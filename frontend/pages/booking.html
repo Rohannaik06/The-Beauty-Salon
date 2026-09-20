@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Book an appointment at The Beauty Salon, Baramati.">
+<meta name="theme-color" content="#000000">
+<title>Book Appointment | The Beauty Salon</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:"DM Sans",sans-serif;background:#000;color:#fff;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+button,input,select{font-family:inherit}
+button{cursor:pointer}
+.container{width:min(1180px,calc(100% - 32px));margin:auto}
+
+/* HEADER */
+.header{position:sticky;top:0;z-index:1000;background:rgba(0,0,0,.96);border-bottom:1px solid #242424;backdrop-filter:blur(10px)}
+.header-inner{min-height:74px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-icon{width:42px;height:42px;display:flex;align-items:center;justify-content:center;border:1px solid #d4af37;border-radius:50%;color:#d4af37}
+.logo-text strong{display:block;font-family:"Playfair Display",serif;font-size:18px}
+.logo-text span{display:block;margin-top:3px;color:#d4af37;font-size:10px;letter-spacing:2px;text-transform:uppercase}
+.desktop-nav{display:none;align-items:center;gap:24px}
+.desktop-nav a{color:#aaa;font-size:13px;font-weight:600}
+.desktop-nav a:hover,.desktop-nav a.active{color:#d4af37}
+.header-book{display:none;padding:11px 17px;border-radius:6px;background:#d4af37;color:#000;font-size:12px;font-weight:700}
+.menu-button{width:42px;height:42px;border:1px solid #333;border-radius:7px;background:#111;color:#fff}
+.mobile-menu{position:fixed;inset:0;z-index:2000;display:none;background:#050505}
+.mobile-menu.open{display:block}
+.mobile-menu-inner{min-height:100%;padding:24px 20px;display:flex;flex-direction:column}
+.mobile-close{align-self:flex-end;width:42px;height:42px;margin-bottom:40px;border:1px solid #333;border-radius:50%;background:#111;color:#fff}
+.mobile-link{padding:17px 5px;border-bottom:1px solid #202020;color:#ccc;font-size:17px}
+.mobile-link.active{color:#d4af37}
+.mobile-book{margin-top:30px;padding:15px;border-radius:7px;background:#d4af37;color:#000;text-align:center;font-weight:700}
+
+/* HERO */
+.booking-hero{padding:70px 20px;text-align:center;background:radial-gradient(circle,rgba(212,175,55,.13),transparent 50%),linear-gradient(#111,#000);border-bottom:1px solid #222}
+.eyebrow{margin-bottom:15px;color:#d4af37;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase}
+.booking-hero h1{font-family:"Playfair Display",serif;font-size:clamp(40px,8vw,65px)}
+.booking-hero h1 span{color:#d4af37}
+.booking-hero p{max-width:650px;margin:15px auto 0;color:#888;font-size:14px;line-height:1.7}
+
+/* BOOKING */
+.booking-section{padding:60px 0 80px;background:#000}
+.booking-layout{display:grid;grid-template-columns:1fr;gap:22px}
+.booking-card,.summary-card{padding:25px;border:1px solid #292929;border-radius:15px;background:#111}
+.booking-card h2{margin-bottom:6px;font-family:"Playfair Display",serif;font-size:27px}
+.booking-card-subtitle{margin-bottom:25px;color:#777;font-size:12px}
+.form-group{margin-bottom:18px}
+.form-group label{display:block;margin-bottom:7px;color:#ccc;font-size:12px;font-weight:600}
+.form-group input,.form-group select{width:100%;min-height:46px;padding:12px 13px;border:1px solid #303030;border-radius:7px;outline:none;background:#080808;color:#fff;font-size:13px}
+.form-group input:focus,.form-group select:focus{border-color:#d4af37}
+.form-group select option{background:#111}
+.form-grid{display:grid;grid-template-columns:1fr;gap:15px}
+.primary-button{width:100%;min-height:48px;border:0;border-radius:7px;background:#d4af37;color:#000;font-size:13px;font-weight:700}
+.primary-button:hover{background:#e5c65a}
+.primary-button:disabled{opacity:.6;cursor:not-allowed}
+
+/* SUMMARY */
+.summary-card h3{margin-bottom:20px;font-family:"Playfair Display",serif;font-size:25px}
+.summary-row{display:flex;justify-content:space-between;gap:15px;padding:13px 0;border-bottom:1px solid #222}
+.summary-row span:first-child{color:#777;font-size:12px}
+.summary-row span:last-child{color:#ddd;font-size:12px;text-align:right}
+.payment-box{margin-top:20px;padding:16px;border:1px solid rgba(212,175,55,.25);border-radius:8px;background:rgba(212,175,55,.05)}
+.payment-box strong{display:block;margin-bottom:5px;color:#d4af37;font-size:13px}
+.payment-box p{color:#888;font-size:11px;line-height:1.6}
+
+/* MESSAGES */
+.message{display:none;margin-bottom:18px;padding:13px 15px;border-radius:7px;font-size:12px;line-height:1.5}
+.message.show{display:block}
+.message.error{border:1px solid #6b2b2b;background:#260f0f;color:#ffb5b5}
+.message.success-msg{border:1px solid #63551d;background:#211c08;color:#e5c65a}
+
+/* SUCCESS */
+.success{display:none;padding:35px 20px;text-align:center}
+.success.show{display:block}
+.success-icon{width:70px;height:70px;margin:0 auto 18px;display:flex;align-items:center;justify-content:center;border:1px solid #d4af37;border-radius:50%;color:#d4af37;font-size:27px}
+.success h2{font-family:"Playfair Display",serif;font-size:30px}
+.success p{margin-top:10px;color:#888;font-size:13px;line-height:1.7}
+.booking-id{margin:18px 0;color:#d4af37;font-weight:700}
+.new-booking{margin-top:20px;padding:12px 20px;border:1px solid #d4af37;border-radius:7px;background:transparent;color:#d4af37;font-weight:700}
+
+/* FOOTER */
+.footer{padding:55px 0 20px;background:#070707}
+.footer-grid{display:grid;grid-template-columns:1fr;gap:32px}
+.footer h3{font-family:"Playfair Display",serif;font-size:24px}
+.footer h3 span{color:#d4af37}
+.footer h4{margin-bottom:13px;font-size:14px}
+.footer p,.footer li,.footer a{color:#777;font-size:12px;line-height:1.7}
+.footer ul{list-style:none}
+.footer li{margin-bottom:7px}
+.footer a:hover{color:#d4af37}
+.footer-contact p{display:flex;gap:9px;margin-bottom:9px}
+.footer-contact i{width:15px;color:#d4af37;margin-top:4px}
+.footer-bottom{margin-top:40px;padding-top:18px;border-top:1px solid #1e1e1e;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px}
+.social{display:flex;gap:7px}
+.social a{width:35px;height:35px;display:flex;align-items:center;justify-content:center;border:1px solid #292929;border-radius:50%}
+
+/* RESPONSIVE */
+@media (min-width:600px){
+.form-grid{grid-template-columns:1fr 1fr}
+.footer-grid{grid-template-columns:1.4fr 1fr 1fr}
+}
+@media (min-width:768px){
+.desktop-nav{display:flex}
+.header-book{display:inline-flex}
+.menu-button{display:none}
+.booking-layout{grid-template-columns:1.5fr .8fr;align-items:start}
+.footer-grid{grid-template-columns:1.5fr 1fr 1fr 1.4fr}
+}
+@media (max-width:599px){
+.container{width:calc(100% - 28px)}
+.booking-hero{padding:60px 15px}
+.booking-section{padding:50px 0 65px}
+.booking-card,.summary-card{padding:20px 17px}
+.footer{padding-left:14px;padding-right:14px}
+.footer-bottom{flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+<div class="container header-inner">
+<a href="../index.html" class="logo">
+<span class="logo-icon"><i class="fa-solid fa-scissors"></i></span>
+<span class="logo-text"><strong>The Beauty</strong><span>Salon</span></span>
+</a>
+
+<nav class="desktop-nav">
+<a href="../index.html">Home</a>
+<a href="about.html">About</a>
+<a href="services.html">Services</a>
+<a href="branches.html">Branches</a>
+<a href="gallery.html">Gallery</a>
+<a href="contact.html">Contact</a>
+</nav>
+
+<a href="booking.html" class="header-book">Book Appointment</a>
+
+<button class="menu-button" id="menuButton" type="button" aria-label="Open menu">
+<i class="fa-solid fa-bars"></i>
+</button>
+</div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+<div class="mobile-menu-inner">
+<button class="mobile-close" id="mobileClose" type="button" aria-label="Close menu">
+<i class="fa-solid fa-xmark"></i>
+</button>
+<a class="mobile-link" href="../index.html">Home</a>
+<a class="mobile-link" href="about.html">About</a>
+<a class="mobile-link" href="services.html">Services</a>
+<a class="mobile-link" href="branches.html">Branches</a>
+<a class="mobile-link" href="gallery.html">Gallery</a>
+<a class="mobile-link" href="contact.html">Contact</a>
+<a class="mobile-book" href="booking.html">Book Appointment</a>
+</div>
+</div>
+
+<section class="booking-hero">
+<div class="eyebrow">Appointment</div>
+<h1>Book Your <span>Appointment</span></h1>
+<p>Choose your branch, service, preferred staff member, date and time. Pay directly at the salon.</p>
+</section>
+
+<main class="booking-section">
+<div class="container">
+<div class="booking-layout">
+
+<div class="booking-card">
+<h2>Appointment Details</h2>
+<p class="booking-card-subtitle">Complete the form below and confirm your appointment directly.</p>
+
+<div id="message" class="message" role="alert"></div>
+
+<form id="bookingForm" novalidate>
+
+<div class="form-group">
+<label for="branch">Select Branch</label>
+<select id="branch" required>
+<option value="">Loading branches...</option>
+</select>
+</div>
+
+<div class="form-group">
+<label for="category">Category</label>
+<select id="category" required>
+<option value="">Select category</option>
+<option value="Him">Him</option>
+<option value="Her">Her</option>
+<option value="Child">Child</option>
+</select>
+</div>
+
+<div class="form-group">
+<label for="service">Select Service</label>
+<select id="service" required>
+<option value="">Loading services...</option>
+</select>
+</div>
+
+<div class="form-group">
+<label for="staff">Select Staff</label>
+<select id="staff" required>
+<option value="">Select branch first</option>
+</select>
+</div>
+
+<div class="form-grid">
+<div class="form-group">
+<label for="date">Appointment Date</label>
+<input type="date" id="date" required>
+</div>
+
+<div class="form-group">
+<label for="time">Time Slot</label>
+<select id="time" required>
+<option value="">Select time</option>
+</select>
+</div>
+</div>
+
+<div class="form-grid">
+<div class="form-group">
+<label for="name">Full Name</label>
+<input type="text" id="name" placeholder="Enter full name" autocomplete="name" required>
+</div>
+
+<div class="form-group">
+<label for="mobile">Mobile Number</label>
+<input type="tel" id="mobile" placeholder="10-digit mobile number" inputmode="numeric" maxlength="10" autocomplete="tel" required>
+</div>
+</div>
+
+<div class="form-group">
+<label for="email">Email Address <span style="color:#666">(optional)</span></label>
+<input type="email" id="email" placeholder="Enter email address" autocomplete="email">
+</div>
+
+<button type="submit" class="primary-button" id="submitButton">
+<i class="fa-regular fa-calendar-check"></i>
+Confirm Appointment
+</button>
+</form>
+
+<div class="success" id="success">
+<div class="success-icon"><i class="fa-solid fa-check"></i></div>
+<h2>Booking Confirmed</h2>
+<p>Your appointment has been successfully created.</p>
+<div class="booking-id">Booking ID: <span id="bookingId"></span></div>
+<p>Payment Method: <strong style="color:#d4af37">Pay at Salon</strong></p>
+<p id="successStaff"></p>
+<button type="button" class="new-booking" id="newBooking">Book Another Appointment</button>
+</div>
+</div>
+
+<aside class="summary-card">
+<h3>Booking Summary</h3>
+
+<div class="summary-row"><span>Branch</span><span id="summaryBranch">Not selected</span></div>
+<div class="summary-row"><span>Category</span><span id="summaryCategory">Not selected</span></div>
+<div class="summary-row"><span>Service</span><span id="summaryService">Not selected</span></div>
+<div class="summary-row"><span>Staff</span><span id="summaryStaff">Not selected</span></div>
+<div class="summary-row"><span>Date</span><span id="summaryDate">Not selected</span></div>
+<div class="summary-row"><span>Time</span><span id="summaryTime">Not selected</span></div>
+
+<div class="payment-box">
+<strong><i class="fa-solid fa-wallet"></i> Pay at Salon</strong>
+<p>No online payment is required. Complete your payment directly at the salon during your visit.</p>
+</div>
+</aside>
+
+</div>
+</div>
+</main>
+
+<footer class="footer">
+<div class="container">
+<div class="footer-grid">
+
+<div>
+<h3>The <span>Beauty</span> Salon</h3>
+<p style="margin-top:12px;max-width:310px;">A modern unisex beauty and hair salon in Baramati, created for premium styling, grooming and beauty care.</p>
+</div>
+
+<div>
+<h4>Quick Links</h4>
+<ul>
+<li><a href="../index.html">Home</a></li>
+<li><a href="about.html">About</a></li>
+<li><a href="services.html">Services</a></li>
+<li><a href="branches.html">Branches</a></li>
+<li><a href="gallery.html">Gallery</a></li>
+</ul>
+</div>
+
+<div>
+<h4>Customer</h4>
+<ul>
+<li><a href="booking.html">Book Appointment</a></li>
+<li><a href="login.html">Login</a></li>
+<li><a href="register.html">Create Account</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul>
+</div>
+
+<div class="footer-contact">
+<h4>Baramati Branch</h4>
+<p><i class="fa-solid fa-location-dot"></i><span>Near Mahanagar Bank, in front of Shayog Society, Baramati, Maharashtra</span></p>
+<p><i class="fa-solid fa-phone"></i><a href="tel:+918793465001">+91 8793465001</a></p>
+<p><i class="fa-regular fa-envelope"></i><a href="mailto:beautysalon@gamil.com">beautysalon@gamil.com</a></p>
+<p><i class="fa-regular fa-clock"></i><span>Mon - Sun: 9:00 AM - 9:00 PM</span></p>
+</div>
+
+</div>
+
+<div class="footer-bottom">
+<p>© <span id="year"></span> The Beauty Salon. All Rights Reserved.</p>
+<div class="social">
+<a href="#" onclick="return false"><i class="fa-brands fa-instagram"></i></a>
+<a href="#" onclick="return false"><i class="fa-brands fa-facebook-f"></i></a>
+<a href="#" onclick="return false"><i class="fa-brands fa-whatsapp"></i></a>
+</div>
+</div>
+</div>
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const API = "http://localhost:5000/api";
+
+    const year = document.getElementById("year");
+    const menuButton = document.getElementById("menuButton");
+    const mobileMenu = document.getElementById("mobileMenu");
+    const mobileClose = document.getElementById("mobileClose");
+
+    const bookingForm = document.getElementById("bookingForm");
+    const success = document.getElementById("success");
+    const bookingId = document.getElementById("bookingId");
+    const successStaff = document.getElementById("successStaff");
+    const newBooking = document.getElementById("newBooking");
+    const message = document.getElementById("message");
+    const submitButton = document.getElementById("submitButton");
+
+    const branch = document.getElementById("branch");
+    const category = document.getElementById("category");
+    const service = document.getElementById("service");
+    const staff = document.getElementById("staff");
+    const date = document.getElementById("date");
+    const time = document.getElementById("time");
+    const name = document.getElementById("name");
+    const mobile = document.getElementById("mobile");
+    const email = document.getElementById("email");
+
+    const summaryBranch = document.getElementById("summaryBranch");
+    const summaryCategory = document.getElementById("summaryCategory");
+    const summaryService = document.getElementById("summaryService");
+    const summaryStaff = document.getElementById("summaryStaff");
+    const summaryDate = document.getElementById("summaryDate");
+    const summaryTime = document.getElementById("summaryTime");
+
+    year.textContent = new Date().getFullYear();
+
+    menuButton.addEventListener("click", function () {
+        mobileMenu.classList.add("open");
+        document.body.style.overflow = "hidden";
+    });
+
+    mobileClose.addEventListener("click", function () {
+        mobileMenu.classList.remove("open");
+        document.body.style.overflow = "";
+    });
+
+    mobileMenu.querySelectorAll("a").forEach(function (link) {
+        link.addEventListener("click", function () {
+            mobileMenu.classList.remove("open");
+            document.body.style.overflow = "";
+        });
+    });
+
+    function showMessage(text, type) {
+        message.textContent = text;
+        message.className = "message show " + (type || "error");
+    }
+
+    function clearMessage() {
+        message.textContent = "";
+        message.className = "message";
+    }
+
+    function setSelectLoading(select, text) {
+        select.innerHTML = "";
+        const option = document.createElement("option");
+        option.value = "";
+        option.textContent = text;
+        select.appendChild(option);
+    }
+
+    function addOption(select, value, text) {
+        const option = document.createElement("option");
+        option.value = value;
+        option.textContent = text;
+        select.appendChild(option);
+    }
+
+    function formatDate(value) {
+        if (!value) return "Not selected";
+        const parts = value.split("-");
+        if (parts.length !== 3) return value;
+        return parts[2] + "/" + parts[1] + "/" + parts[0];
+    }
+
+    function to12Hour(hour, minute) {
+        const suffix = hour >= 12 ? "PM" : "AM";
+        let h = hour % 12;
+        if (h === 0) h = 12;
+        return String(h).padStart(2, "0") + ":" + String(minute).padStart(2, "0") + " " + suffix;
+    }
+
+    function populateTimeSlots() {
+        time.innerHTML = "";
+        addOption(time, "", "Select time");
+
+        for (let minutes = 9 * 60; minutes < 21 * 60; minutes += 30) {
+            const hour = Math.floor(minutes / 60);
+            const minute = minutes % 60;
+            addOption(time, to12Hour(hour, minute), to12Hour(hour, minute));
+        }
+    }
+
+    async function getJson(url) {
+        const response = await fetch(url);
+        let result = null;
+
+        try {
+            result = await response.json();
+        } catch (_) {
+            throw new Error("Invalid response from booking server.");
+        }
+
+        if (!response.ok) {
+            throw new Error(result.message || "Server request failed.");
+        }
+
+        return result;
+    }
+
+    async function loadBranches() {
+        setSelectLoading(branch, "Loading branches...");
+
+        try {
+            const result = await getJson(API + "/branches");
+            const rows = Array.isArray(result) ? result : (result.data || result.branches || []);
+
+            branch.innerHTML = "";
+            addOption(branch, "", "Choose branch");
+
+            rows.filter(function (item) {
+                return item.is_active === undefined || Number(item.is_active) === 1;
+            }).forEach(function (item) {
+                addOption(branch, String(item.id), item.name);
+            });
+
+            if (rows.length === 0) {
+                addOption(branch, "", "No active branches found");
+            }
+        } catch (error) {
+            setSelectLoading(branch, "Unable to load branches");
+            showMessage("Unable to load branches. Make sure the backend is running on http://localhost:5000.", "error");
+        }
+    }
+
+    async function loadServices() {
+        setSelectLoading(service, "Loading services...");
+
+        try {
+            const result = await getJson(API + "/services");
+            const rows = Array.isArray(result) ? result : (result.data || result.services || []);
+
+            service.innerHTML = "";
+            addOption(service, "", "Choose service");
+
+            rows.filter(function (item) {
+                return item.is_active === undefined || Number(item.is_active) === 1;
+            }).forEach(function (item) {
+                const price = Number(item.price || 0).toFixed(0);
+                addOption(
+                    service,
+                    String(item.id),
+                    item.name + " — ₹" + price + " (" + Number(item.duration || 0) + " min)"
+                );
+            });
+
+            if (rows.length === 0) {
+                addOption(service, "", "No active services found");
+            }
+        } catch (error) {
+            setSelectLoading(service, "Unable to load services");
+            showMessage("Unable to load services. Make sure the backend is running on http://localhost:5000.", "error");
+        }
+    }
+
+    async function loadStaff(branchId) {
+        if (!branchId) {
+            setSelectLoading(staff, "Select branch first");
+            return;
+        }
+
+        setSelectLoading(staff, "Loading staff...");
+
+        try {
+            const result = await getJson(API + "/staff/branch/" + encodeURIComponent(branchId));
+            const rows = Array.isArray(result) ? result : (result.data || result.staff || []);
+
+            staff.innerHTML = "";
+            addOption(staff, "ANY", "Any Available Staff");
+
+            rows.filter(function (item) {
+                return item.is_active === undefined || Number(item.is_active) === 1;
+            }).forEach(function (item) {
+                addOption(staff, String(item.id), item.name + (item.role ? " — " + item.role : ""));
+            });
+
+            if (rows.length === 0) {
+                staff.innerHTML = "";
+                addOption(staff, "", "No active staff found");
+            }
+        } catch (error) {
+            setSelectLoading(staff, "Unable to load staff");
+            showMessage("Unable to load staff for the selected branch.", "error");
+        }
+    }
+
+    function updateSummary() {
+        summaryBranch.textContent =
+            branch.options[branch.selectedIndex] && branch.value
+                ? branch.options[branch.selectedIndex].textContent
+                : "Not selected";
+
+        summaryCategory.textContent = category.value || "Not selected";
+
+        summaryService.textContent =
+            service.options[service.selectedIndex] && service.value
+                ? service.options[service.selectedIndex].textContent
+                : "Not selected";
+
+        summaryStaff.textContent =
+            staff.options[staff.selectedIndex] && staff.value
+                ? staff.options[staff.selectedIndex].textContent
+                : "Not selected";
+
+        summaryDate.textContent = formatDate(date.value);
+
+        summaryTime.textContent = time.value || "Not selected";
+    }
+
+    branch.addEventListener("change", function () {
+        clearMessage();
+        loadStaff(branch.value);
+        updateSummary();
+    });
+
+    category.addEventListener("change", updateSummary);
+    service.addEventListener("change", updateSummary);
+    staff.addEventListener("change", updateSummary);
+    date.addEventListener("change", updateSummary);
+    time.addEventListener("change", updateSummary);
+
+    mobile.addEventListener("input", function () {
+        this.value = this.value.replace(/[^0-9]/g, "").slice(0, 10);
+    });
+
+    const today = new Date();
+    const localToday =
+        today.getFullYear() + "-" +
+        String(today.getMonth() + 1).padStart(2, "0") + "-" +
+        String(today.getDate()).padStart(2, "0");
+
+    date.min = localToday;
+    populateTimeSlots();
+
+    bookingForm.addEventListener("submit", async function (event) {
+        event.preventDefault();
+        clearMessage();
+
+        if (!bookingForm.checkValidity()) {
+            bookingForm.reportValidity();
+            return;
+        }
+
+        if (!/^[0-9]{10}$/.test(mobile.value)) {
+            showMessage("Please enter a valid 10-digit mobile number.", "error");
+            mobile.focus();
+            return;
+        }
+
+        if (!branch.value || !service.value || !staff.value || !date.value || !time.value) {
+            showMessage("Please complete all required appointment details.", "error");
+            return;
+        }
+
+        submitButton.disabled = true;
+        submitButton.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Confirming...';
+
+        try {
+            const payload = {
+                name: name.value.trim(),
+                email: email.value.trim() || null,
+                phone: "+91 " + mobile.value.trim(),
+                branch: branch.options[branch.selectedIndex].textContent,
+                service: service.options[service.selectedIndex].textContent.split(" — ₹")[0].trim(),
+                staff: staff.value === "ANY"
+                    ? "Any Available Staff"
+                    : staff.options[staff.selectedIndex].textContent.split(" — ")[0].trim(),
+                booking_date: date.value,
+                booking_time: time.value
+            };
+
+            const response = await fetch(API + "/bookings", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload)
+            });
+
+            let result;
+
+            try {
+                result = await response.json();
+            } catch (_) {
+                throw new Error("Booking server returned an invalid response.");
+            }
+
+            if (!response.ok || !result.success) {
+                throw new Error(result.message || "Booking could not be created.");
+            }
+
+            bookingId.textContent = result.bookingNumber || "Confirmed";
+            successStaff.textContent =
+                result.staff
+                    ? "Assigned Staff: " + result.staff
+                    : "Your selected staff availability has been confirmed.";
+
+            bookingForm.style.display = "none";
+            success.classList.add("show");
+            clearMessage();
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        } catch (error) {
+            console.error("Booking Error:", error);
+            showMessage(error.message || "Unable to create booking. Please try again.", "error");
+        } finally {
+            submitButton.disabled = false;
+            submitButton.innerHTML = '<i class="fa-regular fa-calendar-check"></i> Confirm Appointment';
+        }
+    });
+
+    newBooking.addEventListener("click", function () {
+        success.classList.remove("show");
+        bookingForm.style.display = "";
+        bookingForm.reset();
+        setSelectLoading(staff, "Select branch first");
+        clearMessage();
+        updateSummary();
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    });
+
+    updateSummary();
+
+    Promise.all([
+        loadBranches(),
+        loadServices()
+    ]).then(function () {
+        updateSummary();
+    });
+
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,2286 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="description"
+      content="The Beauty Salon Gallery - Baramati, Maharashtra">
+
+<title>Gallery | The Beauty Salon</title>
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+      rel="stylesheet">
+
+<!-- Font Awesome -->
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+    /* =====================================================
+       RESET
+    ===================================================== */
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family: "DM Sans", sans-serif;
+        background: #000;
+        color: #fff;
+        overflow-x: hidden;
+    }
+
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    button {
+        font-family: inherit;
+    }
+
+    .container {
+        width: min(1180px, calc(100% - 32px));
+        margin: 0 auto;
+    }
+
+
+    /* =====================================================
+       HEADER
+    ===================================================== */
+
+    .header {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: rgba(0, 0, 0, 0.96);
+        border-bottom: 1px solid #242424;
+        backdrop-filter: blur(10px);
+    }
+
+    .header-inner {
+        min-height: 74px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        min-width: 0;
+    }
+
+    .logo-icon {
+        width: 42px;
+        height: 42px;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #d4af37;
+        border-radius: 50%;
+        color: #d4af37;
+        font-size: 17px;
+    }
+
+    .logo-text strong {
+        display: block;
+        font-family: "Playfair Display", serif;
+        font-size: 18px;
+        line-height: 1;
+    }
+
+    .logo-text span {
+        display: block;
+        margin-top: 4px;
+        color: #d4af37;
+        font-size: 10px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
+
+    .desktop-nav {
+        display:none;
+        align-items:center;
+        justify-content:center;
+        gap:30px;
+        flex:1 1 auto;
+        margin-left:10px;
+    }
+
+    .desktop-nav{
+        justify-content:center;
+        gap:30px;
+        flex:1 1 auto;
+        margin-left:10px;
+    }
+
+    .desktop-nav a {
+        color: #aaa;
+        font-size: 13px;
+        font-weight: 600;
+        transition: color 0.2s ease;
+    }
+
+    .desktop-nav a:hover,
+    .desktop-nav a.active {
+        color: #d4af37;
+    }
+
+
+/* CUSTOMER ACCOUNT HEADER */
+    .header-actions{
+        display:flex;
+        align-items:center;
+        gap:10px;
+        margin-left:auto;
+        position:relative;
+    }
+
+    .customer-login-btn,
+    .customer-account-btn{
+        min-height:42px;
+        padding:0 15px;
+        border:1px solid rgba(212,175,55,.42);
+        border-radius:9px;
+        background:#111;
+        color:#fff;
+        font-size:13px;
+        font-weight:700;
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        gap:8px;
+        cursor:pointer;
+        text-decoration:none;
+        transition:.25s ease;
+    }
+
+    .customer-login-btn:hover,
+    .customer-account-btn:hover{
+        border-color:#d4af37;
+        color:#d4af37;
+        transform:translateY(-1px);
+        box-shadow:0 8px 22px rgba(212,175,55,.10);
+    }
+
+    .customer-login-btn i,
+    .customer-account-btn i{
+        color:#d4af37;
+    }
+
+    .customer-account-wrap{position:relative;}
+    .customer-account-chevron{
+        font-size:9px !important;
+        color:#d4af37 !important;
+        margin-left:2px;
+        transition:transform .2s ease;
+    }
+
+
+    .customer-dropdown{
+        position:absolute;
+        right:0;
+        top:calc(100% + 10px);
+        width:235px;
+        padding:9px;
+        background:#111;
+        border:1px solid rgba(212,175,55,.28);
+        border-radius:12px;
+        display:none;
+        box-shadow:0 18px 45px rgba(0,0,0,.55);
+        z-index:2500;
+    }
+
+    .customer-dropdown.open{display:block;}
+
+    .customer-dropdown a,
+    .customer-dropdown button{
+        width:100%;
+        min-height:42px;
+        padding:10px 11px;
+        border:0;
+        background:transparent;
+        color:#ccc;
+        display:flex;
+        align-items:center;
+        gap:11px;
+        text-align:left;
+        border-radius:8px;
+        font:600 13px "DM Sans",sans-serif;
+        text-decoration:none;
+        cursor:pointer;
+    }
+
+    .customer-dropdown a:hover,
+    .customer-dropdown button:hover{
+        background:rgba(212,175,55,.08);
+        color:#d4af37;
+    }
+
+    .customer-dropdown i{
+        width:18px;
+        text-align:center;
+        color:#d4af37;
+    }
+
+    .mobile-account-area{margin-top:28px;}
+
+    .mobile-account-area a,
+    .mobile-account-area button{
+        display:flex!important;
+        align-items:center;
+        gap:11px;
+        width:100%;
+        min-height:50px;
+        padding:14px 5px;
+        border:0;
+        border-bottom:1px solid #202020;
+        background:transparent;
+        color:#ccc;
+        font:600 16px "DM Sans",sans-serif;
+        text-decoration:none;
+        text-align:left;
+        cursor:pointer;
+    }
+
+    .mobile-account-area a:hover,
+    .mobile-account-area button:hover{
+        color:#d4af37;
+    }
+
+    .mobile-account-area i{color:#d4af37;}
+
+    @media(max-width:767px){.header-actions{display:none}}
+
+    .menu-button {
+        width: 42px;
+        height: 42px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #333;
+        border-radius: 7px;
+        background: #111;
+        color: #fff;
+        cursor: pointer;
+        font-size: 17px;
+    }
+
+
+    /* =====================================================
+       MOBILE MENU
+    ===================================================== */
+
+    .mobile-menu {
+        position: fixed;
+        inset: 0;
+        z-index: 2000;
+        display: none;
+        background: #050505;
+    }
+
+    .mobile-menu.open {
+        display: block;
+    }
+
+    .mobile-menu-inner {
+        min-height: 100%;
+        padding: 24px 20px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .mobile-close {
+        align-self: flex-end;
+        width: 42px;
+        height: 42px;
+        border: 1px solid #333;
+        border-radius: 50%;
+        background: #111;
+        color: #fff;
+        cursor: pointer;
+        font-size: 18px;
+        margin-bottom: 45px;
+    }
+
+    .mobile-menu a.menu-link {
+        padding: 17px 5px;
+        border-bottom: 1px solid #202020;
+        color: #ccc;
+        font-size: 17px;
+    }
+
+    .mobile-menu a.menu-link.active {
+        color: #d4af37;
+    }
+
+    .mobile-book {
+        margin-top: 30px;
+        padding: 15px;
+        border-radius: 7px;
+        background: #d4af37;
+        color: #000;
+        text-align: center;
+        font-weight: 700;
+    }
+
+
+    /* =====================================================
+       HERO
+    ===================================================== */
+
+    .hero {
+        min-height: 430px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 80px 20px;
+        text-align: center;
+        background:
+            radial-gradient(
+                circle at center,
+                rgba(212, 175, 55, 0.13),
+                transparent 48%
+            ),
+            linear-gradient(
+                180deg,
+                #111 0%,
+                #000 100%
+            );
+        border-bottom: 1px solid #222;
+    }
+
+    .hero-content {
+        max-width: 760px;
+    }
+
+    .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        margin-bottom: 18px;
+        color: #d4af37;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+    }
+
+    .eyebrow::before,
+    .eyebrow::after {
+        content: "";
+        width: 25px;
+        height: 1px;
+        background: #d4af37;
+    }
+
+    .hero h1 {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(42px, 8vw, 72px);
+        line-height: 1.08;
+        font-weight: 600;
+    }
+
+    .hero h1 span {
+        color: #d4af37;
+    }
+
+    .hero p {
+        max-width: 620px;
+        margin: 20px auto 0;
+        color: #999;
+        font-size: 15px;
+        line-height: 1.8;
+    }
+
+
+    /* =====================================================
+       GALLERY SECTION
+    ===================================================== */
+
+    .gallery-section {
+        padding: 75px 0 90px;
+        background: #000;
+    }
+
+    .section-heading {
+        max-width: 700px;
+        margin: 0 auto 35px;
+        text-align: center;
+    }
+
+    .section-heading small {
+        display: block;
+        margin-bottom: 9px;
+        color: #d4af37;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
+
+    .section-heading h2 {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(30px, 6vw, 46px);
+    }
+
+    .section-heading p {
+        margin-top: 12px;
+        color: #888;
+        font-size: 14px;
+        line-height: 1.7;
+    }
+
+
+    /* =====================================================
+       FILTER
+    ===================================================== */
+
+    .filters {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 35px;
+    }
+
+    .filter-btn {
+        min-height: 42px;
+        padding: 9px 17px;
+        border: 1px solid #303030;
+        border-radius: 30px;
+        background: #111;
+        color: #999;
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 600;
+        transition: 0.2s ease;
+    }
+
+    .filter-btn:hover {
+        border-color: #d4af37;
+        color: #fff;
+    }
+
+    .filter-btn.active {
+        background: #d4af37;
+        border-color: #d4af37;
+        color: #000;
+    }
+
+
+    /* =====================================================
+       GALLERY GRID
+    ===================================================== */
+
+    .gallery-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .gallery-card {
+        position: relative;
+        height: 270px;
+        overflow: hidden;
+        border: 1px solid #292929;
+        border-radius: 14px;
+        background: #111;
+        cursor: pointer;
+        transition:
+            transform 0.25s ease,
+            border-color 0.25s ease;
+    }
+
+    .gallery-card:hover {
+        transform: translateY(-4px);
+        border-color: #8d7622;
+    }
+
+    .gallery-card.hidden {
+        display: none;
+    }
+
+    .gallery-placeholder {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        background:
+            radial-gradient(
+                circle at center,
+                rgba(212, 175, 55, 0.10),
+                transparent 45%
+            ),
+            linear-gradient(
+                145deg,
+                #1b1b1b,
+                #080808
+            );
+    }
+
+    .placeholder-content {
+        padding: 20px;
+    }
+
+    .placeholder-icon {
+        width: 62px;
+        height: 62px;
+        margin: 0 auto 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(212, 175, 55, 0.35);
+        border-radius: 50%;
+        color: #d4af37;
+        font-size: 23px;
+    }
+
+    .placeholder-content h3 {
+        font-family: "Playfair Display", serif;
+        font-size: 21px;
+    }
+
+    .placeholder-content p {
+        margin-top: 6px;
+        color: #777;
+        font-size: 12px;
+    }
+
+    .card-overlay {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 20px;
+        background: linear-gradient(
+            transparent,
+            rgba(0, 0, 0, 0.95)
+        );
+    }
+
+    .card-overlay span {
+        color: #d4af37;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+    }
+
+    .card-overlay h3 {
+        margin-top: 4px;
+        font-family: "Playfair Display", serif;
+        font-size: 19px;
+    }
+
+    .view-icon {
+        position: absolute;
+        top: 14px;
+        right: 14px;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(212, 175, 55, 0.35);
+        border-radius: 50%;
+        background: rgba(0, 0, 0, 0.7);
+        color: #d4af37;
+    }
+
+
+    /* =====================================================
+       REAL GALLERY IMAGES
+    ====================================================== */
+
+    .gallery-image-wrap {
+        overflow: hidden;
+    }
+
+    .gallery-image {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+        object-position: center;
+        transition: transform 0.45s ease;
+    }
+
+    .gallery-card:hover .gallery-image {
+        transform: scale(1.04);
+    }
+
+    .image-fallback {
+        position: absolute;
+        inset: 0;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        background:
+            radial-gradient(
+                circle at center,
+                rgba(212, 175, 55, 0.10),
+                transparent 45%
+            ),
+            linear-gradient(
+                145deg,
+                #1b1b1b,
+                #080808
+            );
+    }
+
+    /* =====================================================
+       INFO NOTE
+    ===================================================== */
+
+    .info-note {
+        max-width: 720px;
+        margin: 35px auto 0;
+        padding: 17px;
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        border: 1px solid rgba(212, 175, 55, 0.18);
+        border-radius: 10px;
+        background: rgba(212, 175, 55, 0.04);
+    }
+
+    .info-note i {
+        color: #d4af37;
+        margin-top: 3px;
+    }
+
+    .info-note p {
+        color: #888;
+        font-size: 12px;
+        line-height: 1.7;
+    }
+
+    .info-note strong {
+        color: #ddd;
+    }
+
+
+    /* =====================================================
+       CTA
+    ===================================================== */
+
+    .cta {
+        padding: 75px 20px;
+        text-align: center;
+        background:
+            radial-gradient(
+                circle,
+                rgba(212, 175, 55, 0.10),
+                transparent 50%
+            ),
+            #101010;
+        border-top: 1px solid #222;
+        border-bottom: 1px solid #222;
+    }
+
+    .cta-content {
+        max-width: 700px;
+        margin: 0 auto;
+    }
+
+    .cta h2 {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(30px, 6vw, 45px);
+    }
+
+    .cta p {
+        margin: 15px auto 25px;
+        color: #888;
+        font-size: 14px;
+        line-height: 1.7;
+    }
+
+    .cta-buttons {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .btn {
+        min-height: 46px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 11px 22px;
+        border-radius: 7px;
+        font-size: 13px;
+        font-weight: 700;
+        transition: 0.2s ease;
+    }
+
+    .btn-primary {
+        background: #d4af37;
+        color: #000;
+    }
+
+    .btn-primary:hover {
+        background: #e5c65a;
+        transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+        border: 1px solid #444;
+        color: #fff;
+    }
+
+    .btn-secondary:hover {
+        border-color: #d4af37;
+        color: #d4af37;
+    }
+
+
+    /* =====================================================
+       LIGHTBOX
+    ===================================================== */
+
+    .lightbox {
+        position: fixed;
+        inset: 0;
+        z-index: 3000;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 18px;
+        background: rgba(0, 0, 0, 0.94);
+    }
+
+    .lightbox.show {
+        display: flex;
+    }
+
+    .lightbox-box {
+        position: relative;
+        width: min(800px, 100%);
+        min-height: 330px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #4d4018;
+        border-radius: 14px;
+        background: #111;
+    }
+
+    .lightbox-content {
+        text-align: center;
+        padding: 60px 45px;
+    }
+
+    .lightbox-content i {
+        color: #d4af37;
+        font-size: 48px;
+    }
+
+    .lightbox-content h3 {
+        margin-top: 18px;
+        font-family: "Playfair Display", serif;
+        font-size: 26px;
+    }
+
+    .lightbox-content p {
+        margin-top: 7px;
+        color: #777;
+        font-size: 12px;
+    }
+
+    .lightbox-image-wrap {
+        width: min(700px, calc(100vw - 120px));
+        height: min(70vh, 560px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        border-radius: 10px;
+        background: #050505;
+    }
+
+    .lightbox-image {
+        width: 100%;
+        height: 100%;
+        display: none;
+        object-fit: contain;
+        border-radius: 10px;
+    }
+
+    .lightbox-image.loaded {
+        display: block;
+    }
+
+    .lightbox-image-fallback {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        color: #777;
+        font-size: 13px;
+    }
+
+    .lightbox-image-fallback i {
+        color: #d4af37;
+        font-size: 46px;
+    }
+
+    .lightbox-image-fallback span {
+        color: #777;
+    }
+
+    .lightbox-close,
+    .lightbox-prev,
+    .lightbox-next {
+        position: absolute;
+        width: 42px;
+        height: 42px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #444;
+        border-radius: 50%;
+        background: rgba(0, 0, 0, 0.8);
+        color: #fff;
+        cursor: pointer;
+    }
+
+    .lightbox-close {
+        top: 15px;
+        right: 15px;
+    }
+
+    .lightbox-prev {
+        top: 50%;
+        left: 15px;
+        transform: translateY(-50%);
+    }
+
+    .lightbox-next {
+        top: 50%;
+        right: 15px;
+        transform: translateY(-50%);
+    }
+
+    .lightbox-close:hover,
+    .lightbox-prev:hover,
+    .lightbox-next:hover {
+        background: #d4af37;
+        color: #000;
+    }
+
+
+    /* =====================================================
+       FOOTER
+    ===================================================== */
+
+    .footer {
+        padding: 55px 0 20px;
+        background: #070707;
+    }
+
+    .footer-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+
+    .footer h3 {
+        font-family: "Playfair Display", serif;
+        font-size: 24px;
+    }
+
+    .footer h3 span {
+        color: #d4af37;
+    }
+
+    .footer h4 {
+        margin-bottom: 13px;
+        font-size: 14px;
+    }
+
+    .footer p,
+    .footer li,
+    .footer a {
+        color: #777;
+        font-size: 12px;
+        line-height: 1.7;
+    }
+
+    .footer ul {
+        list-style: none;
+    }
+
+    .footer li {
+        margin-bottom: 7px;
+    }
+
+    .footer a:hover {
+        color: #d4af37;
+    }
+
+    .footer-contact p {
+        display: flex;
+        gap: 9px;
+        margin-bottom: 9px;
+    }
+
+    .footer-contact i {
+        width: 15px;
+        color: #d4af37;
+        margin-top: 4px;
+    }
+
+    .footer-bottom {
+        margin-top: 40px;
+        padding-top: 18px;
+        border-top: 1px solid #1e1e1e;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .social {
+        display: flex;
+        gap: 7px;
+    }
+
+    .social a {
+        width: 35px;
+        height: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #292929;
+        border-radius: 50%;
+    }
+
+
+    /* =====================================================
+       TABLET
+    ===================================================== */
+
+    @media (min-width: 600px) {
+
+        .gallery-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .footer-grid {
+            grid-template-columns: 1.4fr 1fr 1fr;
+        }
+    }
+
+
+    /* =====================================================
+       DESKTOP
+    ===================================================== */
+
+    @media (min-width: 768px) {
+
+        .desktop-nav {
+            display: flex;
+        }
+
+        .menu-button {
+            display: none;
+        }
+
+        .gallery-grid {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .gallery-card.large {
+            grid-column: span 2;
+            grid-row: span 2;
+            height: 560px;
+        }
+
+        .gallery-card {
+            height: 270px;
+        }
+
+        .footer-grid {
+            grid-template-columns: 1.5fr 1fr 1fr 1.4fr;
+        }
+    }
+
+
+    /* =====================================================
+       MOBILE
+    ===================================================== */
+
+    @media (max-width: 599px) {
+
+        .container {
+            width: calc(100% - 28px);
+        }
+
+        .header-inner {
+            min-height: 68px;
+        }
+
+        .hero {
+            min-height: 400px;
+            padding: 65px 15px;
+        }
+
+        .hero p {
+            font-size: 13px;
+        }
+
+        .gallery-section {
+            padding: 60px 0 70px;
+        }
+
+        .gallery-card {
+            height: 245px;
+        }
+
+        .info-note {
+            padding: 14px;
+        }
+
+        .cta {
+            padding: 60px 15px;
+        }
+
+        .cta-buttons {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .btn {
+            width: 100%;
+            max-width: 320px;
+        }
+
+        .lightbox-image-wrap {
+            width: calc(100vw - 80px);
+            height: min(65vh, 430px);
+        }
+
+        .lightbox-box {
+            min-height: 300px;
+        }
+
+        .lightbox-content {
+            padding: 55px 45px;
+        }
+
+        .lightbox-prev {
+            left: 8px;
+        }
+
+        .lightbox-next {
+            right: 8px;
+        }
+
+        .footer {
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+
+        .footer-bottom {
+            align-items: flex-start;
+            flex-direction: column;
+        }
+    }
+</style>
+
+</head>
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+====================================================== -->
+
+<header class="header">
+
+    <div class="container header-inner">
+
+        <a href="../index.html" class="logo">
+
+            <span class="logo-icon">
+                <i class="fa-solid fa-scissors"></i>
+            </span>
+
+            <span class="logo-text">
+                <strong>The Beauty</strong>
+                <span>Salon</span>
+            </span>
+
+        </a>
+
+        <nav class="desktop-nav">
+
+            <a href="../index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="services.html">Services</a>
+            <a href="branches.html">Branches</a>
+            <a href="gallery.html" class="active">Gallery</a>
+            <a href="contact.html">Contact</a>
+
+        </nav>
+
+        <div class="header-actions">
+            <a href="login.html" class="customer-login-btn" id="customerLoginBtn">
+                <i class="fa-regular fa-user"></i><span>Customer Login</span>
+            </a>
+            <div class="customer-account-wrap" id="customerAccountWrap" style="display:none;">
+                <button class="customer-account-btn" id="customerAccountBtn" type="button" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa-regular fa-user"></i>
+                    <span id="customerAccountName">My Account</span>
+                    <i class="fa-solid fa-chevron-down customer-account-chevron" id="customerAccountChevron" aria-hidden="true"></i>
+                </button>
+                <div class="customer-dropdown" id="customerDropdown">
+                    <a href="appointments.html"><i class="fa-regular fa-calendar-check"></i>My Appointments</a>
+                    <a href="booking-history.html"><i class="fa-solid fa-clock-rotate-left"></i>Booking History</a>
+                    <a href="profile.html"><i class="fa-regular fa-user"></i>Update Profile</a>
+                    <button type="button" id="customerLogout"><i class="fa-solid fa-right-from-bracket"></i>Logout</button>
+                </div>
+            </div>
+        </div>
+
+        <button
+            class="menu-button"
+            id="menuButton"
+            type="button"
+            aria-label="Open menu">
+
+            <i class="fa-solid fa-bars"></i>
+
+        </button>
+
+    </div>
+
+</header>
+
+
+<!-- =====================================================
+     MOBILE MENU
+====================================================== -->
+
+<div class="mobile-menu" id="mobileMenu">
+
+    <div class="mobile-menu-inner">
+
+        <button
+            class="mobile-close"
+            id="mobileClose"
+            type="button"
+            aria-label="Close menu">
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+        <a class="menu-link" href="../index.html">
+            Home
+        </a>
+
+        <a class="menu-link" href="about.html">
+            About
+        </a>
+
+        <a class="menu-link" href="services.html">
+            Services
+        </a>
+
+        <a class="menu-link" href="branches.html">
+            Branches
+        </a>
+
+        <a class="menu-link active" href="gallery.html">
+            Gallery
+        </a>
+
+        <a class="menu-link" href="contact.html">
+            Contact
+        </a>
+
+        <div class="mobile-account-area">
+            <a href="login.html" id="mobileCustomerLogin">
+                <i class="fa-regular fa-user"></i><span>Customer Login</span>
+            </a>
+            <div id="mobileCustomerAccount" style="display:none;">
+                <a href="appointments.html"><i class="fa-regular fa-calendar-check"></i><span>My Appointments</span></a>
+                <a href="booking-history.html"><i class="fa-solid fa-clock-rotate-left"></i><span>Booking History</span></a>
+                <a href="profile.html"><i class="fa-regular fa-user"></i><span>Update Profile</span></a>
+                <button type="button" id="mobileCustomerLogout"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></button>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     HERO
+====================================================== -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="eyebrow">
+            Our Gallery
+        </div>
+
+        <h1>
+            Moments of <span>Beauty</span>
+        </h1>
+
+        <p>
+            Explore The Beauty Salon experience through our
+            salon atmosphere, styling, beauty care and customer
+            experience.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     GALLERY
+====================================================== -->
+
+<main class="gallery-section">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <small>
+                Explore Our Work
+            </small>
+
+            <h2>
+                Salon Gallery
+            </h2>
+
+            <p>
+                Browse our salon, hair styling, beauty care and
+                overall salon experience.
+            </p>
+
+        </div>
+
+
+        <!-- FILTERS -->
+
+        <div class="filters">
+
+            <button
+                type="button"
+                class="filter-btn active"
+                data-filter="all">
+                All
+            </button>
+
+            <button
+                type="button"
+                class="filter-btn"
+                data-filter="salon">
+                Salon
+            </button>
+
+            <button
+                type="button"
+                class="filter-btn"
+                data-filter="hair">
+                Hair
+            </button>
+
+            <button
+                type="button"
+                class="filter-btn"
+                data-filter="beauty">
+                Beauty
+            </button>
+
+            <button
+                type="button"
+                class="filter-btn"
+                data-filter="experience">
+                Experience
+            </button>
+
+        </div>
+
+
+        <!-- GALLERY GRID -->
+
+        <div class="gallery-grid" id="galleryGrid">
+
+            <article
+                class="gallery-card large"
+                data-category="salon"
+                data-title="Premium Salon Interior"
+                data-image="../assets/images/gallery/salon-interior.jpg">
+
+                <div class="gallery-placeholder gallery-image-wrap">
+                    <img
+                        src="../assets/images/gallery/salon-interior.jpg"
+                        alt="Premium Salon Interior"
+                        class="gallery-image"
+                        loading="lazy"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                    >
+                    <div class="image-fallback">
+                        <div class="placeholder-content">
+                            <div class="placeholder-icon">
+                                <i class="fa-regular fa-image"></i>
+                            </div>
+                            <h3>Premium Salon Interior</h3>
+                            <p>Image not added yet</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-overlay">
+
+                    <span>Salon</span>
+
+                    <h3>
+                        Premium Salon Interior
+                    </h3>
+
+                </div>
+
+                <div class="view-icon">
+                    <i class="fa-solid fa-expand"></i>
+                </div>
+
+            </article>
+
+
+            <article
+                class="gallery-card"
+                data-category="hair"
+                data-title="Professional Hair Styling"
+                data-image="../assets/images/gallery/hair-styling.jpg">
+
+                <div class="gallery-placeholder gallery-image-wrap">
+                    <img
+                        src="../assets/images/gallery/hair-styling.jpg"
+                        alt="Professional Hair Styling"
+                        class="gallery-image"
+                        loading="lazy"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                    >
+                    <div class="image-fallback">
+                        <div class="placeholder-content">
+                            <div class="placeholder-icon">
+                                <i class="fa-regular fa-image"></i>
+                            </div>
+                            <h3>Professional Hair Styling</h3>
+                            <p>Image not added yet</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-overlay">
+
+                    <span>Hair</span>
+
+                    <h3>
+                        Professional Hair Styling
+                    </h3>
+
+                </div>
+
+                <div class="view-icon">
+                    <i class="fa-solid fa-expand"></i>
+                </div>
+
+            </article>
+
+
+            <article
+                class="gallery-card"
+                data-category="beauty"
+                data-title="Beauty Care"
+                data-image="../assets/images/gallery/beauty-care.jpg">
+
+                <div class="gallery-placeholder gallery-image-wrap">
+                    <img
+                        src="../assets/images/gallery/beauty-care.jpg"
+                        alt="Beauty Care"
+                        class="gallery-image"
+                        loading="lazy"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                    >
+                    <div class="image-fallback">
+                        <div class="placeholder-content">
+                            <div class="placeholder-icon">
+                                <i class="fa-regular fa-image"></i>
+                            </div>
+                            <h3>Beauty Care</h3>
+                            <p>Image not added yet</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-overlay">
+
+                    <span>Beauty</span>
+
+                    <h3>
+                        Beauty Care
+                    </h3>
+
+                </div>
+
+                <div class="view-icon">
+                    <i class="fa-solid fa-expand"></i>
+                </div>
+
+            </article>
+
+
+            <article
+                class="gallery-card"
+                data-category="experience"
+                data-title="Relaxing Salon Experience"
+                data-image="../assets/images/gallery/salon-experience.jpg">
+
+                <div class="gallery-placeholder gallery-image-wrap">
+                    <img
+                        src="../assets/images/gallery/salon-experience.jpg"
+                        alt="Relaxing Salon Experience"
+                        class="gallery-image"
+                        loading="lazy"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                    >
+                    <div class="image-fallback">
+                        <div class="placeholder-content">
+                            <div class="placeholder-icon">
+                                <i class="fa-regular fa-image"></i>
+                            </div>
+                            <h3>Relaxing Salon Experience</h3>
+                            <p>Image not added yet</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-overlay">
+
+                    <span>Experience</span>
+
+                    <h3>
+                        Relaxing Salon Experience
+                    </h3>
+
+                </div>
+
+                <div class="view-icon">
+                    <i class="fa-solid fa-expand"></i>
+                </div>
+
+            </article>
+
+
+            <article
+                class="gallery-card"
+                data-category="salon"
+                data-title="Modern Salon Space"
+                data-image="../assets/images/gallery/modern-salon.jpg">
+
+                <div class="gallery-placeholder gallery-image-wrap">
+                    <img
+                        src="../assets/images/gallery/modern-salon.jpg"
+                        alt="Modern Salon Space"
+                        class="gallery-image"
+                        loading="lazy"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                    >
+                    <div class="image-fallback">
+                        <div class="placeholder-content">
+                            <div class="placeholder-icon">
+                                <i class="fa-regular fa-image"></i>
+                            </div>
+                            <h3>Modern Salon Space</h3>
+                            <p>Image not added yet</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-overlay">
+
+                    <span>Salon</span>
+
+                    <h3>
+                        Modern Salon Space
+                    </h3>
+
+                </div>
+
+                <div class="view-icon">
+                    <i class="fa-solid fa-expand"></i>
+                </div>
+
+            </article>
+
+
+            <article
+                class="gallery-card"
+                data-category="hair"
+                data-title="Hair Care"
+                data-image="../assets/images/gallery/hair-care.jpg">
+
+                <div class="gallery-placeholder gallery-image-wrap">
+                    <img
+                        src="../assets/images/gallery/hair-care.jpg"
+                        alt="Hair Care"
+                        class="gallery-image"
+                        loading="lazy"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                    >
+                    <div class="image-fallback">
+                        <div class="placeholder-content">
+                            <div class="placeholder-icon">
+                                <i class="fa-regular fa-image"></i>
+                            </div>
+                            <h3>Hair Care</h3>
+                            <p>Image not added yet</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-overlay">
+
+                    <span>Hair</span>
+
+                    <h3>
+                        Professional Hair Care
+                    </h3>
+
+                </div>
+
+                <div class="view-icon">
+                    <i class="fa-solid fa-expand"></i>
+                </div>
+
+            </article>
+
+        </div>
+
+
+        <!-- NOTE -->
+
+        <div class="info-note">
+
+            <i class="fa-solid fa-circle-info"></i>
+
+            <p>
+                <strong>Gallery images:</strong> Save the six photos in <code>frontend/assets/images/gallery/</code>.
+                Clicking any gallery card opens the actual full image with Previous, Next and Close controls.
+            </p>
+
+        </div>
+
+        <div class="cta-buttons">
+
+            <a href="booking.html" class="btn btn-primary">
+                <i class="fa-regular fa-calendar-check"></i>
+                Book Appointment
+            </a>
+
+            <a href="services.html" class="btn btn-secondary">
+                <i class="fa-solid fa-list"></i>
+                View Services
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     LIGHTBOX
+====================================================== -->
+
+<div class="lightbox" id="lightbox">
+
+    <div class="lightbox-box">
+
+        <button
+            type="button"
+            class="lightbox-close"
+            id="lightboxClose"
+            aria-label="Close">
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+        <button
+            type="button"
+            class="lightbox-prev"
+            id="lightboxPrev"
+            aria-label="Previous">
+
+            <i class="fa-solid fa-chevron-left"></i>
+
+        </button>
+
+        <div class="lightbox-content">
+                            <div class="lightbox-image-wrap">
+                                <img
+                                    id="lightboxImage"
+                                    class="lightbox-image"
+                                    src=""
+                                    alt="Gallery Image"
+                                >
+                                <div class="lightbox-image-fallback" id="lightboxFallback">
+                                    <i class="fa-regular fa-image"></i>
+                                    <span>Image not available</span>
+                                </div>
+                            </div>
+
+                            <h3 id="lightboxTitle">Gallery Image</h3>
+
+                            <p id="lightboxDescription">
+                                The Beauty Salon Gallery
+                            </p>
+                        </div>
+
+                        <button
+                            type="button"
+                            class="lightbox-next"
+            id="lightboxNext"
+            aria-label="Next">
+
+            <i class="fa-solid fa-chevron-right"></i>
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     FOOTER
+====================================================== -->
+
+<footer class="footer">
+
+    <div class="container">
+
+        <div class="footer-grid">
+
+            <div>
+
+                <h3>
+                    The <span>Beauty</span> Salon
+                </h3>
+
+                <p style="margin-top: 12px; max-width: 310px;">
+                    A modern unisex beauty and hair salon in
+                    Baramati, created for premium styling,
+                    grooming and beauty care.
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <h4>
+                    Quick Links
+                </h4>
+
+                <ul>
+
+                    <li>
+                        <a href="../index.html">Home</a>
+                    </li>
+
+                    <li>
+                        <a href="about.html">About</a>
+                    </li>
+
+                    <li>
+                        <a href="services.html">Services</a>
+                    </li>
+
+                    <li>
+                        <a href="branches.html">Branches</a>
+                    </li>
+
+                    <li>
+                        <a href="gallery.html">Gallery</a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <div>
+
+                <h4>
+                    Customer
+                </h4>
+
+                <ul>
+
+                    <li>
+                        <a href="booking.html">
+                            Book Appointment
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="login.html">
+                            Login
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="register.html">
+                            Create Account
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="contact.html">
+                            Contact
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <div class="footer-contact">
+
+                <h4>
+                    Baramati Branch
+                </h4>
+
+                <p>
+                    <i class="fa-solid fa-location-dot"></i>
+
+                    <span>
+                        Near Mahanagar Bank, in front of
+                        Shayog Society, Baramati, Maharashtra
+                    </span>
+                </p>
+
+                <p>
+                    <i class="fa-solid fa-phone"></i>
+
+                    <a href="tel:+918793465001">
+                        +91 8793465001
+                    </a>
+                </p>
+
+                <p>
+                    <i class="fa-regular fa-envelope"></i>
+
+                    <a href="mailto:beautysalon@gamil.com">
+                        beautysalon@gamil.com
+                    </a>
+                </p>
+
+                <p>
+                    <i class="fa-regular fa-clock"></i>
+
+                    <span>
+                        Mon - Sun: 9:00 AM - 9:00 PM
+                    </span>
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <p>
+                © <span id="year"></span>
+                The Beauty Salon. All Rights Reserved.
+            </p>
+
+            <div class="social">
+
+                <a href="#" aria-label="Instagram"
+                   onclick="return false;">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+
+                <a href="#" aria-label="Facebook"
+                   onclick="return false;">
+                    <i class="fa-brands fa-facebook-f"></i>
+                </a>
+
+                <a href="#" aria-label="WhatsApp"
+                   onclick="return false;">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- =====================================================
+     JAVASCRIPT
+====================================================== -->
+
+<script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+        /* ==============================
+           YEAR
+        ============================== */
+
+        var yearElement = document.getElementById("year");
+
+        if (yearElement) {
+            yearElement.textContent = new Date().getFullYear();
+        }
+
+
+        /* ==============================
+           MOBILE MENU
+        ============================== */
+
+        var menuButton = document.getElementById("menuButton");
+        var mobileMenu = document.getElementById("mobileMenu");
+        var mobileClose = document.getElementById("mobileClose");
+
+        if (menuButton && mobileMenu) {
+
+            menuButton.addEventListener("click", function () {
+                mobileMenu.classList.add("open");
+                document.body.style.overflow = "hidden";
+            });
+
+        }
+
+        if (mobileClose && mobileMenu) {
+
+            mobileClose.addEventListener("click", function () {
+                mobileMenu.classList.remove("open");
+                document.body.style.overflow = "";
+            });
+
+        }
+
+
+        /* ==============================
+           CLOSE MOBILE MENU
+        ============================== */
+
+        var mobileLinks =
+            document.querySelectorAll(".mobile-menu .menu-link");
+
+        mobileLinks.forEach(function (link) {
+
+            link.addEventListener("click", function () {
+
+                mobileMenu.classList.remove("open");
+                document.body.style.overflow = "";
+
+            });
+
+        });
+
+
+        /* ==============================
+           FILTER
+        ============================== */
+
+        var filterButtons =
+            document.querySelectorAll(".filter-btn");
+
+        var galleryCards =
+            document.querySelectorAll(".gallery-card");
+
+        filterButtons.forEach(function (button) {
+
+            button.addEventListener("click", function () {
+
+                var filter =
+                    button.getAttribute("data-filter");
+
+                filterButtons.forEach(function (btn) {
+                    btn.classList.remove("active");
+                });
+
+                button.classList.add("active");
+
+                galleryCards.forEach(function (card) {
+
+                    var category =
+                        card.getAttribute("data-category");
+
+                    if (
+                        filter === "all" ||
+                        category === filter
+                    ) {
+
+                        card.classList.remove("hidden");
+
+                    } else {
+
+                        card.classList.add("hidden");
+
+                    }
+
+                });
+
+            });
+
+        });
+
+
+        /* ==============================
+           LIGHTBOX
+        ============================== */
+
+        var lightbox =
+            document.getElementById("lightbox");
+
+        var lightboxTitle =
+            document.getElementById("lightboxTitle");
+
+        var lightboxClose =
+            document.getElementById("lightboxClose");
+
+        var lightboxPrev =
+            document.getElementById("lightboxPrev");
+
+        var lightboxNext =
+            document.getElementById("lightboxNext");
+
+        var currentIndex = 0;
+        var lightboxImage =
+            document.getElementById("lightboxImage");
+
+        var lightboxFallback =
+            document.getElementById("lightboxFallback");
+
+        var lightboxDescription =
+            document.getElementById("lightboxDescription");
+
+
+        function getVisibleCards() {
+
+            return Array.from(galleryCards)
+                .filter(function (card) {
+
+                    return !card.classList.contains("hidden");
+
+                });
+
+        }
+
+
+        function loadLightboxImage(imagePath, title) {
+
+            if (!lightboxImage) {
+                return;
+            }
+
+            lightboxImage.classList.remove("loaded");
+
+            if (lightboxFallback) {
+                lightboxFallback.style.display = "flex";
+            }
+
+            lightboxImage.onload = function () {
+
+                lightboxImage.classList.add("loaded");
+
+                if (lightboxFallback) {
+                    lightboxFallback.style.display = "none";
+                }
+
+            };
+
+            lightboxImage.onerror = function () {
+
+                lightboxImage.classList.remove("loaded");
+
+                if (lightboxFallback) {
+                    lightboxFallback.style.display = "flex";
+                }
+
+            };
+
+            lightboxImage.alt = title || "Gallery Image";
+            lightboxImage.src = imagePath || "";
+
+        }
+
+
+        function openLightbox(index) {
+
+            var visibleCards =
+                getVisibleCards();
+
+            if (visibleCards.length === 0) {
+                return;
+            }
+
+            if (index < 0) {
+                index = visibleCards.length - 1;
+            }
+
+            if (index >= visibleCards.length) {
+                index = 0;
+            }
+
+            currentIndex = index;
+
+            var card =
+                visibleCards[currentIndex];
+
+            var title =
+                card.getAttribute("data-title") ||
+                "Gallery Image";
+
+            var imagePath =
+                card.getAttribute("data-image");
+
+            lightboxTitle.textContent = title;
+
+            if (lightboxDescription) {
+                lightboxDescription.textContent =
+                    "The Beauty Salon Gallery";
+            }
+
+            loadLightboxImage(imagePath, title);
+
+            lightbox.classList.add("show");
+
+            document.body.style.overflow = "hidden";
+
+        }
+
+
+        function closeLightbox() {
+
+            lightbox.classList.remove("show");
+
+            document.body.style.overflow = "";
+
+        }
+
+
+        function previousImage() {
+
+            openLightbox(currentIndex - 1);
+
+        }
+
+
+        function nextImage() {
+
+            openLightbox(currentIndex + 1);
+
+        }
+
+
+        galleryCards.forEach(function (card) {
+
+            card.addEventListener("click", function () {
+
+                var visibleCards =
+                    getVisibleCards();
+
+                var index =
+                    visibleCards.indexOf(card);
+
+                openLightbox(index);
+
+            });
+
+        });
+
+
+        if (lightboxClose) {
+
+            lightboxClose.addEventListener(
+                "click",
+                closeLightbox
+            );
+
+        }
+
+
+        if (lightboxPrev) {
+
+            lightboxPrev.addEventListener(
+                "click",
+                previousImage
+            );
+
+        }
+
+
+        if (lightboxNext) {
+
+            lightboxNext.addEventListener(
+                "click",
+                nextImage
+            );
+
+        }
+
+
+        if (lightbox) {
+
+            lightbox.addEventListener(
+                "click",
+                function (event) {
+
+                    if (event.target === lightbox) {
+                        closeLightbox();
+                    }
+
+                }
+            );
+
+        }
+
+
+        /* ==============================
+           KEYBOARD
+        ============================== */
+
+
+        /* ==============================
+           CUSTOMER ACCOUNT
+        ============================== */
+        function getCustomerSession(){
+            try{
+                const raw=localStorage.getItem("salon_customer_session") ||
+                          sessionStorage.getItem("salon_customer_session");
+                return raw ? JSON.parse(raw) : null;
+            }catch(e){ return null; }
+        }
+        function logoutCustomer(){
+            localStorage.removeItem("salon_customer_session");
+            sessionStorage.removeItem("salon_customer_session");
+            localStorage.removeItem("salon_customer");
+            sessionStorage.removeItem("salon_customer");
+            window.location.href="../index.html";
+        }
+        const session=getCustomerSession();
+        const loginBtn=document.getElementById("customerLoginBtn");
+        const accountWrap=document.getElementById("customerAccountWrap");
+        const accountBtn=document.getElementById("customerAccountBtn");
+        const dropdown=document.getElementById("customerDropdown");
+        const accountName=document.getElementById("customerAccountName");
+        const mobileLogin=document.getElementById("mobileCustomerLogin");
+        const mobileAccount=document.getElementById("mobileCustomerAccount");
+
+        if(session && session.token && session.customer){
+            if(loginBtn) loginBtn.style.display="none";
+            if(accountWrap) accountWrap.style.display="block";
+            const name=session.customer.name || session.customer.fullName || "My Account";
+            if(accountName) accountName.textContent=name;
+            if(mobileLogin) mobileLogin.style.display="none";
+            if(mobileAccount) mobileAccount.style.display="block";
+        }
+        const accountChevron=document.getElementById("customerAccountChevron");
+        if(accountBtn && dropdown){
+            accountBtn.addEventListener("click",function(e){
+                e.stopPropagation();
+                const isOpen=dropdown.classList.toggle("open");
+                accountBtn.setAttribute("aria-expanded", String(isOpen));
+                if(accountChevron){
+                    accountChevron.style.transform=isOpen ? "rotate(180deg)" : "rotate(0deg)";
+                }
+            });
+        }
+        document.addEventListener("click",function(e){
+            if(dropdown && !e.target.closest(".customer-account-wrap")){
+                dropdown.classList.remove("open");
+                if(accountBtn) accountBtn.setAttribute("aria-expanded","false");
+                if(accountChevron) accountChevron.style.transform="rotate(0deg)";
+            }
+        });
+        const logout=document.getElementById("customerLogout");
+        const mobileLogout=document.getElementById("mobileCustomerLogout");
+        if(logout) logout.addEventListener("click",logoutCustomer);
+        if(mobileLogout) mobileLogout.addEventListener("click",logoutCustomer);
+
+        document.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (!lightbox.classList.contains("show")) {
+                    return;
+                }
+
+                if (event.key === "Escape") {
+                    closeLightbox();
+                }
+
+                if (event.key === "ArrowLeft") {
+                    previousImage();
+                }
+
+                if (event.key === "ArrowRight") {
+                    nextImage();
+                }
+
+            }
+        );
+
+    });
+
+</script>
+
+
+</body>
+</html>

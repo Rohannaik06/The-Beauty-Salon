@@ -1,0 +1,3765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Offers Management | The Beauty Salon Admin</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            min-height: 100%;
+            overflow-x: hidden;
+            scrollbar-width: none;
+        }
+
+        html::-webkit-scrollbar,
+        body::-webkit-scrollbar,
+        *::-webkit-scrollbar {
+            display: none;
+        }
+
+        body {
+            font-family: "DM Sans", sans-serif;
+            background: #0b0b0b;
+            color: #ffffff;
+        }
+
+        button,
+        input,
+        select,
+        textarea {
+            font-family: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        /* ==========================================
+           HEADER
+        ========================================== */
+
+        .admin-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 78px;
+            background: #101010;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 28px;
+            z-index: 1000;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            min-width: 0;
+        }
+
+        .admin-logo {
+            width: 46px;
+            height: 46px;
+            min-width: 46px;
+            border-radius: 50%;
+            border: 1px solid #d4af37;
+            color: #d4af37;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 19px;
+        }
+
+        .brand-area {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.1;
+        }
+
+        .brand-name {
+            font-family: "Playfair Display", serif;
+            font-size: 19px;
+            color: #ffffff;
+        }
+
+        .brand-admin {
+            color: #d4af37;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-top: 4px;
+        }
+
+        .page-title {
+            margin-left: 28px;
+            padding-left: 28px;
+            border-left: 1px solid #333;
+            font-size: 16px;
+            font-weight: 600;
+            color: #ddd;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+        }
+
+        .notification-btn {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #333;
+            border-radius: 50%;
+            background: #151515;
+            color: #ddd;
+            position: relative;
+        }
+
+        .notification-btn:hover {
+            color: #d4af37;
+            border-color: #d4af37;
+        }
+
+        .notification-dot {
+            position: absolute;
+            top: 7px;
+            right: 7px;
+            width: 7px;
+            height: 7px;
+            background: #d4af37;
+            border-radius: 50%;
+        }
+
+        .admin-profile {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+        }
+
+        .profile-avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: #d4af37;
+            color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .profile-text strong {
+            display: block;
+            font-size: 13px;
+        }
+
+        .profile-text span {
+            display: block;
+            color: #888;
+            font-size: 11px;
+            margin-top: 2px;
+        }
+
+        /* ==========================================
+           MOBILE MENU
+        ========================================== */
+
+        .mobile-menu-btn {
+            display: none;
+            width: 42px;
+            height: 42px;
+            border: 1px solid #333;
+            background: #151515;
+            color: #d4af37;
+            border-radius: 8px;
+            font-size: 18px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ==========================================
+           SIDEBAR
+        ========================================== */
+
+        .admin-sidebar {
+            position: fixed;
+            left: 0;
+            top: 78px;
+            width: 245px;
+            height: calc(100vh - 78px);
+            background: #101010;
+            border-right: 1px solid #252525;
+            padding: 20px 12px;
+            z-index: 900;
+            transition: width 0.25s ease;
+        }
+
+        .sidebar-toggle {
+            position: absolute;
+            right: -13px;
+            top: 22px;
+            width: 27px;
+            height: 27px;
+            border-radius: 50%;
+            border: 1px solid #444;
+            background: #181818;
+            color: #d4af37;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .sidebar-toggle:hover {
+            border-color: #d4af37;
+        }
+
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .sidebar-link {
+            height: 45px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 0 14px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #999;
+            font-size: 13px;
+            white-space: nowrap;
+            overflow: hidden;
+            transition: 0.2s;
+        }
+
+        .sidebar-link i {
+            width: 19px;
+            min-width: 19px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .sidebar-link:hover {
+            color: #ffffff;
+            background: #181818;
+        }
+
+        .sidebar-link.active {
+            color: #d4af37;
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        .sidebar-link.logout {
+            margin-top: 15px;
+            color: #b66;
+        }
+
+        .sidebar-link.logout:hover {
+            color: #ff7777;
+            background: rgba(255, 70, 70, 0.08);
+        }
+
+        /* ==========================================
+           COLLAPSED SIDEBAR
+        ========================================== */
+
+        .admin-sidebar.collapsed {
+            width: 76px;
+        }
+
+        .admin-sidebar.collapsed .sidebar-link {
+            justify-content: center;
+            padding: 0;
+            gap: 0;
+        }
+
+        .admin-sidebar.collapsed .sidebar-link span {
+            display: none;
+        }
+
+        .admin-sidebar.collapsed .sidebar-toggle i {
+            transform: rotate(180deg);
+        }
+
+        /* ==========================================
+           MAIN
+        ========================================== */
+
+        .admin-main {
+            margin-left: 245px;
+            padding: 108px 30px 40px;
+            min-height: 100vh;
+            transition: margin-left 0.25s ease;
+        }
+
+        .admin-sidebar.collapsed ~ .admin-main {
+            margin-left: 76px;
+        }
+
+        /* ==========================================
+           PAGE HEADING
+        ========================================== */
+
+        .content-heading {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 26px;
+        }
+
+        .heading-text h1 {
+            font-family: "Playfair Display", serif;
+            font-size: 31px;
+            margin-bottom: 7px;
+        }
+
+        .heading-text p {
+            color: #888;
+            font-size: 13px;
+        }
+
+        .add-offer-btn {
+            border: none;
+            background: #d4af37;
+            color: #000;
+            padding: 12px 18px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .add-offer-btn:hover {
+            background: #e5c65a;
+        }
+
+        /* ==========================================
+           SUMMARY
+        ========================================== */
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 22px;
+        }
+
+        .summary-card {
+            background: #111111;
+            border: 1px solid #292929;
+            border-radius: 12px;
+            padding: 19px;
+        }
+
+        .summary-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .summary-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 9px;
+            background: rgba(212, 175, 55, 0.1);
+            color: #d4af37;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .summary-card h3 {
+            font-size: 25px;
+            margin-top: 13px;
+        }
+
+        .summary-card p {
+            color: #888;
+            font-size: 12px;
+            margin-top: 3px;
+        }
+
+        /* ==========================================
+           FILTERS
+        ========================================== */
+
+        .filter-box {
+            background: #111111;
+            border: 1px solid #292929;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 18px;
+        }
+
+        .filter-row {
+            display: grid;
+            grid-template-columns: minmax(220px, 1fr) 190px 190px;
+            gap: 12px;
+        }
+
+        .search-box {
+            position: relative;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #777;
+            font-size: 13px;
+        }
+
+        .search-box input,
+        .filter-select {
+            width: 100%;
+            height: 44px;
+            border: 1px solid #303030;
+            background: #181818;
+            color: #ddd;
+            border-radius: 8px;
+            outline: none;
+            padding: 0 13px;
+            font-size: 12px;
+        }
+
+        .search-box input {
+            padding-left: 38px;
+        }
+
+        .search-box input:focus,
+        .filter-select:focus {
+            border-color: #d4af37;
+        }
+
+        .filter-select option {
+            background: #111111;
+        }
+
+        /* ==========================================
+           OFFERS TABLE
+        ========================================== */
+
+        .table-card {
+            background: #111111;
+            border: 1px solid #292929;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .table-header {
+            padding: 17px 19px;
+            border-bottom: 1px solid #252525;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .table-header h2 {
+            font-size: 15px;
+        }
+
+        .table-header span {
+            color: #777;
+            font-size: 11px;
+        }
+
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .table-wrapper::-webkit-scrollbar {
+            display: none;
+        }
+
+        table {
+            width: 100%;
+            min-width: 1050px;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-align: left;
+            padding: 13px 18px;
+            background: #151515;
+            color: #777;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.7px;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 15px 18px;
+            border-top: 1px solid #222;
+            font-size: 12px;
+            color: #ccc;
+            vertical-align: middle;
+        }
+
+        tbody tr:hover {
+            background: #141414;
+        }
+
+        .offer-cell {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+        }
+
+        .offer-icon {
+            width: 38px;
+            height: 38px;
+            min-width: 38px;
+            border-radius: 9px;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.22);
+            color: #d4af37;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .offer-info strong {
+            display: block;
+            color: #eeeeee;
+            font-size: 12px;
+        }
+
+        .offer-info span {
+            display: block;
+            color: #777;
+            font-size: 10px;
+            margin-top: 3px;
+        }
+
+        .day-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 5px 9px;
+            border-radius: 6px;
+            color: #d4af37;
+            background: rgba(212, 175, 55, 0.08);
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .discount-value {
+            color: #d4af37;
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .offer-date {
+            color: #aaa;
+            font-size: 11px;
+        }
+
+        .status {
+            display: inline-flex;
+            align-items: center;
+            padding: 5px 9px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .status.active {
+            color: #73d69a;
+            background: rgba(60, 180, 100, 0.1);
+        }
+
+        .status.inactive {
+            color: #999;
+            background: rgba(150, 150, 150, 0.1);
+        }
+
+        .action-group {
+            display: flex;
+            gap: 6px;
+        }
+
+        .action-btn {
+            width: 31px;
+            height: 31px;
+            border-radius: 7px;
+            border: 1px solid #333;
+            background: #181818;
+            color: #aaa;
+        }
+
+        .action-btn:hover {
+            color: #d4af37;
+            border-color: #d4af37;
+        }
+
+        .action-btn.delete:hover {
+            color: #ff7777;
+            border-color: #c75c5c;
+        }
+
+        /* ==========================================
+           MODAL
+        ========================================== */
+
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.78);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            z-index: 2000;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .modal {
+            width: min(620px, 100%);
+            max-height: 90vh;
+            overflow-y: auto;
+            scrollbar-width: none;
+            background: #111111;
+            border: 1px solid #333;
+            border-radius: 14px;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.6);
+        }
+
+        .modal::-webkit-scrollbar {
+            display: none;
+        }
+
+        .modal-header {
+            padding: 18px 20px;
+            border-bottom: 1px solid #292929;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .modal-header h3 {
+            font-family: "Playfair Display", serif;
+            font-size: 20px;
+        }
+
+        .modal-close {
+            width: 34px;
+            height: 34px;
+            border: 1px solid #333;
+            border-radius: 7px;
+            background: #181818;
+            color: #aaa;
+        }
+
+        .modal-close:hover {
+            color: #d4af37;
+            border-color: #d4af37;
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        /* ==========================================
+           OFFER PREVIEW
+        ========================================== */
+
+        .offer-preview {
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(212, 175, 55, 0.13),
+                    rgba(212, 175, 55, 0.03)
+                );
+            border: 1px solid rgba(212, 175, 55, 0.22);
+            border-radius: 10px;
+            padding: 18px;
+            margin-bottom: 20px;
+        }
+
+        .preview-label {
+            color: #777;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 7px;
+        }
+
+        .preview-title {
+            font-family: "Playfair Display", serif;
+            font-size: 21px;
+            color: #ffffff;
+        }
+
+        .preview-discount {
+            color: #d4af37;
+            font-size: 25px;
+            font-weight: 700;
+            margin-top: 7px;
+        }
+
+        .preview-description {
+            color: #999;
+            font-size: 11px;
+            line-height: 1.6;
+            margin-top: 6px;
+        }
+
+        /* ==========================================
+           FORM
+        ========================================== */
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            display: block;
+            color: #aaa;
+            font-size: 11px;
+            margin-bottom: 6px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            border: 1px solid #333;
+            background: #181818;
+            color: #ddd;
+            border-radius: 7px;
+            padding: 0 12px;
+            outline: none;
+            font-size: 12px;
+        }
+
+        .form-group input,
+        .form-group select {
+            height: 42px;
+        }
+
+        .form-group textarea {
+            height: 90px;
+            padding-top: 11px;
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #d4af37;
+        }
+
+        .form-group input[type="date"] {
+            color-scheme: dark;
+        }
+
+        .discount-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .checkbox-row {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            margin-top: 16px;
+        }
+
+        .checkbox-row input {
+            accent-color: #d4af37;
+        }
+
+        .checkbox-row label {
+            color: #aaa;
+            font-size: 11px;
+        }
+
+        .modal-footer {
+            padding: 16px 20px;
+            border-top: 1px solid #292929;
+            display: flex;
+            justify-content: flex-end;
+            gap: 9px;
+        }
+
+        .modal-btn {
+            padding: 10px 15px;
+            border-radius: 7px;
+            border: 1px solid #333;
+            background: #181818;
+            color: #ccc;
+            font-size: 12px;
+        }
+
+        .modal-btn.primary {
+            border-color: #d4af37;
+            background: #d4af37;
+            color: #000;
+            font-weight: 700;
+        }
+
+        /* ==========================================
+           VIEW MODAL
+        ========================================== */
+
+        .view-offer-box {
+            text-align: center;
+            padding: 12px 0 22px;
+        }
+
+        .view-offer-icon {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            margin: 0 auto 13px;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            color: #d4af37;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 25px;
+        }
+
+        .view-offer-box h4 {
+            font-family: "Playfair Display", serif;
+            font-size: 21px;
+        }
+
+        .view-offer-box .view-discount {
+            color: #d4af37;
+            font-size: 28px;
+            font-weight: 700;
+            margin-top: 5px;
+        }
+
+        .view-offer-box p {
+            color: #888;
+            font-size: 11px;
+            margin-top: 5px;
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .detail-item {
+            background: #181818;
+            border: 1px solid #252525;
+            border-radius: 8px;
+            padding: 13px;
+        }
+
+        .detail-item label {
+            display: block;
+            color: #777;
+            font-size: 10px;
+            margin-bottom: 5px;
+        }
+
+        .detail-item strong {
+            color: #ddd;
+            font-size: 12px;
+        }
+
+        .detail-item.full {
+            grid-column: 1 / -1;
+        }
+
+        /* ==========================================
+           MOBILE OVERLAY
+        ========================================== */
+
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            inset: 78px 0 0 0;
+            background: rgba(0, 0, 0, 0.65);
+            z-index: 850;
+        }
+
+        /* ==========================================
+           RESPONSIVE
+        ========================================== */
+
+        @media (max-width: 1100px) {
+
+            .summary-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .filter-row {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .search-box {
+                grid-column: 1 / -1;
+            }
+
+        }
+
+        @media (max-width: 767px) {
+
+            .admin-header {
+                height: 70px;
+                padding: 0 14px;
+            }
+
+            .admin-logo {
+                width: 40px;
+                height: 40px;
+                min-width: 40px;
+                font-size: 16px;
+            }
+
+            .brand-name {
+                font-size: 16px;
+            }
+
+            .brand-admin {
+                font-size: 8px;
+                letter-spacing: 1.5px;
+            }
+
+            .page-title {
+                display: none;
+            }
+
+            .header-right {
+                gap: 8px;
+            }
+
+            .notification-btn {
+                width: 36px;
+                height: 36px;
+            }
+
+            .profile-text {
+                display: none;
+            }
+
+            .profile-avatar {
+                width: 36px;
+                height: 36px;
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            .admin-sidebar {
+                top: 70px;
+                height: calc(100vh - 70px);
+                width: 255px;
+                transform: translateX(-100%);
+                transition: transform 0.25s ease;
+                z-index: 950;
+            }
+
+            .admin-sidebar.mobile-open {
+                transform: translateX(0);
+            }
+
+            .admin-sidebar.collapsed {
+                width: 255px;
+            }
+
+            .admin-sidebar.collapsed .sidebar-link {
+                justify-content: flex-start;
+                padding: 0 14px;
+                gap: 14px;
+            }
+
+            .admin-sidebar.collapsed .sidebar-link span {
+                display: inline;
+            }
+
+            .admin-sidebar.collapsed .sidebar-toggle i {
+                transform: none;
+            }
+
+            .sidebar-toggle {
+                right: 12px;
+                top: 15px;
+            }
+
+            .sidebar-overlay {
+                inset: 70px 0 0 0;
+            }
+
+            .sidebar-overlay.show {
+                display: block;
+            }
+
+            .admin-main,
+            .admin-sidebar.collapsed ~ .admin-main {
+                margin-left: 0;
+                padding: 94px 14px 30px;
+            }
+
+            .content-heading {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .heading-text h1 {
+                font-size: 27px;
+            }
+
+            .add-offer-btn {
+                width: 100%;
+            }
+
+            .summary-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+
+            .summary-card {
+                padding: 14px;
+            }
+
+            .summary-card h3 {
+                font-size: 21px;
+            }
+
+            .filter-row {
+                grid-template-columns: 1fr;
+            }
+
+            .search-box {
+                grid-column: auto;
+            }
+
+            .detail-grid,
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .detail-item.full,
+            .form-group.full {
+                grid-column: auto;
+            }
+
+            .discount-row {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media (max-width: 420px) {
+
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header-left {
+                gap: 9px;
+            }
+
+            .brand-name {
+                font-size: 15px;
+            }
+
+            .notification-btn {
+                display: none;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header class="admin-header">
+
+        <div class="header-left">
+
+            <button
+                class="mobile-menu-btn"
+                id="mobileMenuBtn"
+                aria-label="Open Menu"
+            >
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <div class="admin-logo">
+                <i class="fa-solid fa-scissors"></i>
+            </div>
+
+            <div class="brand-area">
+                <div class="brand-name">The Beauty</div>
+                <div class="brand-admin">SALON ADMIN</div>
+            </div>
+
+            <div class="page-title">
+                Offers
+            </div>
+
+        </div>
+
+
+        <div class="header-right">
+
+            <button
+                class="notification-btn"
+                title="Notifications"
+            >
+                <i class="fa-regular fa-bell"></i>
+                <span class="notification-dot"></span>
+            </button>
+
+            <div class="admin-profile">
+
+                <div class="profile-avatar">
+                    A
+                </div>
+
+                <div class="profile-text">
+                    <strong>Administrator</strong>
+                    <span>Admin Account</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside
+        class="admin-sidebar"
+        id="adminSidebar"
+    >
+
+        <button
+            class="sidebar-toggle"
+            id="sidebarToggle"
+            title="Collapse Sidebar"
+        >
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+
+
+        <nav class="sidebar-nav">
+
+            <a
+                href="dashboard.html"
+                class="sidebar-link"
+            >
+                <i class="fa-solid fa-chart-line"></i>
+                <span>Dashboard</span>
+            </a>
+
+
+            <a
+                href="branches.html"
+                class="sidebar-link"
+            >
+                <i class="fa-solid fa-code-branch"></i>
+                <span>Branches</span>
+            </a>
+
+
+            <a
+                href="services.html"
+                class="sidebar-link"
+            >
+                <i class="fa-solid fa-scissors"></i>
+                <span>Services</span>
+            </a>
+
+
+            <a
+                href="bookings.html"
+                class="sidebar-link"
+            >
+                <i class="fa-regular fa-calendar-check"></i>
+                <span>Bookings</span>
+            </a>
+
+
+            <a
+                href="customers.html"
+                class="sidebar-link"
+            >
+                <i class="fa-solid fa-users"></i>
+                <span>Customers</span>
+            </a>
+
+
+            <a
+                href="staff.html"
+                class="sidebar-link"
+            >
+                <i class="fa-solid fa-user-tie"></i>
+                <span>Staff</span>
+            </a>
+
+
+            <a
+                href="gallery.html"
+                class="sidebar-link"
+            >
+                <i class="fa-regular fa-images"></i>
+                <span>Gallery</span>
+            </a>
+
+
+            <a
+                href="offers.html"
+                class="sidebar-link active"
+            >
+                <i class="fa-solid fa-tags"></i>
+                <span>Offers</span>
+            </a>
+
+
+            <a
+                href="settings.html"
+                class="sidebar-link"
+            >
+                <i class="fa-solid fa-gear"></i>
+                <span>Settings</span>
+            </a>
+
+
+            <a
+                href="../index.html"
+                class="sidebar-link"
+            >
+                <i class="fa-solid fa-globe"></i>
+                <span>View Website</span>
+            </a>
+
+
+            <a
+                href="../login.html"
+                class="sidebar-link logout"
+            >
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <div
+        class="sidebar-overlay"
+        id="sidebarOverlay"
+    ></div>
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="admin-main">
+
+        <div class="content-heading">
+
+            <div class="heading-text">
+
+                <h1>Offers Management</h1>
+
+                <p>
+                    Manage daily offers, discounts and promotional campaigns.
+                </p>
+
+            </div>
+
+
+            <button
+                class="add-offer-btn"
+                id="addOfferBtn"
+            >
+                <i class="fa-solid fa-plus"></i>
+                Add Offer
+            </button>
+
+        </div>
+
+
+        <!-- =================================================
+             SUMMARY
+        ================================================== -->
+
+        <section class="summary-grid">
+
+            <div class="summary-card">
+
+                <div class="summary-top">
+
+                    <div>
+                        <h3>12</h3>
+                        <p>Total Offers</p>
+                    </div>
+
+                    <div class="summary-icon">
+                        <i class="fa-solid fa-tags"></i>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-top">
+
+                    <div>
+                        <h3>8</h3>
+                        <p>Active Offers</p>
+                    </div>
+
+                    <div class="summary-icon">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-top">
+
+                    <div>
+                        <h3>3</h3>
+                        <p>Scheduled Offers</p>
+                    </div>
+
+                    <div class="summary-icon">
+                        <i class="fa-regular fa-clock"></i>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-top">
+
+                    <div>
+                        <h3>7</h3>
+                        <p>Weekly Offers</p>
+                    </div>
+
+                    <div class="summary-icon">
+                        <i class="fa-solid fa-calendar-week"></i>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             FILTERS
+        ================================================== -->
+
+        <section class="filter-box">
+
+            <div class="filter-row">
+
+                <div class="search-box">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input
+                        type="text"
+                        id="offerSearch"
+                        placeholder="Search offer title or description..."
+                    >
+
+                </div>
+
+
+                <select
+                    class="filter-select"
+                    id="branchFilter"
+                >
+
+                    <option value="all">
+                        All Branches
+                    </option>
+
+                    <option value="Baramati">
+                        Baramati
+                    </option>
+
+                    <option value="Baramati MIDC">
+                        Baramati MIDC
+                    </option>
+
+                </select>
+
+
+                <select
+                    class="filter-select"
+                    id="dayFilter"
+                >
+
+                    <option value="all">
+                        All Days
+                    </option>
+
+                    <option value="Monday">
+                        Monday
+                    </option>
+
+                    <option value="Tuesday">
+                        Tuesday
+                    </option>
+
+                    <option value="Wednesday">
+                        Wednesday
+                    </option>
+
+                    <option value="Thursday">
+                        Thursday
+                    </option>
+
+                    <option value="Friday">
+                        Friday
+                    </option>
+
+                    <option value="Saturday">
+                        Saturday
+                    </option>
+
+                    <option value="Sunday">
+                        Sunday
+                    </option>
+
+                </select>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             OFFERS TABLE
+        ================================================== -->
+
+        <section class="table-card">
+
+            <div class="table-header">
+
+                <h2>Offer List</h2>
+
+                <span id="offerCount">
+                    Showing 8 offers
+                </span>
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Offer</th>
+                            <th>Day</th>
+                            <th>Branch</th>
+                            <th>Discount</th>
+                            <th>Valid From</th>
+                            <th>Valid Until</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="offerTableBody">
+
+
+                        <!-- =================================================
+                             DUMMY OFFER DATA
+                        ================================================== -->
+
+
+                        <tr
+                            data-title="Monday Hair Care"
+                            data-description="Special discount on selected hair care services."
+                            data-day="Monday"
+                            data-branch="Baramati"
+                            data-discount="20"
+                            data-discounttype="%"
+                            data-from="14 Sep 2026"
+                            data-until="30 Sep 2026"
+                            data-status="Active"
+                        >
+
+                            <td>
+
+                                <div class="offer-cell">
+
+                                    <div class="offer-icon">
+                                        <i class="fa-solid fa-scissors"></i>
+                                    </div>
+
+                                    <div class="offer-info">
+
+                                        <strong>
+                                            Monday Hair Care
+                                        </strong>
+
+                                        <span>
+                                            Hair care special
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+                                <span class="day-badge">
+                                    Monday
+                                </span>
+                            </td>
+
+                            <td>
+                                Baramati
+                            </td>
+
+                            <td>
+                                <span class="discount-value">
+                                    20%
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="offer-date">
+                                    14 Sep 2026
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="offer-date">
+                                    30 Sep 2026
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="status active">
+                                    Active
+                                </span>
+                            </td>
+
+                            <td>
+
+                                <div class="action-group">
+
+                                    <button
+                                        class="action-btn view-btn"
+                                        title="View"
+                                    >
+                                        <i class="fa-regular fa-eye"></i>
+                                    </button>
+
+                                    <button
+                                        class="action-btn edit-btn"
+                                        title="Edit"
+                                    >
+                                        <i class="fa-solid fa-pen"></i>
+                                    </button>
+
+                                    <button
+                                        class="action-btn delete delete-btn"
+                                        title="Delete"
+                                    >
+                                        <i class="fa-regular fa-trash-can"></i>
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr
+                            data-title="Tuesday Beard Grooming"
+                            data-description="Special price for beard styling and grooming."
+                            data-day="Tuesday"
+                            data-branch="Baramati"
+                            data-discount="50"
+                            data-discounttype="₹"
+                            data-from="15 Sep 2026"
+                            data-until="30 Sep 2026"
+                            data-status="Active"
+                        >
+
+                            <td>
+
+                                <div class="offer-cell">
+
+                                    <div class="offer-icon">
+                                        <i class="fa-solid fa-user-tie"></i>
+                                    </div>
+
+                                    <div class="offer-info">
+
+                                        <strong>
+                                            Tuesday Beard Grooming
+                                        </strong>
+
+                                        <span>
+                                            Beard & grooming
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+                                <span class="day-badge">
+                                    Tuesday
+                                </span>
+                            </td>
+
+                            <td>
+                                Baramati
+                            </td>
+
+                            <td>
+                                <span class="discount-value">
+                                    ₹50
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="offer-date">
+                                    15 Sep 2026
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="offer-date">
+                                    30 Sep 2026
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="status active">
+                                    Active
+                                </span>
+                            </td>
+
+                            <td>
+
+                                <div class="action-group">
+
+                                    <button class="action-btn view-btn" title="View">
+                                        <i class="fa-regular fa-eye"></i>
+                                    </button>
+
+                                    <button class="action-btn edit-btn" title="Edit">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </button>
+
+                                    <button class="action-btn delete delete-btn" title="Delete">
+                                        <i class="fa-regular fa-trash-can"></i>
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr
+                            data-title="Wednesday Beauty Special"
+                            data-description="Discount on selected facial and beauty services."
+                            data-day="Wednesday"
+                            data-branch="Baramati"
+                            data-discount="15"
+                            data-discounttype="%"
+                            data-from="16 Sep 2026"
+                            data-until="30 Sep 2026"
+                            data-status="Active"
+                        >
+
+                            <td>
+
+                                <div class="offer-cell">
+
+                                    <div class="offer-icon">
+                                        <i class="fa-solid fa-spa"></i>
+                                    </div>
+
+                                    <div class="offer-info">
+
+                                        <strong>
+                                            Wednesday Beauty Special
+                                        </strong>
+
+                                        <span>
+                                            Facial & beauty
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+                                <span class="day-badge">
+                                    Wednesday
+                                </span>
+                            </td>
+
+                            <td>
+                                Baramati
+                            </td>
+
+                            <td>
+                                <span class="discount-value">
+                                    15%
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="offer-date">
+                                    16 Sep 2026
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="offer-date">
+                                    30 Sep 2026
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="status active">
+                                    Active
+                                </span>
+                            </td>
+
+                            <td>
+
+                                <div class="action-group">
+
+                                    <button class="action-btn view-btn" title="View">
+                                        <i class="fa-regular fa-eye"></i>
+                                    </button>
+
+                                    <button class="action-btn edit-btn" title="Edit">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </button>
+
+                                    <button class="action-btn delete delete-btn" title="Delete">
+                                        <i class="fa-regular fa-trash-can"></i>
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr
+                            data-title="Thursday Hair Spa"
+                            data-description="Save on selected hair spa treatments."
+                            data-day="Thursday"
+                            data-branch="Baramati MIDC"
+                            data-discount="100"
+                            data-discounttype="₹"
+                            data-from="17 Sep 2026"
+                            data-until="30 Sep 2026"
+                            data-status="Active"
+                        >
+
+                            <td>
+
+                                <div class="offer-cell">
+
+                                    <div class="offer-icon">
+                                        <i class="fa-solid fa-hot-tub-person"></i>
+                                    </div>
+
+                                    <div class="offer-info">
+
+                                        <strong>
+                                            Thursday Hair Spa
+                                        </strong>
+
+                                        <span>
+                                            Hair spa special
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+                                <span class="day-badge">
+                                    Thursday
+                                </span>
+                            </td>
+
+                            <td>
+                                Baramati MIDC
+                            </td>
+
+                            <td>
+                                <span class="discount-value">
+                                    ₹100
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="offer-date">
+                                    17 Sep 2026
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="offer-date">
+                                    30 Sep 2026
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="status active">
+                                    Active
+                                </span>
+                            </td>
+
+                            <td>
+
+                                <div class="action-group">
+
+                                    <button class="action-btn view-btn" title="View">
+                                        <i class="fa-regular fa-eye"></i>
+                                    </button>
+
+                                    <button class="action-btn edit-btn" title="Edit">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </button>
+
+                                    <button class="action-btn delete delete-btn" title="Delete">
+                                        <i class="fa-regular fa-trash-can"></i>
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr
+                            data-title="Friday Family Beauty"
+                            data-description="Special family offer on selected salon services."
+                            data-day="Friday"
+                            data-branch="Baramati"
+                            data-discount="25"
+                            data-discounttype="%"
+                            data-from="18 Sep 2026"
+                            data-until="30 Sep 2026"
+                            data-status="Active"
+                        >
+
+                            <td>
+
+                                <div class="offer-cell">
+
+                                    <div class="offer-icon">
+                                        <i class="fa-solid fa-people-group"></i>
+                                    </div>
+
+                                    <div class="offer-info">
+
+                                        <strong>
+                                            Friday Family Beauty
+                                        </strong>
+
+                                        <span>
+                                            Family special
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+                                <span class="day-badge">
+                                    Friday
+                                </span>
+                            </td>
+
+                            <td>
+                                Baramati
+                            </td>
+
+                            <td>
+                                <span class="discount-value">
+                                    25%
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="offer-date">
+                                    18 Sep 2026
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="offer-date">
+                                    30 Sep 2026
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="status active">
+                                    Active
+                                </span>
+                            </td>
+
+                            <td>
+
+                                <div class="action-group">
+
+                                    <button class="action-btn view-btn" title="View">
+                                        <i class="fa-regular fa-eye"></i>
+                                    </button>
+
+                                    <button class="action-btn edit-btn" title="Edit">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </button>
+
+                                    <button class="action-btn delete delete-btn" title="Delete">
+                                        <i class="fa-regular fa-trash-can"></i>
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr
+                            data-title="Saturday Premium Styling"
+                            data-description="Weekend discount on premium styling services."
+                            data-day="Saturday"
+                            data-branch="Baramati"
+                            data-discount="20"
+                            data-discounttype="%"
+                            data-from="19 Sep 2026"
+                            data-until="27 Sep 2026"
+                            data-status="Active"
+                        >
+
+                            <td>
+
+                                <div class="offer-cell">
+
+                                    <div class="offer-icon">
+                                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                                    </div>
+
+                                    <div class="offer-info">
+
+                                        <strong>
+                                            Saturday Premium Styling
+                                        </strong>
+
+                                        <span>
+                                            Premium styling
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+                                <span class="day-badge">
+                                    Saturday
+                                </span>
+                            </td>
+
+                            <td>
+                                Baramati
+                            </td>
+
+                            <td>
+                                <span class="discount-value">
+                                    20%
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="offer-date">
+                                    19 Sep 2026
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="offer-date">
+                                    27 Sep 2026
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="status active">
+                                    Active
+                                </span>
+                            </td>
+
+                            <td>
+
+                                <div class="action-group">
+
+                                    <button class="action-btn view-btn" title="View">
+                                        <i class="fa-regular fa-eye"></i>
+                                    </button>
+
+                                    <button class="action-btn edit-btn" title="Edit">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </button>
+
+                                    <button class="action-btn delete delete-btn" title="Delete">
+                                        <i class="fa-regular fa-trash-can"></i>
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr
+                            data-title="Sunday Self Care"
+                            data-description="Sunday special offer for selected beauty treatments."
+                            data-day="Sunday"
+                            data-branch="Baramati MIDC"
+                            data-discount="150"
+                            data-discounttype="₹"
+                            data-from="20 Sep 2026"
+                            data-until="27 Sep 2026"
+                            data-status="Active"
+                        >
+
+                            <td>
+
+                                <div class="offer-cell">
+
+                                    <div class="offer-icon">
+                                        <i class="fa-solid fa-face-smile"></i>
+                                    </div>
+
+                                    <div class="offer-info">
+
+                                        <strong>
+                                            Sunday Self Care
+                                        </strong>
+
+                                        <span>
+                                            Beauty treatment
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+                                <span class="day-badge">
+                                    Sunday
+                                </span>
+                            </td>
+
+                            <td>
+                                Baramati MIDC
+                            </td>
+
+                            <td>
+                                <span class="discount-value">
+                                    ₹150
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="offer-date">
+                                    20 Sep 2026
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="offer-date">
+                                    27 Sep 2026
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="status active">
+                                    Active
+                                </span>
+                            </td>
+
+                            <td>
+
+                                <div class="action-group">
+
+                                    <button class="action-btn view-btn" title="View">
+                                        <i class="fa-regular fa-eye"></i>
+                                    </button>
+
+                                    <button class="action-btn edit-btn" title="Edit">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </button>
+
+                                    <button class="action-btn delete delete-btn" title="Delete">
+                                        <i class="fa-regular fa-trash-can"></i>
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr
+                            data-title="New Customer Welcome"
+                            data-description="Welcome discount for new salon customers."
+                            data-day="Monday"
+                            data-branch="Baramati"
+                            data-discount="10"
+                            data-discounttype="%"
+                            data-from="01 Sep 2026"
+                            data-until="31 Dec 2026"
+                            data-status="Inactive"
+                        >
+
+                            <td>
+
+                                <div class="offer-cell">
+
+                                    <div class="offer-icon">
+                                        <i class="fa-solid fa-user-plus"></i>
+                                    </div>
+
+                                    <div class="offer-info">
+
+                                        <strong>
+                                            New Customer Welcome
+                                        </strong>
+
+                                        <span>
+                                            First visit offer
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+                                <span class="day-badge">
+                                    Monday
+                                </span>
+                            </td>
+
+                            <td>
+                                Baramati
+                            </td>
+
+                            <td>
+                                <span class="discount-value">
+                                    10%
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="offer-date">
+                                    01 Sep 2026
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="offer-date">
+                                    31 Dec 2026
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="status inactive">
+                                    Inactive
+                                </span>
+                            </td>
+
+                            <td>
+
+                                <div class="action-group">
+
+                                    <button class="action-btn view-btn" title="View">
+                                        <i class="fa-regular fa-eye"></i>
+                                    </button>
+
+                                    <button class="action-btn edit-btn" title="Edit">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </button>
+
+                                    <button class="action-btn delete delete-btn" title="Delete">
+                                        <i class="fa-regular fa-trash-can"></i>
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         ADD / EDIT OFFER MODAL
+    ====================================================== -->
+
+    <div
+        class="modal-overlay"
+        id="formModal"
+    >
+
+        <div class="modal">
+
+            <div class="modal-header">
+
+                <h3 id="formTitle">
+                    Add Offer
+                </h3>
+
+                <button
+                    class="modal-close"
+                    data-close="formModal"
+                >
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+
+            </div>
+
+
+            <form id="offerForm">
+
+                <div class="modal-body">
+
+                    <div class="offer-preview">
+
+                        <div class="preview-label">
+                            Offer Preview
+                        </div>
+
+                        <div
+                            class="preview-title"
+                            id="previewTitle"
+                        >
+                            Your New Offer
+                        </div>
+
+                        <div
+                            class="preview-discount"
+                            id="previewDiscount"
+                        >
+                            20%
+                        </div>
+
+                        <div
+                            class="preview-description"
+                            id="previewDescription"
+                        >
+                            Your offer description will appear here.
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-grid">
+
+                        <div class="form-group full">
+
+                            <label>
+                                Offer Title
+                            </label>
+
+                            <input
+                                type="text"
+                                id="offerTitle"
+                                placeholder="Monday Hair Care"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group full">
+
+                            <label>
+                                Description
+                            </label>
+
+                            <textarea
+                                id="offerDescription"
+                                placeholder="Enter offer description..."
+                                required
+                            ></textarea>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Day
+                            </label>
+
+                            <select id="offerDay">
+
+                                <option value="Monday">
+                                    Monday
+                                </option>
+
+                                <option value="Tuesday">
+                                    Tuesday
+                                </option>
+
+                                <option value="Wednesday">
+                                    Wednesday
+                                </option>
+
+                                <option value="Thursday">
+                                    Thursday
+                                </option>
+
+                                <option value="Friday">
+                                    Friday
+                                </option>
+
+                                <option value="Saturday">
+                                    Saturday
+                                </option>
+
+                                <option value="Sunday">
+                                    Sunday
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Branch
+                            </label>
+
+                            <select id="offerBranch">
+
+                                <option value="Baramati">
+                                    Baramati
+                                </option>
+
+                                <option value="Baramati MIDC">
+                                    Baramati MIDC
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Discount
+                            </label>
+
+                            <div class="discount-row">
+
+                                <input
+                                    type="number"
+                                    id="offerDiscount"
+                                    min="0"
+                                    placeholder="20"
+                                    required
+                                >
+
+                                <select id="discountType">
+
+                                    <option value="%">
+                                        Percentage (%)
+                                    </option>
+
+                                    <option value="₹">
+                                        Fixed Amount (₹)
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Status
+                            </label>
+
+                            <select id="offerStatus">
+
+                                <option value="Active">
+                                    Active
+                                </option>
+
+                                <option value="Inactive">
+                                    Inactive
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Valid From
+                            </label>
+
+                            <input
+                                type="date"
+                                id="validFrom"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Valid Until
+                            </label>
+
+                            <input
+                                type="date"
+                                id="validUntil"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="checkbox-row">
+
+                        <input
+                            type="checkbox"
+                            id="dailyOffer"
+                            checked
+                        >
+
+                        <label for="dailyOffer">
+                            Show this offer as a daily promotional offer
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <div class="modal-footer">
+
+                    <button
+                        type="button"
+                        class="modal-btn"
+                        data-close="formModal"
+                    >
+                        Cancel
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="modal-btn primary"
+                    >
+                        Save Offer
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         VIEW OFFER MODAL
+    ====================================================== -->
+
+    <div
+        class="modal-overlay"
+        id="viewModal"
+    >
+
+        <div class="modal">
+
+            <div class="modal-header">
+
+                <h3>
+                    Offer Details
+                </h3>
+
+                <button
+                    class="modal-close"
+                    data-close="viewModal"
+                >
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+
+            </div>
+
+
+            <div class="modal-body">
+
+                <div class="view-offer-box">
+
+                    <div class="view-offer-icon">
+                        <i class="fa-solid fa-tags"></i>
+                    </div>
+
+                    <h4 id="viewTitle">
+                        Monday Hair Care
+                    </h4>
+
+                    <div
+                        class="view-discount"
+                        id="viewDiscount"
+                    >
+                        20%
+                    </div>
+
+                    <p id="viewDescription">
+                        Special discount on selected hair care services.
+                    </p>
+
+                </div>
+
+
+                <div class="detail-grid">
+
+                    <div class="detail-item">
+
+                        <label>
+                            Day
+                        </label>
+
+                        <strong id="viewDay">
+                            Monday
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail-item">
+
+                        <label>
+                            Branch
+                        </label>
+
+                        <strong id="viewBranch">
+                            Baramati
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail-item">
+
+                        <label>
+                            Valid From
+                        </label>
+
+                        <strong id="viewFrom">
+                            14 Sep 2026
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail-item">
+
+                        <label>
+                            Valid Until
+                        </label>
+
+                        <strong id="viewUntil">
+                            30 Sep 2026
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail-item">
+
+                        <label>
+                            Status
+                        </label>
+
+                        <strong id="viewStatus">
+                            Active
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="modal-footer">
+
+                <button
+                    class="modal-btn"
+                    data-close="viewModal"
+                >
+                    Close
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                const sidebar =
+                    document.getElementById("adminSidebar");
+
+                const sidebarToggle =
+                    document.getElementById("sidebarToggle");
+
+                const mobileMenuBtn =
+                    document.getElementById("mobileMenuBtn");
+
+                const sidebarOverlay =
+                    document.getElementById("sidebarOverlay");
+
+                const searchInput =
+                    document.getElementById("offerSearch");
+
+                const branchFilter =
+                    document.getElementById("branchFilter");
+
+                const dayFilter =
+                    document.getElementById("dayFilter");
+
+                const tableBody =
+                    document.getElementById("offerTableBody");
+
+                const offerCount =
+                    document.getElementById("offerCount");
+
+                const addOfferBtn =
+                    document.getElementById("addOfferBtn");
+
+                const formModal =
+                    document.getElementById("formModal");
+
+                const viewModal =
+                    document.getElementById("viewModal");
+
+                const offerForm =
+                    document.getElementById("offerForm");
+
+                let editingRow = null;
+
+
+                /* ==========================================
+                   SIDEBAR
+                ========================================== */
+
+                sidebarToggle.addEventListener(
+                    "click",
+                    function () {
+
+                        if (window.innerWidth <= 767) {
+
+                            sidebar.classList.remove(
+                                "mobile-open"
+                            );
+
+                            sidebarOverlay.classList.remove(
+                                "show"
+                            );
+
+                            return;
+
+                        }
+
+                        sidebar.classList.toggle(
+                            "collapsed"
+                        );
+
+                    }
+                );
+
+
+                mobileMenuBtn.addEventListener(
+                    "click",
+                    function () {
+
+                        sidebar.classList.add(
+                            "mobile-open"
+                        );
+
+                        sidebarOverlay.classList.add(
+                            "show"
+                        );
+
+                    }
+                );
+
+
+                sidebarOverlay.addEventListener(
+                    "click",
+                    function () {
+
+                        sidebar.classList.remove(
+                            "mobile-open"
+                        );
+
+                        sidebarOverlay.classList.remove(
+                            "show"
+                        );
+
+                    }
+                );
+
+
+                document
+                    .querySelectorAll(".sidebar-link")
+                    .forEach(function (link) {
+
+                        link.addEventListener(
+                            "click",
+                            function () {
+
+                                if (
+                                    window.innerWidth <= 767
+                                ) {
+
+                                    sidebar.classList.remove(
+                                        "mobile-open"
+                                    );
+
+                                    sidebarOverlay.classList.remove(
+                                        "show"
+                                    );
+
+                                }
+
+                            }
+                        );
+
+                    });
+
+
+                /* ==========================================
+                   FILTER
+                ========================================== */
+
+                function filterOffers() {
+
+                    const searchValue =
+                        searchInput.value
+                            .trim()
+                            .toLowerCase();
+
+                    const selectedBranch =
+                        branchFilter.value;
+
+                    const selectedDay =
+                        dayFilter.value;
+
+                    const rows =
+                        tableBody.querySelectorAll("tr");
+
+                    let visibleCount = 0;
+
+
+                    rows.forEach(function (row) {
+
+                        const title =
+                            row.dataset.title
+                                .toLowerCase();
+
+                        const description =
+                            row.dataset.description
+                                .toLowerCase();
+
+                        const branch =
+                            row.dataset.branch;
+
+                        const day =
+                            row.dataset.day;
+
+
+                        const matchesSearch =
+                            title.includes(searchValue) ||
+                            description.includes(searchValue);
+
+                        const matchesBranch =
+                            selectedBranch === "all" ||
+                            branch === selectedBranch;
+
+                        const matchesDay =
+                            selectedDay === "all" ||
+                            day === selectedDay;
+
+
+                        if (
+                            matchesSearch &&
+                            matchesBranch &&
+                            matchesDay
+                        ) {
+
+                            row.style.display = "";
+
+                            visibleCount++;
+
+                        } else {
+
+                            row.style.display = "none";
+
+                        }
+
+                    });
+
+
+                    offerCount.textContent =
+                        "Showing " +
+                        visibleCount +
+                        " offers";
+
+                }
+
+
+                searchInput.addEventListener(
+                    "input",
+                    filterOffers
+                );
+
+                branchFilter.addEventListener(
+                    "change",
+                    filterOffers
+                );
+
+                dayFilter.addEventListener(
+                    "change",
+                    filterOffers
+                );
+
+
+                /* ==========================================
+                   VIEW OFFER
+                ========================================== */
+
+                function openViewModal(row) {
+
+                    document.getElementById(
+                        "viewTitle"
+                    ).textContent =
+                        row.dataset.title;
+
+                    document.getElementById(
+                        "viewDescription"
+                    ).textContent =
+                        row.dataset.description;
+
+                    document.getElementById(
+                        "viewDay"
+                    ).textContent =
+                        row.dataset.day;
+
+                    document.getElementById(
+                        "viewBranch"
+                    ).textContent =
+                        row.dataset.branch;
+
+                    document.getElementById(
+                        "viewDiscount"
+                    ).textContent =
+                        row.dataset.discount +
+                        row.dataset.discounttype;
+
+                    document.getElementById(
+                        "viewFrom"
+                    ).textContent =
+                        row.dataset.from;
+
+                    document.getElementById(
+                        "viewUntil"
+                    ).textContent =
+                        row.dataset.until;
+
+                    document.getElementById(
+                        "viewStatus"
+                    ).textContent =
+                        row.dataset.status;
+
+
+                    viewModal.classList.add(
+                        "show"
+                    );
+
+                }
+
+
+                /* ==========================================
+                   EDIT OFFER
+                ========================================== */
+
+                function openEditModal(row) {
+
+                    editingRow = row;
+
+                    document.getElementById(
+                        "formTitle"
+                    ).textContent =
+                        "Edit Offer";
+
+                    document.getElementById(
+                        "offerTitle"
+                    ).value =
+                        row.dataset.title;
+
+                    document.getElementById(
+                        "offerDescription"
+                    ).value =
+                        row.dataset.description;
+
+                    document.getElementById(
+                        "offerDay"
+                    ).value =
+                        row.dataset.day;
+
+                    document.getElementById(
+                        "offerBranch"
+                    ).value =
+                        row.dataset.branch;
+
+                    document.getElementById(
+                        "offerDiscount"
+                    ).value =
+                        row.dataset.discount;
+
+                    document.getElementById(
+                        "discountType"
+                    ).value =
+                        row.dataset.discounttype;
+
+                    document.getElementById(
+                        "offerStatus"
+                    ).value =
+                        row.dataset.status;
+
+
+                    formModal.classList.add(
+                        "show"
+                    );
+
+
+                    updatePreview();
+
+                }
+
+
+                /* ==========================================
+                   ACTIONS
+                ========================================== */
+
+                function attachActions() {
+
+                    document
+                        .querySelectorAll(".view-btn")
+                        .forEach(function (button) {
+
+                            button.onclick =
+                                function () {
+
+                                    openViewModal(
+                                        button.closest("tr")
+                                    );
+
+                                };
+
+                        });
+
+
+                    document
+                        .querySelectorAll(".edit-btn")
+                        .forEach(function (button) {
+
+                            button.onclick =
+                                function () {
+
+                                    openEditModal(
+                                        button.closest("tr")
+                                    );
+
+                                };
+
+                        });
+
+
+                    document
+                        .querySelectorAll(".delete-btn")
+                        .forEach(function (button) {
+
+                            button.onclick =
+                                function () {
+
+                                    const row =
+                                        button.closest("tr");
+
+                                    const title =
+                                        row.dataset.title;
+
+
+                                    const confirmed =
+                                        confirm(
+                                            "Delete offer \"" +
+                                            title +
+                                            "\"?"
+                                        );
+
+
+                                    if (confirmed) {
+
+                                        row.remove();
+
+                                        filterOffers();
+
+                                    }
+
+                                };
+
+                        });
+
+                }
+
+
+                attachActions();
+
+
+                /* ==========================================
+                   ADD OFFER
+                ========================================== */
+
+                addOfferBtn.addEventListener(
+                    "click",
+                    function () {
+
+                        editingRow = null;
+
+                        offerForm.reset();
+
+                        document.getElementById(
+                            "formTitle"
+                        ).textContent =
+                            "Add Offer";
+
+                        document.getElementById(
+                            "dailyOffer"
+                        ).checked = true;
+
+                        formModal.classList.add(
+                            "show"
+                        );
+
+                        updatePreview();
+
+                    }
+                );
+
+
+                /* ==========================================
+                   LIVE PREVIEW
+                ========================================== */
+
+                function updatePreview() {
+
+                    const title =
+                        document.getElementById(
+                            "offerTitle"
+                        ).value.trim();
+
+                    const description =
+                        document.getElementById(
+                            "offerDescription"
+                        ).value.trim();
+
+                    const discount =
+                        document.getElementById(
+                            "offerDiscount"
+                        ).value;
+
+                    const discountType =
+                        document.getElementById(
+                            "discountType"
+                        ).value;
+
+
+                    document.getElementById(
+                        "previewTitle"
+                    ).textContent =
+                        title ||
+                        "Your New Offer";
+
+                    document.getElementById(
+                        "previewDescription"
+                    ).textContent =
+                        description ||
+                        "Your offer description will appear here.";
+
+                    document.getElementById(
+                        "previewDiscount"
+                    ).textContent =
+                        discount
+                            ? discount + discountType
+                            : "20%";
+
+                }
+
+
+                [
+                    "offerTitle",
+                    "offerDescription",
+                    "offerDiscount"
+                ].forEach(function (id) {
+
+                    document.getElementById(id)
+                        .addEventListener(
+                            "input",
+                            updatePreview
+                        );
+
+                });
+
+
+                document.getElementById(
+                    "discountType"
+                ).addEventListener(
+                    "change",
+                    updatePreview
+                );
+
+
+                /* ==========================================
+                   SAVE OFFER
+                ========================================== */
+
+                offerForm.addEventListener(
+                    "submit",
+                    function (event) {
+
+                        event.preventDefault();
+
+
+                        const title =
+                            document.getElementById(
+                                "offerTitle"
+                            ).value.trim();
+
+                        const description =
+                            document.getElementById(
+                                "offerDescription"
+                            ).value.trim();
+
+                        const day =
+                            document.getElementById(
+                                "offerDay"
+                            ).value;
+
+                        const branch =
+                            document.getElementById(
+                                "offerBranch"
+                            ).value;
+
+                        const discount =
+                            document.getElementById(
+                                "offerDiscount"
+                            ).value;
+
+                        const discountType =
+                            document.getElementById(
+                                "discountType"
+                            ).value;
+
+                        const status =
+                            document.getElementById(
+                                "offerStatus"
+                            ).value;
+
+                        const from =
+                            document.getElementById(
+                                "validFrom"
+                            ).value;
+
+                        const until =
+                            document.getElementById(
+                                "validUntil"
+                            ).value;
+
+
+                        if (
+                            !title ||
+                            !description ||
+                            !discount ||
+                            !from ||
+                            !until
+                        ) {
+
+                            alert(
+                                "Please fill all required fields."
+                            );
+
+                            return;
+
+                        }
+
+
+                        if (editingRow) {
+
+                            editingRow.dataset.title =
+                                title;
+
+                            editingRow.dataset.description =
+                                description;
+
+                            editingRow.dataset.day =
+                                day;
+
+                            editingRow.dataset.branch =
+                                branch;
+
+                            editingRow.dataset.discount =
+                                discount;
+
+                            editingRow.dataset.discounttype =
+                                discountType;
+
+                            editingRow.dataset.from =
+                                formatDate(from);
+
+                            editingRow.dataset.until =
+                                formatDate(until);
+
+                            editingRow.dataset.status =
+                                status;
+
+
+                            const cells =
+                                editingRow.querySelectorAll(
+                                    "td"
+                                );
+
+
+                            cells[0].querySelector(
+                                ".offer-info strong"
+                            ).textContent =
+                                title;
+
+                            cells[0].querySelector(
+                                ".offer-info span"
+                            ).textContent =
+                                description;
+
+                            cells[1].innerHTML =
+                                '<span class="day-badge">' +
+                                day +
+                                "</span>";
+
+                            cells[2].textContent =
+                                branch;
+
+                            cells[3].innerHTML =
+                                '<span class="discount-value">' +
+                                discount +
+                                discountType +
+                                "</span>";
+
+                            cells[4].innerHTML =
+                                '<span class="offer-date">' +
+                                formatDate(from) +
+                                "</span>";
+
+                            cells[5].innerHTML =
+                                '<span class="offer-date">' +
+                                formatDate(until) +
+                                "</span>";
+
+                            cells[6].innerHTML =
+                                '<span class="status ' +
+                                (
+                                    status === "Active"
+                                        ? "active"
+                                        : "inactive"
+                                ) +
+                                '">' +
+                                status +
+                                "</span>";
+
+
+                        } else {
+
+                            const newRow =
+                                document.createElement(
+                                    "tr"
+                                );
+
+
+                            newRow.dataset.title =
+                                title;
+
+                            newRow.dataset.description =
+                                description;
+
+                            newRow.dataset.day =
+                                day;
+
+                            newRow.dataset.branch =
+                                branch;
+
+                            newRow.dataset.discount =
+                                discount;
+
+                            newRow.dataset.discounttype =
+                                discountType;
+
+                            newRow.dataset.from =
+                                formatDate(from);
+
+                            newRow.dataset.until =
+                                formatDate(until);
+
+                            newRow.dataset.status =
+                                status;
+
+
+                            newRow.innerHTML = `
+
+                                <td>
+
+                                    <div class="offer-cell">
+
+                                        <div class="offer-icon">
+                                            <i class="fa-solid fa-tags"></i>
+                                        </div>
+
+                                        <div class="offer-info">
+
+                                            <strong>
+                                                ${title}
+                                            </strong>
+
+                                            <span>
+                                                ${description}
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+
+                                </td>
+
+
+                                <td>
+
+                                    <span class="day-badge">
+                                        ${day}
+                                    </span>
+
+                                </td>
+
+
+                                <td>
+                                    ${branch}
+                                </td>
+
+
+                                <td>
+
+                                    <span class="discount-value">
+                                        ${discount}${discountType}
+                                    </span>
+
+                                </td>
+
+
+                                <td>
+
+                                    <span class="offer-date">
+                                        ${formatDate(from)}
+                                    </span>
+
+                                </td>
+
+
+                                <td>
+
+                                    <span class="offer-date">
+                                        ${formatDate(until)}
+                                    </span>
+
+                                </td>
+
+
+                                <td>
+
+                                    <span class="status ${
+                                        status === "Active"
+                                            ? "active"
+                                            : "inactive"
+                                    }">
+
+                                        ${status}
+
+                                    </span>
+
+                                </td>
+
+
+                                <td>
+
+                                    <div class="action-group">
+
+                                        <button
+                                            class="action-btn view-btn"
+                                            title="View"
+                                        >
+                                            <i class="fa-regular fa-eye"></i>
+                                        </button>
+
+                                        <button
+                                            class="action-btn edit-btn"
+                                            title="Edit"
+                                        >
+                                            <i class="fa-solid fa-pen"></i>
+                                        </button>
+
+                                        <button
+                                            class="action-btn delete delete-btn"
+                                            title="Delete"
+                                        >
+                                            <i class="fa-regular fa-trash-can"></i>
+                                        </button>
+
+                                    </div>
+
+                                </td>
+
+                            `;
+
+
+                            tableBody.prepend(
+                                newRow
+                            );
+
+                            attachActions();
+
+                        }
+
+
+                        formModal.classList.remove(
+                            "show"
+                        );
+
+                        offerForm.reset();
+
+                        editingRow = null;
+
+                        filterOffers();
+
+                    }
+                );
+
+
+                /* ==========================================
+                   DATE FORMAT
+                ========================================== */
+
+                function formatDate(dateString) {
+
+                    if (!dateString) {
+                        return "";
+                    }
+
+                    const date =
+                        new Date(
+                            dateString + "T00:00:00"
+                        );
+
+                    const day =
+                        String(
+                            date.getDate()
+                        ).padStart(2, "0");
+
+                    const monthNames = [
+                        "Jan",
+                        "Feb",
+                        "Mar",
+                        "Apr",
+                        "May",
+                        "Jun",
+                        "Jul",
+                        "Aug",
+                        "Sep",
+                        "Oct",
+                        "Nov",
+                        "Dec"
+                    ];
+
+                    const month =
+                        monthNames[
+                            date.getMonth()
+                        ];
+
+                    const year =
+                        date.getFullYear();
+
+                    return (
+                        day +
+                        " " +
+                        month +
+                        " " +
+                        year
+                    );
+
+                }
+
+
+                /* ==========================================
+                   CLOSE MODALS
+                ========================================== */
+
+                document
+                    .querySelectorAll("[data-close]")
+                    .forEach(function (button) {
+
+                        button.addEventListener(
+                            "click",
+                            function () {
+
+                                const modalId =
+                                    button.dataset.close;
+
+                                document
+                                    .getElementById(modalId)
+                                    .classList.remove(
+                                        "show"
+                                    );
+
+                            }
+                        );
+
+                    });
+
+
+                document
+                    .querySelectorAll(".modal-overlay")
+                    .forEach(function (overlay) {
+
+                        overlay.addEventListener(
+                            "click",
+                            function (event) {
+
+                                if (
+                                    event.target === overlay
+                                ) {
+
+                                    overlay.classList.remove(
+                                        "show"
+                                    );
+
+                                }
+
+                            }
+                        );
+
+                    });
+
+
+                /* ==========================================
+                   ESCAPE
+                ========================================== */
+
+                document.addEventListener(
+                    "keydown",
+                    function (event) {
+
+                        if (
+                            event.key === "Escape"
+                        ) {
+
+                            formModal.classList.remove(
+                                "show"
+                            );
+
+                            viewModal.classList.remove(
+                                "show"
+                            );
+
+                            sidebar.classList.remove(
+                                "mobile-open"
+                            );
+
+                            sidebarOverlay.classList.remove(
+                                "show"
+                            );
+
+                        }
+
+                    }
+                );
+
+
+                /* ==========================================
+                   RESIZE
+                ========================================== */
+
+                window.addEventListener(
+                    "resize",
+                    function () {
+
+                        if (
+                            window.innerWidth > 767
+                        ) {
+
+                            sidebar.classList.remove(
+                                "mobile-open"
+                            );
+
+                            sidebarOverlay.classList.remove(
+                                "show"
+                            );
+
+                        }
+
+                    }
+                );
+
+            });
+
+    </script>
+
+</body>
+</html>

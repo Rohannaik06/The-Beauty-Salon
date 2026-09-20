@@ -1,0 +1,3133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Gallery Management | The Beauty Salon Admin</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            min-height: 100%;
+            overflow-x: hidden;
+            scrollbar-width: none;
+        }
+
+        html::-webkit-scrollbar,
+        body::-webkit-scrollbar,
+        *::-webkit-scrollbar {
+            display: none;
+        }
+
+        body {
+            font-family: "DM Sans", sans-serif;
+            background: #0b0b0b;
+            color: #fff;
+        }
+
+        button,
+        input,
+        select {
+            font-family: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .admin-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 78px;
+            background: #101010;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 28px;
+            z-index: 1000;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            min-width: 0;
+        }
+
+        .admin-logo {
+            width: 46px;
+            height: 46px;
+            min-width: 46px;
+            border-radius: 50%;
+            border: 1px solid #d4af37;
+            color: #d4af37;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 19px;
+        }
+
+        .brand-area {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.1;
+        }
+
+        .brand-name {
+            font-family: "Playfair Display", serif;
+            font-size: 19px;
+            color: #fff;
+        }
+
+        .brand-admin {
+            color: #d4af37;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-top: 4px;
+        }
+
+        .page-title {
+            margin-left: 28px;
+            padding-left: 28px;
+            border-left: 1px solid #333;
+            font-size: 16px;
+            font-weight: 600;
+            color: #ddd;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+        }
+
+        .notification-btn {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #333;
+            border-radius: 50%;
+            background: #151515;
+            color: #ddd;
+            position: relative;
+        }
+
+        .notification-btn:hover {
+            color: #d4af37;
+            border-color: #d4af37;
+        }
+
+        .notification-dot {
+            position: absolute;
+            top: 7px;
+            right: 7px;
+            width: 7px;
+            height: 7px;
+            background: #d4af37;
+            border-radius: 50%;
+        }
+
+        .admin-profile {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+        }
+
+        .profile-avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: #d4af37;
+            color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .profile-text strong {
+            display: block;
+            font-size: 13px;
+        }
+
+        .profile-text span {
+            display: block;
+            color: #888;
+            font-size: 11px;
+            margin-top: 2px;
+        }
+
+        /* =========================
+           MOBILE BUTTON
+        ========================= */
+
+        .mobile-menu-btn {
+            display: none;
+            width: 42px;
+            height: 42px;
+            border: 1px solid #333;
+            background: #151515;
+            color: #d4af37;
+            border-radius: 8px;
+            font-size: 18px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* =========================
+           SIDEBAR
+        ========================= */
+
+        .admin-sidebar {
+            position: fixed;
+            left: 0;
+            top: 78px;
+            width: 245px;
+            height: calc(100vh - 78px);
+            background: #101010;
+            border-right: 1px solid #252525;
+            padding: 20px 12px;
+            z-index: 900;
+            transition: width 0.25s ease;
+        }
+
+        .sidebar-toggle {
+            position: absolute;
+            right: -13px;
+            top: 22px;
+            width: 27px;
+            height: 27px;
+            border-radius: 50%;
+            border: 1px solid #444;
+            background: #181818;
+            color: #d4af37;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .sidebar-toggle:hover {
+            border-color: #d4af37;
+        }
+
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .sidebar-link {
+            height: 45px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 0 14px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #999;
+            font-size: 13px;
+            white-space: nowrap;
+            overflow: hidden;
+            transition: 0.2s;
+        }
+
+        .sidebar-link i {
+            width: 19px;
+            min-width: 19px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .sidebar-link:hover {
+            color: #fff;
+            background: #181818;
+        }
+
+        .sidebar-link.active {
+            color: #d4af37;
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        .sidebar-link.logout {
+            margin-top: 15px;
+            color: #b66;
+        }
+
+        .sidebar-link.logout:hover {
+            color: #ff7777;
+            background: rgba(255, 70, 70, 0.08);
+        }
+
+        /* =========================
+           COLLAPSED SIDEBAR
+        ========================= */
+
+        .admin-sidebar.collapsed {
+            width: 76px;
+        }
+
+        .admin-sidebar.collapsed .sidebar-link {
+            justify-content: center;
+            padding: 0;
+            gap: 0;
+        }
+
+        .admin-sidebar.collapsed .sidebar-link span {
+            display: none;
+        }
+
+        .admin-sidebar.collapsed .sidebar-toggle i {
+            transform: rotate(180deg);
+        }
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .admin-main {
+            margin-left: 245px;
+            padding: 108px 30px 40px;
+            min-height: 100vh;
+            transition: margin-left 0.25s ease;
+        }
+
+        .admin-sidebar.collapsed ~ .admin-main {
+            margin-left: 76px;
+        }
+
+        /* =========================
+           PAGE HEADING
+        ========================= */
+
+        .content-heading {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 26px;
+        }
+
+        .heading-text h1 {
+            font-family: "Playfair Display", serif;
+            font-size: 31px;
+            margin-bottom: 7px;
+        }
+
+        .heading-text p {
+            color: #888;
+            font-size: 13px;
+        }
+
+        .add-image-btn {
+            border: none;
+            background: #d4af37;
+            color: #000;
+            padding: 12px 18px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .add-image-btn:hover {
+            background: #e5c65a;
+        }
+
+        /* =========================
+           SUMMARY
+        ========================= */
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 22px;
+        }
+
+        .summary-card {
+            background: #111;
+            border: 1px solid #292929;
+            border-radius: 12px;
+            padding: 19px;
+        }
+
+        .summary-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .summary-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 9px;
+            background: rgba(212, 175, 55, 0.1);
+            color: #d4af37;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .summary-card h3 {
+            font-size: 25px;
+            margin-top: 13px;
+        }
+
+        .summary-card p {
+            color: #888;
+            font-size: 12px;
+            margin-top: 3px;
+        }
+
+        /* =========================
+           FILTERS
+        ========================= */
+
+        .filter-box {
+            background: #111;
+            border: 1px solid #292929;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 18px;
+        }
+
+        .filter-row {
+            display: grid;
+            grid-template-columns: minmax(220px, 1fr) 190px 190px;
+            gap: 12px;
+        }
+
+        .search-box {
+            position: relative;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #777;
+            font-size: 13px;
+        }
+
+        .search-box input,
+        .filter-select {
+            width: 100%;
+            height: 44px;
+            border: 1px solid #303030;
+            background: #181818;
+            color: #ddd;
+            border-radius: 8px;
+            outline: none;
+            padding: 0 13px;
+            font-size: 12px;
+        }
+
+        .search-box input {
+            padding-left: 38px;
+        }
+
+        .search-box input:focus,
+        .filter-select:focus {
+            border-color: #d4af37;
+        }
+
+        .filter-select option {
+            background: #111;
+        }
+
+        /* =========================
+           GALLERY GRID
+        ========================= */
+
+        .gallery-card {
+            background: #111;
+            border: 1px solid #292929;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .gallery-header {
+            padding: 17px 19px;
+            border-bottom: 1px solid #252525;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .gallery-header h2 {
+            font-size: 15px;
+        }
+
+        .gallery-header span {
+            color: #777;
+            font-size: 11px;
+        }
+
+        .gallery-grid {
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+
+        .gallery-item {
+            background: #161616;
+            border: 1px solid #292929;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: 0.2s;
+        }
+
+        .gallery-item:hover {
+            border-color: rgba(212, 175, 55, 0.55);
+            transform: translateY(-2px);
+        }
+
+        .gallery-image {
+            height: 180px;
+            position: relative;
+            background:
+                linear-gradient(
+                    135deg,
+                    #252525,
+                    #111
+                );
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .gallery-image i {
+            font-size: 42px;
+            color: #555;
+        }
+
+        .gallery-item:nth-child(2) .gallery-image {
+            background:
+                linear-gradient(
+                    135deg,
+                    #302b20,
+                    #121212
+                );
+        }
+
+        .gallery-item:nth-child(3) .gallery-image {
+            background:
+                linear-gradient(
+                    135deg,
+                    #242424,
+                    #17130b
+                );
+        }
+
+        .gallery-item:nth-child(4) .gallery-image {
+            background:
+                linear-gradient(
+                    135deg,
+                    #191919,
+                    #332b18
+                );
+        }
+
+        .gallery-item:nth-child(5) .gallery-image {
+            background:
+                linear-gradient(
+                    135deg,
+                    #302b20,
+                    #171717
+                );
+        }
+
+        .gallery-item:nth-child(6) .gallery-image {
+            background:
+                linear-gradient(
+                    135deg,
+                    #222,
+                    #0e0e0e
+                );
+        }
+
+        .gallery-item:nth-child(7) .gallery-image {
+            background:
+                linear-gradient(
+                    135deg,
+                    #322c1f,
+                    #111
+                );
+        }
+
+        .gallery-item:nth-child(8) .gallery-image {
+            background:
+                linear-gradient(
+                    135deg,
+                    #202020,
+                    #302711
+                );
+        }
+
+        .gallery-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 5px 8px;
+            border-radius: 5px;
+            background: rgba(0, 0, 0, 0.7);
+            color: #d4af37;
+            font-size: 9px;
+            font-weight: 700;
+        }
+
+        .featured-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: rgba(212, 175, 55, 0.9);
+            color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+        }
+
+        .gallery-info {
+            padding: 13px;
+        }
+
+        .gallery-info h3 {
+            font-size: 13px;
+            color: #eee;
+            margin-bottom: 5px;
+        }
+
+        .gallery-info p {
+            color: #777;
+            font-size: 10px;
+        }
+
+        .gallery-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 11px;
+        }
+
+        .gallery-status {
+            padding: 4px 8px;
+            border-radius: 15px;
+            font-size: 9px;
+            font-weight: 700;
+        }
+
+        .gallery-status.active {
+            color: #73d69a;
+            background: rgba(60, 180, 100, 0.1);
+        }
+
+        .gallery-status.inactive {
+            color: #999;
+            background: rgba(150, 150, 150, 0.1);
+        }
+
+        .gallery-actions {
+            display: flex;
+            gap: 5px;
+        }
+
+        .action-btn {
+            width: 29px;
+            height: 29px;
+            border-radius: 6px;
+            border: 1px solid #333;
+            background: #1b1b1b;
+            color: #aaa;
+        }
+
+        .action-btn:hover {
+            color: #d4af37;
+            border-color: #d4af37;
+        }
+
+        .action-btn.delete:hover {
+            color: #ff7777;
+            border-color: #c75c5c;
+        }
+
+        /* =========================
+           MODAL
+        ========================= */
+
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.78);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            z-index: 2000;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .modal {
+            width: min(590px, 100%);
+            max-height: 90vh;
+            overflow-y: auto;
+            scrollbar-width: none;
+            background: #111;
+            border: 1px solid #333;
+            border-radius: 14px;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.6);
+        }
+
+        .modal::-webkit-scrollbar {
+            display: none;
+        }
+
+        .modal-header {
+            padding: 18px 20px;
+            border-bottom: 1px solid #292929;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .modal-header h3 {
+            font-family: "Playfair Display", serif;
+            font-size: 20px;
+        }
+
+        .modal-close {
+            width: 34px;
+            height: 34px;
+            border: 1px solid #333;
+            border-radius: 7px;
+            background: #181818;
+            color: #aaa;
+        }
+
+        .modal-close:hover {
+            color: #d4af37;
+            border-color: #d4af37;
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        /* =========================
+           PREVIEW
+        ========================= */
+
+        .preview-box {
+            height: 210px;
+            border: 1px dashed #444;
+            border-radius: 10px;
+            background: #181818;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 9px;
+            margin-bottom: 20px;
+        }
+
+        .preview-box i {
+            color: #d4af37;
+            font-size: 30px;
+        }
+
+        .preview-box span {
+            color: #777;
+            font-size: 11px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            display: block;
+            color: #aaa;
+            font-size: 11px;
+            margin-bottom: 6px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            height: 42px;
+            border: 1px solid #333;
+            background: #181818;
+            color: #ddd;
+            border-radius: 7px;
+            padding: 0 12px;
+            outline: none;
+            font-size: 12px;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #d4af37;
+        }
+
+        .checkbox-row {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            margin-top: 16px;
+        }
+
+        .checkbox-row input {
+            accent-color: #d4af37;
+        }
+
+        .checkbox-row label {
+            color: #aaa;
+            font-size: 11px;
+        }
+
+        .modal-footer {
+            padding: 16px 20px;
+            border-top: 1px solid #292929;
+            display: flex;
+            justify-content: flex-end;
+            gap: 9px;
+        }
+
+        .modal-btn {
+            padding: 10px 15px;
+            border-radius: 7px;
+            border: 1px solid #333;
+            background: #181818;
+            color: #ccc;
+            font-size: 12px;
+        }
+
+        .modal-btn.primary {
+            border-color: #d4af37;
+            background: #d4af37;
+            color: #000;
+            font-weight: 700;
+        }
+
+        /* =========================
+           IMAGE PREVIEW MODAL
+        ========================= */
+
+        .image-preview {
+            height: 380px;
+            background:
+                linear-gradient(
+                    135deg,
+                    #282828,
+                    #111
+                );
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .image-preview i {
+            font-size: 65px;
+            color: #555;
+        }
+
+        .image-preview p {
+            color: #888;
+            font-size: 12px;
+        }
+
+        /* =========================
+           MOBILE OVERLAY
+        ========================= */
+
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            inset: 78px 0 0 0;
+            background: rgba(0, 0, 0, 0.65);
+            z-index: 850;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 1150px) {
+
+            .gallery-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .summary-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .filter-row {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .search-box {
+                grid-column: 1 / -1;
+            }
+
+        }
+
+        @media (max-width: 850px) {
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 767px) {
+
+            .admin-header {
+                height: 70px;
+                padding: 0 14px;
+            }
+
+            .admin-logo {
+                width: 40px;
+                height: 40px;
+                min-width: 40px;
+                font-size: 16px;
+            }
+
+            .brand-name {
+                font-size: 16px;
+            }
+
+            .brand-admin {
+                font-size: 8px;
+                letter-spacing: 1.5px;
+            }
+
+            .page-title {
+                display: none;
+            }
+
+            .header-right {
+                gap: 8px;
+            }
+
+            .notification-btn {
+                width: 36px;
+                height: 36px;
+            }
+
+            .profile-text {
+                display: none;
+            }
+
+            .profile-avatar {
+                width: 36px;
+                height: 36px;
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            .admin-sidebar {
+                top: 70px;
+                height: calc(100vh - 70px);
+                width: 255px;
+                transform: translateX(-100%);
+                transition: transform 0.25s ease;
+                z-index: 950;
+            }
+
+            .admin-sidebar.mobile-open {
+                transform: translateX(0);
+            }
+
+            .admin-sidebar.collapsed {
+                width: 255px;
+            }
+
+            .admin-sidebar.collapsed .sidebar-link {
+                justify-content: flex-start;
+                padding: 0 14px;
+                gap: 14px;
+            }
+
+            .admin-sidebar.collapsed .sidebar-link span {
+                display: inline;
+            }
+
+            .admin-sidebar.collapsed .sidebar-toggle i {
+                transform: none;
+            }
+
+            .sidebar-toggle {
+                right: 12px;
+                top: 15px;
+            }
+
+            .sidebar-overlay {
+                inset: 70px 0 0 0;
+            }
+
+            .sidebar-overlay.show {
+                display: block;
+            }
+
+            .admin-main,
+            .admin-sidebar.collapsed ~ .admin-main {
+                margin-left: 0;
+                padding: 94px 14px 30px;
+            }
+
+            .content-heading {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .heading-text h1 {
+                font-size: 27px;
+            }
+
+            .add-image-btn {
+                width: 100%;
+            }
+
+            .summary-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+
+            .summary-card {
+                padding: 14px;
+            }
+
+            .summary-card h3 {
+                font-size: 21px;
+            }
+
+            .filter-row {
+                grid-template-columns: 1fr;
+            }
+
+            .search-box {
+                grid-column: auto;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr 1fr;
+                padding: 14px;
+                gap: 12px;
+            }
+
+            .gallery-image {
+                height: 150px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full {
+                grid-column: auto;
+            }
+
+            .image-preview {
+                height: 280px;
+            }
+
+        }
+
+        @media (max-width: 430px) {
+
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-image {
+                height: 190px;
+            }
+
+            .header-left {
+                gap: 9px;
+            }
+
+            .brand-name {
+                font-size: 15px;
+            }
+
+            .notification-btn {
+                display: none;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- =====================================================
+         ADMIN HEADER
+    ====================================================== -->
+
+    <header class="admin-header">
+
+        <div class="header-left">
+
+            <button
+                class="mobile-menu-btn"
+                id="mobileMenuBtn"
+                aria-label="Open Menu"
+            >
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <div class="admin-logo">
+                <i class="fa-solid fa-scissors"></i>
+            </div>
+
+            <div class="brand-area">
+                <div class="brand-name">The Beauty</div>
+                <div class="brand-admin">SALON ADMIN</div>
+            </div>
+
+            <div class="page-title">
+                Gallery
+            </div>
+
+        </div>
+
+
+        <div class="header-right">
+
+            <button
+                class="notification-btn"
+                title="Notifications"
+            >
+                <i class="fa-regular fa-bell"></i>
+                <span class="notification-dot"></span>
+            </button>
+
+            <div class="admin-profile">
+
+                <div class="profile-avatar">
+                    A
+                </div>
+
+                <div class="profile-text">
+                    <strong>Administrator</strong>
+                    <span>Admin Account</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside
+        class="admin-sidebar"
+        id="adminSidebar"
+    >
+
+        <button
+            class="sidebar-toggle"
+            id="sidebarToggle"
+            title="Collapse Sidebar"
+        >
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+
+
+        <nav class="sidebar-nav">
+
+            <a
+                href="dashboard.html"
+                class="sidebar-link"
+            >
+                <i class="fa-solid fa-chart-line"></i>
+                <span>Dashboard</span>
+            </a>
+
+
+            <a
+                href="branches.html"
+                class="sidebar-link"
+            >
+                <i class="fa-solid fa-code-branch"></i>
+                <span>Branches</span>
+            </a>
+
+
+            <a
+                href="services.html"
+                class="sidebar-link"
+            >
+                <i class="fa-solid fa-scissors"></i>
+                <span>Services</span>
+            </a>
+
+
+            <a
+                href="bookings.html"
+                class="sidebar-link"
+            >
+                <i class="fa-regular fa-calendar-check"></i>
+                <span>Bookings</span>
+            </a>
+
+
+            <a
+                href="customers.html"
+                class="sidebar-link"
+            >
+                <i class="fa-solid fa-users"></i>
+                <span>Customers</span>
+            </a>
+
+
+            <a
+                href="staff.html"
+                class="sidebar-link"
+            >
+                <i class="fa-solid fa-user-tie"></i>
+                <span>Staff</span>
+            </a>
+
+
+            <a
+                href="gallery.html"
+                class="sidebar-link active"
+            >
+                <i class="fa-regular fa-images"></i>
+                <span>Gallery</span>
+            </a>
+
+
+            <a
+                href="offers.html"
+                class="sidebar-link"
+            >
+                <i class="fa-solid fa-tags"></i>
+                <span>Offers</span>
+            </a>
+
+
+            <a
+                href="settings.html"
+                class="sidebar-link"
+            >
+                <i class="fa-solid fa-gear"></i>
+                <span>Settings</span>
+            </a>
+
+
+            <a
+                href="../index.html"
+                class="sidebar-link"
+            >
+                <i class="fa-solid fa-globe"></i>
+                <span>View Website</span>
+            </a>
+
+
+            <a
+                href="../login.html"
+                class="sidebar-link logout"
+            >
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <div
+        class="sidebar-overlay"
+        id="sidebarOverlay"
+    ></div>
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="admin-main">
+
+        <div class="content-heading">
+
+            <div class="heading-text">
+
+                <h1>Gallery Management</h1>
+
+                <p>
+                    Manage salon photos, gallery categories and featured images.
+                </p>
+
+            </div>
+
+
+            <button
+                class="add-image-btn"
+                id="addImageBtn"
+            >
+                <i class="fa-solid fa-plus"></i>
+                Add Image
+            </button>
+
+        </div>
+
+
+        <!-- =================================================
+             SUMMARY
+        ================================================== -->
+
+        <section class="summary-grid">
+
+            <div class="summary-card">
+
+                <div class="summary-top">
+
+                    <div>
+                        <h3 id="totalImages">24</h3>
+                        <p>Total Images</p>
+                    </div>
+
+                    <div class="summary-icon">
+                        <i class="fa-regular fa-images"></i>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-top">
+
+                    <div>
+                        <h3>21</h3>
+                        <p>Active Images</p>
+                    </div>
+
+                    <div class="summary-icon">
+                        <i class="fa-solid fa-image"></i>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-top">
+
+                    <div>
+                        <h3>3</h3>
+                        <p>Featured Images</p>
+                    </div>
+
+                    <div class="summary-icon">
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-top">
+
+                    <div>
+                        <h3>8</h3>
+                        <p>Gallery Categories</p>
+                    </div>
+
+                    <div class="summary-icon">
+                        <i class="fa-solid fa-layer-group"></i>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             FILTERS
+        ================================================== -->
+
+        <section class="filter-box">
+
+            <div class="filter-row">
+
+                <div class="search-box">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input
+                        type="text"
+                        id="gallerySearch"
+                        placeholder="Search image title or category..."
+                    >
+
+                </div>
+
+
+                <select
+                    class="filter-select"
+                    id="branchFilter"
+                >
+
+                    <option value="all">
+                        All Branches
+                    </option>
+
+                    <option value="Baramati">
+                        Baramati
+                    </option>
+
+                    <option value="Baramati MIDC">
+                        Baramati MIDC
+                    </option>
+
+                </select>
+
+
+                <select
+                    class="filter-select"
+                    id="categoryFilter"
+                >
+
+                    <option value="all">
+                        All Categories
+                    </option>
+
+                    <option value="Salon">
+                        Salon
+                    </option>
+
+                    <option value="Hair">
+                        Hair
+                    </option>
+
+                    <option value="Beauty">
+                        Beauty
+                    </option>
+
+                    <option value="Interior">
+                        Interior
+                    </option>
+
+                    <option value="Staff">
+                        Staff
+                    </option>
+
+                </select>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             GALLERY
+        ================================================== -->
+
+        <section class="gallery-card">
+
+            <div class="gallery-header">
+
+                <h2>Gallery Images</h2>
+
+                <span id="galleryCount">
+                    Showing 8 images
+                </span>
+
+            </div>
+
+
+            <div
+                class="gallery-grid"
+                id="galleryGrid"
+            >
+
+
+                <!-- IMAGE 1 -->
+
+                <article
+                    class="gallery-item"
+                    data-title="Salon Interior"
+                    data-category="Interior"
+                    data-branch="Baramati"
+                    data-status="Active"
+                >
+
+                    <div class="gallery-image">
+
+                        <i class="fa-solid fa-store"></i>
+
+                        <span class="gallery-badge">
+                            Interior
+                        </span>
+
+                        <span class="featured-badge">
+                            <i class="fa-solid fa-star"></i>
+                        </span>
+
+                    </div>
+
+
+                    <div class="gallery-info">
+
+                        <h3>Salon Interior</h3>
+
+                        <p>
+                            Baramati • Main Branch
+                        </p>
+
+
+                        <div class="gallery-meta">
+
+                            <span class="gallery-status active">
+                                Active
+                            </span>
+
+
+                            <div class="gallery-actions">
+
+                                <button
+                                    class="action-btn preview-btn"
+                                    title="Preview"
+                                >
+                                    <i class="fa-regular fa-eye"></i>
+                                </button>
+
+                                <button
+                                    class="action-btn edit-btn"
+                                    title="Edit"
+                                >
+                                    <i class="fa-solid fa-pen"></i>
+                                </button>
+
+                                <button
+                                    class="action-btn delete delete-btn"
+                                    title="Delete"
+                                >
+                                    <i class="fa-regular fa-trash-can"></i>
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- IMAGE 2 -->
+
+                <article
+                    class="gallery-item"
+                    data-title="Hair Styling Area"
+                    data-category="Hair"
+                    data-branch="Baramati"
+                    data-status="Active"
+                >
+
+                    <div class="gallery-image">
+
+                        <i class="fa-solid fa-scissors"></i>
+
+                        <span class="gallery-badge">
+                            Hair
+                        </span>
+
+                    </div>
+
+
+                    <div class="gallery-info">
+
+                        <h3>Hair Styling Area</h3>
+
+                        <p>
+                            Baramati • Main Branch
+                        </p>
+
+
+                        <div class="gallery-meta">
+
+                            <span class="gallery-status active">
+                                Active
+                            </span>
+
+
+                            <div class="gallery-actions">
+
+                                <button
+                                    class="action-btn preview-btn"
+                                    title="Preview"
+                                >
+                                    <i class="fa-regular fa-eye"></i>
+                                </button>
+
+                                <button
+                                    class="action-btn edit-btn"
+                                    title="Edit"
+                                >
+                                    <i class="fa-solid fa-pen"></i>
+                                </button>
+
+                                <button
+                                    class="action-btn delete delete-btn"
+                                    title="Delete"
+                                >
+                                    <i class="fa-regular fa-trash-can"></i>
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- IMAGE 3 -->
+
+                <article
+                    class="gallery-item"
+                    data-title="Premium Beauty Area"
+                    data-category="Beauty"
+                    data-branch="Baramati"
+                    data-status="Active"
+                >
+
+                    <div class="gallery-image">
+
+                        <i class="fa-solid fa-spa"></i>
+
+                        <span class="gallery-badge">
+                            Beauty
+                        </span>
+
+                    </div>
+
+
+                    <div class="gallery-info">
+
+                        <h3>Premium Beauty Area</h3>
+
+                        <p>
+                            Baramati • Main Branch
+                        </p>
+
+
+                        <div class="gallery-meta">
+
+                            <span class="gallery-status active">
+                                Active
+                            </span>
+
+
+                            <div class="gallery-actions">
+
+                                <button class="action-btn preview-btn" title="Preview">
+                                    <i class="fa-regular fa-eye"></i>
+                                </button>
+
+                                <button class="action-btn edit-btn" title="Edit">
+                                    <i class="fa-solid fa-pen"></i>
+                                </button>
+
+                                <button class="action-btn delete delete-btn" title="Delete">
+                                    <i class="fa-regular fa-trash-can"></i>
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- IMAGE 4 -->
+
+                <article
+                    class="gallery-item"
+                    data-title="Reception Area"
+                    data-category="Salon"
+                    data-branch="Baramati"
+                    data-status="Active"
+                >
+
+                    <div class="gallery-image">
+
+                        <i class="fa-solid fa-couch"></i>
+
+                        <span class="gallery-badge">
+                            Salon
+                        </span>
+
+                    </div>
+
+
+                    <div class="gallery-info">
+
+                        <h3>Reception Area</h3>
+
+                        <p>
+                            Baramati • Main Branch
+                        </p>
+
+
+                        <div class="gallery-meta">
+
+                            <span class="gallery-status active">
+                                Active
+                            </span>
+
+
+                            <div class="gallery-actions">
+
+                                <button class="action-btn preview-btn" title="Preview">
+                                    <i class="fa-regular fa-eye"></i>
+                                </button>
+
+                                <button class="action-btn edit-btn" title="Edit">
+                                    <i class="fa-solid fa-pen"></i>
+                                </button>
+
+                                <button class="action-btn delete delete-btn" title="Delete">
+                                    <i class="fa-regular fa-trash-can"></i>
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- IMAGE 5 -->
+
+                <article
+                    class="gallery-item"
+                    data-title="Hair Spa Room"
+                    data-category="Beauty"
+                    data-branch="Baramati MIDC"
+                    data-status="Active"
+                >
+
+                    <div class="gallery-image">
+
+                        <i class="fa-solid fa-hot-tub-person"></i>
+
+                        <span class="gallery-badge">
+                            Beauty
+                        </span>
+
+                        <span class="featured-badge">
+                            <i class="fa-solid fa-star"></i>
+                        </span>
+
+                    </div>
+
+
+                    <div class="gallery-info">
+
+                        <h3>Hair Spa Room</h3>
+
+                        <p>
+                            Baramati MIDC
+                        </p>
+
+
+                        <div class="gallery-meta">
+
+                            <span class="gallery-status active">
+                                Active
+                            </span>
+
+
+                            <div class="gallery-actions">
+
+                                <button class="action-btn preview-btn" title="Preview">
+                                    <i class="fa-regular fa-eye"></i>
+                                </button>
+
+                                <button class="action-btn edit-btn" title="Edit">
+                                    <i class="fa-solid fa-pen"></i>
+                                </button>
+
+                                <button class="action-btn delete delete-btn" title="Delete">
+                                    <i class="fa-regular fa-trash-can"></i>
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- IMAGE 6 -->
+
+                <article
+                    class="gallery-item"
+                    data-title="Men Grooming Area"
+                    data-category="Hair"
+                    data-branch="Baramati"
+                    data-status="Active"
+                >
+
+                    <div class="gallery-image">
+
+                        <i class="fa-solid fa-user-tie"></i>
+
+                        <span class="gallery-badge">
+                            Hair
+                        </span>
+
+                    </div>
+
+
+                    <div class="gallery-info">
+
+                        <h3>Men Grooming Area</h3>
+
+                        <p>
+                            Baramati • Main Branch
+                        </p>
+
+
+                        <div class="gallery-meta">
+
+                            <span class="gallery-status active">
+                                Active
+                            </span>
+
+
+                            <div class="gallery-actions">
+
+                                <button class="action-btn preview-btn" title="Preview">
+                                    <i class="fa-regular fa-eye"></i>
+                                </button>
+
+                                <button class="action-btn edit-btn" title="Edit">
+                                    <i class="fa-solid fa-pen"></i>
+                                </button>
+
+                                <button class="action-btn delete delete-btn" title="Delete">
+                                    <i class="fa-regular fa-trash-can"></i>
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- IMAGE 7 -->
+
+                <article
+                    class="gallery-item"
+                    data-title="Beauty Treatment Room"
+                    data-category="Beauty"
+                    data-branch="Baramati MIDC"
+                    data-status="Active"
+                >
+
+                    <div class="gallery-image">
+
+                        <i class="fa-solid fa-face-smile"></i>
+
+                        <span class="gallery-badge">
+                            Beauty
+                        </span>
+
+                    </div>
+
+
+                    <div class="gallery-info">
+
+                        <h3>Beauty Treatment Room</h3>
+
+                        <p>
+                            Baramati MIDC
+                        </p>
+
+
+                        <div class="gallery-meta">
+
+                            <span class="gallery-status active">
+                                Active
+                            </span>
+
+
+                            <div class="gallery-actions">
+
+                                <button class="action-btn preview-btn" title="Preview">
+                                    <i class="fa-regular fa-eye"></i>
+                                </button>
+
+                                <button class="action-btn edit-btn" title="Edit">
+                                    <i class="fa-solid fa-pen"></i>
+                                </button>
+
+                                <button class="action-btn delete delete-btn" title="Delete">
+                                    <i class="fa-regular fa-trash-can"></i>
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- IMAGE 8 -->
+
+                <article
+                    class="gallery-item"
+                    data-title="Salon Styling Station"
+                    data-category="Salon"
+                    data-branch="Baramati"
+                    data-status="Inactive"
+                >
+
+                    <div class="gallery-image">
+
+                        <i class="fa-solid fa-chair"></i>
+
+                        <span class="gallery-badge">
+                            Salon
+                        </span>
+
+                    </div>
+
+
+                    <div class="gallery-info">
+
+                        <h3>Salon Styling Station</h3>
+
+                        <p>
+                            Baramati • Main Branch
+                        </p>
+
+
+                        <div class="gallery-meta">
+
+                            <span class="gallery-status inactive">
+                                Inactive
+                            </span>
+
+
+                            <div class="gallery-actions">
+
+                                <button class="action-btn preview-btn" title="Preview">
+                                    <i class="fa-regular fa-eye"></i>
+                                </button>
+
+                                <button class="action-btn edit-btn" title="Edit">
+                                    <i class="fa-solid fa-pen"></i>
+                                </button>
+
+                                <button class="action-btn delete delete-btn" title="Delete">
+                                    <i class="fa-regular fa-trash-can"></i>
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         ADD / EDIT IMAGE MODAL
+    ====================================================== -->
+
+    <div
+        class="modal-overlay"
+        id="formModal"
+    >
+
+        <div class="modal">
+
+            <div class="modal-header">
+
+                <h3 id="formTitle">
+                    Add Gallery Image
+                </h3>
+
+                <button
+                    class="modal-close"
+                    data-close="formModal"
+                >
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+
+            </div>
+
+
+            <form id="galleryForm">
+
+                <div class="modal-body">
+
+                    <div class="preview-box">
+
+                        <i class="fa-regular fa-image"></i>
+
+                        <span>
+                            Image preview will appear here
+                        </span>
+
+                    </div>
+
+
+                    <div class="form-grid">
+
+                        <div class="form-group full">
+
+                            <label>
+                                Image File
+                            </label>
+
+                            <input
+                                type="file"
+                                id="imageFile"
+                                accept="image/*"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Image Title
+                            </label>
+
+                            <input
+                                type="text"
+                                id="imageTitle"
+                                placeholder="Salon Interior"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Category
+                            </label>
+
+                            <select id="imageCategory">
+
+                                <option value="Salon">
+                                    Salon
+                                </option>
+
+                                <option value="Hair">
+                                    Hair
+                                </option>
+
+                                <option value="Beauty">
+                                    Beauty
+                                </option>
+
+                                <option value="Interior">
+                                    Interior
+                                </option>
+
+                                <option value="Staff">
+                                    Staff
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Branch
+                            </label>
+
+                            <select id="imageBranch">
+
+                                <option value="Baramati">
+                                    Baramati
+                                </option>
+
+                                <option value="Baramati MIDC">
+                                    Baramati MIDC
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Status
+                            </label>
+
+                            <select id="imageStatus">
+
+                                <option value="Active">
+                                    Active
+                                </option>
+
+                                <option value="Inactive">
+                                    Inactive
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="checkbox-row">
+
+                        <input
+                            type="checkbox"
+                            id="featuredImage"
+                        >
+
+                        <label for="featuredImage">
+                            Set as featured image
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <div class="modal-footer">
+
+                    <button
+                        type="button"
+                        class="modal-btn"
+                        data-close="formModal"
+                    >
+                        Cancel
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="modal-btn primary"
+                    >
+                        Save Image
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         IMAGE PREVIEW MODAL
+    ====================================================== -->
+
+    <div
+        class="modal-overlay"
+        id="previewModal"
+    >
+
+        <div class="modal">
+
+            <div class="modal-header">
+
+                <h3 id="previewTitle">
+                    Image Preview
+                </h3>
+
+                <button
+                    class="modal-close"
+                    data-close="previewModal"
+                >
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+
+            </div>
+
+
+            <div class="modal-body">
+
+                <div class="image-preview">
+
+                    <i class="fa-regular fa-image"></i>
+
+                    <p id="previewText">
+                        Gallery image preview
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="modal-footer">
+
+                <button
+                    class="modal-btn"
+                    data-close="previewModal"
+                >
+                    Close
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                const sidebar =
+                    document.getElementById("adminSidebar");
+
+                const sidebarToggle =
+                    document.getElementById("sidebarToggle");
+
+                const mobileMenuBtn =
+                    document.getElementById("mobileMenuBtn");
+
+                const sidebarOverlay =
+                    document.getElementById("sidebarOverlay");
+
+                const gallerySearch =
+                    document.getElementById("gallerySearch");
+
+                const branchFilter =
+                    document.getElementById("branchFilter");
+
+                const categoryFilter =
+                    document.getElementById("categoryFilter");
+
+                const galleryGrid =
+                    document.getElementById("galleryGrid");
+
+                const galleryCount =
+                    document.getElementById("galleryCount");
+
+                const addImageBtn =
+                    document.getElementById("addImageBtn");
+
+                const formModal =
+                    document.getElementById("formModal");
+
+                const previewModal =
+                    document.getElementById("previewModal");
+
+                const galleryForm =
+                    document.getElementById("galleryForm");
+
+                let editingItem = null;
+
+
+                /* ==========================================
+                   SIDEBAR
+                ========================================== */
+
+                sidebarToggle.addEventListener(
+                    "click",
+                    function () {
+
+                        if (window.innerWidth <= 767) {
+
+                            sidebar.classList.remove(
+                                "mobile-open"
+                            );
+
+                            sidebarOverlay.classList.remove(
+                                "show"
+                            );
+
+                            return;
+                        }
+
+                        sidebar.classList.toggle(
+                            "collapsed"
+                        );
+
+                    }
+                );
+
+
+                mobileMenuBtn.addEventListener(
+                    "click",
+                    function () {
+
+                        sidebar.classList.add(
+                            "mobile-open"
+                        );
+
+                        sidebarOverlay.classList.add(
+                            "show"
+                        );
+
+                    }
+                );
+
+
+                sidebarOverlay.addEventListener(
+                    "click",
+                    function () {
+
+                        sidebar.classList.remove(
+                            "mobile-open"
+                        );
+
+                        sidebarOverlay.classList.remove(
+                            "show"
+                        );
+
+                    }
+                );
+
+
+                document
+                    .querySelectorAll(".sidebar-link")
+                    .forEach(function (link) {
+
+                        link.addEventListener(
+                            "click",
+                            function () {
+
+                                if (
+                                    window.innerWidth <= 767
+                                ) {
+
+                                    sidebar.classList.remove(
+                                        "mobile-open"
+                                    );
+
+                                    sidebarOverlay.classList.remove(
+                                        "show"
+                                    );
+
+                                }
+
+                            }
+                        );
+
+                    });
+
+
+                /* ==========================================
+                   FILTER GALLERY
+                ========================================== */
+
+                function filterGallery() {
+
+                    const searchValue =
+                        gallerySearch.value
+                            .trim()
+                            .toLowerCase();
+
+                    const selectedBranch =
+                        branchFilter.value;
+
+                    const selectedCategory =
+                        categoryFilter.value;
+
+                    const items =
+                        galleryGrid.querySelectorAll(
+                            ".gallery-item"
+                        );
+
+                    let visibleCount = 0;
+
+
+                    items.forEach(function (item) {
+
+                        const title =
+                            item.dataset.title
+                                .toLowerCase();
+
+                        const category =
+                            item.dataset.category;
+
+                        const branch =
+                            item.dataset.branch;
+
+
+                        const matchesSearch =
+                            title.includes(searchValue) ||
+                            category
+                                .toLowerCase()
+                                .includes(searchValue);
+
+                        const matchesBranch =
+                            selectedBranch === "all" ||
+                            branch === selectedBranch;
+
+                        const matchesCategory =
+                            selectedCategory === "all" ||
+                            category === selectedCategory;
+
+
+                        if (
+                            matchesSearch &&
+                            matchesBranch &&
+                            matchesCategory
+                        ) {
+
+                            item.style.display = "";
+
+                            visibleCount++;
+
+                        } else {
+
+                            item.style.display = "none";
+
+                        }
+
+                    });
+
+
+                    galleryCount.textContent =
+                        "Showing " +
+                        visibleCount +
+                        " images";
+
+                }
+
+
+                gallerySearch.addEventListener(
+                    "input",
+                    filterGallery
+                );
+
+                branchFilter.addEventListener(
+                    "change",
+                    filterGallery
+                );
+
+                categoryFilter.addEventListener(
+                    "change",
+                    filterGallery
+                );
+
+
+                /* ==========================================
+                   PREVIEW
+                ========================================== */
+
+                function attachPreviewActions() {
+
+                    document
+                        .querySelectorAll(".preview-btn")
+                        .forEach(function (button) {
+
+                            button.onclick =
+                                function () {
+
+                                    const item =
+                                        button.closest(
+                                            ".gallery-item"
+                                        );
+
+                                    const title =
+                                        item.dataset.title;
+
+
+                                    document.getElementById(
+                                        "previewTitle"
+                                    ).textContent =
+                                        title;
+
+                                    document.getElementById(
+                                        "previewText"
+                                    ).textContent =
+                                        title +
+                                        " — Gallery Preview";
+
+
+                                    previewModal.classList.add(
+                                        "show"
+                                    );
+
+                                };
+
+                        });
+
+                }
+
+
+                /* ==========================================
+                   EDIT
+                ========================================== */
+
+                function attachEditActions() {
+
+                    document
+                        .querySelectorAll(".edit-btn")
+                        .forEach(function (button) {
+
+                            button.onclick =
+                                function () {
+
+                                    const item =
+                                        button.closest(
+                                            ".gallery-item"
+                                        );
+
+                                    editingItem = item;
+
+
+                                    document.getElementById(
+                                        "formTitle"
+                                    ).textContent =
+                                        "Edit Gallery Image";
+
+
+                                    document.getElementById(
+                                        "imageTitle"
+                                    ).value =
+                                        item.dataset.title;
+
+                                    document.getElementById(
+                                        "imageCategory"
+                                    ).value =
+                                        item.dataset.category;
+
+                                    document.getElementById(
+                                        "imageBranch"
+                                    ).value =
+                                        item.dataset.branch;
+
+                                    document.getElementById(
+                                        "imageStatus"
+                                    ).value =
+                                        item.dataset.status;
+
+
+                                    formModal.classList.add(
+                                        "show"
+                                    );
+
+                                };
+
+                        });
+
+                }
+
+
+                /* ==========================================
+                   DELETE
+                ========================================== */
+
+                function attachDeleteActions() {
+
+                    document
+                        .querySelectorAll(".delete-btn")
+                        .forEach(function (button) {
+
+                            button.onclick =
+                                function () {
+
+                                    const item =
+                                        button.closest(
+                                            ".gallery-item"
+                                        );
+
+                                    const title =
+                                        item.dataset.title;
+
+
+                                    const confirmed =
+                                        confirm(
+                                            "Delete gallery image \"" +
+                                            title +
+                                            "\"?"
+                                        );
+
+
+                                    if (confirmed) {
+
+                                        item.remove();
+
+                                        filterGallery();
+
+                                    }
+
+                                };
+
+                        });
+
+                }
+
+
+                function attachAllActions() {
+
+                    attachPreviewActions();
+
+                    attachEditActions();
+
+                    attachDeleteActions();
+
+                }
+
+
+                attachAllActions();
+
+
+                /* ==========================================
+                   ADD IMAGE
+                ========================================== */
+
+                addImageBtn.addEventListener(
+                    "click",
+                    function () {
+
+                        editingItem = null;
+
+                        galleryForm.reset();
+
+                        document.getElementById(
+                            "formTitle"
+                        ).textContent =
+                            "Add Gallery Image";
+
+                        formModal.classList.add(
+                            "show"
+                        );
+
+                    }
+                );
+
+
+                /* ==========================================
+                   SAVE IMAGE
+                ========================================== */
+
+                galleryForm.addEventListener(
+                    "submit",
+                    function (event) {
+
+                        event.preventDefault();
+
+
+                        const title =
+                            document.getElementById(
+                                "imageTitle"
+                            ).value.trim();
+
+                        const category =
+                            document.getElementById(
+                                "imageCategory"
+                            ).value;
+
+                        const branch =
+                            document.getElementById(
+                                "imageBranch"
+                            ).value;
+
+                        const status =
+                            document.getElementById(
+                                "imageStatus"
+                            ).value;
+
+                        const featured =
+                            document.getElementById(
+                                "featuredImage"
+                            ).checked;
+
+
+                        if (!title) {
+
+                            alert(
+                                "Please enter image title."
+                            );
+
+                            return;
+
+                        }
+
+
+                        if (editingItem) {
+
+                            editingItem.dataset.title =
+                                title;
+
+                            editingItem.dataset.category =
+                                category;
+
+                            editingItem.dataset.branch =
+                                branch;
+
+                            editingItem.dataset.status =
+                                status;
+
+
+                            const titleElement =
+                                editingItem.querySelector(
+                                    ".gallery-info h3"
+                                );
+
+                            const descriptionElement =
+                                editingItem.querySelector(
+                                    ".gallery-info p"
+                                );
+
+                            const badge =
+                                editingItem.querySelector(
+                                    ".gallery-badge"
+                                );
+
+                            const statusElement =
+                                editingItem.querySelector(
+                                    ".gallery-status"
+                                );
+
+
+                            titleElement.textContent =
+                                title;
+
+                            descriptionElement.textContent =
+                                branch === "Baramati"
+                                    ? "Baramati • Main Branch"
+                                    : "Baramati MIDC";
+
+
+                            badge.textContent =
+                                category;
+
+
+                            statusElement.textContent =
+                                status;
+
+                            statusElement.className =
+                                "gallery-status " +
+                                (
+                                    status === "Active"
+                                        ? "active"
+                                        : "inactive"
+                                );
+
+
+                            const oldFeatured =
+                                editingItem.querySelector(
+                                    ".featured-badge"
+                                );
+
+
+                            if (
+                                featured &&
+                                !oldFeatured
+                            ) {
+
+                                const image =
+                                    editingItem.querySelector(
+                                        ".gallery-image"
+                                    );
+
+                                const star =
+                                    document.createElement(
+                                        "span"
+                                    );
+
+                                star.className =
+                                    "featured-badge";
+
+                                star.innerHTML =
+                                    '<i class="fa-solid fa-star"></i>';
+
+                                image.appendChild(
+                                    star
+                                );
+
+                            }
+
+
+                            if (
+                                !featured &&
+                                oldFeatured
+                            ) {
+
+                                oldFeatured.remove();
+
+                            }
+
+
+                        } else {
+
+                            const item =
+                                document.createElement(
+                                    "article"
+                                );
+
+                            item.className =
+                                "gallery-item";
+
+                            item.dataset.title =
+                                title;
+
+                            item.dataset.category =
+                                category;
+
+                            item.dataset.branch =
+                                branch;
+
+                            item.dataset.status =
+                                status;
+
+
+                            item.innerHTML = `
+
+                                <div class="gallery-image">
+
+                                    <i class="fa-regular fa-image"></i>
+
+                                    <span class="gallery-badge">
+                                        ${category}
+                                    </span>
+
+                                    ${
+                                        featured
+                                            ? `
+                                                <span class="featured-badge">
+                                                    <i class="fa-solid fa-star"></i>
+                                                </span>
+                                              `
+                                            : ""
+                                    }
+
+                                </div>
+
+
+                                <div class="gallery-info">
+
+                                    <h3>
+                                        ${title}
+                                    </h3>
+
+                                    <p>
+                                        ${
+                                            branch === "Baramati"
+                                                ? "Baramati • Main Branch"
+                                                : "Baramati MIDC"
+                                        }
+                                    </p>
+
+
+                                    <div class="gallery-meta">
+
+                                        <span class="gallery-status ${
+                                            status === "Active"
+                                                ? "active"
+                                                : "inactive"
+                                        }">
+                                            ${status}
+                                        </span>
+
+
+                                        <div class="gallery-actions">
+
+                                            <button
+                                                class="action-btn preview-btn"
+                                                title="Preview"
+                                            >
+                                                <i class="fa-regular fa-eye"></i>
+                                            </button>
+
+                                            <button
+                                                class="action-btn edit-btn"
+                                                title="Edit"
+                                            >
+                                                <i class="fa-solid fa-pen"></i>
+                                            </button>
+
+                                            <button
+                                                class="action-btn delete delete-btn"
+                                                title="Delete"
+                                            >
+                                                <i class="fa-regular fa-trash-can"></i>
+                                            </button>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            `;
+
+
+                            galleryGrid.prepend(item);
+
+                            attachAllActions();
+
+                        }
+
+
+                        formModal.classList.remove(
+                            "show"
+                        );
+
+                        galleryForm.reset();
+
+                        editingItem = null;
+
+                        filterGallery();
+
+                    }
+                );
+
+
+                /* ==========================================
+                   FILE PREVIEW
+                ========================================== */
+
+                document.getElementById(
+                    "imageFile"
+                ).addEventListener(
+                    "change",
+                    function (event) {
+
+                        const file =
+                            event.target.files[0];
+
+                        if (!file) {
+                            return;
+                        }
+
+                        const previewBox =
+                            document.querySelector(
+                                ".preview-box"
+                            );
+
+                        previewBox.innerHTML = `
+
+                            <i class="fa-solid fa-check"></i>
+
+                            <span>
+                                ${file.name}
+                            </span>
+
+                        `;
+
+                    }
+                );
+
+
+                /* ==========================================
+                   CLOSE MODALS
+                ========================================== */
+
+                document
+                    .querySelectorAll("[data-close]")
+                    .forEach(function (button) {
+
+                        button.addEventListener(
+                            "click",
+                            function () {
+
+                                const modalId =
+                                    button.dataset.close;
+
+                                document
+                                    .getElementById(modalId)
+                                    .classList.remove(
+                                        "show"
+                                    );
+
+                            }
+                        );
+
+                    });
+
+
+                document
+                    .querySelectorAll(".modal-overlay")
+                    .forEach(function (overlay) {
+
+                        overlay.addEventListener(
+                            "click",
+                            function (event) {
+
+                                if (
+                                    event.target === overlay
+                                ) {
+
+                                    overlay.classList.remove(
+                                        "show"
+                                    );
+
+                                }
+
+                            }
+                        );
+
+                    });
+
+
+                /* ==========================================
+                   ESCAPE
+                ========================================== */
+
+                document.addEventListener(
+                    "keydown",
+                    function (event) {
+
+                        if (
+                            event.key === "Escape"
+                        ) {
+
+                            formModal.classList.remove(
+                                "show"
+                            );
+
+                            previewModal.classList.remove(
+                                "show"
+                            );
+
+                            sidebar.classList.remove(
+                                "mobile-open"
+                            );
+
+                            sidebarOverlay.classList.remove(
+                                "show"
+                            );
+
+                        }
+
+                    }
+                );
+
+
+                /* ==========================================
+                   RESIZE
+                ========================================== */
+
+                window.addEventListener(
+                    "resize",
+                    function () {
+
+                        if (
+                            window.innerWidth > 767
+                        ) {
+
+                            sidebar.classList.remove(
+                                "mobile-open"
+                            );
+
+                            sidebarOverlay.classList.remove(
+                                "show"
+                            );
+
+                        }
+
+                    }
+                );
+
+            });
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,3122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="Learn about The Beauty Salon - a premium unisex beauty and hair salon in Baramati, Maharashtra.">
+
+    <meta name="theme-color"
+          content="#000000">
+
+    <title>About Us | The Beauty Salon</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Existing Global CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+
+    <style>
+
+        /* =========================================================
+           ABOUT PAGE
+           Page-specific styling
+        ========================================================= */
+
+        .about-page {
+            background: #000;
+            color: #fff;
+        }
+
+        /* =========================================================
+           PROFESSIONAL HEADER
+        ========================================================= */
+
+        .about-site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+
+            border-bottom: 1px solid rgba(212, 175, 55, 0.12);
+        }
+
+        .about-header-container {
+            width: min(1280px, calc(100% - 40px));
+            min-height: 78px;
+            margin: 0 auto;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .about-brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 11px;
+            flex-shrink: 0;
+        }
+
+        .about-brand-logo {
+            width: 44px;
+            height: 44px;
+
+            display: grid;
+            place-items: center;
+
+            border: 1px solid #D4AF37;
+            border-radius: 50%;
+
+            background: rgba(212, 175, 55, 0.05);
+
+            color: #D4AF37;
+            font-size: 18px;
+        }
+
+        .about-brand-name {
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+        }
+
+        .about-brand-name strong {
+            font-family: "Playfair Display", serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .about-brand-name small {
+            margin-top: 5px;
+
+            color: #D4AF37;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .about-desktop-nav {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .about-desktop-nav a {
+            position: relative;
+
+            padding: 29px 0;
+
+            color: #cfcfcf;
+            font-size: 13px;
+            font-weight: 500;
+
+            white-space: nowrap;
+
+            transition: color .25s ease;
+        }
+
+        .about-desktop-nav a::after {
+            content: "";
+
+            position: absolute;
+            left: 0;
+            bottom: 20px;
+
+            width: 0;
+            height: 2px;
+
+            background: #D4AF37;
+
+            transition: width .25s ease;
+        }
+
+        .about-desktop-nav a:hover,
+        .about-desktop-nav a.active {
+            color: #D4AF37;
+        }
+
+        .about-desktop-nav a:hover::after,
+        .about-desktop-nav a.active::after {
+            width: 100%;
+        }
+
+        .about-header-actions {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .about-login-btn,
+        .about-book-btn {
+            min-height: 40px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+
+            border-radius: 8px;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            white-space: nowrap;
+
+            transition: all .25s ease;
+        }
+
+        .about-login-btn {
+            padding: 0 13px;
+
+            color: #D4AF37;
+
+            border: 1px solid rgba(212, 175, 55, .30);
+
+            background: rgba(212, 175, 55, .03);
+        }
+
+        .about-login-btn:hover {
+            border-color: #D4AF37;
+            background: rgba(212, 175, 55, .08);
+        }
+
+        .about-book-btn {
+            padding: 0 15px;
+
+            color: #000;
+
+            background: #D4AF37;
+        }
+
+        .about-book-btn:hover {
+            background: #E5C65A;
+            transform: translateY(-1px);
+        }
+
+        /* =========================================================
+           ACCOUNT / ADMIN HEADER ACTIONS
+        ========================================================== */
+
+        .about-admin-btn,
+        .about-login-btn,
+        .about-account-wrap {
+            min-height: 40px;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .about-admin-btn,
+        .about-login-btn {
+            justify-content: center;
+            gap: 7px;
+            padding: 0 13px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            white-space: nowrap;
+            transition: all .25s ease;
+        }
+
+        .about-admin-btn {
+            color: #D4AF37;
+            border: 1px solid rgba(212, 175, 55, .30);
+            background: rgba(212, 175, 55, .03);
+        }
+
+        .about-admin-btn:hover {
+            border-color: #D4AF37;
+            background: rgba(212, 175, 55, .08);
+        }
+
+        .about-account-wrap {
+            position: relative;
+        }
+
+        .about-account-btn {
+            min-height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            padding: 0 13px;
+            border: 1px solid rgba(212,175,55,.30);
+            border-radius: 8px;
+            background: rgba(212,175,55,.03);
+            color: #D4AF37;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .about-account-btn:hover {
+            border-color: #D4AF37;
+            background: rgba(212,175,55,.08);
+        }
+
+        .about-account-dropdown {
+            position: absolute;
+            top: calc(100% + 10px);
+            right: 0;
+            width: 205px;
+            padding: 8px;
+            background: #111;
+            border: 1px solid rgba(212,175,55,.22);
+            border-radius: 10px;
+            box-shadow: 0 18px 45px rgba(0,0,0,.45);
+            display: none;
+            z-index: 1200;
+        }
+
+        .about-account-dropdown.open {
+            display: block;
+        }
+
+        .about-account-dropdown a,
+        .about-account-dropdown button {
+            width: 100%;
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0 11px;
+            border: 0;
+            border-radius: 7px;
+            background: transparent;
+            color: #d0d0d0;
+            font: inherit;
+            font-size: 12px;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .about-account-dropdown a:hover,
+        .about-account-dropdown button:hover {
+            background: rgba(212,175,55,.08);
+            color: #D4AF37;
+        }
+
+        .about-account-dropdown i {
+            width: 16px;
+            color: #D4AF37;
+            text-align: center;
+        }
+
+        .about-mobile-menu-btn {
+            display: none;
+
+            width: 44px;
+            height: 44px;
+
+            align-items: center;
+            justify-content: center;
+
+            border: 1px solid rgba(212, 175, 55, .35);
+            border-radius: 9px;
+
+            background: transparent;
+
+            color: #D4AF37;
+            font-size: 18px;
+        }
+
+        /* =========================================================
+           MOBILE MENU
+        ========================================================= */
+
+        .about-mobile-menu {
+            position: fixed;
+            inset: 0;
+
+            z-index: 2000;
+
+            background: rgba(0, 0, 0, .98);
+
+            opacity: 0;
+            visibility: hidden;
+
+            transform: translateY(-10px);
+
+            transition:
+                opacity .25s ease,
+                visibility .25s ease,
+                transform .25s ease;
+        }
+
+        .about-mobile-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .about-mobile-menu-header {
+            min-height: 78px;
+            padding: 0 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            border-bottom: 1px solid rgba(212, 175, 55, .15);
+        }
+
+        .about-mobile-close {
+            width: 44px;
+            height: 44px;
+
+            display: grid;
+            place-items: center;
+
+            border: 1px solid rgba(212, 175, 55, .35);
+            border-radius: 9px;
+
+            background: transparent;
+
+            color: #D4AF37;
+            font-size: 19px;
+        }
+
+        .about-mobile-links {
+            padding: 20px;
+
+            display: flex;
+            flex-direction: column;
+        }
+
+        .about-mobile-links a {
+            min-height: 53px;
+
+            display: flex;
+            align-items: center;
+            gap: 13px;
+
+            padding: 0 5px;
+
+            color: #d6d6d6;
+
+            border-bottom: 1px solid rgba(255, 255, 255, .07);
+
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .about-mobile-links a i {
+            width: 20px;
+            color: #777;
+            text-align: center;
+        }
+
+        .about-mobile-links a:hover,
+        .about-mobile-links a.active {
+            color: #D4AF37;
+        }
+
+        .about-mobile-links a:hover i,
+        .about-mobile-links a.active i {
+            color: #D4AF37;
+        }
+
+        .about-mobile-divider {
+            height: 14px;
+        }
+
+        .about-mobile-book {
+            min-height: 51px !important;
+
+            margin-top: 18px;
+
+            justify-content: center;
+
+            border: 0 !important;
+            border-radius: 9px;
+
+            background: #D4AF37;
+
+            color: #000 !important;
+
+            font-weight: 700 !important;
+        }
+
+        .about-mobile-book i {
+            color: #000 !important;
+        }
+
+        /* =========================================================
+           ABOUT HERO
+        ========================================================= */
+
+        .about-hero {
+            min-height: 560px;
+
+            padding: 150px 20px 90px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            position: relative;
+
+            text-align: center;
+
+            overflow: hidden;
+
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(212, 175, 55, .09),
+                    transparent 40%
+                ),
+                #000;
+        }
+
+        .about-hero::before {
+            content: "";
+
+            position: absolute;
+            inset: 0;
+
+            background-image:
+                linear-gradient(
+                    rgba(212,175,55,.025) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(212,175,55,.025) 1px,
+                    transparent 1px
+                );
+
+            background-size: 55px 55px;
+
+            pointer-events: none;
+        }
+
+        .about-hero-content {
+            position: relative;
+            z-index: 1;
+
+            max-width: 760px;
+        }
+
+        .about-hero-eyebrow {
+            margin-bottom: 20px;
+
+            color: #D4AF37;
+
+            font-size: 10px;
+            font-weight: 700;
+
+            letter-spacing: 3px;
+        }
+
+        .about-hero h1 {
+            margin: 0 0 18px;
+
+            font-family: "Playfair Display", serif;
+
+            color: #fff;
+
+            font-size: clamp(44px, 6vw, 68px);
+
+            line-height: 1.05;
+            font-weight: 600;
+        }
+
+        .about-hero h1 span {
+            color: #D4AF37;
+        }
+
+        .about-hero p {
+            max-width: 620px;
+
+            margin: 0 auto;
+
+            color: #999;
+
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        /* =========================================================
+           STORY SECTION
+        ========================================================= */
+
+        .about-story {
+            padding: 100px 20px;
+
+            background: #000;
+        }
+
+        .about-story-container {
+            width: min(1180px, 100%);
+            margin: 0 auto;
+
+            display: grid;
+
+            grid-template-columns: .9fr 1.1fr;
+
+            gap: 75px;
+
+            align-items: center;
+        }
+
+        .about-story-visual {
+            position: relative;
+        }
+
+        .about-story-placeholder {
+            min-height: 480px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border: 1px solid rgba(212,175,55,.22);
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(212,175,55,.09),
+                    transparent 48%
+                ),
+                #111;
+        }
+
+        .about-story-inner {
+            width: 76%;
+            height: 76%;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            border: 1px solid rgba(212,175,55,.13);
+        }
+
+        .about-story-inner i {
+            margin-bottom: 18px;
+
+            color: #D4AF37;
+
+            font-size: 27px;
+        }
+
+        .about-story-inner span {
+            color: #777;
+
+            font-size: 9px;
+            letter-spacing: 3px;
+        }
+
+        .about-story-inner strong {
+            margin-top: 10px;
+
+            font-family: "Playfair Display", serif;
+
+            color: #D4AF37;
+
+            font-size: 34px;
+            line-height: 1.15;
+            font-weight: 500;
+        }
+
+        .about-story-badge {
+            position: absolute;
+
+            right: -18px;
+            bottom: 25px;
+
+            width: 115px;
+            height: 115px;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            border: 1px solid #D4AF37;
+            border-radius: 50%;
+
+            background: #000;
+
+            text-align: center;
+        }
+
+        .about-story-badge strong {
+            color: #D4AF37;
+
+            font-family: "Playfair Display", serif;
+
+            font-size: 31px;
+            line-height: 1;
+        }
+
+        .about-story-badge span {
+            margin-top: 5px;
+
+            color: #999;
+
+            font-size: 9px;
+            line-height: 1.4;
+        }
+
+        .about-story-content .about-label {
+            display: inline-block;
+
+            margin-bottom: 12px;
+
+            color: #D4AF37;
+
+            font-size: 10px;
+            font-weight: 700;
+
+            letter-spacing: 3px;
+        }
+
+        .about-story-content h2 {
+            margin: 0 0 22px;
+
+            font-family: "Playfair Display", serif;
+
+            color: #fff;
+
+            font-size: clamp(34px, 4vw, 48px);
+
+            line-height: 1.15;
+        }
+
+        .about-story-content h2 span {
+            color: #D4AF37;
+        }
+
+        .about-story-content p {
+            margin: 0 0 16px;
+
+            color: #999;
+
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        /* =========================================================
+
+
+        /* =========================================================
+           STORY IMAGE
+           About page visual image
+        ========================================================== */
+
+        .about-story-image-wrap {
+            overflow: hidden;
+            padding: 0;
+            position: relative;
+        }
+
+        .about-story-image {
+            width: 100%;
+            height: 100%;
+            min-height: 480px;
+            display: block;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        @media (max-width: 767px) {
+            .about-story-image {
+                min-height: 330px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .about-story-image {
+                min-height: 290px;
+            }
+        }
+
+
+        .about-values {
+            padding: 100px 20px;
+
+            background: #0a0a0a;
+        }
+
+        .about-section-heading {
+            max-width: 650px;
+
+            margin: 0 auto 45px;
+
+            text-align: center;
+        }
+
+        .about-section-heading span {
+            display: block;
+
+            margin-bottom: 10px;
+
+            color: #D4AF37;
+
+            font-size: 10px;
+            font-weight: 700;
+
+            letter-spacing: 3px;
+        }
+
+        .about-section-heading h2 {
+            margin: 0;
+
+            font-family: "Playfair Display", serif;
+
+            color: #fff;
+
+            font-size: clamp(34px, 4vw, 48px);
+
+            line-height: 1.15;
+        }
+
+        .about-section-heading h2 strong {
+            color: #D4AF37;
+            font-weight: 600;
+        }
+
+        .about-values-grid {
+            width: min(1180px, 100%);
+            margin: 0 auto;
+
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 18px;
+        }
+
+        .about-value-card {
+            padding: 30px 25px;
+
+            background: #151515;
+
+            border: 1px solid rgba(255,255,255,.07);
+
+            border-radius: 10px;
+
+            text-align: center;
+
+            transition: all .25s ease;
+        }
+
+        .about-value-card:hover {
+            transform: translateY(-5px);
+
+            border-color: rgba(212,175,55,.25);
+        }
+
+        .about-value-icon {
+            width: 55px;
+            height: 55px;
+
+            margin: 0 auto 18px;
+
+            display: grid;
+            place-items: center;
+
+            border: 1px solid rgba(212,175,55,.22);
+
+            border-radius: 50%;
+
+            color: #D4AF37;
+
+            background: rgba(212,175,55,.07);
+        }
+
+        .about-value-card h3 {
+            margin: 0 0 9px;
+
+            color: #fff;
+
+            font-family: "Playfair Display", serif;
+
+            font-size: 21px;
+        }
+
+        .about-value-card p {
+            margin: 0;
+
+            color: #777;
+
+            font-size: 12px;
+            line-height: 1.7;
+        }
+
+        /* =========================================================
+           EXPERIENCE
+        ========================================================= */
+
+        .about-experience {
+            padding: 100px 20px;
+
+            background: #000;
+        }
+
+        .experience-container {
+            width: min(1050px, 100%);
+            margin: 0 auto;
+        }
+
+        .experience-list {
+            display: grid;
+
+            grid-template-columns: repeat(4, 1fr);
+
+            gap: 15px;
+        }
+
+        .experience-step {
+            position: relative;
+
+            padding: 25px 20px;
+
+            border-top: 1px solid rgba(212,175,55,.25);
+
+            background: #111;
+        }
+
+        .experience-number {
+            display: block;
+
+            margin-bottom: 20px;
+
+            color: #D4AF37;
+
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .experience-step h3 {
+            margin: 0 0 8px;
+
+            color: #fff;
+
+            font-size: 15px;
+        }
+
+        .experience-step p {
+            margin: 0;
+
+            color: #777;
+
+            font-size: 11px;
+            line-height: 1.7;
+        }
+
+        /* =========================================================
+           BRANCH SECTION
+        ========================================================= */
+
+        .about-branches {
+            padding: 100px 20px;
+
+            background: #0a0a0a;
+        }
+
+        .about-branch-container {
+            width: min(1180px, 100%);
+            margin: 0 auto;
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 18px;
+        }
+
+        .about-branch-card {
+            padding: 30px;
+
+            background: #151515;
+
+            border: 1px solid rgba(255,255,255,.07);
+
+            border-radius: 10px;
+        }
+
+        .about-branch-card.featured {
+            border-color: rgba(212,175,55,.25);
+        }
+
+        .about-branch-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .about-branch-badge {
+            padding: 5px 9px;
+
+            color: #D4AF37;
+
+            background: rgba(212,175,55,.07);
+
+            border: 1px solid rgba(212,175,55,.18);
+
+            border-radius: 4px;
+
+            font-size: 8px;
+            font-weight: 700;
+
+            letter-spacing: 1.5px;
+        }
+
+        .about-branch-top i {
+            color: #D4AF37;
+        }
+
+        .about-branch-card h3 {
+            margin: 25px 0 2px;
+
+            color: #fff;
+
+            font-family: "Playfair Display", serif;
+
+            font-size: 24px;
+        }
+
+        .about-branch-card h4 {
+            margin: 0 0 13px;
+
+            color: #D4AF37;
+
+            font-size: 13px;
+        }
+
+        .about-branch-card p {
+            margin: 0;
+
+            color: #888;
+
+            font-size: 12px;
+            line-height: 1.7;
+        }
+
+        .about-branch-info {
+            margin-top: 22px;
+
+            padding-top: 18px;
+
+            border-top: 1px solid rgba(255,255,255,.07);
+
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .about-branch-info span {
+            display: flex;
+            align-items: flex-start;
+            gap: 9px;
+
+            color: #aaa;
+
+            font-size: 11px;
+        }
+
+        .about-branch-info i {
+            width: 14px;
+
+            color: #D4AF37;
+
+            text-align: center;
+        }
+
+        /* =========================================================
+           CTA
+        ========================================================= */
+
+        .about-cta {
+            padding: 45px 20px 100px;
+
+            background: #0a0a0a;
+        }
+
+        .about-cta-box {
+            width: min(1180px, 100%);
+            min-height: 230px;
+
+            margin: 0 auto;
+
+            padding: 40px 48px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 30px;
+
+            border: 1px solid rgba(212,175,55,.25);
+
+            background:
+                radial-gradient(
+                    circle at 80% 50%,
+                    rgba(212,175,55,.08),
+                    transparent 35%
+                ),
+                #111;
+        }
+
+        .about-cta-box span {
+            color: #D4AF37;
+
+            font-size: 10px;
+            font-weight: 700;
+
+            letter-spacing: 3px;
+        }
+
+        .about-cta-box h2 {
+            margin: 9px 0 10px;
+
+            font-family: "Playfair Display", serif;
+
+            color: #fff;
+
+            font-size: 39px;
+            line-height: 1.15;
+        }
+
+        .about-cta-box h2 strong {
+            color: #D4AF37;
+        }
+
+        .about-cta-box p {
+            margin: 0;
+
+            color: #888;
+
+            font-size: 13px;
+        }
+
+        .about-cta-button {
+            min-height: 50px;
+
+            padding: 0 20px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+
+            flex-shrink: 0;
+
+            border-radius: 8px;
+
+            background: #D4AF37;
+
+            color: #000;
+
+            font-size: 13px;
+            font-weight: 700;
+
+            transition: all .25s ease;
+        }
+
+        .about-cta-button:hover {
+            background: #E5C65A;
+
+            transform: translateY(-2px);
+        }
+
+        /* =========================================================
+           FOOTER
+        ========================================================= */
+
+        .about-footer {
+            background: #080808;
+
+            border-top: 1px solid rgba(212,175,55,.12);
+        }
+
+        .about-footer-container {
+            width: min(1180px, calc(100% - 40px));
+            margin: 0 auto;
+        }
+
+        .about-footer-grid {
+            padding: 65px 0 45px;
+
+            display: grid;
+
+            grid-template-columns: 1.3fr .8fr .8fr 1.3fr;
+
+            gap: 40px;
+        }
+
+        .about-footer-brand p {
+            max-width: 270px;
+
+            margin: 18px 0;
+
+            color: #666;
+
+            font-size: 11px;
+            line-height: 1.8;
+        }
+
+        .about-footer-socials {
+            display: flex;
+            gap: 8px;
+        }
+
+        .about-footer-socials a {
+            width: 34px;
+            height: 34px;
+
+            display: grid;
+            place-items: center;
+
+            border: 1px solid rgba(212,175,55,.20);
+
+            border-radius: 50%;
+
+            color: #777;
+
+            font-size: 12px;
+        }
+
+        .about-footer-socials a:hover {
+            color: #D4AF37;
+
+            border-color: #D4AF37;
+
+            background: rgba(212,175,55,.06);
+        }
+
+        .about-footer-column {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .about-footer-column h3 {
+            margin: 0 0 18px;
+
+            color: #fff;
+
+            font-size: 12px;
+        }
+
+        .about-footer-column a,
+        .about-footer-column p,
+        .about-footer-column span {
+            margin-bottom: 10px;
+
+            color: #666;
+
+            font-size: 11px;
+            line-height: 1.7;
+        }
+
+        .about-footer-column a:hover {
+            color: #D4AF37;
+        }
+
+        .about-footer-contact p,
+        .about-footer-contact a,
+        .about-footer-contact span {
+            display: flex;
+            align-items: flex-start;
+            gap: 9px;
+        }
+
+        .about-footer-contact i {
+            width: 14px;
+
+            flex-shrink: 0;
+
+            color: #A8891F;
+
+            text-align: center;
+        }
+
+        .about-footer-bottom {
+            min-height: 65px;
+
+            padding: 18px 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
+
+            border-top: 1px solid rgba(255,255,255,.06);
+        }
+
+        .about-footer-bottom p,
+        .about-footer-bottom a {
+            color: #555;
+
+            font-size: 10px;
+        }
+
+        .about-footer-legal {
+            display: flex;
+            gap: 20px;
+        }
+
+        .about-footer-bottom a:hover {
+            color: #D4AF37;
+        }
+
+        /* =========================================================
+           MOBILE
+        ========================================================= */
+
+        @media (max-width: 767px) {
+
+            .about-header-container {
+                width: calc(100% - 28px);
+                min-height: 68px;
+            }
+
+            .about-desktop-nav,
+            .about-header-actions {
+                display: none;
+            }
+
+            .about-mobile-menu-btn {
+                display: flex;
+            }
+
+            .about-brand-logo {
+                width: 40px;
+                height: 40px;
+            }
+
+            .about-brand-name strong {
+                font-size: 17px;
+            }
+
+            .about-brand-name small {
+                font-size: 9px;
+            }
+
+            .about-hero {
+                min-height: 500px;
+                padding: 110px 18px 70px;
+            }
+
+            .about-hero h1 {
+                font-size: 42px;
+            }
+
+            .about-hero p {
+                font-size: 13px;
+            }
+
+            .about-story {
+                padding: 70px 14px;
+            }
+
+            .about-story-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .about-story-placeholder {
+                min-height: 330px;
+            }
+
+            .about-story-inner strong {
+                font-size: 28px;
+            }
+
+            .about-story-badge {
+                width: 90px;
+                height: 90px;
+
+                right: 0;
+                bottom: 15px;
+            }
+
+            .about-story-badge strong {
+                font-size: 25px;
+            }
+
+            .about-values {
+                padding: 70px 14px;
+            }
+
+            .about-values-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .about-experience {
+                padding: 70px 14px;
+            }
+
+            .experience-list {
+                grid-template-columns: 1fr;
+            }
+
+            .about-branches {
+                padding: 70px 14px;
+            }
+
+            .about-branch-container {
+                grid-template-columns: 1fr;
+            }
+
+            .about-branch-card {
+                padding: 24px 20px;
+            }
+
+            .about-cta {
+                padding: 25px 14px 70px;
+            }
+
+            .about-cta-box {
+                padding: 30px 22px;
+
+                flex-direction: column;
+
+                align-items: flex-start;
+            }
+
+            .about-cta-box h2 {
+                font-size: 31px;
+            }
+
+            .about-cta-button {
+                width: 100%;
+            }
+
+            .about-footer-container {
+                width: calc(100% - 28px);
+            }
+
+            .about-footer-grid {
+                grid-template-columns: 1fr;
+
+                padding: 55px 0 35px;
+
+                gap: 32px;
+            }
+
+            .about-footer-bottom {
+                flex-direction: column;
+                align-items: flex-start;
+
+                padding: 18px 0;
+            }
+
+            .about-footer-legal {
+                gap: 15px;
+                flex-wrap: wrap;
+            }
+
+        }
+
+        /* =========================================================
+           SMALL MOBILE
+        ========================================================= */
+
+        @media (max-width: 380px) {
+
+            .about-hero h1 {
+                font-size: 37px;
+            }
+
+            .about-story-placeholder {
+                min-height: 290px;
+            }
+
+            .about-story-inner strong {
+                font-size: 25px;
+            }
+
+            .about-section-heading h2 {
+                font-size: 31px;
+            }
+
+        }
+
+
+        /* =========================================================
+           FINAL MOBILE RESPONSIVE OVERRIDES
+           Keeps the existing About header/design unchanged.
+        ========================================================= */
+
+        html,
+        body {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        .about-site-header {
+            width: 100%;
+        }
+
+        .about-header-container {
+            width: min(1280px, calc(100% - 40px));
+        }
+
+        .about-mobile-menu {
+            width: 100%;
+            max-width: 100%;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .about-mobile-menu-header,
+        .about-mobile-links {
+            width: 100%;
+        }
+
+        @media (max-width: 1024px) {
+            .about-header-container {
+                gap: 14px;
+            }
+
+            .about-desktop-nav {
+                gap: 16px;
+            }
+
+            .about-desktop-nav a {
+                font-size: 12px;
+            }
+
+            .about-header-actions {
+                gap: 5px;
+            }
+
+            .about-login-btn,
+            .about-book-btn {
+                font-size: 11px;
+            }
+
+            .about-login-btn {
+                padding: 0 10px;
+            }
+
+            .about-book-btn {
+                padding: 0 11px;
+            }
+
+            .about-story-container {
+                gap: 45px;
+            }
+
+            .about-values-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+
+            .experience-list {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .about-footer-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 767px) {
+            /* Header — exact same structure, mobile friendly */
+            .about-header-container {
+                width: calc(100% - 28px);
+                min-height: 68px;
+                gap: 10px;
+            }
+
+            .about-desktop-nav,
+            .about-header-actions {
+                display: none !important;
+            }
+
+            .about-mobile-menu-btn {
+                display: flex !important;
+                flex: 0 0 44px;
+                cursor: pointer;
+            }
+
+            .about-brand {
+                min-width: 0;
+            }
+
+            .about-brand-name strong {
+                font-size: 17px;
+            }
+
+            .about-brand-name small {
+                font-size: 9px;
+            }
+
+            .about-mobile-menu-header {
+                min-height: 68px;
+                padding: 0 14px;
+            }
+
+            .about-mobile-links {
+                padding: 14px;
+            }
+
+            .about-mobile-links a {
+                min-height: 52px;
+                font-size: 14px;
+            }
+
+            .about-mobile-book {
+                width: 100%;
+                min-height: 51px !important;
+                margin-top: 16px;
+            }
+
+            /* Main sections */
+            .about-hero {
+                width: 100%;
+                min-height: 500px;
+                padding: 110px 18px 70px;
+            }
+
+            .about-hero-content {
+                width: 100%;
+                max-width: 760px;
+            }
+
+            .about-hero h1 {
+                font-size: clamp(36px, 11vw, 42px);
+                overflow-wrap: anywhere;
+            }
+
+            .about-hero p {
+                font-size: 13px;
+                line-height: 1.75;
+            }
+
+            .about-story,
+            .about-values,
+            .about-experience,
+            .about-branches,
+            .about-cta {
+                width: 100%;
+            }
+
+            .about-story-container,
+            .about-branch-container,
+            .about-values-grid,
+            .experience-list,
+            .about-footer-grid {
+                width: 100%;
+                grid-template-columns: 1fr;
+            }
+
+            .about-story {
+                padding: 70px 14px;
+            }
+
+            .about-story-container {
+                gap: 40px;
+            }
+
+            .about-story-placeholder {
+                width: 100%;
+                min-height: 330px;
+            }
+
+            .about-story-badge {
+                right: 0;
+                bottom: 15px;
+                width: 90px;
+                height: 90px;
+            }
+
+            .about-values,
+            .about-experience,
+            .about-branches {
+                padding: 70px 14px;
+            }
+
+            .about-value-card,
+            .about-branch-card {
+                width: 100%;
+            }
+
+            .about-cta {
+                padding: 25px 14px 70px;
+            }
+
+            .about-cta-box {
+                width: 100%;
+                padding: 30px 22px;
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .about-cta-box h2 {
+                font-size: 31px;
+            }
+
+            .about-cta-button {
+                width: 100%;
+            }
+
+            .about-footer-container {
+                width: calc(100% - 28px);
+            }
+
+            .about-footer-grid {
+                padding: 55px 0 35px;
+                gap: 32px;
+            }
+
+            .about-footer-bottom {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 18px 0;
+                gap: 12px;
+            }
+
+            .about-footer-legal {
+                flex-wrap: wrap;
+                gap: 12px 15px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .about-header-container {
+                width: calc(100% - 24px);
+            }
+
+            .about-brand-logo {
+                width: 38px;
+                height: 38px;
+                font-size: 16px;
+            }
+
+            .about-brand-name strong {
+                font-size: 16px;
+            }
+
+            .about-hero {
+                padding-left: 14px;
+                padding-right: 14px;
+            }
+
+            .about-hero h1 {
+                font-size: 36px;
+            }
+
+            .about-story-placeholder {
+                min-height: 290px;
+            }
+
+            .about-story-inner strong {
+                font-size: 25px;
+            }
+
+            .about-section-heading h2 {
+                font-size: 31px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .about-mobile-menu,
+            .about-mobile-menu *,
+            .about-site-header * {
+                transition: none !important;
+                animation: none !important;
+            }
+        }
+
+    
+        /* FINAL HEADER ACTIONS: Customer Login + Profile only */
+        .about-admin-btn,
+        .about-book-btn {
+            display: none !important;
+        }
+
+        .about-header-actions {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+    </style>
+</head>
+
+
+<body class="about-page">
+
+
+    <!-- =========================================================
+         PROFESSIONAL HEADER
+    ========================================================== -->
+
+    <header class="about-site-header">
+
+        <div class="about-header-container">
+
+
+            <!-- Logo -->
+
+            <a href="../index.html"
+               class="about-brand"
+               aria-label="The Beauty Salon Home">
+
+                <span class="about-brand-logo">
+                    <i class="fa-solid fa-scissors"></i>
+                </span>
+
+                <span class="about-brand-name">
+
+                    <strong>The Beauty</strong>
+
+                    <small>Salon</small>
+
+                </span>
+
+            </a>
+
+
+            <!-- Desktop Navigation -->
+
+            <nav class="about-desktop-nav"
+                 aria-label="Primary navigation">
+
+                <a href="../index.html">
+                    Home
+                </a>
+
+                <a href="about.html"
+                   class="active"
+                   aria-current="page">
+                    About
+                </a>
+
+                <a href="services.html">
+                    Services
+                </a>
+
+                <a href="branches.html">
+                    Branches
+                </a>
+
+                <a href="gallery.html">
+                    Gallery
+                </a>
+
+                <a href="contact.html">
+                    Contact
+                </a>
+
+            </nav>
+
+
+            <!-- Header Actions -->
+
+            <div class="about-header-actions">
+
+                <a href="login.html"
+                   class="about-login-btn"
+                   id="aboutCustomerLoginBtn">
+                    <i class="fa-regular fa-user"></i>
+                    <span>Customer Login</span>
+                </a>
+
+                <div class="about-account-wrap"
+                     id="aboutAccountWrap"
+                     style="display:none;">
+
+                    <button type="button"
+                            class="about-account-btn"
+                            id="aboutAccountBtn"
+                            aria-expanded="false">
+                        <i class="fa-regular fa-user"></i>
+                        <span id="aboutAccountName">My Account</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+
+                    <div class="about-account-dropdown"
+                         id="aboutAccountDropdown">
+
+                        <a href="appointments.html">
+                            <i class="fa-regular fa-calendar-check"></i>
+                            <span>My Appointments</span>
+                        </a>
+
+                        <a href="booking-history.html">
+                            <i class="fa-solid fa-clock-rotate-left"></i>
+                            <span>Booking History</span>
+                        </a>
+
+                        <a href="profile.html">
+                            <i class="fa-regular fa-user"></i>
+                            <span>Update Profile</span>
+                        </a>
+
+                        <button type="button" id="aboutLogoutBtn">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                            <span>Logout</span>
+                        </button>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- Mobile Menu -->
+
+            <button class="about-mobile-menu-btn"
+                    id="aboutMenuBtn"
+                    type="button"
+                    aria-label="Open menu"
+                    aria-controls="aboutMobileMenu"
+                    aria-expanded="false">
+
+                <i class="fa-solid fa-bars"></i>
+
+            </button>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =========================================================
+         MOBILE MENU
+    ========================================================== -->
+
+    <div class="about-mobile-menu"
+         id="aboutMobileMenu"
+         aria-hidden="true">
+
+
+        <div class="about-mobile-menu-header">
+
+
+            <a href="../index.html"
+               class="about-brand">
+
+                <span class="about-brand-logo">
+                    <i class="fa-solid fa-scissors"></i>
+                </span>
+
+                <span class="about-brand-name">
+
+                    <strong>The Beauty</strong>
+
+                    <small>Salon</small>
+
+                </span>
+
+            </a>
+
+
+            <button class="about-mobile-close"
+                    id="aboutCloseMenuBtn"
+                    type="button"
+                    aria-label="Close menu">
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+
+        <nav class="about-mobile-links"
+             aria-label="Mobile navigation">
+
+
+            <a href="../index.html">
+
+                <i class="fa-solid fa-house"></i>
+
+                <span>Home</span>
+
+            </a>
+
+
+            <a href="about.html"
+               class="active">
+
+                <i class="fa-regular fa-circle-user"></i>
+
+                <span>About</span>
+
+            </a>
+
+
+            <a href="services.html">
+
+                <i class="fa-solid fa-scissors"></i>
+
+                <span>Services</span>
+
+            </a>
+
+
+            <a href="branches.html">
+
+                <i class="fa-solid fa-location-dot"></i>
+
+                <span>Branches</span>
+
+            </a>
+
+
+            <a href="gallery.html">
+
+                <i class="fa-regular fa-images"></i>
+
+                <span>Gallery</span>
+
+            </a>
+
+
+            <a href="contact.html">
+
+                <i class="fa-regular fa-envelope"></i>
+
+                <span>Contact</span>
+
+            </a>
+
+
+            <div class="about-mobile-divider"></div>
+
+            <a href="login.html" id="aboutMobileCustomerLogin">
+
+                <i class="fa-solid fa-right-to-bracket"></i>
+
+                <span>Customer Login</span>
+
+            </a>
+
+            <div id="aboutMobileAccountLinks" style="display:none;">
+                <a href="appointments.html">
+                    <i class="fa-regular fa-calendar-check"></i>
+                    <span>My Appointments</span>
+                </a>
+                <a href="booking-history.html">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                    <span>Booking History</span>
+                </a>
+                <a href="profile.html">
+                    <i class="fa-regular fa-user"></i>
+                    <span>Update Profile</span>
+                </a>
+                <a href="#" id="aboutMobileLogout">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+
+        </nav>
+
+    </div>
+
+
+
+    <!-- =========================================================
+         MAIN
+    ========================================================== -->
+
+    <main>
+
+
+        <!-- HERO -->
+
+        <section class="about-hero">
+
+            <div class="about-hero-content">
+
+                <div class="about-hero-eyebrow">
+                    THE BEAUTY SALON
+                </div>
+
+                <h1>
+
+                    Beauty.
+                    <span>Style.</span>
+                    Confidence.
+
+                </h1>
+
+                <p>
+
+                    A modern unisex beauty and hair salon
+                    dedicated to creating a premium,
+                    comfortable and personalized experience
+                    for every customer.
+
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- STORY -->
+
+        <section class="about-story">
+
+            <div class="about-story-container">
+
+
+                <div class="about-story-visual">
+
+                    <div class="about-story-placeholder about-story-image-wrap">
+
+                        <img
+                            src="../assets/images/logo/about-us-salon.jpg"
+                            alt="The Beauty Salon"
+                            class="about-story-image"
+                        >
+
+                    </div>
+
+
+                    <div class="about-story-badge">
+
+                        <strong>2</strong>
+
+                        <span>
+                            Salon<br>
+                            Locations
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="about-story-content">
+
+                    <span class="about-label">
+                        OUR STORY
+                    </span>
+
+                    <h2>
+
+                        Where Style Meets
+                        <span>Confidence.</span>
+
+                    </h2>
+
+                    <p>
+
+                        The Beauty Salon is a modern unisex
+                        beauty and hair salon serving customers
+                        in Baramati, Maharashtra.
+
+                    </p>
+
+                    <p>
+
+                        Our approach is simple: combine
+                        professional beauty services with
+                        personalized attention and a comfortable
+                        salon environment.
+
+                    </p>
+
+                    <p>
+
+                        From haircuts and styling to beauty care,
+                        every service is designed to help you
+                        look and feel your best.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- VALUES -->
+
+        <section class="about-values">
+
+            <div class="about-section-heading">
+
+                <span>
+                    WHAT WE BELIEVE
+                </span>
+
+                <h2>
+
+                    Our Core
+                    <strong>Values.</strong>
+
+                </h2>
+
+            </div>
+
+
+            <div class="about-values-grid">
+
+
+                <article class="about-value-card">
+
+                    <div class="about-value-icon">
+
+                        <i class="fa-solid fa-star"></i>
+
+                    </div>
+
+                    <h3>
+                        Quality
+                    </h3>
+
+                    <p>
+
+                        We focus on delivering professional
+                        services with attention to detail.
+
+                    </p>
+
+                </article>
+
+
+                <article class="about-value-card">
+
+                    <div class="about-value-icon">
+
+                        <i class="fa-solid fa-heart"></i>
+
+                    </div>
+
+                    <h3>
+                        Personal Care
+                    </h3>
+
+                    <p>
+
+                        Every customer deserves a service
+                        experience tailored to their needs.
+
+                    </p>
+
+                </article>
+
+
+                <article class="about-value-card">
+
+                    <div class="about-value-icon">
+
+                        <i class="fa-solid fa-gem"></i>
+
+                    </div>
+
+                    <h3>
+                        Premium Experience
+                    </h3>
+
+                    <p>
+
+                        We aim to create a modern, welcoming
+                        and premium salon atmosphere.
+
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- EXPERIENCE -->
+
+        <section class="about-experience">
+
+            <div class="experience-container">
+
+                <div class="about-section-heading">
+
+                    <span>
+                        YOUR JOURNEY
+                    </span>
+
+                    <h2>
+
+                        Simple.
+                        <strong>Comfortable.</strong>
+
+                    </h2>
+
+                </div>
+
+
+                <div class="experience-list">
+
+
+                    <article class="experience-step">
+
+                        <span class="experience-number">
+                            01
+                        </span>
+
+                        <h3>
+                            Choose Your Service
+                        </h3>
+
+                        <p>
+
+                            Explore our beauty and hair
+                            services according to your needs.
+
+                        </p>
+
+                    </article>
+
+
+                    <article class="experience-step">
+
+                        <span class="experience-number">
+                            02
+                        </span>
+
+                        <h3>
+                            Select Your Branch
+                        </h3>
+
+                        <p>
+
+                            Choose the Baramati location
+                            convenient for you.
+
+                        </p>
+
+                    </article>
+
+
+                    <article class="experience-step">
+
+                        <span class="experience-number">
+                            03
+                        </span>
+
+                        <h3>
+                            Book Your Time
+                        </h3>
+
+                        <p>
+
+                            Select your preferred staff member,
+                            date and available time slot.
+
+                        </p>
+
+                    </article>
+
+
+                    <article class="experience-step">
+
+                        <span class="experience-number">
+                            04
+                        </span>
+
+                        <h3>
+                            Visit & Enjoy
+                        </h3>
+
+                        <p>
+
+                            Visit the salon and enjoy your
+                            personalized beauty experience.
+
+                        </p>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- BRANCHES -->
+
+        <section class="about-branches">
+
+            <div class="about-section-heading">
+
+                <span>
+                    OUR LOCATIONS
+                </span>
+
+                <h2>
+
+                    Growing Across
+                    <strong>Baramati.</strong>
+
+                </h2>
+
+            </div>
+
+
+            <div class="about-branch-container">
+
+
+                <!-- Baramati -->
+
+                <article class="about-branch-card featured">
+
+                    <div class="about-branch-top">
+
+                        <span class="about-branch-badge">
+                            MAIN BRANCH
+                        </span>
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+                    </div>
+
+                    <h3>
+                        The Beauty Salon
+                    </h3>
+
+                    <h4>
+                        Baramati
+                    </h4>
+
+                    <p>
+
+                        Near Mahanagar Bank,
+                        in front of Shayog Society,
+                        Baramati, Maharashtra.
+
+                    </p>
+
+
+                    <div class="about-branch-info">
+
+                        <span>
+
+                            <i class="fa-solid fa-phone"></i>
+
+                            +91 8793465001
+
+                        </span>
+
+
+                        <span>
+
+                            <i class="fa-regular fa-envelope"></i>
+
+                            beautysalon@gamil.com
+
+                        </span>
+
+
+                        <span>
+
+                            <i class="fa-regular fa-clock"></i>
+
+                            Mon – Sun · 9:00 AM – 9:00 PM
+
+                        </span>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- MIDC -->
+
+                <article class="about-branch-card">
+
+                    <div class="about-branch-top">
+
+                        <span class="about-branch-badge">
+                            ADDITIONAL BRANCH
+                        </span>
+
+                        <i class="fa-solid fa-building"></i>
+
+                    </div>
+
+                    <h3>
+                        The Beauty Salon
+                    </h3>
+
+                    <h4>
+                        Baramati MIDC
+                    </h4>
+
+                    <p>
+
+                        Our additional Baramati MIDC
+                        branch details will be updated
+                        as the location information becomes
+                        available.
+
+                    </p>
+
+
+                    <div class="about-branch-info">
+
+                        <span>
+
+                            <i class="fa-solid fa-location-dot"></i>
+
+                            Address details coming soon
+
+                        </span>
+
+
+                        <span>
+
+                            <i class="fa-solid fa-phone"></i>
+
+                            Contact details coming soon
+
+                        </span>
+
+
+                        <span>
+
+                            <i class="fa-regular fa-clock"></i>
+
+                            9:00 AM – 9:00 PM
+
+                        </span>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- CTA -->
+
+        <section class="about-cta">
+
+            <div class="about-cta-box">
+
+                <div>
+
+                    <span>
+                        READY FOR YOUR NEXT LOOK?
+                    </span>
+
+                    <h2>
+
+                        Your Beauty.
+                        <strong>Your Time.</strong>
+
+                    </h2>
+
+                    <p>
+
+                        Book your appointment at
+                        The Beauty Salon today.
+
+                    </p>
+
+                </div>
+
+
+                <a href="booking.html"
+                   class="about-cta-button about-book-link">
+
+                    <i class="fa-regular fa-calendar-check"></i>
+
+                    Book Appointment
+
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =========================================================
+         FOOTER
+    ========================================================== -->
+
+    <footer class="about-footer">
+
+        <div class="about-footer-container">
+
+
+            <div class="about-footer-grid">
+
+
+                <!-- Brand -->
+
+                <div class="about-footer-brand">
+
+                    <a href="../index.html"
+                       class="about-brand">
+
+                        <span class="about-brand-logo">
+
+                            <i class="fa-solid fa-scissors"></i>
+
+                        </span>
+
+                        <span class="about-brand-name">
+
+                            <strong>The Beauty</strong>
+
+                            <small>Salon</small>
+
+                        </span>
+
+                    </a>
+
+
+                    <p>
+
+                        Premium unisex beauty and hair
+                        care in Baramati, Maharashtra.
+
+                    </p>
+
+
+                    <div class="about-footer-socials">
+
+                        <a href="#"
+                           aria-label="Instagram">
+
+                            <i class="fa-brands fa-instagram"></i>
+
+                        </a>
+
+                        <a href="#"
+                           aria-label="Facebook">
+
+                            <i class="fa-brands fa-facebook-f"></i>
+
+                        </a>
+
+                        <a href="https://wa.me/918793465001"
+                           aria-label="WhatsApp">
+
+                            <i class="fa-brands fa-whatsapp"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Quick Links -->
+
+                <div class="about-footer-column">
+
+                    <h3>
+                        Quick Links
+                    </h3>
+
+                    <a href="../index.html">
+                        Home
+                    </a>
+
+                    <a href="about.html">
+                        About
+                    </a>
+
+                    <a href="services.html">
+                        Services
+                    </a>
+
+                    <a href="branches.html">
+                        Branches
+                    </a>
+
+                    <a href="gallery.html">
+                        Gallery
+                    </a>
+
+                </div>
+
+
+
+                <!-- Customer -->
+
+                <div class="about-footer-column">
+
+                    <h3>
+                        Customer
+                    </h3>
+
+                    <a href="booking.html">
+                        Book Appointment
+                    </a>
+
+                    <a href="login.html">
+                        Customer Login
+                    </a>
+
+                    <a href="register.html">
+                        Create Account
+                    </a>
+
+                    <a href="contact.html">
+                        Contact Us
+                    </a>
+
+                </div>
+
+
+
+                <!-- Contact -->
+
+                <div class="about-footer-column about-footer-contact">
+
+                    <h3>
+                        Contact
+                    </h3>
+
+
+                    <p>
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+                        <span>
+                            Near Mahanagar Bank,
+                            in front of Shayog Society,
+                            Baramati, Maharashtra.
+                        </span>
+
+                    </p>
+
+
+                    <a href="tel:+918793465001">
+
+                        <i class="fa-solid fa-phone"></i>
+
+                        <span>
+                            +91 8793465001
+                        </span>
+
+                    </a>
+
+
+                    <a href="tel:+918087646512">
+
+                        <i class="fa-solid fa-phone"></i>
+
+                        <span>
+                            +91 8087646512
+                        </span>
+
+                    </a>
+
+
+                    <a href="mailto:beautysalon@gamil.com">
+
+                        <i class="fa-regular fa-envelope"></i>
+
+                        <span>
+                            beautysalon@gamil.com
+                        </span>
+
+                    </a>
+
+
+                    <span>
+
+                        <i class="fa-regular fa-clock"></i>
+
+                        <span>
+                            Mon – Sun: 9:00 AM – 9:00 PM
+                        </span>
+
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Footer Bottom -->
+
+            <div class="about-footer-bottom">
+
+                <p>
+
+                    © <span id="aboutCurrentYear"></span>
+                    The Beauty Salon.
+                    All rights reserved.
+
+                </p>
+
+
+                <div class="about-footer-legal">
+
+                    <a href="#">
+                        Privacy Policy
+                    </a>
+
+                    <a href="#">
+                        Terms & Conditions
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- =========================================================
+         JAVASCRIPT
+    ========================================================== -->
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                /* =================================================
+                   CUSTOMER SESSION / BOOKING PROTECTION
+                ================================================= */
+
+                const sessionKeys = [
+                    "salon_customer_session"
+                ];
+
+                function getCustomerSession() {
+                    try {
+                        const raw =
+                            localStorage.getItem("salon_customer_session") ||
+                            sessionStorage.getItem("salon_customer_session");
+
+                        if (!raw) return null;
+
+                        const session = JSON.parse(raw);
+
+                        if (!session || !session.token) return null;
+
+                        return session;
+                    } catch (error) {
+                        return null;
+                    }
+                }
+
+                const customerSession = getCustomerSession();
+
+                const customerLoginBtn =
+                    document.getElementById(
+                        "aboutCustomerLoginBtn"
+                    );
+
+                const accountWrap =
+                    document.getElementById(
+                        "aboutAccountWrap"
+                    );
+
+                const accountBtn =
+                    document.getElementById(
+                        "aboutAccountBtn"
+                    );
+
+                const accountDropdown =
+                    document.getElementById(
+                        "aboutAccountDropdown"
+                    );
+
+                const accountName =
+                    document.getElementById(
+                        "aboutAccountName"
+                    );
+
+                const logoutBtn =
+                    document.getElementById("aboutLogoutBtn");
+
+                const mobileLogin =
+                    document.getElementById("aboutMobileCustomerLogin");
+
+                const mobileAccountLinks =
+                    document.getElementById("aboutMobileAccountLinks");
+
+                const mobileLogout =
+                    document.getElementById("aboutMobileLogout");
+
+
+                if (customerSession) {
+
+                    if (customerLoginBtn) {
+                        customerLoginBtn.style.display = "none";
+                    }
+
+                    if (accountWrap) {
+                        accountWrap.style.display = "inline-flex";
+                    }
+
+                    if (mobileLogin) mobileLogin.style.display = "none";
+                    if (mobileAccountLinks) mobileAccountLinks.style.display = "block";
+
+                    const customer =
+                        customerSession.customer ||
+                        JSON.parse(
+                            localStorage.getItem("salon_customer") ||
+                            sessionStorage.getItem("salon_customer") ||
+                            "null"
+                        );
+
+                    if (
+                        accountName &&
+                        customer &&
+                        (customer.name || customer.fullName)
+                    ) {
+                        accountName.textContent =
+                            customer.name || customer.fullName;
+                    }
+
+                }
+
+                function logoutCustomer() {
+                    localStorage.removeItem("salon_customer_session");
+                    sessionStorage.removeItem("salon_customer_session");
+                    localStorage.removeItem("salon_customer");
+                    sessionStorage.removeItem("salon_customer");
+                    window.location.href = "../index.html";
+                }
+
+                if (logoutBtn) logoutBtn.addEventListener("click", logoutCustomer);
+                if (mobileLogout) {
+                    mobileLogout.addEventListener("click", function(event) {
+                        event.preventDefault();
+                        logoutCustomer();
+                    });
+                }
+
+
+                if (accountBtn && accountDropdown) {
+
+                    accountBtn.addEventListener(
+                        "click",
+                        function (event) {
+
+                            event.stopPropagation();
+
+                            const isOpen =
+                                accountDropdown.classList.toggle("open");
+
+                            accountBtn.setAttribute(
+                                "aria-expanded",
+                                String(isOpen)
+                            );
+
+                        }
+                    );
+
+                    document.addEventListener(
+                        "click",
+                        function () {
+
+                            accountDropdown.classList.remove("open");
+
+                            accountBtn.setAttribute(
+                                "aria-expanded",
+                                "false"
+                            );
+
+                        }
+                    );
+
+                }
+
+
+                const menuBtn =
+                    document.getElementById(
+                        "aboutMenuBtn"
+                    );
+
+                const closeBtn =
+                    document.getElementById(
+                        "aboutCloseMenuBtn"
+                    );
+
+                const mobileMenu =
+                    document.getElementById(
+                        "aboutMobileMenu"
+                    );
+
+                const currentYear =
+                    document.getElementById(
+                        "aboutCurrentYear"
+                    );
+
+
+                /* =================================================
+                   YEAR
+                ================================================= */
+
+                if (currentYear) {
+
+                    currentYear.textContent =
+                        new Date().getFullYear();
+
+                }
+
+
+                /* =================================================
+                   OPEN MOBILE MENU
+                ================================================= */
+
+                function openMenu() {
+
+                    mobileMenu.classList.add("open");
+
+                    mobileMenu.setAttribute(
+                        "aria-hidden",
+                        "false"
+                    );
+
+                    menuBtn.setAttribute(
+                        "aria-expanded",
+                        "true"
+                    );
+
+                    document.body.style.overflow =
+                        "hidden";
+
+                }
+
+
+                /* =================================================
+                   CLOSE MOBILE MENU
+                ================================================= */
+
+                function closeMenu() {
+
+                    mobileMenu.classList.remove("open");
+
+                    mobileMenu.setAttribute(
+                        "aria-hidden",
+                        "true"
+                    );
+
+                    menuBtn.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
+
+                    document.body.style.overflow =
+                        "";
+
+                }
+
+
+                menuBtn.addEventListener(
+                    "click",
+                    openMenu
+                );
+
+
+                closeBtn.addEventListener(
+                    "click",
+                    closeMenu
+                );
+
+
+                /* Close after navigation */
+
+                document
+                    .querySelectorAll(
+                        ".about-mobile-links a"
+                    )
+                    .forEach(function (link) {
+
+                        link.addEventListener(
+                            "click",
+                            closeMenu
+                        );
+
+                    });
+
+
+                /* Escape */
+
+                document.addEventListener(
+                    "keydown",
+                    function (event) {
+
+                        if (
+                            event.key === "Escape"
+                        ) {
+
+                            closeMenu();
+
+                        }
+
+                    }
+                );
+
+
+                /* Resize */
+
+                window.addEventListener(
+                    "resize",
+                    function () {
+
+                        if (
+                            window.innerWidth >= 768
+                        ) {
+
+                            closeMenu();
+
+                        }
+
+                    }
+                );
+
+            }
+        );
+
+    </script>
+
+</body>
+</html>

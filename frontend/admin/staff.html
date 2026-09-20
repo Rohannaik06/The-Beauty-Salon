@@ -1,0 +1,3316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Staff Management | The Beauty Salon Admin</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            min-height: 100%;
+            overflow-x: hidden;
+            scrollbar-width: none;
+        }
+
+        html::-webkit-scrollbar,
+        body::-webkit-scrollbar,
+        *::-webkit-scrollbar {
+            display: none;
+        }
+
+        body {
+            font-family: "DM Sans", sans-serif;
+            background: #0b0b0b;
+            color: #fff;
+        }
+
+        button,
+        input,
+        select {
+            font-family: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .admin-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 78px;
+            background: #101010;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 28px;
+            z-index: 1000;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            min-width: 0;
+        }
+
+        .admin-logo {
+            width: 46px;
+            height: 46px;
+            min-width: 46px;
+            border-radius: 50%;
+            border: 1px solid #d4af37;
+            color: #d4af37;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 19px;
+        }
+
+        .brand-area {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.1;
+        }
+
+        .brand-name {
+            font-family: "Playfair Display", serif;
+            font-size: 19px;
+            color: #fff;
+        }
+
+        .brand-admin {
+            color: #d4af37;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-top: 4px;
+        }
+
+        .page-title {
+            margin-left: 28px;
+            padding-left: 28px;
+            border-left: 1px solid #333;
+            font-size: 16px;
+            font-weight: 600;
+            color: #ddd;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+        }
+
+        .notification-btn {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #333;
+            border-radius: 50%;
+            background: #151515;
+            color: #ddd;
+            position: relative;
+        }
+
+        .notification-btn:hover {
+            color: #d4af37;
+            border-color: #d4af37;
+        }
+
+        .notification-dot {
+            position: absolute;
+            top: 7px;
+            right: 7px;
+            width: 7px;
+            height: 7px;
+            background: #d4af37;
+            border-radius: 50%;
+        }
+
+        .admin-profile {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+        }
+
+        .profile-avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: #d4af37;
+            color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .profile-text strong {
+            display: block;
+            font-size: 13px;
+        }
+
+        .profile-text span {
+            display: block;
+            color: #888;
+            font-size: 11px;
+            margin-top: 2px;
+        }
+
+        /* =========================
+           MOBILE BUTTON
+        ========================= */
+
+        .mobile-menu-btn {
+            display: none;
+            width: 42px;
+            height: 42px;
+            border: 1px solid #333;
+            background: #151515;
+            color: #d4af37;
+            border-radius: 8px;
+            font-size: 18px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* =========================
+           SIDEBAR
+        ========================= */
+
+        .admin-sidebar {
+            position: fixed;
+            left: 0;
+            top: 78px;
+            width: 245px;
+            height: calc(100vh - 78px);
+            background: #101010;
+            border-right: 1px solid #252525;
+            padding: 20px 12px;
+            z-index: 900;
+            transition: width 0.25s ease;
+        }
+
+        .sidebar-toggle {
+            position: absolute;
+            right: -13px;
+            top: 22px;
+            width: 27px;
+            height: 27px;
+            border-radius: 50%;
+            border: 1px solid #444;
+            background: #181818;
+            color: #d4af37;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .sidebar-toggle:hover {
+            border-color: #d4af37;
+        }
+
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .sidebar-link {
+            height: 45px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 0 14px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #999;
+            font-size: 13px;
+            white-space: nowrap;
+            overflow: hidden;
+            transition: 0.2s;
+        }
+
+        .sidebar-link i {
+            width: 19px;
+            min-width: 19px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .sidebar-link:hover {
+            color: #fff;
+            background: #181818;
+        }
+
+        .sidebar-link.active {
+            color: #d4af37;
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        .sidebar-link.logout {
+            margin-top: 15px;
+            color: #b66;
+        }
+
+        .sidebar-link.logout:hover {
+            color: #ff7777;
+            background: rgba(255, 70, 70, 0.08);
+        }
+
+        /* =========================
+           COLLAPSED SIDEBAR
+        ========================= */
+
+        .admin-sidebar.collapsed {
+            width: 76px;
+        }
+
+        .admin-sidebar.collapsed .sidebar-link {
+            justify-content: center;
+            padding: 0;
+            gap: 0;
+        }
+
+        .admin-sidebar.collapsed .sidebar-link span {
+            display: none;
+        }
+
+        .admin-sidebar.collapsed .sidebar-toggle i {
+            transform: rotate(180deg);
+        }
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .admin-main {
+            margin-left: 245px;
+            padding: 108px 30px 40px;
+            min-height: 100vh;
+            transition: margin-left 0.25s ease;
+        }
+
+        .admin-sidebar.collapsed ~ .admin-main {
+            margin-left: 76px;
+        }
+
+        /* =========================
+           PAGE HEADING
+        ========================= */
+
+        .content-heading {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 26px;
+        }
+
+        .heading-text h1 {
+            font-family: "Playfair Display", serif;
+            font-size: 31px;
+            margin-bottom: 7px;
+        }
+
+        .heading-text p {
+            color: #888;
+            font-size: 13px;
+        }
+
+        .add-staff-btn {
+            border: none;
+            background: #d4af37;
+            color: #000;
+            padding: 12px 18px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .add-staff-btn:hover {
+            background: #e5c65a;
+        }
+
+        /* =========================
+           SUMMARY
+        ========================= */
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 22px;
+        }
+
+        .summary-card {
+            background: #111;
+            border: 1px solid #292929;
+            border-radius: 12px;
+            padding: 19px;
+        }
+
+        .summary-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .summary-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 9px;
+            background: rgba(212, 175, 55, 0.1);
+            color: #d4af37;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .summary-card h3 {
+            font-size: 25px;
+            margin-top: 13px;
+        }
+
+        .summary-card p {
+            color: #888;
+            font-size: 12px;
+            margin-top: 3px;
+        }
+
+        /* =========================
+           FILTERS
+        ========================= */
+
+        .filter-box {
+            background: #111;
+            border: 1px solid #292929;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 18px;
+        }
+
+        .filter-row {
+            display: grid;
+            grid-template-columns: minmax(220px, 1fr) 190px 190px;
+            gap: 12px;
+        }
+
+        .search-box {
+            position: relative;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #777;
+            font-size: 13px;
+        }
+
+        .search-box input,
+        .filter-select {
+            width: 100%;
+            height: 44px;
+            border: 1px solid #303030;
+            background: #181818;
+            color: #ddd;
+            border-radius: 8px;
+            outline: none;
+            padding: 0 13px;
+            font-size: 12px;
+        }
+
+        .search-box input {
+            padding-left: 38px;
+        }
+
+        .search-box input:focus,
+        .filter-select:focus {
+            border-color: #d4af37;
+        }
+
+        .filter-select option {
+            background: #111;
+        }
+
+        /* =========================
+           TABLE
+        ========================= */
+
+        .table-card {
+            background: #111;
+            border: 1px solid #292929;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .table-header {
+            padding: 17px 19px;
+            border-bottom: 1px solid #252525;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .table-header h2 {
+            font-size: 15px;
+        }
+
+        .table-header span {
+            color: #777;
+            font-size: 11px;
+        }
+
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .table-wrapper::-webkit-scrollbar {
+            display: none;
+        }
+
+        table {
+            width: 100%;
+            min-width: 1050px;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-align: left;
+            padding: 13px 18px;
+            background: #151515;
+            color: #777;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.7px;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 15px 18px;
+            border-top: 1px solid #222;
+            font-size: 12px;
+            color: #ccc;
+            vertical-align: middle;
+        }
+
+        tbody tr:hover {
+            background: #141414;
+        }
+
+        /* =========================
+           STAFF CELL
+        ========================= */
+
+        .staff-cell {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+        }
+
+        .staff-avatar {
+            width: 37px;
+            height: 37px;
+            border-radius: 50%;
+            background: #222;
+            border: 1px solid #3a3a3a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #d4af37;
+            font-weight: 700;
+            font-size: 11px;
+        }
+
+        .staff-info strong {
+            display: block;
+            color: #eee;
+            font-size: 12px;
+        }
+
+        .staff-info span {
+            display: block;
+            color: #777;
+            font-size: 10px;
+            margin-top: 3px;
+        }
+
+        .role {
+            color: #d4af37;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .specialization {
+            color: #aaa;
+            font-size: 11px;
+        }
+
+        .status {
+            display: inline-flex;
+            align-items: center;
+            padding: 5px 9px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .status.active {
+            color: #73d69a;
+            background: rgba(60, 180, 100, 0.1);
+        }
+
+        .status.inactive {
+            color: #999;
+            background: rgba(150, 150, 150, 0.1);
+        }
+
+        .action-group {
+            display: flex;
+            gap: 6px;
+        }
+
+        .action-btn {
+            width: 31px;
+            height: 31px;
+            border-radius: 7px;
+            border: 1px solid #333;
+            background: #181818;
+            color: #aaa;
+        }
+
+        .action-btn:hover {
+            border-color: #d4af37;
+            color: #d4af37;
+        }
+
+        .action-btn.delete:hover {
+            border-color: #c75c5c;
+            color: #ff7777;
+        }
+
+        /* =========================
+           MODAL
+        ========================= */
+
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.78);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            z-index: 2000;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .modal {
+            width: min(600px, 100%);
+            max-height: 90vh;
+            overflow-y: auto;
+            scrollbar-width: none;
+            background: #111;
+            border: 1px solid #333;
+            border-radius: 14px;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.6);
+        }
+
+        .modal::-webkit-scrollbar {
+            display: none;
+        }
+
+        .modal-header {
+            padding: 18px 20px;
+            border-bottom: 1px solid #292929;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .modal-header h3 {
+            font-family: "Playfair Display", serif;
+            font-size: 20px;
+        }
+
+        .modal-close {
+            width: 34px;
+            height: 34px;
+            border: 1px solid #333;
+            border-radius: 7px;
+            background: #181818;
+            color: #aaa;
+        }
+
+        .modal-close:hover {
+            color: #d4af37;
+            border-color: #d4af37;
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        /* =========================
+           STAFF DETAIL
+        ========================= */
+
+        .staff-detail-head {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #292929;
+        }
+
+        .large-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #222;
+            border: 1px solid #d4af37;
+            color: #d4af37;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .staff-detail-head h4 {
+            font-size: 17px;
+        }
+
+        .staff-detail-head p {
+            color: #888;
+            font-size: 11px;
+            margin-top: 4px;
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-top: 20px;
+        }
+
+        .detail-item {
+            background: #181818;
+            border: 1px solid #252525;
+            border-radius: 8px;
+            padding: 13px;
+        }
+
+        .detail-item.full {
+            grid-column: 1 / -1;
+        }
+
+        .detail-item label {
+            display: block;
+            color: #777;
+            font-size: 10px;
+            margin-bottom: 5px;
+        }
+
+        .detail-item strong {
+            font-size: 12px;
+            color: #ddd;
+        }
+
+        /* =========================
+           FORM
+        ========================= */
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            display: block;
+            color: #aaa;
+            font-size: 11px;
+            margin-bottom: 6px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            height: 42px;
+            border: 1px solid #333;
+            background: #181818;
+            color: #ddd;
+            border-radius: 7px;
+            padding: 0 12px;
+            outline: none;
+            font-size: 12px;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #d4af37;
+        }
+
+        .modal-footer {
+            padding: 16px 20px;
+            border-top: 1px solid #292929;
+            display: flex;
+            justify-content: flex-end;
+            gap: 9px;
+        }
+
+        .modal-btn {
+            padding: 10px 15px;
+            border-radius: 7px;
+            border: 1px solid #333;
+            background: #181818;
+            color: #ccc;
+            font-size: 12px;
+        }
+
+        .modal-btn.primary {
+            border-color: #d4af37;
+            background: #d4af37;
+            color: #000;
+            font-weight: 700;
+        }
+
+        /* =========================
+           MOBILE OVERLAY
+        ========================= */
+
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            inset: 78px 0 0 0;
+            background: rgba(0, 0, 0, 0.65);
+            z-index: 850;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 1100px) {
+
+            .summary-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .filter-row {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .search-box {
+                grid-column: 1 / -1;
+            }
+        }
+
+        @media (max-width: 767px) {
+
+            .admin-header {
+                height: 70px;
+                padding: 0 14px;
+            }
+
+            .admin-logo {
+                width: 40px;
+                height: 40px;
+                min-width: 40px;
+                font-size: 16px;
+            }
+
+            .brand-name {
+                font-size: 16px;
+            }
+
+            .brand-admin {
+                font-size: 8px;
+                letter-spacing: 1.5px;
+            }
+
+            .page-title {
+                display: none;
+            }
+
+            .header-right {
+                gap: 8px;
+            }
+
+            .notification-btn {
+                width: 36px;
+                height: 36px;
+            }
+
+            .profile-text {
+                display: none;
+            }
+
+            .profile-avatar {
+                width: 36px;
+                height: 36px;
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            .admin-sidebar {
+                top: 70px;
+                height: calc(100vh - 70px);
+                width: 255px;
+                transform: translateX(-100%);
+                transition: transform 0.25s ease;
+                z-index: 950;
+            }
+
+            .admin-sidebar.mobile-open {
+                transform: translateX(0);
+            }
+
+            .admin-sidebar.collapsed {
+                width: 255px;
+            }
+
+            .admin-sidebar.collapsed .sidebar-link {
+                justify-content: flex-start;
+                padding: 0 14px;
+                gap: 14px;
+            }
+
+            .admin-sidebar.collapsed .sidebar-link span {
+                display: inline;
+            }
+
+            .admin-sidebar.collapsed .sidebar-toggle i {
+                transform: none;
+            }
+
+            .sidebar-toggle {
+                right: 12px;
+                top: 15px;
+            }
+
+            .sidebar-overlay {
+                inset: 70px 0 0 0;
+            }
+
+            .sidebar-overlay.show {
+                display: block;
+            }
+
+            .admin-main,
+            .admin-sidebar.collapsed ~ .admin-main {
+                margin-left: 0;
+                padding: 94px 14px 30px;
+            }
+
+            .content-heading {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .heading-text h1 {
+                font-size: 27px;
+            }
+
+            .add-staff-btn {
+                width: 100%;
+            }
+
+            .summary-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+
+            .summary-card {
+                padding: 14px;
+            }
+
+            .summary-card h3 {
+                font-size: 21px;
+            }
+
+            .filter-row {
+                grid-template-columns: 1fr;
+            }
+
+            .search-box {
+                grid-column: auto;
+            }
+
+            .detail-grid,
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .detail-item.full,
+            .form-group.full {
+                grid-column: auto;
+            }
+        }
+
+        @media (max-width: 420px) {
+
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header-left {
+                gap: 9px;
+            }
+
+            .brand-name {
+                font-size: 15px;
+            }
+
+            .notification-btn {
+                display: none;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- =====================================================
+         ADMIN HEADER
+    ====================================================== -->
+
+    <header class="admin-header">
+
+        <div class="header-left">
+
+            <button
+                class="mobile-menu-btn"
+                id="mobileMenuBtn"
+                aria-label="Open Menu"
+            >
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <div class="admin-logo">
+                <i class="fa-solid fa-scissors"></i>
+            </div>
+
+            <div class="brand-area">
+                <div class="brand-name">The Beauty</div>
+                <div class="brand-admin">SALON ADMIN</div>
+            </div>
+
+            <div class="page-title">
+                Staff
+            </div>
+
+        </div>
+
+        <div class="header-right">
+
+            <button class="notification-btn" title="Notifications">
+                <i class="fa-regular fa-bell"></i>
+                <span class="notification-dot"></span>
+            </button>
+
+            <div class="admin-profile">
+
+                <div class="profile-avatar">
+                    A
+                </div>
+
+                <div class="profile-text">
+                    <strong>Administrator</strong>
+                    <span>Admin Account</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="admin-sidebar" id="adminSidebar">
+
+        <button
+            class="sidebar-toggle"
+            id="sidebarToggle"
+            title="Collapse Sidebar"
+        >
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+
+        <nav class="sidebar-nav">
+
+            <a href="dashboard.html" class="sidebar-link">
+                <i class="fa-solid fa-chart-line"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="branches.html" class="sidebar-link">
+                <i class="fa-solid fa-code-branch"></i>
+                <span>Branches</span>
+            </a>
+
+            <a href="services.html" class="sidebar-link">
+                <i class="fa-solid fa-scissors"></i>
+                <span>Services</span>
+            </a>
+
+            <a href="bookings.html" class="sidebar-link">
+                <i class="fa-regular fa-calendar-check"></i>
+                <span>Bookings</span>
+            </a>
+
+            <a href="customers.html" class="sidebar-link">
+                <i class="fa-solid fa-users"></i>
+                <span>Customers</span>
+            </a>
+
+            <a href="staff.html" class="sidebar-link active">
+                <i class="fa-solid fa-user-tie"></i>
+                <span>Staff</span>
+            </a>
+
+            <a href="gallery.html" class="sidebar-link">
+                <i class="fa-regular fa-images"></i>
+                <span>Gallery</span>
+            </a>
+
+            <a href="offers.html" class="sidebar-link">
+                <i class="fa-solid fa-tags"></i>
+                <span>Offers</span>
+            </a>
+
+            <a href="settings.html" class="sidebar-link">
+                <i class="fa-solid fa-gear"></i>
+                <span>Settings</span>
+            </a>
+
+            <a href="../index.html" class="sidebar-link">
+                <i class="fa-solid fa-globe"></i>
+                <span>View Website</span>
+            </a>
+
+            <a href="../login.html" class="sidebar-link logout">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </a>
+
+        </nav>
+
+    </aside>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="admin-main">
+
+        <div class="content-heading">
+
+            <div class="heading-text">
+
+                <h1>Staff Management</h1>
+
+                <p>
+                    Manage salon professionals, roles and working information.
+                </p>
+
+            </div>
+
+            <button
+                class="add-staff-btn"
+                id="addStaffBtn"
+            >
+                <i class="fa-solid fa-plus"></i>
+                Add Staff
+            </button>
+
+        </div>
+
+
+        <!-- =================================================
+             SUMMARY
+        ================================================== -->
+
+        <section class="summary-grid">
+
+            <div class="summary-card">
+
+                <div class="summary-top">
+
+                    <div>
+                        <h3>18</h3>
+                        <p>Total Staff</p>
+                    </div>
+
+                    <div class="summary-icon">
+                        <i class="fa-solid fa-user-tie"></i>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-top">
+
+                    <div>
+                        <h3>16</h3>
+                        <p>Active Staff</p>
+                    </div>
+
+                    <div class="summary-icon">
+                        <i class="fa-solid fa-user-check"></i>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-top">
+
+                    <div>
+                        <h3>2</h3>
+                        <p>Inactive Staff</p>
+                    </div>
+
+                    <div class="summary-icon">
+                        <i class="fa-solid fa-user-clock"></i>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-top">
+
+                    <div>
+                        <h3>9</h3>
+                        <p>Hair & Beauty Experts</p>
+                    </div>
+
+                    <div class="summary-icon">
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             FILTERS
+        ================================================== -->
+
+        <section class="filter-box">
+
+            <div class="filter-row">
+
+                <div class="search-box">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input
+                        type="text"
+                        id="staffSearch"
+                        placeholder="Search staff by name, phone or specialization..."
+                    >
+
+                </div>
+
+
+                <select
+                    class="filter-select"
+                    id="branchFilter"
+                >
+
+                    <option value="all">
+                        All Branches
+                    </option>
+
+                    <option value="Baramati">
+                        Baramati
+                    </option>
+
+                    <option value="Baramati MIDC">
+                        Baramati MIDC
+                    </option>
+
+                </select>
+
+
+                <select
+                    class="filter-select"
+                    id="roleFilter"
+                >
+
+                    <option value="all">
+                        All Roles
+                    </option>
+
+                    <option value="Hair Stylist">
+                        Hair Stylist
+                    </option>
+
+                    <option value="Beautician">
+                        Beautician
+                    </option>
+
+                    <option value="Barber">
+                        Barber
+                    </option>
+
+                    <option value="Receptionist">
+                        Receptionist
+                    </option>
+
+                </select>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             STAFF TABLE
+        ================================================== -->
+
+        <section class="table-card">
+
+            <div class="table-header">
+
+                <h2>Staff List</h2>
+
+                <span id="staffCount">
+                    Showing 8 staff members
+                </span>
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Staff Member</th>
+                            <th>Role</th>
+                            <th>Specialization</th>
+                            <th>Branch</th>
+                            <th>Bookings</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="staffTableBody">
+
+                        <!--
+                            DUMMY DATA
+                            Replace with backend/API data later.
+                        -->
+
+
+                        <tr
+                            data-name="Rahul Patil"
+                            data-phone="+91 9876543210"
+                            data-email="rahul.patil@beautysalon.com"
+                            data-role="Hair Stylist"
+                            data-specialization="Hair Styling"
+                            data-branch="Baramati"
+                            data-bookings="42"
+                            data-status="Active"
+                            data-hours="9:00 AM - 6:00 PM"
+                            data-joined="10 Jan 2026"
+                        >
+
+                            <td>
+
+                                <div class="staff-cell">
+
+                                    <div class="staff-avatar">
+                                        RP
+                                    </div>
+
+                                    <div class="staff-info">
+                                        <strong>Rahul Patil</strong>
+                                        <span>#STF1008</span>
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+                                <span class="role">
+                                    Hair Stylist
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="specialization">
+                                    Hair Styling
+                                </span>
+                            </td>
+
+                            <td>
+                                Baramati
+                            </td>
+
+                            <td>
+                                42
+                            </td>
+
+                            <td>
+                                <span class="status active">
+                                    Active
+                                </span>
+                            </td>
+
+                            <td>
+
+                                <div class="action-group">
+
+                                    <button
+                                        class="action-btn view-btn"
+                                        title="View"
+                                    >
+                                        <i class="fa-regular fa-eye"></i>
+                                    </button>
+
+                                    <button
+                                        class="action-btn edit-btn"
+                                        title="Edit"
+                                    >
+                                        <i class="fa-solid fa-pen"></i>
+                                    </button>
+
+                                    <button
+                                        class="action-btn delete delete-btn"
+                                        title="Delete"
+                                    >
+                                        <i class="fa-regular fa-trash-can"></i>
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr
+                            data-name="Sneha Jadhav"
+                            data-phone="+91 9822456712"
+                            data-email="sneha.jadhav@beautysalon.com"
+                            data-role="Beautician"
+                            data-specialization="Facial & Skin Care"
+                            data-branch="Baramati"
+                            data-bookings="38"
+                            data-status="Active"
+                            data-hours="10:00 AM - 7:00 PM"
+                            data-joined="15 Jan 2026"
+                        >
+
+                            <td>
+
+                                <div class="staff-cell">
+
+                                    <div class="staff-avatar">
+                                        SJ
+                                    </div>
+
+                                    <div class="staff-info">
+                                        <strong>Sneha Jadhav</strong>
+                                        <span>#STF1007</span>
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+                                <span class="role">
+                                    Beautician
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="specialization">
+                                    Facial & Skin Care
+                                </span>
+                            </td>
+
+                            <td>
+                                Baramati
+                            </td>
+
+                            <td>
+                                38
+                            </td>
+
+                            <td>
+                                <span class="status active">
+                                    Active
+                                </span>
+                            </td>
+
+                            <td>
+
+                                <div class="action-group">
+
+                                    <button class="action-btn view-btn" title="View">
+                                        <i class="fa-regular fa-eye"></i>
+                                    </button>
+
+                                    <button class="action-btn edit-btn" title="Edit">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </button>
+
+                                    <button class="action-btn delete delete-btn" title="Delete">
+                                        <i class="fa-regular fa-trash-can"></i>
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr
+                            data-name="Amit More"
+                            data-phone="+91 9765432187"
+                            data-email="amit.more@beautysalon.com"
+                            data-role="Barber"
+                            data-specialization="Beard & Grooming"
+                            data-branch="Baramati"
+                            data-bookings="35"
+                            data-status="Active"
+                            data-hours="9:00 AM - 6:00 PM"
+                            data-joined="20 Jan 2026"
+                        >
+
+                            <td>
+
+                                <div class="staff-cell">
+
+                                    <div class="staff-avatar">
+                                        AM
+                                    </div>
+
+                                    <div class="staff-info">
+                                        <strong>Amit More</strong>
+                                        <span>#STF1006</span>
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+                                <span class="role">
+                                    Barber
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="specialization">
+                                    Beard & Grooming
+                                </span>
+                            </td>
+
+                            <td>
+                                Baramati
+                            </td>
+
+                            <td>
+                                35
+                            </td>
+
+                            <td>
+                                <span class="status active">
+                                    Active
+                                </span>
+                            </td>
+
+                            <td>
+
+                                <div class="action-group">
+
+                                    <button class="action-btn view-btn" title="View">
+                                        <i class="fa-regular fa-eye"></i>
+                                    </button>
+
+                                    <button class="action-btn edit-btn" title="Edit">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </button>
+
+                                    <button class="action-btn delete delete-btn" title="Delete">
+                                        <i class="fa-regular fa-trash-can"></i>
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr
+                            data-name="Pooja Shinde"
+                            data-phone="+91 9898981212"
+                            data-email="pooja.shinde@beautysalon.com"
+                            data-role="Beautician"
+                            data-specialization="Hair Spa & Facial"
+                            data-branch="Baramati"
+                            data-bookings="31"
+                            data-status="Active"
+                            data-hours="11:00 AM - 8:00 PM"
+                            data-joined="05 Feb 2026"
+                        >
+
+                            <td>
+
+                                <div class="staff-cell">
+
+                                    <div class="staff-avatar">
+                                        PS
+                                    </div>
+
+                                    <div class="staff-info">
+                                        <strong>Pooja Shinde</strong>
+                                        <span>#STF1005</span>
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+                                <span class="role">
+                                    Beautician
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="specialization">
+                                    Hair Spa & Facial
+                                </span>
+                            </td>
+
+                            <td>
+                                Baramati
+                            </td>
+
+                            <td>
+                                31
+                            </td>
+
+                            <td>
+                                <span class="status active">
+                                    Active
+                                </span>
+                            </td>
+
+                            <td>
+
+                                <div class="action-group">
+
+                                    <button class="action-btn view-btn" title="View">
+                                        <i class="fa-regular fa-eye"></i>
+                                    </button>
+
+                                    <button class="action-btn edit-btn" title="Edit">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </button>
+
+                                    <button class="action-btn delete delete-btn" title="Delete">
+                                        <i class="fa-regular fa-trash-can"></i>
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr
+                            data-name="Vikas Pawar"
+                            data-phone="+91 9011223344"
+                            data-email="vikas.pawar@beautysalon.com"
+                            data-role="Hair Stylist"
+                            data-specialization="Hair Cut & Styling"
+                            data-branch="Baramati MIDC"
+                            data-bookings="27"
+                            data-status="Active"
+                            data-hours="9:00 AM - 6:00 PM"
+                            data-joined="12 Mar 2026"
+                        >
+
+                            <td>
+
+                                <div class="staff-cell">
+
+                                    <div class="staff-avatar">
+                                        VP
+                                    </div>
+
+                                    <div class="staff-info">
+                                        <strong>Vikas Pawar</strong>
+                                        <span>#STF1004</span>
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+                                <span class="role">
+                                    Hair Stylist
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="specialization">
+                                    Hair Cut & Styling
+                                </span>
+                            </td>
+
+                            <td>
+                                Baramati MIDC
+                            </td>
+
+                            <td>
+                                27
+                            </td>
+
+                            <td>
+                                <span class="status active">
+                                    Active
+                                </span>
+                            </td>
+
+                            <td>
+
+                                <div class="action-group">
+
+                                    <button class="action-btn view-btn" title="View">
+                                        <i class="fa-regular fa-eye"></i>
+                                    </button>
+
+                                    <button class="action-btn edit-btn" title="Edit">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </button>
+
+                                    <button class="action-btn delete delete-btn" title="Delete">
+                                        <i class="fa-regular fa-trash-can"></i>
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr
+                            data-name="Neha Kulkarni"
+                            data-phone="+91 9123456780"
+                            data-email="neha.kulkarni@beautysalon.com"
+                            data-role="Beautician"
+                            data-specialization="Makeup & Beauty"
+                            data-branch="Baramati MIDC"
+                            data-bookings="24"
+                            data-status="Active"
+                            data-hours="10:00 AM - 7:00 PM"
+                            data-joined="22 Apr 2026"
+                        >
+
+                            <td>
+
+                                <div class="staff-cell">
+
+                                    <div class="staff-avatar">
+                                        NK
+                                    </div>
+
+                                    <div class="staff-info">
+                                        <strong>Neha Kulkarni</strong>
+                                        <span>#STF1003</span>
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+                                <span class="role">
+                                    Beautician
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="specialization">
+                                    Makeup & Beauty
+                                </span>
+                            </td>
+
+                            <td>
+                                Baramati MIDC
+                            </td>
+
+                            <td>
+                                24
+                            </td>
+
+                            <td>
+                                <span class="status active">
+                                    Active
+                                </span>
+                            </td>
+
+                            <td>
+
+                                <div class="action-group">
+
+                                    <button class="action-btn view-btn" title="View">
+                                        <i class="fa-regular fa-eye"></i>
+                                    </button>
+
+                                    <button class="action-btn edit-btn" title="Edit">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </button>
+
+                                    <button class="action-btn delete delete-btn" title="Delete">
+                                        <i class="fa-regular fa-trash-can"></i>
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr
+                            data-name="Akash Jagtap"
+                            data-phone="+91 9345678901"
+                            data-email="akash.jagtap@beautysalon.com"
+                            data-role="Receptionist"
+                            data-specialization="Front Desk"
+                            data-branch="Baramati"
+                            data-bookings="0"
+                            data-status="Active"
+                            data-hours="9:00 AM - 6:00 PM"
+                            data-joined="01 Jun 2026"
+                        >
+
+                            <td>
+
+                                <div class="staff-cell">
+
+                                    <div class="staff-avatar">
+                                        AJ
+                                    </div>
+
+                                    <div class="staff-info">
+                                        <strong>Akash Jagtap</strong>
+                                        <span>#STF1002</span>
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+                                <span class="role">
+                                    Receptionist
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="specialization">
+                                    Front Desk
+                                </span>
+                            </td>
+
+                            <td>
+                                Baramati
+                            </td>
+
+                            <td>
+                                0
+                            </td>
+
+                            <td>
+                                <span class="status active">
+                                    Active
+                                </span>
+                            </td>
+
+                            <td>
+
+                                <div class="action-group">
+
+                                    <button class="action-btn view-btn" title="View">
+                                        <i class="fa-regular fa-eye"></i>
+                                    </button>
+
+                                    <button class="action-btn edit-btn" title="Edit">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </button>
+
+                                    <button class="action-btn delete delete-btn" title="Delete">
+                                        <i class="fa-regular fa-trash-can"></i>
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr
+                            data-name="Kiran Deshmukh"
+                            data-phone="+91 9567890123"
+                            data-email="kiran.deshmukh@beautysalon.com"
+                            data-role="Hair Stylist"
+                            data-specialization="Hair Treatment"
+                            data-branch="Baramati MIDC"
+                            data-bookings="18"
+                            data-status="Inactive"
+                            data-hours="10:00 AM - 7:00 PM"
+                            data-joined="15 Jul 2026"
+                        >
+
+                            <td>
+
+                                <div class="staff-cell">
+
+                                    <div class="staff-avatar">
+                                        KD
+                                    </div>
+
+                                    <div class="staff-info">
+                                        <strong>Kiran Deshmukh</strong>
+                                        <span>#STF1001</span>
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+                                <span class="role">
+                                    Hair Stylist
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="specialization">
+                                    Hair Treatment
+                                </span>
+                            </td>
+
+                            <td>
+                                Baramati MIDC
+                            </td>
+
+                            <td>
+                                18
+                            </td>
+
+                            <td>
+                                <span class="status inactive">
+                                    Inactive
+                                </span>
+                            </td>
+
+                            <td>
+
+                                <div class="action-group">
+
+                                    <button class="action-btn view-btn" title="View">
+                                        <i class="fa-regular fa-eye"></i>
+                                    </button>
+
+                                    <button class="action-btn edit-btn" title="Edit">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </button>
+
+                                    <button class="action-btn delete delete-btn" title="Delete">
+                                        <i class="fa-regular fa-trash-can"></i>
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         VIEW STAFF MODAL
+    ====================================================== -->
+
+    <div class="modal-overlay" id="viewModal">
+
+        <div class="modal">
+
+            <div class="modal-header">
+
+                <h3>Staff Details</h3>
+
+                <button
+                    class="modal-close"
+                    data-close="viewModal"
+                >
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+
+            </div>
+
+
+            <div class="modal-body">
+
+                <div class="staff-detail-head">
+
+                    <div
+                        class="large-avatar"
+                        id="viewAvatar"
+                    >
+                        RP
+                    </div>
+
+                    <div>
+
+                        <h4 id="viewName">
+                            Rahul Patil
+                        </h4>
+
+                        <p id="viewStaffId">
+                            #STF1008
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="detail-grid">
+
+                    <div class="detail-item">
+
+                        <label>Phone</label>
+
+                        <strong id="viewPhone">
+                            +91 9876543210
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail-item">
+
+                        <label>Email</label>
+
+                        <strong id="viewEmail">
+                            rahul.patil@beautysalon.com
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail-item">
+
+                        <label>Role</label>
+
+                        <strong id="viewRole">
+                            Hair Stylist
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail-item">
+
+                        <label>Branch</label>
+
+                        <strong id="viewBranch">
+                            Baramati
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail-item">
+
+                        <label>Specialization</label>
+
+                        <strong id="viewSpecialization">
+                            Hair Styling
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail-item">
+
+                        <label>Total Bookings</label>
+
+                        <strong id="viewBookings">
+                            42
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail-item">
+
+                        <label>Working Hours</label>
+
+                        <strong id="viewHours">
+                            9:00 AM - 6:00 PM
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail-item">
+
+                        <label>Status</label>
+
+                        <strong id="viewStatus">
+                            Active
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail-item">
+
+                        <label>Joined</label>
+
+                        <strong id="viewJoined">
+                            10 Jan 2026
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="modal-footer">
+
+                <button
+                    class="modal-btn"
+                    data-close="viewModal"
+                >
+                    Close
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         ADD / EDIT STAFF MODAL
+    ====================================================== -->
+
+    <div class="modal-overlay" id="formModal">
+
+        <div class="modal">
+
+            <div class="modal-header">
+
+                <h3 id="formTitle">
+                    Add Staff
+                </h3>
+
+                <button
+                    class="modal-close"
+                    data-close="formModal"
+                >
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+
+            </div>
+
+
+            <form id="staffForm">
+
+                <div class="modal-body">
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label>
+                                Full Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="staffName"
+                                placeholder="Enter staff name"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Phone Number
+                            </label>
+
+                            <input
+                                type="tel"
+                                id="staffPhone"
+                                placeholder="+91 XXXXX XXXXX"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group full">
+
+                            <label>
+                                Email Address
+                            </label>
+
+                            <input
+                                type="email"
+                                id="staffEmail"
+                                placeholder="staff@beautysalon.com"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Role
+                            </label>
+
+                            <select id="staffRole">
+
+                                <option value="Hair Stylist">
+                                    Hair Stylist
+                                </option>
+
+                                <option value="Beautician">
+                                    Beautician
+                                </option>
+
+                                <option value="Barber">
+                                    Barber
+                                </option>
+
+                                <option value="Receptionist">
+                                    Receptionist
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Specialization
+                            </label>
+
+                            <input
+                                type="text"
+                                id="staffSpecialization"
+                                placeholder="Hair Styling"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Branch
+                            </label>
+
+                            <select id="staffBranch">
+
+                                <option value="Baramati">
+                                    Baramati
+                                </option>
+
+                                <option value="Baramati MIDC">
+                                    Baramati MIDC
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Status
+                            </label>
+
+                            <select id="staffStatus">
+
+                                <option value="Active">
+                                    Active
+                                </option>
+
+                                <option value="Inactive">
+                                    Inactive
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="modal-footer">
+
+                    <button
+                        type="button"
+                        class="modal-btn"
+                        data-close="formModal"
+                    >
+                        Cancel
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="modal-btn primary"
+                    >
+                        Save Staff
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                const sidebar =
+                    document.getElementById("adminSidebar");
+
+                const sidebarToggle =
+                    document.getElementById("sidebarToggle");
+
+                const mobileMenuBtn =
+                    document.getElementById("mobileMenuBtn");
+
+                const sidebarOverlay =
+                    document.getElementById("sidebarOverlay");
+
+                const searchInput =
+                    document.getElementById("staffSearch");
+
+                const branchFilter =
+                    document.getElementById("branchFilter");
+
+                const roleFilter =
+                    document.getElementById("roleFilter");
+
+                const tableBody =
+                    document.getElementById("staffTableBody");
+
+                const staffCount =
+                    document.getElementById("staffCount");
+
+                const viewModal =
+                    document.getElementById("viewModal");
+
+                const formModal =
+                    document.getElementById("formModal");
+
+                const addStaffBtn =
+                    document.getElementById("addStaffBtn");
+
+                const staffForm =
+                    document.getElementById("staffForm");
+
+                let editingRow = null;
+
+
+                /* ==========================================
+                   SIDEBAR COLLAPSE
+                ========================================== */
+
+                sidebarToggle.addEventListener(
+                    "click",
+                    function () {
+
+                        if (window.innerWidth <= 767) {
+
+                            sidebar.classList.remove(
+                                "mobile-open"
+                            );
+
+                            sidebarOverlay.classList.remove(
+                                "show"
+                            );
+
+                            return;
+                        }
+
+                        sidebar.classList.toggle(
+                            "collapsed"
+                        );
+
+                    }
+                );
+
+
+                /* ==========================================
+                   MOBILE MENU
+                ========================================== */
+
+                mobileMenuBtn.addEventListener(
+                    "click",
+                    function () {
+
+                        sidebar.classList.add(
+                            "mobile-open"
+                        );
+
+                        sidebarOverlay.classList.add(
+                            "show"
+                        );
+
+                    }
+                );
+
+
+                sidebarOverlay.addEventListener(
+                    "click",
+                    function () {
+
+                        sidebar.classList.remove(
+                            "mobile-open"
+                        );
+
+                        sidebarOverlay.classList.remove(
+                            "show"
+                        );
+
+                    }
+                );
+
+
+                document
+                    .querySelectorAll(".sidebar-link")
+                    .forEach(function (link) {
+
+                        link.addEventListener(
+                            "click",
+                            function () {
+
+                                if (
+                                    window.innerWidth <= 767
+                                ) {
+
+                                    sidebar.classList.remove(
+                                        "mobile-open"
+                                    );
+
+                                    sidebarOverlay.classList.remove(
+                                        "show"
+                                    );
+
+                                }
+
+                            }
+                        );
+
+                    });
+
+
+                /* ==========================================
+                   FILTER STAFF
+                ========================================== */
+
+                function filterStaff() {
+
+                    const searchValue =
+                        searchInput.value
+                            .trim()
+                            .toLowerCase();
+
+                    const selectedBranch =
+                        branchFilter.value;
+
+                    const selectedRole =
+                        roleFilter.value;
+
+                    const rows =
+                        tableBody.querySelectorAll("tr");
+
+                    let visibleCount = 0;
+
+
+                    rows.forEach(function (row) {
+
+                        const name =
+                            row.dataset.name.toLowerCase();
+
+                        const phone =
+                            row.dataset.phone.toLowerCase();
+
+                        const specialization =
+                            row.dataset.specialization
+                                .toLowerCase();
+
+                        const branch =
+                            row.dataset.branch;
+
+                        const role =
+                            row.dataset.role;
+
+
+                        const matchesSearch =
+                            name.includes(searchValue) ||
+                            phone.includes(searchValue) ||
+                            specialization.includes(searchValue);
+
+                        const matchesBranch =
+                            selectedBranch === "all" ||
+                            branch === selectedBranch;
+
+                        const matchesRole =
+                            selectedRole === "all" ||
+                            role === selectedRole;
+
+
+                        if (
+                            matchesSearch &&
+                            matchesBranch &&
+                            matchesRole
+                        ) {
+
+                            row.style.display = "";
+                            visibleCount++;
+
+                        } else {
+
+                            row.style.display = "none";
+
+                        }
+
+                    });
+
+
+                    staffCount.textContent =
+                        "Showing " +
+                        visibleCount +
+                        " staff members";
+
+                }
+
+
+                searchInput.addEventListener(
+                    "input",
+                    filterStaff
+                );
+
+                branchFilter.addEventListener(
+                    "change",
+                    filterStaff
+                );
+
+                roleFilter.addEventListener(
+                    "change",
+                    filterStaff
+                );
+
+
+                /* ==========================================
+                   VIEW STAFF
+                ========================================== */
+
+                function openViewModal(row) {
+
+                    const firstCell =
+                        row.querySelector("td");
+
+                    const staffId =
+                        firstCell
+                            .querySelector("span")
+                            .textContent;
+
+
+                    const name =
+                        row.dataset.name;
+
+                    const initials =
+                        name
+                            .split(" ")
+                            .map(word => word[0])
+                            .join("")
+                            .substring(0, 2)
+                            .toUpperCase();
+
+
+                    document.getElementById(
+                        "viewAvatar"
+                    ).textContent = initials;
+
+                    document.getElementById(
+                        "viewName"
+                    ).textContent = name;
+
+                    document.getElementById(
+                        "viewStaffId"
+                    ).textContent = staffId;
+
+                    document.getElementById(
+                        "viewPhone"
+                    ).textContent =
+                        row.dataset.phone;
+
+                    document.getElementById(
+                        "viewEmail"
+                    ).textContent =
+                        row.dataset.email;
+
+                    document.getElementById(
+                        "viewRole"
+                    ).textContent =
+                        row.dataset.role;
+
+                    document.getElementById(
+                        "viewSpecialization"
+                    ).textContent =
+                        row.dataset.specialization;
+
+                    document.getElementById(
+                        "viewBranch"
+                    ).textContent =
+                        row.dataset.branch;
+
+                    document.getElementById(
+                        "viewBookings"
+                    ).textContent =
+                        row.dataset.bookings;
+
+                    document.getElementById(
+                        "viewHours"
+                    ).textContent =
+                        row.dataset.hours;
+
+                    document.getElementById(
+                        "viewStatus"
+                    ).textContent =
+                        row.dataset.status;
+
+                    document.getElementById(
+                        "viewJoined"
+                    ).textContent =
+                        row.dataset.joined;
+
+
+                    viewModal.classList.add("show");
+
+                }
+
+
+                /* ==========================================
+                   EDIT STAFF
+                ========================================== */
+
+                function openEditModal(row) {
+
+                    editingRow = row;
+
+                    document.getElementById(
+                        "formTitle"
+                    ).textContent =
+                        "Edit Staff";
+
+
+                    document.getElementById(
+                        "staffName"
+                    ).value =
+                        row.dataset.name;
+
+                    document.getElementById(
+                        "staffPhone"
+                    ).value =
+                        row.dataset.phone;
+
+                    document.getElementById(
+                        "staffEmail"
+                    ).value =
+                        row.dataset.email;
+
+                    document.getElementById(
+                        "staffRole"
+                    ).value =
+                        row.dataset.role;
+
+                    document.getElementById(
+                        "staffSpecialization"
+                    ).value =
+                        row.dataset.specialization;
+
+                    document.getElementById(
+                        "staffBranch"
+                    ).value =
+                        row.dataset.branch;
+
+                    document.getElementById(
+                        "staffStatus"
+                    ).value =
+                        row.dataset.status;
+
+
+                    formModal.classList.add("show");
+
+                }
+
+
+                /* ==========================================
+                   TABLE ACTIONS
+                ========================================== */
+
+                function attachRowActions() {
+
+                    document
+                        .querySelectorAll(".view-btn")
+                        .forEach(function (button) {
+
+                            button.onclick =
+                                function () {
+
+                                    openViewModal(
+                                        button.closest("tr")
+                                    );
+
+                                };
+
+                        });
+
+
+                    document
+                        .querySelectorAll(".edit-btn")
+                        .forEach(function (button) {
+
+                            button.onclick =
+                                function () {
+
+                                    openEditModal(
+                                        button.closest("tr")
+                                    );
+
+                                };
+
+                        });
+
+
+                    document
+                        .querySelectorAll(".delete-btn")
+                        .forEach(function (button) {
+
+                            button.onclick =
+                                function () {
+
+                                    const row =
+                                        button.closest("tr");
+
+                                    const name =
+                                        row.dataset.name;
+
+
+                                    const confirmed =
+                                        confirm(
+                                            "Delete staff member " +
+                                            name +
+                                            "?"
+                                        );
+
+
+                                    if (confirmed) {
+
+                                        row.remove();
+
+                                        filterStaff();
+
+                                    }
+
+                                };
+
+                        });
+
+                }
+
+
+                attachRowActions();
+
+
+                /* ==========================================
+                   ADD STAFF
+                ========================================== */
+
+                addStaffBtn.addEventListener(
+                    "click",
+                    function () {
+
+                        editingRow = null;
+
+                        staffForm.reset();
+
+                        document.getElementById(
+                            "formTitle"
+                        ).textContent =
+                            "Add Staff";
+
+                        formModal.classList.add(
+                            "show"
+                        );
+
+                    }
+                );
+
+
+                /* ==========================================
+                   SAVE STAFF
+                ========================================== */
+
+                staffForm.addEventListener(
+                    "submit",
+                    function (event) {
+
+                        event.preventDefault();
+
+
+                        const name =
+                            document.getElementById(
+                                "staffName"
+                            ).value.trim();
+
+                        const phone =
+                            document.getElementById(
+                                "staffPhone"
+                            ).value.trim();
+
+                        const email =
+                            document.getElementById(
+                                "staffEmail"
+                            ).value.trim();
+
+                        const role =
+                            document.getElementById(
+                                "staffRole"
+                            ).value;
+
+                        const specialization =
+                            document.getElementById(
+                                "staffSpecialization"
+                            ).value.trim();
+
+                        const branch =
+                            document.getElementById(
+                                "staffBranch"
+                            ).value;
+
+                        const status =
+                            document.getElementById(
+                                "staffStatus"
+                            ).value;
+
+
+                        if (
+                            !name ||
+                            !phone ||
+                            !email ||
+                            !specialization
+                        ) {
+
+                            alert(
+                                "Please fill all required fields."
+                            );
+
+                            return;
+
+                        }
+
+
+                        if (editingRow) {
+
+                            editingRow.dataset.name =
+                                name;
+
+                            editingRow.dataset.phone =
+                                phone;
+
+                            editingRow.dataset.email =
+                                email;
+
+                            editingRow.dataset.role =
+                                role;
+
+                            editingRow.dataset.specialization =
+                                specialization;
+
+                            editingRow.dataset.branch =
+                                branch;
+
+                            editingRow.dataset.status =
+                                status;
+
+
+                            const initials =
+                                name
+                                    .split(" ")
+                                    .map(
+                                        word => word[0]
+                                    )
+                                    .join("")
+                                    .substring(0, 2)
+                                    .toUpperCase();
+
+
+                            editingRow.querySelector(
+                                ".staff-avatar"
+                            ).textContent =
+                                initials;
+
+
+                            editingRow.querySelector(
+                                ".staff-info strong"
+                            ).textContent =
+                                name;
+
+
+                            const cells =
+                                editingRow.querySelectorAll(
+                                    "td"
+                                );
+
+
+                            cells[1].innerHTML =
+                                '<span class="role">' +
+                                role +
+                                "</span>";
+
+
+                            cells[2].innerHTML =
+                                '<span class="specialization">' +
+                                specialization +
+                                "</span>";
+
+
+                            cells[3].textContent =
+                                branch;
+
+
+                            cells[5].innerHTML =
+                                '<span class="status ' +
+                                (
+                                    status === "Active"
+                                        ? "active"
+                                        : "inactive"
+                                ) +
+                                '">' +
+                                status +
+                                "</span>";
+
+
+                        } else {
+
+                            const newId =
+                                "STF" +
+                                (
+                                    1000 +
+                                    tableBody.children.length +
+                                    1
+                                );
+
+
+                            const initials =
+                                name
+                                    .split(" ")
+                                    .map(
+                                        word => word[0]
+                                    )
+                                    .join("")
+                                    .substring(0, 2)
+                                    .toUpperCase();
+
+
+                            const newRow =
+                                document.createElement(
+                                    "tr"
+                                );
+
+
+                            newRow.dataset.name =
+                                name;
+
+                            newRow.dataset.phone =
+                                phone;
+
+                            newRow.dataset.email =
+                                email;
+
+                            newRow.dataset.role =
+                                role;
+
+                            newRow.dataset.specialization =
+                                specialization;
+
+                            newRow.dataset.branch =
+                                branch;
+
+                            newRow.dataset.bookings =
+                                "0";
+
+                            newRow.dataset.status =
+                                status;
+
+                            newRow.dataset.hours =
+                                "9:00 AM - 6:00 PM";
+
+                            newRow.dataset.joined =
+                                "18 Sep 2026";
+
+
+                            newRow.innerHTML = `
+
+                                <td>
+
+                                    <div class="staff-cell">
+
+                                        <div class="staff-avatar">
+                                            ${initials}
+                                        </div>
+
+                                        <div class="staff-info">
+
+                                            <strong>
+                                                ${name}
+                                            </strong>
+
+                                            <span>
+                                                #${newId}
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+
+                                </td>
+
+
+                                <td>
+                                    <span class="role">
+                                        ${role}
+                                    </span>
+                                </td>
+
+
+                                <td>
+                                    <span class="specialization">
+                                        ${specialization}
+                                    </span>
+                                </td>
+
+
+                                <td>
+                                    ${branch}
+                                </td>
+
+
+                                <td>
+                                    0
+                                </td>
+
+
+                                <td>
+
+                                    <span class="status ${
+                                        status === "Active"
+                                            ? "active"
+                                            : "inactive"
+                                    }">
+
+                                        ${status}
+
+                                    </span>
+
+                                </td>
+
+
+                                <td>
+
+                                    <div class="action-group">
+
+                                        <button
+                                            class="action-btn view-btn"
+                                            title="View"
+                                        >
+                                            <i class="fa-regular fa-eye"></i>
+                                        </button>
+
+                                        <button
+                                            class="action-btn edit-btn"
+                                            title="Edit"
+                                        >
+                                            <i class="fa-solid fa-pen"></i>
+                                        </button>
+
+                                        <button
+                                            class="action-btn delete delete-btn"
+                                            title="Delete"
+                                        >
+                                            <i class="fa-regular fa-trash-can"></i>
+                                        </button>
+
+                                    </div>
+
+                                </td>
+
+                            `;
+
+
+                            tableBody.prepend(
+                                newRow
+                            );
+
+                            attachRowActions();
+
+                        }
+
+
+                        formModal.classList.remove(
+                            "show"
+                        );
+
+                        staffForm.reset();
+
+                        editingRow = null;
+
+                        filterStaff();
+
+                    }
+                );
+
+
+                /* ==========================================
+                   CLOSE MODALS
+                ========================================== */
+
+                document
+                    .querySelectorAll("[data-close]")
+                    .forEach(function (button) {
+
+                        button.addEventListener(
+                            "click",
+                            function () {
+
+                                const modalId =
+                                    button.dataset.close;
+
+                                document
+                                    .getElementById(modalId)
+                                    .classList.remove(
+                                        "show"
+                                    );
+
+                            }
+                        );
+
+                    });
+
+
+                document
+                    .querySelectorAll(".modal-overlay")
+                    .forEach(function (overlay) {
+
+                        overlay.addEventListener(
+                            "click",
+                            function (event) {
+
+                                if (
+                                    event.target === overlay
+                                ) {
+
+                                    overlay.classList.remove(
+                                        "show"
+                                    );
+
+                                }
+
+                            }
+                        );
+
+                    });
+
+
+                /* ==========================================
+                   ESCAPE
+                ========================================== */
+
+                document.addEventListener(
+                    "keydown",
+                    function (event) {
+
+                        if (event.key === "Escape") {
+
+                            viewModal.classList.remove(
+                                "show"
+                            );
+
+                            formModal.classList.remove(
+                                "show"
+                            );
+
+                            sidebar.classList.remove(
+                                "mobile-open"
+                            );
+
+                            sidebarOverlay.classList.remove(
+                                "show"
+                            );
+
+                        }
+
+                    }
+                );
+
+
+                /* ==========================================
+                   RESIZE
+                ========================================== */
+
+                window.addEventListener(
+                    "resize",
+                    function () {
+
+                        if (
+                            window.innerWidth > 767
+                        ) {
+
+                            sidebar.classList.remove(
+                                "mobile-open"
+                            );
+
+                            sidebarOverlay.classList.remove(
+                                "show"
+                            );
+
+                        }
+
+                    }
+                );
+
+            });
+
+    </script>
+
+</body>
+</html>

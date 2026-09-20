@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking History | The Beauty Salon</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        * { box-sizing: border-box; }
+        html, body { margin: 0; padding: 0; background: #080808; color: #fff; font-family: "DM Sans", sans-serif; }
+        body { min-height: 100vh; overflow-x: hidden; scrollbar-width: none; }
+        body::-webkit-scrollbar { display: none; }
+
+        .site-header {
+            position: sticky; top: 0; z-index: 1000;
+            background: rgba(8,8,8,.96);
+            border-bottom: 1px solid rgba(212,175,55,.22);
+            backdrop-filter: blur(12px);
+        }
+        .header-container {
+            width: min(1180px, calc(100% - 32px));
+            min-height: 76px; margin: auto;
+            display: flex; align-items: center; gap: 30px;
+        }
+        .site-brand {
+            display: flex; align-items: center; gap: 11px;
+            color: #fff; text-decoration: none; margin-right: auto;
+        }
+        .brand-logo {
+            width: 42px; height: 42px; display: grid; place-items: center;
+            border: 1px solid #D4AF37; border-radius: 50%; color: #D4AF37;
+        }
+        .brand-name { display: flex; flex-direction: column; line-height: 1; }
+        .brand-name strong { font-family: "Playfair Display", serif; font-size: 19px; }
+        .brand-name small { color: #D4AF37; font-size: 11px; letter-spacing: 2px; margin-top: 4px; }
+
+        .desktop-navigation { display: flex; gap: 24px; }
+        .desktop-navigation a {
+            color: #ccc; text-decoration: none; font-size: 13px; font-weight: 600;
+        }
+        .desktop-navigation a:hover, .desktop-navigation a.active { color: #D4AF37; }
+
+        .account-wrap { position: relative; }
+        .account-button {
+            min-height: 42px; padding: 0 15px; border: 1px solid #D4AF37;
+            border-radius: 8px; background: #D4AF37; color: #000;
+            display: flex; align-items: center; gap: 8px; cursor: pointer;
+            font: 700 13px "DM Sans", sans-serif;
+        }
+        .account-menu {
+            position: absolute; top: calc(100% + 10px); right: 0;
+            width: 225px; padding: 8px; background: #111;
+            border: 1px solid rgba(212,175,55,.3); border-radius: 10px;
+            box-shadow: 0 18px 45px rgba(0,0,0,.6); display: none;
+        }
+        .account-menu.show { display: block; }
+        .account-menu a, .logout-btn {
+            width: 100%; min-height: 42px; padding: 0 11px;
+            display: flex; align-items: center; gap: 10px;
+            border: 0; border-radius: 6px; background: transparent;
+            color: #ddd; text-decoration: none; font-size: 13px;
+            cursor: pointer; text-align: left;
+        }
+        .account-menu a:hover, .logout-btn:hover {
+            background: rgba(212,175,55,.1); color: #D4AF37;
+        }
+        .account-menu i { width: 17px; color: #D4AF37; text-align: center; }
+        .menu-divider { height: 1px; margin: 6px 3px; background: rgba(255,255,255,.08); }
+
+                .page-hero {
+            padding: 78px 20px 48px; text-align: center;
+            background: radial-gradient(circle at top, rgba(212,175,55,.12), transparent 48%);
+        }
+        .eyebrow { color: #D4AF37; font-size: 12px; font-weight: 700; letter-spacing: 2.5px; }
+        .page-hero h1 {
+            margin: 12px 0 10px; font: 600 clamp(34px, 5vw, 54px) "Playfair Display", serif;
+        }
+        .page-hero p { margin: 0 auto; max-width: 620px; color: #aaa; font-size: 14px; }
+
+        .container { width: min(1120px, calc(100% - 32px)); margin: auto; }
+        .content { padding: 15px 0 80px; }
+
+        .state {
+            padding: 55px 20px; text-align: center;
+            border: 1px solid rgba(212,175,55,.16); border-radius: 14px;
+            background: #101010; color: #aaa;
+        }
+        .state i { font-size: 30px; color: #D4AF37; margin-bottom: 14px; }
+        .state h2 { color: #fff; margin: 5px 0 8px; font-size: 21px; }
+        .state p { margin: 0 0 20px; }
+        .gold-btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            min-height: 43px; padding: 0 18px; border-radius: 7px;
+            background: #D4AF37; color: #000; text-decoration: none;
+            font-weight: 700; font-size: 13px;
+        }
+
+        .history-list { display: grid; gap: 16px; }
+        .booking-card {
+            background: #111; border: 1px solid rgba(212,175,55,.18);
+            border-radius: 14px; overflow: hidden;
+        }
+        .booking-head {
+            padding: 17px 20px; display: flex; align-items: center;
+            justify-content: space-between; gap: 15px;
+            border-bottom: 1px solid rgba(255,255,255,.07);
+        }
+        .booking-number { color: #D4AF37; font-weight: 700; font-size: 14px; }
+        .status {
+            padding: 6px 10px; border-radius: 20px; font-size: 11px;
+            font-weight: 700; letter-spacing: .5px;
+        }
+        .status-confirmed, .status-completed { color: #8ee7a4; background: rgba(80,190,100,.1); }
+        .status-cancelled { color: #ff9999; background: rgba(220,70,70,.1); }
+        .status-default { color: #D4AF37; background: rgba(212,175,55,.1); }
+
+        .booking-body {
+            padding: 20px; display: grid;
+            grid-template-columns: 1.2fr 1fr 1fr 1fr; gap: 20px;
+        }
+        .service-name { color: #fff; font-size: 18px; font-weight: 700; margin-bottom: 7px; }
+        .booking-price { color: #D4AF37; font-weight: 700; font-size: 18px; }
+        .label { color: #777; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
+        .value { color: #ddd; font-size: 13px; line-height: 1.5; }
+
+        .payment {
+            margin: 0 20px 18px; padding: 11px 13px;
+            border-radius: 7px; background: rgba(255,255,255,.035);
+            display: flex; flex-wrap: wrap; gap: 8px 22px; color: #aaa; font-size: 12px;
+        }
+        .payment strong { color: #ddd; }
+
+                @media (max-width: 900px) {
+                        .booking-body { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 600px) {
+            .header-container { min-height: 68px; width: min(100% - 22px, 1180px); }
+                        .page-hero { padding: 55px 16px 35px; }
+            .container { width: min(100% - 22px, 1120px); }
+            .booking-body { grid-template-columns: 1fr; gap: 14px; }
+            .booking-head { align-items: flex-start; flex-direction: column; }
+            .payment { margin-left: 14px; margin-right: 14px; }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="site-header">
+    <div class="header-container">
+        <a href="../index.html" class="site-brand">
+            <span class="brand-logo"><i class="fa-solid fa-scissors"></i></span>
+            <span class="brand-name">
+                <strong>The Beauty</strong>
+                <small>Salon</small>
+            </span>
+        </a>
+
+
+
+        <div class="account-wrap" id="accountWrap">
+            <button type="button" class="account-button" id="accountButton">
+                <i class="fa-regular fa-user"></i>
+                <span id="accountName">My Account</span>
+                <i class="fa-solid fa-chevron-down"></i>
+            </button>
+
+            <div class="account-menu" id="accountMenu">
+                <a href="profile.html"><i class="fa-regular fa-user"></i><span>My Profile</span></a>
+                <div class="menu-divider"></div>
+                <button type="button" class="logout-btn" id="logoutButton">
+                    <i class="fa-solid fa-right-from-bracket"></i><span>Logout</span>
+                </button>
+            </div>
+        </div>
+
+    </div>
+</header>
+
+
+<section class="page-hero">
+    <div class="eyebrow">CUSTOMER ACCOUNT</div>
+    <h1>Booking History</h1>
+    <p>View your previous and current salon bookings in one place.</p>
+</section>
+
+<main class="content">
+    <div class="container">
+
+        <div id="loadingState" class="state">
+            <i class="fa-solid fa-spinner fa-spin"></i>
+            <h2>Loading Booking History</h2>
+            <p>Please wait...</p>
+        </div>
+
+        <div id="loginState" class="state" style="display:none;">
+            <i class="fa-regular fa-user"></i>
+            <h2>Please Login</h2>
+            <p>Login to view your booking history.</p>
+            <a class="gold-btn" href="login.html">Customer Login</a>
+        </div>
+
+        <div id="errorState" class="state" style="display:none;">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <h2>Unable to Load History</h2>
+            <p id="errorMessage">Please try again.</p>
+            <button class="gold-btn" type="button" onclick="loadHistory()">Try Again</button>
+        </div>
+
+        <div id="emptyState" class="state" style="display:none;">
+            <i class="fa-regular fa-calendar-xmark"></i>
+            <h2>No Booking History</h2>
+            <p>You have not made any salon bookings yet.</p>
+            <a class="gold-btn" href="booking.html">Book Appointment</a>
+        </div>
+
+        <div id="historyList" class="history-list" style="display:none;"></div>
+    </div>
+</main>
+
+<script>
+(function () {
+    "use strict";
+
+    const API = "http://localhost:5000/api/bookings/my-appointments";
+
+    const loadingState = document.getElementById("loadingState");
+    const loginState = document.getElementById("loginState");
+    const errorState = document.getElementById("errorState");
+    const emptyState = document.getElementById("emptyState");
+    const historyList = document.getElementById("historyList");
+
+    function getSession() {
+        const raw =
+            localStorage.getItem("salon_customer_session") ||
+            sessionStorage.getItem("salon_customer_session");
+
+        if (!raw) return null;
+
+        try {
+            const session = JSON.parse(raw);
+            if (!session || !session.token) return null;
+            return session;
+        } catch (e) {
+            return null;
+        }
+    }
+
+    function clearSession() {
+        localStorage.removeItem("salon_customer_session");
+        sessionStorage.removeItem("salon_customer_session");
+        localStorage.removeItem("salon_customer");
+        sessionStorage.removeItem("salon_customer");
+    }
+
+    function formatDate(value) {
+        if (!value) return "-";
+        const text = String(value).trim();
+        const match = text.match(/^(\d{4})-(\d{2})-(\d{2})/);
+        if (!match) return text;
+
+        const y = Number(match[1]);
+        const m = Number(match[2]);
+        const d = Number(match[3]);
+
+        const months = ["Jan","Feb","Mar","Apr","May","Jun",
+                        "Jul","Aug","Sep","Oct","Nov","Dec"];
+
+        if (m < 1 || m > 12 || d < 1 || d > 31) return text;
+        return String(d).padStart(2, "0") + " " + months[m - 1] + " " + y;
+    }
+
+    function formatTime(value) {
+        if (!value) return "-";
+        const text = String(value).trim();
+
+        const match = text.match(/^(\d{1,2}):(\d{2})(?::\d{2})?$/);
+        if (!match) return text;
+
+        let hour = Number(match[1]);
+        const minute = match[2];
+        const suffix = hour >= 12 ? "PM" : "AM";
+
+        hour = hour % 12;
+        if (hour === 0) hour = 12;
+
+        return String(hour).padStart(2, "0") + ":" + minute + " " + suffix;
+    }
+
+    function money(value) {
+        const number = Number(value);
+        if (!Number.isFinite(number)) return "₹0";
+        return "₹" + number.toLocaleString("en-IN", {
+            maximumFractionDigits: 2
+        });
+    }
+
+    function safe(value) {
+        return String(value ?? "-")
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
+
+    function getStatusClass(status) {
+        const s = String(status || "").toUpperCase();
+        if (s === "CONFIRMED") return "status-confirmed";
+        if (s === "COMPLETED") return "status-completed";
+        if (s === "CANCELLED" || s === "CANCELED") return "status-cancelled";
+        return "status-default";
+    }
+
+    function getStatusText(status) {
+        return String(status || "UNKNOWN").replace(/_/g, " ");
+    }
+
+    function getBookingArray(data) {
+        if (Array.isArray(data)) return data;
+        if (Array.isArray(data.data)) return data.data;
+        if (Array.isArray(data.bookings)) return data.bookings;
+        if (Array.isArray(data.appointments)) return data.appointments;
+        if (data.data && Array.isArray(data.data.bookings)) return data.data.bookings;
+        return [];
+    }
+
+    function renderHistory(bookings) {
+        if (!bookings.length) {
+            emptyState.style.display = "block";
+            historyList.style.display = "none";
+            return;
+        }
+
+        historyList.innerHTML = bookings.map(function (booking) {
+            const bookingNumber =
+                booking.booking_number ||
+                booking.bookingNumber ||
+                booking.booking_id ||
+                booking.id ||
+                "-";
+
+            const service =
+                booking.service_name ||
+                booking.serviceName ||
+                (booking.service && booking.service.name) ||
+                "Salon Service";
+
+            const branch =
+                booking.branch_name ||
+                booking.branchName ||
+                (booking.branch && booking.branch.name) ||
+                "-";
+
+            const staff =
+                booking.staff_name ||
+                booking.staffName ||
+                (booking.staff && booking.staff.name) ||
+                "-";
+
+            const date =
+                booking.booking_date ||
+                booking.bookingDate ||
+                booking.date;
+
+            const time =
+                booking.booking_time ||
+                booking.bookingTime ||
+                booking.time;
+
+            const price =
+                booking.service_price ??
+                booking.servicePrice ??
+                booking.price ??
+                0;
+
+            const duration =
+                booking.service_duration ??
+                booking.serviceDuration ??
+                booking.duration;
+
+            const paymentMethod =
+                booking.payment_method ||
+                booking.paymentMethod ||
+                "PAY_AT_SALON";
+
+            const paymentStatus =
+                booking.payment_status ||
+                booking.paymentStatus ||
+                "PENDING";
+
+            const status =
+                booking.status ||
+                booking.booking_status ||
+                booking.bookingStatus ||
+                "UNKNOWN";
+
+            return `
+                <article class="booking-card">
+                    <div class="booking-head">
+                        <span class="booking-number">${safe(bookingNumber)}</span>
+                        <span class="status ${getStatusClass(status)}">
+                            ${safe(getStatusText(status))}
+                        </span>
+                    </div>
+
+                    <div class="booking-body">
+                        <div>
+                            <div class="label">Service</div>
+                            <div class="service-name">${safe(service)}</div>
+                            <div class="booking-price">${money(price)}</div>
+                        </div>
+
+                        <div>
+                            <div class="label">Date & Time</div>
+                            <div class="value">
+                                ${safe(formatDate(date))}<br>
+                                ${safe(formatTime(time))}
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="label">Branch</div>
+                            <div class="value">${safe(branch)}</div>
+                        </div>
+
+                        <div>
+                            <div class="label">Staff</div>
+                            <div class="value">${safe(staff)}</div>
+                            ${duration ? `<div class="value">${safe(duration)} minutes</div>` : ""}
+                        </div>
+                    </div>
+
+                    <div class="payment">
+                        <span>Payment: <strong>${safe(String(paymentMethod).replace(/_/g, " "))}</strong></span>
+                        <span>Payment Status: <strong>${safe(String(paymentStatus).replace(/_/g, " "))}</strong></span>
+                    </div>
+                </article>
+            `;
+        }).join("");
+
+        historyList.style.display = "grid";
+    }
+
+    window.loadHistory = async function () {
+        loadingState.style.display = "block";
+        loginState.style.display = "none";
+        errorState.style.display = "none";
+        emptyState.style.display = "none";
+        historyList.style.display = "none";
+
+        const session = getSession();
+
+        if (!session) {
+            loadingState.style.display = "none";
+            loginState.style.display = "block";
+            return;
+        }
+
+        try {
+            const response = await fetch(API, {
+                method: "GET",
+                headers: {
+                    "Authorization": "Bearer " + session.token,
+                    "Accept": "application/json"
+                }
+            });
+
+            let data = {};
+            try {
+                data = await response.json();
+            } catch (e) {}
+
+            if (response.status === 401) {
+                clearSession();
+                loadingState.style.display = "none";
+                loginState.style.display = "block";
+                return;
+            }
+
+            if (!response.ok) {
+                throw new Error(data.message || data.error || "Booking history could not be loaded.");
+            }
+
+            if (data.success === false) {
+                throw new Error(data.message || "Booking history could not be loaded.");
+            }
+
+            const bookings = getBookingArray(data);
+
+            loadingState.style.display = "none";
+            renderHistory(bookings);
+
+        } catch (error) {
+            console.error("Booking History Error:", error);
+            loadingState.style.display = "none";
+            errorState.style.display = "block";
+            document.getElementById("errorMessage").textContent =
+                error.message || "Unable to connect to the backend.";
+        }
+    };
+
+    function setupAccount() {
+        const session = getSession();
+
+        if (!session) {
+            window.location.href = "login.html";
+            return;
+        }
+
+        const customer = session.customer || {};
+        const stored = localStorage.getItem("salon_customer");
+        let storedCustomer = {};
+
+        if (stored) {
+            try { storedCustomer = JSON.parse(stored) || {}; } catch (e) {}
+        }
+
+        const name = customer.name || storedCustomer.name || "My Account";
+        document.getElementById("accountName").textContent =
+            name.length > 20 ? name.substring(0, 20) + "…" : name;
+    }
+
+    document.getElementById("accountButton").addEventListener("click", function (e) {
+        e.stopPropagation();
+        document.getElementById("accountMenu").classList.toggle("show");
+    });
+
+    document.addEventListener("click", function () {
+        document.getElementById("accountMenu").classList.remove("show");
+    });
+
+    document.getElementById("logoutButton").addEventListener("click", function () {
+        clearSession();
+        window.location.href = "../index.html";
+    });
+
+    setupAccount();
+    loadHistory();
+})();
+</script>
+
+</body>
+</html>

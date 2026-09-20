@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile | The Beauty Salon</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        :root{
+            --black:#080808;
+            --dark:#111111;
+            --card:#151515;
+            --gold:#D4AF37;
+            --gold-light:#E5C65A;
+            --white:#fff;
+            --gray:#aaa;
+            --border:rgba(212,175,55,.22);
+        }
+
+        *{box-sizing:border-box;margin:0;padding:0}
+        body{
+            min-height:100vh;
+            background:var(--black);
+            color:var(--white);
+            font-family:"DM Sans",sans-serif;
+        }
+        a{text-decoration:none;color:inherit}
+
+        .header{
+            height:76px;
+            border-bottom:1px solid var(--border);
+            background:#090909;
+            display:flex;
+            align-items:center;
+        }
+        .header-inner{
+            width:min(1180px,calc(100% - 32px));
+            margin:auto;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+        }
+        .brand{
+            display:flex;
+            align-items:center;
+            gap:12px;
+        }
+        .brand-icon{
+            width:42px;height:42px;
+            border:1px solid var(--gold);
+            border-radius:50%;
+            display:grid;
+            place-items:center;
+            color:var(--gold);
+        }
+        .brand-text strong{
+            display:block;
+            font-family:"Playfair Display",serif;
+            font-size:18px;
+        }
+        .brand-text span{
+            display:block;
+            color:var(--gold);
+            font-size:10px;
+            letter-spacing:3px;
+            text-transform:uppercase;
+        }
+        .back-link{
+            color:var(--gray);
+            font-size:14px;
+            transition:.2s;
+        }
+        .back-link:hover{color:var(--gold)}
+
+        .page{
+            width:min(900px,calc(100% - 30px));
+            margin:55px auto 80px;
+        }
+        .heading{text-align:center;margin-bottom:32px}
+        .heading small{
+            color:var(--gold);
+            letter-spacing:3px;
+            font-size:11px;
+            font-weight:700;
+        }
+        .heading h1{
+            font-family:"Playfair Display",serif;
+            font-size:42px;
+            margin:8px 0;
+        }
+        .heading h1 span{color:var(--gold)}
+        .heading p{color:var(--gray);font-size:14px}
+
+        .profile-card{
+            background:linear-gradient(145deg,#171717,#101010);
+            border:1px solid var(--border);
+            border-radius:18px;
+            padding:34px;
+            box-shadow:0 20px 60px rgba(0,0,0,.35);
+        }
+        .profile-top{
+            display:flex;
+            align-items:center;
+            gap:18px;
+            padding-bottom:26px;
+            margin-bottom:28px;
+            border-bottom:1px solid rgba(255,255,255,.08);
+        }
+        .avatar{
+            width:64px;height:64px;
+            border-radius:50%;
+            display:grid;
+            place-items:center;
+            background:rgba(212,175,55,.1);
+            border:1px solid var(--gold);
+            color:var(--gold);
+            font-size:24px;
+        }
+        .profile-top h2{font-size:20px}
+        .profile-top p{color:var(--gray);font-size:13px;margin-top:4px}
+
+        .form-grid{
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:20px;
+        }
+        .field label{
+            display:block;
+            color:#ddd;
+            font-size:13px;
+            margin-bottom:8px;
+            font-weight:600;
+        }
+        .field input{
+            width:100%;
+            height:48px;
+            padding:0 14px;
+            border:1px solid rgba(255,255,255,.12);
+            border-radius:9px;
+            background:#0c0c0c;
+            color:white;
+            outline:none;
+            font-family:inherit;
+            transition:.2s;
+        }
+        .field input:focus{
+            border-color:var(--gold);
+            box-shadow:0 0 0 3px rgba(212,175,55,.08);
+        }
+        .field input[readonly]{color:#999;cursor:not-allowed}
+
+        .actions{
+            display:flex;
+            justify-content:flex-end;
+            margin-top:28px;
+        }
+        .update-btn{
+            border:0;
+            background:linear-gradient(135deg,var(--gold),var(--gold-light));
+            color:#090909;
+            min-width:175px;
+            height:48px;
+            padding:0 22px;
+            border-radius:9px;
+            font-weight:700;
+            cursor:pointer;
+            font-family:inherit;
+            transition:.2s;
+        }
+        .update-btn:hover{transform:translateY(-1px);filter:brightness(1.06)}
+        .message{
+            display:none;
+            margin-top:18px;
+            padding:12px 14px;
+            border-radius:8px;
+            font-size:13px;
+        }
+        .message.success{
+            display:block;
+            color:#dff7df;
+            background:rgba(50,150,70,.12);
+            border:1px solid rgba(80,190,90,.25);
+        }
+        .message.error{
+            display:block;
+            color:#ffdede;
+            background:rgba(180,50,50,.12);
+            border:1px solid rgba(220,80,80,.25);
+        }
+
+
+        .account-wrap{position:relative}
+        .account-btn{
+            height:42px;
+            padding:0 15px;
+            border:1px solid rgba(212,175,55,.35);
+            border-radius:9px;
+            background:#111;
+            color:#fff;
+            display:flex;
+            align-items:center;
+            gap:9px;
+            cursor:pointer;
+            font-family:inherit;
+            font-size:13px;
+            font-weight:600;
+            transition:.2s;
+        }
+        .account-btn:hover{
+            border-color:var(--gold);
+            background:#151515;
+        }
+        .account-btn > i:first-child{color:var(--gold)}
+        .account-chevron{
+            font-size:10px;
+            color:#999;
+            transition:.2s;
+        }
+        .account-wrap.open .account-chevron{transform:rotate(180deg)}
+        .account-menu{
+            position:absolute;
+            top:calc(100% + 10px);
+            right:0;
+            width:190px;
+            padding:7px;
+            background:#151515;
+            border:1px solid var(--border);
+            border-radius:11px;
+            box-shadow:0 18px 45px rgba(0,0,0,.45);
+            display:none;
+            z-index:1000;
+        }
+        .account-wrap.open .account-menu{display:block}
+        .account-menu a,
+        .account-menu button{
+            width:100%;
+            min-height:40px;
+            padding:0 11px;
+            border:0;
+            background:transparent;
+            color:#eee;
+            border-radius:7px;
+            display:flex;
+            align-items:center;
+            gap:10px;
+            font-family:inherit;
+            font-size:13px;
+            text-align:left;
+            cursor:pointer;
+        }
+        .account-menu a:hover,
+        .account-menu button:hover{
+            background:rgba(212,175,55,.08);
+            color:var(--gold-light);
+        }
+        .account-menu i{
+            width:16px;
+            color:var(--gold);
+            text-align:center;
+        }
+        .menu-divider{
+            height:1px;
+            margin:6px 4px;
+            background:rgba(255,255,255,.08);
+        }
+
+        @media(max-width:650px){
+            .header{height:68px}
+            .header-inner{width:calc(100% - 24px)}
+            .account-btn{height:40px;padding:0 11px}
+            .account-btn span{display:none}
+            .page{margin-top:38px}
+            .heading h1{font-size:32px}
+            .profile-card{padding:23px 18px}
+            .form-grid{grid-template-columns:1fr}
+            .actions{justify-content:stretch}
+            .update-btn{width:100%}
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="header">
+    <div class="header-inner">
+        <a href="../index.html" class="brand">
+            <div class="brand-icon">
+                <i class="fa-solid fa-scissors"></i>
+            </div>
+            <div class="brand-text">
+                <strong>The Beauty</strong>
+                <span>Salon</span>
+            </div>
+        </a>
+
+        <div class="account-wrap">
+            <button class="account-btn" id="accountBtn" type="button">
+                <i class="fa-regular fa-user"></i>
+                <span id="accountName">Profile</span>
+                <i class="fa-solid fa-chevron-down account-chevron"></i>
+            </button>
+
+            <div class="account-menu" id="accountMenu">
+                <a href="profile.html">
+                    <i class="fa-regular fa-user"></i>
+                    My Profile
+                </a>
+                <div class="menu-divider"></div>
+                <button type="button" id="logoutBtn">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    Logout
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main class="page">
+
+    <div class="heading">
+        <small>MY ACCOUNT</small>
+        <h1>My <span>Profile</span></h1>
+        <p>View and update your personal information.</p>
+    </div>
+
+    <section class="profile-card">
+
+        <div class="profile-top">
+            <div class="avatar">
+                <i class="fa-regular fa-user"></i>
+            </div>
+            <div>
+                <h2 id="profileName">Customer</h2>
+                <p>Customer Account</p>
+            </div>
+        </div>
+
+        <form id="profileForm">
+
+            <div class="form-grid">
+
+                <div class="field">
+                    <label for="fullName">Full Name</label>
+                    <input id="fullName" type="text" autocomplete="name" required>
+                </div>
+
+                <div class="field">
+                    <label for="mobile">Mobile Number</label>
+                    <input id="mobile" type="text" readonly>
+                </div>
+
+                <div class="field">
+                    <label for="email">Email Address</label>
+                    <input id="email" type="email" autocomplete="email">
+                </div>
+
+            </div>
+
+            <div id="message" class="message"></div>
+
+            <div class="actions">
+                <button type="submit" class="update-btn">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                    Update Profile
+                </button>
+            </div>
+
+        </form>
+
+    </section>
+</main>
+
+<script>
+(function () {
+    const accountWrap = document.querySelector(".account-wrap");
+    const accountBtn = document.getElementById("accountBtn");
+    const accountName = document.getElementById("accountName");
+    const logoutBtn = document.getElementById("logoutBtn");
+
+    function getSession() {
+        try {
+            const raw =
+                localStorage.getItem("salon_customer_session") ||
+                sessionStorage.getItem("salon_customer_session");
+
+            if (!raw) return null;
+            return JSON.parse(raw);
+        } catch {
+            return null;
+        }
+    }
+
+    const accountSession = getSession();
+
+    if (!accountSession || !accountSession.token || !accountSession.customer) {
+        window.location.href = "login.html";
+        return;
+    }
+
+    accountName.textContent = accountSession.customer.name || "Profile";
+
+    accountBtn.addEventListener("click", function (event) {
+        event.stopPropagation();
+        accountWrap.classList.toggle("open");
+    });
+
+    document.addEventListener("click", function () {
+        accountWrap.classList.remove("open");
+    });
+
+    logoutBtn.addEventListener("click", function () {
+        localStorage.removeItem("salon_customer_session");
+        sessionStorage.removeItem("salon_customer_session");
+        localStorage.removeItem("salon_customer");
+        window.location.href = "../index.html";
+    });
+})();
+</script>
+
+<script>
+(function () {
+    const API = "http://localhost:5000/api";
+    const form = document.getElementById("profileForm");
+    const nameInput = document.getElementById("fullName");
+    const mobileInput = document.getElementById("mobile");
+    const emailInput = document.getElementById("email");
+    const profileName = document.getElementById("profileName");
+    const message = document.getElementById("message");
+
+    function getSession() {
+        try {
+            const raw =
+                localStorage.getItem("salon_customer_session") ||
+                sessionStorage.getItem("salon_customer_session");
+
+            if (!raw) return null;
+            return JSON.parse(raw);
+        } catch {
+            return null;
+        }
+    }
+
+    function showMessage(text, type) {
+        message.textContent = text;
+        message.className = "message " + type;
+    }
+
+    const session = getSession();
+
+    if (!session || !session.token || !session.customer) {
+        window.location.href = "login.html";
+        return;
+    }
+
+    const customer = session.customer;
+
+    nameInput.value = customer.name || "";
+    mobileInput.value = customer.phone || "";
+    emailInput.value = customer.email || "";
+    profileName.textContent = customer.name || "Customer";
+
+    form.addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        const updatedName = nameInput.value.trim();
+        const updatedEmail = emailInput.value.trim();
+
+        if (!updatedName) {
+            showMessage("Please enter your full name.", "error");
+            return;
+        }
+
+        try {
+            const response = await fetch(API + "/auth/profile", {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + session.token
+                },
+                body: JSON.stringify({
+                    fullName: updatedName,
+                    email: updatedEmail
+                })
+            });
+
+            const data = await response.json();
+
+            if (!response.ok || !data.success) {
+                throw new Error(data.message || "Unable to update profile.");
+            }
+
+            const updatedCustomer = data.customer;
+
+            session.customer = updatedCustomer;
+
+            const storage =
+                localStorage.getItem("salon_customer_session")
+                    ? localStorage
+                    : sessionStorage;
+
+            storage.setItem(
+                "salon_customer_session",
+                JSON.stringify(session)
+            );
+
+            localStorage.setItem(
+                "salon_customer",
+                JSON.stringify(updatedCustomer)
+            );
+
+            profileName.textContent = updatedCustomer.name || "Customer";
+            showMessage("Profile updated successfully.", "success");
+
+        } catch (error) {
+            showMessage(
+                error.message || "Unable to update profile.",
+                "error"
+            );
+        }
+    });
+})();
+</script>
+
+</body>
+</html>

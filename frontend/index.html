@@ -1,0 +1,2092 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="The Beauty Salon is a premium unisex beauty and hair salon in Baramati, Maharashtra. Explore services, branches and book your appointment.">
+
+    <meta name="keywords"
+          content="The Beauty Salon, Baramati salon, beauty salon Baramati, hair salon Baramati, unisex salon Baramati, salon appointment">
+
+    <meta name="author"
+          content="The Beauty Salon">
+
+    <meta name="theme-color"
+          content="#080808">
+
+    <meta name="robots"
+          content="index, follow">
+
+    <title>The Beauty Salon | Premium Unisex Salon in Baramati</title>
+
+
+    <!-- =========================================================
+         GOOGLE FONTS
+    ========================================================== -->
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+          rel="stylesheet">
+
+
+    <!-- =========================================================
+         FONT AWESOME
+    ========================================================== -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+    <!-- =========================================================
+         WEBSITE CSS
+    ========================================================== -->
+    <link rel="stylesheet"
+          href="css/style.css">
+
+    <link rel="stylesheet"
+          href="css/responsive.css">
+
+
+    <style>
+        .hero-logo-container{width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:28px;box-sizing:border-box;}
+        .hero-logo-image{display:block;width:min(100%,560px);max-height:100%;height:auto;object-fit:contain;filter:drop-shadow(0 18px 35px rgba(212,175,55,.12));}
+        @media (max-width:767px){.hero-logo-container{padding:18px;}.hero-logo-image{width:min(100%,420px);}}
+
+        .gallery-placeholder{position:relative;overflow:hidden;}
+        .gallery-placeholder img{width:100%;height:100%;display:block;object-fit:cover;}
+        .gallery-placeholder span{position:absolute;left:16px;bottom:14px;z-index:2;}
+        .gallery-placeholder::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 45%,rgba(0,0,0,.78));pointer-events:none;}
+    
+
+        /* TODAY'S OFFER - IMAGE ONLY / PROPER PROPORTION */
+/* HOME ABOUT LOGO */
+        .about-logo-image-wrap {
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            overflow:hidden;
+        }
+        .about-logo-image {
+            width:100%;
+            height:100%;
+            display:block;
+            object-fit:contain;
+            object-position:center;
+            padding:24px;
+            box-sizing:border-box;
+        }
+
+        /* TODAY'S OFFER - COMPACT, NO CROPPING */
+        .offer-section .offer-card {
+            min-height:0 !important;
+        }
+        .offer-section .offer-content {
+            width:100%;
+        }
+        @media (max-width:767px) {
+            .about-logo-image { padding:16px; }
+}
+
+
+        /* =========================================================
+           CUSTOMER ACCOUNT HEADER / DROPDOWN
+        ========================================================= */
+        .header-actions {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header-login {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            min-height: 42px;
+            padding: 0 16px;
+            border: 1px solid rgba(212,175,55,.42);
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: .2px;
+            transition: all .25s ease;
+            box-sizing: border-box;
+        }
+
+        .header-login {
+            color: #fff;
+            background: #111;
+            cursor: pointer;
+        }
+
+        .header-login:hover {
+            transform: translateY(-1px);
+            border-color: #D4AF37;
+            box-shadow: 0 8px 24px rgba(212,175,55,.12);
+        }
+
+
+        .admin-login-button { gap: 8px; }
+        .admin-login-button i { color: #D4AF37; }
+
+        .customer-account-chevron {
+            font-size: 9px;
+            margin-left: 2px;
+            transition: transform .2s ease;
+        }
+
+        .customer-account-dropdown {
+            position: absolute;
+            top: calc(100% + 10px);
+            right: 0;
+            width: 245px;
+            padding: 10px;
+            background: #111;
+            border: 1px solid rgba(212,175,55,.28);
+            border-radius: 14px;
+            box-shadow: 0 18px 45px rgba(0,0,0,.5);
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-6px);
+            transition: opacity .2s ease, transform .2s ease, visibility .2s ease;
+        }
+
+        .customer-account-dropdown.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .customer-account-heading {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 10px 12px;
+            color: #D4AF37;
+            font-size: 13px;
+            font-weight: 700;
+            border-bottom: 1px solid rgba(255,255,255,.08);
+            margin-bottom: 6px;
+        }
+
+        .customer-account-avatar {
+            width: 32px;
+            height: 32px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            color: #111;
+            background: #D4AF37;
+        }
+
+        .customer-account-dropdown a,
+        .customer-account-dropdown button {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            padding: 11px 10px;
+            border: 0;
+            border-radius: 9px;
+            background: transparent;
+            color: #ddd;
+            text-decoration: none;
+            font: inherit;
+            font-size: 13px;
+            text-align: left;
+            cursor: pointer;
+            box-sizing: border-box;
+        }
+
+        .customer-account-dropdown a:hover,
+        .customer-account-dropdown button:hover {
+            color: #D4AF37;
+            background: rgba(212,175,55,.08);
+        }
+
+        .customer-account-dropdown i {
+            width: 18px;
+            text-align: center;
+            color: #D4AF37;
+        }
+
+        .customer-account-divider {
+            height: 1px;
+            margin: 6px 4px;
+            background: rgba(255,255,255,.08);
+        }
+
+        .customer-account-dropdown button {
+            color: #f0f0f0;
+        }
+
+        .customer-account-dropdown button:hover {
+            color: #fff;
+            background: rgba(190,55,55,.16);
+        }
+
+        .customer-account-dropdown button:hover i {
+            color: #ff7777;
+        }
+
+        @media (max-width: 767px) {
+            .header-actions { display: none; }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- =========================================================
+         HEADER
+    ========================================================== -->
+
+    <header class="site-header"
+            id="siteHeader">
+
+        <div class="header-container">
+
+
+            <!-- BRAND -->
+
+            <a href="index.html"
+               class="site-brand"
+               aria-label="The Beauty Salon Home">
+
+                <span class="brand-logo">
+                    <i class="fa-solid fa-scissors"></i>
+                </span>
+
+                <span class="brand-name">
+
+                    <strong>The Beauty</strong>
+
+                    <small>Salon</small>
+
+                </span>
+
+            </a>
+
+
+            <!-- DESKTOP NAVIGATION -->
+
+            <nav class="desktop-navigation"
+                 aria-label="Primary navigation">
+
+                <a href="index.html"
+                   class="nav-link active"
+                   aria-current="page">
+                    Home
+                </a>
+
+                <a href="pages/about.html"
+                   class="nav-link">
+                    About
+                </a>
+
+                <a href="pages/services.html"
+                   class="nav-link">
+                    Services
+                </a>
+
+                <a href="pages/branches.html"
+                   class="nav-link">
+                    Branches
+                </a>
+
+                <a href="pages/gallery.html"
+                   class="nav-link">
+                    Gallery
+                </a>
+
+                <a href="pages/contact.html"
+                   class="nav-link">
+                    Contact
+                </a>
+
+            </nav>
+
+
+            <!-- HEADER ACTIONS -->
+
+            <div class="header-actions">
+
+                <!-- Admin Login -->
+                <a href="pages/admin-login.html"
+                   class="header-login admin-login-button"
+                   id="adminLoginButton">
+                    <i class="fa-solid fa-user-shield"></i>
+                    <span>Admin Login</span>
+                </a>
+
+                <!-- Customer Account -->
+                <a href="pages/login.html"
+                   class="header-login"
+                   id="customerAccountButton">
+                    <i class="fa-regular fa-user"></i>
+                    <span id="customerAccountText">Login</span>
+                    <i class="fa-solid fa-chevron-down customer-account-chevron" id="customerAccountChevron" aria-hidden="true"></i>
+                </a>
+
+                <div class="customer-account-dropdown" id="customerAccountDropdown" aria-hidden="true">
+                    <div class="customer-account-heading">
+                        <span class="customer-account-avatar"><i class="fa-regular fa-user"></i></span>
+                        <span>My Account</span>
+                    </div>
+                    <a href="pages/appointments.html"><i class="fa-regular fa-calendar-check"></i><span>My Appointments</span></a>
+                    <a href="pages/history.html"><i class="fa-solid fa-clock-rotate-left"></i><span>Booking History</span></a>
+                    <a href="pages/profile.html"><i class="fa-regular fa-id-card"></i><span>Update Profile</span></a>
+                    <div class="customer-account-divider"></div>
+                    <button type="button" id="customerLogoutButton"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></button>
+                </div>
+
+            </div>
+
+
+            <!-- MOBILE MENU BUTTON -->
+
+            <button class="mobile-menu-button"
+                    id="menuBtn"
+                    type="button"
+                    aria-label="Open navigation menu"
+                    aria-controls="mobileMenu"
+                    aria-expanded="false">
+
+                <i class="fa-solid fa-bars"></i>
+
+            </button>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =========================================================
+         MOBILE NAVIGATION
+    ========================================================== -->
+
+    <div class="mobile-navigation"
+         id="mobileMenu"
+         aria-hidden="true">
+
+
+        <div class="mobile-navigation-header">
+
+
+            <a href="index.html"
+               class="site-brand">
+
+                <span class="brand-logo">
+                    <i class="fa-solid fa-scissors"></i>
+                </span>
+
+                <span class="brand-name">
+
+                    <strong>The Beauty</strong>
+
+                    <small>Salon</small>
+
+                </span>
+
+            </a>
+
+
+            <button class="mobile-close-button"
+                    id="closeMenuBtn"
+                    type="button"
+                    aria-label="Close navigation menu">
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+
+        <nav class="mobile-navigation-links"
+             aria-label="Mobile navigation">
+
+
+            <a href="index.html"
+               class="mobile-nav-link active">
+
+                <i class="fa-solid fa-house"></i>
+
+                <span>Home</span>
+
+            </a>
+
+
+            <a href="pages/about.html"
+               class="mobile-nav-link">
+
+                <i class="fa-regular fa-circle-user"></i>
+
+                <span>About</span>
+
+            </a>
+
+
+            <a href="pages/services.html"
+               class="mobile-nav-link">
+
+                <i class="fa-solid fa-scissors"></i>
+
+                <span>Services</span>
+
+            </a>
+
+
+            <a href="pages/branches.html"
+               class="mobile-nav-link">
+
+                <i class="fa-solid fa-location-dot"></i>
+
+                <span>Branches</span>
+
+            </a>
+
+
+            <a href="pages/gallery.html"
+               class="mobile-nav-link">
+
+                <i class="fa-regular fa-images"></i>
+
+                <span>Gallery</span>
+
+            </a>
+
+
+            <a href="pages/contact.html"
+               class="mobile-nav-link">
+
+                <i class="fa-regular fa-envelope"></i>
+
+                <span>Contact</span>
+
+            </a>
+
+
+            <div class="mobile-navigation-divider"></div>
+
+            <a href="pages/admin-login.html"
+               class="mobile-nav-link"
+               id="mobileAdminLogin">
+                <i class="fa-solid fa-user-shield"></i>
+                <span>Admin Login</span>
+            </a>
+
+            <a href="pages/login.html"
+               class="mobile-nav-link"
+               id="mobileCustomerAccount">
+                <i class="fa-solid fa-right-to-bracket"></i>
+                <span id="mobileCustomerAccountText">Customer Login</span>
+            </a>
+
+        </nav>
+
+    </div>
+
+
+
+    <!-- =========================================================
+         MAIN CONTENT
+    ========================================================== -->
+
+    <main>
+
+
+        <!-- =====================================================
+             HERO
+        ====================================================== -->
+
+        <section class="hero-section">
+
+
+            <div class="hero-background-pattern"></div>
+
+
+            <div class="hero-container">
+
+
+                <!-- Hero Content -->
+
+                <div class="hero-content">
+
+
+                    <div class="hero-eyebrow">
+
+                        <span class="eyebrow-line"></span>
+
+                        <span>PREMIUM UNISEX SALON</span>
+
+                        <span class="eyebrow-line"></span>
+
+                    </div>
+
+
+                    <h1 class="hero-title">
+
+                        Your Beauty.
+
+                        <span>
+                            Your Confidence.
+                        </span>
+
+                    </h1>
+
+
+                    <p class="hero-description">
+
+                        Discover premium beauty and hair care
+                        in a modern, comfortable environment
+                        designed around you.
+
+                    </p>
+
+
+                    <div class="hero-buttons">
+
+
+                        <a href="pages/booking.html"
+                           class="button button-gold">
+
+                            <i class="fa-regular fa-calendar-check"></i>
+
+                            <span>Book Appointment</span>
+
+                        </a>
+
+
+                        <a href="pages/services.html"
+                           class="button button-outline">
+
+                            <span>Explore Services</span>
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+
+                    <!-- Trust -->
+
+                    <div class="hero-trust">
+
+
+                        <div class="trust-item">
+
+                            <span class="trust-icon">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </span>
+
+                            <span class="trust-text">
+
+                                <strong>2</strong>
+
+                                <small>Locations</small>
+
+                            </span>
+
+                        </div>
+
+
+                        <span class="trust-separator"></span>
+
+
+                        <div class="trust-item">
+
+                            <span class="trust-icon">
+                                <i class="fa-regular fa-clock"></i>
+                            </span>
+
+                            <span class="trust-text">
+
+                                <strong>9 AM – 9 PM</strong>
+
+                                <small>Open Daily</small>
+
+                            </span>
+
+                        </div>
+
+
+                        <span class="trust-separator"></span>
+
+
+                        <div class="trust-item">
+
+                            <span class="trust-icon">
+                                <i class="fa-solid fa-wallet"></i>
+                            </span>
+
+                            <span class="trust-text">
+
+                                <strong>Pay at Salon</strong>
+
+                                <small>No Online Payment</small>
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Hero Visual -->
+
+                <div class="hero-visual">
+
+
+                    <div class="hero-frame">
+
+
+                        <div class="hero-frame-border"></div>
+
+
+                        <div class="hero-visual-content hero-logo-container">
+                            <img src="assets/images/logo/beauty-salon-logo.png" alt="The Beauty Salon logo" class="hero-logo-image">
+                        </div>
+
+                        <span class="hero-corner top-left"></span>
+                        <span class="hero-corner top-right"></span>
+                        <span class="hero-corner bottom-left"></span>
+                        <span class="hero-corner bottom-right"></span>
+
+                    </div>
+
+
+                    <div class="hero-floating-card">
+
+
+                        <span class="floating-icon">
+                            <i class="fa-solid fa-sparkles"></i>
+                        </span>
+
+
+                        <span>
+
+                            <strong>
+                                Premium Care
+                            </strong>
+
+                            <small>
+                                Made for you
+                            </small>
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="hero-scroll-indicator">
+
+                <span>
+                    Scroll to explore
+                </span>
+
+                <i class="fa-solid fa-chevron-down"></i>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             ABOUT PREVIEW
+        ====================================================== -->
+
+        <section class="home-section about-section">
+
+
+            <div class="content-container">
+
+
+                <div class="about-layout">
+
+
+                    <!-- Visual -->
+
+                    <div class="about-visual">
+
+
+                        <div class="premium-placeholder about-logo-image-wrap">
+
+                            <img
+                                src="assets/images/logo/beauty-salon-logo-2.png"
+                                alt="The Beauty Salon Premium Experience"
+                                class="about-logo-image"
+                            >
+
+                        </div>
+
+
+                        <div class="experience-badge">
+
+                            <strong>2</strong>
+
+                            <span>
+                                Branch<br>
+                                Locations
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Content -->
+
+                    <div class="about-content">
+
+
+                        <span class="section-eyebrow">
+                            ABOUT US
+                        </span>
+
+
+                        <h2 class="section-title">
+
+                            More Than A Salon.
+
+                            <span>
+                                An Experience.
+                            </span>
+
+                        </h2>
+
+
+                        <p class="section-text">
+
+                            The Beauty Salon is a modern unisex
+                            beauty and hair salon serving customers
+                            in Baramati, Maharashtra.
+
+                        </p>
+
+
+                        <p class="section-text">
+
+                            We combine professional services,
+                            personalized attention and a premium
+                            atmosphere to make every visit
+                            comfortable and memorable.
+
+                        </p>
+
+
+                        <div class="about-features">
+
+
+                            <div class="about-feature">
+
+                                <span>
+                                    <i class="fa-solid fa-check"></i>
+                                </span>
+
+                                <strong>
+                                    Professional Services
+                                </strong>
+
+                            </div>
+
+
+                            <div class="about-feature">
+
+                                <span>
+                                    <i class="fa-solid fa-check"></i>
+                                </span>
+
+                                <strong>
+                                    Experienced Staff
+                                </strong>
+
+                            </div>
+
+
+                            <div class="about-feature">
+
+                                <span>
+                                    <i class="fa-solid fa-check"></i>
+                                </span>
+
+                                <strong>
+                                    Easy Appointment Booking
+                                </strong>
+
+                            </div>
+
+
+                            <div class="about-feature">
+
+                                <span>
+                                    <i class="fa-solid fa-check"></i>
+                                </span>
+
+                                <strong>
+                                    Pay Directly at Salon
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                        <a href="pages/about.html"
+                           class="text-arrow-link">
+
+                            <span>
+                                Discover Our Story
+                            </span>
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             SERVICES
+        ====================================================== -->
+
+        <section class="home-section services-section">
+
+
+            <div class="content-container">
+
+
+                <div class="section-header-row">
+
+
+                    <div>
+
+                        <span class="section-eyebrow">
+                            OUR SERVICES
+                        </span>
+
+
+                        <h2 class="section-title">
+
+                            Beauty Care.
+
+                            <span>
+                                Made Personal.
+                            </span>
+
+                        </h2>
+
+                    </div>
+
+
+                    <a href="pages/services.html"
+                       class="text-arrow-link desktop-section-link">
+
+                        <span>
+                            View All Services
+                        </span>
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </a>
+
+                </div>
+
+
+                <div class="services-grid">
+
+
+                    <!-- Service 1 -->
+
+                    <article class="service-card">
+
+
+                        <div class="service-card-top">
+
+                            <span class="service-number">
+                                01
+                            </span>
+
+                            <span class="service-icon">
+                                <i class="fa-solid fa-scissors"></i>
+                            </span>
+
+                        </div>
+
+
+                        <h3>
+                            Classic Haircut
+                        </h3>
+
+
+                        <p>
+
+                            Clean, modern and personalized
+                            haircut styling for a fresh look.
+
+                        </p>
+
+
+                        <div class="service-card-bottom">
+
+
+                            <span class="service-duration">
+
+                                <i class="fa-regular fa-clock"></i>
+
+                                30 min
+
+                            </span>
+
+
+                            <strong class="service-price">
+                                ₹250
+                            </strong>
+
+                        </div>
+
+
+                        <a href="pages/booking.html?service=classic-haircut"
+                           class="service-book-link">
+
+                            <span>
+                                Book Service
+                            </span>
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </a>
+
+                    </article>
+
+
+
+                    <!-- Service 2 -->
+
+                    <article class="service-card">
+
+
+                        <div class="service-card-top">
+
+                            <span class="service-number">
+                                02
+                            </span>
+
+                            <span class="service-icon">
+                                <i class="fa-solid fa-user-tie"></i>
+                            </span>
+
+                        </div>
+
+
+                        <h3>
+                            Beard Styling
+                        </h3>
+
+
+                        <p>
+
+                            Professional beard shaping and
+                            styling for a sharp, clean finish.
+
+                        </p>
+
+
+                        <div class="service-card-bottom">
+
+
+                            <span class="service-duration">
+
+                                <i class="fa-regular fa-clock"></i>
+
+                                20 min
+
+                            </span>
+
+
+                            <strong class="service-price">
+                                ₹150
+                            </strong>
+
+                        </div>
+
+
+                        <a href="pages/booking.html?service=beard-styling"
+                           class="service-book-link">
+
+                            <span>
+                                Book Service
+                            </span>
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </a>
+
+                    </article>
+
+
+
+                    <!-- Service 3 -->
+
+                    <article class="service-card">
+
+
+                        <div class="service-card-top">
+
+                            <span class="service-number">
+                                03
+                            </span>
+
+                            <span class="service-icon">
+                                <i class="fa-solid fa-spa"></i>
+                            </span>
+
+                        </div>
+
+
+                        <h3>
+                            Facial
+                        </h3>
+
+
+                        <p>
+
+                            Relaxing facial care designed to
+                            leave your skin refreshed and radiant.
+
+                        </p>
+
+
+                        <div class="service-card-bottom">
+
+
+                            <span class="service-duration">
+
+                                <i class="fa-regular fa-clock"></i>
+
+                                60 min
+
+                            </span>
+
+
+                            <strong class="service-price">
+                                ₹700
+                            </strong>
+
+                        </div>
+
+
+                        <a href="pages/booking.html?service=facial"
+                           class="service-book-link">
+
+                            <span>
+                                Book Service
+                            </span>
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </a>
+
+                    </article>
+
+                </div>
+
+
+                <a href="pages/services.html"
+                   class="mobile-section-button">
+
+                    <span>
+                        View All Services
+                    </span>
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             BRANCHES
+        ====================================================== -->
+
+        <section class="home-section branches-section">
+
+
+            <div class="content-container">
+
+
+                <div class="section-header-row">
+
+
+                    <div>
+
+                        <span class="section-eyebrow">
+                            OUR LOCATIONS
+                        </span>
+
+
+                        <h2 class="section-title">
+
+                            Find Us Near
+
+                            <span>
+                                You.
+                            </span>
+
+                        </h2>
+
+                    </div>
+
+
+                    <a href="pages/branches.html"
+                       class="text-arrow-link desktop-section-link">
+
+                        <span>
+                            Explore Branches
+                        </span>
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </a>
+
+                </div>
+
+
+                <div class="branches-grid">
+
+
+                    <!-- Baramati -->
+
+                    <article class="branch-card">
+
+
+                        <div class="branch-header">
+
+
+                            <span class="branch-label">
+                                MAIN BRANCH
+                            </span>
+
+
+                            <span class="branch-icon">
+
+                                <i class="fa-solid fa-location-dot"></i>
+
+                            </span>
+
+                        </div>
+
+
+                        <h3>
+                            The Beauty Salon
+                        </h3>
+
+
+                        <h4>
+                            Baramati
+                        </h4>
+
+
+                        <p>
+
+                            Near Mahanagar Bank,
+                            in front of Shayog Society,
+                            Baramati, Maharashtra.
+
+                        </p>
+
+
+                        <div class="branch-information">
+
+
+                            <a href="tel:+918793465001">
+
+                                <i class="fa-solid fa-phone"></i>
+
+                                <span>
+                                    +91 8793465001
+                                </span>
+
+                            </a>
+
+
+                            <a href="mailto:beautysalon@gamil.com">
+
+                                <i class="fa-regular fa-envelope"></i>
+
+                                <span>
+                                    beautysalon@gamil.com
+                                </span>
+
+                            </a>
+
+
+                            <span>
+
+                                <i class="fa-regular fa-clock"></i>
+
+                                <span>
+                                    Mon – Sun · 9:00 AM – 9:00 PM
+                                </span>
+
+                            </span>
+
+                        </div>
+
+
+                        <a href="pages/booking.html?branch=baramati"
+                           class="branch-button">
+
+                            <span>
+                                Book at Baramati
+                            </span>
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </a>
+
+                    </article>
+
+
+
+                    <!-- MIDC -->
+
+                    <article class="branch-card">
+
+
+                        <div class="branch-header">
+
+
+                            <span class="branch-label">
+                                ADDITIONAL BRANCH
+                            </span>
+
+
+                            <span class="branch-icon">
+
+                                <i class="fa-solid fa-building"></i>
+
+                            </span>
+
+                        </div>
+
+
+                        <h3>
+                            The Beauty Salon
+                        </h3>
+
+
+                        <h4>
+                            Baramati MIDC
+                        </h4>
+
+
+                        <p>
+
+                            Our Baramati MIDC branch is part
+                            of our expanding salon presence.
+                            Detailed contact information will
+                            be updated soon.
+
+                        </p>
+
+
+                        <div class="branch-information">
+
+
+                            <span>
+
+                                <i class="fa-solid fa-location-dot"></i>
+
+                                <span>
+                                    Baramati MIDC, Baramati, Maharashtra
+                                </span>
+
+                            </span>
+
+
+                            <span>
+
+                                <i class="fa-solid fa-phone"></i>
+
+                                <span>
+                                    Contact details available at the branch
+                                </span>
+
+                            </span>
+
+
+                            <span>
+
+                                <i class="fa-regular fa-clock"></i>
+
+                                <span>
+                                    9:00 AM – 9:00 PM
+                                </span>
+
+                            </span>
+
+                        </div>
+
+
+                        <a href="pages/branches.html"
+                           class="branch-button">
+
+                            <span>
+                                Book at Baramati MIDC
+                            </span>
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </a>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             WHY CHOOSE US
+        ====================================================== -->
+
+        <section class="home-section why-section">
+
+
+            <div class="content-container">
+
+
+                <div class="centered-section-heading">
+
+
+                    <span class="section-eyebrow">
+                        WHY THE BEAUTY SALON
+                    </span>
+
+
+                    <h2 class="section-title">
+
+                        A Better Salon
+
+                        <span>
+                            Experience.
+                        </span>
+
+                    </h2>
+
+
+                    <p>
+
+                        From booking to your salon visit,
+                        everything is designed to be simple,
+                        comfortable and convenient.
+
+                    </p>
+
+                </div>
+
+
+                <div class="why-grid">
+
+
+                    <article class="why-card">
+
+                        <span class="why-icon">
+
+                            <i class="fa-solid fa-user-check"></i>
+
+                        </span>
+
+                        <h3>
+                            Professional Care
+                        </h3>
+
+                        <p>
+
+                            Quality salon services delivered
+                            with attention to your individual needs.
+
+                        </p>
+
+                    </article>
+
+
+                    <article class="why-card">
+
+                        <span class="why-icon">
+
+                            <i class="fa-regular fa-calendar-check"></i>
+
+                        </span>
+
+                        <h3>
+                            Easy Booking
+                        </h3>
+
+                        <p>
+
+                            Select your branch, service, staff,
+                            date and time slot with ease.
+
+                        </p>
+
+                    </article>
+
+
+                    <article class="why-card">
+
+                        <span class="why-icon">
+
+                            <i class="fa-solid fa-wallet"></i>
+
+                        </span>
+
+                        <h3>
+                            Pay at Salon
+                        </h3>
+
+                        <p>
+
+                            No online payment is required.
+                            Pay directly at the salon.
+
+                        </p>
+
+                    </article>
+
+
+                    <article class="why-card">
+
+                        <span class="why-icon">
+
+                            <i class="fa-solid fa-location-dot"></i>
+
+                        </span>
+
+                        <h3>
+                            Convenient Locations
+                        </h3>
+
+                        <p>
+
+                            Serving customers through our
+                            Baramati salon locations.
+
+                        </p>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             GALLERY PREVIEW
+        ====================================================== -->
+
+        <section class="home-section gallery-section">
+
+
+            <div class="content-container">
+
+
+                <div class="section-header-row">
+
+
+                    <div>
+
+                        <span class="section-eyebrow">
+                            OUR GALLERY
+                        </span>
+
+
+                        <h2 class="section-title">
+
+                            See The
+
+                            <span>
+                                Experience.
+                            </span>
+
+                        </h2>
+
+                    </div>
+
+
+                    <a href="pages/gallery.html"
+                       class="text-arrow-link desktop-section-link">
+
+                        <span>
+                            View Gallery
+                        </span>
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </a>
+
+                </div>
+
+
+                <div class="gallery-preview-grid">
+
+
+                    <div class="gallery-tile gallery-large">
+
+                        <div class="gallery-placeholder">
+
+                            <img src="assets/images/gallery/salon-interior.jpg" alt="Salon Interior" loading="lazy">
+
+                            <span>
+                                Salon Interior
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="gallery-tile">
+
+                        <div class="gallery-placeholder">
+
+                            <img src="assets/images/gallery/hair-styling.jpg" alt="Hair Styling" loading="lazy">
+
+                            <span>
+                                Hair Styling
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="gallery-tile">
+
+                        <div class="gallery-placeholder">
+
+                            <img src="assets/images/gallery/beauty-care.jpg" alt="Beauty Care" loading="lazy">
+
+                            <span>
+                                Beauty Care
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="gallery-tile">
+
+                        <div class="gallery-placeholder">
+
+                            <img src="assets/images/gallery/salon-experience.jpg" alt="Premium Experience" loading="lazy">
+
+                            <span>
+                                Premium Experience
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <a href="pages/gallery.html"
+                   class="mobile-section-button">
+
+                    <span>
+                        View Gallery
+                    </span>
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             FINAL CTA
+        ====================================================== -->
+
+        <section class="cta-section">
+
+
+            <div class="content-container">
+
+
+                <div class="cta-card">
+
+
+                    <div class="cta-content">
+
+
+                        <span class="section-eyebrow">
+                            READY WHEN YOU ARE
+                        </span>
+
+
+                        <h2>
+
+                            Your Next Look
+
+                            <span>
+                                Starts Here.
+                            </span>
+
+                        </h2>
+
+
+                        <p>
+
+                            Choose your branch and book your
+                            preferred appointment at The Beauty Salon.
+
+                        </p>
+
+                    </div>
+
+
+                    <a href="pages/booking.html"
+                       class="button button-gold">
+
+                        <i class="fa-regular fa-calendar-check"></i>
+
+                        <span>
+                            Book Appointment
+                        </span>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =========================================================
+         FOOTER
+    ========================================================== -->
+
+    <footer class="site-footer">
+
+
+        <div class="content-container">
+
+
+            <div class="footer-grid">
+
+
+                <!-- Footer Brand -->
+
+                <div class="footer-brand-column">
+
+
+                    <a href="index.html"
+                       class="site-brand">
+
+                        <span class="brand-logo">
+
+                            <i class="fa-solid fa-scissors"></i>
+
+                        </span>
+
+                        <span class="brand-name">
+
+                            <strong>The Beauty</strong>
+
+                            <small>Salon</small>
+
+                        </span>
+
+                    </a>
+
+
+                    <p>
+
+                        Premium unisex beauty and hair care
+                        in Baramati, Maharashtra.
+
+                    </p>
+
+
+                    <div class="footer-socials">
+
+
+                        <a href="#"
+                           aria-label="Instagram">
+
+                            <i class="fa-brands fa-instagram"></i>
+
+                        </a>
+
+
+                        <a href="#"
+                           aria-label="Facebook">
+
+                            <i class="fa-brands fa-facebook-f"></i>
+
+                        </a>
+
+
+                        <a href="https://wa.me/918793465001"
+                           aria-label="WhatsApp">
+
+                            <i class="fa-brands fa-whatsapp"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Quick Links -->
+
+                <div class="footer-column">
+
+                    <h3>
+                        Quick Links
+                    </h3>
+
+
+                    <a href="index.html">
+                        Home
+                    </a>
+
+                    <a href="pages/about.html">
+                        About
+                    </a>
+
+                    <a href="pages/services.html">
+                        Services
+                    </a>
+
+                    <a href="pages/branches.html">
+                        Branches
+                    </a>
+
+                    <a href="pages/gallery.html">
+                        Gallery
+                    </a>
+
+                </div>
+
+
+
+                <!-- Customer -->
+
+                <div class="footer-column">
+
+                    <h3>
+                        Customer
+                    </h3>
+
+
+                    <a href="pages/booking.html">
+                        Book Appointment
+                    </a>
+
+                    <a href="pages/login.html">
+                        Customer Login
+                    </a>
+
+                    <a href="pages/register.html">
+                        Create Account
+                    </a>
+
+                    <a href="pages/contact.html">
+                        Contact Us
+                    </a>
+
+                </div>
+
+
+
+                <!-- Contact -->
+
+                <div class="footer-column footer-contact-column">
+
+                    <h3>
+                        Contact
+                    </h3>
+
+
+                    <p>
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+                        <span>
+
+                            Near Mahanagar Bank,
+                            in front of Shayog Society,
+                            Baramati, Maharashtra.
+
+                        </span>
+
+                    </p>
+
+
+                    <a href="tel:+918793465001">
+
+                        <i class="fa-solid fa-phone"></i>
+
+                        <span>
+                            +91 8793465001
+                        </span>
+
+                    </a>
+
+
+                    <a href="tel:+918087646512">
+
+                        <i class="fa-solid fa-phone"></i>
+
+                        <span>
+                            +91 8087646512
+                        </span>
+
+                    </a>
+
+
+                    <a href="mailto:beautysalon@gamil.com">
+
+                        <i class="fa-regular fa-envelope"></i>
+
+                        <span>
+                            beautysalon@gamil.com
+                        </span>
+
+                    </a>
+
+
+                    <span>
+
+                        <i class="fa-regular fa-clock"></i>
+
+                        <span>
+                            Mon – Sun: 9:00 AM – 9:00 PM
+                        </span>
+
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Footer Bottom -->
+
+            <div class="footer-bottom">
+
+
+                <p>
+
+                    © <span id="currentYear"></span>
+                    The Beauty Salon.
+                    All rights reserved.
+
+                </p>
+
+
+                <div class="footer-legal">
+
+                    <a href="#">
+                        Privacy Policy
+                    </a>
+
+                    <a href="#">
+                        Terms & Conditions
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- =========================================================
+         MAIN JAVASCRIPT
+    ========================================================== -->
+
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            /* ---------------------------------------------------------
+               CUSTOMER LOGIN REQUIRED FOR ALL BOOKING BUTTONS
+            --------------------------------------------------------- */
+            document.querySelectorAll('a[href*="booking.html"]').forEach(function (bookingLink) {
+                bookingLink.addEventListener("click", function (event) {
+                    let bookingSession = null;
+
+                    try {
+                        const raw =
+                            localStorage.getItem("salon_customer_session") ||
+                            sessionStorage.getItem("salon_customer_session");
+
+                        if (raw) {
+                            bookingSession = JSON.parse(raw);
+                        }
+                    } catch (error) {
+                        bookingSession = null;
+                    }
+
+                    const isLoggedIn = Boolean(
+                        bookingSession &&
+                        bookingSession.token &&
+                        bookingSession.customer
+                    );
+
+                    if (!isLoggedIn) {
+                        event.preventDefault();
+
+                        const target =
+                            bookingLink.getAttribute("href") || "pages/booking.html";
+
+                        const loginUrl =
+                            "pages/login.html?redirect=" +
+                            encodeURIComponent("../" + target);
+
+                        window.location.href = loginUrl;
+                    }
+                });
+            });
+
+            const accountButton = document.getElementById("customerAccountButton");
+            const accountText = document.getElementById("customerAccountText");
+            const accountChevron = document.getElementById("customerAccountChevron");
+            const accountDropdown = document.getElementById("customerAccountDropdown");
+            const logoutButton = document.getElementById("customerLogoutButton");
+            const mobileAccount = document.getElementById("mobileCustomerAccount");
+            const mobileAccountText = document.getElementById("mobileCustomerAccountText");
+            const adminLoginButton = document.getElementById("adminLoginButton");
+            const mobileAdminLogin = document.getElementById("mobileAdminLogin");
+
+            let session = null;
+            try {
+                const raw = localStorage.getItem("salon_customer_session") || sessionStorage.getItem("salon_customer_session");
+                if (raw) session = JSON.parse(raw);
+            } catch (error) {
+                session = null;
+            }
+
+            const customer = session && session.customer ? session.customer : null;
+            const loggedIn = Boolean(session && session.token && customer);
+
+            if (loggedIn) {
+                // Customer is logged in: hide Admin Login.
+                if (adminLoginButton) adminLoginButton.style.display = "none";
+                if (mobileAdminLogin) mobileAdminLogin.style.display = "none";
+                const name = customer.name || "My Account";
+                accountText.textContent = name.length > 18 ? name.substring(0, 18) + "…" : name;
+                accountButton.href = "#";
+                accountButton.setAttribute("aria-haspopup", "true");
+                accountButton.setAttribute("aria-expanded", "false");
+
+                accountButton.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    const isOpen = accountDropdown.classList.toggle("open");
+                    accountDropdown.setAttribute("aria-hidden", String(!isOpen));
+                    accountButton.setAttribute("aria-expanded", String(isOpen));
+                    accountChevron.style.transform = isOpen ? "rotate(180deg)" : "rotate(0deg)";
+                });
+
+                document.addEventListener("click", function (event) {
+                    if (!accountButton.contains(event.target) && !accountDropdown.contains(event.target)) {
+                        accountDropdown.classList.remove("open");
+                        accountDropdown.setAttribute("aria-hidden", "true");
+                        accountButton.setAttribute("aria-expanded", "false");
+                        accountChevron.style.transform = "rotate(0deg)";
+                    }
+                });
+
+                mobileAccount.href = "pages/profile.html";
+                mobileAccountText.textContent = "My Account";
+                mobileAccount.querySelector("i").className = "fa-regular fa-user";
+            } else {
+                // No customer login: show Admin Login.
+                if (adminLoginButton) adminLoginButton.style.display = "inline-flex";
+                if (mobileAdminLogin) mobileAdminLogin.style.display = "flex";
+                accountButton.href = "pages/login.html";
+                accountButton.removeAttribute("aria-haspopup");
+                accountButton.removeAttribute("aria-expanded");
+                accountChevron.style.display = "none";
+                accountDropdown.style.display = "none";
+                mobileAccount.href = "pages/login.html";
+                mobileAccountText.textContent = "Customer Login";
+            }
+
+            if (logoutButton) {
+                logoutButton.addEventListener("click", function () {
+                    localStorage.removeItem("salon_customer_session");
+                    sessionStorage.removeItem("salon_customer_session");
+                    localStorage.removeItem("salon_customer");
+                    sessionStorage.removeItem("salon_customer");
+                    window.location.href = "index.html";
+                });
+            }
+        });
+    </script>
+
+        <script src="js/main.js"></script>
+
+</body>
+</html>

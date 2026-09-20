@@ -1,0 +1,2244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="Explore hair, beauty and grooming services at The Beauty Salon in Baramati."
+    >
+
+    <title>Services | The Beauty Salon</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+
+    <style>
+        /* =====================================================
+           SERVICES PAGE
+        ===================================================== */
+
+        .services-page {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .services-page *,
+        .services-page *::before,
+        .services-page *::after {
+            box-sizing: border-box;
+        }
+
+        .services-page .container {
+            width: min(1180px, calc(100% - 40px));
+            margin: 0 auto;
+        }
+
+        /* =====================================================
+           HERO
+        ===================================================== */
+
+        .services-hero {
+            position: relative;
+            min-height: 430px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            background:
+                radial-gradient(
+                    circle at 85% 35%,
+                    rgba(212, 175, 55, 0.14),
+                    transparent 35%
+                ),
+                linear-gradient(135deg, #050505, #121212 55%, #050505);
+        }
+
+        .services-hero::before {
+            content: "";
+            position: absolute;
+            width: 360px;
+            height: 360px;
+            right: -170px;
+            top: -150px;
+            border: 1px solid rgba(212,175,55,.18);
+            border-radius: 50%;
+        }
+
+        .services-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 760px;
+            padding: 85px 0;
+        }
+
+        .services-eyebrow {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            margin-bottom: 20px;
+            color: #d4af37;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .services-hero h1 {
+            margin: 0;
+            font-family: "Playfair Display", serif;
+            font-size: clamp(42px, 6vw, 72px);
+            line-height: 1.08;
+            font-weight: 600;
+        }
+
+        .services-hero h1 span {
+            color: #d4af37;
+        }
+
+        .services-hero p {
+            max-width: 620px;
+            margin: 22px 0 0;
+            color: #aaa;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        .services-breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 27px;
+            color: #777;
+            font-size: 13px;
+        }
+
+        .services-breadcrumb a {
+            color: #d4af37;
+            text-decoration: none;
+        }
+
+        .services-breadcrumb i {
+            color: #555;
+            font-size: 9px;
+        }
+
+        /* =====================================================
+           CATEGORY FILTER
+        ===================================================== */
+
+        .services-section {
+            padding: 90px 0 100px;
+            background: #000;
+        }
+
+        .services-heading {
+            max-width: 720px;
+            margin: 0 auto 42px;
+            text-align: center;
+        }
+
+        .services-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 15px;
+            color: #d4af37;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .services-heading h2 {
+            margin: 0 0 14px;
+            font-family: "Playfair Display", serif;
+            font-size: clamp(34px, 5vw, 50px);
+            line-height: 1.15;
+        }
+
+        .services-heading h2 span {
+            color: #d4af37;
+        }
+
+        .services-heading p {
+            margin: 0;
+            color: #808080;
+            font-size: 14px;
+            line-height: 1.75;
+        }
+
+        .services-filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 45px;
+        }
+
+        .service-filter {
+            min-height: 44px;
+            padding: 10px 24px;
+            border: 1px solid #292929;
+            background: #111;
+            color: #999;
+            cursor: pointer;
+            font-family: "DM Sans", sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            transition: .25s ease;
+        }
+
+        .service-filter:hover,
+        .service-filter.active {
+            border-color: #d4af37;
+            background: #d4af37;
+            color: #000;
+        }
+
+        /* =====================================================
+           SERVICES GRID
+        ===================================================== */
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .service-card {
+            position: relative;
+            min-width: 0;
+            overflow: hidden;
+            background: #151515;
+            border: 1px solid #262626;
+            transition:
+                transform .3s ease,
+                border-color .3s ease,
+                box-shadow .3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(212,175,55,.45);
+            box-shadow: 0 18px 45px rgba(0,0,0,.3);
+        }
+
+        .service-card-image {
+            position: relative;
+            height: 220px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            text-align: center;
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(212,175,55,.11),
+                    transparent 55%
+                ),
+                #0d0d0d;
+            border-bottom: 1px solid #252525;
+        }
+
+        .service-card-image::before {
+            content: "";
+            position: absolute;
+            width: 160px;
+            height: 160px;
+            border: 1px solid rgba(212,175,55,.12);
+            border-radius: 50%;
+        }
+
+        .service-card-image i {
+            position: relative;
+            z-index: 2;
+            margin-bottom: 13px;
+            color: #d4af37;
+            font-size: 32px;
+        }
+
+        .service-card-image span {
+            position: relative;
+            z-index: 2;
+            color: #777;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .service-card-content {
+            padding: 18px;
+        }
+
+        .service-category {
+            display: inline-block;
+            margin-bottom: 9px;
+            color: #d4af37;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 1.8px;
+            text-transform: uppercase;
+        }
+
+        .service-card h3 {
+            margin: 0 0 9px;
+            font-family: "Playfair Display", serif;
+            font-size: 22px;
+            line-height: 1.25;
+        }
+
+        .service-card p {
+            min-height: 47px;
+            margin: 0 0 20px;
+            color: #777;
+            font-size: 12px;
+            line-height: 1.65;
+        }
+
+        .service-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            padding-top: 13px;
+            border-top: 1px solid #252525;
+        }
+
+        .service-price {
+            color: #d4af37;
+            font-family: "Playfair Display", serif;
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        .service-duration {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #777;
+            font-size: 11px;
+        }
+
+        .service-duration i {
+            color: #d4af37;
+        }
+
+        .service-book {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            min-height: 44px;
+            margin-top: 18px;
+            border: 1px solid #d4af37;
+            background: transparent;
+            color: #d4af37;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .5px;
+            transition: .25s ease;
+        }
+
+        .service-book:hover {
+            background: #d4af37;
+            color: #000;
+        }
+
+        /* =====================================================
+           NOTE
+        ===================================================== */
+
+        .services-note {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            max-width: 800px;
+            margin: 45px auto 0;
+            padding: 18px 20px;
+            border: 1px solid #292929;
+            background: #101010;
+        }
+
+        .services-note i {
+            flex: 0 0 auto;
+            margin-top: 3px;
+            color: #d4af37;
+        }
+
+        .services-note p {
+            margin: 0;
+            color: #777;
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+        
+        .services-loading,
+        .services-error,
+        .services-empty {
+            grid-column: 1 / -1;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            color: #777;
+            font-size: 13px;
+            border: 1px solid #242424;
+            background: #101010;
+        }
+
+        .services-loading i {
+            color: #d4af37;
+        }
+
+        .service-card-image {
+            height: 155px;
+        }
+
+        .service-card-content {
+            padding: 18px;
+        }
+
+        .service-card p {
+            min-height: 0;
+            margin-bottom: 14px;
+        }
+
+        .service-book {
+            min-height: 40px;
+            margin-top: 14px;
+        }
+
+/* =====================================================
+           CTA
+        ===================================================== */
+
+        .services-cta {
+            padding: 70px 0;
+            background: #d4af37;
+            color: #000;
+        }
+
+        .services-cta-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 35px;
+        }
+
+        .services-cta h2 {
+            margin: 0 0 7px;
+            font-family: "Playfair Display", serif;
+            font-size: clamp(30px, 4vw, 45px);
+            line-height: 1.15;
+        }
+
+        .services-cta p {
+            margin: 0;
+            color: #282100;
+            font-size: 13px;
+        }
+
+        .services-cta .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            min-height: 50px;
+            padding: 12px 25px;
+            background: #000;
+            border: 1px solid #000;
+            color: #fff;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        .services-page .site-footer {
+            width: 100%;
+            margin: 0;
+            padding: 70px 0 0;
+            background: #080808;
+            border-top: 1px solid #222;
+        }
+
+        .services-page .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1.25fr;
+            gap: 45px;
+            width: 100%;
+            padding-bottom: 50px;
+        }
+
+        .services-page .footer-brand,
+        .services-page .footer-column {
+            min-width: 0;
+        }
+
+        .services-page .footer-brand p {
+            max-width: 340px;
+            margin: 20px 0;
+            color: #777;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .services-page .footer-column h3 {
+            margin: 0 0 20px;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        .services-page .footer-column ul {
+            display: grid;
+            gap: 11px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .services-page .footer-column a {
+            color: #777;
+            font-size: 13px;
+            text-decoration: none;
+        }
+
+        .services-page .footer-column a:hover {
+            color: #d4af37;
+        }
+
+        .services-page .footer-contact {
+            display: grid;
+            gap: 13px;
+        }
+
+        .services-page .footer-contact p {
+            display: flex;
+            align-items: flex-start;
+            gap: 11px;
+            margin: 0;
+            color: #777;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .services-page .footer-contact p i {
+            flex: 0 0 15px;
+            margin-top: 3px;
+            color: #d4af37;
+        }
+
+        .services-page .footer-contact a {
+            overflow-wrap: anywhere;
+        }
+
+        .services-page .footer-social {
+            display: flex;
+            gap: 9px;
+        }
+
+        .services-page .footer-social a {
+            width: 38px;
+            height: 38px;
+            display: grid;
+            place-items: center;
+            border: 1px solid #292929;
+        }
+
+        .services-page .footer-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 22px 0;
+            border-top: 1px solid #202020;
+        }
+
+        .services-page .footer-bottom p {
+            margin: 0;
+            color: #555;
+            font-size: 11px;
+        }
+
+        /* =====================================================
+           TABLET
+        ===================================================== */
+
+        @media (max-width: 1024px) {
+
+            .services-grid {
+                grid-template-columns: repeat(2, minmax(0,1fr));
+            }
+
+            .services-page .footer-grid {
+                grid-template-columns: repeat(2,minmax(0,1fr));
+                gap: 40px 30px;
+            }
+        }
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 767px) {
+
+            .services-page .container {
+                width: calc(100% - 32px);
+            }
+
+            .services-hero {
+                min-height: 390px;
+            }
+
+            .services-hero-content {
+                padding: 65px 0;
+            }
+
+            .services-hero h1 {
+                font-size: clamp(38px,11vw,50px);
+            }
+
+            .services-hero p {
+                font-size: 14px;
+                line-height: 1.7;
+            }
+
+            .services-section {
+                padding: 65px 0 70px;
+            }
+
+            .services-heading {
+                margin-bottom: 30px;
+            }
+
+            .services-heading p {
+                font-size: 13px;
+            }
+
+            .services-filters {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0,1fr));
+                gap: 8px;
+                margin-bottom: 32px;
+            }
+
+            .service-filter {
+                width: 100%;
+                min-height: 46px;
+                padding: 10px 12px;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+
+            .service-card-image {
+                height: 190px;
+            }
+
+            .service-card-content {
+                padding: 21px;
+            }
+
+            .service-card h3 {
+                font-size: 21px;
+            }
+
+            .service-card p {
+                min-height: auto;
+                font-size: 12px;
+            }
+
+            .service-price {
+                font-size: 21px;
+            }
+
+            .services-note {
+                margin-top: 30px;
+                padding: 15px;
+            }
+
+            .services-cta {
+                padding: 55px 0;
+            }
+
+            .services-cta-inner {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 24px;
+            }
+
+            .services-cta h2 {
+                font-size: 32px;
+            }
+
+            .services-cta .btn {
+                width: 100%;
+            }
+
+            .services-page .site-footer {
+                padding-top: 55px;
+            }
+
+            .services-page .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 35px;
+                padding-bottom: 35px;
+            }
+
+            .services-page .footer-brand p {
+                max-width: 100%;
+                font-size: 12px;
+            }
+
+            .services-page .footer-bottom {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 7px;
+            }
+        }
+
+        /* =====================================================
+           SMALL MOBILE
+        ===================================================== */
+
+        @media (max-width: 380px) {
+
+            .services-page .container {
+                width: calc(100% - 24px);
+            }
+
+            .services-hero h1 {
+                font-size: 36px;
+            }
+
+            .services-filters {
+                grid-template-columns: 1fr;
+            }
+
+            .service-card-image {
+                height: 175px;
+            }
+
+            .service-card-content {
+                padding: 18px;
+            }
+
+            .service-meta {
+                gap: 8px;
+            }
+
+            .service-price {
+                font-size: 19px;
+            }
+        }
+
+        /* =====================================================
+           REDUCED MOTION
+        ===================================================== */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .services-page *,
+            .services-page *::before,
+            .services-page *::after {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+    
+        /* =========================================================
+           EXACT ABOUT MASTER HEADER + RESPONSIVE SYSTEM
+        ========================================================= */
+        .about-site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+
+            border-bottom: 1px solid rgba(212, 175, 55, 0.12);
+        }
+
+        .about-header-container {
+            width: min(1280px, calc(100% - 40px));
+            min-height: 78px;
+            margin: 0 auto;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .about-brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 11px;
+            flex-shrink: 0;
+        }
+
+        .about-brand-logo {
+            width: 44px;
+            height: 44px;
+
+            display: grid;
+            place-items: center;
+
+            border: 1px solid #D4AF37;
+            border-radius: 50%;
+
+            background: rgba(212, 175, 55, 0.05);
+
+            color: #D4AF37;
+            font-size: 18px;
+        }
+
+        .about-brand-name {
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+        }
+
+        .about-brand-name strong {
+            font-family: "Playfair Display", serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .about-brand-name small {
+            margin-top: 5px;
+
+            color: #D4AF37;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .about-desktop-nav {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .about-desktop-nav a {
+            position: relative;
+
+            padding: 29px 0;
+
+            color: #cfcfcf;
+            font-size: 13px;
+            font-weight: 500;
+
+            white-space: nowrap;
+
+            transition: color .25s ease;
+        }
+
+        .about-desktop-nav a::after {
+            content: "";
+
+            position: absolute;
+            left: 0;
+            bottom: 20px;
+
+            width: 0;
+            height: 2px;
+
+            background: #D4AF37;
+
+            transition: width .25s ease;
+        }
+
+        .about-desktop-nav a:hover,
+        .about-desktop-nav a.active {
+            color: #D4AF37;
+        }
+
+        .about-desktop-nav a:hover::after,
+        .about-desktop-nav a.active::after {
+            width: 100%;
+        }
+
+        .about-header-actions {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .about-login-btn,
+        .about-book-btn {
+            min-height: 40px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+
+            border-radius: 8px;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            white-space: nowrap;
+
+            transition: all .25s ease;
+        }
+
+        .about-login-btn {
+            padding: 0 13px;
+
+            color: #D4AF37;
+
+            border: 1px solid rgba(212, 175, 55, .30);
+
+            background: rgba(212, 175, 55, .03);
+        }
+
+        .about-login-btn:hover {
+            border-color: #D4AF37;
+            background: rgba(212, 175, 55, .08);
+        }
+
+        .about-book-btn {
+            padding: 0 15px;
+
+            color: #000;
+
+            background: #D4AF37;
+        }
+
+        .about-book-btn:hover {
+            background: #E5C65A;
+            transform: translateY(-1px);
+        }
+
+        .about-mobile-menu-btn {
+            display: none;
+
+            width: 44px;
+            height: 44px;
+
+            align-items: center;
+            justify-content: center;
+
+            border: 1px solid rgba(212, 175, 55, .35);
+            border-radius: 9px;
+
+            background: transparent;
+
+            color: #D4AF37;
+            font-size: 18px;
+        }
+
+
+        /* =========================================================
+           CUSTOMER ACCOUNT
+        ========================================================= */
+        .customer-account-wrap {
+            position: relative;
+        }
+
+        .customer-account-btn {
+            min-height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            padding: 0 12px;
+            border: 1px solid rgba(212,175,55,.30);
+            border-radius: 8px;
+            background: rgba(212,175,55,.03);
+            color: #D4AF37;
+            font-family: "DM Sans", sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all .25s ease;
+        }
+
+        .customer-account-btn:hover,
+        .customer-account-btn[aria-expanded="true"] {
+            border-color: #D4AF37;
+            background: rgba(212,175,55,.08);
+        }
+
+        .customer-account-chevron {
+            font-size: 9px;
+            transition: transform .2s ease;
+        }
+
+        .customer-account-btn[aria-expanded="true"] .customer-account-chevron {
+            transform: rotate(180deg);
+        }
+
+        .customer-account-dropdown {
+            position: absolute;
+            top: calc(100% + 10px);
+            right: 0;
+            width: 205px;
+            padding: 7px;
+            background: #111;
+            border: 1px solid rgba(212,175,55,.20);
+            border-radius: 10px;
+            box-shadow: 0 18px 40px rgba(0,0,0,.45);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-6px);
+            transition: .2s ease;
+        }
+
+        .customer-account-wrap.open .customer-account-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .customer-account-dropdown a,
+        .customer-account-dropdown button {
+            width: 100%;
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0 11px;
+            border: 0;
+            border-radius: 7px;
+            background: transparent;
+            color: #d0d0d0;
+            font-family: "DM Sans", sans-serif;
+            font-size: 12px;
+            text-decoration: none;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .customer-account-dropdown a:hover,
+        .customer-account-dropdown button:hover {
+            background: rgba(212,175,55,.08);
+            color: #D4AF37;
+        }
+
+        .customer-account-dropdown i {
+            width: 15px;
+            color: #D4AF37;
+            text-align: center;
+        }
+
+        /* =========================================================
+           MOBILE MENU
+        ========================================================= */
+
+        .about-mobile-menu {
+            position: fixed;
+            inset: 0;
+
+            z-index: 2000;
+
+            background: rgba(0, 0, 0, .98);
+
+            opacity: 0;
+            visibility: hidden;
+
+            transform: translateY(-10px);
+
+            transition:
+                opacity .25s ease,
+                visibility .25s ease,
+                transform .25s ease;
+        }
+
+        .about-mobile-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .about-mobile-menu-header {
+            min-height: 78px;
+            padding: 0 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            border-bottom: 1px solid rgba(212, 175, 55, .15);
+        }
+
+        .about-mobile-close {
+            width: 44px;
+            height: 44px;
+
+            display: grid;
+            place-items: center;
+
+            border: 1px solid rgba(212, 175, 55, .35);
+            border-radius: 9px;
+
+            background: transparent;
+
+            color: #D4AF37;
+            font-size: 19px;
+        }
+
+        .about-mobile-links {
+            padding: 20px;
+
+            display: flex;
+            flex-direction: column;
+        }
+
+        .about-mobile-links a {
+            min-height: 53px;
+
+            display: flex;
+            align-items: center;
+            gap: 13px;
+
+            padding: 0 5px;
+
+            color: #d6d6d6;
+
+            border-bottom: 1px solid rgba(255, 255, 255, .07);
+
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .about-mobile-links a i {
+            width: 20px;
+            color: #777;
+            text-align: center;
+        }
+
+        .about-mobile-links a:hover,
+        .about-mobile-links a.active {
+            color: #D4AF37;
+        }
+
+        .about-mobile-links a:hover i,
+        .about-mobile-links a.active i {
+            color: #D4AF37;
+        }
+
+        .about-mobile-divider {
+            height: 14px;
+        }
+
+        .about-mobile-book {
+            min-height: 51px !important;
+
+            margin-top: 18px;
+
+            justify-content: center;
+
+            border: 0 !important;
+            border-radius: 9px;
+
+            background: #D4AF37;
+
+            color: #000 !important;
+
+            font-weight: 700 !important;
+        }
+
+        .about-mobile-book i {
+            color: #000 !important;
+        }
+
+        
+
+        html, body {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        .about-site-header {
+            width: 100%;
+        }
+
+        .about-mobile-menu {
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        @media (max-width: 1024px) {
+            .about-header-container {
+                width: min(1180px, calc(100% - 32px));
+            }
+            .about-desktop-nav {
+                gap: 18px;
+            }
+            .about-desktop-nav a {
+                font-size: 12px;
+            }
+            .about-header-actions {
+                gap: 6px;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .about-header-container {
+                width: calc(100% - 28px);
+                min-height: 68px;
+            }
+            .about-desktop-nav,
+            .about-header-actions {
+                display: none;
+            }
+            .about-mobile-menu-btn {
+                display: flex;
+            }
+            .about-brand-logo {
+                width: 40px;
+                height: 40px;
+            }
+            .about-brand-name strong {
+                font-size: 17px;
+            }
+            .about-brand-name small {
+                font-size: 9px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .about-header-container {
+                width: calc(100% - 20px);
+            }
+            .about-mobile-menu-header {
+                padding: 0 14px;
+            }
+            .about-mobile-links {
+                padding: 14px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .about-site-header *,
+            .about-site-header *::before,
+            .about-site-header *::after,
+            .about-mobile-menu,
+            .about-mobile-menu * {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+
+    
+        .customer-account-btn {
+            cursor: pointer;
+            font-family: "DM Sans", sans-serif;
+        }
+
+        .customer-account-chevron {
+            color: #d4af37;
+            font-size: 9px;
+            transition: transform .2s ease;
+        }
+
+        .customer-account-dropdown {
+            position: absolute;
+            top: calc(100% + 10px);
+            right: 0;
+            width: 210px;
+            padding: 7px;
+            background: #101010;
+            border: 1px solid rgba(212,175,55,.22);
+            box-shadow: 0 18px 40px rgba(0,0,0,.45);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-6px);
+            transition: .2s ease;
+            z-index: 1200;
+        }
+
+        .customer-account-dropdown.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .customer-account-dropdown a,
+        .customer-account-dropdown button {
+            width: 100%;
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0 11px;
+            border: 0;
+            background: transparent;
+            color: #d0d0d0;
+            text-decoration: none;
+            font: 500 12px "DM Sans", sans-serif;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .customer-account-dropdown a:hover,
+        .customer-account-dropdown button:hover {
+            background: rgba(212,175,55,.08);
+            color: #d4af37;
+        }
+
+        .customer-account-dropdown i {
+            width: 15px;
+            color: #d4af37;
+        }
+
+        @media (max-width: 767px) {
+            .service-card-image {
+                height: 145px;
+            }
+        }
+
+    </style>
+</head>
+
+<body class="services-page">
+
+    <!-- =====================================================
+         HEADER
+    ===================================================== -->
+
+    <header class="about-site-header">
+
+        <div class="about-header-container">
+
+
+            <!-- Logo -->
+
+            <a href="../index.html"
+               class="about-brand"
+               aria-label="The Beauty Salon Home">
+
+                <span class="about-brand-logo">
+                    <i class="fa-solid fa-scissors"></i>
+                </span>
+
+                <span class="about-brand-name">
+
+                    <strong>The Beauty</strong>
+
+                    <small>Salon</small>
+
+                </span>
+
+            </a>
+
+
+            <!-- Desktop Navigation -->
+
+            <nav class="about-desktop-nav"
+                 aria-label="Primary navigation">
+
+                <a href="../index.html">
+                    Home
+                </a>
+
+                <a href="about.html">
+                    About
+                </a>
+
+                <a href="services.html" class="active" aria-current="page">
+                    Services
+                </a>
+
+                <a href="branches.html">
+                    Branches
+                </a>
+
+                <a href="gallery.html">
+                    Gallery
+                </a>
+
+                <a href="contact.html">
+                    Contact
+                </a>
+
+            </nav>
+
+
+            <!-- Header Actions -->
+
+            <div class="about-header-actions" id="customerHeaderActions">
+
+                <a href="login.html"
+                   class="about-login-btn"
+                   id="customerLoginLink">
+
+                    <i class="fa-regular fa-user"></i>
+                    <span>Customer Login</span>
+
+                </a>
+
+                <div class="customer-account-wrap" id="customerAccountWrap" hidden>
+                    <button class="customer-account-btn"
+                            id="customerAccountBtn"
+                            type="button"
+                            aria-haspopup="true"
+                            aria-expanded="false">
+                        <i class="fa-regular fa-user"></i>
+                        <span id="customerAccountName">My Account</span>
+                        <i class="fa-solid fa-chevron-down customer-account-chevron"
+                           id="customerAccountChevron"
+                           aria-hidden="true"></i>
+                    </button>
+
+                    <div class="customer-account-dropdown"
+                         id="customerAccountDropdown"
+                         role="menu">
+                        <a href="appointments.html" role="menuitem">
+                            <i class="fa-regular fa-calendar-check"></i>
+                            <span>My Appointments</span>
+                        </a>
+                        <a href="booking-history.html" role="menuitem">
+                            <i class="fa-solid fa-clock-rotate-left"></i>
+                            <span>Booking History</span>
+                        </a>
+                        <a href="profile.html" role="menuitem">
+                            <i class="fa-regular fa-user"></i>
+                            <span>Update Profile</span>
+                        </a>
+                        <button type="button" id="customerLogoutBtn" role="menuitem">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                            <span>Logout</span>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- Mobile Menu -->
+
+            <button class="about-mobile-menu-btn"
+                    id="servicesMenuBtn"
+                    type="button"
+                    aria-label="Open menu"
+                    aria-controls="servicesMobileMenu"
+                    aria-expanded="false">
+
+                <i class="fa-solid fa-bars"></i>
+
+            </button>
+
+        </div>
+
+    </header>
+
+    <div class="about-mobile-menu"
+         id="servicesMobileMenu"
+         aria-hidden="true">
+
+
+        <div class="about-mobile-menu-header">
+
+
+            <a href="../index.html"
+               class="about-brand">
+
+                <span class="about-brand-logo">
+                    <i class="fa-solid fa-scissors"></i>
+                </span>
+
+                <span class="about-brand-name">
+
+                    <strong>The Beauty</strong>
+
+                    <small>Salon</small>
+
+                </span>
+
+            </a>
+
+
+            <button class="about-mobile-close"
+                    id="servicesCloseMenuBtn"
+                    type="button"
+                    aria-label="Close menu">
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+
+        <nav class="about-mobile-links"
+             aria-label="Mobile navigation">
+
+
+            <a href="../index.html">
+
+                <i class="fa-solid fa-house"></i>
+
+                <span>Home</span>
+
+            </a>
+
+
+            <a href="about.html"
+               class="active">
+
+                <i class="fa-regular fa-circle-user"></i>
+
+                <span>About</span>
+
+            </a>
+
+
+            <a href="services.html" class="active" aria-current="page">
+
+                <i class="fa-solid fa-scissors"></i>
+
+                <span>Services</span>
+
+            </a>
+
+
+            <a href="branches.html">
+
+                <i class="fa-solid fa-location-dot"></i>
+
+                <span>Branches</span>
+
+            </a>
+
+
+            <a href="gallery.html">
+
+                <i class="fa-regular fa-images"></i>
+
+                <span>Gallery</span>
+
+            </a>
+
+
+            <a href="contact.html">
+
+                <i class="fa-regular fa-envelope"></i>
+
+                <span>Contact</span>
+
+            </a>
+
+
+            <div class="about-mobile-divider"></div>
+
+
+            <a href="login.html" id="mobileCustomerLoginLink">
+
+                <i class="fa-solid fa-right-to-bracket"></i>
+
+                <span>Customer Login</span>
+
+            </a>
+
+            <a href="profile.html" id="mobileCustomerAccountLink" hidden>
+
+                <i class="fa-regular fa-user"></i>
+
+                <span>My Account</span>
+
+            </a>
+
+        </nav>
+
+    </div>
+
+
+    <!-- =====================================================
+         MAIN
+    ===================================================== -->
+
+    <main>
+
+        <!-- HERO -->
+
+        <section class="services-hero">
+
+            <div class="container">
+
+                <div class="services-hero-content">
+
+                    <div class="services-eyebrow">
+
+                        <i class="fa-solid fa-sparkles"></i>
+
+                        OUR SERVICES
+
+                    </div>
+
+                    <h1>
+                        Beauty &
+                        <span>Style, Your Way.</span>
+                    </h1>
+
+                    <p>
+                        Explore our range of professional hair,
+                        beauty and grooming services for Him, Her
+                        and Child.
+                    </p>
+
+                    <div class="services-breadcrumb">
+
+                        <a href="../index.html">
+                            Home
+                        </a>
+
+                        <i class="fa-solid fa-chevron-right"></i>
+
+                        <span>
+                            Services
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- SERVICES -->
+
+        <section class="services-section">
+
+            <div class="container">
+
+                <div class="services-heading">
+
+                    <div class="services-label">
+
+                        <i class="fa-solid fa-gem"></i>
+
+                        WHAT WE OFFER
+
+                    </div>
+
+                    <h2>
+                        Find Your
+                        <span>Perfect Service</span>
+                    </h2>
+
+                    <p>
+                        Choose a category to explore services
+                        available at The Beauty Salon.
+                    </p>
+
+                </div>
+
+
+                <!-- Filters -->
+
+                <div
+                    class="services-filters"
+                    role="tablist"
+                    aria-label="Service Categories"
+                >
+
+                    <button
+                        type="button"
+                        class="service-filter active"
+                        data-category="all"
+                    >
+                        All
+                    </button>
+
+                    <button
+                        type="button"
+                        class="service-filter"
+                        data-category="him"
+                    >
+                        Him
+                    </button>
+
+                    <button
+                        type="button"
+                        class="service-filter"
+                        data-category="her"
+                    >
+                        Her
+                    </button>
+
+                    <button
+                        type="button"
+                        class="service-filter"
+                        data-category="child"
+                    >
+                        Child
+                    </button>
+
+                </div>
+
+
+                <!-- Services Grid -->
+
+                <div class="services-grid" id="servicesGrid">
+                    <div class="services-loading" id="servicesLoading">
+                        <i class="fa-solid fa-spinner fa-spin"></i>
+                        <span>Loading services...</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- CTA -->
+
+        <section class="services-cta">
+
+            <div class="container">
+
+                <div class="services-cta-inner">
+
+                    <div>
+
+                        <h2>
+                            Found your service?
+                        </h2>
+
+                        <p>
+                            Choose your preferred branch and book
+                            your appointment.
+                        </p>
+
+                    </div>
+
+                    <a
+                        href="booking.html"
+                        class="btn"
+                    >
+                        Book Appointment
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+    ===================================================== -->
+
+    <footer class="site-footer">
+
+        <div class="container">
+
+            <div class="footer-grid">
+
+                <div class="footer-brand">
+
+                    <a href="../index.html" class="site-logo">
+
+                        <span class="logo-icon">
+                            <i class="fa-solid fa-scissors"></i>
+                        </span>
+
+                        <span class="logo-text">
+                            <strong>The Beauty</strong>
+                            <small>Salon</small>
+                        </span>
+
+                    </a>
+
+                    <p>
+                        Premium unisex beauty and hair salon
+                        providing professional beauty, hair and
+                        grooming services in Baramati.
+                    </p>
+
+                    <div class="footer-social">
+
+                        <a href="#" aria-label="Instagram">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+
+                        <a href="#" aria-label="Facebook">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+
+                        <a href="#" aria-label="WhatsApp">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <div class="footer-column">
+
+                    <h3>
+                        Quick Links
+                    </h3>
+
+                    <ul>
+
+                        <li>
+                            <a href="../index.html">
+                                Home
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="about.html">
+                                About
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="services.html">
+                                Services
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="branches.html">
+                                Branches
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="gallery.html">
+                                Gallery
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="footer-column">
+
+                    <h3>
+                        Services
+                    </h3>
+
+                    <ul>
+
+                        <li>
+                            <a href="services.html">
+                                Hair Services
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="services.html">
+                                Beauty Services
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="services.html">
+                                Grooming
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="booking.html">
+                                Book Appointment
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="footer-column footer-contact">
+
+                    <h3>
+                        Contact Us
+                    </h3>
+
+                    <p>
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+                        <span>
+                            Near Mahanagar Bank,
+                            in front of Shayog Society,
+                            Baramati
+                        </span>
+
+                    </p>
+
+                    <p>
+
+                        <i class="fa-solid fa-phone"></i>
+
+                        <a href="tel:+918793465001">
+                            +91 8793465001
+                        </a>
+
+                    </p>
+
+                    <p>
+
+                        <i class="fa-regular fa-envelope"></i>
+
+                        <a href="mailto:beautysalon@gamil.com">
+                            beautysalon@gamil.com
+                        </a>
+
+                    </p>
+
+                    <p>
+
+                        <i class="fa-regular fa-clock"></i>
+
+                        <span>
+                            Monday – Sunday,
+                            9:00 AM – 9:00 PM
+                        </span>
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-bottom">
+
+                <p>
+                    ©
+                    <span data-current-year>2026</span>
+                    The Beauty Salon.
+                    All Rights Reserved.
+                </p>
+
+                <p>
+                    Premium Beauty & Hair Salon
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <!-- Main JS -->
+    <script src="../js/main.js"></script>
+
+
+
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const API_URL = "http://localhost:5000/api/services";
+            const servicesGrid = document.getElementById("servicesGrid");
+            const filterButtons = document.querySelectorAll(".service-filter");
+
+            function getSession() {
+                try {
+                    const raw =
+                        localStorage.getItem("salon_customer_session") ||
+                        sessionStorage.getItem("salon_customer_session");
+                    return raw ? JSON.parse(raw) : null;
+                } catch (e) {
+                    return null;
+                }
+            }
+
+            function getCustomer() {
+                try {
+                    const raw =
+                        localStorage.getItem("salon_customer") ||
+                        sessionStorage.getItem("salon_customer");
+                    return raw ? JSON.parse(raw) : null;
+                } catch (e) {
+                    return null;
+                }
+            }
+
+            function updateCustomerHeader() {
+                const session = getSession();
+                const customer = getCustomer();
+                const loggedIn = !!(session && session.token && customer);
+
+                const loginLink = document.getElementById("customerLoginLink");
+                const accountWrap = document.getElementById("customerAccountWrap");
+                const accountName = document.getElementById("customerAccountName");
+
+                // Non-Home page header:
+                // Logged out  -> Customer Login
+                // Logged in   -> My Account dropdown
+                // Admin Login -> never shown on this page
+                if (loginLink) {
+                    loginLink.hidden = loggedIn;
+                    loginLink.style.display = loggedIn ? "none" : "inline-flex";
+                }
+
+                if (accountWrap) {
+                    accountWrap.hidden = !loggedIn;
+                    accountWrap.style.display = loggedIn ? "block" : "none";
+                }
+
+                if (accountName) {
+                    accountName.textContent =
+                        customer?.name ||
+                        customer?.fullName ||
+                        "My Account";
+                }
+            }
+
+            function slugify(value) {
+                return String(value || "")
+                    .toLowerCase()
+                    .trim()
+                    .replace(/[^a-z0-9]+/g, "-")
+                    .replace(/^-+|-+$/g, "");
+            }
+
+            function escapeHtml(value) {
+                return String(value ?? "")
+                    .replace(/&/g, "&amp;")
+                    .replace(/</g, "&lt;")
+                    .replace(/>/g, "&gt;")
+                    .replace(/"/g, "&quot;")
+                    .replace(/'/g, "&#039;");
+            }
+
+            function iconFor(category, name) {
+                const n = String(name || "").toLowerCase();
+                if (n.includes("beard")) return "fa-user-tie";
+                if (n.includes("kids")) return "fa-child";
+                if (n.includes("facial")) return "fa-face-smile";
+                if (n.includes("spa")) return "fa-spa";
+                if (n.includes("hair")) return "fa-scissors";
+                return "fa-sparkles";
+            }
+
+            function labelFor(name) {
+                const n = String(name || "").toLowerCase();
+                if (n.includes("beard")) return "Grooming";
+                if (n.includes("facial") || n.includes("spa")) return "Beauty Care";
+                if (n.includes("kids")) return "Kids Service";
+                return "Hair Service";
+            }
+
+            let allServices = [];
+
+            function renderServices(category = "all") {
+                if (!servicesGrid) return;
+
+                const filtered = allServices.filter(service => {
+                    if (category === "all") return true;
+                    return String(service.category || "").toLowerCase() === category;
+                });
+
+                if (!filtered.length) {
+                    servicesGrid.innerHTML = `
+                        <div class="services-empty">
+                            <span>No active services found.</span>
+                        </div>`;
+                    return;
+                }
+
+                servicesGrid.innerHTML = filtered.map(service => {
+                    const id = service.id;
+                    const name = service.name || "Service";
+                    const cat = service.category || "";
+                    const price = Number(service.price || 0).toLocaleString("en-IN");
+                    const duration = Number(service.duration || 0);
+                    const description = service.description || "Professional salon service.";
+                    const slug = slugify(name);
+
+                    return `
+                        <article class="service-card" data-category="${escapeHtml(String(cat).toLowerCase())}">
+                            <div class="service-card-image">
+                                <i class="fa-solid ${iconFor(cat, name)}"></i>
+                                <span>${escapeHtml(labelFor(name))}</span>
+                            </div>
+
+                            <div class="service-card-content">
+                                <span class="service-category">${escapeHtml(cat)}</span>
+
+                                <h3>${escapeHtml(name)}</h3>
+
+                                <p>${escapeHtml(description)}</p>
+
+                                <div class="service-meta">
+                                    <span class="service-price">₹${price}</span>
+                                    <span class="service-duration">
+                                        <i class="fa-regular fa-clock"></i>
+                                        ${duration} min
+                                    </span>
+                                </div>
+
+                                <a href="booking.html?service=${encodeURIComponent(slug)}&serviceId=${encodeURIComponent(id)}"
+                                   class="service-book">
+                                    Book This Service
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </article>`;
+                }).join("");
+            }
+
+            async function loadServices() {
+                try {
+                    const response = await fetch(API_URL);
+                    if (!response.ok) throw new Error("Failed to load services.");
+
+                    const payload = await response.json();
+
+                    const data = Array.isArray(payload)
+                        ? payload
+                        : Array.isArray(payload.services)
+                            ? payload.services
+                            : Array.isArray(payload.data)
+                                ? payload.data
+                                : Array.isArray(payload.data?.services)
+                                    ? payload.data.services
+                                    : [];
+
+                    allServices = data.filter(service =>
+                        Number(service.is_active ?? service.isActive ?? 1) === 1
+                    );
+
+                    renderServices("all");
+                } catch (error) {
+                    console.error("Services API error:", error);
+                    if (servicesGrid) {
+                        servicesGrid.innerHTML = `
+                            <div class="services-error">
+                                <i class="fa-solid fa-circle-exclamation"></i>
+                                <span>Unable to load services. Please make sure the backend is running.</span>
+                            </div>`;
+                    }
+                }
+            }
+
+            filterButtons.forEach(button => {
+                button.addEventListener("click", function () {
+                    filterButtons.forEach(item => item.classList.remove("active"));
+                    this.classList.add("active");
+                    renderServices(this.dataset.category || "all");
+                });
+            });
+
+            // Customer profile dropdown.
+            const accountBtn = document.getElementById("customerAccountBtn");
+            const accountWrap = document.getElementById("customerAccountWrap");
+            const accountDropdown = document.getElementById("customerAccountDropdown");
+
+            if (accountBtn && accountWrap && accountDropdown) {
+                accountBtn.addEventListener("click", function (event) {
+                    event.stopPropagation();
+
+                    const open = accountWrap.classList.toggle("open");
+                    accountBtn.setAttribute("aria-expanded", String(open));
+                });
+
+                accountDropdown.addEventListener("click", function (event) {
+                    event.stopPropagation();
+                });
+
+                document.addEventListener("click", function () {
+                    accountWrap.classList.remove("open");
+                    accountBtn.setAttribute("aria-expanded", "false");
+                });
+            }
+
+            // Logout.
+            document.querySelectorAll("#customerLogoutBtn").forEach(btn => {
+                btn.addEventListener("click", function () {
+                    localStorage.removeItem("salon_customer_session");
+                    sessionStorage.removeItem("salon_customer_session");
+                    localStorage.removeItem("salon_customer");
+                    sessionStorage.removeItem("salon_customer");
+                    window.location.href = "../index.html";
+                });
+            });
+
+            // Mobile menu.
+            const menuBtn = document.getElementById("servicesMenuBtn");
+            const closeBtn = document.getElementById("servicesCloseMenuBtn");
+            const mobileMenu = document.getElementById("servicesMobileMenu");
+
+            function openMenu() {
+                if (!menuBtn || !mobileMenu) return;
+                mobileMenu.classList.add("open");
+                mobileMenu.setAttribute("aria-hidden", "false");
+                menuBtn.setAttribute("aria-expanded", "true");
+                document.body.style.overflow = "hidden";
+            }
+
+            function closeMenu() {
+                if (!menuBtn || !mobileMenu) return;
+                mobileMenu.classList.remove("open");
+                mobileMenu.setAttribute("aria-hidden", "true");
+                menuBtn.setAttribute("aria-expanded", "false");
+                document.body.style.overflow = "";
+            }
+
+            menuBtn?.addEventListener("click", openMenu);
+            closeBtn?.addEventListener("click", closeMenu);
+
+            document.querySelectorAll(".about-mobile-links a").forEach(link => {
+                link.addEventListener("click", closeMenu);
+            });
+
+            document.addEventListener("keydown", event => {
+                if (event.key === "Escape") closeMenu();
+            });
+
+            window.addEventListener("resize", () => {
+                if (window.innerWidth >= 768) closeMenu();
+            });
+
+            updateCustomerHeader();
+            loadServices();
+        });
+    </script>
+</body>
+</html>

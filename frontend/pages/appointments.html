@@ -1,0 +1,2466 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>My Appointments | The Beauty Salon</title>
+
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        html {
+            width: 100%;
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+
+            width: 100%;
+            min-height: 100vh;
+
+            background: #000000;
+
+            color: #ffffff;
+
+            font-family: "DM Sans", sans-serif;
+
+            overflow-x: hidden;
+
+            scrollbar-width: none;
+        }
+
+
+        body::-webkit-scrollbar {
+            display: none;
+        }
+
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        .site-header {
+
+            width: 100%;
+
+            height: 82px;
+
+            background: #000000;
+
+            border-bottom: 1px solid
+                rgba(212, 175, 55, 0.20);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 0 6%;
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 1000;
+        }
+
+
+        /* LOGO */
+
+        .brand {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            text-decoration: none;
+
+            color: #ffffff;
+        }
+
+
+        .brand-icon {
+
+            width: 43px;
+
+            height: 43px;
+
+            border: 1px solid #d4af37;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: #d4af37;
+
+            font-size: 18px;
+        }
+
+
+        .brand-name {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 22px;
+
+            font-weight: 600;
+
+            color: #ffffff;
+
+            letter-spacing: 0.2px;
+        }
+
+
+        /* HEADER RIGHT */
+
+        .header-actions {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+        }
+
+
+        /* ACCOUNT BUTTON */
+
+        .account-button {
+
+            min-height: 43px;
+
+            padding: 0 16px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 9px;
+
+            border: 1px solid #d4af37;
+
+            border-radius: 5px;
+
+            background: #d4af37;
+
+            color: #000000;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            transition: 0.25s ease;
+
+            cursor: pointer;
+        }
+
+
+        .account-button:hover {
+
+            background: #e5c65a;
+
+            border-color: #e5c65a;
+
+            transform: translateY(-1px);
+        }
+
+
+        .account-button i {
+
+            font-size: 14px;
+        }
+
+
+        .account-arrow {
+
+            font-size: 10px !important;
+
+            margin-left: 2px;
+        }
+
+
+        /* =====================================================
+           PAGE HERO
+        ===================================================== */
+
+        .page-hero {
+
+            text-align: center;
+
+            padding:
+                72px 20px 48px;
+
+            background:
+                radial-gradient(
+                    circle at 50% 0%,
+                    rgba(212, 175, 55, 0.10),
+                    transparent 48%
+                );
+        }
+
+
+        .page-label {
+
+            color: #d4af37;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            letter-spacing: 3px;
+
+            margin-bottom: 14px;
+        }
+
+
+        .page-title {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size:
+                clamp(34px, 5vw, 54px);
+
+            font-weight: 600;
+
+            line-height: 1.15;
+
+            margin-bottom: 14px;
+        }
+
+
+        .page-subtitle {
+
+            max-width: 650px;
+
+            margin: auto;
+
+            color: #999999;
+
+            font-size: 14px;
+
+            line-height: 1.8;
+        }
+
+
+        /* =====================================================
+           MAIN CONTAINER
+        ===================================================== */
+
+        .main-container {
+
+            width: min(1180px, 92%);
+
+            margin: 0 auto;
+
+            padding-bottom: 80px;
+        }
+
+
+        /* =====================================================
+           WELCOME BOX
+        ===================================================== */
+
+        .welcome-box {
+
+            width: 100%;
+
+            background: #101010;
+
+            border: 1px solid
+                rgba(212, 175, 55, 0.18);
+
+            border-radius: 9px;
+
+            padding: 20px 22px;
+
+            margin-bottom: 34px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 20px;
+        }
+
+
+        .welcome-content h3 {
+
+            font-size: 18px;
+
+            font-weight: 600;
+
+            margin-bottom: 5px;
+        }
+
+
+        .welcome-content p {
+
+            color: #888888;
+
+            font-size: 13px;
+
+            line-height: 1.5;
+        }
+
+
+        .welcome-icon {
+
+            width: 48px;
+
+            height: 48px;
+
+            flex-shrink: 0;
+
+            border: 1px solid
+                rgba(212, 175, 55, 0.45);
+
+            border-radius: 50%;
+
+            color: #d4af37;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 18px;
+        }
+
+
+        /* =====================================================
+           SECTION HEADER
+        ===================================================== */
+
+        .section-header {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            margin-bottom: 18px;
+        }
+
+
+        .section-title {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 28px;
+
+            font-weight: 600;
+        }
+
+
+        .appointment-count {
+
+            color: #d4af37;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            white-space: nowrap;
+        }
+
+
+        /* =====================================================
+           APPOINTMENT LIST
+        ===================================================== */
+
+        .appointments-list {
+
+            display: grid;
+
+            gap: 17px;
+        }
+
+
+        /* =====================================================
+           APPOINTMENT CARD
+        ===================================================== */
+
+        .appointment-card {
+
+            width: 100%;
+
+            background: #101010;
+
+            border: 1px solid
+                rgba(212, 175, 55, 0.20);
+
+            border-radius: 10px;
+
+            padding: 23px;
+
+            transition:
+                border-color 0.25s ease,
+                transform 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+
+        .appointment-card:hover {
+
+            border-color:
+                rgba(212, 175, 55, 0.48);
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 14px 40px
+                rgba(0, 0, 0, 0.35);
+        }
+
+
+        /* CARD TOP */
+
+        .card-top {
+
+            display: flex;
+
+            align-items: flex-start;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            padding-bottom: 20px;
+
+            border-bottom: 1px solid
+                rgba(255, 255, 255, 0.07);
+        }
+
+
+        .service-info {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+
+            min-width: 0;
+        }
+
+
+        .service-icon {
+
+            width: 50px;
+
+            height: 50px;
+
+            flex-shrink: 0;
+
+            border-radius: 8px;
+
+            background:
+                rgba(212, 175, 55, 0.09);
+
+            border: 1px solid
+                rgba(212, 175, 55, 0.28);
+
+            color: #d4af37;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 19px;
+        }
+
+
+        .service-name {
+
+            font-size: 18px;
+
+            font-weight: 600;
+
+            color: #ffffff;
+
+            margin-bottom: 5px;
+
+            white-space: nowrap;
+
+            overflow: hidden;
+
+            text-overflow: ellipsis;
+        }
+
+
+        .booking-number {
+
+            color: #777777;
+
+            font-size: 11px;
+
+            letter-spacing: 0.4px;
+        }
+
+
+        /* STATUS */
+
+        .status-badge {
+
+            flex-shrink: 0;
+
+            padding: 7px 12px;
+
+            border-radius: 30px;
+
+            color: #d4af37;
+
+            background:
+                rgba(212, 175, 55, 0.08);
+
+            border: 1px solid
+                rgba(212, 175, 55, 0.30);
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+            letter-spacing: 0.6px;
+
+            white-space: nowrap;
+        }
+
+
+        /* =====================================================
+           DETAILS GRID
+        ===================================================== */
+
+        .details-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 22px 18px;
+
+            padding-top: 21px;
+        }
+
+
+        .detail-item {
+
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 10px;
+
+            min-width: 0;
+        }
+
+
+        .detail-icon {
+
+            width: 17px;
+
+            flex-shrink: 0;
+
+            color: #d4af37;
+
+            font-size: 13px;
+
+            text-align: center;
+
+            margin-top: 3px;
+        }
+
+
+        .detail-label {
+
+            display: block;
+
+            color: #707070;
+
+            font-size: 9px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.8px;
+
+            margin-bottom: 4px;
+        }
+
+
+        .detail-value {
+
+            display: block;
+
+            color: #dddddd;
+
+            font-size: 12px;
+
+            line-height: 1.45;
+
+            word-break: break-word;
+        }
+
+
+        .price-value {
+
+            color: #d4af37;
+
+            font-weight: 700;
+
+            font-size: 13px;
+        }
+
+
+        /* =====================================================
+           LOADING
+        ===================================================== */
+
+        .loading-box {
+
+            width: 100%;
+
+            padding: 70px 20px;
+
+            text-align: center;
+
+            color: #888888;
+        }
+
+
+        .loading-box i {
+
+            display: block;
+
+            color: #d4af37;
+
+            font-size: 25px;
+
+            margin-bottom: 13px;
+        }
+
+
+        .loading-box p {
+
+            font-size: 13px;
+        }
+
+
+        /* =====================================================
+           EMPTY
+        ===================================================== */
+
+        .empty-box {
+
+            width: 100%;
+
+            padding: 70px 20px;
+
+            background: #101010;
+
+            border: 1px dashed
+                rgba(212, 175, 55, 0.30);
+
+            border-radius: 10px;
+
+            text-align: center;
+        }
+
+
+        .empty-icon {
+
+            width: 68px;
+
+            height: 68px;
+
+            margin:
+                0 auto 18px;
+
+            border: 1px solid
+                rgba(212, 175, 55, 0.40);
+
+            border-radius: 50%;
+
+            color: #d4af37;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 24px;
+        }
+
+
+        .empty-box h3 {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 24px;
+
+            font-weight: 600;
+
+            margin-bottom: 8px;
+        }
+
+
+        .empty-box p {
+
+            color: #888888;
+
+            font-size: 13px;
+
+            margin-bottom: 22px;
+        }
+
+
+        .book-button {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            padding: 12px 20px;
+
+            background: #d4af37;
+
+            color: #000000;
+
+            border-radius: 5px;
+
+            text-decoration: none;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            transition: 0.25s ease;
+        }
+
+
+        .book-button:hover {
+
+            background: #e5c65a;
+
+            transform: translateY(-1px);
+        }
+
+
+        /* =====================================================
+           ERROR
+        ===================================================== */
+
+        .error-box {
+
+            padding: 18px;
+
+            border-radius: 8px;
+
+            background:
+                rgba(150, 30, 30, 0.10);
+
+            border: 1px solid
+                rgba(220, 70, 70, 0.30);
+
+            color: #ff9b9b;
+
+            text-align: center;
+
+            font-size: 13px;
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        .site-footer {
+
+            width: 100%;
+
+            border-top: 1px solid
+                rgba(212, 175, 55, 0.14);
+
+            padding: 24px 20px;
+
+            text-align: center;
+
+            color: #666666;
+
+            font-size: 11px;
+        }
+
+
+        .site-footer span {
+
+            color: #d4af37;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 900px) {
+
+            .details-grid {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+        }
+
+
+        @media (max-width: 650px) {
+
+            .site-header {
+
+                height: 72px;
+
+                padding: 0 4%;
+            }
+
+
+            .brand-icon {
+
+                width: 37px;
+
+                height: 37px;
+
+                font-size: 15px;
+            }
+
+
+            .brand-name {
+
+                font-size: 18px;
+            }
+
+
+            .account-button {
+
+                padding: 0 12px;
+
+                min-height: 39px;
+            }
+
+
+            .account-button span {
+
+                display: none;
+            }
+
+
+            .account-arrow {
+
+                display: none;
+            }
+
+
+            .page-hero {
+
+                padding:
+                    52px 18px 38px;
+            }
+
+
+            .main-container {
+
+                width: 94%;
+            }
+
+
+            .welcome-box {
+
+                padding: 17px;
+
+            }
+
+
+            .section-title {
+
+                font-size: 24px;
+            }
+
+
+            .appointment-card {
+
+                padding: 18px;
+            }
+
+
+            .card-top {
+
+                flex-direction: column;
+
+                gap: 14px;
+            }
+
+
+            .status-badge {
+
+                align-self: flex-start;
+            }
+
+
+            .details-grid {
+
+                grid-template-columns: 1fr;
+
+                gap: 16px;
+            }
+
+        }
+
+
+        @media (max-width: 400px) {
+
+            .brand-name {
+
+                font-size: 16px;
+            }
+
+
+            .brand {
+
+                gap: 8px;
+            }
+
+
+            .page-title {
+
+                font-size: 34px;
+            }
+
+        }
+
+        /* =====================================================
+   ACCOUNT DROPDOWN
+===================================================== */
+
+.account-dropdown {
+
+    position: relative;
+
+}
+
+
+.account-button {
+
+    min-height: 43px;
+
+    padding: 0 16px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 9px;
+
+    border: 1px solid #d4af37;
+
+    border-radius: 5px;
+
+    background: #d4af37;
+
+    color: #000000;
+
+    font-family: "DM Sans", sans-serif;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.25s ease;
+}
+
+
+.account-button:hover {
+
+    background: #e5c65a;
+
+    border-color: #e5c65a;
+}
+
+
+.account-menu {
+
+    position: absolute;
+
+    top: calc(100% + 10px);
+
+    right: 0;
+
+    width: 220px;
+
+    background: #111111;
+
+    border: 1px solid
+        rgba(212, 175, 55, 0.30);
+
+    border-radius: 7px;
+
+    padding: 7px;
+
+    box-shadow:
+        0 15px 40px
+        rgba(0, 0, 0, 0.55);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transform:
+        translateY(-8px);
+
+    transition:
+        opacity 0.2s ease,
+        visibility 0.2s ease,
+        transform 0.2s ease;
+
+    z-index: 2000;
+}
+
+
+.account-menu.show {
+
+    opacity: 1;
+
+    visibility: visible;
+
+    transform:
+        translateY(0);
+}
+
+
+.account-menu a,
+.logout-item {
+
+    width: 100%;
+
+    min-height: 42px;
+
+    padding: 0 12px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    border: none;
+
+    border-radius: 5px;
+
+    background: transparent;
+
+    color: #dddddd;
+
+    text-decoration: none;
+
+    font-family: "DM Sans", sans-serif;
+
+    font-size: 13px;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+
+    text-align: left;
+}
+
+
+.account-menu a:hover,
+.logout-item:hover {
+
+    background:
+        rgba(212, 175, 55, 0.10);
+
+    color: #d4af37;
+}
+
+
+.account-menu a i,
+.logout-item i {
+
+    width: 17px;
+
+    color: #d4af37;
+
+    text-align: center;
+}
+
+
+.menu-divider {
+
+    height: 1px;
+
+    background:
+        rgba(255, 255, 255, 0.08);
+
+    margin: 6px 4px;
+}
+
+
+.logout-item {
+
+    color: #dddddd;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 650px) {
+
+    .account-menu {
+
+        width: 205px;
+
+        right: 0;
+
+    }
+
+}
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         HEADER
+    ===================================================== -->
+
+    <header class="site-header">
+
+
+        <!-- LOGO -->
+
+        <a
+            href="../index.html"
+            class="brand"
+        >
+
+            <div class="brand-icon">
+
+                <i class="fa-solid fa-scissors"></i>
+
+            </div>
+
+
+            <div class="brand-name">
+                The Beauty Salon
+            </div>
+
+        </a>
+
+
+        <!-- ACCOUNT -->
+
+      <div class="header-actions">
+
+    <div class="account-dropdown">
+
+        <button
+            type="button"
+            class="account-button"
+            id="accountButton"
+        >
+
+            <i class="fa-regular fa-user"></i>
+
+            <span id="accountName">
+                My Account
+            </span>
+
+            <i
+                class="fa-solid fa-chevron-down account-arrow"
+            ></i>
+
+        </button>
+
+
+        <div
+            class="account-menu"
+            id="accountMenu"
+        >
+
+            <a href="profile.html">
+
+                <i class="fa-regular fa-user"></i>
+
+                <span>My Profile</span>
+
+            </a>
+
+
+            <a href="appointments.html">
+
+                <i class="fa-regular fa-calendar-check"></i>
+
+                <span>My Appointments</span>
+
+            </a>
+
+
+            <a href="booking-history.html">
+
+                <i class="fa-solid fa-clock-rotate-left"></i>
+
+                <span>Booking History</span>
+
+            </a>
+
+
+            <div class="menu-divider"></div>
+
+
+            <button
+                type="button"
+                id="logoutButton"
+                class="logout-item"
+            >
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                <span>Logout</span>
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         HERO
+    ===================================================== -->
+
+    <section class="page-hero">
+
+        <div class="page-label">
+            Customer Account
+        </div>
+
+
+        <h1 class="page-title">
+            My Appointments
+        </h1>
+
+
+        <p class="page-subtitle">
+            Manage and view your upcoming
+            confirmed appointments at
+            The Beauty Salon.
+        </p>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         MAIN
+    ===================================================== -->
+
+    <main class="main-container">
+
+
+        <!-- WELCOME -->
+
+        <div
+            class="welcome-box"
+            id="welcomeBox"
+        >
+
+            <div class="welcome-content">
+
+                <h3 id="welcomeName">
+                    Welcome
+                </h3>
+
+
+                <p>
+                    Your upcoming appointments
+                    are shown below.
+                </p>
+
+            </div>
+
+
+            <div class="welcome-icon">
+
+                <i class="fa-regular fa-calendar-check"></i>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- SECTION HEADER -->
+
+        <div class="section-header">
+
+            <h2 class="section-title">
+                Upcoming Appointments
+            </h2>
+
+
+            <span
+                class="appointment-count"
+                id="appointmentCount"
+            >
+                0 Appointments
+            </span>
+
+        </div>
+
+
+
+        <!-- APPOINTMENTS -->
+
+        <div
+            class="appointments-list"
+            id="appointmentsList"
+        >
+
+            <div class="loading-box">
+
+                <i class="fa-solid fa-spinner fa-spin"></i>
+
+                <p>
+                    Loading your appointments...
+                </p>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ===================================================== -->
+
+    <footer class="site-footer">
+
+        © 2026
+        <span>The Beauty Salon</span>
+        · Baramati, Maharashtra
+
+    </footer>
+
+
+
+    <script>
+
+
+        /* =====================================================
+           GET SESSION
+        ===================================================== */
+
+        function getCustomerSession() {
+
+            const localSession =
+                localStorage.getItem(
+                    "salon_customer_session"
+                );
+
+
+            const sessionSession =
+                sessionStorage.getItem(
+                    "salon_customer_session"
+                );
+
+
+            const sessionText =
+                localSession ||
+                sessionSession;
+
+
+            if (!sessionText) {
+
+                return null;
+
+            }
+
+
+            try {
+
+                return JSON.parse(
+                    sessionText
+                );
+
+            } catch (error) {
+
+                return null;
+
+            }
+
+        }
+
+
+
+        /* =====================================================
+           FORMAT DATE
+        ===================================================== */
+
+        function formatDate(dateValue) {
+
+            if (!dateValue) {
+
+                return "-";
+
+            }
+
+
+            const text =
+                String(dateValue).trim();
+
+
+            /*
+                MySQL DATE:
+                YYYY-MM-DD
+            */
+
+            const match =
+                text.match(
+                    /^(\d{4})-(\d{2})-(\d{2})/
+                );
+
+
+            if (!match) {
+
+                return "-";
+
+            }
+
+
+            const year =
+                Number(match[1]);
+
+
+            const month =
+                Number(match[2]);
+
+
+            const day =
+                Number(match[3]);
+
+
+            const months = [
+
+                "Jan",
+                "Feb",
+                "Mar",
+                "Apr",
+                "May",
+                "Jun",
+                "Jul",
+                "Aug",
+                "Sep",
+                "Oct",
+                "Nov",
+                "Dec"
+
+            ];
+
+
+            if (
+
+                year < 2000 ||
+
+                month < 1 ||
+
+                month > 12 ||
+
+                day < 1 ||
+
+                day > 31
+
+            ) {
+
+                return "-";
+
+            }
+
+
+            return (
+
+                String(day).padStart(2, "0") +
+
+                " " +
+
+                months[month - 1] +
+
+                " " +
+
+                year
+
+            );
+
+        }
+
+
+
+        /* =====================================================
+           FORMAT TIME
+        ===================================================== */
+
+        function formatTime(timeValue) {
+
+            if (!timeValue) {
+
+                return "-";
+
+            }
+
+
+            const text =
+                String(timeValue).trim();
+
+
+            const match =
+                text.match(
+                    /^(\d{1,2}):(\d{2})/
+                );
+
+
+            if (!match) {
+
+                return text;
+
+            }
+
+
+            let hours =
+                Number(match[1]);
+
+
+            const minutes =
+                Number(match[2]);
+
+
+            if (
+                hours < 0 ||
+                hours > 23 ||
+                minutes < 0 ||
+                minutes > 59
+            ) {
+
+                return "-";
+
+            }
+
+
+            const period =
+                hours >= 12
+                    ? "pm"
+                    : "am";
+
+
+            hours =
+                hours % 12 || 12;
+
+
+            return (
+
+                String(hours).padStart(2, "0") +
+
+                ":" +
+
+                String(minutes).padStart(2, "0") +
+
+                " " +
+
+                period
+
+            );
+
+        }
+
+
+
+        /* =====================================================
+           FORMAT PRICE
+        ===================================================== */
+
+        function formatPrice(price) {
+
+            const number =
+                Number(price || 0);
+
+
+            return (
+                "₹" +
+                number.toLocaleString(
+                    "en-IN"
+                )
+            );
+
+        }
+
+
+
+        /* =====================================================
+           ESCAPE HTML
+        ===================================================== */
+
+        function escapeHtml(value) {
+
+            return String(
+                value ?? ""
+            )
+
+            .replace(
+                /&/g,
+                "&amp;"
+            )
+
+            .replace(
+                /</g,
+                "&lt;"
+            )
+
+            .replace(
+                />/g,
+                "&gt;"
+            )
+
+            .replace(
+                /"/g,
+                "&quot;"
+            )
+
+            .replace(
+                /'/g,
+                "&#039;"
+            );
+
+        }
+
+
+
+        /* =====================================================
+           LOAD APPOINTMENTS
+        ===================================================== */
+
+        async function loadAppointments() {
+
+            const list =
+                document.getElementById(
+                    "appointmentsList"
+                );
+
+
+            const session =
+                getCustomerSession();
+
+
+            /* ---------------------------------------------
+               LOGIN CHECK
+            --------------------------------------------- */
+
+            if (
+                !session ||
+                !session.token
+            ) {
+
+                window.location.href =
+                    "login.html";
+
+                return;
+
+            }
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        "http://localhost:5000/api/bookings/my-appointments",
+                        {
+                            method: "GET",
+
+                            headers: {
+
+                                "Authorization":
+                                    "Bearer " +
+                                    session.token
+
+                            }
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                /* -----------------------------------------
+                   SESSION EXPIRED
+                ----------------------------------------- */
+
+                if (
+                    response.status === 401
+                ) {
+
+                    localStorage.removeItem(
+                        "salon_customer_session"
+                    );
+
+
+                    sessionStorage.removeItem(
+                        "salon_customer_session"
+                    );
+
+
+                    localStorage.removeItem(
+                        "salon_customer"
+                    );
+
+
+                    window.location.href =
+                        "login.html";
+
+                    return;
+
+                }
+
+
+                if (!data.success) {
+
+                    throw new Error(
+                        data.message ||
+                        "Unable to load appointments."
+                    );
+
+                }
+
+
+                /* -----------------------------------------
+                   CUSTOMER
+                ----------------------------------------- */
+
+                const customer =
+                    data.customer ||
+                    session.customer ||
+                    null;
+
+
+                if (
+                    customer &&
+                    customer.name
+                ) {
+
+                    document.getElementById(
+                        "welcomeName"
+                    ).textContent =
+                        "Welcome, " +
+                        customer.name;
+
+
+                    document.getElementById(
+                        "accountName"
+                    ).textContent =
+                        customer.name;
+
+                }
+
+
+                /* -----------------------------------------
+                   APPOINTMENTS
+                ----------------------------------------- */
+
+                const appointments =
+                    Array.isArray(data.data)
+                        ? data.data
+                        : [];
+
+
+                /* COUNT */
+
+                document.getElementById(
+                    "appointmentCount"
+                ).textContent =
+
+                    appointments.length +
+
+                    (
+
+                        appointments.length === 1
+
+                            ? " Appointment"
+
+                            : " Appointments"
+
+                    );
+
+
+                /* -----------------------------------------
+                   EMPTY
+                ----------------------------------------- */
+
+                if (
+                    appointments.length === 0
+                ) {
+
+                    list.innerHTML = `
+
+                        <div class="empty-box">
+
+                            <div class="empty-icon">
+
+                                <i
+                                    class="fa-regular fa-calendar-xmark"
+                                ></i>
+
+                            </div>
+
+
+                            <h3>
+                                No Upcoming Appointments
+                            </h3>
+
+
+                            <p>
+                                You don't have any
+                                confirmed appointments yet.
+                            </p>
+
+
+                            <a
+                                href="booking.html"
+                                class="book-button"
+                            >
+
+                                <i
+                                    class="fa-regular fa-calendar-plus"
+                                ></i>
+
+                                Book an Appointment
+
+                            </a>
+
+                        </div>
+
+                    `;
+
+                    return;
+
+                }
+
+
+                /* -----------------------------------------
+                   RENDER APPOINTMENTS
+                ----------------------------------------- */
+
+                list.innerHTML =
+                    appointments
+                        .map(
+                            appointment =>
+                                createAppointmentCard(
+                                    appointment
+                                )
+                        )
+                        .join("");
+
+
+            } catch (error) {
+
+                console.error(
+                    "Appointments Error:",
+                    error
+                );
+
+
+                list.innerHTML = `
+
+                    <div class="error-box">
+
+                        <i
+                            class="fa-solid fa-circle-exclamation"
+                        ></i>
+
+                        &nbsp;
+
+                        ${escapeHtml(
+                            error.message ||
+                            "Unable to load appointments."
+                        )}
+
+                    </div>
+
+                `;
+
+            }
+
+        }
+
+
+
+        /* =====================================================
+           CREATE APPOINTMENT CARD
+        ===================================================== */
+
+        function createAppointmentCard(
+            appointment
+        ) {
+
+            const serviceName =
+                appointment.service_name ||
+                "Salon Service";
+
+
+            const bookingNumber =
+                appointment.booking_number ||
+                "-";
+
+
+            const branchName =
+                appointment.branch_name ||
+                "-";
+
+
+            const staffName =
+                appointment.staff_name ||
+                "-";
+
+
+            const duration =
+                Number(
+                    appointment.service_duration ||
+                    0
+                );
+
+
+            const paymentMethod =
+                appointment.payment_method ===
+                "PAY_AT_SALON"
+
+                    ? "Pay at Salon"
+
+                    : (
+                        appointment.payment_method ||
+                        "-"
+                    );
+
+
+            const paymentStatus =
+                appointment.payment_status ||
+                "PENDING";
+
+
+            return `
+
+                <div class="appointment-card">
+
+
+                    <!-- CARD TOP -->
+
+                    <div class="card-top">
+
+
+                        <div class="service-info">
+
+
+                            <div class="service-icon">
+
+                                <i
+                                    class="fa-solid fa-scissors"
+                                ></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <div class="service-name">
+
+                                    ${escapeHtml(
+                                        serviceName
+                                    )}
+
+                                </div>
+
+
+                                <div class="booking-number">
+
+                                    Booking No:
+                                    ${escapeHtml(
+                                        bookingNumber
+                                    )}
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="status-badge">
+
+                            <i
+                                class="fa-solid fa-circle-check"
+                            ></i>
+
+                            &nbsp;
+
+                            CONFIRMED
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- DETAILS -->
+
+                    <div class="details-grid">
+
+
+                        <!-- DATE -->
+
+                        <div class="detail-item">
+
+                            <div class="detail-icon">
+
+                                <i
+                                    class="fa-regular fa-calendar"
+                                ></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <span class="detail-label">
+                                    Date
+                                </span>
+
+
+                                <span class="detail-value">
+
+                                    ${formatDate(
+                                        appointment.booking_date
+                                    )}
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- TIME -->
+
+                        <div class="detail-item">
+
+                            <div class="detail-icon">
+
+                                <i
+                                    class="fa-regular fa-clock"
+                                ></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <span class="detail-label">
+                                    Time
+                                </span>
+
+
+                                <span class="detail-value">
+
+                                    ${formatTime(
+                                        appointment.booking_time
+                                    )}
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- BRANCH -->
+
+                        <div class="detail-item">
+
+                            <div class="detail-icon">
+
+                                <i
+                                    class="fa-solid fa-location-dot"
+                                ></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <span class="detail-label">
+                                    Branch
+                                </span>
+
+
+                                <span class="detail-value">
+
+                                    ${escapeHtml(
+                                        branchName
+                                    )}
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- STAFF -->
+
+                        <div class="detail-item">
+
+                            <div class="detail-icon">
+
+                                <i
+                                    class="fa-solid fa-user"
+                                ></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <span class="detail-label">
+                                    Staff
+                                </span>
+
+
+                                <span class="detail-value">
+
+                                    ${escapeHtml(
+                                        staffName
+                                    )}
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- DURATION -->
+
+                        <div class="detail-item">
+
+                            <div class="detail-icon">
+
+                                <i
+                                    class="fa-solid fa-hourglass-half"
+                                ></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <span class="detail-label">
+                                    Duration
+                                </span>
+
+
+                                <span class="detail-value">
+
+                                    ${duration}
+                                    minutes
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- PAYMENT -->
+
+                        <div class="detail-item">
+
+                            <div class="detail-icon">
+
+                                <i
+                                    class="fa-solid fa-wallet"
+                                ></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <span class="detail-label">
+                                    Payment
+                                </span>
+
+
+                                <span class="detail-value">
+
+                                    ${escapeHtml(
+                                        paymentMethod
+                                    )}
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- PAYMENT STATUS -->
+
+                        <div class="detail-item">
+
+                            <div class="detail-icon">
+
+                                <i
+                                    class="fa-solid fa-credit-card"
+                                ></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <span class="detail-label">
+                                    Payment Status
+                                </span>
+
+
+                                <span class="detail-value">
+
+                                    ${escapeHtml(
+                                        paymentStatus
+                                    )}
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- PRICE -->
+
+                        <div class="detail-item">
+
+                            <div class="detail-icon">
+
+                                <i
+                                    class="fa-solid fa-indian-rupee-sign"
+                                ></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <span class="detail-label">
+                                    Price
+                                </span>
+
+
+                                <span
+                                    class="detail-value price-value"
+                                >
+
+                                    ${formatPrice(
+                                        appointment.service_price
+                                    )}
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }
+
+
+
+        /* =====================================================
+           START
+        ===================================================== */
+
+        loadAppointments();
+
+
+        /* =====================================================
+   ACCOUNT DROPDOWN
+===================================================== */
+
+const accountButton =
+    document.getElementById("accountButton");
+
+const accountMenu =
+    document.getElementById("accountMenu");
+
+
+if (accountButton && accountMenu) {
+
+    accountButton.addEventListener(
+        "click",
+        function (event) {
+
+            event.stopPropagation();
+
+            accountMenu.classList.toggle(
+                "show"
+            );
+
+        }
+    );
+
+
+    document.addEventListener(
+        "click",
+        function () {
+
+            accountMenu.classList.remove(
+                "show"
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+const logoutButton =
+    document.getElementById("logoutButton");
+
+
+if (logoutButton) {
+
+    logoutButton.addEventListener(
+        "click",
+        function () {
+
+            localStorage.removeItem(
+                "salon_customer_session"
+            );
+
+            sessionStorage.removeItem(
+                "salon_customer_session"
+            );
+
+            localStorage.removeItem(
+                "salon_customer"
+            );
+
+            window.location.href =
+                "../index.html";
+
+        }
+    );
+
+}
+
+    </script>
+
+
+</body>
+
+</html>
