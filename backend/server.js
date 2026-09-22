@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const path = require("path");
 require("dotenv").config();
 
 const pool = require("./config/database");
@@ -8,6 +9,10 @@ const bookingRoutes = require("./routes/bookingRoutes");
 const authRoutes = require("./routes/authRoutes");
 const branchRoutes = require("./routes/branchRoutes");
 const serviceRoutes = require("./routes/serviceRoutes");
+const customerRoutes = require("./routes/customerRoutes");
+const staffRoutes = require("./routes/staffRoutes");
+const galleryRoutes = require("./routes/galleryRoutes");
+const offerRoutes = require("./routes/offerRoutes");
 
 const app = express();
 
@@ -35,11 +40,22 @@ app.use(
 
 
 // =====================================================
+// STATIC UPLOADS
+// =====================================================
+
+app.use(
+    "/uploads",
+    express.static(
+        path.join(__dirname, "uploads")
+    )
+);
+
+
+// =====================================================
 // HOME / SERVER TEST
 // =====================================================
 
 app.get("/", (req, res) => {
-
     res.json({
         success: true,
         message: "The Beauty Salon Local Backend is running!",
@@ -47,7 +63,6 @@ app.get("/", (req, res) => {
         database: "salon_booking",
         environment: "LOCAL"
     });
-
 });
 
 
@@ -56,9 +71,7 @@ app.get("/", (req, res) => {
 // =====================================================
 
 app.get("/api/test-db", async (req, res) => {
-
     try {
-
         const [rows] = await pool.promise().query(
             "SELECT 1 AS connected"
         );
@@ -68,9 +81,7 @@ app.get("/api/test-db", async (req, res) => {
             message: "Local MySQL Database Connected Successfully!",
             data: rows
         });
-
     } catch (error) {
-
         console.error("DATABASE TEST ERROR:", error);
 
         res.status(500).json({
@@ -78,9 +89,7 @@ app.get("/api/test-db", async (req, res) => {
             message: "Database connection failed.",
             error: error.message
         });
-
     }
-
 });
 
 
@@ -92,67 +101,43 @@ app.use("/api/branches", branchRoutes);
 
 
 // =====================================================
-// SERVICES API
+// CUSTOMER API
 // =====================================================
 
-app.use("/api/services", serviceRoutes);
+app.use("/api/customers", customerRoutes);
 
 
 // =====================================================
 // STAFF API
 // =====================================================
 
-
-// GET ALL STAFF
-
-app.get("/api/staff", async (req, res) => {
-
-    try {
-
-        const [rows] = await pool.promise().query(`
-            SELECT
-                st.id,
-                st.name,
-                st.role,
-                st.branch_id,
-                st.phone,
-                st.email,
-                st.is_active,
-                b.name AS branch
-            FROM staff st
-            INNER JOIN branches b
-                ON st.branch_id = b.id
-            WHERE st.is_active = 1
-            ORDER BY st.id ASC
-        `);
-
-        res.json({
-            success: true,
-            count: rows.length,
-            data: rows
-        });
-
-    } catch (error) {
-
-        console.error("GET STAFF ERROR:", error);
-
-        res.status(500).json({
-            success: false,
-            message: "Failed to fetch staff.",
-            error: error.message
-        });
-
-    }
-
-});
+app.use("/api/staff", staffRoutes);
 
 
-// GET STAFF BY BRANCH
+// =====================================================
+// GALLERY API
+// =====================================================
+
+app.use("/api/gallery", galleryRoutes);
+
+
+// =====================================================
+// SERVICES API
+// =====================================================
+
+app.use("/api/services", serviceRoutes);
+
+
+// Offer API
+app.use("/api/offers", offerRoutes);
+
+
+// =====================================================
+// STAFF BY BRANCH
+// =====================================================
 
 app.get("/api/staff/branch/:branchId", async (req, res) => {
-
     try {
-
         const [rows] = await pool.promise().query(
             `
             SELECT
@@ -175,9 +160,7 @@ app.get("/api/staff/branch/:branchId", async (req, res) => {
             count: rows.length,
             data: rows
         });
-
     } catch (error) {
-
         console.error("GET BRANCH STAFF ERROR:", error);
 
         res.status(500).json({
@@ -185,104 +168,7 @@ app.get("/api/staff/branch/:branchId", async (req, res) => {
             message: "Failed to fetch branch staff.",
             error: error.message
         });
-
     }
-
-});
-
-
-// =====================================================
-// CUSTOMERS API
-// =====================================================
-
-
-// GET ALL CUSTOMERS
-
-app.get("/api/customers", async (req, res) => {
-
-    try {
-
-        const [rows] = await pool.promise().query(`
-            SELECT
-                id,
-                name,
-                phone,
-                email,
-                created_at,
-                updated_at
-            FROM customers
-            ORDER BY id DESC
-        `);
-
-        res.json({
-            success: true,
-            count: rows.length,
-            data: rows
-        });
-
-    } catch (error) {
-
-        console.error("GET CUSTOMERS ERROR:", error);
-
-        res.status(500).json({
-            success: false,
-            message: "Failed to fetch customers.",
-            error: error.message
-        });
-
-    }
-
-});
-
-
-// GET SINGLE CUSTOMER
-
-app.get("/api/customers/:id", async (req, res) => {
-
-    try {
-
-        const [rows] = await pool.promise().query(
-            `
-            SELECT
-                id,
-                name,
-                phone,
-                email,
-                created_at,
-                updated_at
-            FROM customers
-            WHERE id = ?
-            LIMIT 1
-            `,
-            [req.params.id]
-        );
-
-        if (rows.length === 0) {
-
-            return res.status(404).json({
-                success: false,
-                message: "Customer not found."
-            });
-
-        }
-
-        res.json({
-            success: true,
-            data: rows[0]
-        });
-
-    } catch (error) {
-
-        console.error("GET CUSTOMER ERROR:", error);
-
-        res.status(500).json({
-            success: false,
-            message: "Failed to fetch customer.",
-            error: error.message
-        });
-
-    }
-
 });
 
 
@@ -305,9 +191,7 @@ app.use("/api/auth", authRoutes);
 // =====================================================
 
 app.get("/api/dashboard/stats", async (req, res) => {
-
     try {
-
         const [customers] = await pool.promise().query(
             `
             SELECT COUNT(*) AS total
@@ -374,9 +258,7 @@ app.get("/api/dashboard/stats", async (req, res) => {
                 cancelledBookings: cancelled[0].total
             }
         });
-
     } catch (error) {
-
         console.error("DASHBOARD ERROR:", error);
 
         res.status(500).json({
@@ -384,9 +266,7 @@ app.get("/api/dashboard/stats", async (req, res) => {
             message: "Failed to fetch dashboard statistics.",
             error: error.message
         });
-
     }
-
 });
 
 
@@ -395,12 +275,10 @@ app.get("/api/dashboard/stats", async (req, res) => {
 // =====================================================
 
 app.use((req, res) => {
-
     res.status(404).json({
         success: false,
         message: "API endpoint not found."
     });
-
 });
 
 
@@ -409,7 +287,6 @@ app.use((req, res) => {
 // =====================================================
 
 app.use((err, req, res, next) => {
-
     console.error("SERVER ERROR:", err);
 
     res.status(500).json({
@@ -417,7 +294,6 @@ app.use((err, req, res, next) => {
         message: "Internal server error.",
         error: err.message
     });
-
 });
 
 
@@ -426,14 +302,13 @@ app.use((err, req, res, next) => {
 // =====================================================
 
 app.listen(PORT, () => {
-
     console.log("==============================================");
     console.log("       THE BEAUTY SALON BACKEND");
     console.log("==============================================");
     console.log(`Server: http://localhost:${PORT}`);
     console.log("Database: salon_booking");
     console.log("Environment: LOCAL");
+    console.log("Uploads: /uploads");
     console.log("Status: Running");
     console.log("==============================================");
-
 });

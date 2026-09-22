@@ -114,9 +114,26 @@
             margin-left: 28px;
             padding-left: 28px;
             border-left: 1px solid #333;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 3px;
+            min-width: 260px;
+            flex: 1;
+        }
+
+        .page-title strong {
+            display: block;
             font-size: 16px;
             font-weight: 600;
-            color: #ddd;
+            color: #ffffff;
+        }
+
+        .page-title span {
+            display: block;
+            color: #999;
+            font-size: 11px;
+            font-weight: 400;
         }
 
         .header-right {
@@ -209,15 +226,21 @@
             border-right: 1px solid #252525;
             padding: 20px 12px;
             z-index: 900;
-            transition: width 0.25s ease;
+            transition: width 0.25s ease, transform 0.25s ease;
+            overflow: visible;
+            scrollbar-width: none;
+        }
+
+        .admin-sidebar::-webkit-scrollbar {
+            display: none;
         }
 
         .sidebar-toggle {
             position: absolute;
-            right: -13px;
-            top: 22px;
-            width: 27px;
-            height: 27px;
+            right: -15px;
+            top: 20px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             border: 1px solid #444;
             background: #181818;
@@ -225,7 +248,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 10;
+            z-index: 1200;
+            flex-shrink: 0;
         }
 
         .sidebar-toggle:hover {
@@ -236,6 +260,13 @@
             display: flex;
             flex-direction: column;
             gap: 5px;
+            height: calc(100% - 5px);
+            overflow-y: auto;
+            scrollbar-width: none;
+        }
+
+        .sidebar-nav::-webkit-scrollbar {
+            display: none;
         }
 
         .sidebar-link {
@@ -321,6 +352,13 @@
            PAGE TOP
         ========================= */
 
+        .content-actions {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            margin-bottom: 18px;
+        }
+
         .content-heading {
             display: flex;
             align-items: flex-end;
@@ -369,29 +407,27 @@
             background: #111;
             border: 1px solid #292929;
             border-radius: 12px;
-            padding: 19px;
+            padding: 22px 18px;
+            text-align: center;
+            transition: 0.2s ease;
+        }
+
+        .summary-card:hover {
+            border-color: rgba(212, 175, 55, 0.45);
+            transform: translateY(-2px);
         }
 
         .summary-top {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .summary-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 9px;
-            background: rgba(212, 175, 55, 0.1);
-            color: #d4af37;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
         .summary-card h3 {
-            font-size: 25px;
-            margin-top: 13px;
+            font-size: 30px;
+            line-height: 1;
+            color: #d4af37;
+            margin: 0;
         }
 
         .summary-card p {
@@ -794,6 +830,17 @@
             border-color: #d4af37;
         }
 
+        .form-note {
+            grid-column: 1 / -1;
+            padding: 11px 12px;
+            border: 1px solid rgba(212, 175, 55, 0.18);
+            background: rgba(212, 175, 55, 0.05);
+            border-radius: 7px;
+            color: #888;
+            font-size: 10px;
+            line-height: 1.5;
+        }
+
         /* =========================
            MOBILE OVERLAY
         ========================= */
@@ -848,7 +895,26 @@
             }
 
             .page-title {
-                display: none;
+                display: flex;
+                margin-left: 12px;
+                padding-left: 12px;
+                min-width: 0;
+            }
+
+            .page-title strong {
+                font-size: 13px;
+            }
+
+            .page-title span {
+                font-size: 8px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                max-width: 190px;
+            }
+
+            .content-actions {
+                margin-bottom: 14px;
             }
 
             .header-right {
@@ -909,6 +975,8 @@
             .sidebar-toggle {
                 right: 12px;
                 top: 15px;
+                width: 30px;
+                height: 30px;
             }
 
             .sidebar-overlay {
@@ -917,6 +985,10 @@
 
             .sidebar-overlay.show {
                 display: block;
+            }
+
+            body.sidebar-mobile-open {
+                overflow: hidden;
             }
 
             .admin-main,
@@ -1015,7 +1087,8 @@
             </div>
 
             <div class="page-title">
-                Customers
+                <strong>Customers</strong>
+                <span>Manage salon customers, profiles and booking history.</span>
             </div>
 
         </div>
@@ -1121,18 +1194,13 @@
 
     <main class="admin-main">
 
-        <div class="content-heading">
+        <div class="content-actions">
+            <div></div>
 
-            <div class="heading-text">
-                <h1>Customers</h1>
-                <p>Manage salon customers, profiles and booking history.</p>
-            </div>
-
-            <button class="add-customer-btn" id="addCustomerBtn">
+            <button class="add-customer-btn" id="addCustomerBtn" type="button">
                 <i class="fa-solid fa-plus"></i>
                 Add Customer
             </button>
-
         </div>
 
 
@@ -1145,51 +1213,35 @@
             <div class="summary-card">
                 <div class="summary-top">
                     <div>
-                        <h3 id="totalCustomers">248</h3>
+                        <h3 id="totalCustomers">0</h3>
                         <p>Total Customers</p>
                     </div>
-
-                    <div class="summary-icon">
-                        <i class="fa-solid fa-users"></i>
-                    </div>
                 </div>
             </div>
 
             <div class="summary-card">
                 <div class="summary-top">
                     <div>
-                        <h3 id="activeCustomers">231</h3>
+                        <h3 id="activeCustomers">0</h3>
                         <p>Active Customers</p>
                     </div>
-
-                    <div class="summary-icon">
-                        <i class="fa-solid fa-user-check"></i>
-                    </div>
                 </div>
             </div>
 
             <div class="summary-card">
                 <div class="summary-top">
                     <div>
-                        <h3>17</h3>
+                        <h3 id="inactiveCustomers">0</h3>
                         <p>Inactive Customers</p>
                     </div>
-
-                    <div class="summary-icon">
-                        <i class="fa-solid fa-user-clock"></i>
-                    </div>
                 </div>
             </div>
 
             <div class="summary-card">
                 <div class="summary-top">
                     <div>
-                        <h3>96</h3>
+                        <h3 id="newCustomers">0</h3>
                         <p>New This Month</p>
-                    </div>
-
-                    <div class="summary-icon">
-                        <i class="fa-solid fa-user-plus"></i>
                     </div>
                 </div>
             </div>
@@ -1272,512 +1324,7 @@
 
                     </thead>
 
-                    <tbody id="customerTableBody">
-
-                        <!--
-                            DUMMY DATA
-                            Replace with MySQL/API data later.
-                        -->
-
-                        <tr
-                            data-name="Aditya Shah"
-                            data-phone="+91 9876543210"
-                            data-email="aditya.shah@gmail.com"
-                            data-branch="Baramati"
-                            data-bookings="12"
-                            data-lastvisit="18 Sep 2026"
-                            data-status="Active"
-                            data-joined="12 Jan 2026"
-                        >
-
-                            <td>
-                                <div class="customer-cell">
-
-                                    <div class="customer-avatar">
-                                        AS
-                                    </div>
-
-                                    <div class="customer-info">
-                                        <strong>Aditya Shah</strong>
-                                        <span>#CUS1008</span>
-                                    </div>
-
-                                </div>
-                            </td>
-
-                            <td>+91 9876543210</td>
-
-                            <td>
-                                <span class="branch-name">Baramati</span>
-                            </td>
-
-                            <td>
-                                <span class="booking-count">12</span>
-                            </td>
-
-                            <td>18 Sep 2026</td>
-
-                            <td>
-                                <span class="status active">Active</span>
-                            </td>
-
-                            <td>
-                                <div class="action-group">
-
-                                    <button
-                                        class="action-btn view-btn"
-                                        title="View"
-                                    >
-                                        <i class="fa-regular fa-eye"></i>
-                                    </button>
-
-                                    <button
-                                        class="action-btn edit-btn"
-                                        title="Edit"
-                                    >
-                                        <i class="fa-solid fa-pen"></i>
-                                    </button>
-
-                                    <button
-                                        class="action-btn delete delete-btn"
-                                        title="Delete"
-                                    >
-                                        <i class="fa-regular fa-trash-can"></i>
-                                    </button>
-
-                                </div>
-                            </td>
-
-                        </tr>
-
-
-                        <tr
-                            data-name="Priya Rane"
-                            data-phone="+91 9822456712"
-                            data-email="priya.rane@gmail.com"
-                            data-branch="Baramati"
-                            data-bookings="8"
-                            data-lastvisit="17 Sep 2026"
-                            data-status="Active"
-                            data-joined="05 Feb 2026"
-                        >
-
-                            <td>
-                                <div class="customer-cell">
-
-                                    <div class="customer-avatar">
-                                        PR
-                                    </div>
-
-                                    <div class="customer-info">
-                                        <strong>Priya Rane</strong>
-                                        <span>#CUS1007</span>
-                                    </div>
-
-                                </div>
-                            </td>
-
-                            <td>+91 9822456712</td>
-
-                            <td>Baramati</td>
-
-                            <td>
-                                <span class="booking-count">8</span>
-                            </td>
-
-                            <td>17 Sep 2026</td>
-
-                            <td>
-                                <span class="status active">Active</span>
-                            </td>
-
-                            <td>
-                                <div class="action-group">
-
-                                    <button class="action-btn view-btn" title="View">
-                                        <i class="fa-regular fa-eye"></i>
-                                    </button>
-
-                                    <button class="action-btn edit-btn" title="Edit">
-                                        <i class="fa-solid fa-pen"></i>
-                                    </button>
-
-                                    <button class="action-btn delete delete-btn" title="Delete">
-                                        <i class="fa-regular fa-trash-can"></i>
-                                    </button>
-
-                                </div>
-                            </td>
-
-                        </tr>
-
-
-                        <tr
-                            data-name="Rahul Kadam"
-                            data-phone="+91 9765432187"
-                            data-email="rahul.kadam@gmail.com"
-                            data-branch="Baramati"
-                            data-bookings="15"
-                            data-lastvisit="16 Sep 2026"
-                            data-status="Active"
-                            data-joined="20 Dec 2025"
-                        >
-
-                            <td>
-                                <div class="customer-cell">
-
-                                    <div class="customer-avatar">
-                                        RK
-                                    </div>
-
-                                    <div class="customer-info">
-                                        <strong>Rahul Kadam</strong>
-                                        <span>#CUS1006</span>
-                                    </div>
-
-                                </div>
-                            </td>
-
-                            <td>+91 9765432187</td>
-
-                            <td>Baramati</td>
-
-                            <td>
-                                <span class="booking-count">15</span>
-                            </td>
-
-                            <td>16 Sep 2026</td>
-
-                            <td>
-                                <span class="status active">Active</span>
-                            </td>
-
-                            <td>
-                                <div class="action-group">
-
-                                    <button class="action-btn view-btn" title="View">
-                                        <i class="fa-regular fa-eye"></i>
-                                    </button>
-
-                                    <button class="action-btn edit-btn" title="Edit">
-                                        <i class="fa-solid fa-pen"></i>
-                                    </button>
-
-                                    <button class="action-btn delete delete-btn" title="Delete">
-                                        <i class="fa-regular fa-trash-can"></i>
-                                    </button>
-
-                                </div>
-                            </td>
-
-                        </tr>
-
-
-                        <tr
-                            data-name="Sneha Nikam"
-                            data-phone="+91 9898981212"
-                            data-email="sneha.nikam@gmail.com"
-                            data-branch="Baramati"
-                            data-bookings="10"
-                            data-lastvisit="15 Sep 2026"
-                            data-status="Active"
-                            data-joined="14 Mar 2026"
-                        >
-
-                            <td>
-                                <div class="customer-cell">
-
-                                    <div class="customer-avatar">
-                                        SN
-                                    </div>
-
-                                    <div class="customer-info">
-                                        <strong>Sneha Nikam</strong>
-                                        <span>#CUS1005</span>
-                                    </div>
-
-                                </div>
-                            </td>
-
-                            <td>+91 9898981212</td>
-
-                            <td>Baramati</td>
-
-                            <td>
-                                <span class="booking-count">10</span>
-                            </td>
-
-                            <td>15 Sep 2026</td>
-
-                            <td>
-                                <span class="status active">Active</span>
-                            </td>
-
-                            <td>
-                                <div class="action-group">
-
-                                    <button class="action-btn view-btn" title="View">
-                                        <i class="fa-regular fa-eye"></i>
-                                    </button>
-
-                                    <button class="action-btn edit-btn" title="Edit">
-                                        <i class="fa-solid fa-pen"></i>
-                                    </button>
-
-                                    <button class="action-btn delete delete-btn" title="Delete">
-                                        <i class="fa-regular fa-trash-can"></i>
-                                    </button>
-
-                                </div>
-                            </td>
-
-                        </tr>
-
-
-                        <tr
-                            data-name="Rohit Patil"
-                            data-phone="+91 9011223344"
-                            data-email="rohit.patil@gmail.com"
-                            data-branch="Baramati MIDC"
-                            data-bookings="6"
-                            data-lastvisit="14 Sep 2026"
-                            data-status="Active"
-                            data-joined="10 Apr 2026"
-                        >
-
-                            <td>
-                                <div class="customer-cell">
-
-                                    <div class="customer-avatar">
-                                        RP
-                                    </div>
-
-                                    <div class="customer-info">
-                                        <strong>Rohit Patil</strong>
-                                        <span>#CUS1004</span>
-                                    </div>
-
-                                </div>
-                            </td>
-
-                            <td>+91 9011223344</td>
-
-                            <td>Baramati MIDC</td>
-
-                            <td>
-                                <span class="booking-count">6</span>
-                            </td>
-
-                            <td>14 Sep 2026</td>
-
-                            <td>
-                                <span class="status active">Active</span>
-                            </td>
-
-                            <td>
-                                <div class="action-group">
-
-                                    <button class="action-btn view-btn" title="View">
-                                        <i class="fa-regular fa-eye"></i>
-                                    </button>
-
-                                    <button class="action-btn edit-btn" title="Edit">
-                                        <i class="fa-solid fa-pen"></i>
-                                    </button>
-
-                                    <button class="action-btn delete delete-btn" title="Delete">
-                                        <i class="fa-regular fa-trash-can"></i>
-                                    </button>
-
-                                </div>
-                            </td>
-
-                        </tr>
-
-
-                        <tr
-                            data-name="Neha Jadhav"
-                            data-phone="+91 9123456780"
-                            data-email="neha.jadhav@gmail.com"
-                            data-branch="Baramati"
-                            data-bookings="9"
-                            data-lastvisit="13 Sep 2026"
-                            data-status="Active"
-                            data-joined="18 May 2026"
-                        >
-
-                            <td>
-                                <div class="customer-cell">
-
-                                    <div class="customer-avatar">
-                                        NJ
-                                    </div>
-
-                                    <div class="customer-info">
-                                        <strong>Neha Jadhav</strong>
-                                        <span>#CUS1003</span>
-                                    </div>
-
-                                </div>
-                            </td>
-
-                            <td>+91 9123456780</td>
-
-                            <td>Baramati</td>
-
-                            <td>
-                                <span class="booking-count">9</span>
-                            </td>
-
-                            <td>13 Sep 2026</td>
-
-                            <td>
-                                <span class="status active">Active</span>
-                            </td>
-
-                            <td>
-                                <div class="action-group">
-
-                                    <button class="action-btn view-btn" title="View">
-                                        <i class="fa-regular fa-eye"></i>
-                                    </button>
-
-                                    <button class="action-btn edit-btn" title="Edit">
-                                        <i class="fa-solid fa-pen"></i>
-                                    </button>
-
-                                    <button class="action-btn delete delete-btn" title="Delete">
-                                        <i class="fa-regular fa-trash-can"></i>
-                                    </button>
-
-                                </div>
-                            </td>
-
-                        </tr>
-
-
-                        <tr
-                            data-name="Omkar More"
-                            data-phone="+91 9345678901"
-                            data-email="omkar.more@gmail.com"
-                            data-branch="Baramati MIDC"
-                            data-bookings="3"
-                            data-lastvisit="10 Sep 2026"
-                            data-status="Inactive"
-                            data-joined="02 Jun 2026"
-                        >
-
-                            <td>
-                                <div class="customer-cell">
-
-                                    <div class="customer-avatar">
-                                        OM
-                                    </div>
-
-                                    <div class="customer-info">
-                                        <strong>Omkar More</strong>
-                                        <span>#CUS1002</span>
-                                    </div>
-
-                                </div>
-                            </td>
-
-                            <td>+91 9345678901</td>
-
-                            <td>Baramati MIDC</td>
-
-                            <td>
-                                <span class="booking-count">3</span>
-                            </td>
-
-                            <td>10 Sep 2026</td>
-
-                            <td>
-                                <span class="status inactive">Inactive</span>
-                            </td>
-
-                            <td>
-                                <div class="action-group">
-
-                                    <button class="action-btn view-btn" title="View">
-                                        <i class="fa-regular fa-eye"></i>
-                                    </button>
-
-                                    <button class="action-btn edit-btn" title="Edit">
-                                        <i class="fa-solid fa-pen"></i>
-                                    </button>
-
-                                    <button class="action-btn delete delete-btn" title="Delete">
-                                        <i class="fa-regular fa-trash-can"></i>
-                                    </button>
-
-                                </div>
-                            </td>
-
-                        </tr>
-
-
-                        <tr
-                            data-name="Kavita Shinde"
-                            data-phone="+91 9567890123"
-                            data-email="kavita.shinde@gmail.com"
-                            data-branch="Baramati"
-                            data-bookings="7"
-                            data-lastvisit="08 Sep 2026"
-                            data-status="Active"
-                            data-joined="22 Jul 2026"
-                        >
-
-                            <td>
-                                <div class="customer-cell">
-
-                                    <div class="customer-avatar">
-                                        KS
-                                    </div>
-
-                                    <div class="customer-info">
-                                        <strong>Kavita Shinde</strong>
-                                        <span>#CUS1001</span>
-                                    </div>
-
-                                </div>
-                            </td>
-
-                            <td>+91 9567890123</td>
-
-                            <td>Baramati</td>
-
-                            <td>
-                                <span class="booking-count">7</span>
-                            </td>
-
-                            <td>08 Sep 2026</td>
-
-                            <td>
-                                <span class="status active">Active</span>
-                            </td>
-
-                            <td>
-                                <div class="action-group">
-
-                                    <button class="action-btn view-btn" title="View">
-                                        <i class="fa-regular fa-eye"></i>
-                                    </button>
-
-                                    <button class="action-btn edit-btn" title="Edit">
-                                        <i class="fa-solid fa-pen"></i>
-                                    </button>
-
-                                    <button class="action-btn delete delete-btn" title="Delete">
-                                        <i class="fa-regular fa-trash-can"></i>
-                                    </button>
-
-                                </div>
-                            </td>
-
-                        </tr>
-
-                    </tbody>
+                    <tbody id="customerTableBody"><tr><td colspan="7" style="text-align:center;padding:50px 20px;color:#999;">Loading customers...</td></tr></tbody>
 
                 </table>
 
@@ -1929,38 +1476,8 @@
                             >
                         </div>
 
-                        <div class="form-group">
-                            <label>Branch</label>
-
-                            <select id="customerBranch">
-
-                                <option value="Baramati">
-                                    Baramati
-                                </option>
-
-                                <option value="Baramati MIDC">
-                                    Baramati MIDC
-                                </option>
-
-                            </select>
-
-                        </div>
-
-                        <div class="form-group">
-                            <label>Status</label>
-
-                            <select id="customerStatus">
-
-                                <option value="Active">
-                                    Active
-                                </option>
-
-                                <option value="Inactive">
-                                    Inactive
-                                </option>
-
-                            </select>
-
+                        <div class="form-note full">
+                            Branch and customer status are managed automatically from booking data.
                         </div>
 
                     </div>
@@ -1997,591 +1514,496 @@
          JAVASCRIPT
     ====================================================== -->
 
-    <script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const API = "http://localhost:5000/api/customers";
+    const $ = function (id) {
+        return document.getElementById(id);
+    };
 
-        document.addEventListener("DOMContentLoaded", function () {
+    const sidebar = $("adminSidebar");
+    const sidebarToggle = $("sidebarToggle");
+    const mobileMenuBtn = $("mobileMenuBtn");
+    const sidebarOverlay = $("sidebarOverlay");
 
-            const sidebar = document.getElementById("adminSidebar");
-            const sidebarToggle = document.getElementById("sidebarToggle");
+    const tableBody = $("customerTableBody");
+    const customerCount = $("customerCount");
+    const customerForm = $("customerForm");
+    const viewModal = $("viewModal");
+    const formModal = $("formModal");
+    const addCustomerBtn = $("addCustomerBtn");
+    const saveButton = customerForm.querySelector('button[type="submit"]');
 
-            const mobileMenuBtn = document.getElementById("mobileMenuBtn");
-            const sidebarOverlay = document.getElementById("sidebarOverlay");
+    let customers = [];
+    let editingId = null;
 
-            const searchInput = document.getElementById("customerSearch");
-            const branchFilter = document.getElementById("branchFilter");
-            const statusFilter = document.getElementById("statusFilter");
+    function escapeHtml(value) {
+        return String(value ?? "")
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
 
-            const tableBody = document.getElementById("customerTableBody");
-            const customerCount = document.getElementById("customerCount");
+    function initials(name) {
+        return String(name || "")
+            .trim()
+            .split(/\s+/)
+            .filter(Boolean)
+            .map(function (word) {
+                return word[0];
+            })
+            .join("")
+            .slice(0, 2)
+            .toUpperCase() || "CU";
+    }
 
-            const viewModal = document.getElementById("viewModal");
-            const formModal = document.getElementById("formModal");
+    function dateText(value) {
+        if (!value) {
+            return "No visit yet";
+        }
 
-            const addCustomerBtn = document.getElementById("addCustomerBtn");
-            const customerForm = document.getElementById("customerForm");
+        const parts = String(value).slice(0, 10).split("-");
+        if (parts.length !== 3) {
+            return String(value);
+        }
 
-            let editingRow = null;
+        const months = [
+            "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+        ];
 
+        const monthIndex = Number(parts[1]) - 1;
+        if (monthIndex < 0 || monthIndex > 11) {
+            return String(value);
+        }
 
-            /* ==========================================
-               SIDEBAR COLLAPSE
-            ========================================== */
+        return Number(parts[2]) + " " + months[monthIndex] + " " + parts[0];
+    }
 
-            sidebarToggle.addEventListener("click", function () {
+    function closeMobileSidebar() {
+        sidebar.classList.remove("mobile-open");
+        sidebarOverlay.classList.remove("show");
+        document.body.classList.remove("sidebar-mobile-open");
+    }
 
-                if (window.innerWidth <= 767) {
+    function openMobileSidebar() {
+        sidebar.classList.add("mobile-open");
+        sidebarOverlay.classList.add("show");
+        document.body.classList.add("sidebar-mobile-open");
+    }
 
-                    sidebar.classList.remove("mobile-open");
-                    sidebarOverlay.classList.remove("show");
-
-                    return;
-                }
-
-                sidebar.classList.toggle("collapsed");
-
-            });
-
-
-            /* ==========================================
-               MOBILE SIDEBAR
-            ========================================== */
-
-            mobileMenuBtn.addEventListener("click", function () {
-
-                sidebar.classList.add("mobile-open");
-                sidebarOverlay.classList.add("show");
-
-            });
-
-
-            sidebarOverlay.addEventListener("click", function () {
-
-                sidebar.classList.remove("mobile-open");
-                sidebarOverlay.classList.remove("show");
-
-            });
-
-
-            document.querySelectorAll(".sidebar-link").forEach(function (link) {
-
-                link.addEventListener("click", function () {
-
-                    if (window.innerWidth <= 767) {
-
-                        sidebar.classList.remove("mobile-open");
-                        sidebarOverlay.classList.remove("show");
-
-                    }
-
-                });
-
-            });
-
-
-            /* ==========================================
-               CUSTOMER FILTER
-            ========================================== */
-
-            function filterCustomers() {
-
-                const searchValue =
-                    searchInput.value.trim().toLowerCase();
-
-                const selectedBranch =
-                    branchFilter.value;
-
-                const selectedStatus =
-                    statusFilter.value;
-
-                const rows =
-                    tableBody.querySelectorAll("tr");
-
-                let visibleCount = 0;
-
-                rows.forEach(function (row) {
-
-                    const name =
-                        row.dataset.name.toLowerCase();
-
-                    const phone =
-                        row.dataset.phone.toLowerCase();
-
-                    const email =
-                        row.dataset.email.toLowerCase();
-
-                    const branch =
-                        row.dataset.branch;
-
-                    const status =
-                        row.dataset.status;
-
-                    const matchesSearch =
-                        name.includes(searchValue) ||
-                        phone.includes(searchValue) ||
-                        email.includes(searchValue);
-
-                    const matchesBranch =
-                        selectedBranch === "all" ||
-                        branch === selectedBranch;
-
-                    const matchesStatus =
-                        selectedStatus === "all" ||
-                        status === selectedStatus;
-
-                    if (
-                        matchesSearch &&
-                        matchesBranch &&
-                        matchesStatus
-                    ) {
-
-                        row.style.display = "";
-                        visibleCount++;
-
-                    } else {
-
-                        row.style.display = "none";
-
-                    }
-
-                });
-
-                customerCount.textContent =
-                    "Showing " + visibleCount + " customers";
-
+    function toggleSidebar() {
+        if (window.innerWidth <= 767) {
+            if (sidebar.classList.contains("mobile-open")) {
+                closeMobileSidebar();
+            } else {
+                openMobileSidebar();
             }
-
-
-            searchInput.addEventListener("input", filterCustomers);
-            branchFilter.addEventListener("change", filterCustomers);
-            statusFilter.addEventListener("change", filterCustomers);
-
-
-            /* ==========================================
-               VIEW CUSTOMER
-            ========================================== */
-
-            function openViewModal(row) {
-
-                const cells = row.querySelectorAll("td");
-
-                const customerName =
-                    row.dataset.name;
-
-                const initials =
-                    customerName
-                        .split(" ")
-                        .map(word => word[0])
-                        .join("")
-                        .substring(0, 2)
-                        .toUpperCase();
-
-                document.getElementById("viewAvatar").textContent =
-                    initials;
-
-                document.getElementById("viewName").textContent =
-                    customerName;
-
-                document.getElementById("viewCustomerId").textContent =
-                    cells[0].querySelector("span").textContent;
-
-                document.getElementById("viewPhone").textContent =
-                    row.dataset.phone;
-
-                document.getElementById("viewEmail").textContent =
-                    row.dataset.email;
-
-                document.getElementById("viewBranch").textContent =
-                    row.dataset.branch;
-
-                document.getElementById("viewBookings").textContent =
-                    row.dataset.bookings;
-
-                document.getElementById("viewLastVisit").textContent =
-                    row.dataset.lastvisit;
-
-                document.getElementById("viewJoined").textContent =
-                    row.dataset.joined;
-
-                document.getElementById("viewStatus").textContent =
-                    row.dataset.status;
-
-                viewModal.classList.add("show");
-
-            }
-
-
-            /* ==========================================
-               EDIT CUSTOMER
-            ========================================== */
-
-            function openEditModal(row) {
-
-                editingRow = row;
-
-                document.getElementById("formTitle").textContent =
-                    "Edit Customer";
-
-                document.getElementById("customerName").value =
-                    row.dataset.name;
-
-                document.getElementById("customerPhone").value =
-                    row.dataset.phone;
-
-                document.getElementById("customerEmail").value =
-                    row.dataset.email;
-
-                document.getElementById("customerBranch").value =
-                    row.dataset.branch;
-
-                document.getElementById("customerStatus").value =
-                    row.dataset.status;
-
-                formModal.classList.add("show");
-
-            }
-
-
-            /* ==========================================
-               TABLE ACTIONS
-            ========================================== */
-
-            function attachRowActions() {
-
-                document.querySelectorAll(".view-btn").forEach(function (button) {
-
-                    button.onclick = function () {
-
-                        openViewModal(
-                            button.closest("tr")
-                        );
-
-                    };
-
-                });
-
-
-                document.querySelectorAll(".edit-btn").forEach(function (button) {
-
-                    button.onclick = function () {
-
-                        openEditModal(
-                            button.closest("tr")
-                        );
-
-                    };
-
-                });
-
-
-                document.querySelectorAll(".delete-btn").forEach(function (button) {
-
-                    button.onclick = function () {
-
-                        const row =
-                            button.closest("tr");
-
-                        const name =
-                            row.dataset.name;
-
-                        const confirmed =
-                            confirm(
-                                "Delete customer " +
-                                name +
-                                "?"
-                            );
-
-                        if (confirmed) {
-
-                            row.remove();
-
-                            filterCustomers();
-
-                        }
-
-                    };
-
-                });
-
-            }
-
-
-            attachRowActions();
-
-
-            /* ==========================================
-               ADD CUSTOMER
-            ========================================== */
-
-            addCustomerBtn.addEventListener("click", function () {
-
-                editingRow = null;
-
-                customerForm.reset();
-
-                document.getElementById("formTitle").textContent =
-                    "Add Customer";
-
-                formModal.classList.add("show");
-
+            return;
+        }
+
+        sidebar.classList.toggle("collapsed");
+    }
+
+    sidebarToggle.addEventListener("click", toggleSidebar);
+
+    mobileMenuBtn.addEventListener("click", function () {
+        if (sidebar.classList.contains("mobile-open")) {
+            closeMobileSidebar();
+        } else {
+            openMobileSidebar();
+        }
+    });
+
+    sidebarOverlay.addEventListener("click", closeMobileSidebar);
+
+    sidebar.querySelectorAll(".sidebar-link").forEach(function (link) {
+        link.addEventListener("click", function () {
+            closeMobileSidebar();
+        });
+    });
+
+    document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+            closeMobileSidebar();
+            viewModal.classList.remove("show");
+            formModal.classList.remove("show");
+        }
+    });
+
+    window.addEventListener("resize", function () {
+        if (window.innerWidth > 767) {
+            closeMobileSidebar();
+        }
+    });
+
+    function updateSummary() {
+        const active = customers.filter(function (customer) {
+            return customer.status === "Active";
+        }).length;
+
+        const inactive = customers.filter(function (customer) {
+            return customer.status === "Inactive";
+        }).length;
+
+        const now = new Date();
+        const newCustomers = customers.filter(function (customer) {
+            const value = String(customer.created_at || "").slice(0, 10);
+            const parts = value.split("-");
+
+            return parts.length === 3 &&
+                Number(parts[0]) === now.getFullYear() &&
+                Number(parts[1]) === now.getMonth() + 1;
+        }).length;
+
+        $("totalCustomers").textContent = customers.length;
+        $("activeCustomers").textContent = active;
+        $("inactiveCustomers").textContent = inactive;
+        $("newCustomers").textContent = newCustomers;
+    }
+
+    function getFilteredCustomers() {
+        const search = String($("customerSearch").value || "")
+            .toLowerCase()
+            .trim();
+        const branch = $("branchFilter").value;
+        const status = $("statusFilter").value;
+
+        return customers.filter(function (customer) {
+            const searchable = [
+                customer.name,
+                customer.phone,
+                customer.email,
+                customer.branch_name
+            ].map(function (value) {
+                return String(value || "").toLowerCase();
             });
 
+            const matchesSearch = !search || searchable.some(function (value) {
+                return value.includes(search);
+            });
 
-            /* ==========================================
-               SAVE CUSTOMER
-            ========================================== */
+            const matchesBranch =
+                branch === "all" ||
+                String(customer.branch_name || "") === branch;
 
-            customerForm.addEventListener("submit", function (event) {
+            const matchesStatus =
+                status === "all" ||
+                String(customer.status || "") === status;
 
-                event.preventDefault();
+            return matchesSearch && matchesBranch && matchesStatus;
+        });
+    }
 
-                const name =
-                    document.getElementById("customerName").value.trim();
+    function renderCustomers() {
+        const list = getFilteredCustomers();
 
-                const phone =
-                    document.getElementById("customerPhone").value.trim();
+        if (list.length === 0) {
+            tableBody.innerHTML = `
+                <tr>
+                    <td colspan="7" style="text-align:center;padding:50px;color:#999;">
+                        No customers found
+                    </td>
+                </tr>
+            `;
+        } else {
+            tableBody.innerHTML = list.map(function (customer) {
+                const statusClass =
+                    String(customer.status || "").toLowerCase() === "active"
+                        ? "active"
+                        : "inactive";
 
-                const email =
-                    document.getElementById("customerEmail").value.trim();
-
-                const branch =
-                    document.getElementById("customerBranch").value;
-
-                const status =
-                    document.getElementById("customerStatus").value;
-
-
-                if (!name || !phone || !email) {
-
-                    alert("Please fill all required fields.");
-                    return;
-
-                }
-
-
-                if (editingRow) {
-
-                    editingRow.dataset.name = name;
-                    editingRow.dataset.phone = phone;
-                    editingRow.dataset.email = email;
-                    editingRow.dataset.branch = branch;
-                    editingRow.dataset.status = status;
-
-                    const initials =
-                        name
-                            .split(" ")
-                            .map(word => word[0])
-                            .join("")
-                            .substring(0, 2)
-                            .toUpperCase();
-
-                    editingRow.querySelector(
-                        ".customer-avatar"
-                    ).textContent = initials;
-
-                    editingRow.querySelector(
-                        ".customer-info strong"
-                    ).textContent = name;
-
-                    editingRow.querySelectorAll("td")[1].textContent =
-                        phone;
-
-                    editingRow.querySelectorAll("td")[2].textContent =
-                        branch;
-
-                    editingRow.querySelectorAll("td")[5].innerHTML =
-                        '<span class="status ' +
-                        (
-                            status === "Active"
-                                ? "active"
-                                : "inactive"
-                        ) +
-                        '">' +
-                        status +
-                        "</span>";
-
-                } else {
-
-                    const newId =
-                        "CUS" +
-                        (1000 + tableBody.children.length + 1);
-
-                    const initials =
-                        name
-                            .split(" ")
-                            .map(word => word[0])
-                            .join("")
-                            .substring(0, 2)
-                            .toUpperCase();
-
-                    const newRow =
-                        document.createElement("tr");
-
-                    newRow.dataset.name = name;
-                    newRow.dataset.phone = phone;
-                    newRow.dataset.email = email;
-                    newRow.dataset.branch = branch;
-                    newRow.dataset.bookings = "0";
-                    newRow.dataset.lastvisit = "No visit yet";
-                    newRow.dataset.status = status;
-                    newRow.dataset.joined = "18 Sep 2026";
-
-                    newRow.innerHTML = `
-
+                return `
+                    <tr>
                         <td>
                             <div class="customer-cell">
-
                                 <div class="customer-avatar">
-                                    ${initials}
+                                    ${escapeHtml(initials(customer.name))}
                                 </div>
-
                                 <div class="customer-info">
-                                    <strong>${name}</strong>
-                                    <span>#${newId}</span>
+                                    <strong>${escapeHtml(customer.name)}</strong>
+                                    <span>#CUS${String(customer.id).padStart(4, "0")}</span>
                                 </div>
-
                             </div>
                         </td>
-
-                        <td>${phone}</td>
-
-                        <td>${branch}</td>
-
+                        <td>${escapeHtml(customer.phone || "—")}</td>
+                        <td>${escapeHtml(customer.branch_name || "—")}</td>
                         <td>
-                            <span class="booking-count">0</span>
-                        </td>
-
-                        <td>No visit yet</td>
-
-                        <td>
-                            <span class="status ${
-                                status === "Active"
-                                    ? "active"
-                                    : "inactive"
-                            }">
-                                ${status}
+                            <span class="booking-count">
+                                ${Number(customer.total_bookings || 0)}
                             </span>
                         </td>
-
+                        <td>${escapeHtml(dateText(customer.last_visit))}</td>
                         <td>
-
+                            <span class="status ${statusClass}">
+                                ${escapeHtml(customer.status || "Inactive")}
+                            </span>
+                        </td>
+                        <td>
                             <div class="action-group">
-
-                                <button
-                                    class="action-btn view-btn"
-                                    title="View"
-                                >
+                                <button class="action-btn view-btn" data-id="${customer.id}" title="View" type="button">
                                     <i class="fa-regular fa-eye"></i>
                                 </button>
-
-                                <button
-                                    class="action-btn edit-btn"
-                                    title="Edit"
-                                >
+                                <button class="action-btn edit-btn" data-id="${customer.id}" title="Edit" type="button">
                                     <i class="fa-solid fa-pen"></i>
                                 </button>
-
-                                <button
-                                    class="action-btn delete delete-btn"
-                                    title="Delete"
-                                >
+                                <button class="action-btn delete delete-btn" data-id="${customer.id}" title="Delete" type="button">
                                     <i class="fa-regular fa-trash-can"></i>
                                 </button>
-
                             </div>
-
                         </td>
-                    `;
+                    </tr>
+                `;
+            }).join("");
+        }
 
-                    tableBody.prepend(newRow);
+        customerCount.textContent = "Showing " + list.length + " customers";
+        updateSummary();
+        attachTableActions();
+    }
 
-                    attachRowActions();
+    async function loadCustomers() {
+        tableBody.innerHTML = `
+            <tr>
+                <td colspan="7" style="text-align:center;padding:50px;color:#999;">
+                    Loading customers...
+                </td>
+            </tr>
+        `;
 
+        try {
+            const response = await fetch(API, {
+                method: "GET",
+                headers: {
+                    "Accept": "application/json"
                 }
-
-
-                formModal.classList.remove("show");
-
-                customerForm.reset();
-
-                editingRow = null;
-
-                filterCustomers();
-
             });
 
+            const data = await response.json();
 
-            /* ==========================================
-               CLOSE MODALS
-            ========================================== */
+            if (!response.ok) {
+                throw new Error(data.message || "Failed to load customers.");
+            }
 
-            document.querySelectorAll("[data-close]").forEach(function (button) {
+            customers = Array.isArray(data.data)
+                ? data.data
+                : Array.isArray(data)
+                    ? data
+                    : [];
 
-                button.addEventListener("click", function () {
+            renderCustomers();
+        } catch (error) {
+            console.error("Customers API Error:", error);
+            customers = [];
+            updateSummary();
+            customerCount.textContent = "Showing 0 customers";
+            tableBody.innerHTML = `
+                <tr>
+                    <td colspan="7" style="text-align:center;padding:50px;color:#ef8888;">
+                        Unable to load customers<br>
+                        <small>${escapeHtml(error.message)}</small>
+                    </td>
+                </tr>
+            `;
+        }
+    }
 
-                    const modalId =
-                        button.dataset.close;
-
-                    document
-                        .getElementById(modalId)
-                        .classList.remove("show");
-
-                });
-
-            });
-
-
-            document.querySelectorAll(".modal-overlay").forEach(function (overlay) {
-
-                overlay.addEventListener("click", function (event) {
-
-                    if (event.target === overlay) {
-
-                        overlay.classList.remove("show");
-
-                    }
-
-                });
-
-            });
-
-
-            /* ==========================================
-               ESCAPE KEY
-            ========================================== */
-
-            document.addEventListener("keydown", function (event) {
-
-                if (event.key === "Escape") {
-
-                    viewModal.classList.remove("show");
-                    formModal.classList.remove("show");
-
-                    sidebar.classList.remove("mobile-open");
-                    sidebarOverlay.classList.remove("show");
-
-                }
-
-            });
-
-
-            /* ==========================================
-               MOBILE RESIZE
-            ========================================== */
-
-            window.addEventListener("resize", function () {
-
-                if (window.innerWidth > 767) {
-
-                    sidebar.classList.remove("mobile-open");
-                    sidebarOverlay.classList.remove("show");
-
-                }
-
-            });
-
+    async function getCustomer(id) {
+        const response = await fetch(API + "/" + encodeURIComponent(id), {
+            method: "GET",
+            headers: {
+                "Accept": "application/json"
+            }
         });
 
-    </script>
+        const data = await response.json();
 
+        if (!response.ok) {
+            throw new Error(data.message || "Failed to fetch customer.");
+        }
+
+        return data.data || data;
+    }
+
+    function showCustomer(customer) {
+        $("viewAvatar").textContent = initials(customer.name);
+        $("viewName").textContent = customer.name || "—";
+        $("viewCustomerId").textContent = "#CUS" + String(customer.id).padStart(4, "0");
+        $("viewPhone").textContent = customer.phone || "—";
+        $("viewEmail").textContent = customer.email || "—";
+        $("viewBranch").textContent = customer.branch_name || "—";
+        $("viewBookings").textContent = Number(customer.total_bookings || 0);
+        $("viewLastVisit").textContent = dateText(customer.last_visit);
+        $("viewJoined").textContent = dateText(customer.created_at);
+        $("viewStatus").textContent = customer.status || "Inactive";
+
+        viewModal.classList.add("show");
+    }
+
+    function openAddCustomer() {
+        editingId = null;
+        customerForm.reset();
+        $("formTitle").textContent = "Add Customer";
+        saveButton.disabled = false;
+        saveButton.textContent = "Save Customer";
+        formModal.classList.add("show");
+        $("customerName").focus();
+    }
+
+    function openEditCustomer(customer) {
+        editingId = customer.id;
+        $("formTitle").textContent = "Edit Customer";
+        $("customerName").value = customer.name || "";
+        $("customerPhone").value = customer.phone || "";
+        $("customerEmail").value = customer.email || "";
+        saveButton.disabled = false;
+        saveButton.textContent = "Update Customer";
+        formModal.classList.add("show");
+        $("customerName").focus();
+    }
+
+    function attachTableActions() {
+        tableBody.querySelectorAll(".view-btn").forEach(function (button) {
+            button.addEventListener("click", async function () {
+                try {
+                    showCustomer(await getCustomer(button.dataset.id));
+                } catch (error) {
+                    alert(error.message);
+                }
+            });
+        });
+
+        tableBody.querySelectorAll(".edit-btn").forEach(function (button) {
+            button.addEventListener("click", async function () {
+                try {
+                    openEditCustomer(await getCustomer(button.dataset.id));
+                } catch (error) {
+                    alert(error.message);
+                }
+            });
+        });
+
+        tableBody.querySelectorAll(".delete-btn").forEach(function (button) {
+            button.addEventListener("click", async function () {
+                const customer = customers.find(function (item) {
+                    return String(item.id) === String(button.dataset.id);
+                });
+
+                if (!customer) {
+                    return;
+                }
+
+                if (!confirm("Delete customer " + customer.name + "?")) {
+                    return;
+                }
+
+                try {
+                    const response = await fetch(
+                        API + "/" + encodeURIComponent(button.dataset.id),
+                        {
+                            method: "DELETE",
+                            headers: {
+                                "Accept": "application/json"
+                            }
+                        }
+                    );
+
+                    const data = await response.json();
+
+                    if (!response.ok) {
+                        throw new Error(data.message || "Delete failed.");
+                    }
+
+                    await loadCustomers();
+                } catch (error) {
+                    alert(error.message);
+                }
+            });
+        });
+    }
+
+    addCustomerBtn.addEventListener("click", openAddCustomer);
+
+    customerForm.addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        const name = $("customerName").value.trim();
+        const phone = $("customerPhone").value.trim();
+        const email = $("customerEmail").value.trim().toLowerCase();
+
+        if (!name || !phone || !email) {
+            alert("Please fill Full Name, Phone Number and Email Address.");
+            return;
+        }
+
+        const originalText = editingId ? "Update Customer" : "Save Customer";
+        saveButton.disabled = true;
+        saveButton.textContent = editingId ? "Updating..." : "Saving...";
+
+        try {
+            const url = editingId
+                ? API + "/" + encodeURIComponent(editingId)
+                : API;
+
+            const response = await fetch(url, {
+                method: editingId ? "PUT" : "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify({
+                    name: name,
+                    phone: phone,
+                    email: email
+                })
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.message || "Customer could not be saved.");
+            }
+
+            formModal.classList.remove("show");
+            customerForm.reset();
+            editingId = null;
+            saveButton.disabled = false;
+            saveButton.textContent = originalText;
+
+            await loadCustomers();
+        } catch (error) {
+            console.error("SAVE CUSTOMER ERROR:", error);
+            alert(error.message);
+            saveButton.disabled = false;
+            saveButton.textContent = originalText;
+        }
+    });
+
+    $("customerSearch").addEventListener("input", renderCustomers);
+    $("branchFilter").addEventListener("change", renderCustomers);
+    $("statusFilter").addEventListener("change", renderCustomers);
+
+    document.querySelectorAll("[data-close]").forEach(function (button) {
+        button.addEventListener("click", function () {
+            const modal = $(button.dataset.close);
+            if (modal) {
+                modal.classList.remove("show");
+            }
+        });
+    });
+
+    document.querySelectorAll(".modal-overlay").forEach(function (overlay) {
+        overlay.addEventListener("click", function (event) {
+            if (event.target === overlay) {
+                overlay.classList.remove("show");
+            }
+        });
+    });
+
+    loadCustomers();
+});
+</script>
 </body>
 </html>

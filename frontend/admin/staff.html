@@ -115,9 +115,24 @@
             margin-left: 28px;
             padding-left: 28px;
             border-left: 1px solid #333;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 3px;
+            min-width: 0;
+        }
+
+        .page-title strong {
             font-size: 16px;
             font-weight: 600;
             color: #ddd;
+            line-height: 1.2;
+        }
+
+        .page-title span {
+            color: #777;
+            font-size: 10px;
+            line-height: 1.3;
         }
 
         .header-right {
@@ -326,8 +341,8 @@
 
         .content-heading {
             display: flex;
-            align-items: flex-end;
-            justify-content: space-between;
+            align-items: center;
+            justify-content: flex-end;
             gap: 20px;
             margin-bottom: 26px;
         }
@@ -360,7 +375,6 @@
         /* =========================
            SUMMARY
         ========================= */
-
         .summary-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -369,38 +383,35 @@
         }
 
         .summary-card {
+            min-height: 105px;
             background: #111;
             border: 1px solid #292929;
             border-radius: 12px;
-            padding: 19px;
-        }
-
-        .summary-top {
+            padding: 18px;
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .summary-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 9px;
-            background: rgba(212, 175, 55, 0.1);
-            color: #d4af37;
-            display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
+            text-align: center;
+            transition: 0.2s ease;
+        }
+
+        .summary-card:hover {
+            border-color: rgba(212, 175, 55, 0.55);
+            transform: translateY(-2px);
         }
 
         .summary-card h3 {
-            font-size: 25px;
-            margin-top: 13px;
+            color: #d4af37;
+            font-size: 34px;
+            line-height: 1.1;
+            font-weight: 800;
         }
 
         .summary-card p {
             color: #888;
             font-size: 12px;
-            margin-top: 3px;
+            margin-top: 7px;
         }
 
         /* =========================
@@ -417,8 +428,27 @@
 
         .filter-row {
             display: grid;
-            grid-template-columns: minmax(220px, 1fr) 190px 190px;
+            grid-template-columns: minmax(220px, 1fr) 180px 180px 160px auto;
             gap: 12px;
+            align-items: center;
+        }
+
+        .filter-add-btn {
+            height: 44px;
+            border: none;
+            background: #d4af37;
+            color: #000;
+            border-radius: 8px;
+            padding: 0 18px;
+            font-size: 12px;
+            font-weight: 700;
+            white-space: nowrap;
+            transition: 0.2s ease;
+        }
+
+        .filter-add-btn:hover {
+            background: #e5c65a;
+            transform: translateY(-1px);
         }
 
         .search-box {
@@ -569,13 +599,7 @@
             font-size: 11px;
             font-weight: 600;
         }
-
-        .specialization {
-            color: #aaa;
-            font-size: 11px;
-        }
-
-        .status {
+.status {
             display: inline-flex;
             align-items: center;
             padding: 5px 9px;
@@ -837,6 +861,10 @@
                 grid-template-columns: 1fr 1fr;
             }
 
+            .filter-add-btn {
+                width: 100%;
+            }
+
             .search-box {
                 grid-column: 1 / -1;
             }
@@ -866,7 +894,17 @@
             }
 
             .page-title {
-                display: none;
+                margin-left: 10px;
+                padding-left: 10px;
+                max-width: 230px;
+            }
+
+            .page-title strong {
+                font-size: 13px;
+            }
+
+            .page-title span {
+                font-size: 8px;
             }
 
             .header-right {
@@ -942,7 +980,7 @@
             }
 
             .content-heading {
-                align-items: flex-start;
+                align-items: stretch;
                 flex-direction: column;
             }
 
@@ -969,6 +1007,10 @@
 
             .filter-row {
                 grid-template-columns: 1fr;
+            }
+
+            .filter-add-btn {
+                width: 100%;
             }
 
             .search-box {
@@ -1036,7 +1078,8 @@
             </div>
 
             <div class="page-title">
-                Staff
+                <strong>Staff Management</strong>
+                <span>Manage salon professionals, roles and working information.</span>
             </div>
 
         </div>
@@ -1150,108 +1193,31 @@
 
     <main class="admin-main">
 
-        <div class="content-heading">
-
-            <div class="heading-text">
-
-                <h1>Staff Management</h1>
-
-                <p>
-                    Manage salon professionals, roles and working information.
-                </p>
-
-            </div>
-
-            <button
-                class="add-staff-btn"
-                id="addStaffBtn"
-            >
-                <i class="fa-solid fa-plus"></i>
-                Add Staff
-            </button>
-
-        </div>
-
-
         <!-- =================================================
              SUMMARY
         ================================================== -->
 
         <section class="summary-grid">
-
             <div class="summary-card">
-
-                <div class="summary-top">
-
-                    <div>
-                        <h3>18</h3>
-                        <p>Total Staff</p>
-                    </div>
-
-                    <div class="summary-icon">
-                        <i class="fa-solid fa-user-tie"></i>
-                    </div>
-
-                </div>
-
+                <h3 id="totalStaff">0</h3>
+                <p>Total Staff</p>
             </div>
 
-
             <div class="summary-card">
-
-                <div class="summary-top">
-
-                    <div>
-                        <h3>16</h3>
-                        <p>Active Staff</p>
-                    </div>
-
-                    <div class="summary-icon">
-                        <i class="fa-solid fa-user-check"></i>
-                    </div>
-
-                </div>
-
+                <h3 id="activeStaff">0</h3>
+                <p>Active Staff</p>
             </div>
 
-
             <div class="summary-card">
-
-                <div class="summary-top">
-
-                    <div>
-                        <h3>2</h3>
-                        <p>Inactive Staff</p>
-                    </div>
-
-                    <div class="summary-icon">
-                        <i class="fa-solid fa-user-clock"></i>
-                    </div>
-
-                </div>
-
+                <h3 id="inactiveStaff">0</h3>
+                <p>Inactive Staff</p>
             </div>
 
-
             <div class="summary-card">
-
-                <div class="summary-top">
-
-                    <div>
-                        <h3>9</h3>
-                        <p>Hair & Beauty Experts</p>
-                    </div>
-
-                    <div class="summary-icon">
-                        <i class="fa-solid fa-star"></i>
-                    </div>
-
-                </div>
-
+                <h3 id="expertStaff">0</h3>
+                <p>Senior &amp; Beauty Experts</p>
             </div>
-
         </section>
-
 
         <!-- =================================================
              FILTERS
@@ -1268,7 +1234,7 @@
                     <input
                         type="text"
                         id="staffSearch"
-                        placeholder="Search staff by name, phone or specialization..."
+                        placeholder="Search staff by name, phone or email..."
                     >
 
                 </div>
@@ -1303,23 +1269,37 @@
                         All Roles
                     </option>
 
-                    <option value="Hair Stylist">
-                        Hair Stylist
+                    <option value="Senior Stylist">
+                        Senior Stylist
                     </option>
 
-                    <option value="Beautician">
-                        Beautician
+                    <option value="Stylist">
+                        Stylist
                     </option>
 
-                    <option value="Barber">
-                        Barber
-                    </option>
-
-                    <option value="Receptionist">
-                        Receptionist
+                    <option value="Beauty Specialist">
+                        Beauty Specialist
                     </option>
 
                 </select>
+
+                <select
+                    class="filter-select"
+                    id="statusFilter"
+                >
+                    <option value="all">All Status</option>
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                </select>
+
+                <button
+                    class="filter-add-btn"
+                    id="addStaffBtn"
+                    type="button"
+                >
+                    <i class="fa-solid fa-plus"></i>
+                    Add Staff
+                </button>
 
             </div>
 
@@ -1348,668 +1328,23 @@
                 <table>
 
                     <thead>
-
                         <tr>
                             <th>Staff Member</th>
                             <th>Role</th>
-                            <th>Specialization</th>
                             <th>Branch</th>
+                            <th>Phone</th>
                             <th>Bookings</th>
                             <th>Status</th>
                             <th>Actions</th>
                         </tr>
-
                     </thead>
 
-
                     <tbody id="staffTableBody">
-
-                        <!--
-                            DUMMY DATA
-                            Replace with backend/API data later.
-                        -->
-
-
-                        <tr
-                            data-name="Rahul Patil"
-                            data-phone="+91 9876543210"
-                            data-email="rahul.patil@beautysalon.com"
-                            data-role="Hair Stylist"
-                            data-specialization="Hair Styling"
-                            data-branch="Baramati"
-                            data-bookings="42"
-                            data-status="Active"
-                            data-hours="9:00 AM - 6:00 PM"
-                            data-joined="10 Jan 2026"
-                        >
-
-                            <td>
-
-                                <div class="staff-cell">
-
-                                    <div class="staff-avatar">
-                                        RP
-                                    </div>
-
-                                    <div class="staff-info">
-                                        <strong>Rahul Patil</strong>
-                                        <span>#STF1008</span>
-                                    </div>
-
-                                </div>
-
+                        <tr>
+                            <td colspan="7" style="text-align:center; padding:35px; color:#777;">
+                                Loading staff...
                             </td>
-
-                            <td>
-                                <span class="role">
-                                    Hair Stylist
-                                </span>
-                            </td>
-
-                            <td>
-                                <span class="specialization">
-                                    Hair Styling
-                                </span>
-                            </td>
-
-                            <td>
-                                Baramati
-                            </td>
-
-                            <td>
-                                42
-                            </td>
-
-                            <td>
-                                <span class="status active">
-                                    Active
-                                </span>
-                            </td>
-
-                            <td>
-
-                                <div class="action-group">
-
-                                    <button
-                                        class="action-btn view-btn"
-                                        title="View"
-                                    >
-                                        <i class="fa-regular fa-eye"></i>
-                                    </button>
-
-                                    <button
-                                        class="action-btn edit-btn"
-                                        title="Edit"
-                                    >
-                                        <i class="fa-solid fa-pen"></i>
-                                    </button>
-
-                                    <button
-                                        class="action-btn delete delete-btn"
-                                        title="Delete"
-                                    >
-                                        <i class="fa-regular fa-trash-can"></i>
-                                    </button>
-
-                                </div>
-
-                            </td>
-
                         </tr>
-
-
-                        <tr
-                            data-name="Sneha Jadhav"
-                            data-phone="+91 9822456712"
-                            data-email="sneha.jadhav@beautysalon.com"
-                            data-role="Beautician"
-                            data-specialization="Facial & Skin Care"
-                            data-branch="Baramati"
-                            data-bookings="38"
-                            data-status="Active"
-                            data-hours="10:00 AM - 7:00 PM"
-                            data-joined="15 Jan 2026"
-                        >
-
-                            <td>
-
-                                <div class="staff-cell">
-
-                                    <div class="staff-avatar">
-                                        SJ
-                                    </div>
-
-                                    <div class="staff-info">
-                                        <strong>Sneha Jadhav</strong>
-                                        <span>#STF1007</span>
-                                    </div>
-
-                                </div>
-
-                            </td>
-
-                            <td>
-                                <span class="role">
-                                    Beautician
-                                </span>
-                            </td>
-
-                            <td>
-                                <span class="specialization">
-                                    Facial & Skin Care
-                                </span>
-                            </td>
-
-                            <td>
-                                Baramati
-                            </td>
-
-                            <td>
-                                38
-                            </td>
-
-                            <td>
-                                <span class="status active">
-                                    Active
-                                </span>
-                            </td>
-
-                            <td>
-
-                                <div class="action-group">
-
-                                    <button class="action-btn view-btn" title="View">
-                                        <i class="fa-regular fa-eye"></i>
-                                    </button>
-
-                                    <button class="action-btn edit-btn" title="Edit">
-                                        <i class="fa-solid fa-pen"></i>
-                                    </button>
-
-                                    <button class="action-btn delete delete-btn" title="Delete">
-                                        <i class="fa-regular fa-trash-can"></i>
-                                    </button>
-
-                                </div>
-
-                            </td>
-
-                        </tr>
-
-
-                        <tr
-                            data-name="Amit More"
-                            data-phone="+91 9765432187"
-                            data-email="amit.more@beautysalon.com"
-                            data-role="Barber"
-                            data-specialization="Beard & Grooming"
-                            data-branch="Baramati"
-                            data-bookings="35"
-                            data-status="Active"
-                            data-hours="9:00 AM - 6:00 PM"
-                            data-joined="20 Jan 2026"
-                        >
-
-                            <td>
-
-                                <div class="staff-cell">
-
-                                    <div class="staff-avatar">
-                                        AM
-                                    </div>
-
-                                    <div class="staff-info">
-                                        <strong>Amit More</strong>
-                                        <span>#STF1006</span>
-                                    </div>
-
-                                </div>
-
-                            </td>
-
-                            <td>
-                                <span class="role">
-                                    Barber
-                                </span>
-                            </td>
-
-                            <td>
-                                <span class="specialization">
-                                    Beard & Grooming
-                                </span>
-                            </td>
-
-                            <td>
-                                Baramati
-                            </td>
-
-                            <td>
-                                35
-                            </td>
-
-                            <td>
-                                <span class="status active">
-                                    Active
-                                </span>
-                            </td>
-
-                            <td>
-
-                                <div class="action-group">
-
-                                    <button class="action-btn view-btn" title="View">
-                                        <i class="fa-regular fa-eye"></i>
-                                    </button>
-
-                                    <button class="action-btn edit-btn" title="Edit">
-                                        <i class="fa-solid fa-pen"></i>
-                                    </button>
-
-                                    <button class="action-btn delete delete-btn" title="Delete">
-                                        <i class="fa-regular fa-trash-can"></i>
-                                    </button>
-
-                                </div>
-
-                            </td>
-
-                        </tr>
-
-
-                        <tr
-                            data-name="Pooja Shinde"
-                            data-phone="+91 9898981212"
-                            data-email="pooja.shinde@beautysalon.com"
-                            data-role="Beautician"
-                            data-specialization="Hair Spa & Facial"
-                            data-branch="Baramati"
-                            data-bookings="31"
-                            data-status="Active"
-                            data-hours="11:00 AM - 8:00 PM"
-                            data-joined="05 Feb 2026"
-                        >
-
-                            <td>
-
-                                <div class="staff-cell">
-
-                                    <div class="staff-avatar">
-                                        PS
-                                    </div>
-
-                                    <div class="staff-info">
-                                        <strong>Pooja Shinde</strong>
-                                        <span>#STF1005</span>
-                                    </div>
-
-                                </div>
-
-                            </td>
-
-                            <td>
-                                <span class="role">
-                                    Beautician
-                                </span>
-                            </td>
-
-                            <td>
-                                <span class="specialization">
-                                    Hair Spa & Facial
-                                </span>
-                            </td>
-
-                            <td>
-                                Baramati
-                            </td>
-
-                            <td>
-                                31
-                            </td>
-
-                            <td>
-                                <span class="status active">
-                                    Active
-                                </span>
-                            </td>
-
-                            <td>
-
-                                <div class="action-group">
-
-                                    <button class="action-btn view-btn" title="View">
-                                        <i class="fa-regular fa-eye"></i>
-                                    </button>
-
-                                    <button class="action-btn edit-btn" title="Edit">
-                                        <i class="fa-solid fa-pen"></i>
-                                    </button>
-
-                                    <button class="action-btn delete delete-btn" title="Delete">
-                                        <i class="fa-regular fa-trash-can"></i>
-                                    </button>
-
-                                </div>
-
-                            </td>
-
-                        </tr>
-
-
-                        <tr
-                            data-name="Vikas Pawar"
-                            data-phone="+91 9011223344"
-                            data-email="vikas.pawar@beautysalon.com"
-                            data-role="Hair Stylist"
-                            data-specialization="Hair Cut & Styling"
-                            data-branch="Baramati MIDC"
-                            data-bookings="27"
-                            data-status="Active"
-                            data-hours="9:00 AM - 6:00 PM"
-                            data-joined="12 Mar 2026"
-                        >
-
-                            <td>
-
-                                <div class="staff-cell">
-
-                                    <div class="staff-avatar">
-                                        VP
-                                    </div>
-
-                                    <div class="staff-info">
-                                        <strong>Vikas Pawar</strong>
-                                        <span>#STF1004</span>
-                                    </div>
-
-                                </div>
-
-                            </td>
-
-                            <td>
-                                <span class="role">
-                                    Hair Stylist
-                                </span>
-                            </td>
-
-                            <td>
-                                <span class="specialization">
-                                    Hair Cut & Styling
-                                </span>
-                            </td>
-
-                            <td>
-                                Baramati MIDC
-                            </td>
-
-                            <td>
-                                27
-                            </td>
-
-                            <td>
-                                <span class="status active">
-                                    Active
-                                </span>
-                            </td>
-
-                            <td>
-
-                                <div class="action-group">
-
-                                    <button class="action-btn view-btn" title="View">
-                                        <i class="fa-regular fa-eye"></i>
-                                    </button>
-
-                                    <button class="action-btn edit-btn" title="Edit">
-                                        <i class="fa-solid fa-pen"></i>
-                                    </button>
-
-                                    <button class="action-btn delete delete-btn" title="Delete">
-                                        <i class="fa-regular fa-trash-can"></i>
-                                    </button>
-
-                                </div>
-
-                            </td>
-
-                        </tr>
-
-
-                        <tr
-                            data-name="Neha Kulkarni"
-                            data-phone="+91 9123456780"
-                            data-email="neha.kulkarni@beautysalon.com"
-                            data-role="Beautician"
-                            data-specialization="Makeup & Beauty"
-                            data-branch="Baramati MIDC"
-                            data-bookings="24"
-                            data-status="Active"
-                            data-hours="10:00 AM - 7:00 PM"
-                            data-joined="22 Apr 2026"
-                        >
-
-                            <td>
-
-                                <div class="staff-cell">
-
-                                    <div class="staff-avatar">
-                                        NK
-                                    </div>
-
-                                    <div class="staff-info">
-                                        <strong>Neha Kulkarni</strong>
-                                        <span>#STF1003</span>
-                                    </div>
-
-                                </div>
-
-                            </td>
-
-                            <td>
-                                <span class="role">
-                                    Beautician
-                                </span>
-                            </td>
-
-                            <td>
-                                <span class="specialization">
-                                    Makeup & Beauty
-                                </span>
-                            </td>
-
-                            <td>
-                                Baramati MIDC
-                            </td>
-
-                            <td>
-                                24
-                            </td>
-
-                            <td>
-                                <span class="status active">
-                                    Active
-                                </span>
-                            </td>
-
-                            <td>
-
-                                <div class="action-group">
-
-                                    <button class="action-btn view-btn" title="View">
-                                        <i class="fa-regular fa-eye"></i>
-                                    </button>
-
-                                    <button class="action-btn edit-btn" title="Edit">
-                                        <i class="fa-solid fa-pen"></i>
-                                    </button>
-
-                                    <button class="action-btn delete delete-btn" title="Delete">
-                                        <i class="fa-regular fa-trash-can"></i>
-                                    </button>
-
-                                </div>
-
-                            </td>
-
-                        </tr>
-
-
-                        <tr
-                            data-name="Akash Jagtap"
-                            data-phone="+91 9345678901"
-                            data-email="akash.jagtap@beautysalon.com"
-                            data-role="Receptionist"
-                            data-specialization="Front Desk"
-                            data-branch="Baramati"
-                            data-bookings="0"
-                            data-status="Active"
-                            data-hours="9:00 AM - 6:00 PM"
-                            data-joined="01 Jun 2026"
-                        >
-
-                            <td>
-
-                                <div class="staff-cell">
-
-                                    <div class="staff-avatar">
-                                        AJ
-                                    </div>
-
-                                    <div class="staff-info">
-                                        <strong>Akash Jagtap</strong>
-                                        <span>#STF1002</span>
-                                    </div>
-
-                                </div>
-
-                            </td>
-
-                            <td>
-                                <span class="role">
-                                    Receptionist
-                                </span>
-                            </td>
-
-                            <td>
-                                <span class="specialization">
-                                    Front Desk
-                                </span>
-                            </td>
-
-                            <td>
-                                Baramati
-                            </td>
-
-                            <td>
-                                0
-                            </td>
-
-                            <td>
-                                <span class="status active">
-                                    Active
-                                </span>
-                            </td>
-
-                            <td>
-
-                                <div class="action-group">
-
-                                    <button class="action-btn view-btn" title="View">
-                                        <i class="fa-regular fa-eye"></i>
-                                    </button>
-
-                                    <button class="action-btn edit-btn" title="Edit">
-                                        <i class="fa-solid fa-pen"></i>
-                                    </button>
-
-                                    <button class="action-btn delete delete-btn" title="Delete">
-                                        <i class="fa-regular fa-trash-can"></i>
-                                    </button>
-
-                                </div>
-
-                            </td>
-
-                        </tr>
-
-
-                        <tr
-                            data-name="Kiran Deshmukh"
-                            data-phone="+91 9567890123"
-                            data-email="kiran.deshmukh@beautysalon.com"
-                            data-role="Hair Stylist"
-                            data-specialization="Hair Treatment"
-                            data-branch="Baramati MIDC"
-                            data-bookings="18"
-                            data-status="Inactive"
-                            data-hours="10:00 AM - 7:00 PM"
-                            data-joined="15 Jul 2026"
-                        >
-
-                            <td>
-
-                                <div class="staff-cell">
-
-                                    <div class="staff-avatar">
-                                        KD
-                                    </div>
-
-                                    <div class="staff-info">
-                                        <strong>Kiran Deshmukh</strong>
-                                        <span>#STF1001</span>
-                                    </div>
-
-                                </div>
-
-                            </td>
-
-                            <td>
-                                <span class="role">
-                                    Hair Stylist
-                                </span>
-                            </td>
-
-                            <td>
-                                <span class="specialization">
-                                    Hair Treatment
-                                </span>
-                            </td>
-
-                            <td>
-                                Baramati MIDC
-                            </td>
-
-                            <td>
-                                18
-                            </td>
-
-                            <td>
-                                <span class="status inactive">
-                                    Inactive
-                                </span>
-                            </td>
-
-                            <td>
-
-                                <div class="action-group">
-
-                                    <button class="action-btn view-btn" title="View">
-                                        <i class="fa-regular fa-eye"></i>
-                                    </button>
-
-                                    <button class="action-btn edit-btn" title="Edit">
-                                        <i class="fa-solid fa-pen"></i>
-                                    </button>
-
-                                    <button class="action-btn delete delete-btn" title="Delete">
-                                        <i class="fa-regular fa-trash-can"></i>
-                                    </button>
-
-                                </div>
-
-                            </td>
-
-                        </tr>
-
                     </tbody>
 
                 </table>
@@ -2051,17 +1386,17 @@
                         class="large-avatar"
                         id="viewAvatar"
                     >
-                        RP
+                        —
                     </div>
 
                     <div>
 
                         <h4 id="viewName">
-                            Rahul Patil
+                            —
                         </h4>
 
                         <p id="viewStaffId">
-                            #STF1008
+                            —
                         </p>
 
                     </div>
@@ -2070,111 +1405,44 @@
 
 
                 <div class="detail-grid">
+                        <div class="detail-item">
+                            <label>Phone</label>
+                            <strong id="viewPhone">—</strong>
+                        </div>
 
-                    <div class="detail-item">
+                        <div class="detail-item">
+                            <label>Email</label>
+                            <strong id="viewEmail">—</strong>
+                        </div>
 
-                        <label>Phone</label>
+                        <div class="detail-item">
+                            <label>Role</label>
+                            <strong id="viewRole">—</strong>
+                        </div>
 
-                        <strong id="viewPhone">
-                            +91 9876543210
-                        </strong>
+                        <div class="detail-item">
+                            <label>Branch</label>
+                            <strong id="viewBranch">—</strong>
+                        </div>
 
+                        <div class="detail-item">
+                            <label>Total Bookings</label>
+                            <strong id="viewBookings">0</strong>
+                        </div>
+
+                        <div class="detail-item">
+                            <label>Status</label>
+                            <strong id="viewStatus">—</strong>
+                        </div>
+
+                        <div class="detail-item full">
+                            <label>Joined</label>
+                            <strong id="viewJoined">—</strong>
+                        </div>
                     </div>
-
-
-                    <div class="detail-item">
-
-                        <label>Email</label>
-
-                        <strong id="viewEmail">
-                            rahul.patil@beautysalon.com
-                        </strong>
-
-                    </div>
-
-
-                    <div class="detail-item">
-
-                        <label>Role</label>
-
-                        <strong id="viewRole">
-                            Hair Stylist
-                        </strong>
-
-                    </div>
-
-
-                    <div class="detail-item">
-
-                        <label>Branch</label>
-
-                        <strong id="viewBranch">
-                            Baramati
-                        </strong>
-
-                    </div>
-
-
-                    <div class="detail-item">
-
-                        <label>Specialization</label>
-
-                        <strong id="viewSpecialization">
-                            Hair Styling
-                        </strong>
-
-                    </div>
-
-
-                    <div class="detail-item">
-
-                        <label>Total Bookings</label>
-
-                        <strong id="viewBookings">
-                            42
-                        </strong>
-
-                    </div>
-
-
-                    <div class="detail-item">
-
-                        <label>Working Hours</label>
-
-                        <strong id="viewHours">
-                            9:00 AM - 6:00 PM
-                        </strong>
-
-                    </div>
-
-
-                    <div class="detail-item">
-
-                        <label>Status</label>
-
-                        <strong id="viewStatus">
-                            Active
-                        </strong>
-
-                    </div>
-
-
-                    <div class="detail-item">
-
-                        <label>Joined</label>
-
-                        <strong id="viewJoined">
-                            10 Jan 2026
-                        </strong>
-
-                    </div>
-
                 </div>
 
-            </div>
-
-
-            <div class="modal-footer">
+                <div class="modal-footer">
 
                 <button
                     class="modal-btn"
@@ -2274,41 +1542,11 @@
                                 Role
                             </label>
 
-                            <select id="staffRole">
-
-                                <option value="Hair Stylist">
-                                    Hair Stylist
-                                </option>
-
-                                <option value="Beautician">
-                                    Beautician
-                                </option>
-
-                                <option value="Barber">
-                                    Barber
-                                </option>
-
-                                <option value="Receptionist">
-                                    Receptionist
-                                </option>
-
+                            <select id="staffRole" required>
+                                <option value="Senior Stylist">Senior Stylist</option>
+                                <option value="Stylist">Stylist</option>
+                                <option value="Beauty Specialist">Beauty Specialist</option>
                             </select>
-
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label>
-                                Specialization
-                            </label>
-
-                            <input
-                                type="text"
-                                id="staffSpecialization"
-                                placeholder="Hair Styling"
-                                required
-                            >
 
                         </div>
 
@@ -2390,926 +1628,584 @@
     ====================================================== -->
 
     <script>
-
-        document.addEventListener(
-            "DOMContentLoaded",
-            function () {
-
-                const sidebar =
-                    document.getElementById("adminSidebar");
-
-                const sidebarToggle =
-                    document.getElementById("sidebarToggle");
-
-                const mobileMenuBtn =
-                    document.getElementById("mobileMenuBtn");
-
-                const sidebarOverlay =
-                    document.getElementById("sidebarOverlay");
-
-                const searchInput =
-                    document.getElementById("staffSearch");
-
-                const branchFilter =
-                    document.getElementById("branchFilter");
-
-                const roleFilter =
-                    document.getElementById("roleFilter");
-
-                const tableBody =
-                    document.getElementById("staffTableBody");
-
-                const staffCount =
-                    document.getElementById("staffCount");
-
-                const viewModal =
-                    document.getElementById("viewModal");
-
-                const formModal =
-                    document.getElementById("formModal");
-
-                const addStaffBtn =
-                    document.getElementById("addStaffBtn");
-
-                const staffForm =
-                    document.getElementById("staffForm");
-
-                let editingRow = null;
-
-
-                /* ==========================================
-                   SIDEBAR COLLAPSE
-                ========================================== */
-
-                sidebarToggle.addEventListener(
-                    "click",
-                    function () {
-
-                        if (window.innerWidth <= 767) {
-
-                            sidebar.classList.remove(
-                                "mobile-open"
-                            );
-
-                            sidebarOverlay.classList.remove(
-                                "show"
-                            );
-
-                            return;
-                        }
-
-                        sidebar.classList.toggle(
-                            "collapsed"
-                        );
-
-                    }
-                );
-
-
-                /* ==========================================
-                   MOBILE MENU
-                ========================================== */
-
-                mobileMenuBtn.addEventListener(
-                    "click",
-                    function () {
-
-                        sidebar.classList.add(
-                            "mobile-open"
-                        );
-
-                        sidebarOverlay.classList.add(
-                            "show"
-                        );
-
-                    }
-                );
-
-
-                sidebarOverlay.addEventListener(
-                    "click",
-                    function () {
-
-                        sidebar.classList.remove(
-                            "mobile-open"
-                        );
-
-                        sidebarOverlay.classList.remove(
-                            "show"
-                        );
-
-                    }
-                );
-
-
-                document
-                    .querySelectorAll(".sidebar-link")
-                    .forEach(function (link) {
-
-                        link.addEventListener(
-                            "click",
-                            function () {
-
-                                if (
-                                    window.innerWidth <= 767
-                                ) {
-
-                                    sidebar.classList.remove(
-                                        "mobile-open"
-                                    );
-
-                                    sidebarOverlay.classList.remove(
-                                        "show"
-                                    );
-
-                                }
-
-                            }
-                        );
-
-                    });
-
-
-                /* ==========================================
-                   FILTER STAFF
-                ========================================== */
-
-                function filterStaff() {
-
-                    const searchValue =
-                        searchInput.value
-                            .trim()
-                            .toLowerCase();
-
-                    const selectedBranch =
-                        branchFilter.value;
-
-                    const selectedRole =
-                        roleFilter.value;
-
-                    const rows =
-                        tableBody.querySelectorAll("tr");
-
-                    let visibleCount = 0;
-
-
-                    rows.forEach(function (row) {
-
-                        const name =
-                            row.dataset.name.toLowerCase();
-
-                        const phone =
-                            row.dataset.phone.toLowerCase();
-
-                        const specialization =
-                            row.dataset.specialization
-                                .toLowerCase();
-
-                        const branch =
-                            row.dataset.branch;
-
-                        const role =
-                            row.dataset.role;
-
-
-                        const matchesSearch =
-                            name.includes(searchValue) ||
-                            phone.includes(searchValue) ||
-                            specialization.includes(searchValue);
-
-                        const matchesBranch =
-                            selectedBranch === "all" ||
-                            branch === selectedBranch;
-
-                        const matchesRole =
-                            selectedRole === "all" ||
-                            role === selectedRole;
-
-
-                        if (
-                            matchesSearch &&
-                            matchesBranch &&
-                            matchesRole
-                        ) {
-
-                            row.style.display = "";
-                            visibleCount++;
-
-                        } else {
-
-                            row.style.display = "none";
-
-                        }
-
-                    });
-
-
-                    staffCount.textContent =
-                        "Showing " +
-                        visibleCount +
-                        " staff members";
-
+        document.addEventListener("DOMContentLoaded", function () {
+            const API = "http://localhost:5000/api/staff";
+            const BRANCH_API = "http://localhost:5000/api/branches";
+
+            const sidebar = document.getElementById("adminSidebar");
+            const sidebarToggle = document.getElementById("sidebarToggle");
+            const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+            const sidebarOverlay = document.getElementById("sidebarOverlay");
+
+            const searchInput = document.getElementById("staffSearch");
+            const branchFilter = document.getElementById("branchFilter");
+            const roleFilter = document.getElementById("roleFilter");
+            const statusFilter = document.getElementById("statusFilter");
+            const tableBody = document.getElementById("staffTableBody");
+            const staffCount = document.getElementById("staffCount");
+
+            const totalStaff = document.getElementById("totalStaff");
+            const activeStaff = document.getElementById("activeStaff");
+            const inactiveStaff = document.getElementById("inactiveStaff");
+            const expertStaff = document.getElementById("expertStaff");
+
+            const viewModal = document.getElementById("viewModal");
+            const formModal = document.getElementById("formModal");
+            const addStaffBtn = document.getElementById("addStaffBtn");
+            const staffForm = document.getElementById("staffForm");
+
+            const staffName = document.getElementById("staffName");
+            const staffPhone = document.getElementById("staffPhone");
+            const staffEmail = document.getElementById("staffEmail");
+            const staffRole = document.getElementById("staffRole");
+            const staffBranch = document.getElementById("staffBranch");
+            const staffStatus = document.getElementById("staffStatus");
+            const formTitle = document.getElementById("formTitle");
+
+            let staffData = [];
+            let branches = [];
+            let editingId = null;
+
+            function escapeHtml(value) {
+                return String(value ?? "")
+                    .replace(/&/g, "&amp;")
+                    .replace(/</g, "&lt;")
+                    .replace(/>/g, "&gt;")
+                    .replace(/"/g, "&quot;")
+                    .replace(/'/g, "&#039;");
+            }
+
+            function formatDate(value) {
+                if (!value) {
+                    return "—";
                 }
 
+                const date = new Date(value);
 
-                searchInput.addEventListener(
-                    "input",
-                    filterStaff
-                );
-
-                branchFilter.addEventListener(
-                    "change",
-                    filterStaff
-                );
-
-                roleFilter.addEventListener(
-                    "change",
-                    filterStaff
-                );
-
-
-                /* ==========================================
-                   VIEW STAFF
-                ========================================== */
-
-                function openViewModal(row) {
-
-                    const firstCell =
-                        row.querySelector("td");
-
-                    const staffId =
-                        firstCell
-                            .querySelector("span")
-                            .textContent;
-
-
-                    const name =
-                        row.dataset.name;
-
-                    const initials =
-                        name
-                            .split(" ")
-                            .map(word => word[0])
-                            .join("")
-                            .substring(0, 2)
-                            .toUpperCase();
-
-
-                    document.getElementById(
-                        "viewAvatar"
-                    ).textContent = initials;
-
-                    document.getElementById(
-                        "viewName"
-                    ).textContent = name;
-
-                    document.getElementById(
-                        "viewStaffId"
-                    ).textContent = staffId;
-
-                    document.getElementById(
-                        "viewPhone"
-                    ).textContent =
-                        row.dataset.phone;
-
-                    document.getElementById(
-                        "viewEmail"
-                    ).textContent =
-                        row.dataset.email;
-
-                    document.getElementById(
-                        "viewRole"
-                    ).textContent =
-                        row.dataset.role;
-
-                    document.getElementById(
-                        "viewSpecialization"
-                    ).textContent =
-                        row.dataset.specialization;
-
-                    document.getElementById(
-                        "viewBranch"
-                    ).textContent =
-                        row.dataset.branch;
-
-                    document.getElementById(
-                        "viewBookings"
-                    ).textContent =
-                        row.dataset.bookings;
-
-                    document.getElementById(
-                        "viewHours"
-                    ).textContent =
-                        row.dataset.hours;
-
-                    document.getElementById(
-                        "viewStatus"
-                    ).textContent =
-                        row.dataset.status;
-
-                    document.getElementById(
-                        "viewJoined"
-                    ).textContent =
-                        row.dataset.joined;
-
-
-                    viewModal.classList.add("show");
-
+                if (Number.isNaN(date.getTime())) {
+                    return value;
                 }
 
+                return date.toLocaleDateString("en-IN", {
+                    day: "2-digit",
+                    month: "short",
+                    year: "numeric"
+                });
+            }
 
-                /* ==========================================
-                   EDIT STAFF
-                ========================================== */
+            function getInitials(name) {
+                return String(name || "")
+                    .trim()
+                    .split(/\s+/)
+                    .map(word => word.charAt(0))
+                    .join("")
+                    .substring(0, 2)
+                    .toUpperCase();
+            }
 
-                function openEditModal(row) {
+            function showTableMessage(message) {
+                tableBody.innerHTML = `
+                    <tr>
+                        <td colspan="7" style="text-align:center; padding:35px; color:#777;">
+                            ${escapeHtml(message)}
+                        </td>
+                    </tr>
+                `;
+            }
 
-                    editingRow = row;
+            async function loadBranches() {
+                try {
+                    const response = await fetch(BRANCH_API);
+                    const result = await response.json();
 
-                    document.getElementById(
-                        "formTitle"
-                    ).textContent =
-                        "Edit Staff";
-
-
-                    document.getElementById(
-                        "staffName"
-                    ).value =
-                        row.dataset.name;
-
-                    document.getElementById(
-                        "staffPhone"
-                    ).value =
-                        row.dataset.phone;
-
-                    document.getElementById(
-                        "staffEmail"
-                    ).value =
-                        row.dataset.email;
-
-                    document.getElementById(
-                        "staffRole"
-                    ).value =
-                        row.dataset.role;
-
-                    document.getElementById(
-                        "staffSpecialization"
-                    ).value =
-                        row.dataset.specialization;
-
-                    document.getElementById(
-                        "staffBranch"
-                    ).value =
-                        row.dataset.branch;
-
-                    document.getElementById(
-                        "staffStatus"
-                    ).value =
-                        row.dataset.status;
-
-
-                    formModal.classList.add("show");
-
-                }
-
-
-                /* ==========================================
-                   TABLE ACTIONS
-                ========================================== */
-
-                function attachRowActions() {
-
-                    document
-                        .querySelectorAll(".view-btn")
-                        .forEach(function (button) {
-
-                            button.onclick =
-                                function () {
-
-                                    openViewModal(
-                                        button.closest("tr")
-                                    );
-
-                                };
-
-                        });
-
-
-                    document
-                        .querySelectorAll(".edit-btn")
-                        .forEach(function (button) {
-
-                            button.onclick =
-                                function () {
-
-                                    openEditModal(
-                                        button.closest("tr")
-                                    );
-
-                                };
-
-                        });
-
-
-                    document
-                        .querySelectorAll(".delete-btn")
-                        .forEach(function (button) {
-
-                            button.onclick =
-                                function () {
-
-                                    const row =
-                                        button.closest("tr");
-
-                                    const name =
-                                        row.dataset.name;
-
-
-                                    const confirmed =
-                                        confirm(
-                                            "Delete staff member " +
-                                            name +
-                                            "?"
-                                        );
-
-
-                                    if (confirmed) {
-
-                                        row.remove();
-
-                                        filterStaff();
-
-                                    }
-
-                                };
-
-                        });
-
-                }
-
-
-                attachRowActions();
-
-
-                /* ==========================================
-                   ADD STAFF
-                ========================================== */
-
-                addStaffBtn.addEventListener(
-                    "click",
-                    function () {
-
-                        editingRow = null;
-
-                        staffForm.reset();
-
-                        document.getElementById(
-                            "formTitle"
-                        ).textContent =
-                            "Add Staff";
-
-                        formModal.classList.add(
-                            "show"
-                        );
-
+                    if (!response.ok || !result.success) {
+                        throw new Error(result.message || "Failed to load branches.");
                     }
-                );
 
-
-                /* ==========================================
-                   SAVE STAFF
-                ========================================== */
-
-                staffForm.addEventListener(
-                    "submit",
-                    function (event) {
-
-                        event.preventDefault();
-
-
-                        const name =
-                            document.getElementById(
-                                "staffName"
-                            ).value.trim();
-
-                        const phone =
-                            document.getElementById(
-                                "staffPhone"
-                            ).value.trim();
-
-                        const email =
-                            document.getElementById(
-                                "staffEmail"
-                            ).value.trim();
-
-                        const role =
-                            document.getElementById(
-                                "staffRole"
-                            ).value;
-
-                        const specialization =
-                            document.getElementById(
-                                "staffSpecialization"
-                            ).value.trim();
-
-                        const branch =
-                            document.getElementById(
-                                "staffBranch"
-                            ).value;
-
-                        const status =
-                            document.getElementById(
-                                "staffStatus"
-                            ).value;
-
-
-                        if (
-                            !name ||
-                            !phone ||
-                            !email ||
-                            !specialization
-                        ) {
-
-                            alert(
-                                "Please fill all required fields."
-                            );
-
-                            return;
-
-                        }
-
-
-                        if (editingRow) {
-
-                            editingRow.dataset.name =
-                                name;
-
-                            editingRow.dataset.phone =
-                                phone;
-
-                            editingRow.dataset.email =
-                                email;
-
-                            editingRow.dataset.role =
-                                role;
-
-                            editingRow.dataset.specialization =
-                                specialization;
-
-                            editingRow.dataset.branch =
-                                branch;
-
-                            editingRow.dataset.status =
-                                status;
-
-
-                            const initials =
-                                name
-                                    .split(" ")
-                                    .map(
-                                        word => word[0]
-                                    )
-                                    .join("")
-                                    .substring(0, 2)
-                                    .toUpperCase();
-
-
-                            editingRow.querySelector(
-                                ".staff-avatar"
-                            ).textContent =
-                                initials;
-
-
-                            editingRow.querySelector(
-                                ".staff-info strong"
-                            ).textContent =
-                                name;
-
-
-                            const cells =
-                                editingRow.querySelectorAll(
-                                    "td"
-                                );
-
-
-                            cells[1].innerHTML =
-                                '<span class="role">' +
-                                role +
-                                "</span>";
-
-
-                            cells[2].innerHTML =
-                                '<span class="specialization">' +
-                                specialization +
-                                "</span>";
-
-
-                            cells[3].textContent =
-                                branch;
-
-
-                            cells[5].innerHTML =
-                                '<span class="status ' +
-                                (
-                                    status === "Active"
-                                        ? "active"
-                                        : "inactive"
-                                ) +
-                                '">' +
-                                status +
-                                "</span>";
-
-
-                        } else {
-
-                            const newId =
-                                "STF" +
-                                (
-                                    1000 +
-                                    tableBody.children.length +
-                                    1
-                                );
-
-
-                            const initials =
-                                name
-                                    .split(" ")
-                                    .map(
-                                        word => word[0]
-                                    )
-                                    .join("")
-                                    .substring(0, 2)
-                                    .toUpperCase();
-
-
-                            const newRow =
-                                document.createElement(
-                                    "tr"
-                                );
-
-
-                            newRow.dataset.name =
-                                name;
-
-                            newRow.dataset.phone =
-                                phone;
-
-                            newRow.dataset.email =
-                                email;
-
-                            newRow.dataset.role =
-                                role;
-
-                            newRow.dataset.specialization =
-                                specialization;
-
-                            newRow.dataset.branch =
-                                branch;
-
-                            newRow.dataset.bookings =
-                                "0";
-
-                            newRow.dataset.status =
-                                status;
-
-                            newRow.dataset.hours =
-                                "9:00 AM - 6:00 PM";
-
-                            newRow.dataset.joined =
-                                "18 Sep 2026";
-
-
-                            newRow.innerHTML = `
-
-                                <td>
-
-                                    <div class="staff-cell">
-
-                                        <div class="staff-avatar">
-                                            ${initials}
-                                        </div>
-
-                                        <div class="staff-info">
-
-                                            <strong>
-                                                ${name}
-                                            </strong>
-
-                                            <span>
-                                                #${newId}
-                                            </span>
-
-                                        </div>
-
-                                    </div>
-
-                                </td>
-
-
-                                <td>
-                                    <span class="role">
-                                        ${role}
-                                    </span>
-                                </td>
-
-
-                                <td>
-                                    <span class="specialization">
-                                        ${specialization}
-                                    </span>
-                                </td>
-
-
-                                <td>
-                                    ${branch}
-                                </td>
-
-
-                                <td>
-                                    0
-                                </td>
-
-
-                                <td>
-
-                                    <span class="status ${
-                                        status === "Active"
-                                            ? "active"
-                                            : "inactive"
-                                    }">
-
-                                        ${status}
-
-                                    </span>
-
-                                </td>
-
-
-                                <td>
-
-                                    <div class="action-group">
-
-                                        <button
-                                            class="action-btn view-btn"
-                                            title="View"
-                                        >
-                                            <i class="fa-regular fa-eye"></i>
-                                        </button>
-
-                                        <button
-                                            class="action-btn edit-btn"
-                                            title="Edit"
-                                        >
-                                            <i class="fa-solid fa-pen"></i>
-                                        </button>
-
-                                        <button
-                                            class="action-btn delete delete-btn"
-                                            title="Delete"
-                                        >
-                                            <i class="fa-regular fa-trash-can"></i>
-                                        </button>
-
-                                    </div>
-
-                                </td>
-
-                            `;
-
-
-                            tableBody.prepend(
-                                newRow
-                            );
-
-                            attachRowActions();
-
-                        }
-
-
-                        formModal.classList.remove(
-                            "show"
-                        );
-
-                        staffForm.reset();
-
-                        editingRow = null;
-
-                        filterStaff();
-
+                    branches = Array.isArray(result.data)
+                        ? result.data.filter(branch => Number(branch.is_active) === 1)
+                        : [];
+
+                    renderBranchOptions();
+                } catch (error) {
+                    console.error("BRANCH API ERROR:", error);
+                }
+            }
+
+            function renderBranchOptions() {
+                const currentFormValue = staffBranch.value;
+                const currentFilterValue = branchFilter.value;
+
+                branchFilter.innerHTML = `
+                    <option value="all">All Branches</option>
+                    ${branches.map(branch => `
+                        <option value="${escapeHtml(branch.id)}">
+                            ${escapeHtml(branch.name)}
+                        </option>
+                    `).join("")}
+                `;
+
+                staffBranch.innerHTML = branches.map(branch => `
+                    <option value="${escapeHtml(branch.id)}">
+                        ${escapeHtml(branch.name)}
+                    </option>
+                `).join("");
+
+                if (Array.from(branchFilter.options).some(option => option.value === currentFilterValue)) {
+                    branchFilter.value = currentFilterValue;
+                }
+
+                if (Array.from(staffBranch.options).some(option => option.value === currentFormValue)) {
+                    staffBranch.value = currentFormValue;
+                }
+            }
+
+            async function loadStaff() {
+                showTableMessage("Loading staff...");
+
+                try {
+                    const response = await fetch(API);
+                    const result = await response.json();
+
+                    if (!response.ok || !result.success) {
+                        throw new Error(result.message || "Failed to load staff.");
                     }
+
+                    staffData = Array.isArray(result.data)
+                        ? result.data
+                        : [];
+
+                    updateSummary();
+                    renderStaff();
+                } catch (error) {
+                    console.error("STAFF API ERROR:", error);
+                    showTableMessage("Unable to load staff. Make sure the backend is running.");
+                    updateSummary();
+                    staffCount.textContent = "Showing 0 staff members";
+                }
+            }
+
+            function updateSummary() {
+                const total = staffData.length;
+                const active = staffData.filter(staff => staff.is_active).length;
+                const inactive = total - active;
+
+                const experts = staffData.filter(staff =>
+                    staff.role === "Senior Stylist" ||
+                    staff.role === "Beauty Specialist"
+                ).length;
+
+                totalStaff.textContent = total;
+                activeStaff.textContent = active;
+                inactiveStaff.textContent = inactive;
+                expertStaff.textContent = experts;
+            }
+
+            function getFilteredStaff() {
+                const searchValue = searchInput.value.trim().toLowerCase();
+                const selectedBranch = branchFilter.value;
+                const selectedRole = roleFilter.value;
+                const selectedStatus = statusFilter.value;
+
+                return staffData.filter(staff => {
+                    const searchableText = [
+                        staff.name,
+                        staff.phone,
+                        staff.email,
+                        staff.role,
+                        staff.branch_name
+                    ]
+                        .join(" ")
+                        .toLowerCase();
+
+                    const matchesSearch =
+                        !searchValue ||
+                        searchableText.includes(searchValue);
+
+                    const matchesBranch =
+                        selectedBranch === "all" ||
+                        String(staff.branch_id) === String(selectedBranch);
+
+                    const matchesRole =
+                        selectedRole === "all" ||
+                        staff.role === selectedRole;
+
+                    const matchesStatus =
+                        selectedStatus === "all" ||
+                        (selectedStatus === "active" && staff.is_active) ||
+                        (selectedStatus === "inactive" && !staff.is_active);
+
+                    return matchesSearch &&
+                        matchesBranch &&
+                        matchesRole &&
+                        matchesStatus;
+                });
+            }
+
+            function renderStaff() {
+                const filtered = getFilteredStaff();
+
+                staffCount.textContent =
+                    "Showing " + filtered.length + " of " +
+                    staffData.length + " staff members";
+
+                if (filtered.length === 0) {
+                    showTableMessage(
+                        staffData.length === 0
+                            ? "No staff members found."
+                            : "No staff members match the selected filters."
+                    );
+                    return;
+                }
+
+                tableBody.innerHTML = filtered.map(staff => `
+                    <tr>
+                        <td>
+                            <div class="staff-cell">
+                                <div class="staff-avatar">
+                                    ${escapeHtml(getInitials(staff.name))}
+                                </div>
+
+                                <div class="staff-info">
+                                    <strong>${escapeHtml(staff.name)}</strong>
+                                    <span>#STF${String(staff.id).padStart(4, "0")}</span>
+                                </div>
+                            </div>
+                        </td>
+
+                        <td>
+                            <span class="role">
+                                ${escapeHtml(staff.role)}
+                            </span>
+                        </td>
+
+                        <td>
+                            ${escapeHtml(staff.branch_name || "—")}
+                        </td>
+
+                        <td>
+                            ${escapeHtml(staff.phone || "—")}
+                        </td>
+
+                        <td>
+                            ${Number(staff.total_bookings || 0)}
+                        </td>
+
+                        <td>
+                            <span class="status ${staff.is_active ? "active" : "inactive"}">
+                                ${staff.is_active ? "Active" : "Inactive"}
+                            </span>
+                        </td>
+
+                        <td>
+                            <div class="action-group">
+                                <button
+                                    class="action-btn"
+                                    data-action="view"
+                                    data-id="${staff.id}"
+                                    title="View"
+                                >
+                                    <i class="fa-regular fa-eye"></i>
+                                </button>
+
+                                <button
+                                    class="action-btn"
+                                    data-action="edit"
+                                    data-id="${staff.id}"
+                                    title="Edit"
+                                >
+                                    <i class="fa-solid fa-pen"></i>
+                                </button>
+
+                                <button
+                                    class="action-btn delete"
+                                    data-action="delete"
+                                    data-id="${staff.id}"
+                                    title="Delete"
+                                >
+                                    <i class="fa-regular fa-trash-can"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                `).join("");
+            }
+
+            function findStaff(id) {
+                return staffData.find(staff =>
+                    Number(staff.id) === Number(id)
+                );
+            }
+
+            function openViewModal(staff) {
+                if (!staff) {
+                    return;
+                }
+
+                document.getElementById("viewAvatar").textContent =
+                    getInitials(staff.name);
+
+                document.getElementById("viewName").textContent =
+                    staff.name;
+
+                document.getElementById("viewStaffId").textContent =
+                    "#STF" + String(staff.id).padStart(4, "0");
+
+                document.getElementById("viewPhone").textContent =
+                    staff.phone || "—";
+
+                document.getElementById("viewEmail").textContent =
+                    staff.email || "—";
+
+                document.getElementById("viewRole").textContent =
+                    staff.role || "—";
+
+                document.getElementById("viewBranch").textContent =
+                    staff.branch_name || "—";
+
+                document.getElementById("viewBookings").textContent =
+                    Number(staff.total_bookings || 0);
+
+                document.getElementById("viewStatus").textContent =
+                    staff.is_active ? "Active" : "Inactive";
+
+                document.getElementById("viewJoined").textContent =
+                    formatDate(staff.created_at);
+
+                viewModal.classList.add("show");
+            }
+
+            function openAddModal() {
+                editingId = null;
+                staffForm.reset();
+                formTitle.textContent = "Add Staff";
+
+                if (staffBranch.options.length > 0) {
+                    staffBranch.selectedIndex = 0;
+                }
+
+                staffStatus.value = "Active";
+                formModal.classList.add("show");
+            }
+
+            function openEditModal(staff) {
+                if (!staff) {
+                    return;
+                }
+
+                editingId = staff.id;
+                formTitle.textContent = "Edit Staff";
+
+                staffName.value = staff.name || "";
+                staffPhone.value = staff.phone || "";
+                staffEmail.value = staff.email || "";
+                staffRole.value = staff.role || "Stylist";
+                staffBranch.value = String(staff.branch_id);
+                staffStatus.value = staff.is_active ? "Active" : "Inactive";
+
+                formModal.classList.add("show");
+            }
+
+            async function deleteStaff(id) {
+                const staff = findStaff(id);
+
+                if (!staff) {
+                    return;
+                }
+
+                const confirmed = confirm(
+                    "Delete staff member " + staff.name + "?"
                 );
 
+                if (!confirmed) {
+                    return;
+                }
 
-                /* ==========================================
-                   CLOSE MODALS
-                ========================================== */
-
-                document
-                    .querySelectorAll("[data-close]")
-                    .forEach(function (button) {
-
-                        button.addEventListener(
-                            "click",
-                            function () {
-
-                                const modalId =
-                                    button.dataset.close;
-
-                                document
-                                    .getElementById(modalId)
-                                    .classList.remove(
-                                        "show"
-                                    );
-
-                            }
-                        );
-
+                try {
+                    const response = await fetch(API + "/" + id, {
+                        method: "DELETE"
                     });
 
+                    const result = await response.json();
 
-                document
-                    .querySelectorAll(".modal-overlay")
-                    .forEach(function (overlay) {
-
-                        overlay.addEventListener(
-                            "click",
-                            function (event) {
-
-                                if (
-                                    event.target === overlay
-                                ) {
-
-                                    overlay.classList.remove(
-                                        "show"
-                                    );
-
-                                }
-
-                            }
+                    if (!response.ok || !result.success) {
+                        throw new Error(
+                            result.message || "Failed to delete staff."
                         );
-
-                    });
-
-
-                /* ==========================================
-                   ESCAPE
-                ========================================== */
-
-                document.addEventListener(
-                    "keydown",
-                    function (event) {
-
-                        if (event.key === "Escape") {
-
-                            viewModal.classList.remove(
-                                "show"
-                            );
-
-                            formModal.classList.remove(
-                                "show"
-                            );
-
-                            sidebar.classList.remove(
-                                "mobile-open"
-                            );
-
-                            sidebarOverlay.classList.remove(
-                                "show"
-                            );
-
-                        }
-
                     }
-                );
 
+                    alert(result.message || "Staff deleted successfully.");
+                    await loadStaff();
+                } catch (error) {
+                    console.error("DELETE STAFF ERROR:", error);
+                    alert(error.message);
+                }
+            }
 
-                /* ==========================================
-                   RESIZE
-                ========================================== */
+            tableBody.addEventListener("click", function (event) {
+                const button = event.target.closest("[data-action]");
 
-                window.addEventListener(
-                    "resize",
-                    function () {
+                if (!button) {
+                    return;
+                }
 
-                        if (
-                            window.innerWidth > 767
-                        ) {
+                const id = Number(button.dataset.id);
+                const staff = findStaff(id);
 
-                            sidebar.classList.remove(
-                                "mobile-open"
-                            );
+                if (button.dataset.action === "view") {
+                    openViewModal(staff);
+                }
 
-                            sidebarOverlay.classList.remove(
-                                "show"
-                            );
+                if (button.dataset.action === "edit") {
+                    openEditModal(staff);
+                }
 
-                        }
-
-                    }
-                );
-
+                if (button.dataset.action === "delete") {
+                    deleteStaff(id);
+                }
             });
 
+            addStaffBtn.addEventListener("click", openAddModal);
+
+            staffForm.addEventListener("submit", async function (event) {
+                event.preventDefault();
+
+                const payload = {
+                    name: staffName.value.trim(),
+                    phone: staffPhone.value.trim(),
+                    email: staffEmail.value.trim(),
+                    role: staffRole.value,
+                    branch_id: Number(staffBranch.value),
+                    is_active: staffStatus.value === "Active"
+                };
+
+                if (
+                    !payload.name ||
+                    !payload.phone ||
+                    !payload.email ||
+                    !payload.role ||
+                    !payload.branch_id
+                ) {
+                    alert("Please fill all required fields.");
+                    return;
+                }
+
+                const url = editingId
+                    ? API + "/" + editingId
+                    : API;
+
+                const method = editingId
+                    ? "PUT"
+                    : "POST";
+
+                try {
+                    const response = await fetch(url, {
+                        method,
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(payload)
+                    });
+
+                    const result = await response.json();
+
+                    if (!response.ok || !result.success) {
+                        throw new Error(
+                            result.message || "Failed to save staff."
+                        );
+                    }
+
+                    alert(
+                        result.message ||
+                        (editingId
+                            ? "Staff updated successfully."
+                            : "Staff added successfully.")
+                    );
+
+                    formModal.classList.remove("show");
+                    staffForm.reset();
+                    editingId = null;
+
+                    await loadStaff();
+                } catch (error) {
+                    console.error("SAVE STAFF ERROR:", error);
+                    alert(error.message);
+                }
+            });
+
+            searchInput.addEventListener("input", renderStaff);
+            branchFilter.addEventListener("change", renderStaff);
+            roleFilter.addEventListener("change", renderStaff);
+            statusFilter.addEventListener("change", renderStaff);
+
+            document.querySelectorAll("[data-close]").forEach(button => {
+                button.addEventListener("click", function () {
+                    const modal = document.getElementById(
+                        button.dataset.close
+                    );
+
+                    if (modal) {
+                        modal.classList.remove("show");
+                    }
+                });
+            });
+
+            document.querySelectorAll(".modal-overlay").forEach(overlay => {
+                overlay.addEventListener("click", function (event) {
+                    if (event.target === overlay) {
+                        overlay.classList.remove("show");
+                    }
+                });
+            });
+
+            sidebarToggle.addEventListener("click", function () {
+                if (window.innerWidth <= 767) {
+                    sidebar.classList.remove("mobile-open");
+                    sidebarOverlay.classList.remove("show");
+                    return;
+                }
+
+                sidebar.classList.toggle("collapsed");
+            });
+
+            mobileMenuBtn.addEventListener("click", function () {
+                sidebar.classList.add("mobile-open");
+                sidebarOverlay.classList.add("show");
+            });
+
+            sidebarOverlay.addEventListener("click", function () {
+                sidebar.classList.remove("mobile-open");
+                sidebarOverlay.classList.remove("show");
+            });
+
+            document.querySelectorAll(".sidebar-link").forEach(link => {
+                link.addEventListener("click", function () {
+                    if (window.innerWidth <= 767) {
+                        sidebar.classList.remove("mobile-open");
+                        sidebarOverlay.classList.remove("show");
+                    }
+                });
+            });
+
+            document.addEventListener("keydown", function (event) {
+                if (event.key === "Escape") {
+                    viewModal.classList.remove("show");
+                    formModal.classList.remove("show");
+                    sidebar.classList.remove("mobile-open");
+                    sidebarOverlay.classList.remove("show");
+                }
+            });
+
+            window.addEventListener("resize", function () {
+                if (window.innerWidth > 767) {
+                    sidebar.classList.remove("mobile-open");
+                    sidebarOverlay.classList.remove("show");
+                }
+            });
+
+            loadBranches();
+            loadStaff();
+        });
     </script>
 
 </body>

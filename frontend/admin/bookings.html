@@ -615,11 +615,13 @@
         }
 
         .summary-card {
-            padding:17px;
+            min-height:105px;
+            padding:18px;
 
             display:flex;
             align-items:center;
-            gap:13px;
+            justify-content:center;
+            text-align:center;
 
             background:var(--dark2);
 
@@ -634,39 +636,26 @@
             border-color:var(--gold-border);
         }
 
-        .summary-icon {
-            width:39px;
-            height:39px;
-
-            min-width:39px;
-
-            display:flex;
-            align-items:center;
-            justify-content:center;
-
-            border-radius:9px;
-
-            color:var(--gold);
-            background:var(--gold-soft);
-            border:1px solid rgba(212,175,55,.14);
-
-            font-size:13px;
-        }
-
         .summary-info {
             display:flex;
             flex-direction:column;
-            gap:3px;
+            align-items:center;
+            justify-content:center;
+            gap:5px;
+            width:100%;
         }
 
         .summary-info strong {
-            color:var(--white);
-            font-size:19px;
+            color:var(--gold);
+            font-size:34px;
+            line-height:1.1;
+            font-weight:800;
         }
 
         .summary-info span {
             color:var(--muted);
-            font-size:9px;
+            font-size:10px;
+            font-weight:600;
         }
 
         /* =====================================================
@@ -1533,16 +1522,6 @@
     #bookingDate {
         min-width: 165px;
         cursor: pointer;
-    }
-
-    .summary-info strong {
-        font-size: 34px;
-        line-height: 1.1;
-        font-weight: 800;
-    }
-
-    .summary-card {
-        min-height: 105px;
     }
 
     /* =====================================================
