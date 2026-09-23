@@ -1,5 +1,6 @@
 const pool = require("../config/database");
 
+
 // =====================================================
 // GET ALL BRANCHES
 // =====================================================
@@ -128,9 +129,57 @@ const createBranch = async (req, res) => {
         }
 
 
+        // -------------------------------------------------
+        // FIND SMALLEST AVAILABLE ID
+        // -------------------------------------------------
+
+        const [idRows] = await pool.promise().query(`
+            SELECT
+                COALESCE(
+                    (
+                        SELECT MIN(t1.id + 1)
+                        FROM branches t1
+                        LEFT JOIN branches t2
+                            ON t2.id = t1.id + 1
+                        WHERE t2.id IS NULL
+                    ),
+                    1
+                ) AS next_id
+        `);
+
+
+        let nextId = Number(idRows[0].next_id);
+
+
+        // -------------------------------------------------
+        // IF NO GAP EXISTS, USE MAX ID + 1
+        // -------------------------------------------------
+
+        const [maxRows] = await pool.promise().query(`
+            SELECT
+                COALESCE(MAX(id), 0) AS max_id
+            FROM branches
+        `);
+
+
+        const maxId = Number(maxRows[0].max_id);
+
+
+        if (nextId <= maxId) {
+
+            nextId = maxId + 1;
+
+        }
+
+
+        // -------------------------------------------------
+        // INSERT BRANCH WITH OUR ID
+        // -------------------------------------------------
+
         const [result] = await pool.promise().query(`
             INSERT INTO branches
             (
+                id,
                 name,
                 address,
                 phone,
@@ -139,9 +188,10 @@ const createBranch = async (req, res) => {
                 closing_time,
                 is_active
             )
-            VALUES (?, ?, ?, ?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
         `, [
 
+            nextId,
             name.trim(),
             address.trim(),
             phone || null,
@@ -159,7 +209,7 @@ const createBranch = async (req, res) => {
 
             message: "Branch added successfully.",
 
-            branchId: result.insertId
+            branchId: result.insertId || nextId
 
         });
 
@@ -334,6 +384,10 @@ const deleteBranch = async (req, res) => {
 
 };
 
+
+// =====================================================
+// EXPORT CONTROLLERS
+// =====================================================
 
 module.exports = {
     getAllBranches,

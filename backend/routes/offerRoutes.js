@@ -1,37 +1,94 @@
 const express = require("express");
 const multer = require("multer");
 const path = require("path");
+const fs = require("fs");
 
 const router = express.Router();
 
 const {
     getAllOffers,
-    getOfferById,
-    createOffer,
-    updateOffer,
+    getOfferByDay,
+    saveOffer,
     deleteOffer
 } = require("../controllers/offerController");
 
 
-const storage = multer.memoryStorage();
+const uploadDirectory = path.join(
+    __dirname,
+    "../../frontend/assets/images/offers"
+);
+
+
+if (!fs.existsSync(uploadDirectory)) {
+    fs.mkdirSync(uploadDirectory, {
+        recursive: true
+    });
+}
+
+
+const storage = multer.diskStorage({
+
+    destination: (req, file, cb) => {
+
+        cb(
+            null,
+            uploadDirectory
+        );
+    },
+
+
+    filename: (req, file, cb) => {
+
+        const day = String(
+            req.params.day || "offer"
+        )
+            .trim()
+            .toLowerCase();
+
+
+        const extension = path
+            .extname(file.originalname)
+            .toLowerCase();
+
+
+        cb(
+            null,
+            `${day}${extension}`
+        );
+    }
+
+});
 
 
 const fileFilter = (req, file, cb) => {
+
+    const allowedExtensions = [
+        ".jpg",
+        ".jpeg",
+        ".png",
+        ".webp",
+        ".gif"
+    ];
+
+
     const extension = path
         .extname(file.originalname)
         .toLowerCase();
 
-    const allowedExtensions = [
-        ".jpg",
-        ".jpeg"
-    ];
 
-    if (allowedExtensions.includes(extension)) {
+    if (
+        allowedExtensions.includes(
+            extension
+        )
+    ) {
+
         cb(null, true);
+
     } else {
+
         cb(
             new Error(
-                "Only JPG and JPEG images are allowed."
+                "Only JPG, JPEG, PNG, WEBP and GIF images are allowed."
             )
         );
     }
@@ -39,11 +96,15 @@ const fileFilter = (req, file, cb) => {
 
 
 const upload = multer({
-    storage,
-    fileFilter,
+
+    storage: storage,
+
+    fileFilter: fileFilter,
+
     limits: {
         fileSize: 5 * 1024 * 1024
     }
+
 });
 
 
@@ -54,27 +115,20 @@ router.get(
 
 
 router.get(
-    "/:id",
-    getOfferById
-);
-
-
-router.post(
-    "/",
-    upload.single("image"),
-    createOffer
+    "/:day",
+    getOfferByDay
 );
 
 
 router.put(
-    "/:id",
+    "/:day",
     upload.single("image"),
-    updateOffer
+    saveOffer
 );
 
 
 router.delete(
-    "/:id",
+    "/:day",
     deleteOffer
 );
 

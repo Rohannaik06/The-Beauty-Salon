@@ -1,28 +1,55 @@
-const pool = require("../config/database");
 const fs = require("fs");
 const path = require("path");
 
+const pool = require("../config/database");
+
 const db = pool.promise();
 
-const offersDirectory = path.resolve(
+const DAYS = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday"
+];
+
+const OFFERS_IMAGE_DIRECTORY = path.join(
     __dirname,
     "../../frontend/assets/images/offers"
 );
 
-
-if (!fs.existsSync(offersDirectory)) {
-    fs.mkdirSync(offersDirectory, { recursive: true });
+function ensureImageDirectory() {
+    if (!fs.existsSync(OFFERS_IMAGE_DIRECTORY)) {
+        fs.mkdirSync(OFFERS_IMAGE_DIRECTORY, {
+            recursive: true
+        });
+    }
 }
 
+function deleteImageFile(filename) {
+    if (!filename) {
+        return;
+    }
 
-const dayFileName = (day) => {
-    return `${day.toLowerCase()}.jpg`;
-};
+    const safeFilename = path.basename(filename);
+
+    const filePath = path.join(
+        OFFERS_IMAGE_DIRECTORY,
+        safeFilename
+    );
+
+    if (fs.existsSync(filePath)) {
+        fs.unlinkSync(filePath);
+    }
+}
 
 
 const getAllOffers = async (req, res) => {
     try {
-        const [rows] = await db.query(`
+        const [rows] = await db.query(
+            `
             SELECT
                 id,
                 day,
@@ -32,30 +59,51 @@ const getAllOffers = async (req, res) => {
             FROM offer_images
             ORDER BY FIELD(
                 day,
+                'Sunday',
                 'Monday',
                 'Tuesday',
                 'Wednesday',
                 'Thursday',
                 'Friday',
-                'Saturday',
-                'Sunday'
+                'Saturday'
             )
-        `);
+            `
+        );
 
-        res.json(rows);
+        return res.status(200).json({
+            success: true,
+            count: rows.length,
+            data: rows
+        });
+
     } catch (error) {
-        console.error("Get Offers Error:", error);
 
-        res.status(500).json({
-            message: "Failed to fetch offers"
+        console.error(
+            "❌ Get Offers Error:",
+            error
+        );
+
+        return res.status(500).json({
+            success: false,
+            message: "Failed to fetch offers.",
+            error: error.message
         });
     }
 };
 
 
-const getOfferById = async (req, res) => {
+const getOfferByDay = async (req, res) => {
     try {
-        const { id } = req.params;
+        const day = String(
+            req.params.day || ""
+        ).trim();
+
+        if (!DAYS.includes(day)) {
+            return res.status(400).json({
+                success: false,
+                message: "Invalid day."
+            });
+        }
 
         const [rows] = await db.query(
             `
@@ -66,257 +114,153 @@ const getOfferById = async (req, res) => {
                 status,
                 created_at
             FROM offer_images
-            WHERE id = ?
+            WHERE day = ?
+            LIMIT 1
             `,
-            [id]
+            [day]
         );
 
         if (rows.length === 0) {
             return res.status(404).json({
-                message: "Offer not found"
+                success: false,
+                message: "Offer not found."
             });
         }
 
-        res.json(rows[0]);
-    } catch (error) {
-        console.error("Get Offer Error:", error);
+        return res.status(200).json({
+            success: true,
+            data: rows[0]
+        });
 
-        res.status(500).json({
-            message: "Failed to fetch offer"
+    } catch (error) {
+
+        console.error(
+            "❌ Get Offer By Day Error:",
+            error
+        );
+
+        return res.status(500).json({
+            success: false,
+            message: "Failed to fetch offer.",
+            error: error.message
         });
     }
 };
 
 
-const createOffer = async (req, res) => {
-    try {
-        const { day, status } = req.body;
+const saveOffer = async (req, res) => {
+    let uploadedFilename = null;
 
-        if (!day) {
+    try {
+        const day = String(
+            req.params.day || ""
+        ).trim();
+
+        if (!DAYS.includes(day)) {
             return res.status(400).json({
-                message: "Day is required"
+                success: false,
+                message: "Invalid day."
             });
         }
 
         if (!req.file) {
             return res.status(400).json({
-                message: "Offer image is required"
+                success: false,
+                message: "Please select an image."
             });
         }
 
-        const validDays = [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday",
-            "Sunday"
-        ];
+        ensureImageDirectory();
 
-        if (!validDays.includes(day)) {
-            return res.status(400).json({
-                message: "Invalid day"
-            });
-        }
-
-        const [existingRows] = await db.query(
-            `
-            SELECT id
-            FROM offer_images
-            WHERE day = ?
-            `,
-            [day]
-        );
-
-        if (existingRows.length > 0) {
-            return res.status(409).json({
-                message: `An offer already exists for ${day}`
-            });
-        }
-
-        const finalStatus =
-            String(status || "ACTIVE").toUpperCase() === "INACTIVE"
-                ? "INACTIVE"
-                : "ACTIVE";
-
-        const fileName = dayFileName(day);
-
-        const filePath = path.join(
-            offersDirectory,
-            fileName
-        );
-
-        fs.writeFileSync(
-            filePath,
-            req.file.buffer
-        );
-
-        const [result] = await db.query(
-            `
-            INSERT INTO offer_images
-            (
-                day,
-                image,
-                status
-            )
-            VALUES (?, ?, ?)
-            `,
-            [
-                day,
-                fileName,
-                finalStatus
-            ]
-        );
-
-        res.status(201).json({
-            message: "Offer image added successfully",
-            id: result.insertId,
-            image: fileName
-        });
-    } catch (error) {
-        console.error("Create Offer Error:", error);
-
-        res.status(500).json({
-            message: "Failed to create offer"
-        });
-    }
-};
-
-
-const updateOffer = async (req, res) => {
-    try {
-        const { id } = req.params;
-        const { day, status } = req.body;
-
-        if (!day) {
-            return res.status(400).json({
-                message: "Day is required"
-            });
-        }
-
-        const validDays = [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday",
-            "Sunday"
-        ];
-
-        if (!validDays.includes(day)) {
-            return res.status(400).json({
-                message: "Invalid day"
-            });
-        }
+        uploadedFilename = req.file.filename;
 
         const [existingRows] = await db.query(
             `
             SELECT
                 id,
-                day,
                 image
             FROM offer_images
-            WHERE id = ?
-            `,
-            [id]
-        );
-
-        if (existingRows.length === 0) {
-            return res.status(404).json({
-                message: "Offer not found"
-            });
-        }
-
-        const existingOffer = existingRows[0];
-
-        const [duplicateRows] = await db.query(
-            `
-            SELECT id
-            FROM offer_images
             WHERE day = ?
-            AND id != ?
+            LIMIT 1
             `,
-            [
-                day,
-                id
-            ]
+            [day]
         );
 
-        if (duplicateRows.length > 0) {
-            return res.status(409).json({
-                message: `An offer already exists for ${day}`
-            });
-        }
+        if (existingRows.length > 0) {
 
-        const finalStatus =
-            String(status || "ACTIVE").toUpperCase() === "INACTIVE"
-                ? "INACTIVE"
-                : "ACTIVE";
+            const existingImage =
+                existingRows[0].image;
 
-        const newFileName = dayFileName(day);
-
-        const oldFilePath = path.join(
-            offersDirectory,
-            existingOffer.image
-        );
-
-        const newFilePath = path.join(
-            offersDirectory,
-            newFileName
-        );
-
-
-        if (req.file) {
-            fs.writeFileSync(
-                newFilePath,
-                req.file.buffer
+            await db.query(
+                `
+                UPDATE offer_images
+                SET
+                    image = ?,
+                    status = 'ACTIVE'
+                WHERE day = ?
+                `,
+                [
+                    uploadedFilename,
+                    day
+                ]
             );
 
             if (
-                existingOffer.image !== newFileName &&
-                fs.existsSync(oldFilePath)
+                existingImage &&
+                existingImage !== uploadedFilename
             ) {
-                fs.unlinkSync(oldFilePath);
+                deleteImageFile(existingImage);
             }
-        } else if (
-            existingOffer.image !== newFileName &&
-            fs.existsSync(oldFilePath)
-        ) {
-            fs.renameSync(
-                oldFilePath,
-                newFilePath
+
+        } else {
+
+            await db.query(
+                `
+                INSERT INTO offer_images
+                (
+                    day,
+                    image,
+                    status
+                )
+                VALUES
+                (
+                    ?,
+                    ?,
+                    'ACTIVE'
+                )
+                `,
+                [
+                    day,
+                    uploadedFilename
+                ]
             );
         }
 
+        return res.status(200).json({
+            success: true,
+            message: `${day} offer image saved successfully.`,
+            data: {
+                day: day,
+                image: uploadedFilename,
+                status: "ACTIVE"
+            }
+        });
 
-        await db.query(
-            `
-            UPDATE offer_images
-            SET
-                day = ?,
-                image = ?,
-                status = ?
-            WHERE id = ?
-            `,
-            [
-                day,
-                newFileName,
-                finalStatus,
-                id
-            ]
+    } catch (error) {
+
+        if (uploadedFilename) {
+            deleteImageFile(uploadedFilename);
+        }
+
+        console.error(
+            "❌ Save Offer Error:",
+            error
         );
 
-        res.json({
-            message: "Offer image updated successfully",
-            image: newFileName
-        });
-    } catch (error) {
-        console.error("Update Offer Error:", error);
-
-        res.status(500).json({
-            message: "Failed to update offer"
+        return res.status(500).json({
+            success: false,
+            message: "Failed to save offer.",
+            error: error.message
         });
     }
 };
@@ -324,50 +268,63 @@ const updateOffer = async (req, res) => {
 
 const deleteOffer = async (req, res) => {
     try {
-        const { id } = req.params;
+        const day = String(
+            req.params.day || ""
+        ).trim();
+
+        if (!DAYS.includes(day)) {
+            return res.status(400).json({
+                success: false,
+                message: "Invalid day."
+            });
+        }
 
         const [rows] = await db.query(
             `
-            SELECT image
+            SELECT
+                image
             FROM offer_images
-            WHERE id = ?
+            WHERE day = ?
+            LIMIT 1
             `,
-            [id]
+            [day]
         );
 
         if (rows.length === 0) {
             return res.status(404).json({
-                message: "Offer not found"
+                success: false,
+                message: "No offer image found for this day."
             });
-        }
-
-        const imageName = rows[0].image;
-
-        const imagePath = path.join(
-            offersDirectory,
-            imageName
-        );
-
-        if (fs.existsSync(imagePath)) {
-            fs.unlinkSync(imagePath);
         }
 
         await db.query(
             `
             DELETE FROM offer_images
-            WHERE id = ?
+            WHERE day = ?
             `,
-            [id]
+            [day]
         );
 
-        res.json({
-            message: "Offer image deleted successfully"
-        });
-    } catch (error) {
-        console.error("Delete Offer Error:", error);
+        deleteImageFile(
+            rows[0].image
+        );
 
-        res.status(500).json({
-            message: "Failed to delete offer"
+        return res.status(200).json({
+            success: true,
+            message: `${day} offer image deleted successfully.`
+        });
+
+    } catch (error) {
+
+        console.error(
+            "❌ Delete Offer Error:",
+            error
+        );
+
+        return res.status(500).json({
+            success: false,
+            message: "Failed to delete offer.",
+            error: error.message
         });
     }
 };
@@ -375,8 +332,7 @@ const deleteOffer = async (req, res) => {
 
 module.exports = {
     getAllOffers,
-    getOfferById,
-    createOffer,
-    updateOffer,
+    getOfferByDay,
+    saveOffer,
     deleteOffer
 };

@@ -13,6 +13,9 @@ const customerRoutes = require("./routes/customerRoutes");
 const staffRoutes = require("./routes/staffRoutes");
 const galleryRoutes = require("./routes/galleryRoutes");
 const offerRoutes = require("./routes/offerRoutes");
+const adminAuthRoutes = require("./routes/adminAuthRoutes");
+const adminSettingsRoutes = require("./routes/adminSettingsRoutes");
+const dashboardRoutes = require("./routes/dashboardRoutes");
 
 const app = express();
 
@@ -131,6 +134,14 @@ app.use("/api/services", serviceRoutes);
 // Offer API
 app.use("/api/offers", offerRoutes);
 
+// Admin Login API
+app.use("/api/admin-auth", adminAuthRoutes);
+
+// Admin Seetings
+app.use("/api/admin-settings", adminSettingsRoutes);
+
+// Admin dashboard
+app.use("/api/dashboard", dashboardRoutes);
 
 // =====================================================
 // STAFF BY BRANCH
