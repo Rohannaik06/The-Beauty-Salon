@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Admin Login | The Beauty Salon</title>
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            min-height: 100%;
+        }
+
+        body {
+            font-family: "DM Sans", sans-serif;
+            background: #000000;
+            color: #ffffff;
+            overflow: hidden;
+        }
+
+        .login-page {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background:
+                radial-gradient(
+                    circle at 50% 35%,
+                    rgba(212, 175, 55, 0.08),
+                    transparent 34%
+                ),
+                #000000;
+        }
+
+        .login-page::before {
+            content: "";
+            position: absolute;
+            width: 420px;
+            height: 420px;
+            border: 1px solid rgba(212, 175, 55, 0.08);
+            border-radius: 50%;
+            top: -180px;
+            right: -150px;
+        }
+
+        .login-page::after {
+            content: "";
+            position: absolute;
+            width: 330px;
+            height: 330px;
+            border: 1px solid rgba(212, 175, 55, 0.06);
+            border-radius: 50%;
+            bottom: -150px;
+            left: -120px;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 450px;
+            padding: 30px 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .login-card {
+            width: 100%;
+            background: #101010;
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            border-radius: 18px;
+            padding: 42px 38px;
+            box-shadow:
+                0 25px 70px rgba(0, 0, 0, 0.75),
+                0 0 40px rgba(212, 175, 55, 0.04);
+        }
+
+        .brand {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .brand-icon {
+            width: 58px;
+            height: 58px;
+            margin: 0 auto 16px;
+            border: 1px solid #d4af37;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #d4af37;
+            font-size: 22px;
+        }
+
+        .brand-name {
+            font-family: "Playfair Display", serif;
+            color: #d4af37;
+            font-size: 27px;
+            font-weight: 600;
+            letter-spacing: 0.4px;
+        }
+
+        .brand-subtitle {
+            margin-top: 7px;
+            color: #888888;
+            font-size: 13px;
+        }
+
+        .login-title {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .login-title h1 {
+            font-family: "Playfair Display", serif;
+            font-size: 28px;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .login-title p {
+            margin-top: 7px;
+            color: #888888;
+            font-size: 13px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #dddddd;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper > i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #d4af37;
+            font-size: 14px;
+            pointer-events: none;
+        }
+
+        .input-wrapper input {
+            width: 100%;
+            height: 48px;
+            border: 1px solid #292929;
+            border-radius: 9px;
+            background: #080808;
+            color: #ffffff;
+            outline: none;
+            padding: 0 45px 0 43px;
+            font-family: "DM Sans", sans-serif;
+            font-size: 14px;
+            transition: 0.2s ease;
+        }
+
+        .input-wrapper input::placeholder {
+            color: #666666;
+        }
+
+        .input-wrapper input:focus {
+            border-color: #d4af37;
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.08);
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: 0;
+            background: transparent;
+            color: #777777;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .password-toggle:hover {
+            color: #d4af37;
+        }
+
+        .login-button {
+            width: 100%;
+            height: 49px;
+            margin-top: 5px;
+            border: 0;
+            border-radius: 9px;
+            background: #d4af37;
+            color: #000000;
+            font-family: "DM Sans", sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .login-button:hover {
+            background: #e5c65a;
+            transform: translateY(-1px);
+        }
+
+        .login-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .message {
+            display: none;
+            margin-top: 17px;
+            padding: 11px 13px;
+            border-radius: 8px;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        .message.error {
+            display: block;
+            background: rgba(180, 40, 40, 0.10);
+            border: 1px solid rgba(220, 70, 70, 0.25);
+            color: #ff8d8d;
+        }
+
+        .message.success {
+            display: block;
+            background: rgba(70, 160, 90, 0.10);
+            border: 1px solid rgba(70, 160, 90, 0.25);
+            color: #8ee8a0;
+        }
+
+        .back-link {
+            display: flex;
+            justify-content: center;
+            margin-top: 25px;
+        }
+
+        .back-link a {
+            color: #999999;
+            text-decoration: none;
+            font-size: 13px;
+            transition: 0.2s ease;
+        }
+
+        .back-link a i {
+            color: #d4af37;
+            margin-right: 6px;
+        }
+
+        .back-link a:hover {
+            color: #d4af37;
+        }
+
+        .footer-text {
+            text-align: center;
+            margin-top: 25px;
+            color: #555555;
+            font-size: 11px;
+        }
+
+        @media (max-width: 500px) {
+            .login-container {
+                padding: 20px 15px;
+            }
+
+            .login-card {
+                padding: 34px 24px;
+            }
+
+            .brand-name {
+                font-size: 24px;
+            }
+
+            .login-title h1 {
+                font-size: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="login-page">
+
+        <div class="login-container">
+
+            <div class="login-card">
+
+                <div class="brand">
+
+                    <div class="brand-icon">
+                        <i class="fa-solid fa-crown"></i>
+                    </div>
+
+                    <div class="brand-name">
+                        The Beauty Salon
+                    </div>
+
+                    <div class="brand-subtitle">
+                        Premium Unisex Salon • Baramati
+                    </div>
+
+                </div>
+
+
+                <div class="login-title">
+
+                    <h1>
+                        Admin Login
+                    </h1>
+
+                    <p>
+                        Sign in to manage your salon
+                    </p>
+
+                </div>
+
+
+                <form id="adminLoginForm">
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            Email Address
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <i class="fa-regular fa-envelope"></i>
+
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="Enter admin email"
+                                autocomplete="email"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="password">
+                            Password
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <i class="fa-solid fa-lock"></i>
+
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                placeholder="Enter password"
+                                autocomplete="current-password"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                id="togglePassword"
+                                aria-label="Show password"
+                            >
+                                <i class="fa-regular fa-eye"></i>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="login-button"
+                        id="loginButton"
+                    >
+                        Login to Admin Panel
+                    </button>
+
+
+                    <div
+                        id="message"
+                        class="message"
+                    ></div>
+
+                </form>
+
+
+                <div class="back-link">
+
+                    <a href="../index.html">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        Back to Website
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-text">
+                © 2026 The Beauty Salon. All rights reserved.
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <script>
+
+        const API = "http://localhost:5000/api/admin-auth";
+
+
+        const form =
+            document.getElementById("adminLoginForm");
+
+        const emailInput =
+            document.getElementById("email");
+
+        const passwordInput =
+            document.getElementById("password");
+
+        const loginButton =
+            document.getElementById("loginButton");
+
+        const message =
+            document.getElementById("message");
+
+        const togglePassword =
+            document.getElementById("togglePassword");
+
+
+        /* ============================================
+           PASSWORD VISIBILITY
+        ============================================ */
+
+        togglePassword.addEventListener(
+            "click",
+            () => {
+
+                const isPassword =
+                    passwordInput.type === "password";
+
+
+                passwordInput.type =
+                    isPassword
+                        ? "text"
+                        : "password";
+
+
+                togglePassword.innerHTML =
+                    isPassword
+                        ? '<i class="fa-regular fa-eye-slash"></i>'
+                        : '<i class="fa-regular fa-eye"></i>';
+
+            }
+        );
+
+
+        /* ============================================
+           SHOW MESSAGE
+        ============================================ */
+
+        function showMessage(
+            text,
+            type
+        ) {
+
+            message.textContent = text;
+
+            message.className =
+                `message ${type}`;
+
+        }
+
+
+        /* ============================================
+           ADMIN LOGIN
+        ============================================ */
+
+        form.addEventListener(
+            "submit",
+            async (event) => {
+
+                event.preventDefault();
+
+
+                const email =
+                    emailInput.value.trim();
+
+                const password =
+                    passwordInput.value;
+
+
+                if (!email || !password) {
+
+                    showMessage(
+                        "Please enter email and password.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                loginButton.disabled = true;
+
+                loginButton.textContent =
+                    "Signing in...";
+
+
+                message.className =
+                    "message";
+
+
+                try {
+
+                    const response =
+                        await fetch(
+                            `${API}/login`,
+                            {
+                                method: "POST",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json"
+                                },
+
+                                body: JSON.stringify({
+                                    email,
+                                    password
+                                })
+                            }
+                        );
+
+
+                    const data =
+                        await response.json();
+
+
+                    if (!response.ok) {
+
+                        throw new Error(
+                            data.message ||
+                            "Invalid email or password."
+                        );
+
+                    }
+
+
+                    /* ---------- SAVE ADMIN SESSION ---------- */
+
+                    localStorage.setItem(
+                        "adminToken",
+                        data.token
+                    );
+
+
+                    localStorage.setItem(
+                        "adminEmail",
+                        data.admin.email
+                    );
+
+
+                    localStorage.setItem(
+                        "adminId",
+                        data.admin.id
+                    );
+
+
+                    showMessage(
+                        "Login successful. Redirecting...",
+                        "success"
+                    );
+
+
+                    setTimeout(
+                        () => {
+
+                            window.location.href =
+                                "../admin/dashboard.html";
+
+                        },
+                        700
+                    );
+
+
+                } catch (error) {
+
+                    console.error(
+                        "Admin Login Error:",
+                        error
+                    );
+
+
+                    showMessage(
+                        error.message ||
+                        "Unable to login. Please try again.",
+                        "error"
+                    );
+
+
+                    loginButton.disabled = false;
+
+                    loginButton.textContent =
+                        "Login to Admin Panel";
+
+                }
+
+            }
+        );
+
+    </script>
+
+</body>
+</html>

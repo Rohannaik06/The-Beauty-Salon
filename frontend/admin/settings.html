@@ -1,0 +1,1471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Settings | The Beauty Salon Admin</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+:root{
+  --black:#050505;
+  --dark:#0b0b0b;
+  --dark2:#111;
+  --dark3:#171717;
+  --gold:#d4af37;
+  --gold-light:#e5c65a;
+  --gold-soft:rgba(212,175,55,.11);
+  --gold-border:rgba(212,175,55,.24);
+  --white:#fff;
+  --text:#e9e9e9;
+  --muted:#999;
+  --muted2:#666;
+  --green:#4ade80;
+  --red:#ef4444;
+  --header-height:78px;
+  --sidebar-width:255px;
+  --sidebar-collapsed:78px;
+  --transition:.22s ease;
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;min-height:100%;background:var(--black)}
+body{
+  color:var(--text);
+  font-family:"DM Sans",Arial,sans-serif;
+  overflow-x:hidden;
+}
+a{text-decoration:none;color:inherit}
+button,input{font:inherit}
+button{cursor:pointer}
+
+.admin-header{
+  position:fixed;top:0;left:0;right:0;height:var(--header-height);
+  z-index:1000;display:flex;align-items:center;
+  padding:0 28px;background:rgba(5,5,5,.98);
+  border-bottom:1px solid var(--gold-border);
+}
+.header-left,.header-right{display:flex;align-items:center}
+.header-left{gap:14px;min-width:0;flex:1}
+.header-right{gap:14px;margin-left:auto}
+.mobile-sidebar-btn{
+  width:42px;height:42px;border:1px solid var(--gold-border);
+  border-radius:9px;background:var(--dark2);color:var(--gold);
+  display:flex;align-items:center;justify-content:center;
+  transition:var(--transition);
+}
+.mobile-sidebar-btn:hover{background:var(--gold);color:#000}
+
+.admin-brand{
+  display:flex;align-items:center;gap:11px;color:var(--white);
+  min-width:205px;
+}
+.brand-logo{
+  width:45px;height:45px;flex:0 0 45px;border:1px solid var(--gold);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  color:var(--gold);font-size:18px;
+}
+.brand-text{display:flex;flex-direction:column}
+.brand-main{
+  color:var(--white);font-family:"Playfair Display",serif;
+  font-size:15px;font-weight:700;line-height:1.05;
+}
+.brand-admin{
+  margin-top:3px;color:var(--gold);font-size:9px;font-weight:700;
+  letter-spacing:2px;line-height:1;
+}
+.header-divider{
+  width:1px;height:34px;background:rgba(255,255,255,.10);
+  margin:0 6px;
+}
+.page-heading{min-width:0;margin-left:2px}
+.page-heading h1{
+  margin:0;color:var(--white);font-family:"Playfair Display",serif;
+  font-size:18px;font-weight:700;line-height:1.1;
+}
+.page-heading p{
+  margin:4px 0 0;color:var(--muted);font-size:11px;line-height:1.2;
+}
+.notification-btn{
+  width:40px;height:40px;border:1px solid rgba(255,255,255,.09);
+  border-radius:9px;background:var(--dark2);color:#aaa;
+  display:flex;align-items:center;justify-content:center;
+}
+.notification-btn:hover{border-color:var(--gold-border);color:var(--gold)}
+.admin-profile{display:flex;align-items:center;gap:10px}
+.admin-avatar{
+  width:40px;height:40px;border-radius:50%;background:var(--gold-soft);
+  border:1px solid var(--gold-border);color:var(--gold);
+  display:flex;align-items:center;justify-content:center;
+}
+.profile-info{text-align:right}
+.profile-role{font-size:12px;font-weight:700;color:var(--white)}
+.profile-email{margin-top:2px;font-size:10px;color:var(--muted)}
+
+.admin-sidebar{
+  position:fixed;top:var(--header-height);left:0;bottom:0;width:var(--sidebar-width);
+  z-index:900;background:#080808;border-right:1px solid var(--gold-border);
+  display:flex;flex-direction:column;transition:width var(--transition),transform var(--transition);
+}
+.sidebar-inner{padding:18px 12px 10px;flex:1;overflow:hidden}
+.sidebar-inner::-webkit-scrollbar{display:none}
+.sidebar-section-title{
+  margin:0 12px 9px;color:var(--muted2);font-size:9px;font-weight:700;
+  letter-spacing:1.8px;text-transform:uppercase;
+}
+.sidebar-nav{display:flex;flex-direction:column;gap:4px}
+.sidebar-nav a{
+  position:relative;height:45px;display:flex;align-items:center;gap:13px;
+  padding:0 13px;border-radius:8px;color:#969696;font-size:13px;font-weight:500;
+  transition:var(--transition);
+}
+.sidebar-nav a i{width:20px;text-align:center;color:#707070;font-size:14px}
+.sidebar-nav a:hover{background:rgba(212,175,55,.07);color:var(--white)}
+.sidebar-nav a:hover i{color:var(--gold)}
+.sidebar-nav a.active{background:var(--gold-soft);color:var(--gold)}
+.sidebar-nav a.active::before{
+  content:"";position:absolute;left:0;top:7px;bottom:7px;width:3px;
+  border-radius:0 3px 3px 0;background:var(--gold);
+}
+.sidebar-nav a.active i{color:var(--gold)}
+.sidebar-system{margin-top:18px;padding-top:17px;border-top:1px solid rgba(255,255,255,.05)}
+.sidebar-bottom{padding:12px;border-top:1px solid rgba(255,255,255,.05)}
+.logout-button{
+  width:100%;height:45px;border:1px solid rgba(255,255,255,.06);
+  border-radius:8px;background:transparent;color:#929292;
+  display:flex;align-items:center;gap:13px;padding:0 13px;font-size:13px;
+}
+.logout-button i{width:20px;text-align:center;color:#707070}
+.logout-button:hover{background:rgba(212,175,55,.07);border-color:var(--gold-border);color:var(--gold)}
+.logout-button:hover i{color:var(--gold)}
+
+.admin-main{
+  margin-left:var(--sidebar-width);padding-top:var(--header-height);
+  min-height:100vh;background:
+    radial-gradient(circle at 75% 0%,rgba(212,175,55,.06),transparent 30%),
+    #050505;transition:margin-left var(--transition);
+}
+.main-content{max-width:1700px;margin:0 auto;padding:28px 32px 36px}
+.content-heading{margin-bottom:20px}
+.content-heading h2{
+  margin:0;font-family:"Playfair Display",serif;font-size:32px;
+  color:var(--white);line-height:1.15;
+}
+.content-heading h2 span{color:var(--gold)}
+.content-heading p{margin:6px 0 0;color:var(--muted);font-size:13px}
+
+.settings-panel{
+  width:100%;max-width:980px;margin:0 auto;background:var(--dark2);
+  border:1px solid var(--gold-border);border-radius:12px;
+  overflow:hidden;box-shadow:0 18px 45px rgba(0,0,0,.24);
+}
+.panel-header{
+  padding:18px 22px;border-bottom:1px solid rgba(255,255,255,.06);
+  background:rgba(255,255,255,.012);
+}
+.panel-header h3{margin:0;color:var(--white);font-size:16px;font-weight:700}
+.panel-header p{margin:5px 0 0;color:var(--muted);font-size:12px}
+
+.settings-form{padding:22px}
+.message{
+  display:none;margin-bottom:18px;padding:11px 13px;border-radius:8px;
+  font-size:12px;line-height:1.5;
+}
+.message.success{display:block;background:rgba(74,222,128,.07);border:1px solid rgba(74,222,128,.20);color:#8beaab}
+.message.error{display:block;background:rgba(239,68,68,.07);border:1px solid rgba(239,68,68,.20);color:#ff9292}
+
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.form-group{min-width:0}
+.form-group.full-width{grid-column:1/-1}
+.form-group label{
+  display:block;margin-bottom:7px;color:#cfcfcf;font-size:11px;
+  font-weight:700;letter-spacing:.15px;
+}
+.input-wrapper{position:relative}
+.form-group input{
+  width:100%;height:44px;padding:0 13px;border:1px solid rgba(255,255,255,.09);
+  border-radius:8px;background:#0b0b0b;color:var(--white);outline:none;
+  font-size:13px;transition:var(--transition);
+}
+.form-group input::placeholder{color:#5f5f5f}
+.form-group input:focus{border-color:rgba(212,175,55,.55);box-shadow:0 0 0 3px rgba(212,175,55,.06)}
+.form-group input[readonly]{color:#888;background:#090909;cursor:not-allowed}
+.input-wrapper input{padding-right:45px}
+.password-toggle{
+  position:absolute;right:12px;top:50%;transform:translateY(-50%);
+  border:0;background:transparent;color:#666;padding:4px;
+}
+.password-toggle:hover{color:var(--gold)}
+
+.form-note{
+  margin-top:18px;padding:11px 13px;border:1px solid rgba(212,175,55,.13);
+  border-radius:8px;background:rgba(212,175,55,.045);color:#929292;
+  font-size:11px;line-height:1.55;
+}
+.form-note i{margin-right:6px;color:var(--gold)}
+.form-actions{
+  display:flex;justify-content:flex-end;margin-top:20px;padding-top:18px;
+  border-top:1px solid rgba(255,255,255,.06);
+}
+.save-button{
+  height:42px;min-width:130px;padding:0 18px;border:0;border-radius:8px;
+  background:linear-gradient(135deg,var(--gold),var(--gold-light));
+  color:#050505;font-size:12px;font-weight:800;
+}
+.save-button:hover{box-shadow:0 7px 18px rgba(212,175,55,.18);transform:translateY(-1px)}
+.save-button:disabled{opacity:.55;cursor:not-allowed;transform:none;box-shadow:none}
+
+body.sidebar-collapsed .admin-sidebar{width:var(--sidebar-collapsed)}
+body.sidebar-collapsed .admin-main{margin-left:var(--sidebar-collapsed)}
+body.sidebar-collapsed .sidebar-section-title,
+body.sidebar-collapsed .sidebar-nav a span,
+body.sidebar-collapsed .logout-button span{display:none}
+body.sidebar-collapsed .sidebar-nav a,
+body.sidebar-collapsed .logout-button{justify-content:center;padding:0}
+body.sidebar-collapsed .sidebar-nav a i,
+body.sidebar-collapsed .logout-button i{margin:0}
+
+@media(max-width:1100px){
+  .profile-info{display:none}
+  .main-content{padding:25px 22px 32px}
+}
+@media(max-width:850px){
+  .admin-sidebar{transform:translateX(-100%);width:var(--sidebar-width);overflow:visible}
+  body.sidebar-mobile-open .admin-sidebar{transform:translateX(0)}
+  .admin-main,body.sidebar-collapsed .admin-main{margin-left:0}
+  body.sidebar-collapsed .admin-sidebar{width:var(--sidebar-width)}
+  .header-divider,.page-heading{display:none}
+  .form-grid{grid-template-columns:1fr}
+  .form-group.full-width{grid-column:auto}
+}
+@media(max-width:600px){
+  .admin-header{height:70px;padding:0 14px}
+  .admin-sidebar{top:70px}
+  .admin-main{padding-top:70px}
+  .main-content{padding:20px 14px 28px}
+  .content-heading h2{font-size:27px}
+  .settings-form{padding:18px}
+  .panel-header{padding:17px 18px}
+  .form-actions{justify-content:stretch}
+  .save-button{width:100%}
+}
+
+/* Sidebar open / close control */
+.sidebar-control{
+  position:absolute;
+  top:18px;
+  right:12px;
+  z-index:5;
+}
+.sidebar-close-btn{display:none;
+  width:32px;
+  height:32px;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:7px;
+  background:var(--dark2);
+  color:#777;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:var(--transition);
+}
+.sidebar-close-btn:hover{
+  color:var(--gold);
+  border-color:var(--gold-border);
+  background:var(--gold-soft);
+}
+.admin-sidebar .sidebar-inner{padding-top:62px}
+body.sidebar-collapsed .sidebar-close-btn i{transform:rotate(180deg)}
+body.sidebar-collapsed .sidebar-control{right:23px}
+@media(max-width:850px){
+  .admin-sidebar .sidebar-inner{padding-top:62px}
+  .sidebar-control{display:block}
+}
+
+
+/* ===== SETTINGS: MATCH BOOKING SIDEBAR/HEADER DETAILS ===== */
+.sidebar-collapse-btn{
+  position:absolute;
+  top:18px;
+  right:-14px;
+  width:28px;
+  height:28px;
+  border-radius:50%;
+  border:1px solid var(--gold-border);
+  background:#151515;
+  color:var(--gold);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:10px;
+  z-index:950;
+  transition:var(--transition);
+}
+.sidebar-collapse-btn:hover{color:#000;background:var(--gold)}
+body.sidebar-collapsed .sidebar-collapse-btn i{transform:rotate(180deg)}
+body.sidebar-collapsed .sidebar-section-title{opacity:0;pointer-events:none}
+body.sidebar-collapsed .sidebar-nav a{justify-content:center;padding:0;gap:0}
+body.sidebar-collapsed .sidebar-nav a span{display:none}
+
+
+/* Final Settings fixes */
+.sidebar-inner {
+  overflow: hidden !important;
+  overflow-y: hidden !important;
+  scrollbar-width: none !important;
+}
+.sidebar-inner::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+}
+#viewWebsiteLink {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+
+/* Sidebar: controlled vertical scroll so all navigation items remain accessible */
+.sidebar-inner {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  max-height: calc(100vh - 78px) !important;
+  scrollbar-width: thin !important;
+  scrollbar-color: rgba(212,175,55,.65) #111 !important;
+}
+.sidebar-inner::-webkit-scrollbar {
+  width: 7px !important;
+}
+.sidebar-inner::-webkit-scrollbar-track {
+  background: #111 !important;
+}
+.sidebar-inner::-webkit-scrollbar-thumb {
+  background: rgba(212,175,55,.65) !important;
+  border-radius: 10px !important;
+}
+.sidebar-inner::-webkit-scrollbar-thumb:hover {
+  background: #d4af37 !important;
+}
+#viewWebsiteLink {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: relative !important;
+}
+
+
+/* Keep sidebar scrollable but hide the scrollbar */
+.sidebar-inner {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  max-height: calc(100vh - 78px) !important;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+.sidebar-inner::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+  display: none !important;
+}
+
+
+/* ==========================================================
+   FINAL ADMIN SIDEBAR + BALANCED TYPOGRAPHY
+   ========================================================== */
+
+:root{
+    --header-height:78px;
+    --sidebar-width:255px;
+    --sidebar-collapsed:78px;
+}
+
+body{
+    font-size:14px;
+}
+
+/* Header consistency */
+.admin-header{
+    height:var(--header-height)!important;
+}
+
+.brand-main{
+    font-size:19px!important;
+}
+
+.brand-admin{
+    font-size:10px!important;
+}
+
+.page-heading h1{
+    font-size:16px!important;
+}
+
+.page-heading p{
+    font-size:10px!important;
+}
+
+/* Sidebar */
+.admin-sidebar{
+    top:var(--header-height)!important;
+    left:0!important;
+    bottom:0!important;
+    width:var(--sidebar-width)!important;
+    height:calc(100vh - var(--header-height))!important;
+    overflow:visible!important;
+    transition:width .22s ease,transform .22s ease!important;
+}
+
+.sidebar-inner{
+    width:100%!important;
+    height:100%!important;
+    padding:62px 12px 10px!important;
+    overflow-y:auto!important;
+    overflow-x:hidden!important;
+    scrollbar-width:none!important;
+}
+
+.sidebar-inner::-webkit-scrollbar{
+    display:none!important;
+    width:0!important;
+}
+
+.sidebar-section-title{
+    display:flex!important;
+    align-items:center!important;
+    gap:9px!important;
+    height:34px!important;
+    min-height:34px!important;
+    margin:2px 12px 3px!important;
+    color:#666!important;
+    font-size:9px!important;
+    font-weight:700!important;
+    letter-spacing:1.8px!important;
+    text-transform:uppercase!important;
+}
+
+.sidebar-section-title::before{
+    content:""!important;
+    width:4px!important;
+    height:4px!important;
+    flex:0 0 4px!important;
+    border-radius:50%!important;
+    background:#d4af37!important;
+}
+
+.sidebar-system{
+    margin-top:18px!important;
+    padding-top:14px!important;
+    border-top:1px solid rgba(255,255,255,.07)!important;
+}
+
+.sidebar-nav{
+    width:100%!important;
+    display:flex!important;
+    flex-direction:column!important;
+    gap:5px!important;
+}
+
+.sidebar-nav a{
+    width:100%!important;
+    height:45px!important;
+    min-height:45px!important;
+    flex-shrink:0!important;
+    padding:0 14px!important;
+    gap:14px!important;
+    border-radius:8px!important;
+    font-size:13px!important;
+}
+
+.sidebar-nav a i{
+    width:19px!important;
+    min-width:19px!important;
+    font-size:14px!important;
+}
+
+.sidebar-bottom{
+    padding:12px!important;
+    flex-shrink:0!important;
+}
+
+.logout-button{
+    height:45px!important;
+    font-size:13px!important;
+}
+
+.sidebar-collapse-btn{
+    right:-14px!important;
+    top:18px!important;
+    width:28px!important;
+    height:28px!important;
+    z-index:1200!important;
+}
+
+body.sidebar-collapsed .admin-sidebar{
+    width:var(--sidebar-collapsed)!important;
+}
+
+body.sidebar-collapsed .sidebar-inner{
+    padding-left:12px!important;
+    padding-right:12px!important;
+}
+
+body.sidebar-collapsed .sidebar-section-title{
+    justify-content:center!important;
+    margin-left:0!important;
+    margin-right:0!important;
+    padding:0!important;
+}
+
+body.sidebar-collapsed .sidebar-section-title::before{
+    display:block!important;
+}
+
+body.sidebar-collapsed .sidebar-nav a{
+    justify-content:center!important;
+    padding:0!important;
+    gap:0!important;
+}
+
+body.sidebar-collapsed .sidebar-nav a span,
+body.sidebar-collapsed .logout-button span{
+    display:none!important;
+}
+
+body.sidebar-collapsed .logout-button{
+    justify-content:center!important;
+    padding:0!important;
+}
+
+body.sidebar-collapsed .sidebar-collapse-btn i{
+    transform:rotate(180deg)!important;
+}
+
+/* Main content */
+.admin-main{
+    width:auto!important;
+    margin-left:var(--sidebar-width)!important;
+    min-height:100vh!important;
+    padding-top:var(--header-height)!important;
+    transition:margin-left .22s ease!important;
+}
+
+body.sidebar-collapsed .admin-main{
+    margin-left:var(--sidebar-collapsed)!important;
+}
+
+.main-content{
+    width:100%!important;
+    max-width:1700px!important;
+    padding:28px 30px 36px!important;
+}
+
+/* Balanced settings typography */
+.content-heading h2{
+    font-size:28px!important;
+}
+
+.content-heading p{
+    font-size:12px!important;
+}
+
+.settings-panel{
+    max-width:980px!important;
+}
+
+.panel-header h3{
+    font-size:15px!important;
+}
+
+.panel-header p{
+    font-size:11px!important;
+}
+
+.form-group label{
+    font-size:11px!important;
+}
+
+.form-group input{
+    height:44px!important;
+    font-size:12px!important;
+}
+
+.form-note{
+    font-size:11px!important;
+}
+
+.save-button{
+    font-size:12px!important;
+}
+
+/* Mobile */
+@media(max-width:850px){
+    .admin-sidebar{
+        width:255px!important;
+        transform:translateX(-100%)!important;
+    }
+
+    body.sidebar-mobile-open .admin-sidebar{
+        transform:translateX(0)!important;
+    }
+
+    body.sidebar-collapsed .admin-sidebar{
+        width:255px!important;
+    }
+
+    body.sidebar-collapsed .sidebar-nav a{
+        justify-content:flex-start!important;
+        padding:0 14px!important;
+        gap:14px!important;
+    }
+
+    body.sidebar-collapsed .sidebar-nav a span,
+    body.sidebar-collapsed .logout-button span{
+        display:inline!important;
+    }
+
+    body.sidebar-collapsed .sidebar-section-title{
+        justify-content:flex-start!important;
+        margin-left:12px!important;
+        margin-right:12px!important;
+    }
+
+    .admin-main,
+    body.sidebar-collapsed .admin-main{
+        margin-left:0!important;
+    }
+
+    .sidebar-collapse-btn{
+        right:12px!important;
+        top:15px!important;
+    }
+}
+
+@media(max-width:600px){
+    .admin-header{
+        height:70px!important;
+        padding:0 14px!important;
+    }
+
+    .admin-sidebar{
+        top:70px!important;
+        height:calc(100vh - 70px)!important;
+    }
+
+    .admin-main{
+        padding-top:70px!important;
+    }
+
+    .main-content{
+        padding:20px 14px 28px!important;
+    }
+
+    .content-heading h2{
+        font-size:26px!important;
+    }
+}
+
+
+/* Remove extra space above MAIN MENU */
+.admin-sidebar .sidebar-inner{
+    padding-top:18px!important;
+}
+
+.admin-sidebar .sidebar-section-title:first-child{
+    margin-top:0!important;
+}
+
+</style>
+</head>
+
+<body>
+
+<header class="admin-header">
+  <div class="header-left">
+    <a href="dashboard.html" class="admin-brand">
+      <div class="brand-logo"><i class="fa-solid fa-scissors"></i></div>
+      <div class="brand-text">
+        <div class="brand-main">The Beauty</div>
+        <div class="brand-admin">SALON ADMIN</div>
+      </div>
+    </a>
+    <div class="header-divider"></div>
+<div class="page-heading">
+      <h1>Account Settings</h1>
+      <p>Update your administrator email and password.</p>
+    </div>
+  </div>
+
+  <div class="header-right">
+    <button type="button" class="notification-btn" aria-label="Notifications">
+      <i class="fas fa-bell"></i>
+    </button>
+    <div class="admin-profile">
+      <div class="admin-avatar"><i class="fas fa-user-shield"></i></div>
+      <div class="profile-info">
+        <div class="profile-role">Administrator</div>
+        <div class="profile-email" id="headerAdminEmail">admin@beautysalon.com</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<aside class="admin-sidebar" id="adminSidebar">
+  <div class="sidebar-inner">
+    <div class="sidebar-section-title">Main Menu</div>
+    <nav class="sidebar-nav">
+      <a href="dashboard.html"><i class="fas fa-chart-line"></i><span>Dashboard</span></a>
+      <a href="branches.html"><i class="fas fa-code-branch"></i><span>Branches</span></a>
+      <a href="services.html"><i class="fas fa-scissors"></i><span>Services</span></a>
+      <a href="bookings.html"><i class="fas fa-calendar-check"></i><span>Bookings</span></a>
+      <a href="customers.html"><i class="fas fa-users"></i><span>Customers</span></a>
+      <a href="staff.html"><i class="fas fa-user-tie"></i><span>Staff</span></a>
+      <a href="gallery.html"><i class="fas fa-images"></i><span>Gallery</span></a>
+      <a href="offers.html"><i class="fas fa-tags"></i><span>Offers</span></a>
+    </nav>
+
+    <div class="sidebar-system">
+      <div class="sidebar-section-title">System</div>
+      <nav class="sidebar-nav">
+        <a href="settings.html" class="active"><i class="fas fa-cog"></i><span>Settings</span></a>
+        <a href="../index.html"><i class="fas fa-globe"></i><span>View Website</span></a>
+      </nav>
+    </div>
+  </div>
+
+  <div class="sidebar-bottom">
+    <button type="button" class="logout-button" id="logoutButton">
+      <i class="fas fa-sign-out-alt"></i><span>Logout</span>
+    </button>
+  </div>
+
+  <button type="button"
+          class="sidebar-collapse-btn"
+          id="sidebarToggle"
+          aria-label="Collapse sidebar"
+          title="Collapse Sidebar">
+      <i class="fa-solid fa-chevron-left"></i>
+    </button>
+</aside>
+
+<main class="admin-main">
+  <div class="main-content">
+<section class="settings-panel">
+      <div class="panel-header">
+        <h3>Administrator Account</h3>
+        <p>Manage your administrator login information.</p>
+      </div>
+
+      <form class="settings-form" id="settingsForm">
+        <div id="message" class="message"></div>
+
+        <div class="form-grid">
+          <div class="form-group full-width">
+            <label for="currentEmail">Current Email</label>
+            <input type="email" id="currentEmail" readonly>
+          </div>
+
+          <div class="form-group full-width">
+            <label for="newEmail">New Email</label>
+            <input type="email" id="newEmail" placeholder="Enter new email address" autocomplete="email">
+          </div>
+
+          <div class="form-group">
+            <label for="currentPassword">Current Password</label>
+            <div class="input-wrapper">
+              <input type="password" id="currentPassword" placeholder="Enter current password" autocomplete="current-password">
+              <button type="button" class="password-toggle" data-target="currentPassword" aria-label="Show password">
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="newPassword">New Password</label>
+            <div class="input-wrapper">
+              <input type="password" id="newPassword" placeholder="Enter new password" autocomplete="new-password">
+              <button type="button" class="password-toggle" data-target="newPassword" aria-label="Show password">
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="confirmPassword">Confirm New Password</label>
+            <div class="input-wrapper">
+              <input type="password" id="confirmPassword" placeholder="Confirm new password" autocomplete="new-password">
+              <button type="button" class="password-toggle" data-target="confirmPassword" aria-label="Show password">
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-note">
+          <i class="fas fa-shield-alt"></i>
+          Your current password is required before changing your administrator account details.
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="save-button" id="saveButton">Save Changes</button>
+        </div>
+      </form>
+    </section>
+  </div>
+</main>
+
+<script src="admin-auth.js"></script>
+
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+
+                /* =========================================
+                   ADMIN SESSION
+                ========================================= */
+
+                const adminEmail =
+                    localStorage.getItem(
+                        "adminEmail"
+                    );
+
+
+                const adminToken =
+                    localStorage.getItem(
+                        "adminToken"
+                    );
+
+
+                const adminId =
+                    localStorage.getItem(
+                        "adminId"
+                    );
+
+
+                if (
+                    !adminToken ||
+                    !adminEmail ||
+                    !adminId
+                ) {
+
+                    window.location.replace(
+                        "../pages/admin-login.html"
+                    );
+
+                    return;
+                }
+
+
+                const headerAdminEmail =
+                    document.getElementById(
+                        "headerAdminEmail"
+                    );
+
+
+                const currentEmail =
+                    document.getElementById(
+                        "currentEmail"
+                    );
+
+
+                if (headerAdminEmail) {
+
+                    headerAdminEmail.textContent =
+                        adminEmail;
+
+                }
+
+
+                if (currentEmail) {
+
+                    currentEmail.value =
+                        adminEmail;
+
+                }
+
+
+                /* =========================================
+                   SIDEBAR
+                ========================================= */
+
+                const body =
+                    document.body;
+
+
+                const sidebarToggle =
+                    document.getElementById(
+                        "sidebarToggle"
+                    );
+
+
+                const sidebarClose =
+                    document.getElementById(
+                        "sidebarClose"
+                    );
+
+
+                if (sidebarToggle) {
+
+                    sidebarToggle.addEventListener(
+                        "click",
+                        function () {
+
+                            if (
+                                window.innerWidth <= 900
+                            ) {
+
+                                body.classList.toggle(
+                                    "sidebar-mobile-open"
+                                );
+
+                            } else {
+
+                                body.classList.toggle(
+                                    "sidebar-collapsed"
+                                );
+
+                            }
+
+                        }
+                    );
+
+                }
+
+
+                if (sidebarClose) {
+
+                    sidebarClose.addEventListener(
+                        "click",
+                        function () {
+
+                            if (
+                                window.innerWidth <= 900
+                            ) {
+
+                                body.classList.remove(
+                                    "sidebar-mobile-open"
+                                );
+
+                            } else {
+
+                                body.classList.toggle(
+                                    "sidebar-collapsed"
+                                );
+
+                            }
+
+                        }
+                    );
+
+                }
+
+
+                const sidebarLinks =
+                    document.querySelectorAll(
+                        ".sidebar-nav a"
+                    );
+
+
+                sidebarLinks.forEach(
+                    function (link) {
+
+                        link.addEventListener(
+                            "click",
+                            function () {
+
+                                if (
+                                    window.innerWidth <= 900
+                                ) {
+
+                                    body.classList.remove(
+                                        "sidebar-mobile-open"
+                                    );
+
+                                }
+
+                            }
+                        );
+
+                    }
+                );
+
+
+                /* =========================================
+                   LOGOUT
+                ========================================= */
+
+                const logoutButton =
+                    document.getElementById(
+                        "logoutButton"
+                    );
+
+
+                if (logoutButton) {
+
+                    logoutButton.addEventListener(
+                        "click",
+                        function () {
+
+                            localStorage.removeItem(
+                                "adminToken"
+                            );
+
+
+                            localStorage.removeItem(
+                                "adminEmail"
+                            );
+
+
+                            localStorage.removeItem(
+                                "adminId"
+                            );
+
+
+                            window.location.replace(
+                                "../pages/admin-login.html"
+                            );
+
+                        }
+                    );
+
+                }
+
+
+                /* =========================================
+                   PASSWORD SHOW / HIDE
+                ========================================= */
+
+                const passwordToggles =
+                    document.querySelectorAll(
+                        ".password-toggle"
+                    );
+
+
+                passwordToggles.forEach(
+                    function (button) {
+
+                        button.addEventListener(
+                            "click",
+                            function () {
+
+                                const targetId =
+                                    button.getAttribute(
+                                        "data-target"
+                                    );
+
+
+                                const input =
+                                    document.getElementById(
+                                        targetId
+                                    );
+
+
+                                const icon =
+                                    button.querySelector(
+                                        "i"
+                                    );
+
+
+                                if (!input) {
+                                    return;
+                                }
+
+
+                                if (
+                                    input.type ===
+                                    "password"
+                                ) {
+
+                                    input.type =
+                                        "text";
+
+
+                                    if (icon) {
+
+                                        icon.classList.remove(
+                                            "fa-eye"
+                                        );
+
+
+                                        icon.classList.add(
+                                            "fa-eye-slash"
+                                        );
+
+                                    }
+
+                                } else {
+
+                                    input.type =
+                                        "password";
+
+
+                                    if (icon) {
+
+                                        icon.classList.remove(
+                                            "fa-eye-slash"
+                                        );
+
+
+                                        icon.classList.add(
+                                            "fa-eye"
+                                        );
+
+                                    }
+
+                                }
+
+                            }
+                        );
+
+                    }
+                );
+
+
+                /* =========================================
+                   SETTINGS FORM
+                ========================================= */
+
+                const settingsForm =
+                    document.getElementById(
+                        "settingsForm"
+                    );
+
+
+                const message =
+                    document.getElementById(
+                        "message"
+                    );
+
+
+                const saveButton =
+                    document.getElementById(
+                        "saveButton"
+                    );
+
+
+                const newEmail =
+                    document.getElementById(
+                        "newEmail"
+                    );
+
+
+                const currentPassword =
+                    document.getElementById(
+                        "currentPassword"
+                    );
+
+
+                const newPassword =
+                    document.getElementById(
+                        "newPassword"
+                    );
+
+
+                const confirmPassword =
+                    document.getElementById(
+                        "confirmPassword"
+                    );
+
+
+                function showMessage(
+                    text,
+                    type
+                ) {
+
+                    message.textContent =
+                        text;
+
+
+                    message.className =
+                        "message " + type;
+
+                }
+
+
+                function clearMessage() {
+
+                    message.textContent =
+                        "";
+
+
+                    message.className =
+                        "message";
+
+                }
+
+
+                settingsForm.addEventListener(
+                    "submit",
+                    async function (event) {
+
+                        event.preventDefault();
+
+
+                        clearMessage();
+
+
+                        const email =
+                            newEmail.value.trim();
+
+
+                        const password =
+                            currentPassword.value;
+
+
+                        const newPass =
+                            newPassword.value;
+
+
+                        const confirmPass =
+                            confirmPassword.value;
+
+
+                        /* =================================
+                           VALIDATION
+                        ================================= */
+
+                        if (!password) {
+
+                            showMessage(
+                                "Please enter your current password.",
+                                "error"
+                            );
+
+                            currentPassword.focus();
+
+                            return;
+                        }
+
+
+                        if (
+                            !email &&
+                            !newPass
+                        ) {
+
+                            showMessage(
+                                "Please enter a new email or new password.",
+                                "error"
+                            );
+
+                            return;
+                        }
+
+
+                        if (
+                            newPass &&
+                            newPass.length < 6
+                        ) {
+
+                            showMessage(
+                                "New password must be at least 6 characters.",
+                                "error"
+                            );
+
+                            newPassword.focus();
+
+                            return;
+                        }
+
+
+                        if (
+                            newPass !==
+                            confirmPass
+                        ) {
+
+                            showMessage(
+                                "New password and confirm password do not match.",
+                                "error"
+                            );
+
+                            confirmPassword.focus();
+
+                            return;
+                        }
+
+
+                        if (
+                            email &&
+                            !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+                                email
+                            )
+                        ) {
+
+                            showMessage(
+                                "Please enter a valid email address.",
+                                "error"
+                            );
+
+                            newEmail.focus();
+
+                            return;
+                        }
+
+
+                        /* =================================
+                           SAVE
+                        ================================= */
+
+                        saveButton.disabled =
+                            true;
+
+
+                        saveButton.textContent =
+                            "Saving...";
+
+
+                        try {
+
+                            const response =
+                                await fetch(
+                                    "http://localhost:5000/api/admin-settings",
+                                    {
+                                        method: "PUT",
+
+                                        headers: {
+                                            "Content-Type":
+                                                "application/json"
+                                        },
+
+                                        body:
+                                            JSON.stringify({
+
+                                                adminId:
+                                                    adminId,
+
+                                                currentEmail:
+                                                    adminEmail,
+
+                                                newEmail:
+                                                    email,
+
+                                                currentPassword:
+                                                    password,
+
+                                                newPassword:
+                                                    newPass
+
+                                            })
+                                    }
+                                );
+
+
+                            const data =
+                                await response.json();
+
+
+                            if (!response.ok) {
+
+                                throw new Error(
+                                    data.message ||
+                                    "Failed to update administrator settings."
+                                );
+
+                            }
+
+
+                            /* =============================
+                               UPDATE LOCAL SESSION
+                            ============================= */
+
+                            if (
+                                data.admin &&
+                                data.admin.email
+                            ) {
+
+                                localStorage.setItem(
+                                    "adminEmail",
+                                    data.admin.email
+                                );
+
+
+                                if (headerAdminEmail) {
+
+                                    headerAdminEmail.textContent =
+                                        data.admin.email;
+
+                                }
+
+
+                                if (currentEmail) {
+
+                                    currentEmail.value =
+                                        data.admin.email;
+
+                                }
+
+                            }
+
+
+                            /* =============================
+                               SUCCESS
+                            ============================= */
+
+                            showMessage(
+                                data.message ||
+                                "Administrator settings updated successfully.",
+                                "success"
+                            );
+
+
+                            /* =============================
+                               CLEAR PASSWORD FIELDS
+                            ============================= */
+
+                            currentPassword.value =
+                                "";
+
+
+                            newPassword.value =
+                                "";
+
+
+                            confirmPassword.value =
+                                "";
+
+
+                            newEmail.value =
+                                "";
+
+
+                        } catch (error) {
+
+                            console.error(
+                                "❌ Settings Update Error:",
+                                error
+                            );
+
+
+                            showMessage(
+                                error.message ||
+                                "Failed to update administrator settings.",
+                                "error"
+                            );
+
+                        } finally {
+
+                            saveButton.disabled =
+                                false;
+
+
+                            saveButton.textContent =
+                                "Save Changes";
+
+                        }
+
+                    }
+                );
+
+            }
+
+        );
+
+    </script>
+</body>
+</html>

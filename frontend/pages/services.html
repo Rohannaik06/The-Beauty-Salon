@@ -9,6 +9,12 @@
         content="Explore hair, beauty and grooming services at The Beauty Salon in Baramati."
     >
 
+    <link
+        rel="icon"
+        type="image/png"
+        href="../assets/images/logo/beauty-salon-logo.png"
+    >
+
     <title>Services | The Beauty Salon</title>
 
     <!-- Fonts -->
@@ -827,6 +833,14 @@
             font-size: 18px;
         }
 
+        .about-brand-logo img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
         .about-brand-name {
             display: flex;
             flex-direction: column;
@@ -964,101 +978,6 @@
 
             color: #D4AF37;
             font-size: 18px;
-        }
-
-
-        /* =========================================================
-           CUSTOMER ACCOUNT
-        ========================================================= */
-        .customer-account-wrap {
-            position: relative;
-        }
-
-        .customer-account-btn {
-            min-height: 40px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 7px;
-            padding: 0 12px;
-            border: 1px solid rgba(212,175,55,.30);
-            border-radius: 8px;
-            background: rgba(212,175,55,.03);
-            color: #D4AF37;
-            font-family: "DM Sans", sans-serif;
-            font-size: 12px;
-            font-weight: 700;
-            white-space: nowrap;
-            cursor: pointer;
-            transition: all .25s ease;
-        }
-
-        .customer-account-btn:hover,
-        .customer-account-btn[aria-expanded="true"] {
-            border-color: #D4AF37;
-            background: rgba(212,175,55,.08);
-        }
-
-        .customer-account-chevron {
-            font-size: 9px;
-            transition: transform .2s ease;
-        }
-
-        .customer-account-btn[aria-expanded="true"] .customer-account-chevron {
-            transform: rotate(180deg);
-        }
-
-        .customer-account-dropdown {
-            position: absolute;
-            top: calc(100% + 10px);
-            right: 0;
-            width: 205px;
-            padding: 7px;
-            background: #111;
-            border: 1px solid rgba(212,175,55,.20);
-            border-radius: 10px;
-            box-shadow: 0 18px 40px rgba(0,0,0,.45);
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-6px);
-            transition: .2s ease;
-        }
-
-        .customer-account-wrap.open .customer-account-dropdown {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .customer-account-dropdown a,
-        .customer-account-dropdown button {
-            width: 100%;
-            min-height: 40px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 0 11px;
-            border: 0;
-            border-radius: 7px;
-            background: transparent;
-            color: #d0d0d0;
-            font-family: "DM Sans", sans-serif;
-            font-size: 12px;
-            text-decoration: none;
-            text-align: left;
-            cursor: pointer;
-        }
-
-        .customer-account-dropdown a:hover,
-        .customer-account-dropdown button:hover {
-            background: rgba(212,175,55,.08);
-            color: #D4AF37;
-        }
-
-        .customer-account-dropdown i {
-            width: 15px;
-            color: #D4AF37;
-            text-align: center;
         }
 
         /* =========================================================
@@ -1262,74 +1181,844 @@
         }
 
     
-        .customer-account-btn {
-            cursor: pointer;
-            font-family: "DM Sans", sans-serif;
-        }
-
-        .customer-account-chevron {
-            color: #d4af37;
-            font-size: 9px;
-            transition: transform .2s ease;
-        }
-
+        .customer-account-btn { cursor:pointer; font-family:"DM Sans",sans-serif; }
+        .customer-account-chevron { color:#D4AF37; font-size:9px; transition:transform .2s ease; }
         .customer-account-dropdown {
-            position: absolute;
-            top: calc(100% + 10px);
-            right: 0;
-            width: 210px;
-            padding: 7px;
-            background: #101010;
-            border: 1px solid rgba(212,175,55,.22);
-            box-shadow: 0 18px 40px rgba(0,0,0,.45);
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-6px);
-            transition: .2s ease;
-            z-index: 1200;
+            position:absolute; top:calc(100% + 10px); right:0; width:210px; padding:7px;
+            background:#101010; border:1px solid rgba(212,175,55,.22);
+            box-shadow:0 18px 40px rgba(0,0,0,.45); opacity:0; visibility:hidden;
+            transform:translateY(-6px); transition:.2s ease; z-index:1200;
         }
-
-        .customer-account-dropdown.open {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
+        .customer-account-dropdown.open { opacity:1; visibility:visible; transform:translateY(0); }
+        .customer-account-dropdown a,.customer-account-dropdown button {
+            width:100%; min-height:40px; display:flex; align-items:center; gap:10px;
+            padding:0 11px; border:0; background:transparent; color:#d0d0d0;
+            text-decoration:none; font:500 12px "DM Sans",sans-serif; text-align:left; cursor:pointer;
         }
+        .customer-account-dropdown a:hover,.customer-account-dropdown button:hover { background:rgba(212,175,55,.08); color:#D4AF37; }
+        .customer-account-dropdown i { width:15px; color:#D4AF37; }
 
-        .customer-account-dropdown a,
-        .customer-account-dropdown button {
-            width: 100%;
-            min-height: 40px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 0 11px;
-            border: 0;
-            background: transparent;
-            color: #d0d0d0;
-            text-decoration: none;
-            font: 500 12px "DM Sans", sans-serif;
-            text-align: left;
-            cursor: pointer;
-        }
-
-        .customer-account-dropdown a:hover,
-        .customer-account-dropdown button:hover {
-            background: rgba(212,175,55,.08);
-            color: #d4af37;
-        }
-
-        .customer-account-dropdown i {
-            width: 15px;
-            color: #d4af37;
-        }
-
+        /* Professional spacing below fixed header */
+        
         @media (max-width: 767px) {
             .service-card-image {
                 height: 145px;
             }
         }
 
-    </style>
+    
+
+        .footer {
+        padding: 55px 0 20px;
+        background: #070707;
+    }
+
+    .footer-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+
+    .footer h3 {
+        font-family: "Playfair Display", serif;
+        font-size: 24px;
+    }
+
+    .footer h3 span {
+        color: #d4af37;
+    }
+
+    .footer h4 {
+        margin-bottom: 13px;
+        font-size: 14px;
+    }
+
+    .footer p,
+    .footer li,
+    .footer a {
+        color: #777;
+        font-size: 12px;
+        line-height: 1.7;
+    }
+
+    .footer ul {
+        list-style: none;
+    }
+
+    .footer li {
+        margin-bottom: 7px;
+    }
+
+    .footer a:hover {
+        color: #d4af37;
+    }
+
+    .footer-contact p {
+        display: flex;
+        gap: 9px;
+        margin-bottom: 9px;
+    }
+
+    .footer-contact i {
+        width: 15px;
+        color: #d4af37;
+        margin-top: 4px;
+    }
+
+    .footer-bottom {
+        margin-top: 40px;
+        padding-top: 18px;
+        border-top: 1px solid #1e1e1e;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .social {
+        display: flex;
+        gap: 7px;
+    }
+
+    .social a {
+        width: 35px;
+        height: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #292929;
+        border-radius: 50%;
+    }
+
+    @media (min-width: 600px) {
+        .footer-grid {
+            grid-template-columns: 1.4fr 1fr 1fr;
+        }
+    }
+
+    @media (min-width: 768px) {
+        .footer-grid {
+            grid-template-columns: 1.5fr 1fr 1fr 1.4fr;
+        }
+    }
+
+    @media (max-width: 599px) {
+        .footer {
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+
+        .footer-bottom {
+            align-items: flex-start;
+            flex-direction: column;
+        }
+    }
+
+/* =====================================================
+           TABLET
+        ===================================================== */
+
+        @media (max-width: 1024px) {
+
+            .branches-grid {
+                grid-template-columns: 1fr;
+                max-width: 760px;
+                margin: 0 auto;
+            }
+
+            .branch-highlights-grid {
+                grid-template-columns: repeat(3,minmax(0,1fr));
+            }
+
+            .branches-page .footer-grid {
+                grid-template-columns: repeat(2,minmax(0,1fr));
+                gap: 40px 30px;
+            }
+        }
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 767px) {
+
+            .branches-page .container {
+                width: calc(100% - 32px);
+            }
+
+            .branches-hero {
+                min-height: 390px;
+            }
+
+            .branches-hero-content {
+                padding: 65px 0;
+            }
+
+            .branches-hero h1 {
+                font-size: clamp(38px,11vw,50px);
+            }
+
+            .branches-hero p {
+                font-size: 14px;
+                line-height: 1.7;
+            }
+
+            .branches-section {
+                padding: 65px 0 70px;
+            }
+
+            .branches-heading {
+                margin-bottom: 35px;
+            }
+
+            .branches-heading p {
+                font-size: 13px;
+            }
+
+            .branches-grid {
+                gap: 14px;
+            }
+
+            .branch-card-new:hover {
+                transform: none;
+            }
+
+            .branch-visual {
+                height: 210px;
+            }
+
+            .branch-visual::before {
+                width: 180px;
+                height: 180px;
+            }
+
+            .branch-visual::after {
+                width: 115px;
+                height: 115px;
+            }
+
+            .branch-content {
+                padding: 24px 20px;
+            }
+
+            .branch-content h3 {
+                font-size: 24px;
+            }
+
+            .branch-details li {
+                font-size: 12px;
+            }
+
+            .branch-actions {
+                grid-template-columns: 1fr;
+            }
+
+            .branch-action {
+                min-height: 48px;
+            }
+
+            .branch-highlights {
+                padding: 65px 0;
+            }
+
+            .branch-highlights-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .branch-highlight {
+                display: grid;
+                grid-template-columns: 50px 1fr;
+                column-gap: 16px;
+                padding: 22px;
+            }
+
+            .branch-highlight-icon {
+                grid-row: span 2;
+                margin: 0;
+            }
+
+            .branch-highlight h3 {
+                margin-bottom: 4px;
+            }
+
+            .branches-cta {
+                padding: 55px 0;
+            }
+
+            .branches-cta-inner {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 24px;
+            }
+
+            .branches-cta h2 {
+                font-size: 32px;
+            }
+
+            .branches-cta .btn {
+                width: 100%;
+            }
+
+            .branches-page .site-footer {
+                padding-top: 55px;
+            }
+
+            .branches-page .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 35px;
+                padding-bottom: 35px;
+            }
+
+            .branches-page .footer-brand p {
+                max-width: 100%;
+                font-size: 12px;
+            }
+
+            .branches-page .footer-bottom {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 7px;
+            }
+        }
+
+        /* =====================================================
+           SMALL MOBILE
+        ===================================================== */
+
+        @media (max-width: 380px) {
+
+            .branches-page .container {
+                width: calc(100% - 24px);
+            }
+
+            .branches-hero h1 {
+                font-size: 36px;
+            }
+
+            .branch-visual {
+                height: 190px;
+            }
+
+            .branch-content {
+                padding: 21px 17px;
+            }
+
+            .branch-content h3 {
+                font-size: 22px;
+            }
+
+            .branch-details li {
+                font-size: 11px;
+            }
+        }
+
+        /* =====================================================
+           DATABASE BRANCH LOADING
+        ===================================================== */
+
+        .disabled-branch-action {
+            opacity: .55;
+            pointer-events: none;
+            cursor: not-allowed;
+        }
+
+        .branches-loading,
+        .branches-empty,
+        .branches-error {
+            grid-column: 1 / -1;
+            min-height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 12px;
+            padding: 30px;
+            border: 1px solid #292929;
+            background: #141414;
+            color: #888;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        .branches-loading i,
+        .branches-error i {
+            color: #d4af37;
+            font-size: 25px;
+        }
+
+        .branches-error strong,
+        .branches-empty strong {
+            color: #fff;
+            font-family: "Playfair Display", serif;
+            font-size: 20px;
+        }
+
+        .branch-status-note.database-note {
+            margin-top: 18px;
+        }
+
+        /* =====================================================
+           REDUCED MOTION
+        ===================================================== */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .branches-page *,
+            .branches-page *::before,
+            .branches-page *::after {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+    
+        /* =========================================================
+           EXACT ABOUT MASTER HEADER + RESPONSIVE SYSTEM
+        ========================================================= */
+        .about-site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+
+            border-bottom: 1px solid rgba(212, 175, 55, 0.12);
+        }
+
+        .about-header-container {
+            width: min(1280px, calc(100% - 40px));
+            min-height: 78px;
+            margin: 0 auto;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .about-brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 11px;
+            flex-shrink: 0;
+        }
+
+        .about-brand-logo {
+            width: 44px;
+            height: 44px;
+
+            display: grid;
+            place-items: center;
+
+            border: 1px solid #D4AF37;
+            border-radius: 50%;
+
+            background: rgba(212, 175, 55, 0.05);
+
+            color: #D4AF37;
+            font-size: 18px;
+        }
+
+        .about-brand-logo img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .about-brand-name {
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+        }
+
+        .about-brand-name strong {
+            font-family: "Playfair Display", serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .about-brand-name small {
+            margin-top: 5px;
+
+            color: #D4AF37;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .about-desktop-nav {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .about-desktop-nav a {
+            position: relative;
+
+            padding: 29px 0;
+
+            color: #cfcfcf;
+            font-size: 13px;
+            font-weight: 500;
+
+            white-space: nowrap;
+
+            transition: color .25s ease;
+        }
+
+        .about-desktop-nav a::after {
+            content: "";
+
+            position: absolute;
+            left: 0;
+            bottom: 20px;
+
+            width: 0;
+            height: 2px;
+
+            background: #D4AF37;
+
+            transition: width .25s ease;
+        }
+
+        .about-desktop-nav a:hover,
+        .about-desktop-nav a.active {
+            color: #D4AF37;
+        }
+
+        .about-desktop-nav a:hover::after,
+        .about-desktop-nav a.active::after {
+            width: 100%;
+        }
+
+        .about-header-actions {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .about-login-btn,
+        .about-book-btn {
+            min-height: 40px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+
+            border-radius: 8px;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            white-space: nowrap;
+
+            transition: all .25s ease;
+        }
+
+        .about-login-btn {
+            padding: 0 13px;
+
+            color: #D4AF37;
+
+            border: 1px solid rgba(212, 175, 55, .30);
+
+            background: rgba(212, 175, 55, .03);
+        }
+
+        .about-login-btn:hover {
+            border-color: #D4AF37;
+            background: rgba(212, 175, 55, .08);
+        }
+
+        .about-book-btn {
+            padding: 0 15px;
+
+            color: #000;
+
+            background: #D4AF37;
+        }
+
+        .about-book-btn:hover {
+            background: #E5C65A;
+            transform: translateY(-1px);
+        }
+
+        .about-mobile-menu-btn {
+            display: none;
+
+            width: 44px;
+            height: 44px;
+
+            align-items: center;
+            justify-content: center;
+
+            border: 1px solid rgba(212, 175, 55, .35);
+            border-radius: 9px;
+
+            background: transparent;
+
+            color: #D4AF37;
+            font-size: 18px;
+        }
+
+        /* =========================================================
+           MOBILE MENU
+        ========================================================= */
+
+        .about-mobile-menu {
+            position: fixed;
+            inset: 0;
+
+            z-index: 2000;
+
+            background: rgba(0, 0, 0, .98);
+
+            opacity: 0;
+            visibility: hidden;
+
+            transform: translateY(-10px);
+
+            transition:
+                opacity .25s ease,
+                visibility .25s ease,
+                transform .25s ease;
+        }
+
+        .about-mobile-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .about-mobile-menu-header {
+            min-height: 78px;
+            padding: 0 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            border-bottom: 1px solid rgba(212, 175, 55, .15);
+        }
+
+        .about-mobile-close {
+            width: 44px;
+            height: 44px;
+
+            display: grid;
+            place-items: center;
+
+            border: 1px solid rgba(212, 175, 55, .35);
+            border-radius: 9px;
+
+            background: transparent;
+
+            color: #D4AF37;
+            font-size: 19px;
+        }
+
+        .about-mobile-links {
+            padding: 20px;
+
+            display: flex;
+            flex-direction: column;
+        }
+
+        .about-mobile-links a {
+            min-height: 53px;
+
+            display: flex;
+            align-items: center;
+            gap: 13px;
+
+            padding: 0 5px;
+
+            color: #d6d6d6;
+
+            border-bottom: 1px solid rgba(255, 255, 255, .07);
+
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .about-mobile-links a i {
+            width: 20px;
+            color: #777;
+            text-align: center;
+        }
+
+        .about-mobile-links a:hover,
+        .about-mobile-links a.active {
+            color: #D4AF37;
+        }
+
+        .about-mobile-links a:hover i,
+        .about-mobile-links a.active i {
+            color: #D4AF37;
+        }
+
+        .about-mobile-divider {
+            height: 14px;
+        }
+
+        .about-mobile-book {
+            min-height: 51px !important;
+
+            margin-top: 18px;
+
+            justify-content: center;
+
+            border: 0 !important;
+            border-radius: 9px;
+
+            background: #D4AF37;
+
+            color: #000 !important;
+
+            font-weight: 700 !important;
+        }
+
+        .about-mobile-book i {
+            color: #000 !important;
+        }
+
+        
+
+        html, body {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        .about-site-header {
+            width: 100%;
+        }
+
+        .about-mobile-menu {
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        @media (max-width: 1024px) {
+            .about-header-container {
+                width: min(1180px, calc(100% - 32px));
+            }
+            .about-desktop-nav {
+                gap: 18px;
+            }
+            .about-desktop-nav a {
+                font-size: 12px;
+            }
+            .about-header-actions {
+                gap: 6px;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .about-header-container {
+                width: calc(100% - 28px);
+                min-height: 68px;
+            }
+            .about-desktop-nav,
+            .about-header-actions {
+                display: none;
+            }
+            .about-mobile-menu-btn {
+                display: flex;
+            }
+            .about-brand-logo {
+                width: 40px;
+                height: 40px;
+            }
+            .about-brand-name strong {
+                font-size: 17px;
+            }
+            .about-brand-name small {
+                font-size: 9px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .about-header-container {
+                width: calc(100% - 20px);
+            }
+            .about-mobile-menu-header {
+                padding: 0 14px;
+            }
+            .about-mobile-links {
+                padding: 14px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .about-site-header *,
+            .about-site-header *::before,
+            .about-site-header *::after,
+            .about-mobile-menu,
+            .about-mobile-menu * {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+
+    
+        .customer-account-btn { cursor:pointer; font-family:"DM Sans",sans-serif; }
+        .customer-account-chevron { color:#D4AF37; font-size:9px; transition:transform .2s ease; }
+        .customer-account-dropdown {
+            position:absolute; top:calc(100% + 10px); right:0; width:210px; padding:7px;
+            background:#101010; border:1px solid rgba(212,175,55,.22);
+            box-shadow:0 18px 40px rgba(0,0,0,.45); opacity:0; visibility:hidden;
+            transform:translateY(-6px); transition:.2s ease; z-index:1200;
+        }
+        .customer-account-dropdown.open { opacity:1; visibility:visible; transform:translateY(0); }
+        .customer-account-dropdown a,.customer-account-dropdown button {
+            width:100%; min-height:40px; display:flex; align-items:center; gap:10px;
+            padding:0 11px; border:0; background:transparent; color:#d0d0d0;
+            text-decoration:none; font:500 12px "DM Sans",sans-serif; text-align:left; cursor:pointer;
+        }
+        .customer-account-dropdown a:hover,.customer-account-dropdown button:hover { background:rgba(212,175,55,.08); color:#D4AF37; }
+        .customer-account-dropdown i { width:15px; color:#D4AF37; }
+
+        /* Professional spacing below fixed header */
+        .branches-page main {
+            padding-top: 78px;
+        }
+
+        @media (max-width: 767px) {
+            .branches-page main {
+                padding-top: 68px;
+            }
+        }
+
+        /* Exact header/body spacing */
+        .services-page main {
+            padding-top: 78px;
+        }
+
+        @media (max-width: 767px) {
+            .services-page main {
+                padding-top: 68px;
+            }
+        }
+
+        /* Account dropdown compatibility for Services page JS */
+        .customer-account-wrap.open .customer-account-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+</style>
 </head>
 
 <body class="services-page">
@@ -1350,7 +2039,10 @@
                aria-label="The Beauty Salon Home">
 
                 <span class="about-brand-logo">
-                    <i class="fa-solid fa-scissors"></i>
+                    <img
+                        src="../assets/images/logo/beauty-salon-logo.png"
+                        alt="The Beauty Salon Logo"
+                    >
                 </span>
 
                 <span class="about-brand-name">
@@ -1399,53 +2091,30 @@
             <!-- Header Actions -->
 
             <div class="about-header-actions" id="customerHeaderActions">
-
-                <a href="login.html"
-                   class="about-login-btn"
-                   id="customerLoginLink">
-
+                <a href="login.html" class="about-login-btn customer-login-link" id="customerLoginLink">
                     <i class="fa-regular fa-user"></i>
                     <span>Customer Login</span>
-
                 </a>
 
-                <div class="customer-account-wrap" id="customerAccountWrap" hidden>
-                    <button class="customer-account-btn"
-                            id="customerAccountBtn"
-                            type="button"
-                            aria-haspopup="true"
-                            aria-expanded="false">
+                <div class="customer-account-area customer-account-wrap" id="customerAccountWrap" hidden style="display:none; position:relative;">
+                    <button class="about-login-btn customer-account-btn"
+                            id="customerAccountBtn" type="button"
+                            aria-haspopup="true" aria-expanded="false">
                         <i class="fa-regular fa-user"></i>
                         <span id="customerAccountName">My Account</span>
                         <i class="fa-solid fa-chevron-down customer-account-chevron"
-                           id="customerAccountChevron"
-                           aria-hidden="true"></i>
+                           id="customerAccountChevron"></i>
                     </button>
-
-                    <div class="customer-account-dropdown"
-                         id="customerAccountDropdown"
-                         role="menu">
-                        <a href="appointments.html" role="menuitem">
-                            <i class="fa-regular fa-calendar-check"></i>
-                            <span>My Appointments</span>
-                        </a>
-                        <a href="booking-history.html" role="menuitem">
-                            <i class="fa-solid fa-clock-rotate-left"></i>
-                            <span>Booking History</span>
-                        </a>
-                        <a href="profile.html" role="menuitem">
-                            <i class="fa-regular fa-user"></i>
-                            <span>Update Profile</span>
-                        </a>
-                        <button type="button" id="customerLogoutBtn" role="menuitem">
-                            <i class="fa-solid fa-right-from-bracket"></i>
-                            <span>Logout</span>
+                    <div class="customer-account-dropdown" id="customerAccountDropdown">
+                        <a href="appointments.html"><i class="fa-regular fa-calendar-check"></i>My Appointments</a>
+                        <a href="booking-history.html"><i class="fa-solid fa-clock-rotate-left"></i>Booking History</a>
+                        <a href="profile.html"><i class="fa-regular fa-user"></i>Update Profile</a>
+                        <button type="button" id="customerLogoutBtn" class="customer-logout">
+                            <i class="fa-solid fa-right-from-bracket"></i>Logout
                         </button>
                     </div>
                 </div>
-
             </div>
-
 
             <!-- Mobile Menu -->
 
@@ -1476,7 +2145,10 @@
                class="about-brand">
 
                 <span class="about-brand-logo">
-                    <i class="fa-solid fa-scissors"></i>
+                    <img
+                        src="../assets/images/logo/beauty-salon-logo.png"
+                        alt="The Beauty Salon Logo"
+                    >
                 </span>
 
                 <span class="about-brand-name">
@@ -1515,8 +2187,7 @@
             </a>
 
 
-            <a href="about.html"
-               class="active">
+            <a href="about.html">
 
                 <i class="fa-regular fa-circle-user"></i>
 
@@ -1564,20 +2235,18 @@
             <div class="about-mobile-divider"></div>
 
 
-            <a href="login.html" id="mobileCustomerLoginLink">
-
+            <a href="login.html" class="customer-login-link">
                 <i class="fa-solid fa-right-to-bracket"></i>
-
                 <span>Customer Login</span>
-
             </a>
-
-            <a href="profile.html" id="mobileCustomerAccountLink" hidden>
-
-                <i class="fa-regular fa-user"></i>
-
-                <span>My Account</span>
-
+            <a href="appointments.html" class="customer-account-area" style="display:none;">
+                <i class="fa-regular fa-calendar-check"></i><span>My Appointments</span>
+            </a>
+            <a href="booking-history.html" class="customer-account-area" style="display:none;">
+                <i class="fa-solid fa-clock-rotate-left"></i><span>Booking History</span>
+            </a>
+            <a href="profile.html" class="customer-account-area" style="display:none;">
+                <i class="fa-regular fa-user"></i><span>Update Profile</span>
             </a>
 
         </nav>
@@ -1765,199 +2434,90 @@
          FOOTER
     ===================================================== -->
 
-    <footer class="site-footer">
+    <footer class="footer">
 
         <div class="container">
 
             <div class="footer-grid">
 
-                <div class="footer-brand">
-
-                    <a href="../index.html" class="site-logo">
-
-                        <span class="logo-icon">
-                            <i class="fa-solid fa-scissors"></i>
-                        </span>
-
-                        <span class="logo-text">
-                            <strong>The Beauty</strong>
-                            <small>Salon</small>
-                        </span>
-
-                    </a>
-
-                    <p>
-                        Premium unisex beauty and hair salon
-                        providing professional beauty, hair and
-                        grooming services in Baramati.
+                <div>
+                    <h3>
+                        The <span>Beauty</span> Salon
+                    </h3>
+                    <p style="margin-top: 12px; max-width: 310px;">
+                        A modern unisex beauty and hair salon in
+                        Baramati, created for premium styling,
+                        grooming and beauty care.
                     </p>
-
-                    <div class="footer-social">
-
-                        <a href="#" aria-label="Instagram">
-                            <i class="fa-brands fa-instagram"></i>
-                        </a>
-
-                        <a href="#" aria-label="Facebook">
-                            <i class="fa-brands fa-facebook-f"></i>
-                        </a>
-
-                        <a href="#" aria-label="WhatsApp">
-                            <i class="fa-brands fa-whatsapp"></i>
-                        </a>
-
-                    </div>
-
                 </div>
 
-
-                <div class="footer-column">
-
-                    <h3>
-                        Quick Links
-                    </h3>
-
+                <div>
+                    <h4>Quick Links</h4>
                     <ul>
-
-                        <li>
-                            <a href="../index.html">
-                                Home
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="about.html">
-                                About
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="services.html">
-                                Services
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="branches.html">
-                                Branches
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="gallery.html">
-                                Gallery
-                            </a>
-                        </li>
-
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="branches.html">Branches</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
                     </ul>
-
                 </div>
 
-
-                <div class="footer-column">
-
-                    <h3>
-                        Services
-                    </h3>
-
+                <div>
+                    <h4>Customer</h4>
                     <ul>
-
-                        <li>
-                            <a href="services.html">
-                                Hair Services
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="services.html">
-                                Beauty Services
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="services.html">
-                                Grooming
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="booking.html">
-                                Book Appointment
-                            </a>
-                        </li>
-
+                        <li><a href="booking.html">Book Appointment</a></li>
+                        <li><a href="login.html">Login</a></li>
+                        <li><a href="register.html">Create Account</a></li>
+                        <li><a href="contact.html">Contact</a></li>
                     </ul>
-
                 </div>
 
-
-                <div class="footer-column footer-contact">
-
-                    <h3>
-                        Contact Us
-                    </h3>
+                <div class="footer-contact">
+                    <h4>Baramati Branch</h4>
 
                     <p>
-
                         <i class="fa-solid fa-location-dot"></i>
-
                         <span>
-                            Near Mahanagar Bank,
-                            in front of Shayog Society,
-                            Baramati
+                            Near Mahanagar Bank, in front of
+                            Shayog Society, Baramati, Maharashtra
                         </span>
-
                     </p>
 
                     <p>
-
                         <i class="fa-solid fa-phone"></i>
-
-                        <a href="tel:+918793465001">
-                            +91 8793465001
-                        </a>
-
+                        <a href="tel:+918793465001">+91 8793465001</a>
                     </p>
 
                     <p>
-
                         <i class="fa-regular fa-envelope"></i>
-
-                        <a href="mailto:beautysalon@gamil.com">
-                            beautysalon@gamil.com
-                        </a>
-
+                        <a href="mailto:beautysalon@gamil.com">beautysalon@gamil.com</a>
                     </p>
 
                     <p>
-
                         <i class="fa-regular fa-clock"></i>
-
-                        <span>
-                            Monday – Sunday,
-                            9:00 AM – 9:00 PM
-                        </span>
-
+                        <span>Mon - Sun: 9:00 AM - 9:00 PM</span>
                     </p>
-
                 </div>
 
             </div>
 
-
             <div class="footer-bottom">
-
                 <p>
-                    ©
-                    <span data-current-year>2026</span>
-                    The Beauty Salon.
-                    All Rights Reserved.
+                    © <span id="year"></span>
+                    The Beauty Salon. All Rights Reserved.
                 </p>
 
-                <p>
-                    Premium Beauty & Hair Salon
-                </p>
-
+                <div class="social">
+                    <a href="#" aria-label="Instagram" onclick="return false;">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <a href="#" aria-label="Facebook" onclick="return false;">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+                    <a href="#" aria-label="WhatsApp" onclick="return false;">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+                </div>
             </div>
 
         </div>

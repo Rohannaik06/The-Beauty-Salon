@@ -359,12 +359,15 @@
         }
 
         .add-image-btn {
-            min-width: 125px;
+            width: 112px;
+            min-width: 112px;
+            max-width: 112px;
             height: 44px;
+            justify-self: end;
             border: 1px solid #d4af37;
             background: #d4af37;
             color: #000;
-            padding: 0 16px;
+            padding: 0 10px;
             border-radius: 8px;
             font-size: 12px;
             font-weight: 700;
@@ -423,8 +426,8 @@
             background: #111;
             border: 1px solid #292929;
             border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 18px;
+            padding: 12px 14px;
+            margin-bottom: 16px;
         }
 
         .filter-row {
@@ -921,7 +924,10 @@
             }
 
             .filter-row .add-image-btn {
-                width: 100%;
+                width: 112px;
+                min-width: 112px;
+                max-width: 112px;
+                justify-self: end;
             }
 
             .search-box {
@@ -1137,7 +1143,334 @@
 
         }
 
-    </style>
+    
+/* ==========================================================
+   FINAL ADMIN SIDEBAR + BALANCED TYPOGRAPHY
+   ========================================================== */
+
+:root{
+    --header-height:78px;
+    --sidebar-width:255px;
+    --sidebar-collapsed:78px;
+}
+
+body{
+    font-size:14px;
+}
+
+.admin-sidebar{
+    top:var(--header-height)!important;
+    left:0!important;
+    bottom:0!important;
+    width:var(--sidebar-width)!important;
+    height:calc(100vh - var(--header-height))!important;
+    padding:20px 12px!important;
+    overflow:visible!important;
+    transition:width .22s ease!important;
+}
+
+.sidebar-nav{
+    width:100%!important;
+    height:100%!important;
+    display:flex!important;
+    flex-direction:column!important;
+    gap:5px!important;
+    overflow-y:auto!important;
+    overflow-x:hidden!important;
+    scrollbar-width:none!important;
+}
+
+.sidebar-nav::-webkit-scrollbar{
+    display:none!important;
+}
+
+.sidebar-link{
+    width:100%!important;
+    height:45px!important;
+    min-height:45px!important;
+    flex-shrink:0!important;
+    padding:0 14px!important;
+    gap:14px!important;
+    border-radius:8px!important;
+    font-size:13px!important;
+}
+
+.sidebar-link i{
+    width:19px!important;
+    min-width:19px!important;
+    font-size:14px!important;
+}
+
+.sidebar-section-title{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    height:34px;
+    min-height:34px;
+    padding:0 12px;
+    margin:2px 0 3px;
+    color:#666;
+    font-size:9px;
+    font-weight:700;
+    letter-spacing:1.8px;
+    text-transform:uppercase;
+    white-space:nowrap;
+}
+
+.sidebar-section-title::before{
+    content:"";
+    width:4px;
+    height:4px;
+    flex:0 0 4px;
+    border-radius:50%;
+    background:#d4af37;
+}
+
+.sidebar-section-title.system-title{
+    margin-top:18px;
+    padding-top:14px;
+    height:48px;
+    min-height:48px;
+    border-top:1px solid rgba(255,255,255,.07);
+}
+
+.sidebar-section-title.system-title::before{
+    background:#888;
+}
+
+.sidebar-section-title span{
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.admin-sidebar.collapsed{
+    width:var(--sidebar-collapsed)!important;
+}
+
+.admin-sidebar.collapsed .sidebar-link{
+    justify-content:center!important;
+    padding:0!important;
+    gap:0!important;
+}
+
+.admin-sidebar.collapsed .sidebar-link span{
+    display:none!important;
+}
+
+.admin-sidebar.collapsed .sidebar-section-title{
+    justify-content:center!important;
+    padding:0!important;
+}
+
+.admin-sidebar.collapsed .sidebar-section-title span{
+    display:none!important;
+}
+
+.admin-sidebar.collapsed .sidebar-section-title::before{
+    display:block!important;
+}
+
+.sidebar-toggle{
+    right:-14px!important;
+    top:18px!important;
+    z-index:1200!important;
+}
+
+.admin-sidebar.collapsed .sidebar-toggle i{
+    transform:rotate(180deg)!important;
+}
+
+.admin-main{
+    width:auto!important;
+    min-height:100vh!important;
+    margin-left:var(--sidebar-width)!important;
+    padding:106px 30px 36px!important;
+    transition:margin-left .22s ease!important;
+}
+
+.admin-sidebar.collapsed ~ .admin-main{
+    margin-left:var(--sidebar-collapsed)!important;
+}
+
+/* Balanced overall typography */
+.page-title-main{
+    font-size:16px!important;
+}
+
+.page-title-sub{
+    font-size:10px!important;
+}
+
+.heading-text h1{
+    font-size:28px!important;
+}
+
+.heading-text p{
+    font-size:12px!important;
+}
+
+.summary-card h3{
+    font-size:34px!important;
+}
+
+.summary-card p{
+    font-size:12px!important;
+}
+
+.filter-row{
+    grid-template-columns:minmax(220px,1fr) 180px 180px 160px auto!important;
+    gap:12px!important;
+    align-items:center!important;
+}
+
+.search-box input,
+.filter-select{
+    height:44px!important;
+    font-size:12px!important;
+}
+
+.add-image-btn{
+    width:auto!important;
+    min-width:120px!important;
+    max-width:none!important;
+    height:44px!important;
+    font-size:12px!important;
+}
+
+.gallery-header h2{
+    font-size:15px!important;
+}
+
+.gallery-header span{
+    font-size:11px!important;
+}
+
+.gallery-info h3{
+    font-size:13px!important;
+}
+
+.gallery-info p{
+    font-size:10px!important;
+}
+
+.gallery-status{
+    font-size:9px!important;
+}
+
+.gallery-badge{
+    font-size:9px!important;
+}
+
+.action-btn{
+    font-size:12px!important;
+}
+
+.modal-header h3{
+    font-size:20px!important;
+}
+
+.form-group label{
+    font-size:11px!important;
+}
+
+.form-group input,
+.form-group select{
+    font-size:12px!important;
+}
+
+.modal-btn{
+    font-size:12px!important;
+}
+
+@media(max-width:1150px){
+    .filter-row{
+        grid-template-columns:1fr 1fr!important;
+    }
+
+    .search-box{
+        grid-column:1/-1!important;
+    }
+
+    .filter-row .add-image-btn{
+        width:100%!important;
+        min-width:0!important;
+        max-width:none!important;
+    }
+}
+
+@media(max-width:767px){
+    .admin-header{
+        height:70px!important;
+    }
+
+    .admin-sidebar{
+        top:70px!important;
+        height:calc(100vh - 70px)!important;
+        width:255px!important;
+        transform:translateX(-100%);
+        transition:transform .25s ease!important;
+    }
+
+    .admin-sidebar.mobile-open{
+        transform:translateX(0)!important;
+    }
+
+    .admin-sidebar.collapsed{
+        width:255px!important;
+    }
+
+    .admin-sidebar.collapsed .sidebar-link{
+        justify-content:flex-start!important;
+        padding:0 14px!important;
+        gap:14px!important;
+    }
+
+    .admin-sidebar.collapsed .sidebar-link span{
+        display:inline!important;
+    }
+
+    .admin-sidebar.collapsed .sidebar-section-title{
+        justify-content:flex-start!important;
+        padding:0 12px!important;
+    }
+
+    .admin-sidebar.collapsed .sidebar-section-title span{
+        display:inline!important;
+    }
+
+    .sidebar-toggle{
+        right:12px!important;
+        top:15px!important;
+    }
+
+    .admin-sidebar.collapsed .sidebar-toggle i{
+        transform:none!important;
+    }
+
+    .admin-main,
+    .admin-sidebar.collapsed ~ .admin-main{
+        margin-left:0!important;
+        padding:94px 14px 30px!important;
+    }
+
+    .heading-text h1{
+        font-size:27px!important;
+    }
+
+    .filter-row{
+        grid-template-columns:1fr!important;
+    }
+
+    .search-box{
+        grid-column:auto!important;
+    }
+
+    .add-image-btn{
+        width:100%!important;
+    }
+}
+
+</style>
 </head>
 
 <body>
@@ -1223,6 +1556,10 @@
 
         <nav class="sidebar-nav">
 
+            <div class="sidebar-section-title">
+                <span>MAIN MENU</span>
+            </div>
+
             <a
                 href="dashboard.html"
                 class="sidebar-link"
@@ -1294,6 +1631,10 @@
                 <span>Offers</span>
             </a>
 
+
+            <div class="sidebar-section-title system-title">
+                <span>SYSTEM</span>
+            </div>
 
             <a
                 href="settings.html"

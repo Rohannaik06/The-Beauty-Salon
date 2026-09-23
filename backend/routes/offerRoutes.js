@@ -5,13 +5,19 @@ const fs = require("fs");
 
 const router = express.Router();
 
+
 const {
     getAllOffers,
+    getTodayOffer,
     getOfferByDay,
     saveOffer,
     deleteOffer
 } = require("../controllers/offerController");
 
+
+/* =========================================================
+   UPLOAD DIRECTORY
+========================================================= */
 
 const uploadDirectory = path.join(
     __dirname,
@@ -20,11 +26,17 @@ const uploadDirectory = path.join(
 
 
 if (!fs.existsSync(uploadDirectory)) {
+
     fs.mkdirSync(uploadDirectory, {
         recursive: true
     });
+
 }
 
+
+/* =========================================================
+   MULTER STORAGE
+========================================================= */
 
 const storage = multer.diskStorage({
 
@@ -34,6 +46,7 @@ const storage = multer.diskStorage({
             null,
             uploadDirectory
         );
+
     },
 
 
@@ -55,10 +68,15 @@ const storage = multer.diskStorage({
             null,
             `${day}${extension}`
         );
+
     }
 
 });
 
+
+/* =========================================================
+   FILE FILTER
+========================================================= */
 
 const fileFilter = (req, file, cb) => {
 
@@ -91,9 +109,15 @@ const fileFilter = (req, file, cb) => {
                 "Only JPG, JPEG, PNG, WEBP and GIF images are allowed."
             )
         );
+
     }
+
 };
 
+
+/* =========================================================
+   MULTER
+========================================================= */
 
 const upload = multer({
 
@@ -106,6 +130,22 @@ const upload = multer({
     }
 
 });
+
+
+/* =========================================================
+   ROUTES
+========================================================= */
+
+
+/*
+   IMPORTANT:
+   /today MUST COME BEFORE /:day
+*/
+
+router.get(
+    "/today",
+    getTodayOffer
+);
 
 
 router.get(
@@ -132,5 +172,9 @@ router.delete(
     deleteOffer
 );
 
+
+/* =========================================================
+   EXPORT ROUTER
+========================================================= */
 
 module.exports = router;

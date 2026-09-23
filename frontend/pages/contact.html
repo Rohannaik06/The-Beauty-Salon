@@ -72,140 +72,392 @@ button {
 
 
 /* =====================================================
-   HEADER
+   EXACT ABOUT MASTER HEADER — CONTACT PAGE
 ===================================================== */
 
-.header {
-    position: sticky;
+.about-site-header {
+    position: fixed;
     top: 0;
+    left: 0;
+    width: 100%;
     z-index: 1000;
 
-    background: rgba(0, 0, 0, 0.97);
+    background: rgba(0, 0, 0, 0.92);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
 
-    border-bottom: 1px solid #242424;
-
-    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.12);
 }
 
-.header-inner {
-    min-height: 74px;
+.about-header-container {
+    width: min(1280px, calc(100% - 40px));
+    min-height: 78px;
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.about-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 11px;
+    flex-shrink: 0;
+}
+
+.about-brand-logo {
+    width: 44px;
+    height: 44px;
+
+    display: grid;
+    place-items: center;
+
+    border: 1px solid #D4AF37;
+    border-radius: 50%;
+
+    background: rgba(212, 175, 55, 0.05);
+
+    overflow: hidden;
+}
+
+.about-brand-logo img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.about-brand-name {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+}
+
+.about-brand-name strong {
+    font-family: "Playfair Display", serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.about-brand-name small {
+    margin-top: 5px;
+
+    color: #D4AF37;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.about-desktop-nav {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.about-desktop-nav a {
+    position: relative;
+
+    padding: 29px 0;
+
+    color: #cfcfcf;
+    font-size: 13px;
+    font-weight: 500;
+
+    white-space: nowrap;
+
+    transition: color .25s ease;
+}
+
+.about-desktop-nav a::after {
+    content: "";
+
+    position: absolute;
+    left: 0;
+    bottom: 20px;
+
+    width: 0;
+    height: 2px;
+
+    background: #D4AF37;
+
+    transition: width .25s ease;
+}
+
+.about-desktop-nav a:hover,
+.about-desktop-nav a.active {
+    color: #D4AF37;
+}
+
+.about-desktop-nav a:hover::after,
+.about-desktop-nav a.active::after {
+    width: 100%;
+}
+
+.about-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.about-login-btn {
+    min-height: 40px;
+    padding: 0 13px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+
+    border-radius: 8px;
+
+    color: #fff;
+
+    border: 1px solid #D4AF37;
+
+    background: #000;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    white-space: nowrap;
+
+    transition: all .25s ease;
+}
+
+.about-login-btn:hover {
+    border-color: #D4AF37;
+    background: #000;
+    color: #D4AF37;
+}
+
+.about-mobile-menu-btn {
+    display: none;
+
+    width: 44px;
+    height: 44px;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(212, 175, 55, .35);
+    border-radius: 9px;
+
+    background: transparent;
+
+    color: #D4AF37;
+    font-size: 18px;
+}
+
+/* =========================================================
+   MOBILE MENU
+========================================================= */
+
+.about-mobile-menu {
+    position: fixed;
+    inset: 0;
+
+    z-index: 2000;
+
+    background: rgba(0, 0, 0, .98);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform: translateY(-10px);
+
+    transition:
+        opacity .25s ease,
+        visibility .25s ease,
+        transform .25s ease;
+
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.about-mobile-menu.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.about-mobile-menu-header {
+    min-height: 78px;
+    padding: 0 20px;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    gap: 20px;
+    border-bottom: 1px solid rgba(212, 175, 55, .15);
 }
 
-
-/* LOGO */
-
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 11px;
-}
-
-.logo-icon {
-    width: 43px;
-    height: 43px;
+.about-mobile-close {
+    width: 44px;
+    height: 44px;
 
     display: grid;
     place-items: center;
 
-    border: 1px solid #d4af37;
-    border-radius: 50%;
+    border: 1px solid rgba(212, 175, 55, .35);
+    border-radius: 9px;
 
-    color: #d4af37;
+    background: transparent;
+
+    color: #D4AF37;
+    font-size: 19px;
 }
 
-.logo-text strong {
-    display: block;
+.about-mobile-links {
+    padding: 20px;
 
-    font-family: "Playfair Display", serif;
-
-    font-size: 18px;
-    line-height: 1;
+    display: flex;
+    flex-direction: column;
 }
 
-.logo-text span {
-    display: block;
+.about-mobile-links a {
+    min-height: 53px;
 
-    margin-top: 4px;
-
-    color: #d4af37;
-
-    font-size: 9px;
-
-    letter-spacing: 2px;
-
-    text-transform: uppercase;
-}
-
-
-/* NAVIGATION */
-
-.desktop-nav {
     display: flex;
     align-items: center;
+    gap: 13px;
 
-    gap: 25px;
+    padding: 0 5px;
+
+    color: #d6d6d6;
+
+    border-bottom: 1px solid rgba(255, 255, 255, .07);
+
+    font-size: 15px;
+    font-weight: 500;
 }
 
-.desktop-nav a {
-    color: #999;
-
-    font-size: 13px;
-
-    font-weight: 600;
-
-    transition: .2s;
+.about-mobile-links a i {
+    width: 20px;
+    color: #777;
+    text-align: center;
 }
 
-.desktop-nav a:hover,
-.desktop-nav a.active {
-    color: #d4af37;
+.about-mobile-links a:hover,
+.about-mobile-links a.active {
+    color: #D4AF37;
 }
 
-
-/* HEADER BOOK */
-
-.header-book {
-    padding: 11px 17px;
-
-    border-radius: 6px;
-
-    background: #d4af37;
-
-    color: #000;
-
-    font-size: 12px;
-
-    font-weight: 700;
+.about-mobile-links a:hover i,
+.about-mobile-links a.active i {
+    color: #D4AF37;
 }
 
-
-/* MENU BUTTON */
-
-.menu-button {
-    display: none;
-
-    width: 42px;
-    height: 42px;
-
-    border: 1px solid #333;
-
-    border-radius: 7px;
-
-    background: #111;
-
-    color: #fff;
+.about-mobile-divider {
+    height: 14px;
 }
 
+.about-mobile-login {
+    min-height: 51px !important;
 
-/* =====================================================
-   MOBILE MENU
-===================================================== */
+    margin-top: 18px;
+
+    justify-content: center;
+
+    border: 1px solid #D4AF37 !important;
+    border-radius: 9px;
+
+    background: #000;
+
+    color: #fff !important;
+
+    font-weight: 700 !important;
+}
+
+.about-mobile-login i {
+    color: #D4AF37 !important;
+}
+
+html,
+body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+.about-site-header {
+    width: 100%;
+}
+
+@media (max-width: 1024px) {
+    .about-header-container {
+        width: min(1180px, calc(100% - 32px));
+    }
+
+    .about-desktop-nav {
+        gap: 18px;
+    }
+
+    .about-desktop-nav a {
+        font-size: 12px;
+    }
+
+    .about-header-actions {
+        gap: 6px;
+    }
+}
+
+@media (max-width: 767px) {
+    .about-header-container {
+        width: calc(100% - 28px);
+        min-height: 68px;
+    }
+
+    .about-desktop-nav,
+    .about-header-actions {
+        display: none;
+    }
+
+    .about-mobile-menu-btn {
+        display: flex;
+    }
+
+    .about-brand-logo {
+        width: 40px;
+        height: 40px;
+    }
+
+    .about-brand-name strong {
+        font-size: 17px;
+    }
+
+    .about-brand-name small {
+        font-size: 9px;
+    }
+}
+
+@media (max-width: 380px) {
+    .about-header-container {
+        width: calc(100% - 20px);
+    }
+
+    .about-mobile-menu-header {
+        padding: 0 14px;
+    }
+
+    .about-mobile-links {
+        padding: 14px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .about-site-header *,
+    .about-site-header *::before,
+    .about-site-header *::after,
+    .about-mobile-menu,
+    .about-mobile-menu * {
+        animation: none !important;
+        transition: none !important;
+    }
+}
 
 .mobile-menu {
     position: fixed;
@@ -582,251 +834,9 @@ button {
 .info-row-content a:hover {
     color: #d4af37;
 }
-
-
-/* =====================================================
-   RIGHT BOX
-===================================================== */
-
-.offer-card {
-    width: 100%;
-
-    min-height: 570px;
-
-    height: 100%;
-
-    padding: 24px;
-
-    display: flex;
-
-    flex-direction: column;
-
-    border: 1px solid #292929;
-
-    border-radius: 18px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #151515,
-            #0b0b0b
-        );
-}
-
-
-/* =====================================================
-   WEEKLY OFFERS CENTER
-===================================================== */
-
-.offers-title {
-    width: 100%;
-
-    margin: 0 0 18px;
-
-    color: #d4af37;
-
-    font-family: "Playfair Display", serif;
-
-    font-size: 30px;
-
-    line-height: 1.2;
-
-    text-align: center;
-}
-
-
-/* =====================================================
-   OFFER SLIDER
-===================================================== */
-
-.offer-slider {
-    position: relative;
-
-    width: 100%;
-
-    flex: 1;
-
-    overflow: hidden;
-
-    border-radius: 18px;
-
-    background: #050505;
-}
-
-.offer-track {
-    position: relative;
-
-    width: 100%;
-    height: 100%;
-
-    min-height: 500px;
-
-    overflow: hidden;
-
-    border-radius: 18px;
-}
-
-
-/* =====================================================
-   OFFER SLIDE
-===================================================== */
-
-.offer-slide {
-    position: absolute;
-
-    inset: 0;
-
-    display: none;
-
-    width: 100%;
-    height: 100%;
-
-    overflow: hidden;
-
-    border-radius: 18px;
-}
-
-.offer-slide.active {
-    display: block;
-
-    animation: offerFade .45s ease;
-}
-
-
-/* =====================================================
-   IMAGE - COMPLETE IMAGE, NO CUT
-===================================================== */
-
-.offer-slide img {
-    width: 100%;
-    height: 100%;
-
-    display: block;
-
-    /*
-       COMPLETE IMAGE
-       NO CROPPING
-    */
-    object-fit: contain;
-
-    object-position: center;
-
-    background: #050505;
-
-    border-radius: 18px;
-}
-
-
-/* =====================================================
-   FADE
-===================================================== */
-
-@keyframes offerFade {
-
-    from {
-        opacity: 0;
-    }
-
-    to {
+to {
         opacity: 1;
     }
-
-}
-
-
-/* =====================================================
-   SLIDER BUTTONS
-===================================================== */
-
-.offer-controls {
-    position: absolute;
-
-    top: 14px;
-
-    right: 14px;
-
-    z-index: 20;
-
-    display: flex;
-
-    gap: 7px;
-}
-
-.offer-prev,
-.offer-next {
-    width: 40px;
-    height: 40px;
-
-    display: grid;
-
-    place-items: center;
-
-    border: 1px solid rgba(255,255,255,.35);
-
-    border-radius: 10px;
-
-    background: rgba(0,0,0,.72);
-
-    color: #d4af37;
-
-    backdrop-filter: blur(8px);
-
-    transition: .2s;
-}
-
-.offer-prev:hover,
-.offer-next:hover {
-    background: #d4af37;
-
-    color: #000;
-}
-
-
-/* =====================================================
-   DOTS
-===================================================== */
-
-.offer-dots {
-    position: absolute;
-
-    left: 50%;
-
-    bottom: 14px;
-
-    z-index: 20;
-
-    transform: translateX(-50%);
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 6px;
-}
-
-.offer-dot {
-    width: 7px;
-    height: 7px;
-
-    padding: 0;
-
-    border: 0;
-
-    border-radius: 50%;
-
-    background: rgba(255,255,255,.55);
-
-    transition: .2s;
-}
-
-.offer-dot.active {
-    width: 22px;
-
-    border-radius: 10px;
-
-    background: #d4af37;
-}
-
 
 /* =====================================================
    MAP
@@ -1112,43 +1122,7 @@ button {
 
         height: auto;
     }
-
-    .offer-card {
-        min-height: 0;
-
-        height: auto;
-
-        padding: 16px;
-
-        border-radius: 16px;
-    }
-
-    .offers-title {
-        margin-bottom: 15px;
-
-        font-size: 27px;
-
-        text-align: center;
-    }
-
-    .offer-slider {
-        flex: none;
-    }
-
-    .offer-track {
-        min-height: 0;
-
-        aspect-ratio: 4 / 3;
-
-        border-radius: 15px;
-    }
-
-    .offer-slide,
-    .offer-slide img {
-        border-radius: 15px;
-    }
-
-    .map-header {
+.map-header {
         align-items: flex-start;
 
         flex-direction: column;
@@ -1188,29 +1162,183 @@ button {
     .info-card {
         padding: 22px 18px;
     }
-
-    .offer-card {
-        padding: 12px;
-    }
-
-    .offers-title {
-        font-size: 25px;
-    }
-
-    .offer-track {
-        aspect-ratio: 4 / 3;
-    }
-
-    .offer-prev,
-    .offer-next {
-        width: 36px;
-        height: 36px;
-    }
-
 }
-
 </style>
 
+
+<style>
+/* DATABASE-DRIVEN BRANCH INFORMATION */
+.branch-loading,
+.branch-error {
+    width: min(760px, 100%);
+    margin: 0 auto;
+    padding: 45px 25px;
+    text-align: center;
+    color: #888;
+    border: 1px solid #292929;
+    border-radius: 18px;
+    background: linear-gradient(145deg, #151515, #0b0b0b);
+}
+
+.branch-error {
+    color: #d4af37;
+}
+
+#branchesContainer {
+    width: 100%;
+}
+
+.dynamic-branch-content {
+    display: none;
+}
+
+.dynamic-branch-content.active {
+    display: block;
+}
+
+.dynamic-branch-layout {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.dynamic-info-card {
+    width: min(760px, 100%);
+    min-height: 0;
+    padding: 38px 42px;
+    text-align: center;
+    background:
+        radial-gradient(circle at top center, rgba(212,175,55,.10), transparent 42%),
+        linear-gradient(145deg, #151515, #0b0b0b);
+    border: 1px solid rgba(212,175,55,.20);
+    border-radius: 20px;
+    box-shadow: 0 18px 55px rgba(0,0,0,.35);
+}
+
+.dynamic-info-card h3 {
+    font-family: "Playfair Display", serif;
+    font-size: 32px;
+}
+
+.dynamic-info-subtitle {
+    margin: 7px 0 30px;
+    color: #888;
+    font-size: 12px;
+}
+
+.dynamic-info-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    max-width: 570px;
+    margin: 0 auto 20px;
+    text-align: left;
+}
+
+.dynamic-info-icon {
+    width: 46px;
+    height: 46px;
+    flex: 0 0 46px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(212,175,55,.3);
+    border-radius: 50%;
+    background: rgba(212,175,55,.06);
+    color: #d4af37;
+}
+
+.dynamic-info-content span {
+    display: block;
+    margin-bottom: 5px;
+    color: #666;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+}
+
+.dynamic-info-content p,
+.dynamic-info-content a {
+    color: #ccc;
+    font-size: 13px;
+    line-height: 1.65;
+}
+
+.dynamic-info-content a:hover {
+    color: #d4af37;
+}
+
+.dynamic-map {
+    margin-top: 28px;
+}
+
+@media (max-width: 767px) {
+    .dynamic-info-card {
+        padding: 30px 20px;
+        border-radius: 16px;
+    }
+
+    .dynamic-info-card h3 {
+        font-size: 27px;
+    }
+
+    .dynamic-info-row {
+        max-width: 100%;
+    }
+}
+</style>
+
+
+<style>
+/* FINAL CSS REPAIR */
+.branch-selector {
+    position: relative;
+    z-index: 20;
+    pointer-events: auto;
+}
+
+.branch-button {
+    position: relative;
+    z-index: 21;
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.dynamic-branch-content {
+    display: none;
+}
+
+.dynamic-branch-content.active {
+    display: block;
+}
+
+.dynamic-branch-layout {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.dynamic-info-card {
+    width: min(760px, 100%);
+    margin: 0 auto;
+}
+
+.branch-loading,
+.branch-error {
+    width: min(760px, 100%);
+    margin: 0 auto;
+    padding: 45px 25px;
+    text-align: center;
+    border: 1px solid #292929;
+    border-radius: 18px;
+    background: linear-gradient(145deg, #151515, #0b0b0b);
+    color: #888;
+}
+
+.branch-error {
+    color: #d4af37;
+}
+</style>
 </head>
 
 
@@ -1221,37 +1349,29 @@ button {
      HEADER
 ===================================================== -->
 
-<header class="header">
+<header class="about-site-header">
 
-    <div class="container header-inner">
-
+    <div class="about-header-container">
 
         <a href="../index.html"
-           class="logo">
+           class="about-brand"
+           aria-label="The Beauty Salon Home">
 
-            <span class="logo-icon">
-
-                <i class="fa-solid fa-scissors"></i>
-
+            <span class="about-brand-logo">
+                <img
+                    src="../assets/images/logo/beauty-salon-logo.png"
+                    alt="The Beauty Salon Logo">
             </span>
 
-
-            <span class="logo-text">
-
-                <strong>
-                    The Beauty
-                </strong>
-
-                <span>
-                    Salon
-                </span>
-
+            <span class="about-brand-name">
+                <strong>The Beauty</strong>
+                <small>Salon</small>
             </span>
 
         </a>
 
-
-        <nav class="desktop-nav">
+        <nav class="about-desktop-nav"
+             aria-label="Primary navigation">
 
             <a href="../index.html">
                 Home
@@ -1274,25 +1394,33 @@ button {
             </a>
 
             <a href="contact.html"
-               class="active">
+               class="active"
+               aria-current="page">
                 Contact
             </a>
 
         </nav>
 
+        <div class="about-header-actions">
 
-        <a href="booking.html"
-           class="header-book">
+            <a href="login.html"
+               class="about-login-btn"
+               id="headerCustomerLogin">
 
-            Book Appointment
+                <i class="fa-regular fa-user"></i>
+                <span>Customer Login</span>
 
-        </a>
+            </a>
 
+        </div>
 
         <button
-            class="menu-button"
-            id="menuButton"
-            type="button">
+            class="about-mobile-menu-btn"
+            id="contactMenuBtn"
+            type="button"
+            aria-label="Open menu"
+            aria-controls="contactMobileMenu"
+            aria-expanded="false">
 
             <i class="fa-solid fa-bars"></i>
 
@@ -1302,71 +1430,85 @@ button {
 
 </header>
 
+<div class="about-mobile-menu"
+     id="contactMobileMenu"
+     aria-hidden="true">
 
-<!-- =====================================================
-     MOBILE MENU
-===================================================== -->
+    <div class="about-mobile-menu-header">
 
-<div class="mobile-menu"
-     id="mobileMenu">
+        <a href="../index.html"
+           class="about-brand">
 
-    <div class="mobile-menu-inner">
+            <span class="about-brand-logo">
+                <img
+                    src="../assets/images/logo/beauty-salon-logo.png"
+                    alt="The Beauty Salon Logo">
+            </span>
 
+            <span class="about-brand-name">
+                <strong>The Beauty</strong>
+                <small>Salon</small>
+            </span>
+
+        </a>
 
         <button
-            class="mobile-close"
-            id="mobileClose"
-            type="button">
+            class="about-mobile-close"
+            id="contactCloseMenuBtn"
+            type="button"
+            aria-label="Close menu">
 
             <i class="fa-solid fa-xmark"></i>
 
         </button>
 
-
-        <a class="mobile-link"
-           href="../index.html">
-            Home
-        </a>
-
-
-        <a class="mobile-link"
-           href="about.html">
-            About
-        </a>
-
-
-        <a class="mobile-link"
-           href="services.html">
-            Services
-        </a>
-
-
-        <a class="mobile-link"
-           href="branches.html">
-            Branches
-        </a>
-
-
-        <a class="mobile-link"
-           href="gallery.html">
-            Gallery
-        </a>
-
-
-        <a class="mobile-link active"
-           href="contact.html">
-            Contact
-        </a>
-
-
-        <a class="mobile-book"
-           href="booking.html">
-
-            Book Appointment
-
-        </a>
-
     </div>
+
+    <nav class="about-mobile-links"
+         aria-label="Mobile navigation">
+
+        <a href="../index.html">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+        </a>
+
+        <a href="about.html">
+            <i class="fa-regular fa-circle-user"></i>
+            <span>About</span>
+        </a>
+
+        <a href="services.html">
+            <i class="fa-solid fa-scissors"></i>
+            <span>Services</span>
+        </a>
+
+        <a href="branches.html">
+            <i class="fa-solid fa-location-dot"></i>
+            <span>Branches</span>
+        </a>
+
+        <a href="gallery.html">
+            <i class="fa-regular fa-images"></i>
+            <span>Gallery</span>
+        </a>
+
+        <a href="contact.html"
+           class="active"
+           aria-current="page">
+            <i class="fa-regular fa-envelope"></i>
+            <span>Contact</span>
+        </a>
+
+        <div class="about-mobile-divider"></div>
+
+        <a href="login.html"
+           class="about-mobile-login"
+           id="mobileCustomerLogin">
+            <i class="fa-solid fa-right-to-bracket"></i>
+            <span>Customer Login</span>
+        </a>
+
+    </nav>
 
 </div>
 
@@ -1410,6 +1552,7 @@ button {
     <div class="container">
 
 
+        
         <div class="section-heading">
 
             <small>
@@ -1423,650 +1566,14 @@ button {
 
         </div>
 
+        <div class="branch-selector" id="branchSelector"></div>
 
-        <!-- =================================================
-             BRANCH SELECTOR
-        ================================================== -->
-
-        <div class="branch-selector">
-
-
-            <button
-                type="button"
-                class="branch-button active"
-                data-branch="baramati">
-
-                Baramati
-
-            </button>
-
-
-            <button
-                type="button"
-                class="branch-button"
-                data-branch="baramati-midc">
-
-                Baramati MIDC
-
-            </button>
-
-
+        <div id="branchesContainer">
+            <div class="branch-loading">
+                Loading branch information...
+            </div>
         </div>
 
-
-        <!-- =================================================
-             BARAMATI
-        ================================================== -->
-
-        <section
-            class="branch-content active"
-            id="baramati">
-
-
-            <div class="contact-layout">
-
-
-                <!-- LEFT INFO BOX -->
-
-                <div class="info-card">
-
-
-                    <h3>
-                        Baramati Branch
-                    </h3>
-
-
-                    <p class="info-card-subtitle">
-                        Main Branch · Open Daily
-                    </p>
-
-
-                    <div class="info-row">
-
-                        <div class="info-icon">
-
-                            <i class="fa-solid fa-location-dot"></i>
-
-                        </div>
-
-
-                        <div class="info-row-content">
-
-                            <span>
-                                Address
-                            </span>
-
-
-                            <p>
-                                Near Mahanagar Bank,
-                                in front of Shayog Society,
-                                Baramati, Maharashtra
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="info-row">
-
-                        <div class="info-icon">
-
-                            <i class="fa-solid fa-phone"></i>
-
-                        </div>
-
-
-                        <div class="info-row-content">
-
-                            <span>
-                                Phone
-                            </span>
-
-
-                            <a href="tel:+918793465001">
-                                +91 8793465001
-                            </a>
-
-                            <br>
-
-                            <a href="tel:+918087646512">
-                                +91 8087646512
-                            </a>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="info-row">
-
-                        <div class="info-icon">
-
-                            <i class="fa-regular fa-envelope"></i>
-
-                        </div>
-
-
-                        <div class="info-row-content">
-
-                            <span>
-                                Email
-                            </span>
-
-
-                            <a href="mailto:beautysalon@gamil.com">
-                                beautysalon@gamil.com
-                            </a>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="info-row">
-
-                        <div class="info-icon">
-
-                            <i class="fa-regular fa-clock"></i>
-
-                        </div>
-
-
-                        <div class="info-row-content">
-
-                            <span>
-                                Opening Hours
-                            </span>
-
-
-                            <p>
-                                Monday – Sunday<br>
-                                9:00 AM – 9:00 PM
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-                </div>
-
-
-                <!-- RIGHT OFFERS BOX -->
-
-                <div class="offer-card">
-
-
-                    <h3 class="offers-title">
-                        Weekly Offers
-                    </h3>
-
-
-                    <div class="offer-slider">
-
-
-                        <div class="offer-track">
-
-
-                            <div class="offer-slide active">
-
-                                <img
-                                    src="../assets/images/offers/monday.jpg"
-                                    alt="Weekly Offer">
-
-                            </div>
-
-
-                            <div class="offer-slide">
-
-                                <img
-                                    src="../assets/images/offers/tuesday.jpg"
-                                    alt="Weekly Offer">
-
-                            </div>
-
-
-                            <div class="offer-slide">
-
-                                <img
-                                    src="../assets/images/offers/wednesday.jpg"
-                                    alt="Weekly Offer">
-
-                            </div>
-
-
-                            <div class="offer-slide">
-
-                                <img
-                                    src="../assets/images/offers/thursday.jpg"
-                                    alt="Weekly Offer">
-
-                            </div>
-
-
-                            <div class="offer-slide">
-
-                                <img
-                                    src="../assets/images/offers/friday.jpg"
-                                    alt="Weekly Offer">
-
-                            </div>
-
-
-                            <div class="offer-slide">
-
-                                <img
-                                    src="../assets/images/offers/saturday.jpg"
-                                    alt="Weekly Offer">
-
-                            </div>
-
-
-                        </div>
-
-
-                        <div class="offer-controls">
-
-
-                            <button
-                                class="offer-prev"
-                                type="button">
-
-                                <i class="fa-solid fa-chevron-left"></i>
-
-                            </button>
-
-
-                            <button
-                                class="offer-next"
-                                type="button">
-
-                                <i class="fa-solid fa-chevron-right"></i>
-
-                            </button>
-
-
-                        </div>
-
-
-                        <div class="offer-dots"></div>
-
-
-                    </div>
-
-                </div>
-
-
-            </div>
-
-
-            <!-- MAP -->
-
-            <div class="map-section">
-
-
-                <div class="map-header">
-
-                    <h3>
-                        Visit Our Baramati Branch
-                    </h3>
-
-
-                    <span>
-                        OPEN
-                    </span>
-
-                </div>
-
-
-                <div class="map-box">
-
-                    <div class="map-placeholder">
-
-
-                        <i class="fa-solid fa-location-dot"></i>
-
-
-                        <h4>
-                            The Beauty Salon
-                        </h4>
-
-
-                        <p>
-                            Near Mahanagar Bank,
-                            in front of Shayog Society,
-                            Baramati, Maharashtra
-                        </p>
-
-
-                        <a
-                            class="map-link"
-                            href="https://www.google.com/maps/search/?api=1&query=The+Beauty+Salon+Baramati+Maharashtra"
-                            target="_blank"
-                            rel="noopener">
-
-                            <i class="fa-solid fa-map-location-dot"></i>
-
-                            &nbsp;
-
-                            Open in Google Maps
-
-                        </a>
-
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-        </section>
-
-
-        <!-- =================================================
-             BARAMATI MIDC
-        ================================================== -->
-
-        <section
-            class="branch-content"
-            id="baramati-midc">
-
-
-            <div class="contact-layout">
-
-
-                <!-- LEFT INFO BOX -->
-
-                <div class="info-card">
-
-
-                    <h3>
-                        Baramati MIDC Branch
-                    </h3>
-
-
-                    <p class="info-card-subtitle">
-                        Additional Branch · Open Daily
-                    </p>
-
-
-                    <div class="info-row">
-
-                        <div class="info-icon">
-
-                            <i class="fa-solid fa-location-dot"></i>
-
-                        </div>
-
-
-                        <div class="info-row-content">
-
-                            <span>
-                                Address
-                            </span>
-
-
-                            <p>
-                                Baramati MIDC,
-                                Baramati, Maharashtra
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="info-row">
-
-                        <div class="info-icon">
-
-                            <i class="fa-solid fa-phone"></i>
-
-                        </div>
-
-
-                        <div class="info-row-content">
-
-                            <span>
-                                Phone
-                            </span>
-
-
-                            <p>
-                                Contact details available
-                                at the branch
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="info-row">
-
-                        <div class="info-icon">
-
-                            <i class="fa-regular fa-envelope"></i>
-
-                        </div>
-
-
-                        <div class="info-row-content">
-
-                            <span>
-                                Email
-                            </span>
-
-
-                            <a href="mailto:beautysalon@gamil.com">
-                                beautysalon@gamil.com
-                            </a>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="info-row">
-
-                        <div class="info-icon">
-
-                            <i class="fa-regular fa-clock"></i>
-
-                        </div>
-
-
-                        <div class="info-row-content">
-
-                            <span>
-                                Opening Hours
-                            </span>
-
-
-                            <p>
-                                Monday – Sunday<br>
-                                9:00 AM – 9:00 PM
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-                </div>
-
-
-                <!-- RIGHT OFFERS BOX -->
-
-                <div class="offer-card">
-
-
-                    <h3 class="offers-title">
-                        Weekly Offers
-                    </h3>
-
-
-                    <div class="offer-slider">
-
-
-                        <div class="offer-track">
-
-
-                            <div class="offer-slide active">
-
-                                <img
-                                    src="../assets/images/offers/monday.jpg"
-                                    alt="Weekly Offer">
-
-                            </div>
-
-
-                            <div class="offer-slide">
-
-                                <img
-                                    src="../assets/images/offers/tuesday.jpg"
-                                    alt="Weekly Offer">
-
-                            </div>
-
-
-                            <div class="offer-slide">
-
-                                <img
-                                    src="../assets/images/offers/wednesday.jpg"
-                                    alt="Weekly Offer">
-
-                            </div>
-
-
-                            <div class="offer-slide">
-
-                                <img
-                                    src="../assets/images/offers/thursday.jpg"
-                                    alt="Weekly Offer">
-
-                            </div>
-
-
-                            <div class="offer-slide">
-
-                                <img
-                                    src="../assets/images/offers/friday.jpg"
-                                    alt="Weekly Offer">
-
-                            </div>
-
-
-                            <div class="offer-slide">
-
-                                <img
-                                    src="../assets/images/offers/saturday.jpg"
-                                    alt="Weekly Offer">
-
-                            </div>
-
-
-                        </div>
-
-
-                        <div class="offer-controls">
-
-
-                            <button
-                                class="offer-prev"
-                                type="button">
-
-                                <i class="fa-solid fa-chevron-left"></i>
-
-                            </button>
-
-
-                            <button
-                                class="offer-next"
-                                type="button">
-
-                                <i class="fa-solid fa-chevron-right"></i>
-
-                            </button>
-
-
-                        </div>
-
-
-                        <div class="offer-dots"></div>
-
-
-                    </div>
-
-                </div>
-
-
-            </div>
-
-
-            <!-- MAP -->
-
-            <div class="map-section">
-
-
-                <div class="map-header">
-
-                    <h3>
-                        Visit Our Baramati MIDC Branch
-                    </h3>
-
-
-                    <span>
-                        OPEN
-                    </span>
-
-                </div>
-
-
-                <div class="map-box">
-
-                    <div class="map-placeholder">
-
-
-                        <i class="fa-solid fa-location-dot"></i>
-
-
-                        <h4>
-                            The Beauty Salon — Baramati MIDC
-                        </h4>
-
-
-                        <p>
-                            Baramati MIDC,
-                            Baramati, Maharashtra
-                        </p>
-
-
-                        <a
-                            class="map-link"
-                            href="https://www.google.com/maps/search/?api=1&query=The+Beauty+Salon+Baramati+MIDC+Maharashtra"
-                            target="_blank"
-                            rel="noopener">
-
-                            <i class="fa-solid fa-map-location-dot"></i>
-
-                            &nbsp;
-
-                            Open in Google Maps
-
-                        </a>
-
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-        </section>
 
 
     </div>
@@ -2162,7 +1669,7 @@ button {
                 <ul>
 
                     <li>
-                        <a href="booking.html">
+                        <a href="booking.html" class="booking-link">
                             Book Appointment
                         </a>
                     </li>
@@ -2309,414 +1816,462 @@ button {
 ===================================================== -->
 
 <script>
+document.addEventListener("DOMContentLoaded", function () {
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function () {
+    const API = "http://localhost:5000/api/branches";
 
+    const year = document.getElementById("year");
 
-        /* =============================================
-           YEAR
-        ============================================= */
+    if (year) {
+        year.textContent = new Date().getFullYear();
+    }
+    const menuBtn = document.getElementById("contactMenuBtn");
+    const closeBtn = document.getElementById("contactCloseMenuBtn");
+    const mobileMenu = document.getElementById("contactMobileMenu");
 
-        const year =
-            document.getElementById("year");
-
-        if (year) {
-
-            year.textContent =
-                new Date().getFullYear();
-
+    function openMenu() {
+        if (!mobileMenu || !menuBtn) {
+            return;
         }
 
+        mobileMenu.classList.add("open");
+        mobileMenu.setAttribute("aria-hidden", "false");
+        menuBtn.setAttribute("aria-expanded", "true");
+        document.body.style.overflow = "hidden";
+    }
 
-        /* =============================================
-           MOBILE MENU
-        ============================================= */
-
-        const menuButton =
-            document.getElementById("menuButton");
-
-        const mobileMenu =
-            document.getElementById("mobileMenu");
-
-        const mobileClose =
-            document.getElementById("mobileClose");
-
-
-        if (menuButton && mobileMenu) {
-
-            menuButton.addEventListener(
-                "click",
-                function () {
-
-                    mobileMenu.classList.add("open");
-
-                    document.body.style.overflow =
-                        "hidden";
-
-                }
-            );
-
+    function closeMenu() {
+        if (!mobileMenu || !menuBtn) {
+            return;
         }
 
+        mobileMenu.classList.remove("open");
+        mobileMenu.setAttribute("aria-hidden", "true");
+        menuBtn.setAttribute("aria-expanded", "false");
+        document.body.style.overflow = "";
+    }
 
-        if (mobileClose && mobileMenu) {
+    if (menuBtn) {
+        menuBtn.addEventListener("click", openMenu);
+    }
 
-            mobileClose.addEventListener(
-                "click",
-                function () {
+    if (closeBtn) {
+        closeBtn.addEventListener("click", closeMenu);
+    }
 
-                    mobileMenu.classList.remove("open");
+    document.querySelectorAll(".about-mobile-links a").forEach(function (link) {
+        link.addEventListener("click", closeMenu);
+    });
 
-                    document.body.style.overflow =
-                        "";
-
-                }
-            );
-
+    document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+            closeMenu();
         }
+    });
 
+    window.addEventListener("resize", function () {
+        if (window.innerWidth >= 768) {
+            closeMenu();
+        }
+    });
 
-        document
-            .querySelectorAll(
-                ".mobile-link, .mobile-book"
-            )
-            .forEach(
-                function (link) {
-
-                    link.addEventListener(
-                        "click",
-                        function () {
-
-                            mobileMenu.classList
-                                .remove("open");
-
-                            document.body.style
-                                .overflow = "";
-
-                        }
-                    );
-
-                }
-            );
-
-
-        /* =============================================
-           BRANCH SWITCHING
-        ============================================= */
-
-        const branchButtons =
-            document.querySelectorAll(
-                ".branch-button"
-            );
-
-        const branchContents =
-            document.querySelectorAll(
-                ".branch-content"
-            );
-
-
-        branchButtons.forEach(
-            function (button) {
-
-                button.addEventListener(
-                    "click",
-                    function () {
-
-
-                        const selectedBranch =
-                            button.getAttribute(
-                                "data-branch"
-                            );
-
-
-                        branchButtons.forEach(
-                            function (btn) {
-
-                                btn.classList
-                                    .remove("active");
-
-                            }
-                        );
-
-
-                        branchContents.forEach(
-                            function (content) {
-
-                                content.classList
-                                    .remove("active");
-
-                            }
-                        );
-
-
-                        button.classList
-                            .add("active");
-
-
-                        const selectedContent =
-                            document.getElementById(
-                                selectedBranch
-                            );
-
-
-                        if (selectedContent) {
-
-                            selectedContent.classList
-                                .add("active");
-
-                        }
-
-                    }
-                );
-
-            }
+    function isCustomerLoggedIn() {
+        return Boolean(
+            localStorage.getItem("customerToken") ||
+            localStorage.getItem("customerId") ||
+            localStorage.getItem("customerPhone")
         );
+    }
 
+    function updateCustomerLoginButtons() {
+        const loggedIn = isCustomerLoggedIn();
 
-        /* =============================================
-           WEEKLY OFFER SLIDERS
-        ============================================= */
+        const desktopLogin =
+            document.getElementById("headerCustomerLogin");
 
-        document
-            .querySelectorAll(".offer-slider")
-            .forEach(
-                function (slider) {
+        const mobileLogin =
+            document.getElementById("mobileCustomerLogin");
 
+        if (loggedIn) {
+            if (desktopLogin) {
+                desktopLogin.textContent = "My Account";
+                desktopLogin.href = "profile.html";
+            }
 
-                    const slides =
-                        slider.querySelectorAll(
-                            ".offer-slide"
-                        );
+            if (mobileLogin) {
+                mobileLogin.textContent = "My Account";
+                mobileLogin.href = "profile.html";
+            }
+        }
+    }
 
+    updateCustomerLoginButtons();
 
-                    const previous =
-                        slider.querySelector(
-                            ".offer-prev"
-                        );
+    document.querySelectorAll(".booking-link").forEach(function (link) {
 
+        link.addEventListener("click", function (event) {
 
-                    const next =
-                        slider.querySelector(
-                            ".offer-next"
-                        );
+            if (!isCustomerLoggedIn()) {
+                event.preventDefault();
 
+                window.location.href =
+                    "login.html?redirect=booking.html";
+            }
 
-                    const dotsContainer =
-                        slider.querySelector(
-                            ".offer-dots"
-                        );
+        });
 
+    });
 
-                    let current = 0;
+    function escapeHtml(value) {
+        return String(value ?? "")
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
 
-                    let timer;
+    function formatTime(value) {
 
+        if (!value) {
+            return "9:00 AM";
+        }
 
-                    /* CREATE DOTS */
+        const parts = String(value).split(":");
+        const hour = Number(parts[0]);
+        const minute = parts[1] || "00";
 
-                    slides.forEach(
-                        function (_, index) {
+        if (Number.isNaN(hour)) {
+            return escapeHtml(value);
+        }
 
+        const suffix = hour >= 12 ? "PM" : "AM";
+        const displayHour = hour % 12 || 12;
 
-                            const dot =
-                                document.createElement(
-                                    "button"
-                                );
+        return displayHour + ":" + minute + " " + suffix;
+    }
 
+    function formatAddress(address) {
+        return escapeHtml(address || "Address not available");
+    }
 
-                            dot.type = "button";
+    function branchStatus(branch) {
+        return Number(branch.is_active) === 1
+            ? "OPEN"
+            : "CLOSED";
+    }
 
-                            dot.className =
-                                "offer-dot" +
-                                (
-                                    index === 0
-                                    ? " active"
-                                    : ""
-                                );
+    function renderBranch(branch) {
 
+        const branchId = String(branch.id);
 
-                            dot.setAttribute(
-                                "aria-label",
-                                "Show offer " +
-                                (index + 1)
-                            );
+        const phone =
+            branch.phone
+                ? escapeHtml(branch.phone)
+                : "Phone details not available";
 
+        const email =
+            branch.email
+                ? escapeHtml(branch.email)
+                : "Email details not available";
 
-                            dot.addEventListener(
-                                "click",
-                                function () {
+        const opening =
+            formatTime(branch.opening_time);
 
-                                    showSlide(index);
+        const closing =
+            formatTime(branch.closing_time);
 
-                                    restartTimer();
-
-                                }
-                            );
-
-
-                            dotsContainer
-                                .appendChild(dot);
-
-                        }
-                    );
-
-
-                    const dots =
-                        dotsContainer
-                            .querySelectorAll(
-                                ".offer-dot"
-                            );
-
-
-                    /* SHOW SLIDE */
-
-                    function showSlide(index) {
-
-
-                        current =
-                            (
-                                index +
-                                slides.length
-                            ) %
-                            slides.length;
-
-
-                        slides.forEach(
-                            function (
-                                slide,
-                                i
-                            ) {
-
-                                slide.classList
-                                    .toggle(
-                                        "active",
-                                        i === current
-                                    );
-
-                            }
-                        );
-
-
-                        dots.forEach(
-                            function (
-                                dot,
-                                i
-                            ) {
-
-                                dot.classList
-                                    .toggle(
-                                        "active",
-                                        i === current
-                                    );
-
-                            }
-                        );
-
-                    }
-
-
-                    /* AUTO SLIDER */
-
-                    function restartTimer() {
-
-
-                        clearInterval(timer);
-
-
-                        timer =
-                            setInterval(
-                                function () {
-
-                                    showSlide(
-                                        current + 1
-                                    );
-
-                                },
-                                4500
-                            );
-
-                    }
-
-
-                    /* PREVIOUS */
-
-                    if (previous) {
-
-                        previous.addEventListener(
-                            "click",
-                            function () {
-
-                                showSlide(
-                                    current - 1
-                                );
-
-                                restartTimer();
-
-                            }
-                        );
-
-                    }
-
-
-                    /* NEXT */
-
-                    if (next) {
-
-                        next.addEventListener(
-                            "click",
-                            function () {
-
-                                showSlide(
-                                    current + 1
-                                );
-
-                                restartTimer();
-
-                            }
-                        );
-
-                    }
-
-
-                    /* PAUSE ON HOVER */
-
-                    slider.addEventListener(
-                        "mouseenter",
-                        function () {
-
-                            clearInterval(timer);
-
-                        }
-                    );
-
-
-                    slider.addEventListener(
-                        "mouseleave",
-                        function () {
-
-                            restartTimer();
-
-                        }
-                    );
-
-
-                    /* START */
-
-                    showSlide(0);
-
-                    restartTimer();
-
-
-                }
+        const safeName =
+            escapeHtml(branch.name || "The Beauty Salon");
+
+        const safeAddress =
+            formatAddress(branch.address);
+
+        const status =
+            branchStatus(branch);
+
+        const mapQuery =
+            encodeURIComponent(
+                "The Beauty Salon " +
+                (branch.name || "") +
+                " " +
+                (branch.address || "")
             );
 
+        return `
+            <section
+                class="dynamic-branch-content ${branchId === String(currentBranchId) ? "active" : ""}"
+                data-branch-id="${branchId}">
+
+                <div class="dynamic-branch-layout">
+
+                    <div class="dynamic-info-card">
+
+                        <h3>${safeName}</h3>
+
+                        <p class="dynamic-info-subtitle">
+                            The Beauty Salon · ${status === "OPEN" ? "Open Daily" : "Currently Closed"}
+                        </p>
+
+                        <div class="dynamic-info-row">
+
+                            <div class="dynamic-info-icon">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+
+                            <div class="dynamic-info-content">
+                                <span>Address</span>
+                                <p>${safeAddress}</p>
+                            </div>
+
+                        </div>
+
+                        <div class="dynamic-info-row">
+
+                            <div class="dynamic-info-icon">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+
+                            <div class="dynamic-info-content">
+                                <span>Phone</span>
+                                ${
+                                    branch.phone
+                                        ? `<a href="tel:${escapeHtml(branch.phone)}">${phone}</a>`
+                                        : `<p>${phone}</p>`
+                                }
+                            </div>
+
+                        </div>
+
+                        <div class="dynamic-info-row">
+
+                            <div class="dynamic-info-icon">
+                                <i class="fa-regular fa-envelope"></i>
+                            </div>
+
+                            <div class="dynamic-info-content">
+                                <span>Email</span>
+                                ${
+                                    branch.email
+                                        ? `<a href="mailto:${email}">${email}</a>`
+                                        : `<p>${email}</p>`
+                                }
+                            </div>
+
+                        </div>
+
+                        <div class="dynamic-info-row">
+
+                            <div class="dynamic-info-icon">
+                                <i class="fa-regular fa-clock"></i>
+                            </div>
+
+                            <div class="dynamic-info-content">
+                                <span>Opening Hours</span>
+                                <p>
+                                    Monday – Sunday<br>
+                                    ${opening} – ${closing}
+                                </p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="map-section dynamic-map">
+
+                    <div class="map-header">
+                        <h3>Visit Our Branch</h3>
+                        <span>${status}</span>
+                    </div>
+
+                    <div class="map-box">
+
+                        <div class="map-placeholder">
+
+                            <i class="fa-solid fa-location-dot"></i>
+
+                            <h4>${safeName}</h4>
+
+                            <p>${safeAddress}</p>
+
+                            <a
+                                class="map-link"
+                                href="https://www.google.com/maps/search/?api=1&query=${mapQuery}"
+                                target="_blank"
+                                rel="noopener noreferrer">
+
+                                <i class="fa-solid fa-map-location-dot"></i>
+                                &nbsp;
+                                Open in Google Maps
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+        `;
+    }
+
+    let branches = [];
+    let currentBranchId = null;
+
+    function renderBranchSelector() {
+
+        const selector =
+            document.getElementById("branchSelector");
+
+        if (!selector) {
+            return;
+        }
+
+        selector.innerHTML = branches.map(function (branch, index) {
+
+            const active =
+                index === 0;
+
+            return `
+                <button
+                    type="button"
+                    class="branch-button ${active ? "active" : ""}"
+                    data-branch-id="${branch.id}"
+                    aria-selected="${active ? "true" : "false"}">
+
+                    ${escapeHtml(branch.name)}
+
+                </button>
+            `;
+
+        }).join("");
+
+        selector
+            .querySelectorAll(".branch-button")
+            .forEach(function (button) {
+
+                button.addEventListener("click", function () {
+
+                    currentBranchId =
+                        Number(button.dataset.branchId);
+
+                    selector
+                        .querySelectorAll(".branch-button")
+                        .forEach(function (btn) {
+
+                            const active =
+                                btn.dataset.branchId ===
+                                String(currentBranchId);
+
+                            btn.classList.toggle(
+                                "active",
+                                active
+                            );
+
+                            btn.setAttribute(
+                                "aria-selected",
+                                active ? "true" : "false"
+                            );
+
+                        });
+
+                    document
+                        .querySelectorAll(
+                            ".dynamic-branch-content"
+                        )
+                        .forEach(function (content) {
+
+                            content.classList.toggle(
+                                "active",
+                                content.dataset.branchId ===
+                                String(currentBranchId)
+                            );
+
+                        });
+
+                });
+
+            });
+    }
+
+    async function loadBranches() {
+
+        const container =
+            document.getElementById("branchesContainer");
+
+        if (!container) {
+            return;
+        }
+
+        try {
+
+            const response =
+                await fetch(API);
+
+            if (!response.ok) {
+                throw new Error(
+                    "Failed to load branches."
+                );
+            }
+
+            const result =
+                await response.json();
+
+            branches =
+                Array.isArray(result.data)
+                    ? result.data
+                    : [];
+
+            if (branches.length === 0) {
+
+                container.innerHTML = `
+                    <div class="branch-error">
+                        No branch information is available.
+                    </div>
+                `;
+
+                return;
+            }
+
+            branches.sort(function (a, b) {
+                return Number(a.id) - Number(b.id);
+            });
+
+            currentBranchId =
+                Number(branches[0].id);
+
+            renderBranchSelector();
+
+            container.innerHTML =
+                branches
+                    .map(renderBranch)
+                    .join("");
+
+        } catch (error) {
+
+            console.error(
+                "Branch loading error:",
+                error
+            );
+
+            container.innerHTML = `
+                <div class="branch-error">
+                    Unable to load branch information from the database.
+                    Please make sure the backend server is running.
+                </div>
+            `;
+
+        }
 
     }
 
-);
+    loadBranches();
 
+});
 </script>
 
 

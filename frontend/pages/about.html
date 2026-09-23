@@ -92,6 +92,14 @@
             font-size: 18px;
         }
 
+        .about-brand-logo img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
         .about-brand-name {
             display: flex;
             flex-direction: column;
@@ -1146,623 +1154,145 @@
         }
 
         /* =========================================================
-           FOOTER
+           FOOTER - FINAL
+           Same structure and styling as the Branches reference
         ========================================================= */
 
-        .about-footer {
-            background: #080808;
-
-            border-top: 1px solid rgba(212,175,55,.12);
+        .footer {
+            padding: 55px 0 20px;
+            background: #070707;
         }
 
-        .about-footer-container {
-            width: min(1180px, calc(100% - 40px));
-            margin: 0 auto;
-        }
-
-        .about-footer-grid {
-            padding: 65px 0 45px;
-
+        .footer-grid {
             display: grid;
-
-            grid-template-columns: 1.3fr .8fr .8fr 1.3fr;
-
-            gap: 40px;
+            grid-template-columns: 1fr;
+            gap: 32px;
         }
 
-        .about-footer-brand p {
-            max-width: 270px;
-
-            margin: 18px 0;
-
-            color: #666;
-
-            font-size: 11px;
-            line-height: 1.8;
+        .footer h3 {
+            font-family: "Playfair Display", serif;
+            font-size: 24px;
         }
 
-        .about-footer-socials {
-            display: flex;
-            gap: 8px;
-        }
+        .footer h3 span { color: #d4af37; }
 
-        .about-footer-socials a {
-            width: 34px;
-            height: 34px;
+        .footer h4 { margin-bottom: 13px; font-size: 14px; }
 
-            display: grid;
-            place-items: center;
-
-            border: 1px solid rgba(212,175,55,.20);
-
-            border-radius: 50%;
-
+        .footer p, .footer li, .footer a {
             color: #777;
-
             font-size: 12px;
-        }
-
-        .about-footer-socials a:hover {
-            color: #D4AF37;
-
-            border-color: #D4AF37;
-
-            background: rgba(212,175,55,.06);
-        }
-
-        .about-footer-column {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
-
-        .about-footer-column h3 {
-            margin: 0 0 18px;
-
-            color: #fff;
-
-            font-size: 12px;
-        }
-
-        .about-footer-column a,
-        .about-footer-column p,
-        .about-footer-column span {
-            margin-bottom: 10px;
-
-            color: #666;
-
-            font-size: 11px;
             line-height: 1.7;
         }
 
-        .about-footer-column a:hover {
-            color: #D4AF37;
-        }
+        .footer ul { list-style: none; }
+        .footer li { margin-bottom: 7px; }
+        .footer a:hover { color: #d4af37; }
 
-        .about-footer-contact p,
-        .about-footer-contact a,
-        .about-footer-contact span {
+        .footer-contact p {
             display: flex;
-            align-items: flex-start;
             gap: 9px;
+            margin-bottom: 9px;
         }
 
-        .about-footer-contact i {
-            width: 14px;
-
-            flex-shrink: 0;
-
-            color: #A8891F;
-
-            text-align: center;
+        .footer-contact i {
+            width: 15px;
+            color: #d4af37;
+            margin-top: 4px;
         }
 
-        .about-footer-bottom {
-            min-height: 65px;
-
-            padding: 18px 0;
-
+        .footer-bottom {
+            margin-top: 40px;
+            padding-top: 18px;
+            border-top: 1px solid #1e1e1e;
             display: flex;
-            align-items: center;
             justify-content: space-between;
-
-            gap: 20px;
-
-            border-top: 1px solid rgba(255,255,255,.06);
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
-        .about-footer-bottom p,
-        .about-footer-bottom a {
-            color: #555;
-
-            font-size: 10px;
-        }
-
-        .about-footer-legal {
-            display: flex;
-            gap: 20px;
-        }
-
-        .about-footer-bottom a:hover {
-            color: #D4AF37;
-        }
-
-        /* =========================================================
-           MOBILE
-        ========================================================= */
-
-        @media (max-width: 767px) {
-
-            .about-header-container {
-                width: calc(100% - 28px);
-                min-height: 68px;
-            }
-
-            .about-desktop-nav,
-            .about-header-actions {
-                display: none;
-            }
-
-            .about-mobile-menu-btn {
-                display: flex;
-            }
-
-            .about-brand-logo {
-                width: 40px;
-                height: 40px;
-            }
-
-            .about-brand-name strong {
-                font-size: 17px;
-            }
-
-            .about-brand-name small {
-                font-size: 9px;
-            }
-
-            .about-hero {
-                min-height: 500px;
-                padding: 110px 18px 70px;
-            }
-
-            .about-hero h1 {
-                font-size: 42px;
-            }
-
-            .about-hero p {
-                font-size: 13px;
-            }
-
-            .about-story {
-                padding: 70px 14px;
-            }
-
-            .about-story-container {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-
-            .about-story-placeholder {
-                min-height: 330px;
-            }
-
-            .about-story-inner strong {
-                font-size: 28px;
-            }
-
-            .about-story-badge {
-                width: 90px;
-                height: 90px;
-
-                right: 0;
-                bottom: 15px;
-            }
-
-            .about-story-badge strong {
-                font-size: 25px;
-            }
-
-            .about-values {
-                padding: 70px 14px;
-            }
-
-            .about-values-grid {
-                grid-template-columns: 1fr;
-                gap: 12px;
-            }
-
-            .about-experience {
-                padding: 70px 14px;
-            }
-
-            .experience-list {
-                grid-template-columns: 1fr;
-            }
-
-            .about-branches {
-                padding: 70px 14px;
-            }
-
-            .about-branch-container {
-                grid-template-columns: 1fr;
-            }
-
-            .about-branch-card {
-                padding: 24px 20px;
-            }
-
-            .about-cta {
-                padding: 25px 14px 70px;
-            }
-
-            .about-cta-box {
-                padding: 30px 22px;
-
-                flex-direction: column;
-
-                align-items: flex-start;
-            }
-
-            .about-cta-box h2 {
-                font-size: 31px;
-            }
-
-            .about-cta-button {
-                width: 100%;
-            }
-
-            .about-footer-container {
-                width: calc(100% - 28px);
-            }
-
-            .about-footer-grid {
-                grid-template-columns: 1fr;
-
-                padding: 55px 0 35px;
-
-                gap: 32px;
-            }
-
-            .about-footer-bottom {
-                flex-direction: column;
-                align-items: flex-start;
-
-                padding: 18px 0;
-            }
-
-            .about-footer-legal {
-                gap: 15px;
-                flex-wrap: wrap;
-            }
-
-        }
-
-        /* =========================================================
-           SMALL MOBILE
-        ========================================================= */
-
-        @media (max-width: 380px) {
-
-            .about-hero h1 {
-                font-size: 37px;
-            }
-
-            .about-story-placeholder {
-                min-height: 290px;
-            }
-
-            .about-story-inner strong {
-                font-size: 25px;
-            }
-
-            .about-section-heading h2 {
-                font-size: 31px;
-            }
-
-        }
-
-
-        /* =========================================================
-           FINAL MOBILE RESPONSIVE OVERRIDES
-           Keeps the existing About header/design unchanged.
-        ========================================================= */
-
-        html,
-        body {
-            width: 100%;
-            max-width: 100%;
-            overflow-x: hidden;
-        }
-
-        .about-site-header {
-            width: 100%;
-        }
-
-        .about-header-container {
-            width: min(1280px, calc(100% - 40px));
-        }
-
-        .about-mobile-menu {
-            width: 100%;
-            max-width: 100%;
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .about-mobile-menu-header,
-        .about-mobile-links {
-            width: 100%;
-        }
-
-        @media (max-width: 1024px) {
-            .about-header-container {
-                gap: 14px;
-            }
-
-            .about-desktop-nav {
-                gap: 16px;
-            }
-
-            .about-desktop-nav a {
-                font-size: 12px;
-            }
-
-            .about-header-actions {
-                gap: 5px;
-            }
-
-            .about-login-btn,
-            .about-book-btn {
-                font-size: 11px;
-            }
-
-            .about-login-btn {
-                padding: 0 10px;
-            }
-
-            .about-book-btn {
-                padding: 0 11px;
-            }
-
-            .about-story-container {
-                gap: 45px;
-            }
-
-            .about-values-grid {
-                grid-template-columns: repeat(3, minmax(0, 1fr));
-            }
-
-            .experience-list {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-            }
-
-            .about-footer-grid {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-            }
-        }
-
-        @media (max-width: 767px) {
-            /* Header — exact same structure, mobile friendly */
-            .about-header-container {
-                width: calc(100% - 28px);
-                min-height: 68px;
-                gap: 10px;
-            }
-
-            .about-desktop-nav,
-            .about-header-actions {
-                display: none !important;
-            }
-
-            .about-mobile-menu-btn {
-                display: flex !important;
-                flex: 0 0 44px;
-                cursor: pointer;
-            }
-
-            .about-brand {
-                min-width: 0;
-            }
-
-            .about-brand-name strong {
-                font-size: 17px;
-            }
-
-            .about-brand-name small {
-                font-size: 9px;
-            }
-
-            .about-mobile-menu-header {
-                min-height: 68px;
-                padding: 0 14px;
-            }
-
-            .about-mobile-links {
-                padding: 14px;
-            }
-
-            .about-mobile-links a {
-                min-height: 52px;
-                font-size: 14px;
-            }
-
-            .about-mobile-book {
-                width: 100%;
-                min-height: 51px !important;
-                margin-top: 16px;
-            }
-
-            /* Main sections */
-            .about-hero {
-                width: 100%;
-                min-height: 500px;
-                padding: 110px 18px 70px;
-            }
-
-            .about-hero-content {
-                width: 100%;
-                max-width: 760px;
-            }
-
-            .about-hero h1 {
-                font-size: clamp(36px, 11vw, 42px);
-                overflow-wrap: anywhere;
-            }
-
-            .about-hero p {
-                font-size: 13px;
-                line-height: 1.75;
-            }
-
-            .about-story,
-            .about-values,
-            .about-experience,
-            .about-branches,
-            .about-cta {
-                width: 100%;
-            }
-
-            .about-story-container,
-            .about-branch-container,
-            .about-values-grid,
-            .experience-list,
-            .about-footer-grid {
-                width: 100%;
-                grid-template-columns: 1fr;
-            }
-
-            .about-story {
-                padding: 70px 14px;
-            }
-
-            .about-story-container {
-                gap: 40px;
-            }
-
-            .about-story-placeholder {
-                width: 100%;
-                min-height: 330px;
-            }
-
-            .about-story-badge {
-                right: 0;
-                bottom: 15px;
-                width: 90px;
-                height: 90px;
-            }
-
-            .about-values,
-            .about-experience,
-            .about-branches {
-                padding: 70px 14px;
-            }
-
-            .about-value-card,
-            .about-branch-card {
-                width: 100%;
-            }
-
-            .about-cta {
-                padding: 25px 14px 70px;
-            }
-
-            .about-cta-box {
-                width: 100%;
-                padding: 30px 22px;
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .about-cta-box h2 {
-                font-size: 31px;
-            }
-
-            .about-cta-button {
-                width: 100%;
-            }
-
-            .about-footer-container {
-                width: calc(100% - 28px);
-            }
-
-            .about-footer-grid {
-                padding: 55px 0 35px;
-                gap: 32px;
-            }
-
-            .about-footer-bottom {
-                flex-direction: column;
-                align-items: flex-start;
-                padding: 18px 0;
-                gap: 12px;
-            }
-
-            .about-footer-legal {
-                flex-wrap: wrap;
-                gap: 12px 15px;
-            }
-        }
-
-        @media (max-width: 380px) {
-            .about-header-container {
-                width: calc(100% - 24px);
-            }
-
-            .about-brand-logo {
-                width: 38px;
-                height: 38px;
-                font-size: 16px;
-            }
-
-            .about-brand-name strong {
-                font-size: 16px;
-            }
-
-            .about-hero {
-                padding-left: 14px;
-                padding-right: 14px;
-            }
-
-            .about-hero h1 {
-                font-size: 36px;
-            }
-
-            .about-story-placeholder {
-                min-height: 290px;
-            }
-
-            .about-story-inner strong {
-                font-size: 25px;
-            }
-
-            .about-section-heading h2 {
-                font-size: 31px;
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            .about-mobile-menu,
-            .about-mobile-menu *,
-            .about-site-header * {
-                transition: none !important;
-                animation: none !important;
-            }
-        }
-
-    
-        /* FINAL HEADER ACTIONS: Customer Login + Profile only */
-        .about-admin-btn,
-        .about-book-btn {
-            display: none !important;
-        }
-
-        .about-header-actions {
+        .social { display: flex; gap: 7px; }
+
+        .social a {
+            width: 35px;
+            height: 35px;
             display: flex;
             align-items: center;
-            gap: 7px;
+            justify-content: center;
+            border: 1px solid #292929;
+            border-radius: 50%;
         }
 
-    </style>
+        @media (min-width: 600px) {
+            .footer-grid { grid-template-columns: 1.4fr 1fr 1fr; }
+        }
+
+        @media (min-width: 768px) {
+            .footer-grid { grid-template-columns: 1.5fr 1fr 1fr 1.4fr; }
+        }
+
+        @media (max-width: 599px) {
+            .footer { padding-left: 15px; padding-right: 15px; }
+            .footer-bottom { align-items: flex-start; flex-direction: column; }
+        }
+
+</style>
+    <link rel="icon" type="image/png" href="../assets/images/logo/beauty-salon-logo.png">
+
+
+<style>
+/* FOOTER - responsive width and spacing fix */
+html, body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+.footer {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.footer > .container {
+    width: 80%;
+    max-width: 1400px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.footer-grid {
+    width: 100%;
+    box-sizing: border-box;
+    min-width: 0;
+}
+
+.footer-grid > * {
+    min-width: 0;
+}
+
+.footer p,
+.footer li,
+.footer a {
+    overflow-wrap: break-word;
+    word-break: normal;
+}
+
+.footer-bottom {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+@media (max-width: 767px) {
+    .footer > .container {
+        width: 100%;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+</style>
+
 </head>
 
 
@@ -1785,7 +1315,7 @@
                aria-label="The Beauty Salon Home">
 
                 <span class="about-brand-logo">
-                    <i class="fa-solid fa-scissors"></i>
+                    <img src="../assets/images/logo/beauty-salon-logo.png" alt="The Beauty Salon Logo">
                 </span>
 
                 <span class="about-brand-name">
@@ -1921,7 +1451,7 @@
                class="about-brand">
 
                 <span class="about-brand-logo">
-                    <i class="fa-solid fa-scissors"></i>
+                    <img src="../assets/images/logo/beauty-salon-logo.png" alt="The Beauty Salon Logo">
                 </span>
 
                 <span class="about-brand-name">
@@ -2387,139 +1917,36 @@
             </div>
 
 
-            <div class="about-branch-container">
-
-
-                <!-- Baramati -->
-
+            <div class="about-branch-container" id="aboutBranchesGrid">
                 <article class="about-branch-card featured">
-
                     <div class="about-branch-top">
-
-                        <span class="about-branch-badge">
-                            MAIN BRANCH
-                        </span>
-
+                        <span class="about-branch-badge">MAIN BRANCH</span>
                         <i class="fa-solid fa-location-dot"></i>
-
                     </div>
-
-                    <h3>
-                        The Beauty Salon
-                    </h3>
-
-                    <h4>
-                        Baramati
-                    </h4>
-
-                    <p>
-
-                        Near Mahanagar Bank,
-                        in front of Shayog Society,
-                        Baramati, Maharashtra.
-
-                    </p>
-
-
+                    <h3>The Beauty Salon</h3>
+                    <h4>Baramati</h4>
+                    <p>Near Mahanagar Bank, in front of Shayog Society, Baramati, Maharashtra.</p>
                     <div class="about-branch-info">
-
-                        <span>
-
-                            <i class="fa-solid fa-phone"></i>
-
-                            +91 8793465001
-
-                        </span>
-
-
-                        <span>
-
-                            <i class="fa-regular fa-envelope"></i>
-
-                            beautysalon@gamil.com
-
-                        </span>
-
-
-                        <span>
-
-                            <i class="fa-regular fa-clock"></i>
-
-                            Mon – Sun · 9:00 AM – 9:00 PM
-
-                        </span>
-
+                        <span><i class="fa-solid fa-phone"></i>+91 8793465001</span>
+                        <span><i class="fa-regular fa-envelope"></i>beautysalon@gamil.com</span>
+                        <span><i class="fa-regular fa-clock"></i>Mon – Sun · 9:00 AM – 9:00 PM</span>
                     </div>
-
                 </article>
-
-
-
-                <!-- MIDC -->
-
                 <article class="about-branch-card">
-
                     <div class="about-branch-top">
-
-                        <span class="about-branch-badge">
-                            ADDITIONAL BRANCH
-                        </span>
-
+                        <span class="about-branch-badge">ADDITIONAL BRANCH</span>
                         <i class="fa-solid fa-building"></i>
-
                     </div>
-
-                    <h3>
-                        The Beauty Salon
-                    </h3>
-
-                    <h4>
-                        Baramati MIDC
-                    </h4>
-
-                    <p>
-
-                        Our additional Baramati MIDC
-                        branch details will be updated
-                        as the location information becomes
-                        available.
-
-                    </p>
-
-
+                    <h3>The Beauty Salon</h3>
+                    <h4>Baramati MIDC</h4>
+                    <p>Our additional Baramati MIDC branch details will be updated as the location information becomes available.</p>
                     <div class="about-branch-info">
-
-                        <span>
-
-                            <i class="fa-solid fa-location-dot"></i>
-
-                            Address details coming soon
-
-                        </span>
-
-
-                        <span>
-
-                            <i class="fa-solid fa-phone"></i>
-
-                            Contact details coming soon
-
-                        </span>
-
-
-                        <span>
-
-                            <i class="fa-regular fa-clock"></i>
-
-                            9:00 AM – 9:00 PM
-
-                        </span>
-
+                        <span><i class="fa-solid fa-location-dot"></i>Address details coming soon</span>
+                        <span><i class="fa-solid fa-phone"></i>Contact details coming soon</span>
+                        <span><i class="fa-regular fa-clock"></i>9:00 AM – 9:00 PM</span>
                     </div>
-
                 </article>
-
-            </div>
+            </div>>
 
         </section>
 
@@ -2575,231 +2002,90 @@
          FOOTER
     ========================================================== -->
 
-    <footer class="about-footer">
+    <footer class="footer">
 
-        <div class="about-footer-container">
+        <div class="container">
 
+            <div class="footer-grid">
 
-            <div class="about-footer-grid">
-
-
-                <!-- Brand -->
-
-                <div class="about-footer-brand">
-
-                    <a href="../index.html"
-                       class="about-brand">
-
-                        <span class="about-brand-logo">
-
-                            <i class="fa-solid fa-scissors"></i>
-
-                        </span>
-
-                        <span class="about-brand-name">
-
-                            <strong>The Beauty</strong>
-
-                            <small>Salon</small>
-
-                        </span>
-
-                    </a>
-
-
-                    <p>
-
-                        Premium unisex beauty and hair
-                        care in Baramati, Maharashtra.
-
+                <div>
+                    <h3>
+                        The <span>Beauty</span> Salon
+                    </h3>
+                    <p style="margin-top: 12px; max-width: 310px;">
+                        A modern unisex beauty and hair salon in
+                        Baramati, created for premium styling,
+                        grooming and beauty care.
                     </p>
-
-
-                    <div class="about-footer-socials">
-
-                        <a href="#"
-                           aria-label="Instagram">
-
-                            <i class="fa-brands fa-instagram"></i>
-
-                        </a>
-
-                        <a href="#"
-                           aria-label="Facebook">
-
-                            <i class="fa-brands fa-facebook-f"></i>
-
-                        </a>
-
-                        <a href="https://wa.me/918793465001"
-                           aria-label="WhatsApp">
-
-                            <i class="fa-brands fa-whatsapp"></i>
-
-                        </a>
-
-                    </div>
-
                 </div>
 
-
-
-                <!-- Quick Links -->
-
-                <div class="about-footer-column">
-
-                    <h3>
-                        Quick Links
-                    </h3>
-
-                    <a href="../index.html">
-                        Home
-                    </a>
-
-                    <a href="about.html">
-                        About
-                    </a>
-
-                    <a href="services.html">
-                        Services
-                    </a>
-
-                    <a href="branches.html">
-                        Branches
-                    </a>
-
-                    <a href="gallery.html">
-                        Gallery
-                    </a>
-
+                <div>
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="branches.html">Branches</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                    </ul>
                 </div>
 
-
-
-                <!-- Customer -->
-
-                <div class="about-footer-column">
-
-                    <h3>
-                        Customer
-                    </h3>
-
-                    <a href="booking.html">
-                        Book Appointment
-                    </a>
-
-                    <a href="login.html">
-                        Customer Login
-                    </a>
-
-                    <a href="register.html">
-                        Create Account
-                    </a>
-
-                    <a href="contact.html">
-                        Contact Us
-                    </a>
-
+                <div>
+                    <h4>Customer</h4>
+                    <ul>
+                        <li><a href="booking.html">Book Appointment</a></li>
+                        <li><a href="login.html">Login</a></li>
+                        <li><a href="register.html">Create Account</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
                 </div>
 
-
-
-                <!-- Contact -->
-
-                <div class="about-footer-column about-footer-contact">
-
-                    <h3>
-                        Contact
-                    </h3>
-
+                <div class="footer-contact">
+                    <h4>Baramati Branch</h4>
 
                     <p>
-
                         <i class="fa-solid fa-location-dot"></i>
-
                         <span>
-                            Near Mahanagar Bank,
-                            in front of Shayog Society,
-                            Baramati, Maharashtra.
+                            Near Mahanagar Bank, in front of
+                            Shayog Society, Baramati, Maharashtra
                         </span>
-
                     </p>
 
-
-                    <a href="tel:+918793465001">
-
+                    <p>
                         <i class="fa-solid fa-phone"></i>
+                        <a href="tel:+918793465001">+91 8793465001</a>
+                    </p>
 
-                        <span>
-                            +91 8793465001
-                        </span>
-
-                    </a>
-
-
-                    <a href="tel:+918087646512">
-
-                        <i class="fa-solid fa-phone"></i>
-
-                        <span>
-                            +91 8087646512
-                        </span>
-
-                    </a>
-
-
-                    <a href="mailto:beautysalon@gamil.com">
-
+                    <p>
                         <i class="fa-regular fa-envelope"></i>
+                        <a href="mailto:beautysalon@gamil.com">beautysalon@gamil.com</a>
+                    </p>
 
-                        <span>
-                            beautysalon@gamil.com
-                        </span>
-
-                    </a>
-
-
-                    <span>
-
+                    <p>
                         <i class="fa-regular fa-clock"></i>
-
-                        <span>
-                            Mon – Sun: 9:00 AM – 9:00 PM
-                        </span>
-
-                    </span>
-
+                        <span>Mon - Sun: 9:00 AM - 9:00 PM</span>
+                    </p>
                 </div>
 
             </div>
 
-
-
-            <!-- Footer Bottom -->
-
-            <div class="about-footer-bottom">
-
+            <div class="footer-bottom">
                 <p>
-
-                    © <span id="aboutCurrentYear"></span>
-                    The Beauty Salon.
-                    All rights reserved.
-
+                    © <span id="year"></span>
+                    The Beauty Salon. All Rights Reserved.
                 </p>
 
-
-                <div class="about-footer-legal">
-
-                    <a href="#">
-                        Privacy Policy
+                <div class="social">
+                    <a href="#" aria-label="Instagram" onclick="return false;">
+                        <i class="fa-brands fa-instagram"></i>
                     </a>
-
-                    <a href="#">
-                        Terms & Conditions
+                    <a href="#" aria-label="Facebook" onclick="return false;">
+                        <i class="fa-brands fa-facebook-f"></i>
                     </a>
-
+                    <a href="#" aria-label="WhatsApp" onclick="return false;">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </a>
                 </div>
-
             </div>
 
         </div>
@@ -2812,311 +2098,247 @@
          JAVASCRIPT
     ========================================================== -->
 
+    <script src="../js/main.js"></script>
+
     <script>
-
-        document.addEventListener(
-            "DOMContentLoaded",
-            function () {
-
-                /* =================================================
-                   CUSTOMER SESSION / BOOKING PROTECTION
-                ================================================= */
-
-                const sessionKeys = [
-                    "salon_customer_session"
-                ];
-
-                function getCustomerSession() {
-                    try {
-                        const raw =
-                            localStorage.getItem("salon_customer_session") ||
-                            sessionStorage.getItem("salon_customer_session");
-
-                        if (!raw) return null;
-
-                        const session = JSON.parse(raw);
-
-                        if (!session || !session.token) return null;
-
-                        return session;
-                    } catch (error) {
-                        return null;
-                    }
-                }
-
-                const customerSession = getCustomerSession();
-
-                const customerLoginBtn =
-                    document.getElementById(
-                        "aboutCustomerLoginBtn"
-                    );
-
-                const accountWrap =
-                    document.getElementById(
-                        "aboutAccountWrap"
-                    );
-
-                const accountBtn =
-                    document.getElementById(
-                        "aboutAccountBtn"
-                    );
-
-                const accountDropdown =
-                    document.getElementById(
-                        "aboutAccountDropdown"
-                    );
-
-                const accountName =
-                    document.getElementById(
-                        "aboutAccountName"
-                    );
-
-                const logoutBtn =
-                    document.getElementById("aboutLogoutBtn");
-
-                const mobileLogin =
-                    document.getElementById("aboutMobileCustomerLogin");
-
-                const mobileAccountLinks =
-                    document.getElementById("aboutMobileAccountLinks");
-
-                const mobileLogout =
-                    document.getElementById("aboutMobileLogout");
-
-
-                if (customerSession) {
-
-                    if (customerLoginBtn) {
-                        customerLoginBtn.style.display = "none";
-                    }
-
-                    if (accountWrap) {
-                        accountWrap.style.display = "inline-flex";
-                    }
-
-                    if (mobileLogin) mobileLogin.style.display = "none";
-                    if (mobileAccountLinks) mobileAccountLinks.style.display = "block";
-
-                    const customer =
-                        customerSession.customer ||
-                        JSON.parse(
-                            localStorage.getItem("salon_customer") ||
-                            sessionStorage.getItem("salon_customer") ||
-                            "null"
-                        );
-
-                    if (
-                        accountName &&
-                        customer &&
-                        (customer.name || customer.fullName)
-                    ) {
-                        accountName.textContent =
-                            customer.name || customer.fullName;
-                    }
-
-                }
-
-                function logoutCustomer() {
-                    localStorage.removeItem("salon_customer_session");
-                    sessionStorage.removeItem("salon_customer_session");
-                    localStorage.removeItem("salon_customer");
-                    sessionStorage.removeItem("salon_customer");
-                    window.location.href = "../index.html";
-                }
-
-                if (logoutBtn) logoutBtn.addEventListener("click", logoutCustomer);
-                if (mobileLogout) {
-                    mobileLogout.addEventListener("click", function(event) {
-                        event.preventDefault();
-                        logoutCustomer();
-                    });
-                }
-
-
-                if (accountBtn && accountDropdown) {
-
-                    accountBtn.addEventListener(
-                        "click",
-                        function (event) {
-
-                            event.stopPropagation();
-
-                            const isOpen =
-                                accountDropdown.classList.toggle("open");
-
-                            accountBtn.setAttribute(
-                                "aria-expanded",
-                                String(isOpen)
-                            );
-
-                        }
-                    );
-
-                    document.addEventListener(
-                        "click",
-                        function () {
-
-                            accountDropdown.classList.remove("open");
-
-                            accountBtn.setAttribute(
-                                "aria-expanded",
-                                "false"
-                            );
-
-                        }
-                    );
-
-                }
-
-
-                const menuBtn =
-                    document.getElementById(
-                        "aboutMenuBtn"
-                    );
-
-                const closeBtn =
-                    document.getElementById(
-                        "aboutCloseMenuBtn"
-                    );
-
-                const mobileMenu =
-                    document.getElementById(
-                        "aboutMobileMenu"
-                    );
-
-                const currentYear =
-                    document.getElementById(
-                        "aboutCurrentYear"
-                    );
-
-
-                /* =================================================
-                   YEAR
-                ================================================= */
-
-                if (currentYear) {
-
-                    currentYear.textContent =
-                        new Date().getFullYear();
-
-                }
-
-
-                /* =================================================
-                   OPEN MOBILE MENU
-                ================================================= */
-
-                function openMenu() {
-
-                    mobileMenu.classList.add("open");
-
-                    mobileMenu.setAttribute(
-                        "aria-hidden",
-                        "false"
-                    );
-
-                    menuBtn.setAttribute(
-                        "aria-expanded",
-                        "true"
-                    );
-
-                    document.body.style.overflow =
-                        "hidden";
-
-                }
-
-
-                /* =================================================
-                   CLOSE MOBILE MENU
-                ================================================= */
-
-                function closeMenu() {
-
-                    mobileMenu.classList.remove("open");
-
-                    mobileMenu.setAttribute(
-                        "aria-hidden",
-                        "true"
-                    );
-
-                    menuBtn.setAttribute(
-                        "aria-expanded",
-                        "false"
-                    );
-
-                    document.body.style.overflow =
-                        "";
-
-                }
-
-
-                menuBtn.addEventListener(
-                    "click",
-                    openMenu
+document.addEventListener("DOMContentLoaded", function () {
+    const API_URL = "http://localhost:5000/api/branches";
+
+    function getCustomerSession() {
+        try {
+            const raw =
+                localStorage.getItem("salon_customer_session") ||
+                sessionStorage.getItem("salon_customer_session");
+            if (!raw) return null;
+            const session = JSON.parse(raw);
+            return session && session.token ? session : null;
+        } catch (error) {
+            return null;
+        }
+    }
+
+    function isCustomerLoggedIn() {
+        return !!getCustomerSession();
+    }
+
+    /* Customer header/account */
+    const session = getCustomerSession();
+    const loginBtn = document.getElementById("aboutCustomerLoginBtn");
+    const accountWrap = document.getElementById("aboutAccountWrap");
+    const accountBtn = document.getElementById("aboutAccountBtn");
+    const accountDropdown = document.getElementById("aboutAccountDropdown");
+    const accountName = document.getElementById("aboutAccountName");
+    const logoutBtn = document.getElementById("aboutLogoutBtn");
+    const mobileLogin = document.getElementById("aboutMobileCustomerLogin");
+    const mobileAccountLinks = document.getElementById("aboutMobileAccountLinks");
+    const mobileLogout = document.getElementById("aboutMobileLogout");
+
+    if (session) {
+        if (loginBtn) loginBtn.style.display = "none";
+        if (accountWrap) accountWrap.style.display = "inline-flex";
+        if (mobileLogin) mobileLogin.style.display = "none";
+        if (mobileAccountLinks) mobileAccountLinks.style.display = "block";
+
+        let customer = session.customer;
+        if (!customer) {
+            try {
+                customer = JSON.parse(
+                    localStorage.getItem("salon_customer") ||
+                    sessionStorage.getItem("salon_customer") || "null"
                 );
+            } catch (_) {}
+        }
+        if (accountName && customer && (customer.name || customer.fullName)) {
+            accountName.textContent = customer.name || customer.fullName;
+        }
+    }
 
+    function logoutCustomer() {
+        localStorage.removeItem("salon_customer_session");
+        sessionStorage.removeItem("salon_customer_session");
+        localStorage.removeItem("salon_customer");
+        sessionStorage.removeItem("salon_customer");
+        window.location.href = "../index.html";
+    }
 
-                closeBtn.addEventListener(
-                    "click",
-                    closeMenu
-                );
+    if (logoutBtn) logoutBtn.addEventListener("click", logoutCustomer);
+    if (mobileLogout) {
+        mobileLogout.addEventListener("click", function (e) {
+            e.preventDefault();
+            logoutCustomer();
+        });
+    }
 
+    if (accountBtn && accountDropdown) {
+        accountBtn.addEventListener("click", function (e) {
+            e.stopPropagation();
+            const open = accountDropdown.classList.toggle("open");
+            accountBtn.setAttribute("aria-expanded", String(open));
+        });
+        document.addEventListener("click", function () {
+            accountDropdown.classList.remove("open");
+            accountBtn.setAttribute("aria-expanded", "false");
+        });
+    }
 
-                /* Close after navigation */
-
-                document
-                    .querySelectorAll(
-                        ".about-mobile-links a"
-                    )
-                    .forEach(function (link) {
-
-                        link.addEventListener(
-                            "click",
-                            closeMenu
-                        );
-
-                    });
-
-
-                /* Escape */
-
-                document.addEventListener(
-                    "keydown",
-                    function (event) {
-
-                        if (
-                            event.key === "Escape"
-                        ) {
-
-                            closeMenu();
-
-                        }
-
-                    }
-                );
-
-
-                /* Resize */
-
-                window.addEventListener(
-                    "resize",
-                    function () {
-
-                        if (
-                            window.innerWidth >= 768
-                        ) {
-
-                            closeMenu();
-
-                        }
-
-                    }
-                );
-
+    /* Book Appointment protection: login required */
+    document.querySelectorAll('a[href^="booking.html"]').forEach(function (link) {
+        link.addEventListener("click", function (event) {
+            if (!isCustomerLoggedIn()) {
+                event.preventDefault();
+                const target = link.getAttribute("href") || "booking.html";
+                window.location.href = "login.html?redirect=" + encodeURIComponent(target);
             }
-        );
+        });
+    });
 
-    </script>
+    /* Mobile menu */
+    const menuBtn = document.getElementById("aboutMenuBtn");
+    const closeBtn = document.getElementById("aboutCloseMenuBtn");
+    const mobileMenu = document.getElementById("aboutMobileMenu");
+
+    function closeMenu() {
+        if (!mobileMenu) return;
+        mobileMenu.classList.remove("open");
+        mobileMenu.setAttribute("aria-hidden", "true");
+        if (menuBtn) menuBtn.setAttribute("aria-expanded", "false");
+        document.body.style.overflow = "";
+    }
+
+    if (menuBtn && mobileMenu) {
+        menuBtn.addEventListener("click", function () {
+            mobileMenu.classList.add("open");
+            mobileMenu.setAttribute("aria-hidden", "false");
+            menuBtn.setAttribute("aria-expanded", "true");
+            document.body.style.overflow = "hidden";
+        });
+    }
+    if (closeBtn) closeBtn.addEventListener("click", closeMenu);
+    document.querySelectorAll(".about-mobile-links a").forEach(function (link) {
+        link.addEventListener("click", closeMenu);
+    });
+    document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") closeMenu();
+    });
+    window.addEventListener("resize", function () {
+        if (window.innerWidth >= 768) closeMenu();
+    });
+
+    const year = document.getElementById("year");
+    if (year) year.textContent = new Date().getFullYear();
+
+    /* Database connectivity: load active branches from MySQL backend */
+    const grid = document.getElementById("aboutBranchesGrid");
+    if (grid) {
+        const escapeHtml = value => String(value ?? "")
+            .replace(/&/g, "&amp;").replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;").replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+
+        const normalizeTime = value => {
+            if (!value) return "";
+            const raw = String(value).trim();
+            const match = raw.match(/^(\d{1,2}):(\d{2})/);
+            if (!match) return raw;
+            let hour = Number(match[1]);
+            const minute = match[2];
+            const suffix = hour >= 12 ? "PM" : "AM";
+            hour = hour % 12 || 12;
+            return `${hour}:${minute} ${suffix}`;
+        };
+
+        const getBranches = payload => {
+            if (Array.isArray(payload)) return payload;
+            if (Array.isArray(payload?.branches)) return payload.branches;
+            if (Array.isArray(payload?.data)) return payload.data;
+            if (Array.isArray(payload?.data?.branches)) return payload.data.branches;
+            return [];
+        };
+
+        const phoneHref = value => {
+            const digits = String(value ?? "").replace(/[^\d+]/g, "");
+            return digits ? `tel:${digits}` : "#";
+        };
+
+        const emailHref = value => value ? `mailto:${String(value).trim()}` : "#";
+
+        function renderBranch(branch, index) {
+            const name = branch.name || "Salon Branch";
+            const address = branch.address || "Address not available";
+            const phone = branch.phone || "";
+            const email = branch.email || "";
+            const opening = branch.opening_time || branch.openingTime;
+            const closing = branch.closing_time || branch.closingTime;
+            const isActive = Number(branch.is_active ?? branch.isActive ?? 1) === 1;
+            const isMain = index === 0 || /baramati(?!.*midc)/i.test(name);
+            const icon = /midc/i.test(name) ? "fa-building" : "fa-location-dot";
+            const hours = opening || closing
+                ? `${normalizeTime(opening) || "—"} – ${normalizeTime(closing) || "—"}`
+                : "9:00 AM – 9:00 PM";
+
+            return `
+                <article class="about-branch-card ${isMain ? "featured" : ""}">
+                    <div class="about-branch-top">
+                        <span class="about-branch-badge">${isActive ? (isMain ? "MAIN BRANCH" : "ADDITIONAL BRANCH") : "CLOSED"}</span>
+                        <i class="fa-solid ${icon}"></i>
+                    </div>
+                    <h3>The Beauty Salon</h3>
+                    <h4>${escapeHtml(name)}</h4>
+                    <p>${escapeHtml(address)}</p>
+                    <div class="about-branch-info">
+                        ${phone ? `<span><i class="fa-solid fa-phone"></i><a href="${phoneHref(phone)}">${escapeHtml(phone)}</a></span>` : ""}
+                        ${email ? `<span><i class="fa-regular fa-envelope"></i><a href="${emailHref(email)}">${escapeHtml(email)}</a></span>` : ""}
+                        <span><i class="fa-regular fa-clock"></i>${escapeHtml(`Mon – Sun · ${hours}`)}</span>
+                    </div>
+                </article>
+            `;
+        }
+
+        fetch(API_URL, {
+            method: "GET",
+            headers: { "Accept": "application/json" }
+        })
+        .then(response => {
+            if (!response.ok) throw new Error("Server returned " + response.status);
+            return response.json();
+        })
+        .then(payload => {
+            const branches = getBranches(payload)
+                .filter(branch => Number(branch.is_active ?? branch.isActive ?? 1) === 1);
+            if (branches.length) {
+                grid.innerHTML = branches.map(renderBranch).join("");
+            }
+        })
+        .catch(error => {
+            console.error("About branches API error:", error);
+            /* Keep the static fallback cards when backend is unavailable. */
+        });
+    }
+});
+</script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll('a[href="booking.html"]').forEach(function (link) {
+        link.addEventListener("click", function (event) {
+            let session = null;
+            try {
+                const raw = localStorage.getItem("salon_customer_session") || sessionStorage.getItem("salon_customer_session");
+                if (raw) {
+                    const parsed = JSON.parse(raw);
+                    if (parsed && parsed.token) session = parsed;
+                }
+            } catch (error) {}
+
+            if (!session) {
+                event.preventDefault();
+                window.location.href = "login.html";
+            }
+        });
+    });
+});
+</script>
 
 </body>
 </html>

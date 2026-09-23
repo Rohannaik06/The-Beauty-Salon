@@ -99,6 +99,19 @@
         font-size: 17px;
     }
 
+
+    .logo-icon {
+        overflow: hidden;
+        background: #111;
+    }
+
+    .logo-icon img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+    }
+
     .logo-text strong {
         display: block;
         font-family: "Playfair Display", serif;
@@ -487,6 +500,65 @@
     }
 
 
+
+    .gallery-toolbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        margin-bottom: 35px;
+        padding: 12px 14px;
+        border: 1px solid #242424;
+        border-radius: 12px;
+        background: #0b0b0b;
+    }
+
+    .gallery-toolbar-title {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        color: #ddd;
+        font-size: 13px;
+        font-weight: 700;
+        white-space: nowrap;
+    }
+
+    .gallery-toolbar-title i {
+        color: #d4af37;
+        font-size: 15px;
+    }
+
+    .gallery-toolbar .filters {
+        margin-bottom: 0;
+        justify-content: flex-end;
+    }
+
+    .gallery-toolbar .filter-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+    }
+
+    .gallery-toolbar .filter-btn i {
+        font-size: 11px;
+    }
+
+    @media (max-width: 700px) {
+        .gallery-toolbar {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .gallery-toolbar-title {
+            justify-content: center;
+        }
+
+        .gallery-toolbar .filters {
+            justify-content: center;
+        }
+    }
+
     /* =====================================================
        GALLERY GRID
     ===================================================== */
@@ -648,6 +720,52 @@
                 #1b1b1b,
                 #080808
             );
+    }
+
+
+    .gallery-loading,
+    .gallery-error,
+    .gallery-empty {
+        grid-column: 1 / -1;
+        min-height: 260px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        border: 1px solid #242424;
+        border-radius: 14px;
+        background: #0b0b0b;
+        color: #777;
+        text-align: center;
+        padding: 30px;
+    }
+
+    .gallery-loading i,
+    .gallery-error i {
+        color: #d4af37;
+        font-size: 28px;
+    }
+
+    .gallery-error strong {
+        color: #ddd;
+        font-size: 15px;
+    }
+
+    .gallery-error button {
+        min-height: 40px;
+        padding: 8px 16px;
+        border: 1px solid #d4af37;
+        border-radius: 7px;
+        background: #000;
+        color: #d4af37;
+        cursor: pointer;
+        font-weight: 700;
+    }
+
+    .gallery-error button:hover {
+        background: #d4af37;
+        color: #000;
     }
 
     /* =====================================================
@@ -1117,6 +1235,8 @@
     }
 </style>
 
+    <link rel="icon" type="image/png" href="../assets/images/logo/beauty-salon-logo.png">
+
 </head>
 
 <body>
@@ -1133,7 +1253,9 @@
         <a href="../index.html" class="logo">
 
             <span class="logo-icon">
-                <i class="fa-solid fa-scissors"></i>
+                <img
+                    src="../assets/images/logo/beauty-salon-logo.png"
+                    alt="The Beauty Salon Logo">
             </span>
 
             <span class="logo-text">
@@ -1302,332 +1424,33 @@
 
         <!-- FILTERS -->
 
-        <div class="filters">
+        <div class="gallery-toolbar">
+            <div class="gallery-toolbar-title">
+                <i class="fa-regular fa-images"></i>
+                <span>View Gallery</span>
+            </div>
 
-            <button
-                type="button"
-                class="filter-btn active"
-                data-filter="all">
-                All
-            </button>
-
-            <button
-                type="button"
-                class="filter-btn"
-                data-filter="salon">
-                Salon
-            </button>
-
-            <button
-                type="button"
-                class="filter-btn"
-                data-filter="hair">
-                Hair
-            </button>
-
-            <button
-                type="button"
-                class="filter-btn"
-                data-filter="beauty">
-                Beauty
-            </button>
-
-            <button
-                type="button"
-                class="filter-btn"
-                data-filter="experience">
-                Experience
-            </button>
-
+            <div class="filters" id="galleryFilters">
+                <button
+                    type="button"
+                    class="filter-btn active"
+                    data-filter="all">
+                    <i class="fa-solid fa-grip"></i>
+                    All Images
+                </button>
+            </div>
         </div>
 
 
         <!-- GALLERY GRID -->
 
         <div class="gallery-grid" id="galleryGrid">
-
-            <article
-                class="gallery-card large"
-                data-category="salon"
-                data-title="Premium Salon Interior"
-                data-image="../assets/images/gallery/salon-interior.jpg">
-
-                <div class="gallery-placeholder gallery-image-wrap">
-                    <img
-                        src="../assets/images/gallery/salon-interior.jpg"
-                        alt="Premium Salon Interior"
-                        class="gallery-image"
-                        loading="lazy"
-                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-                    >
-                    <div class="image-fallback">
-                        <div class="placeholder-content">
-                            <div class="placeholder-icon">
-                                <i class="fa-regular fa-image"></i>
-                            </div>
-                            <h3>Premium Salon Interior</h3>
-                            <p>Image not added yet</p>
-                        </div>
-                    </div>
+                <div class="gallery-loading" id="galleryLoading">
+                    <i class="fa-solid fa-spinner fa-spin"></i>
+                    <span>Loading gallery images...</span>
                 </div>
-
-                <div class="card-overlay">
-
-                    <span>Salon</span>
-
-                    <h3>
-                        Premium Salon Interior
-                    </h3>
-
-                </div>
-
-                <div class="view-icon">
-                    <i class="fa-solid fa-expand"></i>
-                </div>
-
-            </article>
-
-
-            <article
-                class="gallery-card"
-                data-category="hair"
-                data-title="Professional Hair Styling"
-                data-image="../assets/images/gallery/hair-styling.jpg">
-
-                <div class="gallery-placeholder gallery-image-wrap">
-                    <img
-                        src="../assets/images/gallery/hair-styling.jpg"
-                        alt="Professional Hair Styling"
-                        class="gallery-image"
-                        loading="lazy"
-                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-                    >
-                    <div class="image-fallback">
-                        <div class="placeholder-content">
-                            <div class="placeholder-icon">
-                                <i class="fa-regular fa-image"></i>
-                            </div>
-                            <h3>Professional Hair Styling</h3>
-                            <p>Image not added yet</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card-overlay">
-
-                    <span>Hair</span>
-
-                    <h3>
-                        Professional Hair Styling
-                    </h3>
-
-                </div>
-
-                <div class="view-icon">
-                    <i class="fa-solid fa-expand"></i>
-                </div>
-
-            </article>
-
-
-            <article
-                class="gallery-card"
-                data-category="beauty"
-                data-title="Beauty Care"
-                data-image="../assets/images/gallery/beauty-care.jpg">
-
-                <div class="gallery-placeholder gallery-image-wrap">
-                    <img
-                        src="../assets/images/gallery/beauty-care.jpg"
-                        alt="Beauty Care"
-                        class="gallery-image"
-                        loading="lazy"
-                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-                    >
-                    <div class="image-fallback">
-                        <div class="placeholder-content">
-                            <div class="placeholder-icon">
-                                <i class="fa-regular fa-image"></i>
-                            </div>
-                            <h3>Beauty Care</h3>
-                            <p>Image not added yet</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card-overlay">
-
-                    <span>Beauty</span>
-
-                    <h3>
-                        Beauty Care
-                    </h3>
-
-                </div>
-
-                <div class="view-icon">
-                    <i class="fa-solid fa-expand"></i>
-                </div>
-
-            </article>
-
-
-            <article
-                class="gallery-card"
-                data-category="experience"
-                data-title="Relaxing Salon Experience"
-                data-image="../assets/images/gallery/salon-experience.jpg">
-
-                <div class="gallery-placeholder gallery-image-wrap">
-                    <img
-                        src="../assets/images/gallery/salon-experience.jpg"
-                        alt="Relaxing Salon Experience"
-                        class="gallery-image"
-                        loading="lazy"
-                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-                    >
-                    <div class="image-fallback">
-                        <div class="placeholder-content">
-                            <div class="placeholder-icon">
-                                <i class="fa-regular fa-image"></i>
-                            </div>
-                            <h3>Relaxing Salon Experience</h3>
-                            <p>Image not added yet</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card-overlay">
-
-                    <span>Experience</span>
-
-                    <h3>
-                        Relaxing Salon Experience
-                    </h3>
-
-                </div>
-
-                <div class="view-icon">
-                    <i class="fa-solid fa-expand"></i>
-                </div>
-
-            </article>
-
-
-            <article
-                class="gallery-card"
-                data-category="salon"
-                data-title="Modern Salon Space"
-                data-image="../assets/images/gallery/modern-salon.jpg">
-
-                <div class="gallery-placeholder gallery-image-wrap">
-                    <img
-                        src="../assets/images/gallery/modern-salon.jpg"
-                        alt="Modern Salon Space"
-                        class="gallery-image"
-                        loading="lazy"
-                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-                    >
-                    <div class="image-fallback">
-                        <div class="placeholder-content">
-                            <div class="placeholder-icon">
-                                <i class="fa-regular fa-image"></i>
-                            </div>
-                            <h3>Modern Salon Space</h3>
-                            <p>Image not added yet</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card-overlay">
-
-                    <span>Salon</span>
-
-                    <h3>
-                        Modern Salon Space
-                    </h3>
-
-                </div>
-
-                <div class="view-icon">
-                    <i class="fa-solid fa-expand"></i>
-                </div>
-
-            </article>
-
-
-            <article
-                class="gallery-card"
-                data-category="hair"
-                data-title="Hair Care"
-                data-image="../assets/images/gallery/hair-care.jpg">
-
-                <div class="gallery-placeholder gallery-image-wrap">
-                    <img
-                        src="../assets/images/gallery/hair-care.jpg"
-                        alt="Hair Care"
-                        class="gallery-image"
-                        loading="lazy"
-                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-                    >
-                    <div class="image-fallback">
-                        <div class="placeholder-content">
-                            <div class="placeholder-icon">
-                                <i class="fa-regular fa-image"></i>
-                            </div>
-                            <h3>Hair Care</h3>
-                            <p>Image not added yet</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card-overlay">
-
-                    <span>Hair</span>
-
-                    <h3>
-                        Professional Hair Care
-                    </h3>
-
-                </div>
-
-                <div class="view-icon">
-                    <i class="fa-solid fa-expand"></i>
-                </div>
-
-            </article>
-
-        </div>
-
-
-        <!-- NOTE -->
-
-        <div class="info-note">
-
-            <i class="fa-solid fa-circle-info"></i>
-
-            <p>
-                <strong>Gallery images:</strong> Save the six photos in <code>frontend/assets/images/gallery/</code>.
-                Clicking any gallery card opens the actual full image with Previous, Next and Close controls.
-            </p>
-
-        </div>
-
-        <div class="cta-buttons">
-
-            <a href="booking.html" class="btn btn-primary">
-                <i class="fa-regular fa-calendar-check"></i>
-                Book Appointment
-            </a>
-
-            <a href="services.html" class="btn btn-secondary">
-                <i class="fa-solid fa-list"></i>
-                View Services
-            </a>
-
-        </div>
-
-    </div>
+            </div>
+</div>
 
 </section>
 
@@ -1933,53 +1756,6 @@
         });
 
 
-        /* ==============================
-           FILTER
-        ============================== */
-
-        var filterButtons =
-            document.querySelectorAll(".filter-btn");
-
-        var galleryCards =
-            document.querySelectorAll(".gallery-card");
-
-        filterButtons.forEach(function (button) {
-
-            button.addEventListener("click", function () {
-
-                var filter =
-                    button.getAttribute("data-filter");
-
-                filterButtons.forEach(function (btn) {
-                    btn.classList.remove("active");
-                });
-
-                button.classList.add("active");
-
-                galleryCards.forEach(function (card) {
-
-                    var category =
-                        card.getAttribute("data-category");
-
-                    if (
-                        filter === "all" ||
-                        category === filter
-                    ) {
-
-                        card.classList.remove("hidden");
-
-                    } else {
-
-                        card.classList.add("hidden");
-
-                    }
-
-                });
-
-            });
-
-        });
-
 
         /* ==============================
            LIGHTBOX
@@ -2013,7 +1789,9 @@
 
         function getVisibleCards() {
 
-            return Array.from(galleryCards)
+            return Array.from(
+                document.querySelectorAll("#galleryGrid .gallery-card")
+            )
                 .filter(function (card) {
 
                     return !card.classList.contains("hidden");
@@ -2127,26 +1905,7 @@
             openLightbox(currentIndex + 1);
 
         }
-
-
-        galleryCards.forEach(function (card) {
-
-            card.addEventListener("click", function () {
-
-                var visibleCards =
-                    getVisibleCards();
-
-                var index =
-                    visibleCards.indexOf(card);
-
-                openLightbox(index);
-
-            });
-
-        });
-
-
-        if (lightboxClose) {
+if (lightboxClose) {
 
             lightboxClose.addEventListener(
                 "click",
@@ -2196,6 +1955,321 @@
            KEYBOARD
         ============================== */
 
+
+
+        document.addEventListener("keydown", function (event) {
+            if (!lightbox || !lightbox.classList.contains("show")) {
+                return;
+            }
+
+            if (event.key === "Escape") {
+                closeLightbox();
+            } else if (event.key === "ArrowLeft") {
+                previousImage();
+            } else if (event.key === "ArrowRight") {
+                nextImage();
+            }
+        });
+
+
+        /* ==============================
+           DATABASE GALLERY
+        ============================== */
+
+        const GALLERY_API = "http://localhost:5000/api/gallery";
+        const GALLERY_IMAGE_FOLDER = "../assets/images/gallery/";
+
+        let databaseGalleryImages = [];
+        let activeGalleryFilter = "all";
+
+        function galleryEscape(value) {
+            return String(value || "")
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        function galleryImageUrl(image) {
+            if (!image) {
+                return "";
+            }
+
+            const value = String(image).trim();
+
+            if (!value) {
+                return "";
+            }
+
+            if (/^https?:\/\//i.test(value)) {
+                return value;
+            }
+
+            if (value.startsWith("/uploads/")) {
+                return "http://localhost:5000" + value;
+            }
+
+            if (value.startsWith("/assets/")) {
+                return ".." + value;
+            }
+
+            if (value.startsWith("../assets/")) {
+                return value;
+            }
+
+            if (value.startsWith("assets/")) {
+                return "../" + value;
+            }
+
+            const cleanName = value.split("/").pop();
+
+            return GALLERY_IMAGE_FOLDER + cleanName;
+        }
+
+        function getGalleryCategory(item) {
+            return String(item.category || "Other")
+                .trim()
+                .toLowerCase();
+        }
+
+        function buildGalleryFilters() {
+            const filters = document.getElementById("galleryFilters");
+
+            if (!filters) {
+                return;
+            }
+
+            const categoryMap = new Map();
+
+            databaseGalleryImages.forEach(function (item) {
+                const category = String(item.category || "Other").trim();
+
+                if (category) {
+                    categoryMap.set(category.toLowerCase(), category);
+                }
+            });
+
+            filters.innerHTML = `
+                <button
+                    type="button"
+                    class="filter-btn active"
+                    data-filter="all">
+                    <i class="fa-solid fa-grip"></i>
+                    All Images
+                </button>
+            `;
+
+            Array.from(categoryMap.values())
+                .sort(function (a, b) {
+                    return a.localeCompare(b);
+                })
+                .forEach(function (category) {
+                    const button = document.createElement("button");
+
+                    button.type = "button";
+                    button.className = "filter-btn";
+                    button.dataset.filter = category.toLowerCase();
+
+                    button.innerHTML = `
+                        <i class="fa-regular fa-image"></i>
+                        ${galleryEscape(category)}
+                    `;
+
+                    filters.appendChild(button);
+                });
+
+            filters.querySelectorAll(".filter-btn").forEach(function (button) {
+                button.addEventListener("click", function () {
+                    filters.querySelectorAll(".filter-btn").forEach(function (item) {
+                        item.classList.remove("active");
+                    });
+
+                    button.classList.add("active");
+
+                    activeGalleryFilter =
+                        button.dataset.filter || "all";
+
+                    renderDatabaseGallery();
+                });
+            });
+        }
+
+        function renderDatabaseGallery() {
+            const galleryGrid = document.getElementById("galleryGrid");
+
+            if (!galleryGrid) {
+                return;
+            }
+
+            const filteredImages = databaseGalleryImages.filter(function (item) {
+                if (activeGalleryFilter === "all") {
+                    return true;
+                }
+
+                return getGalleryCategory(item) === activeGalleryFilter;
+            });
+
+            if (filteredImages.length === 0) {
+                galleryGrid.innerHTML = `
+                    <div class="gallery-empty">
+                        <i class="fa-regular fa-images"></i>
+                        <strong>No gallery images available.</strong>
+                        <span>Images added from the admin Gallery section will appear here.</span>
+                    </div>
+                `;
+                return;
+            }
+
+            galleryGrid.innerHTML = "";
+
+            filteredImages.forEach(function (item, index) {
+                const imageUrl = galleryImageUrl(item.image);
+                const title = item.title || "Gallery Image";
+                const category = item.category || "Gallery";
+
+                const card = document.createElement("article");
+
+                card.className =
+                    "gallery-card" +
+                    (index === 0 ? " large" : "");
+
+                card.dataset.category = getGalleryCategory(item);
+                card.dataset.title = title;
+                card.dataset.image = imageUrl;
+
+                card.innerHTML = `
+                    <div class="gallery-placeholder gallery-image-wrap">
+                        <img
+                            src="${galleryEscape(imageUrl)}"
+                            alt="${galleryEscape(title)}"
+                            class="gallery-image"
+                            loading="lazy"
+                        >
+
+                        <div class="image-fallback">
+                            <div class="placeholder-content">
+                                <div class="placeholder-icon">
+                                    <i class="fa-regular fa-image"></i>
+                                </div>
+                                <h3>${galleryEscape(title)}</h3>
+                                <p>Image not available</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-overlay">
+                        <span>${galleryEscape(category)}</span>
+                        <h3>${galleryEscape(title)}</h3>
+                    </div>
+
+                    <div class="view-icon">
+                        <i class="fa-solid fa-expand"></i>
+                    </div>
+                `;
+
+                const image =
+                    card.querySelector(".gallery-image");
+
+                const fallback =
+                    card.querySelector(".image-fallback");
+
+                if (image) {
+                    image.addEventListener("error", function () {
+                        image.style.display = "none";
+
+                        if (fallback) {
+                            fallback.style.display = "flex";
+                        }
+                    });
+                }
+
+                card.addEventListener("click", function () {
+                    const visibleCards =
+                        Array.from(
+                            galleryGrid.querySelectorAll(".gallery-card")
+                        );
+
+                    const cardIndex =
+                        visibleCards.indexOf(card);
+
+                    openLightbox(cardIndex);
+                });
+
+                galleryGrid.appendChild(card);
+            });
+        }
+
+        async function loadDatabaseGallery() {
+            const galleryGrid =
+                document.getElementById("galleryGrid");
+
+            if (!galleryGrid) {
+                return;
+            }
+
+            galleryGrid.innerHTML = `
+                <div class="gallery-loading">
+                    <i class="fa-solid fa-spinner fa-spin"></i>
+                    <span>Loading gallery images...</span>
+                </div>
+            `;
+
+            try {
+                const response = await fetch(GALLERY_API);
+
+                const result = await response.json();
+
+                if (!response.ok || !result.success) {
+                    throw new Error(
+                        result.message ||
+                        "Failed to load gallery images."
+                    );
+                }
+
+                databaseGalleryImages =
+                    Array.isArray(result.data)
+                        ? result.data.filter(function (item) {
+                            return String(item.status || "ACTIVE")
+                                .toUpperCase() === "ACTIVE";
+                        })
+                        : [];
+
+                activeGalleryFilter = "all";
+
+                buildGalleryFilters();
+                renderDatabaseGallery();
+
+            } catch (error) {
+                console.error(
+                    "GALLERY DATABASE ERROR:",
+                    error
+                );
+
+                galleryGrid.innerHTML = `
+                    <div class="gallery-error">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                        <strong>Unable to load gallery images.</strong>
+                        <span>Please make sure the backend server is running.</span>
+                        <button type="button" id="retryGallery">
+                            Retry
+                        </button>
+                    </div>
+                `;
+
+                const retryButton =
+                    document.getElementById("retryGallery");
+
+                if (retryButton) {
+                    retryButton.addEventListener(
+                        "click",
+                        loadDatabaseGallery
+                    );
+                }
+            }
+        }
+
+        loadDatabaseGallery();
 
         /* ==============================
            CUSTOMER ACCOUNT

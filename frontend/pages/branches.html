@@ -11,6 +11,12 @@
 
     <title>Branches | The Beauty Salon</title>
 
+    <link
+        rel="icon"
+        type="image/png"
+        href="../assets/images/logo/beauty-salon-logo.png"
+    >
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -523,116 +529,118 @@
             white-space: nowrap;
         }
 
-        /* =====================================================
-           FOOTER
-        ===================================================== */
+            /* =====================================================
+       FOOTER
+    ===================================================== */
 
-        .branches-page .site-footer {
-            width: 100%;
-            margin: 0;
-            padding: 70px 0 0;
-            background: #080808;
-            border-top: 1px solid #222;
+    .footer {
+        padding: 55px 0 20px;
+        background: #070707;
+    }
+
+    .footer-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+
+    .footer h3 {
+        font-family: "Playfair Display", serif;
+        font-size: 24px;
+    }
+
+    .footer h3 span {
+        color: #d4af37;
+    }
+
+    .footer h4 {
+        margin-bottom: 13px;
+        font-size: 14px;
+    }
+
+    .footer p,
+    .footer li,
+    .footer a {
+        color: #777;
+        font-size: 12px;
+        line-height: 1.7;
+    }
+
+    .footer ul {
+        list-style: none;
+    }
+
+    .footer li {
+        margin-bottom: 7px;
+    }
+
+    .footer a:hover {
+        color: #d4af37;
+    }
+
+    .footer-contact p {
+        display: flex;
+        gap: 9px;
+        margin-bottom: 9px;
+    }
+
+    .footer-contact i {
+        width: 15px;
+        color: #d4af37;
+        margin-top: 4px;
+    }
+
+    .footer-bottom {
+        margin-top: 40px;
+        padding-top: 18px;
+        border-top: 1px solid #1e1e1e;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .social {
+        display: flex;
+        gap: 7px;
+    }
+
+    .social a {
+        width: 35px;
+        height: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #292929;
+        border-radius: 50%;
+    }
+
+    @media (min-width: 600px) {
+        .footer-grid {
+            grid-template-columns: 1.4fr 1fr 1fr;
+        }
+    }
+
+    @media (min-width: 768px) {
+        .footer-grid {
+            grid-template-columns: 1.5fr 1fr 1fr 1.4fr;
+        }
+    }
+
+    @media (max-width: 599px) {
+        .footer {
+            padding-left: 15px;
+            padding-right: 15px;
         }
 
-        .branches-page .footer-grid {
-            display: grid;
-            grid-template-columns: 1.5fr 1fr 1fr 1.25fr;
-            gap: 45px;
-            padding-bottom: 50px;
-        }
-
-        .branches-page .footer-brand,
-        .branches-page .footer-column {
-            min-width: 0;
-        }
-
-        .branches-page .footer-brand p {
-            max-width: 340px;
-            margin: 20px 0;
-            color: #777;
-            font-size: 13px;
-            line-height: 1.7;
-        }
-
-        .branches-page .footer-column h3 {
-            margin: 0 0 20px;
-            color: #fff;
-            font-size: 14px;
-        }
-
-        .branches-page .footer-column ul {
-            display: grid;
-            gap: 11px;
-            margin: 0;
-            padding: 0;
-            list-style: none;
-        }
-
-        .branches-page .footer-column a {
-            color: #777;
-            font-size: 13px;
-            text-decoration: none;
-        }
-
-        .branches-page .footer-column a:hover {
-            color: #d4af37;
-        }
-
-        .branches-page .footer-contact {
-            display: grid;
-            gap: 13px;
-        }
-
-        .branches-page .footer-contact p {
-            display: flex;
+        .footer-bottom {
             align-items: flex-start;
-            gap: 11px;
-            margin: 0;
-            color: #777;
-            font-size: 12px;
-            line-height: 1.6;
+            flex-direction: column;
         }
+    }
 
-        .branches-page .footer-contact p i {
-            flex: 0 0 15px;
-            margin-top: 3px;
-            color: #d4af37;
-        }
-
-        .branches-page .footer-contact a {
-            overflow-wrap: anywhere;
-        }
-
-        .branches-page .footer-social {
-            display: flex;
-            gap: 9px;
-        }
-
-        .branches-page .footer-social a {
-            width: 38px;
-            height: 38px;
-            display: grid;
-            place-items: center;
-            border: 1px solid #292929;
-        }
-
-        .branches-page .footer-bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 20px;
-            padding: 22px 0;
-            border-top: 1px solid #202020;
-        }
-
-        .branches-page .footer-bottom p {
-            margin: 0;
-            color: #555;
-            font-size: 11px;
-        }
-
-        /* =====================================================
+/* =====================================================
            TABLET
         ===================================================== */
 
@@ -939,6 +947,14 @@
 
             color: #D4AF37;
             font-size: 18px;
+        }
+
+        .about-brand-logo img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            border-radius: 50%;
         }
 
         .about-brand-name {
@@ -1297,6 +1313,17 @@
         }
         .customer-account-dropdown a:hover,.customer-account-dropdown button:hover { background:rgba(212,175,55,.08); color:#D4AF37; }
         .customer-account-dropdown i { width:15px; color:#D4AF37; }
+
+        /* Professional spacing below fixed header */
+        .branches-page main {
+            padding-top: 78px;
+        }
+
+        @media (max-width: 767px) {
+            .branches-page main {
+                padding-top: 68px;
+            }
+        }
 </style>
 </head>
 
@@ -1318,7 +1345,10 @@
                aria-label="The Beauty Salon Home">
 
                 <span class="about-brand-logo">
-                    <i class="fa-solid fa-scissors"></i>
+                    <img
+                        src="../assets/images/logo/beauty-salon-logo.png"
+                        alt="The Beauty Salon Logo"
+                    >
                 </span>
 
                 <span class="about-brand-name">
@@ -1421,7 +1451,10 @@
                class="about-brand">
 
                 <span class="about-brand-logo">
-                    <i class="fa-solid fa-scissors"></i>
+                    <img
+                        src="../assets/images/logo/beauty-salon-logo.png"
+                        alt="The Beauty Salon Logo"
+                    >
                 </span>
 
                 <span class="about-brand-name">
@@ -1615,7 +1648,7 @@
                         <i class="fa-solid fa-spinner fa-spin"></i>
                         <span>Loading branches...</span>
                     </div>
-                </div>>
+                </div>
 
             </div>
 
@@ -1736,208 +1769,101 @@
     <!-- =====================================================
          FOOTER
     ===================================================== -->
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
 
-    <footer class="site-footer">
+    <footer class="footer">
 
         <div class="container">
 
             <div class="footer-grid">
 
-                <div class="footer-brand">
-
-                    <a href="../index.html" class="site-logo">
-
-                        <span class="logo-icon">
-                            <i class="fa-solid fa-scissors"></i>
-                        </span>
-
-                        <span class="logo-text">
-                            <strong>The Beauty</strong>
-                            <small>Salon</small>
-                        </span>
-
-                    </a>
-
-                    <p>
-                        Premium unisex beauty and hair salon
-                        providing professional beauty, hair and
-                        grooming services in Baramati.
+                <div>
+                    <h3>
+                        The <span>Beauty</span> Salon
+                    </h3>
+                    <p style="margin-top: 12px; max-width: 310px;">
+                        A modern unisex beauty and hair salon in
+                        Baramati, created for premium styling,
+                        grooming and beauty care.
                     </p>
-
-                    <div class="footer-social">
-
-                        <a href="#" aria-label="Instagram">
-                            <i class="fa-brands fa-instagram"></i>
-                        </a>
-
-                        <a href="#" aria-label="Facebook">
-                            <i class="fa-brands fa-facebook-f"></i>
-                        </a>
-
-                        <a href="#" aria-label="WhatsApp">
-                            <i class="fa-brands fa-whatsapp"></i>
-                        </a>
-
-                    </div>
-
                 </div>
 
-
-                <div class="footer-column">
-
-                    <h3>
-                        Quick Links
-                    </h3>
-
+                <div>
+                    <h4>Quick Links</h4>
                     <ul>
-
-                        <li>
-                            <a href="../index.html">
-                                Home
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="about.html">
-                                About
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="services.html">
-                                Services
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="branches.html">
-                                Branches
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="gallery.html">
-                                Gallery
-                            </a>
-                        </li>
-
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="branches.html">Branches</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
                     </ul>
-
                 </div>
 
-
-                <div class="footer-column">
-
-                    <h3>
-                        Services
-                    </h3>
-
+                <div>
+                    <h4>Customer</h4>
                     <ul>
-
-                        <li>
-                            <a href="services.html">
-                                Hair Services
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="services.html">
-                                Beauty Services
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="services.html">
-                                Grooming
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="booking.html">
-                                Book Appointment
-                            </a>
-                        </li>
-
+                        <li><a href="booking.html">Book Appointment</a></li>
+                        <li><a href="login.html">Login</a></li>
+                        <li><a href="register.html">Create Account</a></li>
+                        <li><a href="contact.html">Contact</a></li>
                     </ul>
-
                 </div>
 
-
-                <div class="footer-column footer-contact">
-
-                    <h3>
-                        Contact Us
-                    </h3>
+                <div class="footer-contact">
+                    <h4>Baramati Branch</h4>
 
                     <p>
-
                         <i class="fa-solid fa-location-dot"></i>
-
                         <span>
-                            Near Mahanagar Bank,
-                            in front of Shayog Society,
-                            Baramati
+                            Near Mahanagar Bank, in front of
+                            Shayog Society, Baramati, Maharashtra
                         </span>
-
                     </p>
 
                     <p>
-
                         <i class="fa-solid fa-phone"></i>
-
-                        <a href="tel:+918793465001">
-                            +91 8793465001
-                        </a>
-
+                        <a href="tel:+918793465001">+91 8793465001</a>
                     </p>
 
                     <p>
-
                         <i class="fa-regular fa-envelope"></i>
-
-                        <a href="mailto:beautysalon@gamil.com">
-                            beautysalon@gamil.com
-                        </a>
-
+                        <a href="mailto:beautysalon@gamil.com">beautysalon@gamil.com</a>
                     </p>
 
                     <p>
-
                         <i class="fa-regular fa-clock"></i>
-
-                        <span>
-                            Monday – Sunday,
-                            9:00 AM – 9:00 PM
-                        </span>
-
+                        <span>Mon - Sun: 9:00 AM - 9:00 PM</span>
                     </p>
-
                 </div>
 
             </div>
 
-
             <div class="footer-bottom">
-
                 <p>
-                    ©
-                    <span data-current-year>2026</span>
-                    The Beauty Salon.
-                    All Rights Reserved.
+                    © <span id="year"></span>
+                    The Beauty Salon. All Rights Reserved.
                 </p>
 
-                <p>
-                    Premium Beauty & Hair Salon
-                </p>
-
+                <div class="social">
+                    <a href="#" aria-label="Instagram" onclick="return false;">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <a href="#" aria-label="Facebook" onclick="return false;">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+                    <a href="#" aria-label="WhatsApp" onclick="return false;">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+                </div>
             </div>
 
         </div>
 
     </footer>
 
-
-    <script src="../js/main.js"></script>
+<script src="../js/main.js"></script>
 
 
     <script>
@@ -2108,8 +2034,8 @@
                     grid.innerHTML = `
                         <div class="branches-empty">
                             <i class="fa-solid fa-location-dot"></i>
-                            <strong>No active branches found</strong>
-                            <span>Branch information is currently unavailable in the database.</span>
+                            <strong>No branches found</strong>
+                            <span>No branch records are currently available in the database.</span>
                         </div>
                     `;
                     return;
@@ -2170,6 +2096,52 @@
         });
     </script>
 
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    function isCustomerLoggedIn() {
+        try {
+            const sessionRaw =
+                localStorage.getItem("salon_customer_session") ||
+                sessionStorage.getItem("salon_customer_session");
+
+            const customerRaw =
+                localStorage.getItem("salon_customer") ||
+                sessionStorage.getItem("salon_customer");
+
+            if (!sessionRaw || !customerRaw) {
+                return false;
+            }
+
+            const session = JSON.parse(sessionRaw);
+            const customer = JSON.parse(customerRaw);
+
+            return Boolean(session && session.token && customer);
+        } catch (error) {
+            return false;
+        }
+    }
+
+    document.addEventListener("click", function (event) {
+        const bookingLink = event.target.closest('a[href*="booking.html"]');
+
+        if (!bookingLink) {
+            return;
+        }
+
+        if (bookingLink.getAttribute("aria-disabled") === "true") {
+            event.preventDefault();
+            return;
+        }
+
+        if (!isCustomerLoggedIn()) {
+            event.preventDefault();
+            window.location.href = "login.html";
+        }
+    });
+});
+</script>
 
 <script>
 document.addEventListener("DOMContentLoaded", function(){

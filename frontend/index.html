@@ -21,6 +21,9 @@
     <meta name="robots"
           content="index, follow">
 
+    <link rel="icon" type="image/png" href="assets/images/logo/beauty-salon-logo.png">
+    <link rel="apple-touch-icon" href="assets/images/logo/beauty-salon-logo.png">
+
     <title>The Beauty Salon | Premium Unisex Salon in Baramati</title>
 
 
@@ -244,6 +247,1064 @@
             .header-actions { display: none; }
         }
 
+    
+        /* =========================================================
+           FINAL HOMEPAGE FIXES
+        ========================================================== */
+
+        .image-brand-logo {
+            width: 46px;
+            height: 46px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .image-brand-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .premium-care-logo {
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            flex: 0 0 42px;
+        }
+
+        .premium-care-logo i {
+            font-size: 20px;
+            color: #D4AF37;
+            line-height: 1;
+        }
+
+        /* About image - smaller height */
+        .about-visual .about-logo-image-wrap {
+            width: 100%;
+            height: 460px;
+            min-height: 460px;
+            overflow: hidden;
+        }
+
+        .about-visual .about-logo-image {
+            width: 100%;
+            height: 100%;
+            max-height: 460px;
+            padding: 0;
+            margin: 0;
+            display: block;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        /* Today's offer */
+        .today-offer-section {
+            padding: 70px 0;
+        }
+
+        .today-offer-card {
+            position: relative;
+            display: grid;
+            grid-template-columns: 180px 1fr auto;
+            gap: 28px;
+            align-items: center;
+            padding: 34px 38px;
+            border: 1px solid rgba(212,175,55,.28);
+            background: linear-gradient(135deg, #111 0%, #090909 100%);
+            border-radius: 18px;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+        .today-offer-image-wrap {
+            position: relative;
+            z-index: 1;
+            width: 240px;
+            height: 170px;
+            flex: 0 0 240px;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid rgba(212,175,55,.28);
+            background: #111;
+            cursor: zoom-in;
+            box-shadow: 0 10px 30px rgba(0,0,0,.28);
+        }
+
+        .today-offer-image {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            object-position: center;
+            transition: transform .35s ease, opacity .25s ease;
+        }
+
+        .today-offer-image-wrap:hover .today-offer-image {
+            transform: scale(1.04);
+        }
+
+        .today-offer-image-wrap::after {
+            content: "\f00e";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            right: 12px;
+            bottom: 12px;
+            width: 34px;
+            height: 34px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            color: #111;
+            background: #D4AF37;
+            box-shadow: 0 5px 16px rgba(0,0,0,.35);
+            pointer-events: none;
+        }
+
+        .offer-image-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 100000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 28px;
+            background: rgba(0,0,0,.88);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity .25s ease, visibility .25s ease;
+            box-sizing: border-box;
+        }
+
+        .offer-image-modal.open {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        .offer-image-modal img {
+            display: block;
+            width: auto;
+            height: auto;
+            max-width: min(94vw, 1100px);
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 14px;
+            box-shadow: 0 25px 70px rgba(0,0,0,.65);
+        }
+
+        .offer-image-modal-close {
+            position: absolute;
+            top: 18px;
+            right: 20px;
+            width: 44px;
+            height: 44px;
+            display: grid;
+            place-items: center;
+            border: 1px solid rgba(212,175,55,.5);
+            border-radius: 50%;
+            color: #D4AF37;
+            background: #111;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .today-offer-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 85% 20%, rgba(212,175,55,.13), transparent 38%);
+            pointer-events: none;
+        }
+
+        .today-offer-content,
+        .today-offer-action {
+            position: relative;
+            z-index: 1;
+        }
+
+        .today-offer-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+            color: #D4AF37;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+        }
+
+        .today-offer-title {
+            margin: 0 0 8px;
+            font-family: "Playfair Display", serif;
+            font-size: clamp(25px, 3vw, 38px);
+            line-height: 1.15;
+            color: #fff;
+        }
+
+        .today-offer-description {
+            margin: 0;
+            max-width: 700px;
+            color: #aaa;
+            line-height: 1.7;
+        }
+
+        .today-offer-discount {
+            margin-top: 14px;
+            color: #D4AF37;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .today-offer-meta {
+            margin-top: 8px;
+            color: #777;
+            font-size: 12px;
+        }
+
+        .today-offer-action .button {
+            white-space: nowrap;
+        }
+
+        .home-api-message {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 35px 20px;
+            color: #888;
+        }
+
+        .home-api-message i {
+            color: #D4AF37;
+            margin-right: 7px;
+        }
+
+        @media (max-width: 767px) {
+            .about-visual .about-logo-image-wrap {
+                width: 100%;
+                height: 320px;
+                min-height: 320px;
+            }
+
+            .about-visual .about-logo-image {
+                width: 100%;
+                height: 100%;
+                max-height: 320px;
+                padding: 0;
+                margin: 0;
+                object-fit: cover;
+                object-position: center;
+            }
+
+            .today-offer-section {
+                padding: 50px 0;
+            }
+
+            .today-offer-card {
+                grid-template-columns: 1fr;
+                padding: 26px 22px;
+            }
+
+            .today-offer-image-wrap {
+                width: 100%;
+                height: 220px;
+                flex: 0 0 auto;
+            }
+
+            .today-offer-action .button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+
+
+        /* =========================================================
+           TODAY'S OFFER - FINAL OVERRIDES
+        ========================================================== */
+        .today-offer-section {
+            padding: 70px 0;
+        }
+
+        .today-offer-card {
+            position: relative;
+            display: grid;
+            grid-template-columns: minmax(240px, 280px) minmax(0, 1fr) auto;
+            gap: 32px;
+            align-items: center;
+            width: 100%;
+            padding: 34px 38px;
+            border: 1px solid rgba(212,175,55,.28);
+            border-radius: 18px;
+            background: linear-gradient(135deg, #111 0%, #090909 100%);
+            box-sizing: border-box;
+            overflow: hidden;
+            box-shadow: 0 15px 45px rgba(0,0,0,.20);
+        }
+
+        .today-offer-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 85% 20%, rgba(212,175,55,.13), transparent 38%);
+            pointer-events: none;
+        }
+
+        .today-offer-image-wrap {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            height: 180px;
+            overflow: hidden;
+            border-radius: 14px;
+            border: 1px solid rgba(212,175,55,.30);
+            background: #111;
+            cursor: zoom-in;
+            box-shadow: 0 10px 30px rgba(0,0,0,.30);
+            transition: transform .25s ease, border-color .25s ease;
+        }
+
+        .today-offer-image-wrap:hover {
+            transform: translateY(-3px);
+            border-color: rgba(212,175,55,.70);
+        }
+
+        .today-offer-image {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            object-position: center;
+            transition: transform .35s ease;
+        }
+
+        .today-offer-image-wrap:hover .today-offer-image {
+            transform: scale(1.05);
+        }
+
+        .today-offer-image-wrap::after {
+            content: "\f00e";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            right: 12px;
+            bottom: 12px;
+            width: 36px;
+            height: 36px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            color: #111;
+            background: #D4AF37;
+            box-shadow: 0 5px 16px rgba(0,0,0,.35);
+            pointer-events: none;
+        }
+
+        .today-offer-content,
+        .today-offer-action {
+            position: relative;
+            z-index: 2;
+        }
+
+        .today-offer-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+            color: #D4AF37;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .today-offer-title {
+            margin: 0 0 10px;
+            color: #fff;
+            font-family: "Playfair Display", serif;
+            font-size: clamp(25px, 3vw, 38px);
+            font-weight: 600;
+            line-height: 1.15;
+        }
+
+        .today-offer-description {
+            margin: 0;
+            max-width: 680px;
+            color: #aaa;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .today-offer-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 15px;
+            color: #888;
+            font-size: 13px;
+        }
+
+        .today-offer-meta i {
+            color: #D4AF37;
+        }
+
+        .today-offer-action .button {
+            white-space: nowrap;
+        }
+
+        .offer-image-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 100000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 25px;
+            background: rgba(0,0,0,.92);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity .25s ease, visibility .25s ease;
+            box-sizing: border-box;
+        }
+
+        .offer-image-modal.open {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        .offer-image-modal img {
+            display: block;
+            width: auto;
+            height: auto;
+            max-width: 94vw;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 14px;
+            box-shadow: 0 25px 70px rgba(0,0,0,.70);
+        }
+
+        .offer-image-modal-close {
+            position: absolute;
+            top: 18px;
+            right: 20px;
+            width: 46px;
+            height: 46px;
+            display: grid;
+            place-items: center;
+            border: 1px solid rgba(212,175,55,.55);
+            border-radius: 50%;
+            color: #D4AF37;
+            background: #111;
+            font-size: 20px;
+            cursor: pointer;
+            z-index: 2;
+            transition: background .2s ease, color .2s ease, transform .2s ease;
+        }
+
+        .offer-image-modal-close:hover {
+            background: #D4AF37;
+            color: #111;
+            transform: rotate(90deg);
+        }
+
+        @media (max-width: 767px) {
+            .today-offer-section {
+                padding: 50px 0;
+            }
+
+            .today-offer-card {
+                grid-template-columns: 1fr;
+                gap: 22px;
+                padding: 24px 20px;
+            }
+
+            .today-offer-image-wrap {
+                width: 100%;
+                height: 220px;
+            }
+
+            .today-offer-title {
+                font-size: 27px;
+            }
+
+            .today-offer-description {
+                font-size: 14px;
+            }
+
+            .today-offer-action,
+            .today-offer-action .button {
+                width: 100%;
+            }
+
+            .today-offer-action .button {
+                justify-content: center;
+            }
+
+            .offer-image-modal {
+                padding: 15px;
+            }
+
+            .offer-image-modal img {
+                max-width: 96vw;
+                max-height: 84vh;
+                border-radius: 10px;
+            }
+
+            .offer-image-modal-close {
+                top: 12px;
+                right: 12px;
+                width: 42px;
+                height: 42px;
+            }
+        }
+
+    
+        /* =========================================================
+           PROFESSIONAL MOBILE-FIRST POLISH
+           Visual/responsive improvements only.
+           Existing HTML, API calls and JavaScript logic are unchanged.
+        ========================================================== */
+
+        :root {
+            --salon-gold: #D4AF37;
+            --salon-gold-soft: rgba(212,175,55,.18);
+            --salon-bg: #080808;
+            --salon-card: #111111;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+        }
+
+        body {
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: rgba(212,175,55,.12);
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        a,
+        button {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Better touch targets */
+        .button,
+        .branch-button,
+        .service-book-link,
+        .mobile-nav-link,
+        .mobile-menu-button,
+        .mobile-close-button,
+        .header-login,
+        .offer-image-modal-close {
+            min-height: 44px;
+        }
+
+        /* Prevent long text from breaking cards/layouts */
+        .today-offer-title,
+        .today-offer-description,
+        .service-card h3,
+        .service-card p,
+        .branch-card h3,
+        .branch-card h4,
+        .branch-card p,
+        .branch-information,
+        .footer-column,
+        .footer-brand-column {
+            overflow-wrap: anywhere;
+        }
+
+        /* Today's offer - desktop refinement */
+        .today-offer-section .content-container {
+            width: min(100% - 32px, 1180px);
+            margin-inline: auto;
+        }
+
+        .today-offer-card {
+            isolation: isolate;
+        }
+
+        .today-offer-image-wrap {
+            aspect-ratio: 4 / 3;
+            height: auto;
+            min-height: 160px;
+        }
+
+        .today-offer-image {
+            object-fit: cover;
+        }
+
+        .today-offer-content {
+            min-width: 0;
+        }
+
+        .today-offer-description {
+            max-width: 620px;
+        }
+
+        .today-offer-action {
+            align-self: center;
+        }
+
+        .today-offer-action .button {
+            min-width: 190px;
+            min-height: 48px;
+            border-radius: 10px;
+        }
+
+        /* Fullscreen offer image - mobile safe area */
+        .offer-image-modal {
+            padding:
+                max(16px, env(safe-area-inset-top))
+                max(16px, env(safe-area-inset-right))
+                max(16px, env(safe-area-inset-bottom))
+                max(16px, env(safe-area-inset-left));
+        }
+
+        .offer-image-modal img {
+            width: auto;
+            max-width: 96vw;
+            max-height: 88vh;
+        }
+
+        .offer-image-modal-close {
+            top: max(12px, env(safe-area-inset-top));
+            right: max(12px, env(safe-area-inset-right));
+        }
+
+        /* Tablets */
+        @media (max-width: 1024px) {
+            .today-offer-card {
+                grid-template-columns: 230px minmax(0, 1fr);
+                gap: 24px;
+                padding: 28px;
+            }
+
+            .today-offer-image-wrap {
+                grid-row: 1 / span 2;
+                min-height: 175px;
+            }
+
+            .today-offer-action {
+                grid-column: 2;
+                justify-self: start;
+            }
+
+            .today-offer-action .button {
+                min-width: 180px;
+            }
+        }
+
+        /* Mobile phones */
+        @media (max-width: 767px) {
+
+            body {
+                min-width: 320px;
+            }
+
+            .today-offer-section {
+                padding: 42px 0;
+            }
+
+            .today-offer-section .content-container {
+                width: min(100% - 24px, 620px);
+            }
+
+            .today-offer-card {
+                grid-template-columns: 1fr;
+                gap: 18px;
+                padding: 18px;
+                border-radius: 16px;
+            }
+
+            .today-offer-image-wrap {
+                width: 100%;
+                min-height: 0;
+                height: auto;
+                aspect-ratio: 16 / 10;
+                border-radius: 12px;
+                box-shadow: 0 8px 24px rgba(0,0,0,.30);
+            }
+
+            .today-offer-image-wrap::after {
+                right: 10px;
+                bottom: 10px;
+                width: 34px;
+                height: 34px;
+            }
+
+            .today-offer-badge {
+                margin-bottom: 9px;
+                font-size: 10px;
+                letter-spacing: 1.25px;
+            }
+
+            .today-offer-title {
+                margin-bottom: 8px;
+                font-size: clamp(24px, 7vw, 29px);
+                line-height: 1.18;
+            }
+
+            .today-offer-description {
+                font-size: 14px;
+                line-height: 1.65;
+            }
+
+            .today-offer-meta {
+                margin-top: 11px;
+                font-size: 12px;
+                line-height: 1.45;
+            }
+
+            .today-offer-action {
+                grid-column: auto;
+                width: 100%;
+            }
+
+            .today-offer-action .button {
+                width: 100%;
+                min-width: 0;
+                min-height: 50px;
+                padding: 12px 16px;
+                border-radius: 10px;
+            }
+
+            /* Keep section headings comfortable on narrow screens */
+            .centered-section-heading,
+            .section-header-row {
+                max-width: 100%;
+            }
+
+            .section-title {
+                line-height: 1.18;
+            }
+
+            /* Hero buttons stack cleanly */
+            .hero-buttons {
+                width: 100%;
+            }
+
+            .hero-buttons .button {
+                width: 100%;
+                justify-content: center;
+                min-height: 50px;
+            }
+
+            /* Cards become easier to tap */
+            .service-card,
+            .branch-card,
+            .why-card {
+                min-width: 0;
+            }
+
+            .service-book-link,
+            .branch-button {
+                min-height: 46px;
+            }
+
+            /* Contact details should never overflow */
+            .branch-information a,
+            .branch-information > span {
+                min-width: 0;
+            }
+
+            /* Gallery stays clean on small screens */
+            .gallery-placeholder {
+                min-height: 190px;
+            }
+
+            /* Footer spacing */
+            .site-footer {
+                padding-bottom: max(24px, env(safe-area-inset-bottom));
+            }
+
+            /* Fullscreen offer preview */
+            .offer-image-modal img {
+                max-width: 94vw;
+                max-height: 78vh;
+                border-radius: 10px;
+            }
+
+            .offer-image-modal-close {
+                width: 42px;
+                height: 42px;
+                font-size: 18px;
+            }
+        }
+
+        /* Very small phones */
+        @media (max-width: 380px) {
+            .today-offer-section .content-container {
+                width: calc(100% - 18px);
+            }
+
+            .today-offer-card {
+                padding: 15px;
+                gap: 16px;
+            }
+
+            .today-offer-title {
+                font-size: 23px;
+            }
+
+            .today-offer-description {
+                font-size: 13px;
+            }
+
+            .today-offer-meta {
+                font-size: 11px;
+            }
+
+            .today-offer-action .button {
+                font-size: 13px;
+            }
+        }
+
+        /* Landscape phones */
+        @media (max-width: 767px) and (orientation: landscape) {
+            .today-offer-image-wrap {
+                aspect-ratio: 16 / 7;
+            }
+
+            .offer-image-modal img {
+                max-height: 82vh;
+            }
+        }
+
+        /* Accessibility / reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: .01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+    
+        /* =========================================================
+           PROFESSIONAL MOBILE FOOTER
+           Visual-only improvement. Existing footer HTML/links unchanged.
+        ========================================================== */
+
+        .site-footer {
+            position: relative;
+            background: #070707;
+        }
+
+        .site-footer .footer-grid {
+            align-items: start;
+            gap: 42px;
+        }
+
+        .site-footer .footer-brand-column > p {
+            max-width: 330px;
+            line-height: 1.75;
+        }
+
+        .site-footer .footer-column h3 {
+            margin-bottom: 18px;
+        }
+
+        .site-footer .footer-socials {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .site-footer .footer-socials a {
+            width: 42px;
+            height: 42px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(212,175,55,.22);
+            border-radius: 50%;
+            transition: .25s ease;
+        }
+
+        .site-footer .footer-contact-column p,
+        .site-footer .footer-contact-column > a,
+        .site-footer .footer-contact-column > span {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            line-height: 1.55;
+        }
+
+        .site-footer .footer-contact-column i {
+            flex: 0 0 18px;
+            margin-top: 3px;
+            color: #D4AF37;
+        }
+
+        .site-footer .footer-bottom {
+            gap: 18px;
+        }
+
+        @media (max-width: 767px) {
+
+            .site-footer {
+                padding-top: 48px;
+                padding-bottom: max(24px, env(safe-area-inset-bottom));
+            }
+
+            .site-footer .content-container {
+                width: calc(100% - 32px);
+                margin-inline: auto;
+            }
+
+            .site-footer .footer-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 30px 18px;
+            }
+
+            /* Brand gets the full first row */
+            .site-footer .footer-brand-column {
+                grid-column: 1 / -1;
+                padding-bottom: 8px;
+                border-bottom: 1px solid rgba(255,255,255,.08);
+            }
+
+            .site-footer .footer-brand-column > p {
+                max-width: 330px;
+                margin-top: 12px;
+                font-size: 13px;
+                line-height: 1.7;
+            }
+
+            .site-footer .footer-socials {
+                margin-top: 16px;
+                gap: 9px;
+            }
+
+            .site-footer .footer-socials a {
+                width: 40px;
+                height: 40px;
+            }
+
+            .site-footer .footer-column {
+                min-width: 0;
+            }
+
+            .site-footer .footer-column h3 {
+                margin-bottom: 12px;
+                font-size: 14px;
+                letter-spacing: .3px;
+            }
+
+            .site-footer .footer-column > a {
+                display: block;
+                width: fit-content;
+                max-width: 100%;
+                padding: 5px 0;
+                font-size: 13px;
+                line-height: 1.45;
+            }
+
+            /* Contact gets the full width */
+            .site-footer .footer-contact-column {
+                grid-column: 1 / -1;
+                padding-top: 4px;
+                padding-bottom: 6px;
+                border-top: 1px solid rgba(255,255,255,.08);
+            }
+
+            .site-footer .footer-contact-column h3 {
+                margin-bottom: 14px;
+            }
+
+            .site-footer .footer-contact-column p,
+            .site-footer .footer-contact-column > a,
+            .site-footer .footer-contact-column > span {
+                width: 100%;
+                margin: 0 0 11px;
+                font-size: 12.5px;
+                line-height: 1.55;
+                overflow-wrap: anywhere;
+            }
+
+            .site-footer .footer-contact-column i {
+                flex: 0 0 18px;
+                margin-top: 2px;
+            }
+
+            .site-footer .footer-bottom {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 14px;
+                margin-top: 28px;
+                padding-top: 18px;
+                text-align: left;
+            }
+
+            .site-footer .footer-bottom p {
+                margin: 0;
+                font-size: 11.5px;
+                line-height: 1.55;
+            }
+
+            .site-footer .footer-legal {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px 16px;
+            }
+
+            .site-footer .footer-legal a {
+                font-size: 11.5px;
+                line-height: 1.5;
+            }
+        }
+
+        @media (max-width: 380px) {
+
+            .site-footer .content-container {
+                width: calc(100% - 24px);
+            }
+
+            .site-footer .footer-grid {
+                gap: 26px 14px;
+            }
+
+            .site-footer .footer-column h3 {
+                font-size: 13px;
+            }
+
+            .site-footer .footer-column > a,
+            .site-footer .footer-contact-column p,
+            .site-footer .footer-contact-column > a,
+            .site-footer .footer-contact-column > span {
+                font-size: 12px;
+            }
+
+            .site-footer .footer-socials a {
+                width: 38px;
+                height: 38px;
+            }
+        }
+
     </style>
 </head>
 
@@ -267,8 +1328,9 @@
                class="site-brand"
                aria-label="The Beauty Salon Home">
 
-                <span class="brand-logo">
-                    <i class="fa-solid fa-scissors"></i>
+                <span class="brand-logo image-brand-logo">
+                    <img src="assets/images/logo/beauty-salon-logo.png"
+                         alt="The Beauty Salon logo">
                 </span>
 
                 <span class="brand-name">
@@ -391,8 +1453,9 @@
             <a href="index.html"
                class="site-brand">
 
-                <span class="brand-logo">
-                    <i class="fa-solid fa-scissors"></i>
+                <span class="brand-logo image-brand-logo">
+                    <img src="assets/images/logo/beauty-salon-logo.png"
+                         alt="The Beauty Salon logo">
                 </span>
 
                 <span class="brand-name">
@@ -677,8 +1740,8 @@
                     <div class="hero-floating-card">
 
 
-                        <span class="floating-icon">
-                            <i class="fa-solid fa-sparkles"></i>
+                        <span class="floating-icon premium-care-logo">
+                            <i class="fa-solid fa-scissors" aria-hidden="true"></i>
                         </span>
 
 
@@ -713,6 +1776,44 @@
 
         </section>
 
+
+
+
+        <!-- =====================================================
+             TODAY'S OFFERS
+        ====================================================== -->
+
+        <section class="home-section today-offer-section" id="todayOffersSection">
+
+            <div class="content-container">
+
+                <div class="centered-section-heading">
+                    <span class="section-eyebrow">
+                        TODAY'S OFFER
+                    </span>
+
+                    <h2 class="section-title">
+                        Special For
+                        <span>
+                            You Today.
+                        </span>
+                    </h2>
+
+                    <p>
+                        Discover our special salon offer.
+                    </p>
+                </div>
+
+                <div id="todayOfferContainer">
+                    <div class="home-api-message">
+                        <i class="fa-solid fa-spinner fa-spin"></i>
+                        Loading today's offer...
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
 
 
         <!-- =====================================================
@@ -923,7 +2024,7 @@
                 </div>
 
 
-                <div class="services-grid">
+                <div class="services-grid" id="homeServicesGrid">
 
 
                     <!-- Service 1 -->
@@ -1186,7 +2287,7 @@
                 </div>
 
 
-                <div class="branches-grid">
+                <div class="branches-grid" id="homeBranchesGrid">
 
 
                     <!-- Baramati -->
@@ -1569,7 +2670,7 @@
                 </div>
 
 
-                <div class="gallery-preview-grid">
+                <div class="gallery-preview-grid" id="homeGalleryGrid">
 
 
                     <div class="gallery-tile gallery-large">
@@ -2086,7 +3187,585 @@
         });
     </script>
 
-        <script src="js/main.js"></script>
+    
+    <script>
+        /* =========================================================
+           HOMEPAGE DATABASE CONNECTIONS
+           Services  -> /api/services       -> services table
+           Branches  -> /api/branches       -> branches table
+           Gallery   -> /api/gallery        -> gallery table
+           Offers    -> /api/offers/today   -> offers table + today's date
+        ========================================================== */
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const API_BASE = "http://localhost:5000/api";
+
+            function escapeHtml(value) {
+                return String(value ?? "")
+                    .replace(/&/g, "&amp;")
+                    .replace(/</g, "&lt;")
+                    .replace(/>/g, "&gt;")
+                    .replace(/"/g, "&quot;")
+                    .replace(/'/g, "&#039;");
+            }
+
+            function apiRows(payload) {
+                if (Array.isArray(payload)) return payload;
+                if (Array.isArray(payload.data)) return payload.data;
+                if (Array.isArray(payload.services)) return payload.services;
+                if (Array.isArray(payload.branches)) return payload.branches;
+                if (Array.isArray(payload.gallery)) return payload.gallery;
+                if (Array.isArray(payload.offers)) return payload.offers;
+                return [];
+            }
+
+            function normalizeTime(value) {
+                if (!value) return "";
+                const raw = String(value).trim();
+                const match = raw.match(/^(\d{1,2}):(\d{2})/);
+                if (!match) return raw;
+
+                let hour = Number(match[1]);
+                const minute = match[2];
+                const suffix = hour >= 12 ? "PM" : "AM";
+                hour = hour % 12 || 12;
+                return `${hour}:${minute} ${suffix}`;
+            }
+
+            function showApiMessage(element, message, icon = "fa-circle-info") {
+                if (!element) return;
+                element.innerHTML = `
+                    <div class="home-api-message">
+                        <i class="fa-solid ${icon}"></i>
+                        ${escapeHtml(message)}
+                    </div>
+                `;
+            }
+
+            /* =====================================================
+               TODAY'S OFFER
+            ====================================================== */
+            async function loadTodayOffer() {
+
+                const container = document.getElementById("todayOfferContainer");
+                if (!container) return;
+
+                const todayName = new Date().toLocaleDateString("en-US", {
+                    weekday: "long"
+                });
+
+                const todayNameLower = todayName.toLowerCase();
+                const defaultImage = `assets/images/offers/${todayNameLower}.jpg`;
+
+                try {
+                    const response = await fetch(`${API_BASE}/offers/today`, {
+                        method: "GET",
+                        cache: "no-store"
+                    });
+
+                    if (!response.ok) {
+                        console.warn("Today's Offer API HTTP Status:", response.status);
+                        renderTodayOffer(todayName, defaultImage, false);
+                        return;
+                    }
+
+                    const payload = await response.json();
+
+                    console.log("TODAY OFFER API RESPONSE:", payload);
+
+                    // The backend returns data as ONE OBJECT, not an array.
+                    const offer = payload && payload.data ? payload.data : null;
+
+                    let imagePath = defaultImage;
+
+                    if (offer && offer.image) {
+                        const imageName = String(offer.image)
+                            .split("/")
+                            .pop()
+                            .trim();
+
+                        if (imageName) {
+                            imagePath = `assets/images/offers/${imageName}`;
+                        }
+                    }
+
+                    renderTodayOffer(
+                        todayName,
+                        imagePath,
+                        Boolean(offer && offer.image)
+                    );
+
+                } catch (error) {
+                    console.error("TODAY OFFER ERROR:", error);
+
+                    // Keep the daily image visible even if the API is unavailable.
+                    renderTodayOffer(todayName, defaultImage, false);
+                }
+            }
+
+            /* =====================================================
+               RENDER TODAY'S OFFER
+            ====================================================== */
+            function renderTodayOffer(day, imagePath, databaseOffer) {
+
+                const container = document.getElementById("todayOfferContainer");
+                if (!container) return;
+
+                const safeDay = escapeHtml(day);
+                const safeImage = escapeHtml(imagePath);
+
+                container.innerHTML = `
+                    <div class="today-offer-card">
+
+                        <div
+                            class="today-offer-image-wrap"
+                            data-offer-image="${safeImage}"
+                            role="button"
+                            tabindex="0"
+                            aria-label="View today's offer image"
+                        >
+                            <img
+                                src="${safeImage}"
+                                alt="${safeDay} special salon offer"
+                                class="today-offer-image"
+                                loading="eager"
+                            >
+                        </div>
+
+                        <div class="today-offer-content">
+
+                            <span class="today-offer-badge">
+                                <i class="fa-solid fa-tags"></i>
+                                TODAY'S OFFER
+                            </span>
+
+                            <h3 class="today-offer-title">
+                                ${safeDay} Special Offer
+                            </h3>
+
+                            <p class="today-offer-description">
+                                Enjoy our special salon offer available today at The Beauty Salon.
+                            </p>
+
+                            <div class="today-offer-meta">
+                                <i class="fa-solid ${databaseOffer ? "fa-circle-check" : "fa-calendar-day"}"></i>
+                                ${databaseOffer ? "Special offer available today" : "Today's special offer"}
+                            </div>
+
+                        </div>
+
+                        <div class="today-offer-action">
+                            <a href="pages/booking.html" class="button button-gold">
+                                <i class="fa-regular fa-calendar-check"></i>
+                                <span>Book Appointment</span>
+                            </a>
+                        </div>
+
+                    </div>
+                `;
+
+                const image = container.querySelector(".today-offer-image");
+
+                if (image) {
+                    image.addEventListener("error", function () {
+
+                        const fallback = `assets/images/offers/${day.toLowerCase()}.jpg`;
+
+                        if (this.getAttribute("src") !== fallback) {
+                            this.src = fallback;
+                            return;
+                        }
+
+                        this.style.display = "none";
+                    });
+                }
+
+                const imageWrap = container.querySelector(".today-offer-image-wrap");
+
+                if (imageWrap) {
+
+                    const open = function () {
+                        openOfferImageModal(
+                            imagePath,
+                            `${day} Special Offer`
+                        );
+                    };
+
+                    imageWrap.addEventListener("click", open);
+
+                    imageWrap.addEventListener("keydown", function (event) {
+                        if (event.key === "Enter" || event.key === " ") {
+                            event.preventDefault();
+                            open();
+                        }
+                    });
+                }
+            }
+
+            /* =====================================================
+               OFFER IMAGE MODAL
+            ====================================================== */
+            function openOfferImageModal(imagePath, altText) {
+
+                const modal = document.getElementById("offerImageModal");
+                const modalImage = document.getElementById("offerImageModalImg");
+
+                if (!modal || !modalImage || !imagePath) return;
+
+                modalImage.src = imagePath;
+                modalImage.alt = altText || "Offer preview";
+
+                modal.classList.add("open");
+                modal.setAttribute("aria-hidden", "false");
+                document.body.style.overflow = "hidden";
+            }
+
+            function closeOfferImageModal() {
+
+                const modal = document.getElementById("offerImageModal");
+                const modalImage = document.getElementById("offerImageModalImg");
+
+                if (!modal) return;
+
+                modal.classList.remove("open");
+                modal.setAttribute("aria-hidden", "true");
+
+                if (modalImage) {
+                    modalImage.src = "";
+                }
+
+                document.body.style.overflow = "";
+            }
+
+            const offerModal = document.getElementById("offerImageModal");
+            const offerModalClose = document.getElementById("offerImageModalClose");
+
+            if (offerModalClose) {
+                offerModalClose.addEventListener("click", closeOfferImageModal);
+            }
+
+            if (offerModal) {
+                offerModal.addEventListener("click", function (event) {
+                    if (event.target === offerModal) {
+                        closeOfferImageModal();
+                    }
+                });
+            }
+
+            document.addEventListener("keydown", function (event) {
+                if (event.key === "Escape") {
+                    closeOfferImageModal();
+                }
+            });
+
+            /* =====================================================
+               SERVICES DATABASE
+            ====================================================== */
+            async function loadHomeServices() {
+                const grid = document.getElementById("homeServicesGrid");
+                if (!grid) return;
+
+                try {
+                    const response = await fetch(`${API_BASE}/services`, {
+                        cache: "no-store"
+                    });
+
+                    if (!response.ok) {
+                        throw new Error("Services API returned HTTP " + response.status);
+                    }
+
+                    const payload = await response.json();
+                    const services = apiRows(payload);
+
+                    if (!services.length) {
+                        showApiMessage(grid, "No active services found in the database.", "fa-scissors");
+                        return;
+                    }
+
+                    grid.innerHTML = services.slice(0, 3).map(function (service, index) {
+
+                        const category = String(service.category || "").toLowerCase();
+
+                        const icon =
+                            category === "him" ? "fa-scissors" :
+                            category === "her" ? "fa-spa" :
+                            category === "child" ? "fa-child" :
+                            "fa-sparkles";
+
+                        const number = String(index + 1).padStart(2, "0");
+                        const id = service.id ?? "";
+                        const name = service.name || "Salon Service";
+                        const duration = service.duration || "30";
+                        const price = Number(service.price || 0);
+
+                        return `
+                            <article class="service-card">
+
+                                <div class="service-card-top">
+                                    <span class="service-number">${number}</span>
+
+                                    <span class="service-icon">
+                                        <i class="fa-solid ${icon}"></i>
+                                    </span>
+                                </div>
+
+                                <h3>
+                                    ${escapeHtml(name)}
+                                </h3>
+
+                                <p>
+                                    Professional ${escapeHtml(name.toLowerCase())}
+                                    service at The Beauty Salon.
+                                </p>
+
+                                <div class="service-card-bottom">
+
+                                    <span class="service-duration">
+                                        <i class="fa-regular fa-clock"></i>
+                                        ${escapeHtml(duration)} min
+                                    </span>
+
+                                    <strong class="service-price">
+                                        ₹${price.toLocaleString("en-IN")}
+                                    </strong>
+
+                                </div>
+
+                                <a href="pages/booking.html?service=${encodeURIComponent(String(name))}&service_id=${encodeURIComponent(String(id))}"
+                                   class="service-book-link">
+
+                                    <span>Book Service</span>
+                                    <i class="fa-solid fa-arrow-right"></i>
+
+                                </a>
+
+                            </article>
+                        `;
+                    }).join("");
+
+                } catch (error) {
+                    console.error("SERVICES API ERROR:", error);
+                    showApiMessage(grid, "Services could not be loaded from the database.", "fa-triangle-exclamation");
+                }
+            }
+
+            /* =====================================================
+               BRANCHES DATABASE
+            ====================================================== */
+            async function loadHomeBranches() {
+                const grid = document.getElementById("homeBranchesGrid");
+                if (!grid) return;
+
+                try {
+                    const response = await fetch(`${API_BASE}/branches`, {
+                        cache: "no-store"
+                    });
+
+                    if (!response.ok) {
+                        throw new Error("Branches API returned HTTP " + response.status);
+                    }
+
+                    const payload = await response.json();
+                    const branches = apiRows(payload).filter(function (branch) {
+                        return branch.is_active === undefined ||
+                               Number(branch.is_active) === 1 ||
+                               String(branch.status || "").toUpperCase() === "OPEN";
+                    });
+
+                    if (!branches.length) {
+                        showApiMessage(grid, "No active branches found in the database.", "fa-location-dot");
+                        return;
+                    }
+
+                    grid.innerHTML = branches.slice(0, 2).map(function (branch, index) {
+
+                        const phone = branch.phone || "";
+                        const email = branch.email || "";
+                        const opening = normalizeTime(branch.opening_time) || "9:00 AM";
+                        const closing = normalizeTime(branch.closing_time) || "9:00 PM";
+
+                        return `
+                            <article class="branch-card">
+
+                                <div class="branch-header">
+                                    <span class="branch-label">
+                                        ${index === 0 ? "MAIN BRANCH" : "ADDITIONAL BRANCH"}
+                                    </span>
+
+                                    <span class="branch-icon">
+                                        <i class="fa-solid ${index === 0 ? "fa-location-dot" : "fa-building"}"></i>
+                                    </span>
+                                </div>
+
+                                <h3>
+                                    ${escapeHtml(branch.name || "The Beauty Salon")}
+                                </h3>
+
+                                <h4>
+                                    ${escapeHtml(
+                                        branch.address
+                                            ? String(branch.address).split(",")[0]
+                                            : "Baramati"
+                                    )}
+                                </h4>
+
+                                <p>
+                                    ${escapeHtml(branch.address || "Baramati, Maharashtra")}
+                                </p>
+
+                                <div class="branch-information">
+
+                                    ${phone ? `
+                                        <a href="tel:${escapeHtml(phone)}">
+                                            <i class="fa-solid fa-phone"></i>
+                                            <span>${escapeHtml(phone)}</span>
+                                        </a>
+                                    ` : ""}
+
+                                    ${email ? `
+                                        <a href="mailto:${escapeHtml(email)}">
+                                            <i class="fa-regular fa-envelope"></i>
+                                            <span>${escapeHtml(email)}</span>
+                                        </a>
+                                    ` : ""}
+
+                                    <span>
+                                        <i class="fa-regular fa-clock"></i>
+                                        <span>Mon – Sun · ${escapeHtml(opening)} – ${escapeHtml(closing)}</span>
+                                    </span>
+
+                                </div>
+
+                                <a href="pages/booking.html?branch=${encodeURIComponent(String(branch.id ?? ""))}"
+                                   class="branch-button">
+
+                                    <span>Book at ${escapeHtml(branch.name || "Branch")}</span>
+                                    <i class="fa-solid fa-arrow-right"></i>
+
+                                </a>
+
+                            </article>
+                        `;
+                    }).join("");
+
+                } catch (error) {
+                    console.error("BRANCHES API ERROR:", error);
+                    showApiMessage(grid, "Branches could not be loaded from the database.", "fa-triangle-exclamation");
+                }
+            }
+
+            /* =====================================================
+               GALLERY DATABASE
+            ====================================================== */
+            async function loadHomeGallery() {
+                const grid = document.getElementById("homeGalleryGrid");
+                if (!grid) return;
+
+                try {
+                    const response = await fetch(`${API_BASE}/gallery`, {
+                        cache: "no-store"
+                    });
+
+                    if (!response.ok) {
+                        throw new Error("Gallery API returned HTTP " + response.status);
+                    }
+
+                    const payload = await response.json();
+
+                    const gallery = apiRows(payload).filter(function (item) {
+                        const status = String(item.status || "ACTIVE").toUpperCase();
+                        return status === "ACTIVE" || status === "OPEN" || status === "1";
+                    });
+
+                    if (!gallery.length) {
+                        showApiMessage(grid, "No gallery images found in the database.", "fa-images");
+                        return;
+                    }
+
+                    function imageUrl(value) {
+                        const raw = String(value || "").trim();
+
+                        if (!raw) return "";
+
+                        if (/^https?:\/\//i.test(raw)) return raw;
+
+                        if (raw.startsWith("/uploads/")) {
+                            return "http://localhost:5000" + raw;
+                        }
+
+                        if (raw.startsWith("/assets/")) {
+                            return ".." + raw;
+                        }
+
+                        if (raw.startsWith("../assets/")) {
+                            return raw;
+                        }
+
+                        if (raw.startsWith("assets/")) {
+                            return "../" + raw;
+                        }
+
+                        return "assets/images/gallery/" + raw.split("/").pop();
+                    }
+
+                    grid.innerHTML = gallery.slice(0, 4).map(function (item, index) {
+
+                        const title = item.title || item.category || "Salon Gallery";
+                        const image = imageUrl(item.image);
+
+                        return `
+                            <div class="gallery-tile ${index === 0 ? "gallery-large" : ""}">
+                                <div class="gallery-placeholder">
+
+                                    <img src="${escapeHtml(image)}"
+                                         alt="${escapeHtml(title)}"
+                                         loading="lazy"
+                                         onerror="this.style.display='none';">
+
+                                    <span>
+                                        ${escapeHtml(title)}
+                                    </span>
+
+                                </div>
+                            </div>
+                        `;
+                    }).join("");
+
+                } catch (error) {
+                    console.error("GALLERY API ERROR:", error);
+                    showApiMessage(grid, "Gallery could not be loaded from the database.", "fa-triangle-exclamation");
+                }
+            }
+
+            loadTodayOffer();
+            loadHomeServices();
+            loadHomeBranches();
+            loadHomeGallery();
+
+        });
+    </script>
+
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const year = document.getElementById("currentYear");
+            if (year) year.textContent = new Date().getFullYear();
+        });
+    </script>
+
+    <script src="js/main.js"></script>
+
+
+    <!-- OFFER IMAGE FULL-SCREEN VIEW -->
+    <div class="offer-image-modal" id="offerImageModal" aria-hidden="true">
+        <button type="button" class="offer-image-modal-close" id="offerImageModalClose" aria-label="Close offer image">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <img id="offerImageModalImg" src="" alt="Offer preview">
+    </div>
+
 
 </body>
 </html>
