@@ -484,114 +484,259 @@
             white-space: nowrap;
         }
 
-        /* =====================================================
-           FOOTER
-        ===================================================== */
-
+        /* =========================================================
+           EXACT HOME PAGE FOOTER
+        ========================================================= */
         .services-page .site-footer {
+            position: relative;
             width: 100%;
             margin: 0;
             padding: 70px 0 0;
-            background: #080808;
+            background: #070707;
             border-top: 1px solid #222;
         }
 
-        .services-page .footer-grid {
-            display: grid;
-            grid-template-columns: 1.5fr 1fr 1fr 1.25fr;
-            gap: 45px;
-            width: 100%;
-            padding-bottom: 50px;
+        .services-page .site-footer .content-container {
+            width: min(1180px, calc(100% - 40px));
+            margin: 0 auto;
         }
 
-        .services-page .footer-brand,
-        .services-page .footer-column {
+        .services-page .site-footer .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1.25fr;
+            gap: 42px;
+            width: 100%;
+            padding-bottom: 50px;
+            align-items: start;
+        }
+
+        .services-page .site-footer .footer-brand-column,
+        .services-page .site-footer .footer-column {
             min-width: 0;
         }
 
-        .services-page .footer-brand p {
-            max-width: 340px;
-            margin: 20px 0;
+        .services-page .site-footer .footer-brand-column > p {
+            max-width: 330px;
+            margin: 18px 0 0;
             color: #777;
             font-size: 13px;
-            line-height: 1.7;
+            line-height: 1.75;
         }
 
-        .services-page .footer-column h3 {
-            margin: 0 0 20px;
+        .services-page .site-footer .footer-column h3 {
+            margin: 0 0 18px;
             color: #fff;
             font-size: 14px;
+            font-weight: 600;
         }
 
-        .services-page .footer-column ul {
-            display: grid;
-            gap: 11px;
-            margin: 0;
-            padding: 0;
-            list-style: none;
-        }
-
-        .services-page .footer-column a {
+        .services-page .site-footer .footer-column > a {
+            display: block;
+            width: fit-content;
+            margin: 0 0 10px;
             color: #777;
             font-size: 13px;
+            line-height: 1.5;
             text-decoration: none;
+            transition: .25s ease;
         }
 
-        .services-page .footer-column a:hover {
+        .services-page .site-footer .footer-column > a:hover {
             color: #d4af37;
         }
 
-        .services-page .footer-contact {
-            display: grid;
-            gap: 13px;
-        }
-
-        .services-page .footer-contact p {
+        .services-page .site-footer .footer-contact-column p,
+        .services-page .site-footer .footer-contact-column > a,
+        .services-page .site-footer .footer-contact-column > span {
             display: flex;
             align-items: flex-start;
-            gap: 11px;
-            margin: 0;
+            gap: 10px;
+            margin: 0 0 11px;
             color: #777;
-            font-size: 12px;
-            line-height: 1.6;
+            font-size: 12.5px;
+            line-height: 1.55;
+            text-decoration: none;
+            overflow-wrap: anywhere;
         }
 
-        .services-page .footer-contact p i {
-            flex: 0 0 15px;
+        .services-page .site-footer .footer-contact-column i {
+            flex: 0 0 18px;
             margin-top: 3px;
             color: #d4af37;
         }
 
-        .services-page .footer-contact a {
-            overflow-wrap: anywhere;
-        }
-
-        .services-page .footer-social {
+        .services-page .site-footer .footer-socials {
             display: flex;
-            gap: 9px;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
         }
 
-        .services-page .footer-social a {
-            width: 38px;
-            height: 38px;
-            display: grid;
-            place-items: center;
-            border: 1px solid #292929;
+        .services-page .site-footer .footer-socials a {
+            width: 42px;
+            height: 42px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(212,175,55,.22);
+            border-radius: 50%;
+            color: #d4af37;
+            text-decoration: none;
+            transition: .25s ease;
         }
 
-        .services-page .footer-bottom {
+        .services-page .site-footer .footer-socials a:hover {
+            border-color: #d4af37;
+            background: rgba(212,175,55,.08);
+            transform: translateY(-2px);
+        }
+
+        .services-page .site-footer .footer-bottom {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 20px;
+            gap: 18px;
             padding: 22px 0;
             border-top: 1px solid #202020;
         }
 
-        .services-page .footer-bottom p {
+        .services-page .site-footer .footer-bottom p {
             margin: 0;
             color: #555;
-            font-size: 11px;
+            font-size: 11.5px;
+            line-height: 1.55;
+        }
+
+        .services-page .site-footer .footer-legal {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 16px;
+        }
+
+        .services-page .site-footer .footer-legal a {
+            color: #555;
+            font-size: 11.5px;
+            text-decoration: none;
+            transition: .25s ease;
+        }
+
+        .services-page .site-footer .footer-legal a:hover {
+            color: #d4af37;
+        }
+
+        @media (max-width: 1024px) {
+            .services-page .site-footer .footer-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 40px 30px;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .services-page .site-footer {
+                padding-top: 48px;
+                padding-bottom: max(24px, env(safe-area-inset-bottom));
+            }
+
+            .services-page .site-footer .content-container {
+                width: calc(100% - 32px);
+                margin-inline: auto;
+            }
+
+            .services-page .site-footer .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 30px 18px;
+                padding-bottom: 35px;
+            }
+
+            .services-page .site-footer .footer-brand-column {
+                grid-column: 1 / -1;
+                padding-bottom: 8px;
+                border-bottom: 1px solid rgba(255,255,255,.08);
+            }
+
+            .services-page .site-footer .footer-brand-column > p {
+                max-width: 330px;
+                margin-top: 12px;
+                font-size: 13px;
+                line-height: 1.7;
+            }
+
+            .services-page .site-footer .footer-socials {
+                margin-top: 16px;
+                gap: 9px;
+            }
+
+            .services-page .site-footer .footer-socials a {
+                width: 40px;
+                height: 40px;
+            }
+
+            .services-page .site-footer .footer-column h3 {
+                margin-bottom: 12px;
+                font-size: 14px;
+            }
+
+            .services-page .site-footer .footer-column > a {
+                padding: 5px 0;
+                margin: 0;
+                font-size: 13px;
+                line-height: 1.45;
+            }
+
+            .services-page .site-footer .footer-contact-column {
+                grid-column: 1 / -1;
+                padding-top: 4px;
+                padding-bottom: 6px;
+                border-top: 1px solid rgba(255,255,255,.08);
+            }
+
+            .services-page .site-footer .footer-contact-column p,
+            .services-page .site-footer .footer-contact-column > a,
+            .services-page .site-footer .footer-contact-column > span {
+                width: 100%;
+                margin: 0 0 11px;
+                font-size: 12.5px;
+                line-height: 1.55;
+            }
+
+            .services-page .site-footer .footer-bottom {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 14px;
+                margin-top: 28px;
+                padding-top: 18px;
+                text-align: left;
+            }
+
+            .services-page .site-footer .footer-legal {
+                gap: 8px 16px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .services-page .site-footer .content-container {
+                width: calc(100% - 24px);
+            }
+
+            .services-page .site-footer .footer-grid {
+                gap: 26px 14px;
+            }
+
+            .services-page .site-footer .footer-column h3 {
+                font-size: 13px;
+            }
+
+            .services-page .site-footer .footer-column > a,
+            .services-page .site-footer .footer-contact-column p,
+            .services-page .site-footer .footer-contact-column > a,
+            .services-page .site-footer .footer-contact-column > span {
+                font-size: 12px;
+            }
+
+            .services-page .site-footer .footer-socials a {
+                width: 38px;
+                height: 38px;
+            }
         }
 
         /* =====================================================
@@ -2018,6 +2163,95 @@
             transform: translateY(0);
         }
 
+        /* =========================================================
+           PROFESSIONAL BLACK + GOLD CTA
+           Found your service section
+        ========================================================= */
+        .services-page .services-cta {
+            background: #000;
+            color: #fff;
+            padding: 70px 0;
+        }
+
+        .services-page .services-cta-inner {
+            width: min(80%, 900px);
+            margin: 0 auto;
+            padding: 38px 42px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+            background: #000;
+            border: 1px solid #D4AF37;
+            border-radius: 16px;
+            box-shadow: 0 0 0 1px rgba(212,175,55,.08), 0 18px 55px rgba(0,0,0,.35);
+        }
+
+        .services-page .services-cta h2 {
+            color: #fff;
+        }
+
+        .services-page .services-cta p {
+            color: #999;
+        }
+
+        .services-page .services-cta .btn {
+            flex-shrink: 0;
+            border: 1px solid #D4AF37;
+            background: #D4AF37;
+            color: #000;
+            border-radius: 8px;
+            font-weight: 700;
+            transition: .25s ease;
+        }
+
+        .services-page .services-cta .btn:hover {
+            background: #E5C65A;
+            border-color: #E5C65A;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 767px) {
+            .services-page .services-cta {
+                padding: 50px 0;
+            }
+
+            .services-page .services-cta-inner {
+                width: 80%;
+                padding: 30px 24px;
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+                gap: 22px;
+                border-radius: 14px;
+            }
+
+            .services-page .services-cta h2 {
+                font-size: 30px;
+            }
+
+            .services-page .services-cta p {
+                font-size: 13px;
+                line-height: 1.6;
+            }
+
+            .services-page .services-cta .btn {
+                width: 100%;
+                min-height: 48px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .services-page .services-cta-inner {
+                width: 88%;
+                padding: 26px 18px;
+            }
+
+            .services-page .services-cta h2 {
+                font-size: 27px;
+            }
+        }
+
 </style>
 </head>
 
@@ -2107,7 +2341,7 @@
                     </button>
                     <div class="customer-account-dropdown" id="customerAccountDropdown">
                         <a href="appointments.html"><i class="fa-regular fa-calendar-check"></i>My Appointments</a>
-                        <a href="booking-history.html"><i class="fa-solid fa-clock-rotate-left"></i>Booking History</a>
+                        <a href="history.html"><i class="fa-solid fa-clock-rotate-left"></i>Booking History</a>
                         <a href="profile.html"><i class="fa-regular fa-user"></i>Update Profile</a>
                         <button type="button" id="customerLogoutBtn" class="customer-logout">
                             <i class="fa-solid fa-right-from-bracket"></i>Logout
@@ -2434,94 +2668,80 @@
          FOOTER
     ===================================================== -->
 
-    <footer class="footer">
-
-        <div class="container">
-
+    <footer class="site-footer">
+        <div class="content-container">
             <div class="footer-grid">
 
-                <div>
-                    <h3>
-                        The <span>Beauty</span> Salon
-                    </h3>
-                    <p style="margin-top: 12px; max-width: 310px;">
-                        A modern unisex beauty and hair salon in
-                        Baramati, created for premium styling,
-                        grooming and beauty care.
+                <div class="footer-brand-column">
+                    <a href="../index.html" class="site-brand">
+                        <span class="brand-logo">
+                            <i class="fa-solid fa-scissors"></i>
+                        </span>
+                        <span class="brand-name">
+                            <strong>The Beauty</strong>
+                            <small>Salon</small>
+                        </span>
+                    </a>
+
+                    <p>
+                        Premium unisex beauty and hair care in Baramati, Maharashtra.
                     </p>
+
+                    <div class="footer-socials">
+                        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="https://wa.me/918793465001" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
                 </div>
 
-                <div>
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="../index.html">Home</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="branches.html">Branches</a></li>
-                        <li><a href="gallery.html">Gallery</a></li>
-                    </ul>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <a href="../index.html">Home</a>
+                    <a href="about.html">About</a>
+                    <a href="services.html">Services</a>
+                    <a href="branches.html">Branches</a>
+                    <a href="gallery.html">Gallery</a>
                 </div>
 
-                <div>
-                    <h4>Customer</h4>
-                    <ul>
-                        <li><a href="booking.html">Book Appointment</a></li>
-                        <li><a href="login.html">Login</a></li>
-                        <li><a href="register.html">Create Account</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
+                <div class="footer-column">
+                    <h3>Customer</h3>
+                    <a href="booking.html">Book Appointment</a>
+                    <a href="login.html">Customer Login</a>
+                    <a href="register.html">Create Account</a>
+                    <a href="contact.html">Contact Us</a>
                 </div>
 
-                <div class="footer-contact">
-                    <h4>Baramati Branch</h4>
-
+                <div class="footer-column footer-contact-column">
+                    <h3>Contact</h3>
                     <p>
                         <i class="fa-solid fa-location-dot"></i>
-                        <span>
-                            Near Mahanagar Bank, in front of
-                            Shayog Society, Baramati, Maharashtra
-                        </span>
+                        <span>Near Mahanagar Bank, in front of Shayog Society, Baramati, Maharashtra.</span>
                     </p>
 
-                    <p>
+                    <a href="tel:+918087646512">
                         <i class="fa-solid fa-phone"></i>
-                        <a href="tel:+918793465001">+91 8793465001</a>
-                    </p>
-
-                    <p>
+                        <span>+91 8087646512</span>
+                    </a>
+                    <a href="mailto:beautysalon@gamil.com">
                         <i class="fa-regular fa-envelope"></i>
-                        <a href="mailto:beautysalon@gamil.com">beautysalon@gamil.com</a>
-                    </p>
-
-                    <p>
+                        <span>beautysalon@gamil.com</span>
+                    </a>
+                    <span>
                         <i class="fa-regular fa-clock"></i>
-                        <span>Mon - Sun: 9:00 AM - 9:00 PM</span>
-                    </p>
+                        <span>Mon – Sun: 9:00 AM – 9:00 PM</span>
+                    </span>
                 </div>
 
             </div>
 
             <div class="footer-bottom">
-                <p>
-                    © <span id="year"></span>
-                    The Beauty Salon. All Rights Reserved.
-                </p>
-
-                <div class="social">
-                    <a href="#" aria-label="Instagram" onclick="return false;">
-                        <i class="fa-brands fa-instagram"></i>
-                    </a>
-                    <a href="#" aria-label="Facebook" onclick="return false;">
-                        <i class="fa-brands fa-facebook-f"></i>
-                    </a>
-                    <a href="#" aria-label="WhatsApp" onclick="return false;">
-                        <i class="fa-brands fa-whatsapp"></i>
-                    </a>
+                <p>© <span id="year"></span> The Beauty Salon. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms &amp; Conditions</a>
                 </div>
             </div>
-
         </div>
-
     </footer>
 
 

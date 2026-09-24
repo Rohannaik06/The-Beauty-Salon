@@ -1305,6 +1305,233 @@
             }
         }
 
+    
+/* =========================================================
+   FINAL PROFESSIONAL MOBILE HEADER + HAMBURGER MENU
+   Mobile only. Desktop layout remains unchanged.
+========================================================= */
+
+.mobile-menu-button{
+    display:none;
+    width:46px;
+    height:46px;
+    min-width:46px;
+    align-items:center;
+    justify-content:center;
+    border:1px solid rgba(212,175,55,.38);
+    border-radius:12px;
+    background:rgba(17,17,17,.96);
+    color:#D4AF37;
+    font-size:19px;
+    cursor:pointer;
+    box-shadow:0 8px 24px rgba(0,0,0,.25);
+    transition:all .25s ease;
+    z-index:10002;
+}
+
+.mobile-menu-button:hover{
+    border-color:#D4AF37;
+    background:#181818;
+    transform:translateY(-1px);
+}
+
+.mobile-navigation{
+    position:fixed;
+    inset:0;
+    z-index:10001;
+    display:flex;
+    flex-direction:column;
+    background:
+        radial-gradient(circle at 85% 10%,rgba(212,175,55,.10),transparent 30%),
+        linear-gradient(180deg,#0b0b0b 0%,#050505 100%);
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+    transform:translateX(100%);
+    transition:
+        transform .32s cubic-bezier(.22,.61,.36,1),
+        opacity .25s ease,
+        visibility .25s ease;
+    overflow-y:auto;
+    -webkit-overflow-scrolling:touch;
+}
+
+.mobile-navigation.open{
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+    transform:translateX(0);
+}
+
+.mobile-navigation-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:18px;
+    padding:
+        max(18px,env(safe-area-inset-top))
+        20px
+        18px;
+    border-bottom:1px solid rgba(255,255,255,.08);
+    flex:0 0 auto;
+}
+
+.mobile-navigation-header .site-brand{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    min-width:0;
+    text-decoration:none;
+}
+
+.mobile-navigation-header .brand-name{
+    display:flex;
+    flex-direction:column;
+    line-height:1;
+}
+
+.mobile-navigation-header .brand-name strong{
+    color:#fff;
+    font-size:15px;
+    letter-spacing:.2px;
+}
+
+.mobile-navigation-header .brand-name small{
+    margin-top:4px;
+    color:#D4AF37;
+    font-size:11px;
+    letter-spacing:1.6px;
+    text-transform:uppercase;
+}
+
+.mobile-close-button{
+    width:44px;
+    height:44px;
+    min-width:44px;
+    display:grid;
+    place-items:center;
+    border:1px solid rgba(212,175,55,.42);
+    border-radius:12px;
+    background:#111;
+    color:#D4AF37;
+    font-size:20px;
+    cursor:pointer;
+    transition:all .25s ease;
+}
+
+.mobile-close-button:hover{
+    background:#D4AF37;
+    color:#111;
+    transform:rotate(90deg);
+}
+
+.mobile-navigation-links{
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+    padding:24px 20px 30px;
+}
+
+.mobile-nav-link{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    width:100%;
+    min-height:52px;
+    padding:0 15px;
+    box-sizing:border-box;
+    border:1px solid transparent;
+    border-radius:12px;
+    color:#ddd;
+    background:rgba(255,255,255,.025);
+    text-decoration:none;
+    font-size:14px;
+    font-weight:600;
+    letter-spacing:.15px;
+    transition:all .22s ease;
+}
+
+.mobile-nav-link i{
+    width:22px;
+    text-align:center;
+    color:#D4AF37;
+    font-size:16px;
+}
+
+.mobile-nav-link:hover,
+.mobile-nav-link:focus-visible,
+.mobile-nav-link.active{
+    color:#fff;
+    background:rgba(212,175,55,.09);
+    border-color:rgba(212,175,55,.28);
+    transform:translateX(3px);
+    outline:none;
+}
+
+.mobile-navigation-divider{
+    height:1px;
+    margin:12px 0 8px;
+    background:rgba(255,255,255,.10);
+}
+
+body.mobile-menu-open{
+    overflow:hidden;
+}
+
+@media (max-width:767px){
+    .mobile-menu-button{
+        display:inline-flex !important;
+    }
+
+    .mobile-navigation{
+        display:flex !important;
+    }
+
+    .header-container{
+        min-height:68px;
+    }
+
+    .site-header{
+        z-index:10000;
+    }
+
+    .site-brand .brand-name strong{
+        font-size:14px;
+    }
+
+    .site-brand .brand-name small{
+        font-size:10px;
+    }
+
+    .image-brand-logo{
+        width:42px;
+        height:42px;
+    }
+}
+
+@media (min-width:768px){
+    .mobile-navigation{
+        display:none !important;
+    }
+}
+
+@media (max-width:380px){
+    .mobile-navigation-header{
+        padding-left:14px;
+        padding-right:14px;
+    }
+
+    .mobile-navigation-links{
+        padding-left:14px;
+        padding-right:14px;
+    }
+
+    .mobile-nav-link{
+        min-height:50px;
+        font-size:13px;
+    }
+}
+
     </style>
 </head>
 
@@ -2979,17 +3206,6 @@
                     </p>
 
 
-                    <a href="tel:+918793465001">
-
-                        <i class="fa-solid fa-phone"></i>
-
-                        <span>
-                            +91 8793465001
-                        </span>
-
-                    </a>
-
-
                     <a href="tel:+918087646512">
 
                         <i class="fa-solid fa-phone"></i>
@@ -3746,14 +3962,93 @@
         });
     </script>
 
-
-
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const year = document.getElementById("currentYear");
             if (year) year.textContent = new Date().getFullYear();
         });
     </script>
+
+    
+<script>
+/* =========================================================
+   PROFESSIONAL MOBILE MENU
+   Redirects to the existing pages and closes the menu safely.
+========================================================= */
+(function () {
+    function initProfessionalMobileMenu() {
+        const menuBtn = document.getElementById("menuBtn");
+        const closeBtn = document.getElementById("closeMenuBtn");
+        const mobileMenu = document.getElementById("mobileMenu");
+
+        if (!menuBtn || !closeBtn || !mobileMenu) return;
+
+        function openMenu() {
+            mobileMenu.classList.add("open");
+            document.body.classList.add("mobile-menu-open");
+            mobileMenu.setAttribute("aria-hidden", "false");
+            menuBtn.setAttribute("aria-expanded", "true");
+            menuBtn.setAttribute("aria-label", "Close navigation menu");
+        }
+
+        function closeMenu() {
+            mobileMenu.classList.remove("open");
+            document.body.classList.remove("mobile-menu-open");
+            mobileMenu.setAttribute("aria-hidden", "true");
+            menuBtn.setAttribute("aria-expanded", "false");
+            menuBtn.setAttribute("aria-label", "Open navigation menu");
+        }
+
+        menuBtn.addEventListener("click", function (event) {
+            event.preventDefault();
+            if (mobileMenu.classList.contains("open")) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
+        });
+
+        closeBtn.addEventListener("click", function (event) {
+            event.preventDefault();
+            closeMenu();
+        });
+
+        /* Every menu item redirects to its own page normally. */
+        mobileMenu.querySelectorAll("a.mobile-nav-link").forEach(function (link) {
+            link.addEventListener("click", function () {
+                closeMenu();
+            });
+        });
+
+        /* Close when clicking outside the navigation content. */
+        mobileMenu.addEventListener("click", function (event) {
+            if (event.target === mobileMenu) {
+                closeMenu();
+            }
+        });
+
+        /* ESC closes the menu. */
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Escape" && mobileMenu.classList.contains("open")) {
+                closeMenu();
+            }
+        });
+
+        /* If screen becomes desktop, reset mobile-menu state. */
+        window.addEventListener("resize", function () {
+            if (window.innerWidth >= 768) {
+                closeMenu();
+            }
+        });
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initProfessionalMobileMenu);
+    } else {
+        initProfessionalMobileMenu();
+    }
+})();
+</script>
 
     <script src="js/main.js"></script>
 

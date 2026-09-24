@@ -8,6 +8,7 @@
     >
 
     <title>Admin Login | The Beauty Salon</title>
+    <link rel="icon" type="image/png" href="../assets/images/logo/beauty-salon-logo.png">
 
     <link
         rel="preconnect"
@@ -90,7 +91,7 @@
 
         .login-container {
             width: 100%;
-            max-width: 450px;
+            max-width: 500px;
             padding: 30px 20px;
             position: relative;
             z-index: 2;
@@ -101,7 +102,7 @@
             background: #101010;
             border: 1px solid rgba(212, 175, 55, 0.25);
             border-radius: 18px;
-            padding: 42px 38px;
+            padding: 30px 38px;
             box-shadow:
                 0 25px 70px rgba(0, 0, 0, 0.75),
                 0 0 40px rgba(212, 175, 55, 0.04);
@@ -109,7 +110,7 @@
 
         .brand {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 16px;
         }
 
         .brand-icon {
@@ -123,6 +124,15 @@
             justify-content: center;
             color: #d4af37;
             font-size: 22px;
+            overflow: hidden;
+        }
+
+        .brand-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            border-radius: 50%;
         }
 
         .brand-name {
@@ -141,7 +151,7 @@
 
         .login-title {
             text-align: center;
-            margin-bottom: 28px;
+            margin-bottom: 20px;
         }
 
         .login-title h1 {
@@ -331,7 +341,7 @@
                 <div class="brand">
 
                     <div class="brand-icon">
-                        <i class="fa-solid fa-crown"></i>
+                        <img src="../assets/images/logo/beauty-salon-logo.png" alt="The Beauty Salon Logo">
                     </div>
 
                     <div class="brand-name">

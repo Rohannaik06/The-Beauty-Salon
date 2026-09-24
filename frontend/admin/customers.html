@@ -6,6 +6,8 @@
 
     <title>Customers Management | The Beauty Salon Admin</title>
 
+    <link rel="icon" type="image/png" href="../assets/images/logo/beauty-salon-logo.png">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -612,7 +614,35 @@ tbody tr{transition:var(--transition)} tbody tr:hover{background:rgba(255,255,25
     padding-left:28px!important;
 }
 
+
+
+/* FINAL HEADER / LOGO REFINEMENT */
+.admin-logo{
+    overflow:hidden;
+    padding:0;
+}
+.admin-logo img{
+    width:100%;
+    height:100%;
+    display:block;
+    object-fit:cover;
+    border-radius:50%;
+}
+.admin-main{
+    max-width:none;
+}
+@media (min-width:851px){
+    :root{--header-height:70px}
+    .admin-header{padding:0 26px}
+    .admin-logo{width:42px;height:42px;flex-basis:42px}
+    .brand-name{font-size:20px}
+}
+@media (max-width:600px){
+    .admin-logo{width:38px;height:38px;flex-basis:38px}
+}
+
 </style>
+    <script src="admin-auth.js"></script>
 </head>
 
 <body>
@@ -631,7 +661,7 @@ tbody tr{transition:var(--transition)} tbody tr:hover{background:rgba(255,255,25
             </button>
 
             <div class="admin-logo">
-                <i class="fa-solid fa-scissors"></i>
+                <img src="../assets/images/logo/beauty-salon-logo.png" alt="The Beauty Salon Logo">
             </div>
 
             <div class="brand-area">

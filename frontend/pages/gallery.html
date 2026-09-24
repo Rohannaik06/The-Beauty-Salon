@@ -58,300 +58,490 @@
     }
 
 
-    /* =====================================================
-       HEADER
-    ===================================================== */
+    /* =========================================================
+           EXACT ABOUT MASTER HEADER + RESPONSIVE SYSTEM
+        ========================================================= */
+        .about-site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
 
-    .header {
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-        background: rgba(0, 0, 0, 0.96);
-        border-bottom: 1px solid #242424;
-        backdrop-filter: blur(10px);
-    }
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
 
-    .header-inner {
-        min-height: 74px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 20px;
-    }
+            border-bottom: 1px solid rgba(212, 175, 55, 0.12);
+        }
 
-    .logo {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        min-width: 0;
-    }
+        .about-header-container {
+            width: min(1280px, calc(100% - 40px));
+            min-height: 78px;
+            margin: 0 auto;
 
-    .logo-icon {
-        width: 42px;
-        height: 42px;
-        flex-shrink: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border: 1px solid #d4af37;
-        border-radius: 50%;
-        color: #d4af37;
-        font-size: 17px;
-    }
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
 
+        .about-brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 11px;
+            flex-shrink: 0;
+        }
 
-    .logo-icon {
-        overflow: hidden;
-        background: #111;
-    }
+        .about-brand-logo {
+            width: 44px;
+            height: 44px;
 
-    .logo-icon img {
-        width: 100%;
-        height: 100%;
-        display: block;
-        object-fit: cover;
-    }
+            display: grid;
+            place-items: center;
 
-    .logo-text strong {
-        display: block;
-        font-family: "Playfair Display", serif;
-        font-size: 18px;
-        line-height: 1;
-    }
+            border: 1px solid #D4AF37;
+            border-radius: 50%;
 
-    .logo-text span {
-        display: block;
-        margin-top: 4px;
-        color: #d4af37;
-        font-size: 10px;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-    }
+            background: rgba(212, 175, 55, 0.05);
 
-    .desktop-nav {
-        display:none;
-        align-items:center;
-        justify-content:center;
-        gap:30px;
-        flex:1 1 auto;
-        margin-left:10px;
-    }
+            color: #D4AF37;
+            font-size: 18px;
+        }
 
-    .desktop-nav{
-        justify-content:center;
-        gap:30px;
-        flex:1 1 auto;
-        margin-left:10px;
-    }
+        .about-brand-logo img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            border-radius: 50%;
+        }
 
-    .desktop-nav a {
-        color: #aaa;
-        font-size: 13px;
-        font-weight: 600;
-        transition: color 0.2s ease;
-    }
+        .about-brand-name {
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+        }
 
-    .desktop-nav a:hover,
-    .desktop-nav a.active {
-        color: #d4af37;
-    }
+        .about-brand-name strong {
+            font-family: "Playfair Display", serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: #fff;
+        }
 
+        .about-brand-name small {
+            margin-top: 5px;
 
-/* CUSTOMER ACCOUNT HEADER */
-    .header-actions{
-        display:flex;
-        align-items:center;
-        gap:10px;
-        margin-left:auto;
-        position:relative;
-    }
+            color: #D4AF37;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
 
-    .customer-login-btn,
-    .customer-account-btn{
-        min-height:42px;
-        padding:0 15px;
-        border:1px solid rgba(212,175,55,.42);
-        border-radius:9px;
-        background:#111;
-        color:#fff;
-        font-size:13px;
-        font-weight:700;
-        display:inline-flex;
-        align-items:center;
-        justify-content:center;
-        gap:8px;
-        cursor:pointer;
-        text-decoration:none;
-        transition:.25s ease;
-    }
+        .about-desktop-nav {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
 
-    .customer-login-btn:hover,
-    .customer-account-btn:hover{
-        border-color:#d4af37;
-        color:#d4af37;
-        transform:translateY(-1px);
-        box-shadow:0 8px 22px rgba(212,175,55,.10);
-    }
+        .about-desktop-nav a {
+            position: relative;
 
-    .customer-login-btn i,
-    .customer-account-btn i{
-        color:#d4af37;
-    }
+            padding: 29px 0;
 
-    .customer-account-wrap{position:relative;}
-    .customer-account-chevron{
-        font-size:9px !important;
-        color:#d4af37 !important;
-        margin-left:2px;
-        transition:transform .2s ease;
-    }
+            color: #cfcfcf;
+            font-size: 13px;
+            font-weight: 500;
 
+            white-space: nowrap;
 
-    .customer-dropdown{
-        position:absolute;
-        right:0;
-        top:calc(100% + 10px);
-        width:235px;
-        padding:9px;
-        background:#111;
-        border:1px solid rgba(212,175,55,.28);
-        border-radius:12px;
-        display:none;
-        box-shadow:0 18px 45px rgba(0,0,0,.55);
-        z-index:2500;
-    }
+            transition: color .25s ease;
+        }
 
-    .customer-dropdown.open{display:block;}
+        .about-desktop-nav a::after {
+            content: "";
 
-    .customer-dropdown a,
-    .customer-dropdown button{
-        width:100%;
-        min-height:42px;
-        padding:10px 11px;
-        border:0;
-        background:transparent;
-        color:#ccc;
-        display:flex;
-        align-items:center;
-        gap:11px;
-        text-align:left;
-        border-radius:8px;
-        font:600 13px "DM Sans",sans-serif;
-        text-decoration:none;
-        cursor:pointer;
-    }
+            position: absolute;
+            left: 0;
+            bottom: 20px;
 
-    .customer-dropdown a:hover,
-    .customer-dropdown button:hover{
-        background:rgba(212,175,55,.08);
-        color:#d4af37;
-    }
+            width: 0;
+            height: 2px;
 
-    .customer-dropdown i{
-        width:18px;
-        text-align:center;
-        color:#d4af37;
-    }
+            background: #D4AF37;
 
-    .mobile-account-area{margin-top:28px;}
+            transition: width .25s ease;
+        }
 
-    .mobile-account-area a,
-    .mobile-account-area button{
-        display:flex!important;
-        align-items:center;
-        gap:11px;
-        width:100%;
-        min-height:50px;
-        padding:14px 5px;
-        border:0;
-        border-bottom:1px solid #202020;
-        background:transparent;
-        color:#ccc;
-        font:600 16px "DM Sans",sans-serif;
-        text-decoration:none;
-        text-align:left;
-        cursor:pointer;
-    }
+        .about-desktop-nav a:hover,
+        .about-desktop-nav a.active {
+            color: #D4AF37;
+        }
 
-    .mobile-account-area a:hover,
-    .mobile-account-area button:hover{
-        color:#d4af37;
-    }
+        .about-desktop-nav a:hover::after,
+        .about-desktop-nav a.active::after {
+            width: 100%;
+        }
 
-    .mobile-account-area i{color:#d4af37;}
+        .about-header-actions {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
 
-    @media(max-width:767px){.header-actions{display:none}}
+        .about-login-btn,
+        .about-book-btn {
+            min-height: 40px;
 
-    .menu-button {
-        width: 42px;
-        height: 42px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border: 1px solid #333;
-        border-radius: 7px;
-        background: #111;
-        color: #fff;
-        cursor: pointer;
-        font-size: 17px;
-    }
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
 
+            border-radius: 8px;
 
-    /* =====================================================
-       MOBILE MENU
-    ===================================================== */
+            font-size: 12px;
+            font-weight: 700;
 
-    .mobile-menu {
-        position: fixed;
-        inset: 0;
-        z-index: 2000;
-        display: none;
-        background: #050505;
-    }
+            white-space: nowrap;
 
-    .mobile-menu.open {
-        display: block;
-    }
+            transition: all .25s ease;
+        }
 
-    .mobile-menu-inner {
-        min-height: 100%;
-        padding: 24px 20px;
-        display: flex;
-        flex-direction: column;
-    }
+        .about-login-btn {
+            padding: 0 13px;
 
-    .mobile-close {
-        align-self: flex-end;
-        width: 42px;
-        height: 42px;
-        border: 1px solid #333;
-        border-radius: 50%;
-        background: #111;
-        color: #fff;
-        cursor: pointer;
-        font-size: 18px;
-        margin-bottom: 45px;
-    }
+            color: #D4AF37;
 
-    .mobile-menu a.menu-link {
-        padding: 17px 5px;
-        border-bottom: 1px solid #202020;
-        color: #ccc;
-        font-size: 17px;
-    }
+            border: 1px solid rgba(212, 175, 55, .30);
 
-    .mobile-menu a.menu-link.active {
-        color: #d4af37;
-    }
+            background: rgba(212, 175, 55, .03);
+        }
 
-    .mobile-book {
-        margin-top: 30px;
-        padding: 15px;
-        border-radius: 7px;
-        background: #d4af37;
-        color: #000;
-        text-align: center;
-        font-weight: 700;
+        .about-login-btn:hover {
+            border-color: #D4AF37;
+            background: rgba(212, 175, 55, .08);
+        }
+
+        .about-book-btn {
+            padding: 0 15px;
+
+            color: #000;
+
+            background: #D4AF37;
+        }
+
+        .about-book-btn:hover {
+            background: #E5C65A;
+            transform: translateY(-1px);
+        }
+
+        .about-mobile-menu-btn {
+            display: none;
+
+            width: 44px;
+            height: 44px;
+
+            align-items: center;
+            justify-content: center;
+
+            border: 1px solid rgba(212, 175, 55, .35);
+            border-radius: 9px;
+
+            background: transparent;
+
+            color: #D4AF37;
+            font-size: 18px;
+        }
+
+    /* =========================================================
+           MOBILE MENU
+        ========================================================= */
+
+        .about-mobile-menu {
+            position: fixed;
+            inset: 0;
+
+            z-index: 2000;
+
+            background: rgba(0, 0, 0, .98);
+
+            opacity: 0;
+            visibility: hidden;
+
+            transform: translateY(-10px);
+
+            transition:
+                opacity .25s ease,
+                visibility .25s ease,
+                transform .25s ease;
+        }
+
+        .about-mobile-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .about-mobile-menu-header {
+            min-height: 78px;
+            padding: 0 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            border-bottom: 1px solid rgba(212, 175, 55, .15);
+        }
+
+        .about-mobile-close {
+            width: 44px;
+            height: 44px;
+
+            display: grid;
+            place-items: center;
+
+            border: 1px solid rgba(212, 175, 55, .35);
+            border-radius: 9px;
+
+            background: transparent;
+
+            color: #D4AF37;
+            font-size: 19px;
+        }
+
+        .about-mobile-links {
+            padding: 20px;
+
+            display: flex;
+            flex-direction: column;
+        }
+
+        .about-mobile-links a {
+            min-height: 53px;
+
+            display: flex;
+            align-items: center;
+            gap: 13px;
+
+            padding: 0 5px;
+
+            color: #d6d6d6;
+
+            border-bottom: 1px solid rgba(255, 255, 255, .07);
+
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .about-mobile-links a i {
+            width: 20px;
+            color: #777;
+            text-align: center;
+        }
+
+        .about-mobile-links a:hover,
+        .about-mobile-links a.active {
+            color: #D4AF37;
+        }
+
+        .about-mobile-links a:hover i,
+        .about-mobile-links a.active i {
+            color: #D4AF37;
+        }
+
+        .about-mobile-divider {
+            height: 14px;
+        }
+
+        .about-mobile-book {
+            min-height: 51px !important;
+
+            margin-top: 18px;
+
+            justify-content: center;
+
+            border: 0 !important;
+            border-radius: 9px;
+
+            background: #D4AF37;
+
+            color: #000 !important;
+
+            font-weight: 700 !important;
+        }
+
+        .about-mobile-book i {
+            color: #000 !important;
+        }
+
+        
+
+        html, body {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        .about-site-header {
+            width: 100%;
+        }
+
+        .about-mobile-menu {
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        @media (max-width: 1024px) {
+            .about-header-container {
+                width: min(1180px, calc(100% - 32px));
+            }
+            .about-desktop-nav {
+                gap: 18px;
+            }
+            .about-desktop-nav a {
+                font-size: 12px;
+            }
+            .about-header-actions {
+                gap: 6px;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .about-header-container {
+                width: calc(100% - 28px);
+                min-height: 68px;
+            }
+            .about-desktop-nav,
+            .about-header-actions {
+                display: none;
+            }
+            .about-mobile-menu-btn {
+                display: flex;
+            }
+            .about-brand-logo {
+                width: 40px;
+                height: 40px;
+            }
+            .about-brand-name strong {
+                font-size: 17px;
+            }
+            .about-brand-name small {
+                font-size: 9px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .about-header-container {
+                width: calc(100% - 20px);
+            }
+            .about-mobile-menu-header {
+                padding: 0 14px;
+            }
+            .about-mobile-links {
+                padding: 14px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .about-site-header *,
+            .about-site-header *::before,
+            .about-site-header *::after,
+            .about-mobile-menu,
+            .about-mobile-menu * {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+
+    
+        .customer-account-btn { cursor:pointer; font-family:"DM Sans",sans-serif; }
+        .customer-account-chevron { color:#D4AF37; font-size:9px; transition:transform .2s ease; }
+        .customer-account-dropdown {
+            position:absolute;
+            top:calc(100% + 10px);
+            right:0;
+            width:262px;
+            padding:8px;
+            background:#101010;
+            border:1px solid rgba(212,175,55,.28);
+            box-shadow:0 18px 45px rgba(0,0,0,.52);
+            opacity:0;
+            visibility:hidden;
+            transform:translateY(-7px);
+            transition:opacity .2s ease, visibility .2s ease, transform .2s ease;
+            z-index:1200;
+        }
+
+        .customer-account-dropdown.open {
+            opacity:1;
+            visibility:visible;
+            transform:translateY(0);
+        }
+
+        .customer-account-dropdown a,
+        .customer-account-dropdown button {
+            width:100%;
+            min-height:49px;
+            display:flex;
+            align-items:center;
+            gap:14px;
+            padding:0 13px;
+            border:0;
+            border-radius:3px;
+            background:transparent;
+            color:#d0d0d0;
+            text-decoration:none;
+            font:600 14px "DM Sans",sans-serif;
+            text-align:left;
+            cursor:pointer;
+            transition:background .2s ease, color .2s ease;
+        }
+
+        .customer-account-dropdown a:hover,
+        .customer-account-dropdown button:hover {
+            background:rgba(212,175,55,.08);
+            color:#D4AF37;
+        }
+
+        .customer-account-dropdown i {
+            width:17px;
+            flex:0 0 17px;
+            color:#D4AF37;
+            font-size:15px;
+            text-align:center;
+        }
+
+        .customer-account-btn {
+            min-width:158px;
+        }
+
+        @media (max-width:767px) {
+            .customer-account-dropdown {
+                position:fixed;
+                top:68px;
+                right:14px;
+                width:min(262px, calc(100vw - 28px));
+            }
+        }
+
+        /* Professional spacing below fixed header */
+        .gallery-page main {
+            padding-top: 78px;
+        }
+
+        @media (max-width: 767px) {
+            .gallery-page main {
+                padding-top: 68px;
+            }
+        }
+
+    .gallery-page main { padding-top: 78px; }
+
+    @media (max-width: 767px) {
+        .gallery-page main { padding-top: 68px; }
     }
 
 
@@ -1102,6 +1292,78 @@
     }
 
 
+
+/* =====================================================
+   PROFESSIONAL HEADER + CUSTOMER ACCOUNT FIX
+===================================================== */
+.customer-login-btn,
+.customer-account-btn {
+    color: #d4af37 !important;
+    border-color: rgba(212,175,55,.42);
+}
+
+.customer-login-btn span,
+.customer-account-btn span {
+    color: #d4af37 !important;
+}
+
+.customer-login-btn i,
+.customer-account-btn i,
+.customer-account-chevron {
+    color: #d4af37 !important;
+}
+
+
+/* Make the account area visually consistent */
+.customer-account-wrap {
+    position: relative;
+}
+
+@media (max-width: 767px) {
+    .header {
+        position: sticky;
+        top: 0;
+    }
+
+    .header-inner {
+        width: calc(100% - 28px);
+        min-height: 68px;
+    }
+
+    .logo-text strong {
+        font-size: 16px;
+    }
+
+    .logo-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .mobile-menu-inner {
+        width: 100%;
+        max-width: 520px;
+        margin: 0 auto;
+        padding: 22px 20px 35px;
+    }
+
+    .mobile-menu a.menu-link,
+    .mobile-account-area a,
+    .mobile-account-area button {
+        color: #d0d0d0;
+        transition: .2s ease;
+    }
+
+    .mobile-account-area a span,
+    .mobile-account-area button span {
+        color: inherit;
+    }
+
+    .mobile-account-area a:hover,
+    .mobile-account-area button:hover {
+        color: #d4af37;
+    }
+}
+
     /* =====================================================
        TABLET
     ===================================================== */
@@ -1233,141 +1495,575 @@
             flex-direction: column;
         }
     }
+
+/* =====================================================
+   HOME PAGE STYLE FOOTER
+===================================================== */
+.site-footer {
+    padding: 68px 0 22px;
+    background: #070707;
+    border-top: 1px solid #1c1c1c;
+}
+
+.site-footer .content-container {
+    width: min(1180px, calc(100% - 32px));
+    margin: 0 auto;
+}
+
+.site-footer .footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1.35fr;
+    gap: 42px;
+}
+
+.site-footer .site-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+}
+
+.site-footer .brand-logo {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #d4af37;
+    border-radius: 50%;
+    color: #d4af37;
+}
+
+.site-footer .brand-name strong {
+    display: block;
+    font-family: "Playfair Display", serif;
+    font-size: 18px;
+    line-height: 1;
+}
+
+.site-footer .brand-name small {
+    display: block;
+    margin-top: 4px;
+    color: #d4af37;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.site-footer .footer-brand-column > p {
+    max-width: 330px;
+    margin-top: 16px;
+    color: #888;
+    font-size: 12px;
+    line-height: 1.75;
+}
+
+.site-footer .footer-socials {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.site-footer .footer-socials a {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(212,175,55,.22);
+    border-radius: 50%;
+    background: #0d0d0d;
+    color: #aaa;
+    transition: .25s ease;
+}
+
+.site-footer .footer-socials a:hover {
+    color: #000;
+    background: #d4af37;
+    border-color: #d4af37;
+    transform: translateY(-2px);
+}
+
+.site-footer .footer-column h3 {
+    margin-bottom: 18px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.site-footer .footer-column > a {
+    display: block;
+    width: fit-content;
+    margin-bottom: 10px;
+    color: #888;
+    font-size: 12px;
+    line-height: 1.6;
+    transition: .2s ease;
+}
+
+.site-footer .footer-column > a:hover {
+    color: #d4af37;
+    transform: translateX(2px);
+}
+
+.site-footer .footer-contact-column p,
+.site-footer .footer-contact-column > a,
+.site-footer .footer-contact-column > span {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 11px;
+    color: #888;
+    font-size: 12px;
+    line-height: 1.65;
+}
+
+.site-footer .footer-contact-column i {
+    width: 15px;
+    flex: 0 0 15px;
+    margin-top: 3px;
+    color: #d4af37;
+}
+
+.site-footer .footer-contact-column a:hover {
+    color: #d4af37;
+}
+
+.site-footer .footer-bottom {
+    margin-top: 42px;
+    padding-top: 18px;
+    border-top: 1px solid #1e1e1e;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.site-footer .footer-bottom p {
+    color: #666;
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+.site-footer .footer-legal {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+}
+
+.site-footer .footer-legal a {
+    color: #666;
+    font-size: 11px;
+}
+
+.site-footer .footer-legal a:hover {
+    color: #d4af37;
+}
+
+@media (max-width: 767px) {
+    .site-footer {
+        padding: 48px 0 20px;
+    }
+
+    .site-footer .content-container {
+        width: calc(100% - 32px);
+    }
+
+    .site-footer .footer-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 30px 18px;
+    }
+
+    .site-footer .footer-brand-column {
+        grid-column: 1 / -1;
+        padding-bottom: 26px;
+        border-bottom: 1px solid #1e1e1e;
+    }
+
+    .site-footer .footer-contact-column {
+        grid-column: 1 / -1;
+        padding-top: 26px;
+        border-top: 1px solid #1e1e1e;
+    }
+
+    .site-footer .footer-bottom {
+        align-items: flex-start;
+        flex-direction: column;
+        margin-top: 30px;
+    }
+
+    .site-footer .footer-legal {
+        gap: 12px 18px;
+    }
+}
+
+@media (max-width: 380px) {
+    .site-footer .content-container {
+        width: calc(100% - 24px);
+    }
+
+    .site-footer .footer-grid {
+        gap: 26px 14px;
+    }
+
+    .site-footer .footer-socials a {
+        width: 38px;
+        height: 38px;
+    }
+}
+
+
+/* =====================================================
+   GALLERY MOBILE POLISH
+===================================================== */
+@media (max-width: 767px) {
+    .gallery-toolbar {
+        padding: 14px;
+        border-radius: 14px;
+    }
+
+    .gallery-toolbar .filters {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .gallery-toolbar .filter-btn {
+        min-height: 40px;
+        padding: 8px 13px;
+    }
+
+    .gallery-grid {
+        gap: 13px;
+    }
+
+    .gallery-card {
+        height: 235px;
+        border-radius: 13px;
+    }
+
+    .gallery-card.large {
+        height: 300px;
+    }
+
+    .card-overlay {
+        padding: 16px;
+    }
+
+    .view-icon {
+        width: 38px;
+        height: 38px;
+    }
+
+    .cta {
+        padding: 55px 15px;
+    }
+
+    .cta-content {
+        width: min(100%, 520px);
+        margin: 0 auto;
+        padding: 26px 20px;
+        border: 1px solid #d4af37;
+        border-radius: 16px;
+        background: #080808;
+    }
+}
+
+@media (min-width: 768px) {
+    .cta-content {
+        width: min(80%, 920px);
+        padding: 34px 38px;
+        border: 1px solid #d4af37;
+        border-radius: 16px;
+        background: #080808;
+    }
+}
+
+
+/* =====================================================
+   PROFESSIONAL CTA CARD
+===================================================== */
+.cta-content {
+    width: min(80%, 920px);
+    padding: 34px 38px;
+    border: 1px solid #d4af37;
+    border-radius: 16px;
+    background: #080808;
+    box-shadow: 0 18px 50px rgba(0,0,0,.35);
+}
+
+
+/* FINAL ACCOUNT DROPDOWN HOVER FIX */
+.customer-account-dropdown a[href="profile.html"]:hover {
+    background: #101010 !important;
+    color: #D0D0D0 !important;
+}
+.customer-account-dropdown a[href="profile.html"]:hover i {
+    color: #D4AF37 !important;
+}
+
+
+/* FINAL GALLERY TO FOOTER SPACING */
+.gallery-section {
+    padding-bottom: 115px !important;
+}
+.site-footer {
+    margin-top: 0 !important;
+}
+
+@media (max-width: 767px) {
+    .gallery-section {
+        padding-bottom: 95px !important;
+    }
+}
+
 </style>
 
     <link rel="icon" type="image/png" href="../assets/images/logo/beauty-salon-logo.png">
 
 </head>
 
-<body>
+<body class="gallery-page">
 
 
 <!-- =====================================================
      HEADER
 ====================================================== -->
 
-<header class="header">
+<header class="about-site-header">
 
-    <div class="container header-inner">
+        <div class="about-header-container">
 
-        <a href="../index.html" class="logo">
 
-            <span class="logo-icon">
-                <img
-                    src="../assets/images/logo/beauty-salon-logo.png"
-                    alt="The Beauty Salon Logo">
-            </span>
+            <!-- Logo -->
 
-            <span class="logo-text">
-                <strong>The Beauty</strong>
-                <span>Salon</span>
-            </span>
+            <a href="../index.html"
+               class="about-brand"
+               aria-label="The Beauty Salon Home">
 
-        </a>
+                <span class="about-brand-logo">
+                    <img
+                        src="../assets/images/logo/beauty-salon-logo.png"
+                        alt="The Beauty Salon Logo"
+                    >
+                </span>
 
-        <nav class="desktop-nav">
+                <span class="about-brand-name">
 
-            <a href="../index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="services.html">Services</a>
-            <a href="branches.html">Branches</a>
-            <a href="gallery.html" class="active">Gallery</a>
-            <a href="contact.html">Contact</a>
+                    <strong>The Beauty</strong>
+
+                    <small>Salon</small>
+
+                </span>
+
+            </a>
+
+
+            <!-- Desktop Navigation -->
+
+            <nav class="about-desktop-nav"
+                 aria-label="Primary navigation">
+
+                <a href="../index.html">
+                    Home
+                </a>
+
+                <a href="about.html">
+                    About
+                </a>
+
+                <a href="services.html">
+                    Services
+                </a>
+
+                <a href="branches.html">
+                    Branches
+                </a>
+
+                <a href="gallery.html" class="active" aria-current="page">
+                    Gallery
+                </a>
+
+                <a href="contact.html">
+                    Contact
+                </a>
+
+            </nav>
+
+
+            <!-- Header Actions -->
+
+            <div class="about-header-actions">
+                <a href="login.html" class="about-login-btn customer-login-link" id="customerLoginBtn">
+                    <i class="fa-regular fa-user"></i>
+                    <span>Customer Login</span>
+                </a>
+
+                <div class="customer-account-area customer-account-wrap" id="customerAccountWrap" style="display:none; position:relative;">
+                    <button class="about-login-btn customer-account-btn"
+                            id="customerAccountBtn" type="button"
+                            aria-haspopup="true" aria-expanded="false">
+                        <i class="fa-regular fa-user"></i>
+                        <span id="customerAccountName">My Account</span>
+                        <i class="fa-solid fa-chevron-down customer-account-chevron"
+                           id="customerAccountChevron"></i>
+                    </button>
+                    <div class="customer-account-dropdown" id="customerDropdown">
+                        <a href="appointments.html"><i class="fa-regular fa-calendar-check"></i>My Appointments</a>
+                        <a href="history.html"><i class="fa-solid fa-clock-rotate-left"></i>Booking History</a>
+                        <a href="profile.html"><i class="fa-regular fa-user"></i>Update Profile</a>
+                        <button type="button" class="customer-logout">
+                            <i class="fa-solid fa-right-from-bracket"></i>Logout
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Menu -->
+
+            <button class="about-mobile-menu-btn"
+                    id="menuButton"
+                    type="button"
+                    aria-label="Open menu"
+                    aria-controls="mobileMenu"
+                    aria-expanded="false">
+
+                <i class="fa-solid fa-bars"></i>
+
+            </button>
+
+        </div>
+
+    </header>
+
+    <div class="about-mobile-menu"
+         id="mobileMenu"
+         aria-hidden="true">
+
+
+        <div class="about-mobile-menu-header">
+
+
+            <a href="../index.html"
+               class="about-brand">
+
+                <span class="about-brand-logo">
+                    <img
+                        src="../assets/images/logo/beauty-salon-logo.png"
+                        alt="The Beauty Salon Logo"
+                    >
+                </span>
+
+                <span class="about-brand-name">
+
+                    <strong>The Beauty</strong>
+
+                    <small>Salon</small>
+
+                </span>
+
+            </a>
+
+
+            <button class="about-mobile-close"
+                    id="mobileClose"
+                    type="button"
+                    aria-label="Close menu">
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+
+        <nav class="about-mobile-links"
+             aria-label="Mobile navigation">
+
+
+            <a href="../index.html">
+
+                <i class="fa-solid fa-house"></i>
+
+                <span>Home</span>
+
+            </a>
+
+
+            <a href="about.html">
+
+                <i class="fa-regular fa-circle-user"></i>
+
+                <span>About</span>
+
+            </a>
+
+
+            <a href="services.html">
+
+                <i class="fa-solid fa-scissors"></i>
+
+                <span>Services</span>
+
+            </a>
+
+
+            <a href="branches.html">
+
+                <i class="fa-solid fa-location-dot"></i>
+
+                <span>Branches</span>
+
+            </a>
+
+
+            <a href="gallery.html">
+
+                <i class="fa-regular fa-images"></i>
+
+                <span>Gallery</span>
+
+            </a>
+
+
+            <a href="contact.html">
+
+                <i class="fa-regular fa-envelope"></i>
+
+                <span>Contact</span>
+
+            </a>
+
+
+            <div class="about-mobile-divider"></div>
+
+
+            <a href="login.html" class="customer-login-link">
+                <i class="fa-solid fa-right-to-bracket"></i>
+                <span>Customer Login</span>
+            </a>
+            <a href="appointments.html" class="customer-account-area" style="display:none;">
+                <i class="fa-regular fa-calendar-check"></i><span>My Appointments</span>
+            </a>
+            <a href="booking-history.html" class="customer-account-area" style="display:none;">
+                <i class="fa-solid fa-clock-rotate-left"></i><span>Booking History</span>
+            </a>
+            <a href="profile.html" class="customer-account-area" style="display:none;">
+                <i class="fa-regular fa-user"></i><span>Update Profile</span>
+            </a>
+            <button type="button"
+                    id="mobileCustomerLogout"
+                    class="customer-account-area"
+                    style="display:none;">
+                <i class="fa-solid fa-right-from-bracket"></i><span>Logout</span>
+            </button>
 
         </nav>
 
-        <div class="header-actions">
-            <a href="login.html" class="customer-login-btn" id="customerLoginBtn">
-                <i class="fa-regular fa-user"></i><span>Customer Login</span>
-            </a>
-            <div class="customer-account-wrap" id="customerAccountWrap" style="display:none;">
-                <button class="customer-account-btn" id="customerAccountBtn" type="button" aria-haspopup="true" aria-expanded="false">
-                    <i class="fa-regular fa-user"></i>
-                    <span id="customerAccountName">My Account</span>
-                    <i class="fa-solid fa-chevron-down customer-account-chevron" id="customerAccountChevron" aria-hidden="true"></i>
-                </button>
-                <div class="customer-dropdown" id="customerDropdown">
-                    <a href="appointments.html"><i class="fa-regular fa-calendar-check"></i>My Appointments</a>
-                    <a href="booking-history.html"><i class="fa-solid fa-clock-rotate-left"></i>Booking History</a>
-                    <a href="profile.html"><i class="fa-regular fa-user"></i>Update Profile</a>
-                    <button type="button" id="customerLogout"><i class="fa-solid fa-right-from-bracket"></i>Logout</button>
-                </div>
-            </div>
-        </div>
-
-        <button
-            class="menu-button"
-            id="menuButton"
-            type="button"
-            aria-label="Open menu">
-
-            <i class="fa-solid fa-bars"></i>
-
-        </button>
-
     </div>
 
-</header>
 
-
-<!-- =====================================================
-     MOBILE MENU
-====================================================== -->
-
-<div class="mobile-menu" id="mobileMenu">
-
-    <div class="mobile-menu-inner">
-
-        <button
-            class="mobile-close"
-            id="mobileClose"
-            type="button"
-            aria-label="Close menu">
-
-            <i class="fa-solid fa-xmark"></i>
-
-        </button>
-
-        <a class="menu-link" href="../index.html">
-            Home
-        </a>
-
-        <a class="menu-link" href="about.html">
-            About
-        </a>
-
-        <a class="menu-link" href="services.html">
-            Services
-        </a>
-
-        <a class="menu-link" href="branches.html">
-            Branches
-        </a>
-
-        <a class="menu-link active" href="gallery.html">
-            Gallery
-        </a>
-
-        <a class="menu-link" href="contact.html">
-            Contact
-        </a>
-
-        <div class="mobile-account-area">
-            <a href="login.html" id="mobileCustomerLogin">
-                <i class="fa-regular fa-user"></i><span>Customer Login</span>
-            </a>
-            <div id="mobileCustomerAccount" style="display:none;">
-                <a href="appointments.html"><i class="fa-regular fa-calendar-check"></i><span>My Appointments</span></a>
-                <a href="booking-history.html"><i class="fa-solid fa-clock-rotate-left"></i><span>Booking History</span></a>
-                <a href="profile.html"><i class="fa-regular fa-user"></i><span>Update Profile</span></a>
-                <button type="button" id="mobileCustomerLogout"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></button>
-            </div>
-        </div>
-
-    </div>
-
-</div>
-
+    
 
 <!-- =====================================================
      HERO
@@ -1519,175 +2215,88 @@
 </div>
 
 
+<br><br><br><br>
+
 <!-- =====================================================
      FOOTER
 ====================================================== -->
 
-<footer class="footer">
-
-    <div class="container">
-
+<footer class="site-footer">
+    <div class="content-container">
         <div class="footer-grid">
 
-            <div>
+            <div class="footer-brand-column">
+                <a href="../index.html" class="site-brand">
+                    <span class="brand-logo">
+                        <i class="fa-solid fa-scissors"></i>
+                    </span>
+                    <span class="brand-name">
+                        <strong>The Beauty</strong>
+                        <small>Salon</small>
+                    </span>
+                </a>
 
-                <h3>
-                    The <span>Beauty</span> Salon
-                </h3>
+                <p>Premium unisex beauty and hair care in Baramati, Maharashtra.</p>
 
-                <p style="margin-top: 12px; max-width: 310px;">
-                    A modern unisex beauty and hair salon in
-                    Baramati, created for premium styling,
-                    grooming and beauty care.
-                </p>
-
+                <div class="footer-socials">
+                    <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://wa.me/918793465001" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                </div>
             </div>
 
-
-            <div>
-
-                <h4>
-                    Quick Links
-                </h4>
-
-                <ul>
-
-                    <li>
-                        <a href="../index.html">Home</a>
-                    </li>
-
-                    <li>
-                        <a href="about.html">About</a>
-                    </li>
-
-                    <li>
-                        <a href="services.html">Services</a>
-                    </li>
-
-                    <li>
-                        <a href="branches.html">Branches</a>
-                    </li>
-
-                    <li>
-                        <a href="gallery.html">Gallery</a>
-                    </li>
-
-                </ul>
-
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <a href="../index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="services.html">Services</a>
+                <a href="branches.html">Branches</a>
+                <a href="gallery.html">Gallery</a>
             </div>
 
-
-            <div>
-
-                <h4>
-                    Customer
-                </h4>
-
-                <ul>
-
-                    <li>
-                        <a href="booking.html">
-                            Book Appointment
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="login.html">
-                            Login
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="register.html">
-                            Create Account
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="contact.html">
-                            Contact
-                        </a>
-                    </li>
-
-                </ul>
-
+            <div class="footer-column">
+                <h3>Customer</h3>
+                <a href="booking.html">Book Appointment</a>
+                <a href="login.html">Customer Login</a>
+                <a href="register.html">Create Account</a>
+                <a href="contact.html">Contact Us</a>
             </div>
 
-
-            <div class="footer-contact">
-
-                <h4>
-                    Baramati Branch
-                </h4>
+            <div class="footer-column footer-contact-column">
+                <h3>Contact</h3>
 
                 <p>
                     <i class="fa-solid fa-location-dot"></i>
-
-                    <span>
-                        Near Mahanagar Bank, in front of
-                        Shayog Society, Baramati, Maharashtra
-                    </span>
+                    <span>Near Mahanagar Bank, in front of Shayog Society, Baramati, Maharashtra.</span>
                 </p>
 
-                <p>
+                <a href="tel:+918087646512">
                     <i class="fa-solid fa-phone"></i>
+                    <span>+91 8087646512</span>
+                </a>
 
-                    <a href="tel:+918793465001">
-                        +91 8793465001
-                    </a>
-                </p>
-
-                <p>
+                <a href="mailto:beautysalon@gamil.com">
                     <i class="fa-regular fa-envelope"></i>
+                    <span>beautysalon@gamil.com</span>
+                </a>
 
-                    <a href="mailto:beautysalon@gamil.com">
-                        beautysalon@gamil.com
-                    </a>
-                </p>
-
-                <p>
+                <span>
                     <i class="fa-regular fa-clock"></i>
-
-                    <span>
-                        Mon - Sun: 9:00 AM - 9:00 PM
-                    </span>
-                </p>
-
+                    <span>Mon – Sun: 9:00 AM – 9:00 PM</span>
+                </span>
             </div>
 
         </div>
-
 
         <div class="footer-bottom">
+            <p>© <span id="year"></span> The Beauty Salon. All rights reserved.</p>
 
-            <p>
-                © <span id="year"></span>
-                The Beauty Salon. All Rights Reserved.
-            </p>
-
-            <div class="social">
-
-                <a href="#" aria-label="Instagram"
-                   onclick="return false;">
-                    <i class="fa-brands fa-instagram"></i>
-                </a>
-
-                <a href="#" aria-label="Facebook"
-                   onclick="return false;">
-                    <i class="fa-brands fa-facebook-f"></i>
-                </a>
-
-                <a href="#" aria-label="WhatsApp"
-                   onclick="return false;">
-                    <i class="fa-brands fa-whatsapp"></i>
-                </a>
-
+            <div class="footer-legal">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms &amp; Conditions</a>
             </div>
-
         </div>
-
     </div>
-
 </footer>
 
 
@@ -2274,59 +2883,138 @@ if (lightboxClose) {
         /* ==============================
            CUSTOMER ACCOUNT
         ============================== */
-        function getCustomerSession(){
-            try{
-                const raw=localStorage.getItem("salon_customer_session") ||
-                          sessionStorage.getItem("salon_customer_session");
+        function readCustomerJSON(key) {
+            try {
+                const localValue = localStorage.getItem(key);
+                const sessionValue = sessionStorage.getItem(key);
+                const raw = localValue || sessionValue;
                 return raw ? JSON.parse(raw) : null;
-            }catch(e){ return null; }
+            } catch (error) {
+                return null;
+            }
         }
-        function logoutCustomer(){
-            localStorage.removeItem("salon_customer_session");
-            sessionStorage.removeItem("salon_customer_session");
-            localStorage.removeItem("salon_customer");
-            sessionStorage.removeItem("salon_customer");
-            window.location.href="../index.html";
-        }
-        const session=getCustomerSession();
-        const loginBtn=document.getElementById("customerLoginBtn");
-        const accountWrap=document.getElementById("customerAccountWrap");
-        const accountBtn=document.getElementById("customerAccountBtn");
-        const dropdown=document.getElementById("customerDropdown");
-        const accountName=document.getElementById("customerAccountName");
-        const mobileLogin=document.getElementById("mobileCustomerLogin");
-        const mobileAccount=document.getElementById("mobileCustomerAccount");
 
-        if(session && session.token && session.customer){
-            if(loginBtn) loginBtn.style.display="none";
-            if(accountWrap) accountWrap.style.display="block";
-            const name=session.customer.name || session.customer.fullName || "My Account";
-            if(accountName) accountName.textContent=name;
-            if(mobileLogin) mobileLogin.style.display="none";
-            if(mobileAccount) mobileAccount.style.display="block";
+        function getCustomerData() {
+            const session = readCustomerJSON("salon_customer_session");
+            const salonCustomer = readCustomerJSON("salon_customer");
+            const salonhubUser = readCustomerJSON("salonhubUser");
+
+            const customer =
+                session?.customer ||
+                salonCustomer ||
+                salonhubUser ||
+                null;
+
+            const token =
+                session?.token ||
+                localStorage.getItem("customerToken") ||
+                sessionStorage.getItem("customerToken");
+
+            return {
+                loggedIn: !!(customer && (token || salonCustomer || salonhubUser)),
+                customer
+            };
         }
-        const accountChevron=document.getElementById("customerAccountChevron");
-        if(accountBtn && dropdown){
-            accountBtn.addEventListener("click",function(e){
-                e.stopPropagation();
-                const isOpen=dropdown.classList.toggle("open");
-                accountBtn.setAttribute("aria-expanded", String(isOpen));
-                if(accountChevron){
-                    accountChevron.style.transform=isOpen ? "rotate(180deg)" : "rotate(0deg)";
+
+        function logoutCustomer() {
+            [
+                "salon_customer_session",
+                "salon_customer",
+                "salonhubUser",
+                "customerToken",
+                "customerId",
+                "customerPhone"
+            ].forEach(function (key) {
+                localStorage.removeItem(key);
+                sessionStorage.removeItem(key);
+            });
+
+            window.location.href = "../index.html";
+        }
+
+        const customerState = getCustomerData();
+        const customer = customerState.customer;
+        const loggedIn = customerState.loggedIn;
+
+        const loginBtn = document.getElementById("customerLoginBtn");
+        const accountWrap = document.getElementById("customerAccountWrap");
+        const accountBtn = document.getElementById("customerAccountBtn");
+        const dropdown = document.getElementById("customerDropdown");
+        const accountName = document.getElementById("customerAccountName");
+        const accountChevron = document.getElementById("customerAccountChevron");
+
+        if (loginBtn) {
+            loginBtn.style.display = loggedIn ? "none" : "inline-flex";
+        }
+
+        if (accountWrap) {
+            accountWrap.style.display = loggedIn ? "block" : "none";
+        }
+
+        if (accountName && customer) {
+            accountName.textContent =
+                customer.name ||
+                customer.fullName ||
+                customer.full_name ||
+                customer.username ||
+                customer.email ||
+                "My Account";
+        }
+
+        if (accountBtn && dropdown) {
+            accountBtn.addEventListener("click", function (event) {
+                event.stopPropagation();
+
+                const isOpen = dropdown.classList.toggle("open");
+
+                accountBtn.setAttribute(
+                    "aria-expanded",
+                    String(isOpen)
+                );
+
+                if (accountChevron) {
+                    accountChevron.style.transform =
+                        isOpen ? "rotate(180deg)" : "rotate(0deg)";
+                }
+            });
+
+            dropdown.addEventListener("click", function (event) {
+                event.stopPropagation();
+            });
+
+            document.addEventListener("click", function () {
+                dropdown.classList.remove("open");
+                accountBtn.setAttribute("aria-expanded", "false");
+
+                if (accountChevron) {
+                    accountChevron.style.transform = "rotate(0deg)";
                 }
             });
         }
-        document.addEventListener("click",function(e){
-            if(dropdown && !e.target.closest(".customer-account-wrap")){
-                dropdown.classList.remove("open");
-                if(accountBtn) accountBtn.setAttribute("aria-expanded","false");
-                if(accountChevron) accountChevron.style.transform="rotate(0deg)";
-            }
+
+        const mobileLogin = document.getElementById("mobileCustomerLogin");
+        const mobileAccountItems =
+            document.querySelectorAll(".customer-account-area");
+
+        if (mobileLogin) {
+            mobileLogin.style.display = loggedIn ? "none" : "flex";
+        }
+
+        mobileAccountItems.forEach(function (item) {
+            item.style.display = loggedIn ? "flex" : "none";
         });
-        const logout=document.getElementById("customerLogout");
-        const mobileLogout=document.getElementById("mobileCustomerLogout");
-        if(logout) logout.addEventListener("click",logoutCustomer);
-        if(mobileLogout) mobileLogout.addEventListener("click",logoutCustomer);
+
+        const desktopLogout = document.querySelector(".customer-logout");
+        const mobileLogout =
+            document.getElementById("mobileCustomerLogout");
+
+        if (desktopLogout) {
+            desktopLogout.addEventListener("click", logoutCustomer);
+        }
+
+        if (mobileLogout) {
+            mobileLogout.addEventListener("click", logoutCustomer);
+        }
 
         document.addEventListener(
             "keydown",
@@ -2354,6 +3042,9 @@ if (lightboxClose) {
     });
 
 </script>
+
+
+
 
 
 </body>

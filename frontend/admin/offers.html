@@ -6,6 +6,8 @@
 
     <title>Offers Management | The Beauty Salon Admin</title>
 
+    <link rel="icon" type="image/png" href="../assets/images/logo/beauty-salon-logo.png">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -13,6 +15,8 @@
 
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <script src="admin-auth.js"></script>
 
     <style>
 
@@ -1801,6 +1805,32 @@ table td{
     }
 }
 
+
+
+/* FINAL HEADER / LOGO REFINEMENT */
+.brand-logo{
+    overflow:hidden;
+    padding:0;
+}
+.brand-logo img{
+    width:100%;
+    height:100%;
+    display:block;
+    object-fit:cover;
+    border-radius:50%;
+}
+.admin-main{
+    max-width:1800px;
+}
+@media (min-width:851px){
+    :root{--header-height:70px}
+    .admin-header{padding:0 26px}
+    .brand-logo{width:42px;height:42px;flex-basis:42px}
+    .brand-main{font-size:20px}
+}
+@media (max-width:600px){
+    .brand-logo{width:38px;height:38px;flex-basis:38px}
+}
 </style>
 
 <style>
@@ -2175,7 +2205,7 @@ table td{
          HEADER
     ====================================================== -->
 
-    <header class="admin-header"> <div class="header-left"> <button class="mobile-sidebar-btn" id="mobileMenuBtn" aria-label="Open sidebar" aria-expanded="false"><i class="fa-solid fa-bars"></i></button> <a href="dashboard.html" class="admin-brand"> <div class="brand-logo"><i class="fa-solid fa-scissors"></i></div> <div class="brand-text"><div class="brand-main">The Beauty</div><div class="brand-admin">SALON ADMIN</div></div> </a> <div class="header-divider"></div> <div class="page-heading"><h1>Offers Management</h1><span>Manage daily offers, discounts and promotional campaigns.</span></div> </div> <div class="header-right"> <button class="notification-btn" aria-label="Notifications"><i class="fa-regular fa-bell"></i><span class="notification-dot"></span></button> <div class="admin-profile"><div class="profile-avatar"><i class="fa-solid fa-user-shield"></i></div><div class="profile-info"><strong>Administrator</strong><span>Super Admin</span></div></div> </div> </header>
+    <header class="admin-header"> <div class="header-left"> <button class="mobile-sidebar-btn" id="mobileMenuBtn" aria-label="Open sidebar" aria-expanded="false"><i class="fa-solid fa-bars"></i></button> <a href="dashboard.html" class="admin-brand"> <div class="brand-logo"><img src="../assets/images/logo/beauty-salon-logo.png" alt="The Beauty Salon Logo"></div> <div class="brand-text"><div class="brand-main">The Beauty</div><div class="brand-admin">SALON ADMIN</div></div> </a> <div class="header-divider"></div> <div class="page-heading"><h1>Offers Management</h1><span>Manage daily offers, discounts and promotional campaigns.</span></div> </div> <div class="header-right"> <button class="notification-btn" aria-label="Notifications"><i class="fa-regular fa-bell"></i><span class="notification-dot"></span></button> <div class="admin-profile"><div class="profile-avatar"><i class="fa-solid fa-user-shield"></i></div><div class="profile-info"><strong>Administrator</strong><span>Super Admin</span></div></div> </div> </header>
 
 
     <!-- =====================================================

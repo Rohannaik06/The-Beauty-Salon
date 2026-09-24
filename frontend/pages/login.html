@@ -1,27 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="description" content="Login to The Beauty Salon customer account.">
+    <meta name="description" content="Customer Login - The Beauty Salon">
     <meta name="theme-color" content="#000000">
 
     <title>Login | The Beauty Salon</title>
 
+    <!-- Favicon -->
+    <link rel="icon"
+          type="image/png"
+          href="../assets/images/logo/beauty-salon-logo.png">
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+        rel="stylesheet">
 
     <!-- Font Awesome -->
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
 
     <style>
-        /* =========================================================
+
+        /* =====================================================
            RESET
-        ========================================================= */
+        ===================================================== */
+
         * {
             margin: 0;
             padding: 0;
@@ -40,6 +53,11 @@
             overflow-x: hidden;
         }
 
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
         button,
         input {
             font: inherit;
@@ -49,20 +67,16 @@
             cursor: pointer;
         }
 
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
 
-        /* =========================================================
+        /* =====================================================
            VARIABLES
-        ========================================================= */
+        ===================================================== */
+
         :root {
+
             --black: #000000;
-            --black-soft: #101010;
-            --dark: #111111;
+            --dark: #101010;
             --card: #181818;
-            --card-light: #202020;
 
             --gold: #D4AF37;
             --gold-light: #E5C65A;
@@ -70,420 +84,461 @@
 
             --white: #FFFFFF;
             --gray: #AAAAAA;
-            --gray-light: #D0D0D0;
+            --border: rgba(212,175,55,0.22);
 
-            --border: rgba(212, 175, 55, 0.22);
         }
 
-        /* =========================================================
+
+        /* =====================================================
            HEADER
-        ========================================================= */
+        ===================================================== */
+
         .site-header {
+
             position: fixed;
+
             top: 0;
             left: 0;
+
             width: 100%;
+
             z-index: 1000;
 
-            background: rgba(0, 0, 0, 0.94);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
+            background: rgba(0,0,0,0.94);
 
-            border-bottom: 1px solid rgba(212, 175, 55, 0.12);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+
+            border-bottom:
+                1px solid rgba(212,175,55,0.14);
+
         }
+
 
         .header-inner {
-            width: min(1180px, calc(100% - 32px));
+
+            width:
+                min(1180px, calc(100% - 32px));
+
             min-height: 76px;
-            margin: 0 auto;
+
+            margin: auto;
 
             display: flex;
+
             align-items: center;
+
             justify-content: space-between;
-            gap: 20px;
+
         }
 
-        /* Logo */
+
+        /* =====================================================
+           BRAND / LOGO
+        ===================================================== */
+
         .brand {
+
             display: inline-flex;
+
             align-items: center;
-            gap: 12px;
-            flex-shrink: 0;
+
+            gap: 11px;
+
         }
 
-        .brand-icon {
-            width: 43px;
-            height: 43px;
 
-            display: grid;
-            place-items: center;
+        .brand-logo {
+
+            width: 44px;
+            height: 44px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border:
+                1px solid var(--gold);
 
             border-radius: 50%;
-            border: 1px solid var(--gold);
 
-            color: var(--gold);
-            font-size: 18px;
+            overflow: hidden;
 
-            background: rgba(212, 175, 55, 0.06);
+            background:
+                rgba(212,175,55,0.06);
+
         }
 
-        .brand-text {
-            line-height: 1.05;
-        }
 
-        .brand-text strong {
+        .brand-logo img {
+
+            width: 100%;
+            height: 100%;
+
             display: block;
 
-            font-family: "Playfair Display", serif;
+            object-fit: cover;
+
+            border-radius: 50%;
+
+        }
+
+
+        .brand-name {
+
+            display: flex;
+
+            flex-direction: column;
+
+            line-height: 1;
+
+        }
+
+
+        .brand-name strong {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
             font-size: 18px;
+
             font-weight: 600;
 
-            color: var(--white);
+            color: #fff;
+
         }
 
-        .brand-text span {
-            display: block;
 
-            margin-top: 2px;
+        .brand-name span {
 
-            font-size: 11px;
-            letter-spacing: 2.5px;
+            margin-top: 5px;
+
+            color: var(--gold);
+
+            font-size: 10px;
+
+            font-weight: 600;
+
+            letter-spacing: 3px;
+
             text-transform: uppercase;
 
-            color: var(--gold);
         }
 
-        /* Desktop Navigation */
-        .desktop-nav {
-            display: flex;
-            align-items: center;
-            gap: 28px;
-        }
 
-        .desktop-nav a {
-            position: relative;
+        /* =====================================================
+           HEADER ACTIONS
+        ===================================================== */
 
-            color: #d7d7d7;
-            font-size: 14px;
-            font-weight: 500;
-
-            padding: 28px 0;
-
-            transition: color 0.25s ease;
-        }
-
-        .desktop-nav a::after {
-            content: "";
-
-            position: absolute;
-            left: 0;
-            bottom: 20px;
-
-            width: 0;
-            height: 2px;
-
-            background: var(--gold);
-
-            transition: width 0.25s ease;
-        }
-
-        .desktop-nav a:hover,
-        .desktop-nav a.active {
-            color: var(--gold);
-        }
-
-        .desktop-nav a:hover::after,
-        .desktop-nav a.active::after {
-            width: 100%;
-        }
-
-        /* Header actions */
         .header-actions {
+
             display: flex;
+
             align-items: center;
-            gap: 10px;
+
+            gap: 20px;
+
         }
 
-        .login-header-btn {
-            color: var(--gold);
-            border: 1px solid rgba(212, 175, 55, 0.35);
-            border-radius: 8px;
 
-            padding: 10px 15px;
+        .secure-text {
 
-            font-size: 13px;
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            color: #777;
+
+            font-size: 11px;
+
             font-weight: 600;
 
-            transition: all 0.25s ease;
         }
 
-        .login-header-btn:hover {
-            background: rgba(212, 175, 55, 0.08);
-            border-color: var(--gold);
+
+        .secure-text i {
+
+            color: var(--gold);
+
         }
 
-        .book-header-btn {
+
+        .back-home {
+
+            min-height: 40px;
+
             display: inline-flex;
+
             align-items: center;
+
             justify-content: center;
-            gap: 8px;
 
-            background: var(--gold);
-            color: #000;
+            gap: 7px;
 
-            padding: 11px 17px;
+            padding: 0 14px;
+
+            border:
+                1px solid rgba(212,175,55,0.30);
+
             border-radius: 8px;
 
-            font-size: 13px;
+            color: var(--gold);
+
+            font-size: 12px;
+
             font-weight: 700;
 
-            transition: all 0.25s ease;
+            transition: 0.25s ease;
+
         }
 
-        .book-header-btn:hover {
-            background: var(--gold-light);
-            transform: translateY(-1px);
-        }
 
-        /* Mobile menu button */
-        .menu-btn {
-            width: 43px;
-            height: 43px;
-
-            display: none;
-            place-items: center;
-
-            background: transparent;
-            border: 1px solid rgba(212, 175, 55, 0.35);
-            border-radius: 8px;
-
-            color: var(--gold);
-            font-size: 19px;
-        }
-
-        /* =========================================================
-           MOBILE MENU
-        ========================================================= */
-        .mobile-menu {
-            position: fixed;
-            inset: 0;
-
-            z-index: 2000;
-
-            background: rgba(0, 0, 0, 0.98);
-
-            display: flex;
-            flex-direction: column;
-
-            opacity: 0;
-            visibility: hidden;
-
-            transform: translateY(-10px);
-
-            transition:
-                opacity 0.25s ease,
-                visibility 0.25s ease,
-                transform 0.25s ease;
-        }
-
-        .mobile-menu.open {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .mobile-menu-top {
-            min-height: 76px;
-            padding: 0 20px;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
-        }
-
-        .mobile-close {
-            width: 43px;
-            height: 43px;
-
-            display: grid;
-            place-items: center;
-
-            background: transparent;
-            border: 1px solid rgba(212, 175, 55, 0.35);
-            border-radius: 8px;
-
-            color: var(--gold);
-            font-size: 18px;
-        }
-
-        .mobile-nav {
-            padding: 25px 20px;
-
-            display: flex;
-            flex-direction: column;
-        }
-
-        .mobile-nav a {
-            padding: 18px 5px;
-
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-
-            color: #ddd;
-            font-size: 17px;
-            font-weight: 500;
-        }
-
-        .mobile-nav a:hover,
-        .mobile-nav a.active {
-            color: var(--gold);
-        }
-
-        .mobile-book {
-            margin-top: 20px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-
-            padding: 14px;
-
-            border-radius: 9px;
+        .back-home:hover {
 
             background: var(--gold);
+
+            border-color: var(--gold);
+
             color: #000;
 
-            font-weight: 700;
         }
 
-        /* =========================================================
+
+        /* =====================================================
            PAGE
-        ========================================================= */
+        ===================================================== */
+
         .login-page {
+
             min-height: 100vh;
 
-            padding: 125px 20px 50px;
+            padding:
+                120px
+                20px
+                45px;
 
             display: flex;
+
             align-items: center;
+
             justify-content: center;
 
             position: relative;
 
             background:
+
                 radial-gradient(
                     circle at 50% 30%,
-                    rgba(212, 175, 55, 0.09),
+                    rgba(212,175,55,0.09),
                     transparent 38%
                 ),
+
                 #000;
+
         }
 
+
         .login-page::before {
+
             content: "";
 
             position: absolute;
+
             inset: 0;
 
             pointer-events: none;
 
             background-image:
+
                 linear-gradient(
-                    rgba(212, 175, 55, 0.025) 1px,
+                    rgba(212,175,55,0.025) 1px,
                     transparent 1px
                 ),
+
                 linear-gradient(
                     90deg,
-                    rgba(212, 175, 55, 0.025) 1px,
+                    rgba(212,175,55,0.025) 1px,
                     transparent 1px
                 );
 
             background-size: 50px 50px;
 
-            mask-image: linear-gradient(
-                to bottom,
-                black,
-                transparent 80%
-            );
+            mask-image:
+                linear-gradient(
+                    to bottom,
+                    black,
+                    transparent 80%
+                );
+
         }
+
 
         .login-wrapper {
+
             width: 100%;
-            max-width: 470px;
+
+            max-width: 450px;
 
             position: relative;
-            z-index: 1;
+
+            z-index: 2;
+
         }
 
-        /* =========================================================
-           LOGIN CARD
-        ========================================================= */
-        .login-card {
-            background: rgba(17, 17, 17, 0.96);
 
-            border: 1px solid var(--border);
-            border-radius: 18px;
+        /* =====================================================
+           CARD
+        ===================================================== */
+
+        .login-card {
+
+            width: 100%;
 
             padding: 38px 36px;
 
+            background:
+                rgba(17,17,17,0.97);
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 18px;
+
             box-shadow:
-                0 25px 70px rgba(0, 0, 0, 0.55),
-                0 0 50px rgba(212, 175, 55, 0.04);
+
+                0 25px 70px rgba(0,0,0,0.55),
+
+                0 0 50px
+                rgba(212,175,55,0.04);
+
         }
+
+
+        /* =====================================================
+           LOGIN / FORGOT HEADINGS
+        ===================================================== */
 
         .login-heading {
+
             text-align: center;
+
             margin-bottom: 30px;
+
         }
 
-        .login-icon {
-            width: 62px;
-            height: 62px;
-
-            margin: 0 auto 18px;
-
-            display: grid;
-            place-items: center;
-
-            border-radius: 50%;
-
-            border: 1px solid rgba(212, 175, 55, 0.5);
-
-            background: rgba(212, 175, 55, 0.07);
-
-            color: var(--gold);
-            font-size: 24px;
-        }
 
         .login-heading h1 {
-            font-family: "Playfair Display", serif;
+
+            font-family:
+                "Playfair Display",
+                serif;
 
             font-size: 34px;
+
             line-height: 1.2;
 
             font-weight: 600;
 
-            color: var(--white);
+            color: #fff;
 
             margin-bottom: 8px;
+
         }
+
 
         .login-heading p {
+
             color: var(--gray);
+
             font-size: 14px;
+
             line-height: 1.6;
+
         }
 
-        /* =========================================================
-           FORM
-        ========================================================= */
-        .form-group {
-            margin-bottom: 20px;
+
+        .forgot-heading {
+
+            text-align: center;
+
+            margin-bottom: 30px;
+
         }
+
+
+        .forgot-icon {
+
+            width: 62px;
+            height: 62px;
+
+            margin:
+                0 auto 18px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border:
+                1px solid rgba(212,175,55,0.35);
+
+            border-radius: 50%;
+
+            background:
+                rgba(212,175,55,0.06);
+
+            color: var(--gold);
+
+            font-size: 22px;
+
+        }
+
+
+        .forgot-heading h1 {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 32px;
+
+            font-weight: 600;
+
+            color: #fff;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .forgot-heading p {
+
+            color: #999;
+
+            font-size: 13px;
+
+            line-height: 1.7;
+
+        }
+
+
+        /* =====================================================
+           FORMS
+        ===================================================== */
+
+        .form-group {
+
+            margin-bottom: 20px;
+
+        }
+
 
         .form-label {
+
             display: block;
 
             margin-bottom: 8px;
@@ -491,20 +546,29 @@
             color: #e5e5e5;
 
             font-size: 13px;
+
             font-weight: 600;
+
         }
+
 
         .input-wrapper {
+
             position: relative;
+
         }
 
+
         .input-icon {
+
             position: absolute;
 
             left: 15px;
+
             top: 50%;
 
-            transform: translateY(-50%);
+            transform:
+                translateY(-50%);
 
             color: #777;
 
@@ -512,18 +576,25 @@
 
             pointer-events: none;
 
-            transition: color 0.25s ease;
+            transition: 0.25s ease;
+
         }
 
+
         .form-input {
+
             width: 100%;
+
             height: 50px;
 
-            padding: 0 45px;
+            padding:
+                0 45px;
 
             background: #0b0b0b;
 
-            border: 1px solid #2b2b2b;
+            border:
+                1px solid #2b2b2b;
+
             border-radius: 9px;
 
             color: #fff;
@@ -532,68 +603,101 @@
 
             outline: none;
 
-            transition:
-                border-color 0.25s ease,
-                box-shadow 0.25s ease;
+            transition: 0.25s ease;
+
         }
+
 
         .form-input::placeholder {
+
             color: #666;
+
         }
 
+
         .form-input:focus {
+
             border-color: var(--gold);
 
             box-shadow:
-                0 0 0 3px rgba(212, 175, 55, 0.08);
+                0 0 0 3px
+                rgba(212,175,55,0.08);
+
         }
 
-        .input-wrapper:focus-within .input-icon {
+
+        .input-wrapper:focus-within
+        .input-icon {
+
             color: var(--gold);
+
         }
+
+
+        /* =====================================================
+           PASSWORD TOGGLE
+        ===================================================== */
 
         .password-toggle {
+
             position: absolute;
 
             right: 13px;
+
             top: 50%;
 
-            transform: translateY(-50%);
+            transform:
+                translateY(-50%);
 
             width: 30px;
             height: 30px;
 
             border: 0;
+
             background: transparent;
 
             color: #777;
 
             display: grid;
+
             place-items: center;
 
-            transition: color 0.2s ease;
         }
+
 
         .password-toggle:hover {
+
             color: var(--gold);
+
         }
 
-        /* =========================================================
-           FORM OPTIONS
-        ========================================================= */
+
+        /* =====================================================
+           OPTIONS
+        ===================================================== */
+
         .form-options {
+
             display: flex;
+
             align-items: center;
+
             justify-content: space-between;
 
             gap: 15px;
 
-            margin: 4px 0 22px;
+            margin:
+                4px 0 22px;
+
         }
 
+
         .remember-label {
+
             display: inline-flex;
+
             align-items: center;
+
             gap: 8px;
 
             color: #aaa;
@@ -601,444 +705,532 @@
             font-size: 13px;
 
             cursor: pointer;
+
         }
 
+
         .remember-label input {
+
             width: 15px;
             height: 15px;
 
             accent-color: var(--gold);
 
-            cursor: pointer;
         }
 
+
         .forgot-link {
+
             color: var(--gold);
 
             font-size: 13px;
+
             font-weight: 600;
+
+            cursor: pointer;
+
         }
+
 
         .forgot-link:hover {
+
             color: var(--gold-light);
+
             text-decoration: underline;
+
         }
 
-        /* =========================================================
-           LOGIN BUTTON
-        ========================================================= */
+
+        /* =====================================================
+           BUTTON
+        ===================================================== */
+
         .login-btn {
+
             width: 100%;
+
             min-height: 52px;
 
             display: flex;
+
             align-items: center;
+
             justify-content: center;
+
             gap: 9px;
 
             border: 0;
+
             border-radius: 9px;
 
             background: var(--gold);
+
             color: #000;
 
             font-size: 15px;
+
             font-weight: 700;
 
-            transition:
-                background 0.25s ease,
-                transform 0.25s ease,
-                box-shadow 0.25s ease;
+            transition: 0.25s ease;
+
         }
+
 
         .login-btn:hover {
-            background: var(--gold-light);
 
-            transform: translateY(-1px);
+            background:
+                var(--gold-light);
+
+            transform:
+                translateY(-1px);
 
             box-shadow:
-                0 8px 25px rgba(212, 175, 55, 0.15);
+                0 8px 25px
+                rgba(212,175,55,0.15);
+
         }
 
-        .login-btn:active {
-            transform: translateY(0);
+
+        .login-btn:disabled {
+
+            opacity: 0.65;
+
+            cursor: not-allowed;
+
+            transform: none;
+
         }
 
-        /* =========================================================
+
+        /* =====================================================
            MESSAGE
-        ========================================================= */
+        ===================================================== */
+
         .form-message {
+
             display: none;
 
             margin-top: 16px;
+
             padding: 12px 14px;
 
             border-radius: 8px;
 
             font-size: 13px;
+
             line-height: 1.5;
 
             text-align: center;
+
         }
 
+
         .form-message.error {
+
             display: block;
 
             color: #ffb4b4;
 
-            background: rgba(180, 30, 30, 0.10);
+            background:
+                rgba(180,30,30,0.10);
 
-            border: 1px solid rgba(255, 80, 80, 0.20);
+            border:
+                1px solid
+                rgba(255,80,80,0.20);
+
         }
 
+
         .form-message.success {
+
             display: block;
 
             color: #d9f7df;
 
-            background: rgba(40, 150, 70, 0.10);
+            background:
+                rgba(40,150,70,0.10);
 
-            border: 1px solid rgba(80, 200, 100, 0.20);
+            border:
+                1px solid
+                rgba(80,200,100,0.20);
+
         }
 
-        /* =========================================================
-           REGISTER
-        ========================================================= */
-        .register-text {
+
+        /* =====================================================
+           REGISTER / BACK LOGIN
+        ===================================================== */
+
+        .register-text,
+        .back-login {
+
             margin-top: 25px;
 
             padding-top: 22px;
 
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            border-top:
+                1px solid
+                rgba(255,255,255,0.08);
 
             text-align: center;
 
             color: #999;
 
             font-size: 14px;
+
         }
 
-        .register-text a {
+
+        .register-text a,
+        .back-login a {
+
             color: var(--gold);
+
             font-weight: 700;
+
         }
 
-        .register-text a:hover {
+
+        .register-text a:hover,
+        .back-login a:hover {
+
             color: var(--gold-light);
+
             text-decoration: underline;
+
         }
 
-        /* =========================================================
-           SECURITY NOTE
-        ========================================================= */
+
+        .back-login a {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            font-size: 13px;
+
+        }
+
+
+        /* =====================================================
+           SECURITY
+        ===================================================== */
+
         .security-note {
+
             margin-top: 18px;
 
             display: flex;
+
             align-items: center;
+
             justify-content: center;
+
             gap: 7px;
 
             color: #666;
 
             font-size: 11px;
+
         }
+
 
         .security-note i {
+
             color: var(--gold-dark);
+
         }
 
-        /* =========================================================
+
+        /* =====================================================
            FOOTER
-        ========================================================= */
+        ===================================================== */
+
         .login-footer {
-            margin-top: 24px;
+
+            margin-top: 20px;
 
             text-align: center;
 
             color: #666;
 
             font-size: 12px;
+
         }
+
 
         .login-footer a {
+
             color: #999;
+
         }
+
 
         .login-footer a:hover {
+
             color: var(--gold);
+
         }
 
-        /* =========================================================
-           TABLET
-        ========================================================= */
-        @media (max-width: 1100px) {
-            .desktop-nav {
-                gap: 18px;
-            }
 
-            .desktop-nav a {
-                font-size: 13px;
-            }
+        /* =====================================================
+           FORGOT PAGE HIDDEN
+        ===================================================== */
 
-            .header-actions {
-                gap: 7px;
-            }
+        #forgotPasswordView {
 
-            .login-header-btn,
-            .book-header-btn {
-                padding-left: 12px;
-                padding-right: 12px;
-            }
+            display: none;
+
         }
 
-        /* =========================================================
+
+        /* =====================================================
            MOBILE
-        ========================================================= */
+        ===================================================== */
+
         @media (max-width: 767px) {
+
             .header-inner {
+
+                width:
+                    calc(100% - 28px);
+
                 min-height: 68px;
-                width: min(100% - 28px, 600px);
+
             }
 
-            .desktop-nav,
-            .header-actions {
-                display: none;
-            }
 
-            .menu-btn {
-                display: grid;
-            }
+            .brand-logo {
 
-            .brand-icon {
                 width: 40px;
                 height: 40px;
+
             }
 
-            .brand-text strong {
+
+            .brand-name strong {
+
                 font-size: 17px;
+
             }
 
-            .brand-text span {
-                font-size: 10px;
+
+            .brand-name span {
+
+                font-size: 9px;
+
             }
+
+
+            .secure-text {
+
+                display: none;
+
+            }
+
+
+            .back-home {
+
+                min-height: 37px;
+
+                padding:
+                    0 11px;
+
+                font-size: 11px;
+
+            }
+
 
             .login-page {
+
                 padding:
-                    100px
+                    92px
                     14px
                     35px;
+
             }
 
+
             .login-card {
-                padding: 30px 22px;
+
+                padding:
+                    30px 22px;
+
                 border-radius: 15px;
+
             }
 
-            .login-heading {
-                margin-bottom: 25px;
-            }
 
             .login-heading h1 {
+
                 font-size: 29px;
+
             }
 
-            .login-heading p {
-                font-size: 13px;
+
+            .forgot-heading h1 {
+
+                font-size: 29px;
+
             }
 
-            .login-icon {
-                width: 56px;
-                height: 56px;
-                font-size: 21px;
-                margin-bottom: 15px;
-            }
 
             .form-options {
+
                 align-items: flex-start;
+
             }
 
-            .forgot-link {
-                white-space: nowrap;
-            }
         }
 
-        /* =========================================================
-           SMALL MOBILE
-        ========================================================= */
+
         @media (max-width: 380px) {
-            .brand-text strong {
-                font-size: 16px;
+
+            .header-inner {
+
+                width:
+                    calc(100% - 20px);
+
             }
 
-            .brand-text span {
-                letter-spacing: 2px;
-                font-size: 9px;
+
+            .brand-name strong {
+
+                font-size: 16px;
+
             }
+
+
+            .login-page {
+
+                padding-left: 10px;
+
+                padding-right: 10px;
+
+            }
+
 
             .login-card {
-                padding: 27px 17px;
+
+                padding:
+                    27px 17px;
+
             }
 
-            .login-heading h1 {
+
+            .login-heading h1,
+            .forgot-heading h1 {
+
                 font-size: 27px;
+
             }
+
 
             .form-options {
+
                 flex-direction: column;
+
+                align-items: flex-start;
+
                 gap: 12px;
+
             }
 
-            .forgot-link {
-                align-self: flex-start;
-            }
         }
 
-        /* =========================================================
-           REDUCED MOTION
-        ========================================================= */
-        @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-                scroll-behavior: auto !important;
-                transition: none !important;
-                animation: none !important;
-            }
-        }
     </style>
+
 </head>
+
 
 <body>
 
-    <!-- =========================================================
-         HEADER
-    ========================================================= -->
-    <header class="site-header">
-        <div class="header-inner">
 
-            <a href="../index.html" class="brand" aria-label="The Beauty Salon Home">
-                <div class="brand-icon">
-                    <i class="fa-solid fa-scissors"></i>
-                </div>
+<!-- =====================================================
+     HEADER
+===================================================== -->
 
-                <div class="brand-text">
-                    <strong>The Beauty</strong>
-                    <span>Salon</span>
-                </div>
+<header class="site-header">
+
+    <div class="header-inner">
+
+
+        <!-- LOGO IN HEADER ONLY -->
+
+        <a
+            href="../index.html"
+            class="brand"
+            aria-label="The Beauty Salon Home">
+
+            <span class="brand-logo">
+
+                <img
+                    src="../assets/images/logo/beauty-salon-logo.png"
+                    alt="The Beauty Salon Logo">
+
+            </span>
+
+
+            <span class="brand-name">
+
+                <strong>The Beauty</strong>
+
+                <span>Salon</span>
+
+            </span>
+
+        </a>
+
+
+        <div class="header-actions">
+
+            <span class="secure-text">
+
+                <i class="fa-solid fa-shield-halved"></i>
+
+                Secure Customer Login
+
+            </span>
+
+
+            <a
+                href="../index.html"
+                class="back-home">
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Back to Salon
+
             </a>
-
-            <!-- Desktop Navigation -->
-            <nav class="desktop-nav" aria-label="Main navigation">
-
-                <a href="../index.html">Home</a>
-
-                <a href="about.html">About</a>
-
-                <a href="services.html">Services</a>
-
-                <a href="branches.html">Branches</a>
-
-                <a href="gallery.html">Gallery</a>
-
-                <a href="contact.html">Contact</a>
-
-            </nav>
-
-            <!-- Admin Login -->
-            <a href="admin-login.html"
-               class="login-header-btn"
-               style="display:inline-flex;align-items:center;justify-content:center;gap:8px;">
-                <i class="fa-solid fa-user-shield"></i>
-                Admin Login
-            </a>
-
-            <!-- Mobile Menu Button -->
-            <button
-                class="menu-btn"
-                id="menuBtn"
-                type="button"
-                aria-label="Open menu"
-                aria-controls="mobileMenu"
-                aria-expanded="false">
-
-                <i class="fa-solid fa-bars"></i>
-
-            </button>
 
         </div>
-    </header>
-
-
-    <!-- =========================================================
-         MOBILE MENU
-    ========================================================= -->
-    <div class="mobile-menu" id="mobileMenu">
-
-        <div class="mobile-menu-top">
-
-            <a href="../index.html" class="brand">
-                <div class="brand-icon">
-                    <i class="fa-solid fa-scissors"></i>
-                </div>
-
-                <div class="brand-text">
-                    <strong>The Beauty</strong>
-                    <span>Salon</span>
-                </div>
-            </a>
-
-            <button
-                class="mobile-close"
-                id="closeMenuBtn"
-                type="button"
-                aria-label="Close menu">
-
-                <i class="fa-solid fa-xmark"></i>
-
-            </button>
-
-        </div>
-
-        <nav class="mobile-nav" aria-label="Mobile navigation">
-
-            <a href="../index.html">Home</a>
-
-            <a href="about.html">About</a>
-
-            <a href="services.html">Services</a>
-
-            <a href="branches.html">Branches</a>
-
-            <a href="gallery.html">Gallery</a>
-
-            <a href="contact.html">Contact</a>
-
-            <a href="admin-login.html">
-                <i class="fa-solid fa-user-shield"></i>
-                Admin Login
-            </a>
-
-        </nav>
 
     </div>
 
+</header>
 
-    <!-- =========================================================
-         LOGIN SECTION
-    ========================================================= -->
-    <main class="login-page">
 
-        <div class="login-wrapper">
+<!-- =====================================================
+     LOGIN PAGE
+===================================================== -->
 
-            <div class="login-card">
+<main class="login-page">
 
-                <!-- Heading -->
+    <div class="login-wrapper">
+
+        <div class="login-card">
+
+
+            <!-- =================================================
+                 LOGIN VIEW
+            ================================================== -->
+
+            <div id="loginView">
+
+
                 <div class="login-heading">
-
-                    <div class="login-icon">
-                        <i class="fa-regular fa-user"></i>
-                    </div>
 
                     <h1>Welcome Back</h1>
 
@@ -1050,26 +1242,32 @@
                 </div>
 
 
-                <!-- Login Form -->
-                <form id="loginForm" novalidate>
+                <form id="loginForm">
 
-                    <!-- Email / Mobile -->
+
+                    <!-- EMAIL / MOBILE -->
+
                     <div class="form-group">
 
                         <label
                             class="form-label"
                             for="loginIdentifier">
+
                             Email or Mobile Number
+
                         </label>
+
 
                         <div class="input-wrapper">
 
-                            <i class="fa-regular fa-user input-icon"></i>
+                            <i
+                                class="fa-regular fa-user input-icon">
+                            </i>
+
 
                             <input
                                 type="text"
                                 id="loginIdentifier"
-                                name="identifier"
                                 class="form-input"
                                 placeholder="Enter email or mobile number"
                                 autocomplete="username"
@@ -1080,27 +1278,34 @@
                     </div>
 
 
-                    <!-- Password -->
+                    <!-- PASSWORD -->
+
                     <div class="form-group">
 
                         <label
                             class="form-label"
                             for="loginPassword">
+
                             Password
+
                         </label>
+
 
                         <div class="input-wrapper">
 
-                            <i class="fa-solid fa-lock input-icon"></i>
+                            <i
+                                class="fa-solid fa-lock input-icon">
+                            </i>
+
 
                             <input
                                 type="password"
                                 id="loginPassword"
-                                name="password"
                                 class="form-input"
                                 placeholder="Enter your password"
                                 autocomplete="current-password"
                                 required>
+
 
                             <button
                                 type="button"
@@ -1108,8 +1313,10 @@
                                 id="passwordToggle"
                                 aria-label="Show password">
 
-                                <i class="fa-regular fa-eye"
-                                   id="passwordIcon"></i>
+                                <i
+                                    class="fa-regular fa-eye"
+                                    id="passwordIcon">
+                                </i>
 
                             </button>
 
@@ -1118,54 +1325,61 @@
                     </div>
 
 
-                    <!-- Remember + Forgot -->
+                    <!-- OPTIONS -->
+
                     <div class="form-options">
 
                         <label class="remember-label">
 
                             <input
                                 type="checkbox"
-                                id="rememberMe"
-                                name="remember">
+                                id="rememberMe">
 
-                            <span>Remember me</span>
+                            <span>
+                                Remember me
+                            </span>
 
                         </label>
+
 
                         <a
                             href="#"
                             class="forgot-link"
                             id="forgotPassword">
+
                             Forgot Password?
+
                         </a>
 
                     </div>
 
 
-                    <!-- Login Button -->
+                    <!-- LOGIN BUTTON -->
+
                     <button
                         type="submit"
                         class="login-btn"
                         id="loginBtn">
 
-                        <i class="fa-solid fa-right-to-bracket"></i>
+                        <i
+                            class="fa-solid fa-right-to-bracket">
+                        </i>
 
                         <span>Login</span>
 
                     </button>
 
 
-                    <!-- Message -->
                     <div
                         class="form-message"
-                        id="formMessage"
-                        role="alert">
+                        id="formMessage">
                     </div>
 
                 </form>
 
 
-                <!-- Register -->
+                <!-- REGISTER -->
+
                 <div class="register-text">
 
                     Don't have an account?
@@ -1177,534 +1391,451 @@
                 </div>
 
 
-                <!-- Security -->
                 <div class="security-note">
 
                     <i class="fa-solid fa-shield-halved"></i>
 
-                    <span>Your account information is protected.</span>
+                    <span>
+                        Your account information is protected.
+                    </span>
 
                 </div>
 
             </div>
 
 
-            <!-- Footer -->
-            <div class="login-footer">
+            <!-- =================================================
+                 FORGOT PASSWORD VIEW
+            ================================================== -->
 
-                © <span id="currentYear"></span>
-                The Beauty Salon · Baramati, Maharashtra
+            <div id="forgotPasswordView">
 
-                <br>
 
-                <a href="contact.html">
-                    Need Help? Contact Us
-                </a>
+                <div class="forgot-heading">
+
+                    <div class="forgot-icon">
+
+                        <i class="fa-solid fa-key"></i>
+
+                    </div>
+
+
+                    <h1>Reset Password</h1>
+
+
+                    <p>
+
+                        Enter your registered email and
+                        create a new password for your account.
+
+                    </p>
+
+                </div>
+
+
+                <form id="forgotPasswordForm">
+
+
+                    <!-- EMAIL -->
+
+                    <div class="form-group">
+
+                        <label
+                            class="form-label"
+                            for="forgotEmail">
+
+                            Email Address
+
+                        </label>
+
+
+                        <div class="input-wrapper">
+
+                            <i
+                                class="fa-regular fa-envelope input-icon">
+                            </i>
+
+
+                            <input
+                                type="email"
+                                id="forgotEmail"
+                                class="form-input"
+                                placeholder="Enter your registered email"
+                                autocomplete="email"
+                                required>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- NEW PASSWORD -->
+
+                    <div class="form-group">
+
+                        <label
+                            class="form-label"
+                            for="newPassword">
+
+                            New Password
+
+                        </label>
+
+
+                        <div class="input-wrapper">
+
+                            <i
+                                class="fa-solid fa-lock input-icon">
+                            </i>
+
+
+                            <input
+                                type="password"
+                                id="newPassword"
+                                class="form-input"
+                                placeholder="Enter new password"
+                                autocomplete="new-password"
+                                required>
+
+
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                data-target="newPassword">
+
+                                <i
+                                    class="fa-regular fa-eye">
+                                </i>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- CONFIRM PASSWORD -->
+
+                    <div class="form-group">
+
+                        <label
+                            class="form-label"
+                            for="confirmPassword">
+
+                            Confirm Password
+
+                        </label>
+
+
+                        <div class="input-wrapper">
+
+                            <i
+                                class="fa-solid fa-lock input-icon">
+                            </i>
+
+
+                            <input
+                                type="password"
+                                id="confirmPassword"
+                                class="form-input"
+                                placeholder="Confirm your new password"
+                                autocomplete="new-password"
+                                required>
+
+
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                data-target="confirmPassword">
+
+                                <i
+                                    class="fa-regular fa-eye">
+                                </i>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- MESSAGE -->
+
+                    <div
+                        class="form-message"
+                        id="forgotFormMessage">
+                    </div>
+
+
+                    <!-- RESET BUTTON -->
+
+                    <button
+                        type="submit"
+                        class="login-btn"
+                        id="resetPasswordBtn">
+
+                        <i class="fa-solid fa-key"></i>
+
+                        <span>Reset Password</span>
+
+                    </button>
+
+                </form>
+
+
+                <!-- BACK TO LOGIN -->
+
+                <div class="back-login">
+
+                    <a
+                        href="#"
+                        id="backToLogin">
+
+                        <i class="fa-solid fa-arrow-left"></i>
+
+                        Back to Login
+
+                    </a>
+
+                </div>
+
+
+                <div class="security-note">
+
+                    <i class="fa-solid fa-shield-halved"></i>
+
+                    <span>
+                        Your password is securely protected.
+                    </span>
+
+                </div>
 
             </div>
 
         </div>
 
-    </main>
+
+        <!-- FOOTER -->
+
+        <div class="login-footer">
+
+            © <span id="currentYear"></span>
+            The Beauty Salon · Baramati, Maharashtra
+
+            <br>
+
+            <a href="contact.html">
+                Need Help? Contact Us
+            </a>
+
+        </div>
+
+    </div>
+
+</main>
 
 
-    <!-- =========================================================
-         JAVASCRIPT
-    ========================================================= -->
-    <script>
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
 
-        document.addEventListener("DOMContentLoaded", function () {
+<script>
 
-            /* -----------------------------------------------------
-               ELEMENTS
-            ----------------------------------------------------- */
+document.addEventListener("DOMContentLoaded", function () {
 
-            const menuBtn =
-                document.getElementById("menuBtn");
+    /* =================================================
+       ELEMENTS
+    ================================================= */
 
-            const closeMenuBtn =
-                document.getElementById("closeMenuBtn");
+    const loginView =
+        document.getElementById("loginView");
 
-            const mobileMenu =
-                document.getElementById("mobileMenu");
+    const forgotPasswordView =
+        document.getElementById("forgotPasswordView");
 
-            const passwordToggle =
-                document.getElementById("passwordToggle");
+    const forgotPassword =
+        document.getElementById("forgotPassword");
 
-            const passwordInput =
-                document.getElementById("loginPassword");
-
-            const passwordIcon =
-                document.getElementById("passwordIcon");
-
-            const loginForm =
-                document.getElementById("loginForm");
-
-            const formMessage =
-                document.getElementById("formMessage");
-
-            const loginBtn =
-                document.getElementById("loginBtn");
-
-            const forgotPassword =
-                document.getElementById("forgotPassword");
-
-            const currentYear =
-                document.getElementById("currentYear");
+    const backToLogin =
+        document.getElementById("backToLogin");
 
 
-            /* -----------------------------------------------------
-               CURRENT YEAR
-            ----------------------------------------------------- */
+    /* =================================================
+       YEAR
+    ================================================= */
 
-            if (currentYear) {
-                currentYear.textContent =
-                    new Date().getFullYear();
-            }
+    const currentYear =
+        document.getElementById("currentYear");
 
-
-            /* -----------------------------------------------------
-               MOBILE MENU OPEN
-            ----------------------------------------------------- */
-
-            function openMobileMenu() {
-
-                if (!mobileMenu) return;
-
-                mobileMenu.classList.add("open");
-
-                if (menuBtn) {
-                    menuBtn.setAttribute(
-                        "aria-expanded",
-                        "true"
-                    );
-                }
-
-                document.body.style.overflow = "hidden";
-            }
+    if (currentYear) {
+        currentYear.textContent =
+            new Date().getFullYear();
+    }
 
 
-            /* -----------------------------------------------------
-               MOBILE MENU CLOSE
-            ----------------------------------------------------- */
+    /* =================================================
+       SHOW FORGOT PASSWORD
+    ================================================= */
 
-            function closeMobileMenu() {
+    if (forgotPassword) {
 
-                if (!mobileMenu) return;
+        forgotPassword.addEventListener(
+            "click",
+            function (event) {
 
-                mobileMenu.classList.remove("open");
+                event.preventDefault();
 
-                if (menuBtn) {
-                    menuBtn.setAttribute(
-                        "aria-expanded",
-                        "false"
-                    );
-                }
+                loginView.style.display = "none";
 
-                document.body.style.overflow = "";
-            }
+                forgotPasswordView.style.display = "block";
 
-
-            if (menuBtn) {
-                menuBtn.addEventListener(
-                    "click",
-                    openMobileMenu
-                );
-            }
-
-
-            if (closeMenuBtn) {
-                closeMenuBtn.addEventListener(
-                    "click",
-                    closeMobileMenu
-                );
-            }
-
-
-            /* Close menu after clicking link */
-
-            document.querySelectorAll(".mobile-nav a")
-                .forEach(function (link) {
-
-                    link.addEventListener(
-                        "click",
-                        closeMobileMenu
-                    );
-
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
                 });
 
+            }
+        );
 
-            /* Close menu with Escape */
-
-            document.addEventListener(
-                "keydown",
-                function (event) {
-
-                    if (event.key === "Escape") {
-                        closeMobileMenu();
-                    }
-
-                }
-            );
+    }
 
 
-            /* -----------------------------------------------------
-               PASSWORD SHOW / HIDE
-            ----------------------------------------------------- */
+    /* =================================================
+       BACK TO LOGIN
+    ================================================= */
 
-            if (passwordToggle && passwordInput) {
+    if (backToLogin) {
 
-                passwordToggle.addEventListener(
-                    "click",
-                    function () {
+        backToLogin.addEventListener(
+            "click",
+            function (event) {
 
-                        const isPassword =
-                            passwordInput.type === "password";
+                event.preventDefault();
 
-                        passwordInput.type =
-                            isPassword
-                                ? "text"
-                                : "password";
+                forgotPasswordView.style.display = "none";
 
-                        if (passwordIcon) {
+                loginView.style.display = "block";
 
-                            passwordIcon.className =
-                                isPassword
-                                    ? "fa-regular fa-eye-slash"
-                                    : "fa-regular fa-eye";
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
 
-                        }
+            }
+        );
 
-                        passwordToggle.setAttribute(
-                            "aria-label",
-                            isPassword
-                                ? "Hide password"
-                                : "Show password"
-                        );
+    }
 
-                    }
+
+    /* =================================================
+       LOGIN PASSWORD SHOW / HIDE
+    ================================================= */
+
+    const passwordToggle =
+        document.getElementById("passwordToggle");
+
+    const passwordInput =
+        document.getElementById("loginPassword");
+
+    const passwordIcon =
+        document.getElementById("passwordIcon");
+
+
+    if (
+        passwordToggle &&
+        passwordInput &&
+        passwordIcon
+    ) {
+
+        passwordToggle.addEventListener(
+            "click",
+            function () {
+
+                const isPassword =
+                    passwordInput.type === "password";
+
+                passwordInput.type =
+                    isPassword
+                        ? "text"
+                        : "password";
+
+                passwordIcon.className =
+                    isPassword
+                        ? "fa-regular fa-eye-slash"
+                        : "fa-regular fa-eye";
+
+                passwordToggle.setAttribute(
+                    "aria-label",
+                    isPassword
+                        ? "Hide password"
+                        : "Show password"
                 );
 
             }
+        );
 
+    }
 
-            /* -----------------------------------------------------
-               MESSAGE HELPER
-            ----------------------------------------------------- */
 
-            function showMessage(message, type) {
+    /* =================================================
+       FORGOT PASSWORD SHOW / HIDE
+    ================================================= */
 
-                if (!formMessage) return;
+    document
+        .querySelectorAll(
+            "#forgotPasswordView .password-toggle"
+        )
+        .forEach(function (button) {
 
-                formMessage.textContent = message;
-
-                formMessage.className =
-                    "form-message " + type;
-
-            }
-
-
-            function clearMessage() {
-
-                if (!formMessage) return;
-
-                formMessage.textContent = "";
-
-                formMessage.className =
-                    "form-message";
-
-            }
-
-
-            /* -----------------------------------------------------
-               LOGIN FORM
-               Backend authentication: Node.js + Express + MySQL
-            ----------------------------------------------------- */
-
-            if (loginForm) {
-
-                loginForm.addEventListener(
-                    "submit",
-                    async function (event) {
-
-                        event.preventDefault();
-
-                        clearMessage();
-
-                        const identifier =
-                            document
-                                .getElementById("loginIdentifier")
-                                .value
-                                .trim();
-
-                        const password =
-                            passwordInput.value;
-
-                        const rememberMe =
-                            document
-                                .getElementById("rememberMe")
-                                .checked;
-
-
-                        /* Empty fields */
-
-                        if (!identifier) {
-
-                            showMessage(
-                                "Please enter your email or mobile number.",
-                                "error"
-                            );
-
-                            document
-                                .getElementById("loginIdentifier")
-                                .focus();
-
-                            return;
-
-                        }
-
-
-                        if (!password) {
-
-                            showMessage(
-                                "Please enter your password.",
-                                "error"
-                            );
-
-                            passwordInput.focus();
-
-                            return;
-
-                        }
-
-
-                        /* Password minimum length */
-
-                        if (password.length < 6) {
-
-                            showMessage(
-                                "Password must contain at least 6 characters.",
-                                "error"
-                            );
-
-                            passwordInput.focus();
-
-                            return;
-
-                        }
-
-
-                        /* -------------------------------------------------
-                           SEND LOGIN REQUEST TO BACKEND
-                        ------------------------------------------------- */
-
-                        loginBtn.disabled = true;
-
-                        loginBtn.innerHTML =
-                            '<i class="fa-solid fa-spinner fa-spin"></i>' +
-                            '<span>Checking...</span>';
-
-
-                        try {
-
-                            const response =
-                                await fetch(
-                                    "http://localhost:5000/api/auth/login",
-                                    {
-                                        method: "POST",
-
-                                        headers: {
-                                            "Content-Type": "application/json"
-                                        },
-
-                                        body: JSON.stringify({
-                                            identifier: identifier,
-                                            password: password
-                                        })
-                                    }
-                                );
-
-
-                            let data = {};
-
-                            try {
-                                data = await response.json();
-                            }
-                            catch (jsonError) {
-                                data = {};
-                            }
-
-
-                            if (!response.ok) {
-
-                                throw new Error(
-                                    data.message ||
-                                    "Login failed. Please check your details."
-                                );
-
-                            }
-
-
-                            if (
-                                !data.success ||
-                                !data.token ||
-                                !data.customer
-                            ) {
-
-                                throw new Error(
-                                    "Invalid login response from server."
-                                );
-
-                            }
-
-
-                            /* -------------------------------------------------
-                               SAVE CUSTOMER SESSION
-                            ------------------------------------------------- */
-
-                            const customerSession = {
-                                token: data.token,
-                                customer: data.customer,
-                                loggedInAt: new Date().toISOString()
-                            };
-
-
-                            /*
-                               Remember me checked:
-                               Keep login until logout.
-
-                               Remember me unchecked:
-                               Keep login only for current browser tab/session.
-                            */
-
-                            if (rememberMe) {
-
-                                localStorage.setItem(
-                                    "salon_customer_session",
-                                    JSON.stringify(customerSession)
-                                );
-
-                                sessionStorage.removeItem(
-                                    "salon_customer_session"
-                                );
-
-                            }
-                            else {
-
-                                sessionStorage.setItem(
-                                    "salon_customer_session",
-                                    JSON.stringify(customerSession)
-                                );
-
-                                localStorage.removeItem(
-                                    "salon_customer_session"
-                                );
-
-                            }
-
-
-                            /* Save customer profile separately */
-
-                            localStorage.setItem(
-                                "salon_customer",
-                                JSON.stringify(data.customer)
-                            );
-
-
-                            /* -------------------------------------------------
-                               SUCCESS
-                            ------------------------------------------------- */
-
-                            showMessage(
-                                data.message ||
-                                "Login successful.",
-                                "success"
-                            );
-
-
-                            loginBtn.innerHTML =
-                                '<i class="fa-solid fa-check"></i>' +
-                                '<span>Login Successful</span>';
-
-
-                            /* Redirect to home page */
-
-                            setTimeout(
-                                function () {
-
-                                    window.location.href =
-                                        "../index.html";
-
-                                },
-                                700
-                            );
-
-
-                        }
-                        catch (error) {
-
-                            console.error(
-                                "Login Error:",
-                                error
-                            );
-
-
-                            showMessage(
-                                error.message ||
-                                "Unable to connect to the server.",
-                                "error"
-                            );
-
-
-                            loginBtn.disabled = false;
-
-                            loginBtn.innerHTML =
-                                '<i class="fa-solid fa-right-to-bracket"></i>' +
-                                '<span>Login</span>';
-
-                        }
-
-                    }
-                );
-
-            }
-
-
-            /* -----------------------------------------------------
-               FORGOT PASSWORD
-            ----------------------------------------------------- */
-
-            if (forgotPassword) {
-
-                forgotPassword.addEventListener(
-                    "click",
-                    function (event) {
-
-                        event.preventDefault();
-
-                        showMessage(
-                            "Password recovery will be connected with the backend.",
-                            "success"
-                        );
-
-                    }
-                );
-
-            }
-
-
-            /* -----------------------------------------------------
-               RESIZE
-            ----------------------------------------------------- */
-
-            window.addEventListener(
-                "resize",
+            button.addEventListener(
+                "click",
                 function () {
 
+                    const target =
+                        button.getAttribute(
+                            "data-target"
+                        );
+
+                    const input =
+                        document.getElementById(target);
+
+                    const icon =
+                        button.querySelector("i");
+
+
+                    if (!input || !icon) {
+                        return;
+                    }
+
+
                     if (
-                        window.innerWidth >= 768
+                        input.type === "password"
                     ) {
-                        closeMobileMenu();
+
+                        input.type = "text";
+
+                        icon.className =
+                            "fa-regular fa-eye-slash";
+
+                        button.setAttribute(
+                            "aria-label",
+                            "Hide password"
+                        );
+
+                    }
+
+                    else {
+
+                        input.type = "password";
+
+                        icon.className =
+                            "fa-regular fa-eye";
+
+                        button.setAttribute(
+                            "aria-label",
+                            "Show password"
+                        );
+
                     }
 
                 }
@@ -1712,7 +1843,673 @@
 
         });
 
-    </script>
+
+    /* =================================================
+       MESSAGE HELPER
+    ================================================= */
+
+    function showMessage(
+        element,
+        message,
+        type
+    ) {
+
+        if (!element) {
+            return;
+        }
+
+        element.textContent = message;
+
+        element.className =
+            "form-message " + type;
+
+    }
+
+
+    function clearMessage(element) {
+
+        if (!element) {
+            return;
+        }
+
+        element.textContent = "";
+
+        element.className =
+            "form-message";
+
+    }
+
+
+    /* =================================================
+       CUSTOMER LOGIN
+       BACKEND
+    ================================================= */
+
+    const loginForm =
+        document.getElementById("loginForm");
+
+    const loginBtn =
+        document.getElementById("loginBtn");
+
+    const formMessage =
+        document.getElementById("formMessage");
+
+
+    if (loginForm) {
+
+        loginForm.addEventListener(
+            "submit",
+            async function (event) {
+
+                event.preventDefault();
+
+                clearMessage(formMessage);
+
+
+                const identifier =
+                    document
+                        .getElementById(
+                            "loginIdentifier"
+                        )
+                        .value
+                        .trim();
+
+
+                const password =
+                    passwordInput.value;
+
+
+                const rememberMe =
+                    document
+                        .getElementById(
+                            "rememberMe"
+                        )
+                        .checked;
+
+
+                /* ---------- VALIDATION ---------- */
+
+                if (!identifier) {
+
+                    showMessage(
+                        formMessage,
+                        "Please enter your email or mobile number.",
+                        "error"
+                    );
+
+                    return;
+
+                }
+
+
+                if (!password) {
+
+                    showMessage(
+                        formMessage,
+                        "Please enter your password.",
+                        "error"
+                    );
+
+                    return;
+
+                }
+
+
+                if (password.length < 6) {
+
+                    showMessage(
+                        formMessage,
+                        "Password must contain at least 6 characters.",
+                        "error"
+                    );
+
+                    return;
+
+                }
+
+
+                /* ---------- LOADING ---------- */
+
+                loginBtn.disabled = true;
+
+                loginBtn.innerHTML =
+                    '<i class="fa-solid fa-spinner fa-spin"></i>' +
+                    '<span>Checking...</span>';
+
+
+                try {
+
+                    const response =
+                        await fetch(
+                            "http://localhost:5000/api/auth/login",
+                            {
+                                method: "POST",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json"
+                                },
+
+                                body:
+                                    JSON.stringify({
+                                        identifier:
+                                            identifier,
+
+                                        password:
+                                            password
+                                    })
+                            }
+                        );
+
+
+                    let data = {};
+
+                    try {
+
+                        data =
+                            await response.json();
+
+                    }
+                    catch (_) {
+
+                        data = {};
+
+                    }
+
+
+                    if (!response.ok) {
+
+                        throw new Error(
+                            data.message ||
+                            "Login failed. Please check your details."
+                        );
+
+                    }
+
+
+                    if (
+                        !data.success ||
+                        !data.token ||
+                        !data.customer
+                    ) {
+
+                        throw new Error(
+                            "Invalid login response from server."
+                        );
+
+                    }
+
+
+                    /* ---------- SAVE SESSION ---------- */
+
+                    const customerSession = {
+
+                        token:
+                            data.token,
+
+                        customer:
+                            data.customer,
+
+                        loggedInAt:
+                            new Date().toISOString()
+
+                    };
+
+
+                    if (rememberMe) {
+
+                        localStorage.setItem(
+                            "salon_customer_session",
+                            JSON.stringify(
+                                customerSession
+                            )
+                        );
+
+                        sessionStorage.removeItem(
+                            "salon_customer_session"
+                        );
+
+                    }
+
+                    else {
+
+                        sessionStorage.setItem(
+                            "salon_customer_session",
+                            JSON.stringify(
+                                customerSession
+                            )
+                        );
+
+                        localStorage.removeItem(
+                            "salon_customer_session"
+                        );
+
+                    }
+
+
+                    localStorage.setItem(
+                        "salon_customer",
+                        JSON.stringify(
+                            data.customer
+                        )
+                    );
+
+
+                    /* ---------- SUCCESS ---------- */
+
+                    showMessage(
+                        formMessage,
+                        data.message ||
+                        "Login successful.",
+                        "success"
+                    );
+
+
+                    loginBtn.innerHTML =
+                        '<i class="fa-solid fa-check"></i>' +
+                        '<span>Login Successful</span>';
+
+
+                    setTimeout(
+                        function () {
+
+                            window.location.href =
+                                "../index.html";
+
+                        },
+                        700
+                    );
+
+
+                }
+
+                catch (error) {
+
+                    console.error(
+                        "Login Error:",
+                        error
+                    );
+
+
+                    showMessage(
+                        formMessage,
+                        error.message ||
+                        "Unable to connect to the server.",
+                        "error"
+                    );
+
+
+                    loginBtn.disabled = false;
+
+                    loginBtn.innerHTML =
+                        '<i class="fa-solid fa-right-to-bracket"></i>' +
+                        '<span>Login</span>';
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* =================================================
+       FORGOT PASSWORD
+       REAL BACKEND CONNECTION
+    ================================================= */
+
+    const forgotForm =
+        document.getElementById(
+            "forgotPasswordForm"
+        );
+
+    const forgotMessage =
+        document.getElementById(
+            "forgotFormMessage"
+        );
+
+    const resetPasswordBtn =
+        document.getElementById(
+            "resetPasswordBtn"
+        );
+
+
+    if (forgotForm) {
+
+        forgotForm.addEventListener(
+            "submit",
+            async function (event) {
+
+                event.preventDefault();
+
+                clearMessage(forgotMessage);
+
+
+                /* ---------- GET VALUES ---------- */
+
+                const email =
+                    document
+                        .getElementById(
+                            "forgotEmail"
+                        )
+                        .value
+                        .trim()
+                        .toLowerCase();
+
+
+                const newPassword =
+                    document
+                        .getElementById(
+                            "newPassword"
+                        )
+                        .value;
+
+
+                const confirmPassword =
+                    document
+                        .getElementById(
+                            "confirmPassword"
+                        )
+                        .value;
+
+
+                /* ---------- EMAIL VALIDATION ---------- */
+
+                if (!email) {
+
+                    showMessage(
+                        forgotMessage,
+                        "Please enter your registered email.",
+                        "error"
+                    );
+
+                    return;
+
+                }
+
+
+                const emailPattern =
+                    /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+                if (
+                    !emailPattern.test(email)
+                ) {
+
+                    showMessage(
+                        forgotMessage,
+                        "Please enter a valid email address.",
+                        "error"
+                    );
+
+                    return;
+
+                }
+
+
+                /* ---------- PASSWORD VALIDATION ---------- */
+
+                if (!newPassword) {
+
+                    showMessage(
+                        forgotMessage,
+                        "Please enter a new password.",
+                        "error"
+                    );
+
+                    return;
+
+                }
+
+
+                if (
+                    newPassword.length < 6
+                ) {
+
+                    showMessage(
+                        forgotMessage,
+                        "Password must contain at least 6 characters.",
+                        "error"
+                    );
+
+                    return;
+
+                }
+
+
+                /* ---------- CONFIRM PASSWORD ---------- */
+
+                if (!confirmPassword) {
+
+                    showMessage(
+                        forgotMessage,
+                        "Please confirm your new password.",
+                        "error"
+                    );
+
+                    return;
+
+                }
+
+
+                if (
+                    newPassword !==
+                    confirmPassword
+                ) {
+
+                    showMessage(
+                        forgotMessage,
+                        "Passwords do not match.",
+                        "error"
+                    );
+
+                    return;
+
+                }
+
+
+                /* ---------- BUTTON LOADING ---------- */
+
+                resetPasswordBtn.disabled = true;
+
+                resetPasswordBtn.innerHTML =
+                    '<i class="fa-solid fa-spinner fa-spin"></i>' +
+                    '<span>Resetting...</span>';
+
+
+                try {
+
+                    /* =====================================
+                       SEND REQUEST TO BACKEND
+                    ===================================== */
+
+                    const response =
+                        await fetch(
+                            "http://localhost:5000/api/auth/forgot-password",
+                            {
+                                method: "POST",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json"
+                                },
+
+                                body:
+                                    JSON.stringify({
+
+                                        email:
+                                            email,
+
+                                        newPassword:
+                                            newPassword,
+
+                                        confirmPassword:
+                                            confirmPassword
+
+                                    })
+                            }
+                        );
+
+
+                    /* ---------- READ RESPONSE ---------- */
+
+                    let data = {};
+
+                    try {
+
+                        data =
+                            await response.json();
+
+                    }
+                    catch (_) {
+
+                        data = {};
+
+                    }
+
+
+                    /* ---------- BACKEND ERROR ---------- */
+
+                    if (!response.ok) {
+
+                        throw new Error(
+                            data.message ||
+                            "Password reset failed."
+                        );
+
+                    }
+
+
+                    /* ---------- SUCCESS ---------- */
+
+                    if (!data.success) {
+
+                        throw new Error(
+                            data.message ||
+                            "Password reset failed."
+                        );
+
+                    }
+
+
+                    showMessage(
+                        forgotMessage,
+                        data.message ||
+                        "Password reset successfully. Please login with your new password.",
+                        "success"
+                    );
+
+
+                    resetPasswordBtn.innerHTML =
+                        '<i class="fa-solid fa-check"></i>' +
+                        '<span>Password Updated</span>';
+
+
+                    /* ---------- CLEAR FORM ---------- */
+
+                    document
+                        .getElementById(
+                            "forgotPasswordForm"
+                        )
+                        .reset();
+
+
+                    /* ---------- REMOVE OLD SESSION ---------- */
+
+                    localStorage.removeItem(
+                        "salon_customer_session"
+                    );
+
+                    sessionStorage.removeItem(
+                        "salon_customer_session"
+                    );
+
+                    localStorage.removeItem(
+                        "salon_customer"
+                    );
+
+
+                    /* ---------- RETURN TO LOGIN ---------- */
+
+                    setTimeout(
+                        function () {
+
+                            forgotPasswordView.style.display =
+                                "none";
+
+                            loginView.style.display =
+                                "block";
+
+
+                            resetPasswordBtn.disabled =
+                                false;
+
+                            resetPasswordBtn.innerHTML =
+                                '<i class="fa-solid fa-key"></i>' +
+                                '<span>Reset Password</span>';
+
+
+                            clearMessage(
+                                forgotMessage
+                            );
+
+
+                            const loginIdentifier =
+                                document.getElementById(
+                                    "loginIdentifier"
+                                );
+
+
+                            if (loginIdentifier) {
+
+                                loginIdentifier.value =
+                                    email;
+
+                                loginIdentifier.focus();
+
+                            }
+
+                        },
+                        1800
+                    );
+
+
+                }
+
+                catch (error) {
+
+                    console.error(
+                        "Forgot Password Error:",
+                        error
+                    );
+
+
+                    showMessage(
+                        forgotMessage,
+                        error.message ||
+                        "Unable to connect to the server.",
+                        "error"
+                    );
+
+
+                    resetPasswordBtn.disabled =
+                        false;
+
+
+                    resetPasswordBtn.innerHTML =
+                        '<i class="fa-solid fa-key"></i>' +
+                        '<span>Reset Password</span>';
+
+                }
+
+            }
+        );
+
+    }
+
+});
+
+</script>
 
 </body>
 </html>

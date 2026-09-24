@@ -5,6 +5,7 @@ const router = express.Router();
 const {
     registerCustomer,
     loginCustomer,
+    forgotPassword,
     updateCustomerProfile
 } = require("../controllers/authController");
 
@@ -26,6 +27,16 @@ router.post(
 router.post(
     "/login",
     loginCustomer
+);
+
+
+/* ============================================
+   CUSTOMER FORGOT PASSWORD
+============================================ */
+
+router.post(
+    "/forgot-password",
+    forgotPassword
 );
 
 

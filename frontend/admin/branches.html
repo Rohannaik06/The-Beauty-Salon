@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="The Beauty Salon - Branch Management">
     <title>Branches | The Beauty Salon Admin</title>
+    <link rel="icon" type="image/png" href="../assets/images/logo/beauty-salon-logo.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -960,7 +961,33 @@
             outline: 2px solid var(--gold);
             outline-offset: 2px;
         }
-    </style>
+    
+
+        /* FINAL HEADER / LOGO REFINEMENT */
+        .brand-logo{
+            overflow:hidden;
+            padding:0;
+        }
+        .brand-logo img{
+            width:100%;
+            height:100%;
+            display:block;
+            object-fit:cover;
+            border-radius:50%;
+        }
+        .main-content{
+            max-width:1800px;
+        }
+        @media (min-width:851px){
+            :root{--header-height:70px}
+            .admin-header{padding:0 26px}
+            .brand-logo{width:42px;height:42px;flex-basis:42px}
+            .brand-main{font-size:20px}
+        }
+        @media (max-width:600px){
+            .brand-logo{width:38px;height:38px;flex-basis:38px}
+        }
+</style>
 </head>
 
 <body>
@@ -984,7 +1011,7 @@
             <a href="dashboard.html" class="admin-brand">
 
                 <div class="brand-logo">
-                    <i class="fa-solid fa-scissors"></i>
+                    <img src="../assets/images/logo/beauty-salon-logo.png" alt="The Beauty Salon Logo">
                 </div>
 
                 <div class="brand-text">

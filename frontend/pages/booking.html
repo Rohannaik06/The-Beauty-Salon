@@ -7,6 +7,8 @@
 <meta name="theme-color" content="#000000">
 <title>Book Appointment | The Beauty Salon</title>
 
+    <link rel="icon" type="image/png" href="../assets/images/logo/beauty-salon-logo.png">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
@@ -21,28 +23,436 @@ button,input,select{font-family:inherit}
 button{cursor:pointer}
 .container{width:min(1180px,calc(100% - 32px));margin:auto}
 
-/* HEADER */
-.header{position:sticky;top:0;z-index:1000;background:rgba(0,0,0,.96);border-bottom:1px solid #242424;backdrop-filter:blur(10px)}
-.header-inner{min-height:74px;display:flex;align-items:center;justify-content:space-between;gap:20px}
-.logo{display:flex;align-items:center;gap:10px}
-.logo-icon{width:42px;height:42px;display:flex;align-items:center;justify-content:center;border:1px solid #d4af37;border-radius:50%;color:#d4af37}
-.logo-text strong{display:block;font-family:"Playfair Display",serif;font-size:18px}
-.logo-text span{display:block;margin-top:3px;color:#d4af37;font-size:10px;letter-spacing:2px;text-transform:uppercase}
-.desktop-nav{display:none;align-items:center;gap:24px}
-.desktop-nav a{color:#aaa;font-size:13px;font-weight:600}
-.desktop-nav a:hover,.desktop-nav a.active{color:#d4af37}
-.header-book{display:none;padding:11px 17px;border-radius:6px;background:#d4af37;color:#000;font-size:12px;font-weight:700}
-.menu-button{width:42px;height:42px;border:1px solid #333;border-radius:7px;background:#111;color:#fff}
-.mobile-menu{position:fixed;inset:0;z-index:2000;display:none;background:#050505}
-.mobile-menu.open{display:block}
-.mobile-menu-inner{min-height:100%;padding:24px 20px;display:flex;flex-direction:column}
-.mobile-close{align-self:flex-end;width:42px;height:42px;margin-bottom:40px;border:1px solid #333;border-radius:50%;background:#111;color:#fff}
-.mobile-link{padding:17px 5px;border-bottom:1px solid #202020;color:#ccc;font-size:17px}
-.mobile-link.active{color:#d4af37}
-.mobile-book{margin-top:30px;padding:15px;border-radius:7px;background:#d4af37;color:#000;text-align:center;font-weight:700}
+/* =========================================================
+           PROFESSIONAL HEADER
+        ========================================================= */
+
+        .about-site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+
+            border-bottom: 1px solid rgba(212, 175, 55, 0.12);
+        }
+
+        .about-header-container {
+            width: min(1280px, calc(100% - 40px));
+            min-height: 78px;
+            margin: 0 auto;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .about-brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 11px;
+            flex-shrink: 0;
+        }
+
+        .about-brand-logo {
+            width: 44px;
+            height: 44px;
+
+            display: grid;
+            place-items: center;
+
+            border: 1px solid #D4AF37;
+            border-radius: 50%;
+
+            background: rgba(212, 175, 55, 0.05);
+
+            color: #D4AF37;
+            font-size: 18px;
+        }
+
+        .about-brand-logo img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .about-brand-name {
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+        }
+
+        .about-brand-name strong {
+            font-family: "Playfair Display", serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .about-brand-name small {
+            margin-top: 5px;
+
+            color: #D4AF37;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .about-desktop-nav {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .about-desktop-nav a {
+            position: relative;
+
+            padding: 29px 0;
+
+            color: #cfcfcf;
+            font-size: 13px;
+            font-weight: 500;
+
+            white-space: nowrap;
+
+            transition: color .25s ease;
+        }
+
+        .about-desktop-nav a::after {
+            content: "";
+
+            position: absolute;
+            left: 0;
+            bottom: 20px;
+
+            width: 0;
+            height: 2px;
+
+            background: #D4AF37;
+
+            transition: width .25s ease;
+        }
+
+        .about-desktop-nav a:hover,
+        .about-desktop-nav a.active {
+            color: #D4AF37;
+        }
+
+        .about-desktop-nav a:hover::after,
+        .about-desktop-nav a.active::after {
+            width: 100%;
+        }
+
+        .about-header-actions {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .about-login-btn,
+        .about-book-btn {
+            min-height: 40px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+
+            border-radius: 8px;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            white-space: nowrap;
+
+            transition: all .25s ease;
+        }
+
+        .about-login-btn {
+            padding: 0 13px;
+
+            color: #D4AF37;
+
+            border: 1px solid rgba(212, 175, 55, .30);
+
+            background: rgba(212, 175, 55, .03);
+        }
+
+        .about-login-btn:hover {
+            border-color: #D4AF37;
+            background: rgba(212, 175, 55, .08);
+        }
+
+        .about-book-btn {
+            padding: 0 15px;
+
+            color: #000;
+
+            background: #D4AF37;
+        }
+
+        .about-book-btn:hover {
+            background: #E5C65A;
+            transform: translateY(-1px);
+        }
+
+        /* =========================================================
+           ACCOUNT / ADMIN HEADER ACTIONS
+        ========================================================== */
+
+        .about-admin-btn,
+        .about-login-btn,
+        .about-account-wrap {
+            min-height: 40px;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .about-admin-btn,
+        .about-login-btn {
+            justify-content: center;
+            gap: 7px;
+            padding: 0 13px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            white-space: nowrap;
+            transition: all .25s ease;
+        }
+
+        .about-admin-btn {
+            color: #D4AF37;
+            border: 1px solid rgba(212, 175, 55, .30);
+            background: rgba(212, 175, 55, .03);
+        }
+
+        .about-admin-btn:hover {
+            border-color: #D4AF37;
+            background: rgba(212, 175, 55, .08);
+        }
+
+        .about-account-wrap {
+            position: relative;
+        }
+
+        .about-account-btn {
+            min-height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            padding: 0 13px;
+            border: 1px solid rgba(212,175,55,.30);
+            border-radius: 8px;
+            background: rgba(212,175,55,.03);
+            color: #D4AF37;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .about-account-btn:hover {
+            border-color: #D4AF37;
+            background: rgba(212,175,55,.08);
+        }
+
+        .about-account-dropdown {
+            position: absolute;
+            top: calc(100% + 10px);
+            right: 0;
+            width: 205px;
+            padding: 8px;
+            background: #111;
+            border: 1px solid rgba(212,175,55,.22);
+            border-radius: 10px;
+            box-shadow: 0 18px 45px rgba(0,0,0,.45);
+            display: none;
+            z-index: 1200;
+        }
+
+        .about-account-dropdown.open {
+            display: block;
+        }
+
+        .about-account-dropdown a,
+        .about-account-dropdown button {
+            width: 100%;
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0 11px;
+            border: 0;
+            border-radius: 7px;
+            background: transparent;
+            color: #d0d0d0;
+            font: inherit;
+            font-size: 12px;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .about-account-dropdown a:hover,
+        .about-account-dropdown button:hover {
+            background: rgba(212,175,55,.08);
+            color: #D4AF37;
+        }
+
+        .about-account-dropdown i {
+            width: 16px;
+            color: #D4AF37;
+            text-align: center;
+        }
+
+        .about-mobile-menu-btn {
+            display: none;
+
+            width: 44px;
+            height: 44px;
+
+            align-items: center;
+            justify-content: center;
+
+            border: 1px solid rgba(212, 175, 55, .35);
+            border-radius: 9px;
+
+            background: transparent;
+
+            color: #D4AF37;
+            font-size: 18px;
+        }
+
+        /* =========================================================
+           MOBILE MENU
+        ========================================================= */
+
+        .about-mobile-menu {
+            position: fixed;
+            inset: 0;
+
+            z-index: 2000;
+
+            background: rgba(0, 0, 0, .98);
+
+            opacity: 0;
+            visibility: hidden;
+
+            transform: translateY(-10px);
+
+            transition:
+                opacity .25s ease,
+                visibility .25s ease,
+                transform .25s ease;
+        }
+
+        .about-mobile-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .about-mobile-menu-header {
+            min-height: 78px;
+            padding: 0 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            border-bottom: 1px solid rgba(212, 175, 55, .15);
+        }
+
+        .about-mobile-close {
+            width: 44px;
+            height: 44px;
+
+            display: grid;
+            place-items: center;
+
+            border: 1px solid rgba(212, 175, 55, .35);
+            border-radius: 9px;
+
+            background: transparent;
+
+            color: #D4AF37;
+            font-size: 19px;
+        }
+
+        .about-mobile-links {
+            padding: 20px;
+
+            display: flex;
+            flex-direction: column;
+        }
+
+        .about-mobile-links a {
+            min-height: 53px;
+
+            display: flex;
+            align-items: center;
+            gap: 13px;
+
+            padding: 0 5px;
+
+            color: #d6d6d6;
+
+            border-bottom: 1px solid rgba(255, 255, 255, .07);
+
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .about-mobile-links a i {
+            width: 20px;
+            color: #777;
+            text-align: center;
+        }
+
+        .about-mobile-links a:hover,
+        .about-mobile-links a.active {
+            color: #D4AF37;
+        }
+
+        .about-mobile-links a:hover i,
+        .about-mobile-links a.active i {
+            color: #D4AF37;
+        }
+
+        .about-mobile-divider {
+            height: 14px;
+        }
+
+        .about-mobile-book {
+            min-height: 51px !important;
+
+            margin-top: 18px;
+
+            justify-content: center;
+
+            border: 0 !important;
+            border-radius: 9px;
+
+            background: #D4AF37;
+
+            color: #000 !important;
+
+            font-weight: 700 !important;
+        }
+
+        .about-mobile-book i {
+            color: #000 !important;
+        }
 
 /* HERO */
-.booking-hero{padding:70px 20px;text-align:center;background:radial-gradient(circle,rgba(212,175,55,.13),transparent 50%),linear-gradient(#111,#000);border-bottom:1px solid #222}
+.booking-hero{padding:148px 20px 70px;text-align:center;background:radial-gradient(circle,rgba(212,175,55,.13),transparent 50%),linear-gradient(#111,#000);border-bottom:1px solid #222}
 .eyebrow{margin-bottom:15px;color:#d4af37;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase}
 .booking-hero h1{font-family:"Playfair Display",serif;font-size:clamp(40px,8vw,65px)}
 .booking-hero h1 span{color:#d4af37}
@@ -64,14 +474,30 @@ button{cursor:pointer}
 .primary-button:hover{background:#e5c65a}
 .primary-button:disabled{opacity:.6;cursor:not-allowed}
 
-/* SUMMARY */
-.summary-card h3{margin-bottom:20px;font-family:"Playfair Display",serif;font-size:25px}
-.summary-row{display:flex;justify-content:space-between;gap:15px;padding:13px 0;border-bottom:1px solid #222}
-.summary-row span:first-child{color:#777;font-size:12px}
-.summary-row span:last-child{color:#ddd;font-size:12px;text-align:right}
-.payment-box{margin-top:20px;padding:16px;border:1px solid rgba(212,175,55,.25);border-radius:8px;background:rgba(212,175,55,.05)}
-.payment-box strong{display:block;margin-bottom:5px;color:#d4af37;font-size:13px}
-.payment-box p{color:#888;font-size:11px;line-height:1.6}
+/* WEEKLY OFFERS */
+.offers-card{position:relative;overflow:hidden;padding:0;border:1px solid rgba(212,175,55,.5);border-radius:16px;background:linear-gradient(145deg,#151515,#090909);box-shadow:0 0 0 1px rgba(212,175,55,.06),0 18px 50px rgba(0,0,0,.35)}
+.offers-head{padding:22px 22px 16px;display:flex;align-items:flex-end;justify-content:space-between;gap:14px;border-bottom:1px solid rgba(212,175,55,.16)}
+.offers-eyebrow{margin-bottom:6px;color:#d4af37;font-size:9px;font-weight:700;letter-spacing:2.4px;text-transform:uppercase}
+.offers-card h3{font-family:"Playfair Display",serif;font-size:25px;line-height:1.1}
+.offers-head-note{color:#777;font-size:10px;text-align:right;line-height:1.5}
+.offers-slider{position:relative;overflow:hidden}
+.offers-track{display:flex;transition:transform .55s cubic-bezier(.22,.61,.36,1);will-change:transform}
+.offer-slide{min-width:100%;padding:18px 18px 16px}
+.offer-image-wrap{position:relative;overflow:hidden;height:185px;border:1px solid rgba(212,175,55,.6);border-radius:12px;background:#111;box-shadow:inset 0 0 0 1px rgba(255,255,255,.02)}
+.offer-image-wrap::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(0,0,0,.78));pointer-events:none}
+.offer-image{width:100%;height:100%;display:block;object-fit:cover;transition:transform .7s ease}
+.offer-slide:hover .offer-image{transform:scale(1.045)}
+.offer-badge{position:absolute;z-index:2;top:12px;left:12px;padding:6px 9px;border:1px solid #d4af37;border-radius:999px;background:rgba(0,0,0,.78);color:#e5c65a;font-size:9px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase}
+.offer-price del{color:#666;font-size:11px}
+.offer-nav{position:absolute;left:0;right:0;top:0;height:100%;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:0 12px;pointer-events:none}
+.offer-arrow{width:42px;height:42px;display:flex;align-items:center;justify-content:center;border:1px solid #d4af37;border-radius:50%;background:rgba(0,0,0,.82);color:#d4af37;font-size:14px;box-shadow:0 4px 18px rgba(0,0,0,.45);pointer-events:auto;transition:all .25s ease}
+.offer-arrow:hover{background:#d4af37;color:#000;transform:scale(1.08);box-shadow:0 0 18px rgba(212,175,55,.35)}
+.offer-arrow:active{transform:scale(.96)}
+.offer-arrow i{pointer-events:none}
+.offer-dots{display:flex;justify-content:center;gap:6px;padding:0 0 17px}
+.offer-dot{width:6px;height:6px;padding:0;border:1px solid #777;border-radius:50%;background:transparent;transition:.2s}
+.offer-dot.active{width:18px;border-color:#d4af37;border-radius:999px;background:#d4af37}
+.offer-footer i{margin-right:5px;color:#d4af37}
 
 /* MESSAGES */
 .message{display:none;margin-bottom:18px;padding:13px 15px;border-radius:7px;font-size:12px;line-height:1.5}
@@ -88,21 +514,492 @@ button{cursor:pointer}
 .booking-id{margin:18px 0;color:#d4af37;font-weight:700}
 .new-booking{margin-top:20px;padding:12px 20px;border:1px solid #d4af37;border-radius:7px;background:transparent;color:#d4af37;font-weight:700}
 
-/* FOOTER */
-.footer{padding:55px 0 20px;background:#070707}
-.footer-grid{display:grid;grid-template-columns:1fr;gap:32px}
-.footer h3{font-family:"Playfair Display",serif;font-size:24px}
-.footer h3 span{color:#d4af37}
-.footer h4{margin-bottom:13px;font-size:14px}
-.footer p,.footer li,.footer a{color:#777;font-size:12px;line-height:1.7}
-.footer ul{list-style:none}
-.footer li{margin-bottom:7px}
-.footer a:hover{color:#d4af37}
-.footer-contact p{display:flex;gap:9px;margin-bottom:9px}
-.footer-contact i{width:15px;color:#d4af37;margin-top:4px}
-.footer-bottom{margin-top:40px;padding-top:18px;border-top:1px solid #1e1e1e;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px}
-.social{display:flex;gap:7px}
-.social a{width:35px;height:35px;display:flex;align-items:center;justify-content:center;border:1px solid #292929;border-radius:50%}
+/* =========================================================
+   FOOTER - PROFESSIONAL MASTER FOOTER
+========================================================= */
+
+.site-footer {
+    position: relative;
+    width: 100%;
+    background: #070707;
+    color: #fff;
+    border-top: 1px solid rgba(212,175,55,.10);
+    padding: 64px 0 22px;
+}
+
+.site-footer .content-container {
+    width: min(1180px, calc(100% - 40px));
+    margin: 0 auto;
+}
+
+.site-footer .footer-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1.35fr;
+    gap: 42px;
+    align-items: start;
+}
+
+.site-footer .footer-brand-column,
+.site-footer .footer-column {
+    min-width: 0;
+}
+
+/* Footer Brand */
+.site-footer .site-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 11px;
+}
+
+.site-footer .brand-logo {
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    flex: 0 0 44px;
+    border: 1px solid #D4AF37;
+    border-radius: 50%;
+    color: #D4AF37;
+    background: rgba(212,175,55,.05);
+    font-size: 17px;
+}
+
+.site-footer .brand-name {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+}
+
+.site-footer .brand-name strong {
+    font-family: "Playfair Display", serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.site-footer .brand-name small {
+    margin-top: 5px;
+    color: #D4AF37;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.site-footer .footer-brand-column > p {
+    max-width: 330px;
+    margin: 16px 0 0;
+    color: #888;
+    font-size: 12px;
+    line-height: 1.75;
+}
+
+/* Footer Headings */
+.site-footer .footer-column h3 {
+    margin: 2px 0 18px;
+    color: #fff;
+    font-family: "Playfair Display", serif;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.site-footer .footer-contact-column h3 {
+    margin-bottom: 18px;
+}
+
+/* Footer Links */
+.site-footer .footer-column > a {
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    margin-bottom: 10px;
+    color: #858585;
+    font-size: 12px;
+    line-height: 1.6;
+    transition: color .25s ease, transform .25s ease;
+}
+
+.site-footer .footer-column > a:hover {
+    color: #D4AF37;
+    transform: translateX(2px);
+}
+
+/* Social */
+.site-footer .footer-socials {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.site-footer .footer-socials a {
+    width: 42px;
+    height: 42px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(212,175,55,.22);
+    border-radius: 50%;
+    color: #888;
+    background: transparent;
+    transition: all .25s ease;
+}
+
+.site-footer .footer-socials a:hover {
+    border-color: #D4AF37;
+    color: #D4AF37;
+    background: rgba(212,175,55,.05);
+    transform: translateY(-3px);
+}
+
+/* Contact */
+.site-footer .footer-contact-column p,
+.site-footer .footer-contact-column > a,
+.site-footer .footer-contact-column > span {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    width: 100%;
+    margin: 0 0 12px;
+    color: #888;
+    font-size: 11.5px;
+    line-height: 1.6;
+}
+
+.site-footer .footer-contact-column > a {
+    transition: color .25s ease;
+}
+
+.site-footer .footer-contact-column > a:hover {
+    color: #D4AF37;
+}
+
+.site-footer .footer-contact-column i {
+    flex: 0 0 18px;
+    margin-top: 3px;
+    color: #D4AF37;
+    text-align: center;
+}
+
+.site-footer .footer-contact-column span {
+    min-width: 0;
+}
+
+/* Footer Bottom */
+.site-footer .footer-bottom {
+    margin-top: 42px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,.08);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+}
+
+.site-footer .footer-bottom p {
+    margin: 0;
+    color: #666;
+    font-size: 11.5px;
+    line-height: 1.55;
+}
+
+.site-footer .footer-legal {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+}
+
+.site-footer .footer-legal a {
+    color: #666;
+    font-size: 11.5px;
+    line-height: 1.5;
+    transition: color .25s ease;
+}
+
+.site-footer .footer-legal a:hover {
+    color: #D4AF37;
+}
+
+/* ---------- FOOTER MOBILE ---------- */
+@media (max-width: 767px) {
+
+    .site-footer {
+        padding: 48px 0 max(24px, env(safe-area-inset-bottom));
+    }
+
+    .site-footer .content-container {
+        width: calc(100% - 32px);
+        margin-inline: auto;
+    }
+
+    .site-footer .footer-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px 18px;
+    }
+
+    .site-footer .footer-brand-column {
+        grid-column: 1 / -1;
+        padding-bottom: 12px;
+        border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+
+    .site-footer .footer-brand-column > p {
+        max-width: 330px;
+        margin-top: 12px;
+        font-size: 13px;
+        line-height: 1.7;
+    }
+
+    .site-footer .footer-socials {
+        margin-top: 16px;
+        gap: 9px;
+    }
+
+    .site-footer .footer-socials a {
+        width: 40px;
+        height: 40px;
+    }
+
+    .site-footer .footer-column {
+        min-width: 0;
+    }
+
+    .site-footer .footer-column h3 {
+        margin-bottom: 12px;
+        font-size: 14px;
+        letter-spacing: .3px;
+    }
+
+    .site-footer .footer-column > a {
+        margin-bottom: 0;
+        padding: 5px 0;
+        font-size: 13px;
+        line-height: 1.45;
+    }
+
+    .site-footer .footer-contact-column {
+        grid-column: 1 / -1;
+        padding-top: 6px;
+        padding-bottom: 6px;
+        border-top: 1px solid rgba(255,255,255,.08);
+    }
+
+    .site-footer .footer-contact-column h3 {
+        margin-bottom: 14px;
+    }
+
+    .site-footer .footer-contact-column p,
+    .site-footer .footer-contact-column > a,
+    .site-footer .footer-contact-column > span {
+        width: 100%;
+        margin: 0 0 11px;
+        font-size: 12.5px;
+        line-height: 1.55;
+        overflow-wrap: anywhere;
+    }
+
+    .site-footer .footer-contact-column i {
+        flex: 0 0 18px;
+        margin-top: 2px;
+    }
+
+    .site-footer .footer-bottom {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+        margin-top: 28px;
+        padding-top: 18px;
+        text-align: left;
+    }
+
+    .site-footer .footer-bottom p {
+        margin: 0;
+        font-size: 11.5px;
+        line-height: 1.55;
+    }
+
+    .site-footer .footer-legal {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 16px;
+    }
+
+    .site-footer .footer-legal a {
+        font-size: 11.5px;
+        line-height: 1.5;
+    }
+}
+
+@media (max-width: 380px) {
+
+    .site-footer .content-container {
+        width: calc(100% - 24px);
+    }
+
+    .site-footer .footer-grid {
+        gap: 26px 14px;
+    }
+
+    .site-footer .footer-column h3 {
+        font-size: 13px;
+    }
+
+    .site-footer .footer-column > a,
+    .site-footer .footer-contact-column p,
+    .site-footer .footer-contact-column > a,
+    .site-footer .footer-contact-column > span {
+        font-size: 12px;
+    }
+
+    .site-footer .footer-socials a {
+        width: 38px;
+        height: 38px;
+    }
+}
+
+        @media (max-width: 767px) {
+
+            .site-footer {
+                padding-top: 48px;
+                padding-bottom: max(24px, env(safe-area-inset-bottom));
+            }
+
+            .site-footer .content-container {
+                width: calc(100% - 32px);
+                margin-inline: auto;
+            }
+
+            .site-footer .footer-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 30px 18px;
+            }
+
+            .site-footer .footer-brand-column {
+                grid-column: 1 / -1;
+                padding-bottom: 8px;
+                border-bottom: 1px solid rgba(255,255,255,.08);
+            }
+
+            .site-footer .footer-brand-column > p {
+                max-width: 330px;
+                margin-top: 12px;
+                font-size: 13px;
+                line-height: 1.7;
+            }
+
+            .site-footer .footer-socials {
+                margin-top: 16px;
+                gap: 9px;
+            }
+
+            .site-footer .footer-socials a {
+                width: 40px;
+                height: 40px;
+            }
+
+            .site-footer .footer-column {
+                min-width: 0;
+            }
+
+            .site-footer .footer-column h3 {
+                margin-bottom: 12px;
+                font-size: 14px;
+                letter-spacing: .3px;
+            }
+
+            .site-footer .footer-column > a {
+                display: block;
+                width: fit-content;
+                max-width: 100%;
+                padding: 5px 0;
+                font-size: 13px;
+                line-height: 1.45;
+            }
+
+            .site-footer .footer-contact-column {
+                grid-column: 1 / -1;
+                padding-top: 4px;
+                padding-bottom: 6px;
+                border-top: 1px solid rgba(255,255,255,.08);
+            }
+
+            .site-footer .footer-contact-column h3 {
+                margin-bottom: 14px;
+            }
+
+            .site-footer .footer-contact-column p,
+            .site-footer .footer-contact-column > a,
+            .site-footer .footer-contact-column > span {
+                width: 100%;
+                margin: 0 0 11px;
+                font-size: 12.5px;
+                line-height: 1.55;
+                overflow-wrap: anywhere;
+            }
+
+            .site-footer .footer-contact-column i {
+                flex: 0 0 18px;
+                margin-top: 2px;
+            }
+
+            .site-footer .footer-bottom {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 14px;
+                margin-top: 28px;
+                padding-top: 18px;
+                text-align: left;
+            }
+
+            .site-footer .footer-bottom p {
+                margin: 0;
+                font-size: 11.5px;
+                line-height: 1.55;
+            }
+
+            .site-footer .footer-legal {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px 16px;
+            }
+
+            .site-footer .footer-legal a {
+                font-size: 11.5px;
+                line-height: 1.5;
+            }
+        }
+
+        @media (max-width: 380px) {
+
+            .site-footer .content-container {
+                width: calc(100% - 24px);
+            }
+
+            .site-footer .footer-grid {
+                gap: 26px 14px;
+            }
+
+            .site-footer .footer-column h3 {
+                font-size: 13px;
+            }
+
+            .site-footer .footer-column > a,
+            .site-footer .footer-contact-column p,
+            .site-footer .footer-contact-column > a,
+            .site-footer .footer-contact-column > span {
+                font-size: 12px;
+            }
+
+            .site-footer .footer-socials a {
+                width: 38px;
+                height: 38px;
+            }
+        }
 
 /* RESPONSIVE */
 @media (min-width:600px){
@@ -110,6 +1007,7 @@ button{cursor:pointer}
 .footer-grid{grid-template-columns:1.4fr 1fr 1fr}
 }
 @media (min-width:768px){
+.offer-image-wrap{height:205px}
 .desktop-nav{display:flex}
 .header-book{display:inline-flex}
 .menu-button{display:none}
@@ -118,9 +1016,18 @@ button{cursor:pointer}
 }
 @media (max-width:599px){
 .container{width:calc(100% - 28px)}
-.booking-hero{padding:60px 15px}
+.header{height:68px}
+.header-inner{height:68px}
+.desktop-nav,.header-book{display:none}
+.menu-button{display:block}
+.booking-hero{padding:82px 15px 60px}
 .booking-section{padding:50px 0 65px}
-.booking-card,.summary-card{padding:20px 17px}
+.booking-card{padding:20px 17px}
+.offers-head{padding:20px 17px 14px}
+.offers-head-note{display:none}
+.offer-slide{padding:15px 15px 14px}
+.offer-image-wrap{height:180px}
+.offer-nav{top:0;height:100%;padding:0 7px}
 .footer{padding-left:14px;padding-right:14px}
 .footer-bottom{flex-direction:column;align-items:flex-start}
 }
@@ -129,44 +1036,219 @@ button{cursor:pointer}
 
 <body>
 
-<header class="header">
-<div class="container header-inner">
-<a href="../index.html" class="logo">
-<span class="logo-icon"><i class="fa-solid fa-scissors"></i></span>
-<span class="logo-text"><strong>The Beauty</strong><span>Salon</span></span>
-</a>
+<!-- =========================================================
+     PROFESSIONAL HEADER
+========================================================== -->
 
-<nav class="desktop-nav">
-<a href="../index.html">Home</a>
-<a href="about.html">About</a>
-<a href="services.html">Services</a>
-<a href="branches.html">Branches</a>
-<a href="gallery.html">Gallery</a>
-<a href="contact.html">Contact</a>
-</nav>
+<header class="about-site-header">
 
-<a href="booking.html" class="header-book">Book Appointment</a>
+    <div class="about-header-container">
 
-<button class="menu-button" id="menuButton" type="button" aria-label="Open menu">
-<i class="fa-solid fa-bars"></i>
-</button>
-</div>
+        <!-- Logo -->
+        <a href="../index.html"
+           class="about-brand"
+           aria-label="The Beauty Salon Home">
+
+            <span class="about-brand-logo">
+                <img src="../assets/images/logo/beauty-salon-logo.png" alt="The Beauty Salon Logo">
+            </span>
+
+            <span class="about-brand-name">
+                <strong>The Beauty</strong>
+                <small>Salon</small>
+            </span>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav class="about-desktop-nav"
+             aria-label="Primary navigation">
+
+            <a href="../index.html">
+                Home
+            </a>
+
+            <a href="about.html">
+                About
+            </a>
+
+            <a href="services.html">
+                Services
+            </a>
+
+            <a href="branches.html">
+                Branches
+            </a>
+
+            <a href="gallery.html">
+                Gallery
+            </a>
+
+            <a href="contact.html">
+                Contact
+            </a>
+        </nav>
+
+        <!-- Header Actions -->
+        <div class="about-header-actions">
+
+            <a href="login.html"
+               class="about-login-btn"
+               id="aboutCustomerLoginBtn">
+                <i class="fa-regular fa-user"></i>
+                <span>Customer Login</span>
+            </a>
+
+            <div class="about-account-wrap"
+                 id="aboutAccountWrap"
+                 style="display:none;">
+
+                <button type="button"
+                        class="about-account-btn"
+                        id="aboutAccountBtn"
+                        aria-expanded="false">
+                    <i class="fa-regular fa-user"></i>
+                    <span id="aboutAccountName">My Account</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
+
+                <div class="about-account-dropdown"
+                     id="aboutAccountDropdown">
+
+                    <a href="appointments.html">
+                        <i class="fa-regular fa-calendar-check"></i>
+                        <span>My Appointments</span>
+                    </a>
+
+                    <a href="history.html">
+                        <i class="fa-solid fa-clock-rotate-left"></i>
+                        <span>Booking History</span>
+                    </a>
+
+                    <a href="profile.html">
+                        <i class="fa-regular fa-user"></i>
+                        <span>Update Profile</span>
+                    </a>
+
+                    <button type="button" id="aboutLogoutBtn">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        <span>Logout</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <button class="about-mobile-menu-btn"
+                id="aboutMenuBtn"
+                type="button"
+                aria-label="Open menu"
+                aria-controls="aboutMobileMenu"
+                aria-expanded="false">
+
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+    </div>
+
 </header>
 
-<div class="mobile-menu" id="mobileMenu">
-<div class="mobile-menu-inner">
-<button class="mobile-close" id="mobileClose" type="button" aria-label="Close menu">
-<i class="fa-solid fa-xmark"></i>
-</button>
-<a class="mobile-link" href="../index.html">Home</a>
-<a class="mobile-link" href="about.html">About</a>
-<a class="mobile-link" href="services.html">Services</a>
-<a class="mobile-link" href="branches.html">Branches</a>
-<a class="mobile-link" href="gallery.html">Gallery</a>
-<a class="mobile-link" href="contact.html">Contact</a>
-<a class="mobile-book" href="booking.html">Book Appointment</a>
+
+<!-- =========================================================
+     MOBILE MENU
+========================================================== -->
+
+<div class="about-mobile-menu"
+     id="aboutMobileMenu"
+     aria-hidden="true">
+
+    <div class="about-mobile-menu-header">
+
+        <a href="../index.html"
+           class="about-brand">
+
+            <span class="about-brand-logo">
+                <img src="../assets/images/logo/beauty-salon-logo.png" alt="The Beauty Salon Logo">
+            </span>
+
+            <span class="about-brand-name">
+                <strong>The Beauty</strong>
+                <small>Salon</small>
+            </span>
+        </a>
+
+        <button class="about-mobile-close"
+                id="aboutCloseMenuBtn"
+                type="button"
+                aria-label="Close menu">
+
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+    </div>
+
+    <nav class="about-mobile-links"
+         aria-label="Mobile navigation">
+
+        <a href="../index.html">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+        </a>
+
+        <a href="about.html">
+            <i class="fa-regular fa-circle-user"></i>
+            <span>About</span>
+        </a>
+
+        <a href="services.html">
+            <i class="fa-solid fa-scissors"></i>
+            <span>Services</span>
+        </a>
+
+        <a href="branches.html">
+            <i class="fa-solid fa-location-dot"></i>
+            <span>Branches</span>
+        </a>
+
+        <a href="gallery.html">
+            <i class="fa-regular fa-images"></i>
+            <span>Gallery</span>
+        </a>
+
+        <a href="contact.html">
+            <i class="fa-regular fa-envelope"></i>
+            <span>Contact</span>
+        </a>
+
+        <div class="about-mobile-divider"></div>
+
+        <a href="login.html" id="aboutMobileCustomerLogin">
+            <i class="fa-solid fa-right-to-bracket"></i>
+            <span>Customer Login</span>
+        </a>
+
+        <div id="aboutMobileAccountLinks" style="display:none;">
+            <a href="appointments.html">
+                <i class="fa-regular fa-calendar-check"></i>
+                <span>My Appointments</span>
+            </a>
+            <a href="booking-history.html">
+                <i class="fa-solid fa-clock-rotate-left"></i>
+                <span>Booking History</span>
+            </a>
+            <a href="profile.html">
+                <i class="fa-regular fa-user"></i>
+                <span>Update Profile</span>
+            </a>
+            <a href="#" id="aboutMobileLogout">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </a>
+        </div>
+
+    </nav>
+
 </div>
-</div>
+
 
 <section class="booking-hero">
 <div class="eyebrow">Appointment</div>
@@ -265,79 +1347,236 @@ Confirm Appointment
 </div>
 </div>
 
-<aside class="summary-card">
-<h3>Booking Summary</h3>
-
-<div class="summary-row"><span>Branch</span><span id="summaryBranch">Not selected</span></div>
-<div class="summary-row"><span>Category</span><span id="summaryCategory">Not selected</span></div>
-<div class="summary-row"><span>Service</span><span id="summaryService">Not selected</span></div>
-<div class="summary-row"><span>Staff</span><span id="summaryStaff">Not selected</span></div>
-<div class="summary-row"><span>Date</span><span id="summaryDate">Not selected</span></div>
-<div class="summary-row"><span>Time</span><span id="summaryTime">Not selected</span></div>
-
-<div class="payment-box">
-<strong><i class="fa-solid fa-wallet"></i> Pay at Salon</strong>
-<p>No online payment is required. Complete your payment directly at the salon during your visit.</p>
+<aside class="offers-card" aria-label="Weekly offers">
+<div class="offers-head">
+<div>
+<div class="offers-eyebrow">Weekly Special</div>
+<h3>All Days Offers</h3>
 </div>
+</div>
+
+<div class="offers-slider" id="offersSlider">
+<div class="offers-track" id="offersTrack">
+<article class="offer-slide" data-offer-image="monday.jpg">
+<div class="offer-image-wrap">
+<img class="offer-image" src="../assets/images/offers/monday.jpg" alt="Monday offer" loading="lazy">
+<span class="offer-badge">Monday</span>
+</div>
+</article>
+
+<article class="offer-slide" data-offer-image="tuesday.jpg">
+<div class="offer-image-wrap">
+<img class="offer-image" src="../assets/images/offers/tuesday.jpg" alt="Tuesday offer" loading="lazy">
+<span class="offer-badge">Tuesday</span>
+</div>
+</article>
+
+<article class="offer-slide" data-offer-image="wednesday.jpg">
+<div class="offer-image-wrap">
+<img class="offer-image" src="../assets/images/offers/wednesday.jpg" alt="Wednesday offer" loading="lazy">
+<span class="offer-badge">Wednesday</span>
+</div>
+</article>
+
+<article class="offer-slide" data-offer-image="thursday.jpg">
+<div class="offer-image-wrap">
+<img class="offer-image" src="../assets/images/offers/thursday.jpg" alt="Thursday offer" loading="lazy">
+<span class="offer-badge">Thursday</span>
+</div>
+</article>
+
+<article class="offer-slide" data-offer-image="friday.jpg">
+<div class="offer-image-wrap">
+<img class="offer-image" src="../assets/images/offers/friday.jpg" alt="Friday offer" loading="lazy">
+<span class="offer-badge">Friday</span>
+</div>
+</article>
+
+<article class="offer-slide" data-offer-image="saturday.jpg">
+<div class="offer-image-wrap">
+<img class="offer-image" src="../assets/images/offers/saturday.jpg" alt="Saturday offer" loading="lazy">
+<span class="offer-badge">Saturday</span>
+</div>
+</article>
+
+<article class="offer-slide" data-offer-image="sunday.jpg">
+<div class="offer-image-wrap">
+<img class="offer-image" src="../assets/images/offers/sunday.jpg" alt="Sunday offer" loading="lazy">
+<span class="offer-badge">Sunday</span>
+</div>
+</article>
+</div>
+
+<div class="offer-nav">
+<button type="button" class="offer-arrow" id="offerPrev" aria-label="Previous offer"><i class="fa-solid fa-chevron-left"></i></button>
+<button type="button" class="offer-arrow" id="offerNext" aria-label="Next offer"><i class="fa-solid fa-chevron-right"></i></button>
+</div>
+</div>
+
+<div class="offer-dots" id="offerDots" aria-label="Offer slides"></div>
 </aside>
 
 </div>
 </div>
 </main>
 
-<footer class="footer">
-<div class="container">
-<div class="footer-grid">
+<footer class="site-footer">
 
-<div>
-<h3>The <span>Beauty</span> Salon</h3>
-<p style="margin-top:12px;max-width:310px;">A modern unisex beauty and hair salon in Baramati, created for premium styling, grooming and beauty care.</p>
-</div>
+    <div class="content-container">
 
-<div>
-<h4>Quick Links</h4>
-<ul>
-<li><a href="../index.html">Home</a></li>
-<li><a href="about.html">About</a></li>
-<li><a href="services.html">Services</a></li>
-<li><a href="branches.html">Branches</a></li>
-<li><a href="gallery.html">Gallery</a></li>
-</ul>
-</div>
+        <div class="footer-grid">
 
-<div>
-<h4>Customer</h4>
-<ul>
-<li><a href="booking.html">Book Appointment</a></li>
-<li><a href="login.html">Login</a></li>
-<li><a href="register.html">Create Account</a></li>
-<li><a href="contact.html">Contact</a></li>
-</ul>
-</div>
+            <!-- Footer Brand -->
+            <div class="footer-brand-column">
 
-<div class="footer-contact">
-<h4>Baramati Branch</h4>
-<p><i class="fa-solid fa-location-dot"></i><span>Near Mahanagar Bank, in front of Shayog Society, Baramati, Maharashtra</span></p>
-<p><i class="fa-solid fa-phone"></i><a href="tel:+918793465001">+91 8793465001</a></p>
-<p><i class="fa-regular fa-envelope"></i><a href="mailto:beautysalon@gamil.com">beautysalon@gamil.com</a></p>
-<p><i class="fa-regular fa-clock"></i><span>Mon - Sun: 9:00 AM - 9:00 PM</span></p>
-</div>
+                <a href="../index.html"
+                   class="site-brand">
 
-</div>
+                    <span class="brand-logo">
+                        <i class="fa-solid fa-scissors"></i>
+                    </span>
 
-<div class="footer-bottom">
-<p>© <span id="year"></span> The Beauty Salon. All Rights Reserved.</p>
-<div class="social">
-<a href="#" onclick="return false"><i class="fa-brands fa-instagram"></i></a>
-<a href="#" onclick="return false"><i class="fa-brands fa-facebook-f"></i></a>
-<a href="#" onclick="return false"><i class="fa-brands fa-whatsapp"></i></a>
-</div>
-</div>
-</div>
+                    <span class="brand-name">
+                        <strong>The Beauty</strong>
+                        <small>Salon</small>
+                    </span>
+
+                </a>
+
+                <p>
+                    Premium unisex beauty and hair care
+                    in Baramati, Maharashtra.
+                </p>
+
+                <div class="footer-socials">
+
+                    <a href="#" aria-label="Instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+
+                    <a href="#" aria-label="Facebook">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+
+                    <a href="https://wa.me/918793465001" aria-label="WhatsApp">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- Quick Links -->
+            <div class="footer-column">
+
+                <h3>Quick Links</h3>
+
+                <a href="../index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="services.html">Services</a>
+                <a href="branches.html">Branches</a>
+                <a href="gallery.html">Gallery</a>
+
+            </div>
+
+            <!-- Customer -->
+            <div class="footer-column">
+
+                <h3>Customer</h3>
+
+                <a href="booking.html">Book Appointment</a>
+                <a href="login.html">Customer Login</a>
+                <a href="register.html">Create Account</a>
+                <a href="contact.html">Contact Us</a>
+
+            </div>
+
+            <!-- Contact -->
+            <div class="footer-column footer-contact-column">
+
+                <h3>Contact</h3>
+
+                <p>
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span>
+                        Near Mahanagar Bank,
+                        in front of Shayog Society,
+                        Baramati, Maharashtra.
+                    </span>
+                </p>
+
+
+                <a href="tel:+918087646512">
+                    <i class="fa-solid fa-phone"></i>
+                    <span>+91 8087646512</span>
+                </a>
+
+                <a href="mailto:beautysalon@gamil.com">
+                    <i class="fa-regular fa-envelope"></i>
+                    <span>beautysalon@gamil.com</span>
+                </a>
+
+                <span>
+                    <i class="fa-regular fa-clock"></i>
+                    <span>Mon – Sun: 6:00 AM – 9:00 PM</span>
+                </span>
+
+            </div>
+
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+
+            <p>
+                © <span id="year"></span>
+                The Beauty Salon.
+                All rights reserved.
+            </p>
+
+            <div class="footer-legal">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms & Conditions</a>
+            </div>
+
+        </div>
+
+    </div>
+
 </footer>
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
+    // Header/mobile menu behavior only — booking logic remains unchanged.
+    const aboutMenuBtn = document.getElementById("aboutMenuBtn");
+    const aboutMobileMenu = document.getElementById("aboutMobileMenu");
+    const aboutCloseMenuBtn = document.getElementById("aboutCloseMenuBtn");
+
+    if (aboutMenuBtn && aboutMobileMenu && aboutCloseMenuBtn) {
+        aboutMenuBtn.addEventListener("click", function () {
+            aboutMobileMenu.classList.add("open");
+            aboutMobileMenu.setAttribute("aria-hidden", "false");
+            aboutMenuBtn.setAttribute("aria-expanded", "true");
+            document.body.style.overflow = "hidden";
+        });
+
+        aboutCloseMenuBtn.addEventListener("click", function () {
+            aboutMobileMenu.classList.remove("open");
+            aboutMobileMenu.setAttribute("aria-hidden", "true");
+            aboutMenuBtn.setAttribute("aria-expanded", "false");
+            document.body.style.overflow = "";
+        });
+
+        aboutMobileMenu.querySelectorAll("a").forEach(function (link) {
+            link.addEventListener("click", function () {
+                aboutMobileMenu.classList.remove("open");
+                aboutMobileMenu.setAttribute("aria-hidden", "true");
+                aboutMenuBtn.setAttribute("aria-expanded", "false");
+                document.body.style.overflow = "";
+            });
+        });
+    }
+
 
     const API = "http://localhost:5000/api";
 
@@ -364,31 +1603,36 @@ document.addEventListener("DOMContentLoaded", function () {
     const mobile = document.getElementById("mobile");
     const email = document.getElementById("email");
 
-    const summaryBranch = document.getElementById("summaryBranch");
-    const summaryCategory = document.getElementById("summaryCategory");
-    const summaryService = document.getElementById("summaryService");
-    const summaryStaff = document.getElementById("summaryStaff");
-    const summaryDate = document.getElementById("summaryDate");
-    const summaryTime = document.getElementById("summaryTime");
+    const offersTrack = document.getElementById("offersTrack");
+    const offerSlides = Array.from(document.querySelectorAll(".offer-slide"));
+    const offerDots = document.getElementById("offerDots");
+    const offerPrev = document.getElementById("offerPrev");
+    const offerNext = document.getElementById("offerNext");
 
     year.textContent = new Date().getFullYear();
 
-    menuButton.addEventListener("click", function () {
-        mobileMenu.classList.add("open");
-        document.body.style.overflow = "hidden";
-    });
+    if (menuButton && mobileMenu) {
+        menuButton.addEventListener("click", function () {
+            mobileMenu.classList.add("open");
+            document.body.style.overflow = "hidden";
+        });
+    }
 
-    mobileClose.addEventListener("click", function () {
-        mobileMenu.classList.remove("open");
-        document.body.style.overflow = "";
-    });
-
-    mobileMenu.querySelectorAll("a").forEach(function (link) {
-        link.addEventListener("click", function () {
+    if (mobileClose && mobileMenu) {
+        mobileClose.addEventListener("click", function () {
             mobileMenu.classList.remove("open");
             document.body.style.overflow = "";
         });
-    });
+    }
+
+    if (mobileMenu) {
+        mobileMenu.querySelectorAll("a").forEach(function (link) {
+            link.addEventListener("click", function () {
+                mobileMenu.classList.remove("open");
+                document.body.style.overflow = "";
+            });
+        });
+    }
 
     function showMessage(text, type) {
         message.textContent = text;
@@ -543,40 +1787,134 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    function updateSummary() {
-        summaryBranch.textContent =
-            branch.options[branch.selectedIndex] && branch.value
-                ? branch.options[branch.selectedIndex].textContent
-                : "Not selected";
+    let offerIndex = 0;
+    let offerTimer = null;
 
-        summaryCategory.textContent = category.value || "Not selected";
-
-        summaryService.textContent =
-            service.options[service.selectedIndex] && service.value
-                ? service.options[service.selectedIndex].textContent
-                : "Not selected";
-
-        summaryStaff.textContent =
-            staff.options[staff.selectedIndex] && staff.value
-                ? staff.options[staff.selectedIndex].textContent
-                : "Not selected";
-
-        summaryDate.textContent = formatDate(date.value);
-
-        summaryTime.textContent = time.value || "Not selected";
+    function getOfferSlides() {
+        return Array.from(document.querySelectorAll(".offer-slide"));
     }
 
-    branch.addEventListener("change", function () {
-        clearMessage();
-        loadStaff(branch.value);
-        updateSummary();
+    function showOffer(index) {
+        const slides = getOfferSlides();
+        if (!slides.length) return;
+
+        offerIndex = (index + slides.length) % slides.length;
+        offersTrack.style.transform = "translate3d(-" + (offerIndex * 100) + "%, 0, 0)";
+
+        Array.from(offerDots.children).forEach(function (dot, i) {
+            dot.classList.toggle("active", i === offerIndex);
+        });
+    }
+
+    function renderOfferDots() {
+        const slides = getOfferSlides();
+        offerDots.innerHTML = "";
+
+        slides.forEach(function (_, index) {
+            const dot = document.createElement("button");
+            dot.type = "button";
+            dot.className = "offer-dot" + (index === offerIndex ? " active" : "");
+            dot.setAttribute("aria-label", "Show offer " + (index + 1));
+
+            dot.addEventListener("click", function () {
+                showOffer(index);
+                restartOfferTimer();
+            });
+
+            offerDots.appendChild(dot);
+        });
+    }
+
+    function nextOffer() {
+        showOffer(offerIndex + 1);
+    }
+
+    function prevOffer() {
+        showOffer(offerIndex - 1);
+    }
+
+    function restartOfferTimer() {
+        if (offerTimer) {
+            clearInterval(offerTimer);
+            offerTimer = null;
+        }
+
+        if (getOfferSlides().length > 1) {
+            offerTimer = setInterval(function () {
+                nextOffer();
+            }, 4200);
+        }
+    }
+
+    function refreshOffers() {
+        const slides = getOfferSlides();
+        offerPrev.style.display = slides.length > 1 ? "flex" : "none";
+        offerNext.style.display = slides.length > 1 ? "flex" : "none";
+
+        if (!slides.length) {
+            document.querySelector(".offers-card").style.display = "none";
+            return;
+        }
+
+        if (offerIndex >= slides.length) {
+            offerIndex = 0;
+        }
+
+        renderOfferDots();
+        showOffer(offerIndex);
+        restartOfferTimer();
+    }
+
+    window.refreshOffers = refreshOffers;
+
+    offerNext.addEventListener("click", function () {
+        nextOffer();
+        restartOfferTimer();
     });
 
-    category.addEventListener("change", updateSummary);
-    service.addEventListener("change", updateSummary);
-    staff.addEventListener("change", updateSummary);
-    date.addEventListener("change", updateSummary);
-    time.addEventListener("change", updateSummary);
+    offerPrev.addEventListener("click", function () {
+        prevOffer();
+        restartOfferTimer();
+    });
+
+    var touchStartX = 0;
+    var touchEndX = 0;
+
+    offersTrack.addEventListener("touchstart", function (event) {
+        touchStartX = event.changedTouches[0].screenX;
+    }, { passive: true });
+
+    offersTrack.addEventListener("touchend", function (event) {
+        touchEndX = event.changedTouches[0].screenX;
+
+        if (Math.abs(touchEndX - touchStartX) > 45) {
+            if (touchEndX < touchStartX) {
+                nextOffer();
+            } else {
+                prevOffer();
+            }
+
+            restartOfferTimer();
+        }
+    }, { passive: true });
+
+    // Validate offer images without changing booking logic.
+    getOfferSlides().forEach(function (slide) {
+        const image = slide.querySelector(".offer-image");
+
+        if (!image) {
+            slide.remove();
+            return;
+        }
+
+        image.addEventListener("error", function () {
+            image.style.display = "none";
+            slide.querySelector(".offer-image-wrap").style.background =
+                "radial-gradient(circle, rgba(212,175,55,.12), transparent 55%), #111";
+        }, { once: true });
+    });
+
+    refreshOffers();
 
     mobile.addEventListener("input", function () {
         this.value = this.value.replace(/[^0-9]/g, "").slice(0, 10);
@@ -678,21 +2016,17 @@ document.addEventListener("DOMContentLoaded", function () {
         bookingForm.reset();
         setSelectLoading(staff, "Select branch first");
         clearMessage();
-        updateSummary();
         window.scrollTo({
             top: 0,
             behavior: "smooth"
         });
     });
 
-    updateSummary();
 
     Promise.all([
         loadBranches(),
         loadServices()
-    ]).then(function () {
-        updateSummary();
-    });
+    ]);
 
 });
 </script>

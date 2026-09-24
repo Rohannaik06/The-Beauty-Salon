@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../assets/images/logo/beauty-salon-logo.png">
+    <link rel="apple-touch-icon" href="../assets/images/logo/beauty-salon-logo.png">
     <title>Booking History | The Beauty Salon</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -129,11 +131,46 @@
         .value { color: #ddd; font-size: 13px; line-height: 1.5; }
 
         .payment {
-            margin: 0 20px 18px; padding: 11px 13px;
-            border-radius: 7px; background: rgba(255,255,255,.035);
-            display: flex; flex-wrap: wrap; gap: 8px 22px; color: #aaa; font-size: 12px;
+            margin: 0 20px 18px; padding: 12px 14px;
+            border-radius: 9px; background: rgba(255,255,255,.035);
+            border: 1px solid rgba(255,255,255,.06);
+            display: flex; flex-wrap: wrap; gap: 9px 22px; color: #aaa; font-size: 12px;
+            align-items: center;
         }
         .payment strong { color: #ddd; }
+
+        .payment-state {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            font-weight: 700;
+        }
+        .payment-state i { font-size: 11px; }
+
+        .payment-completed {
+            color: #8ee7a4 !important;
+        }
+        .payment-completed strong {
+            color: #8ee7a4 !important;
+        }
+        .payment-cancelled {
+            color: #ff9999 !important;
+        }
+        .payment-cancelled strong {
+            color: #ff9999 !important;
+        }
+        .payment-pending {
+            color: #D4AF37 !important;
+        }
+        .payment-pending strong {
+            color: #D4AF37 !important;
+        }
+        .payment-not-applicable {
+            color: #999 !important;
+        }
+        .payment-not-applicable strong {
+            color: #bbb !important;
+        }
 
                 @media (max-width: 900px) {
                         .booking-body { grid-template-columns: 1fr 1fr; }
@@ -146,6 +183,262 @@
             .booking-head { align-items: flex-start; flex-direction: column; }
             .payment { margin-left: 14px; margin-right: 14px; }
         }
+
+        /* =========================================================
+           FINAL PROFESSIONAL HEADER / MOBILE NAV
+        ========================================================= */
+        .brand-logo {
+            overflow: hidden;
+            flex: 0 0 42px;
+            background: #080808;
+        }
+
+        .brand-logo img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: contain;
+            padding: 4px;
+        }
+
+        .desktop-navigation {
+            align-items: center;
+            white-space: nowrap;
+        }
+
+        .mobile-header-actions,
+        .mobile-navigation {
+            display: none;
+        }
+
+        /* Profile link: no yellow background */
+        .account-menu a[href="profile.html"]:hover {
+            background: #101010 !important;
+            color: #D0D0D0 !important;
+        }
+
+        .account-menu a[href="profile.html"]:hover i {
+            color: #D4AF37 !important;
+        }
+
+        .history-list {
+            padding-bottom: 20px;
+        }
+
+        @media (max-width: 900px) {
+            .desktop-navigation {
+                display: none;
+            }
+
+            .mobile-header-actions {
+                display: flex;
+                align-items: center;
+                margin-left: auto;
+            }
+
+            .mobile-menu-button {
+                width: 44px;
+                height: 44px;
+                border: 1px solid rgba(212,175,55,.35);
+                border-radius: 10px;
+                background: #111;
+                color: #D4AF37;
+                display: grid;
+                place-items: center;
+                font-size: 18px;
+                cursor: pointer;
+                transition: .25s ease;
+            }
+
+            .mobile-menu-button:hover {
+                border-color: #D4AF37;
+                background: #181818;
+            }
+
+            .account-wrap {
+                display: none;
+            }
+
+            .mobile-navigation {
+                position: fixed;
+                inset: 0;
+                z-index: 5000;
+                display: block;
+                background: rgba(5,5,5,.98);
+                backdrop-filter: blur(16px);
+                transform: translateX(100%);
+                visibility: hidden;
+                opacity: 0;
+                transition: transform .3s ease, opacity .3s ease, visibility .3s ease;
+                overflow-y: auto;
+            }
+
+            .mobile-navigation.open {
+                transform: translateX(0);
+                visibility: visible;
+                opacity: 1;
+            }
+
+            .mobile-navigation-header {
+                min-height: 76px;
+                padding: 0 20px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                border-bottom: 1px solid rgba(212,175,55,.20);
+            }
+
+            .mobile-brand {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                color: #fff;
+                text-decoration: none;
+            }
+
+            .mobile-brand-logo {
+                width: 42px;
+                height: 42px;
+                border: 1px solid #D4AF37;
+                border-radius: 50%;
+                overflow: hidden;
+                display: grid;
+                place-items: center;
+            }
+
+            .mobile-brand-logo img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                padding: 4px;
+            }
+
+            .mobile-brand strong,
+            .mobile-brand small {
+                display: block;
+            }
+
+            .mobile-brand strong {
+                font-family: "Playfair Display", serif;
+                font-size: 18px;
+            }
+
+            .mobile-brand small {
+                margin-top: 3px;
+                color: #D4AF37;
+                font-size: 10px;
+                letter-spacing: 2px;
+            }
+
+            .mobile-close-button {
+                width: 42px;
+                height: 42px;
+                border: 1px solid rgba(212,175,55,.35);
+                border-radius: 10px;
+                background: #111;
+                color: #D4AF37;
+                font-size: 19px;
+                cursor: pointer;
+            }
+
+            .mobile-navigation-links {
+                padding: 22px 20px 35px;
+            }
+
+            .mobile-navigation-links a {
+                min-height: 50px;
+                padding: 0 14px;
+                margin-bottom: 7px;
+                display: flex;
+                align-items: center;
+                gap: 13px;
+                border: 1px solid transparent;
+                border-radius: 10px;
+                color: #ddd;
+                text-decoration: none;
+                font-size: 14px;
+                font-weight: 600;
+                transition: .2s ease;
+            }
+
+            .mobile-navigation-links a i {
+                width: 20px;
+                text-align: center;
+                color: #D4AF37;
+            }
+
+            .mobile-navigation-links a:hover,
+            .mobile-navigation-links a:active {
+                background: #111;
+                border-color: rgba(212,175,55,.18);
+                color: #D4AF37;
+            }
+
+            .mobile-menu-divider {
+                height: 1px;
+                margin: 15px 4px;
+                background: rgba(255,255,255,.08);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .header-container {
+                min-height: 68px;
+            }
+
+            .site-brand .brand-name {
+                font-size: 18px;
+            }
+
+            .brand-logo {
+                width: 38px;
+                height: 38px;
+                flex-basis: 38px;
+            }
+
+            .page-hero {
+                padding-top: 48px;
+            }
+
+            .booking-card {
+                border-radius: 12px;
+            }
+
+            .booking-head {
+                padding: 15px;
+            }
+
+            .booking-body {
+                padding: 17px 15px;
+            }
+
+            .service-name {
+                font-size: 17px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .site-brand {
+                gap: 8px;
+            }
+
+            .site-brand .brand-name {
+                font-size: 16px;
+            }
+
+            .header-container {
+                width: calc(100% - 18px);
+            }
+
+            .mobile-navigation-header {
+                padding-inline: 15px;
+            }
+
+            .mobile-navigation-links {
+                padding-inline: 15px;
+            }
+        }
+
     </style>
 </head>
 
@@ -154,14 +447,18 @@
 <header class="site-header">
     <div class="header-container">
         <a href="../index.html" class="site-brand">
-            <span class="brand-logo"><i class="fa-solid fa-scissors"></i></span>
+            <span class="brand-logo"><img src="../assets/images/logo/beauty-salon-logo.png" alt="The Beauty Salon Logo"></span>
             <span class="brand-name">
                 <strong>The Beauty</strong>
                 <small>Salon</small>
             </span>
         </a>
-
-
+<div class="mobile-header-actions">
+            <button type="button" class="mobile-menu-button" id="menuBtn"
+                    aria-label="Open navigation menu" aria-controls="mobileMenu" aria-expanded="false">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
 
         <div class="account-wrap" id="accountWrap">
             <button type="button" class="account-button" id="accountButton">
@@ -171,10 +468,22 @@
             </button>
 
             <div class="account-menu" id="accountMenu">
-                <a href="profile.html"><i class="fa-regular fa-user"></i><span>My Profile</span></a>
+                <a href="appointments.html">
+                    <i class="fa-regular fa-calendar-check"></i>
+                    <span>My Appointments</span>
+                </a>
+                <a href="history.html">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                    <span>Booking History</span>
+                </a>
+                <a href="profile.html">
+                    <i class="fa-regular fa-user"></i>
+                    <span>Update Profile</span>
+                </a>
                 <div class="menu-divider"></div>
                 <button type="button" class="logout-btn" id="logoutButton">
-                    <i class="fa-solid fa-right-from-bracket"></i><span>Logout</span>
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span>Logout</span>
                 </button>
             </div>
         </div>
@@ -182,6 +491,46 @@
     </div>
 </header>
 
+<div class="mobile-navigation" id="mobileMenu" aria-hidden="true">
+    <div class="mobile-navigation-header">
+        <a href="../index.html" class="mobile-brand">
+            <span class="mobile-brand-logo">
+                <img src="../assets/images/logo/beauty-salon-logo.png" alt="The Beauty Salon Logo">
+            </span>
+            <span>
+                <strong>The Beauty</strong>
+                <small>Salon</small>
+            </span>
+        </a>
+        <button type="button" class="mobile-close-button" id="closeMenuBtn" aria-label="Close navigation menu">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+    </div>
+
+    <nav class="mobile-navigation-links" aria-label="Mobile account navigation">
+        <a href="appointments.html">
+            <i class="fa-regular fa-calendar-check"></i>
+            <span>My Appointments</span>
+        </a>
+
+        <a href="history.html" aria-current="page">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+            <span>Booking History</span>
+        </a>
+
+        <a href="profile.html">
+            <i class="fa-regular fa-user"></i>
+            <span>Update Profile</span>
+        </a>
+
+        <div class="mobile-menu-divider"></div>
+
+        <a href="#" id="mobileLogoutButton">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span>Logout</span>
+        </a>
+    </nav>
+</div>
 
 <section class="page-hero">
     <div class="eyebrow">CUSTOMER ACCOUNT</div>
@@ -227,7 +576,7 @@
 (function () {
     "use strict";
 
-    const API = "http://localhost:5000/api/bookings/my-appointments";
+    const API = "http://localhost:5000/api/bookings/booking-history";
 
     const loadingState = document.getElementById("loadingState");
     const loginState = document.getElementById("loginState");
@@ -389,7 +738,7 @@
                 booking.paymentMethod ||
                 "PAY_AT_SALON";
 
-            const paymentStatus =
+            const rawPaymentStatus =
                 booking.payment_status ||
                 booking.paymentStatus ||
                 "PENDING";
@@ -399,6 +748,50 @@
                 booking.booking_status ||
                 booking.bookingStatus ||
                 "UNKNOWN";
+
+            /*
+             * Professional payment logic:
+             * CONFIRMED -> Payment Pending (unless backend explicitly says paid)
+             * COMPLETED -> Payment Completed
+             * CANCELLED/CANCELED -> Booking Cancelled + Payment Cancelled
+             * Other statuses -> preserve backend payment status
+             */
+            const normalizedBookingStatus = String(status || "").trim().toUpperCase();
+            const normalizedPaymentStatus = String(rawPaymentStatus || "").trim().toUpperCase();
+
+            let displayPaymentStatus = normalizedPaymentStatus.replace(/_/g, " ");
+            let paymentClass = "payment-pending";
+            let paymentIcon = "fa-clock";
+            let paymentLabel = "Payment Status";
+
+            if (normalizedBookingStatus === "COMPLETED") {
+                displayPaymentStatus = "COMPLETED";
+                paymentClass = "payment-completed";
+                paymentIcon = "fa-circle-check";
+            } else if (
+                normalizedBookingStatus === "CANCELLED" ||
+                normalizedBookingStatus === "CANCELED"
+            ) {
+                displayPaymentStatus = "CANCELLED";
+                paymentClass = "payment-cancelled";
+                paymentIcon = "fa-circle-xmark";
+            } else if (
+                normalizedPaymentStatus === "COMPLETED" ||
+                normalizedPaymentStatus === "PAID" ||
+                normalizedPaymentStatus === "SUCCESS" ||
+                normalizedPaymentStatus === "SUCCESSFUL"
+            ) {
+                displayPaymentStatus = "COMPLETED";
+                paymentClass = "payment-completed";
+                paymentIcon = "fa-circle-check";
+            } else if (
+                normalizedPaymentStatus === "CANCELLED" ||
+                normalizedPaymentStatus === "CANCELED"
+            ) {
+                displayPaymentStatus = "CANCELLED";
+                paymentClass = "payment-cancelled";
+                paymentIcon = "fa-circle-xmark";
+            }
 
             return `
                 <article class="booking-card">
@@ -437,8 +830,15 @@
                     </div>
 
                     <div class="payment">
-                        <span>Payment: <strong>${safe(String(paymentMethod).replace(/_/g, " "))}</strong></span>
-                        <span>Payment Status: <strong>${safe(String(paymentStatus).replace(/_/g, " "))}</strong></span>
+                        <span>
+                            Payment:
+                            <strong>${safe(String(paymentMethod).replace(/_/g, " "))}</strong>
+                        </span>
+                        <span class="payment-state ${paymentClass}">
+                            <i class="fa-solid ${paymentIcon}"></i>
+                            ${safe(paymentLabel)}:
+                            <strong>${safe(displayPaymentStatus)}</strong>
+                        </span>
                     </div>
                 </article>
             `;
@@ -541,9 +941,110 @@
     });
 
     setupAccount();
+
+    /* =====================================================
+       MOBILE NAVIGATION
+    ===================================================== */
+    const menuBtn = document.getElementById("menuBtn");
+    const closeMenuBtn = document.getElementById("closeMenuBtn");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    function openMobileMenu() {
+        if (!mobileMenu) return;
+        mobileMenu.classList.add("open");
+        mobileMenu.setAttribute("aria-hidden", "false");
+        if (menuBtn) menuBtn.setAttribute("aria-expanded", "true");
+        document.body.style.overflow = "hidden";
+    }
+
+    function closeMobileMenu() {
+        if (!mobileMenu) return;
+        mobileMenu.classList.remove("open");
+        mobileMenu.setAttribute("aria-hidden", "true");
+        if (menuBtn) menuBtn.setAttribute("aria-expanded", "false");
+        document.body.style.overflow = "";
+    }
+
+    if (menuBtn) menuBtn.addEventListener("click", openMobileMenu);
+    if (closeMenuBtn) closeMenuBtn.addEventListener("click", closeMobileMenu);
+
+    const mobileLogoutButton = document.getElementById("mobileLogoutButton");
+    if (mobileLogoutButton) {
+        mobileLogoutButton.addEventListener("click", function (event) {
+            event.preventDefault();
+            clearSession();
+            closeMobileMenu();
+            window.location.href = "../index.html";
+        });
+    }
+
+    document.querySelectorAll(".mobile-navigation-links a:not(#mobileLogoutButton)").forEach(function (link) {
+        link.addEventListener("click", closeMobileMenu);
+    });
+
+    document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") closeMobileMenu();
+    });
+
     loadHistory();
 })();
 </script>
 
 </body>
 </html>
+<style>
+/* Profile: no hover background */
+.account-menu a[href="profile.html"]:hover {
+    background: transparent !important;
+    color: #D0D0D0 !important;
+}
+.account-menu a[href="profile.html"]:hover i {
+    color: #D4AF37 !important;
+}
+</style>
+
+
+<style>
+/* Customer account dropdown - black menu tabs */
+.account-menu a,
+.account-menu .logout-btn {
+    background: #000000 !important;
+    color: #D0D0D0 !important;
+    border: 1px solid rgba(212,175,55,.14) !important;
+}
+
+.account-menu a i,
+.account-menu .logout-btn i {
+    color: #D4AF37 !important;
+}
+
+.account-menu a:hover,
+.account-menu .logout-btn:hover {
+    background: #101010 !important;
+    color: #FFFFFF !important;
+}
+
+.account-menu a:hover i,
+.account-menu .logout-btn:hover i {
+    color: #D4AF37 !important;
+}
+
+/* Keep the logged-in user's name/button background unchanged */
+.account-button {
+    background: transparent !important;
+}
+</style>
+
+<style>
+/* Logged-in user name: gold */
+.account-button,
+.account-button span,
+#accountName {
+    background: transparent !important;
+    color: #D4AF37 !important;
+}
+
+.account-button i {
+    color: #D4AF37 !important;
+}
+</style>

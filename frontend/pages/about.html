@@ -1154,144 +1154,750 @@
         }
 
         /* =========================================================
-           FOOTER - FINAL
-           Same structure and styling as the Branches reference
-        ========================================================= */
+           FOOTER - SAME AS INDEX PAGE
+        ========================================================== */
 
-        .footer {
-            padding: 55px 0 20px;
+        .site-footer {
+            position: relative;
             background: #070707;
         }
 
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 32px;
+        .site-footer .footer-grid {
+            align-items: start;
+            gap: 42px;
         }
 
-        .footer h3 {
-            font-family: "Playfair Display", serif;
-            font-size: 24px;
+        .site-footer .footer-brand-column > p {
+            max-width: 330px;
+            line-height: 1.75;
         }
 
-        .footer h3 span { color: #d4af37; }
-
-        .footer h4 { margin-bottom: 13px; font-size: 14px; }
-
-        .footer p, .footer li, .footer a {
-            color: #777;
-            font-size: 12px;
-            line-height: 1.7;
+        .site-footer .footer-column h3 {
+            margin-bottom: 18px;
         }
 
-        .footer ul { list-style: none; }
-        .footer li { margin-bottom: 7px; }
-        .footer a:hover { color: #d4af37; }
-
-        .footer-contact p {
+        .site-footer .footer-socials {
             display: flex;
-            gap: 9px;
-            margin-bottom: 9px;
-        }
-
-        .footer-contact i {
-            width: 15px;
-            color: #d4af37;
-            margin-top: 4px;
-        }
-
-        .footer-bottom {
-            margin-top: 40px;
-            padding-top: 18px;
-            border-top: 1px solid #1e1e1e;
-            display: flex;
-            justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
+            gap: 10px;
+            margin-top: 20px;
         }
 
-        .social { display: flex; gap: 7px; }
-
-        .social a {
-            width: 35px;
-            height: 35px;
-            display: flex;
+        .site-footer .footer-socials a {
+            width: 42px;
+            height: 42px;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid #292929;
+            border: 1px solid rgba(212,175,55,.22);
             border-radius: 50%;
+            transition: .25s ease;
         }
 
-        @media (min-width: 600px) {
-            .footer-grid { grid-template-columns: 1.4fr 1fr 1fr; }
+        .site-footer .footer-socials a:hover {
+            border-color: #D4AF37;
+            color: #D4AF37;
+            transform: translateY(-3px);
         }
 
-        @media (min-width: 768px) {
-            .footer-grid { grid-template-columns: 1.5fr 1fr 1fr 1.4fr; }
+        .site-footer .footer-contact-column p,
+        .site-footer .footer-contact-column > a,
+        .site-footer .footer-contact-column > span {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            line-height: 1.55;
         }
 
-        @media (max-width: 599px) {
-            .footer { padding-left: 15px; padding-right: 15px; }
-            .footer-bottom { align-items: flex-start; flex-direction: column; }
+        .site-footer .footer-contact-column i {
+            flex: 0 0 18px;
+            margin-top: 3px;
+            color: #D4AF37;
         }
 
-</style>
+        .site-footer .footer-bottom {
+            gap: 18px;
+        }
+
+        @media (max-width: 767px) {
+
+            .site-footer {
+                padding-top: 48px;
+                padding-bottom: max(24px, env(safe-area-inset-bottom));
+            }
+
+            .site-footer .content-container {
+                width: calc(100% - 32px);
+                margin-inline: auto;
+            }
+
+            .site-footer .footer-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 30px 18px;
+            }
+
+            .site-footer .footer-brand-column {
+                grid-column: 1 / -1;
+                padding-bottom: 8px;
+                border-bottom: 1px solid rgba(255,255,255,.08);
+            }
+
+            .site-footer .footer-brand-column > p {
+                max-width: 330px;
+                margin-top: 12px;
+                font-size: 13px;
+                line-height: 1.7;
+            }
+
+            .site-footer .footer-socials {
+                margin-top: 16px;
+                gap: 9px;
+            }
+
+            .site-footer .footer-socials a {
+                width: 40px;
+                height: 40px;
+            }
+
+            .site-footer .footer-column {
+                min-width: 0;
+            }
+
+            .site-footer .footer-column h3 {
+                margin-bottom: 12px;
+                font-size: 14px;
+                letter-spacing: .3px;
+            }
+
+            .site-footer .footer-column > a {
+                display: block;
+                width: fit-content;
+                max-width: 100%;
+                padding: 5px 0;
+                font-size: 13px;
+                line-height: 1.45;
+            }
+
+            .site-footer .footer-contact-column {
+                grid-column: 1 / -1;
+                padding-top: 4px;
+                padding-bottom: 6px;
+                border-top: 1px solid rgba(255,255,255,.08);
+            }
+
+            .site-footer .footer-contact-column h3 {
+                margin-bottom: 14px;
+            }
+
+            .site-footer .footer-contact-column p,
+            .site-footer .footer-contact-column > a,
+            .site-footer .footer-contact-column > span {
+                width: 100%;
+                margin: 0 0 11px;
+                font-size: 12.5px;
+                line-height: 1.55;
+                overflow-wrap: anywhere;
+            }
+
+            .site-footer .footer-contact-column i {
+                flex: 0 0 18px;
+                margin-top: 2px;
+            }
+
+            .site-footer .footer-bottom {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 14px;
+                margin-top: 28px;
+                padding-top: 18px;
+                text-align: left;
+            }
+
+            .site-footer .footer-bottom p {
+                margin: 0;
+                font-size: 11.5px;
+                line-height: 1.55;
+            }
+
+            .site-footer .footer-legal {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px 16px;
+            }
+
+            .site-footer .footer-legal a {
+                font-size: 11.5px;
+                line-height: 1.5;
+            }
+        }
+
+        @media (max-width: 380px) {
+
+            .site-footer .content-container {
+                width: calc(100% - 24px);
+            }
+
+            .site-footer .footer-grid {
+                gap: 26px 14px;
+            }
+
+            .site-footer .footer-column h3 {
+                font-size: 13px;
+            }
+
+            .site-footer .footer-column > a,
+            .site-footer .footer-contact-column p,
+            .site-footer .footer-contact-column > a,
+            .site-footer .footer-contact-column > span {
+                font-size: 12px;
+            }
+
+            .site-footer .footer-socials a {
+                width: 38px;
+                height: 38px;
+            }
+        }
+
+
+        /* =========================================================
+           PROFESSIONAL MOBILE EXPERIENCE
+        ========================================================== */
+
+        @media (max-width: 767px) {
+
+            html,
+            body {
+                width: 100%;
+                max-width: 100%;
+                overflow-x: hidden;
+            }
+
+            .about-page {
+                overflow-x: hidden;
+            }
+
+            /* ---------- HEADER ---------- */
+
+            .about-site-header {
+                background: rgba(0, 0, 0, .96);
+                border-bottom-color: rgba(212, 175, 55, .16);
+            }
+
+            .about-header-container {
+                width: calc(100% - 28px);
+                min-height: 68px;
+                gap: 10px;
+            }
+
+            .about-brand {
+                min-width: 0;
+                gap: 8px;
+            }
+
+            .about-brand-logo {
+                width: 38px;
+                height: 38px;
+                flex: 0 0 38px;
+                font-size: 15px;
+            }
+
+            .about-brand-name strong {
+                font-size: 15px;
+            }
+
+            .about-brand-name small {
+                margin-top: 4px;
+                font-size: 8px;
+                letter-spacing: 2.4px;
+            }
+
+            .about-desktop-nav,
+            .about-header-actions {
+                display: none;
+            }
+
+            .about-mobile-menu-btn {
+                display: inline-flex;
+                flex: 0 0 42px;
+                width: 42px;
+                height: 42px;
+            }
+
+            /* ---------- MOBILE MENU ---------- */
+
+            .about-mobile-menu-header {
+                min-height: 68px;
+                padding: 0 14px;
+            }
+
+            .about-mobile-close {
+                width: 42px;
+                height: 42px;
+            }
+
+            .about-mobile-links {
+                padding: 12px 16px 24px;
+                overflow-y: auto;
+                max-height: calc(100vh - 68px);
+            }
+
+            .about-mobile-links a {
+                min-height: 50px;
+                font-size: 14px;
+            }
+
+            .about-mobile-book {
+                margin-top: 14px;
+            }
+
+            /* ---------- HERO ---------- */
+
+            .about-hero {
+                min-height: auto;
+                padding: 126px 18px 72px;
+            }
+
+            .about-hero-content {
+                width: 100%;
+                max-width: 520px;
+            }
+
+            .about-hero-eyebrow {
+                margin-bottom: 15px;
+                font-size: 9px;
+                letter-spacing: 2.4px;
+            }
+
+            .about-hero h1 {
+                margin-bottom: 15px;
+                font-size: clamp(37px, 11vw, 52px);
+                line-height: 1.08;
+            }
+
+            .about-hero p {
+                max-width: 460px;
+                font-size: 13px;
+                line-height: 1.75;
+            }
+
+            /* ---------- COMMON SECTIONS ---------- */
+
+            .about-story,
+            .about-values,
+            .about-experience,
+            .about-branches {
+                padding: 68px 16px;
+            }
+
+            .about-section-heading {
+                width: 100%;
+                max-width: 520px;
+                margin-bottom: 30px;
+            }
+
+            .about-section-heading span {
+                margin-bottom: 8px;
+                font-size: 9px;
+                letter-spacing: 2.5px;
+            }
+
+            .about-section-heading h2 {
+                font-size: clamp(29px, 8vw, 39px);
+                line-height: 1.18;
+            }
+
+            /* ---------- STORY ---------- */
+
+            .about-story-container {
+                width: 100%;
+                grid-template-columns: 1fr;
+                gap: 34px;
+            }
+
+            .about-story-visual {
+                width: 100%;
+            }
+
+            .about-story-placeholder {
+                min-height: 330px;
+            }
+
+            .about-story-image {
+                min-height: 330px;
+            }
+
+            .about-story-inner {
+                width: 78%;
+                height: 78%;
+            }
+
+            .about-story-badge {
+                right: 10px;
+                bottom: -18px;
+                width: 88px;
+                height: 88px;
+            }
+
+            .about-story-badge strong {
+                font-size: 25px;
+            }
+
+            .about-story-badge span {
+                font-size: 8px;
+            }
+
+            .about-story-content {
+                padding-top: 4px;
+            }
+
+            .about-story-content .about-label {
+                margin-bottom: 9px;
+                font-size: 9px;
+                letter-spacing: 2.5px;
+            }
+
+            .about-story-content h2 {
+                margin-bottom: 17px;
+                font-size: clamp(29px, 8vw, 39px);
+            }
+
+            .about-story-content p {
+                margin-bottom: 13px;
+                font-size: 13px;
+                line-height: 1.75;
+            }
+
+            /* ---------- VALUES ---------- */
+
+            .about-values-grid {
+                width: 100%;
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .about-value-card {
+                padding: 24px 20px;
+                border-radius: 9px;
+            }
+
+            .about-value-icon {
+                width: 48px;
+                height: 48px;
+                margin-bottom: 14px;
+            }
+
+            .about-value-card h3 {
+                margin-bottom: 7px;
+                font-size: 19px;
+            }
+
+            .about-value-card p {
+                font-size: 12px;
+                line-height: 1.65;
+            }
+
+            /* ---------- EXPERIENCE ---------- */
+
+            .experience-container {
+                width: 100%;
+            }
+
+            .experience-list {
+                grid-template-columns: 1fr;
+                gap: 11px;
+            }
+
+            .experience-step {
+                padding: 21px 18px;
+                border-top: 1px solid rgba(212,175,55,.24);
+                border-left: 2px solid rgba(212,175,55,.10);
+            }
+
+            .experience-number {
+                margin-bottom: 13px;
+                font-size: 10px;
+            }
+
+            .experience-step h3 {
+                margin-bottom: 6px;
+                font-size: 14px;
+            }
+
+            .experience-step p {
+                font-size: 11.5px;
+                line-height: 1.65;
+            }
+
+            /* ---------- BRANCHES ---------- */
+
+            .about-branch-container {
+                width: 100%;
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .about-branch-card {
+                padding: 23px 19px;
+                border-radius: 9px;
+            }
+
+            .about-branch-card h3 {
+                margin-top: 20px;
+                font-size: 21px;
+            }
+
+            .about-branch-card h4 {
+                margin-bottom: 11px;
+                font-size: 12px;
+            }
+
+            .about-branch-card p {
+                font-size: 11.5px;
+                line-height: 1.65;
+            }
+
+            .about-branch-info {
+                margin-top: 18px;
+                padding-top: 15px;
+                gap: 9px;
+            }
+
+            .about-branch-info span {
+                font-size: 11px;
+                line-height: 1.55;
+                overflow-wrap: anywhere;
+            }
+
+            /* ---------- CTA ---------- */
+
+            .about-cta {
+                padding: 30px 16px 68px;
+            }
+
+            .about-cta-box {
+                width: 100%;
+                min-height: auto;
+                padding: 29px 21px;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 22px;
+                border-radius: 9px;
+            }
+
+            .about-cta-box span {
+                font-size: 8.5px;
+                letter-spacing: 2.3px;
+            }
+
+            .about-cta-box h2 {
+                margin: 8px 0 9px;
+                font-size: clamp(28px, 8vw, 37px);
+                line-height: 1.16;
+            }
+
+            .about-cta-box p {
+                font-size: 12px;
+                line-height: 1.65;
+            }
+
+            .about-cta-button {
+                width: 100%;
+                min-height: 48px;
+                padding: 0 15px;
+                font-size: 12px;
+            }
+
+            /* ---------- FOOTER ---------- */
+
+            .site-footer {
+                width: 100%;
+                max-width: 100%;
+                padding-top: 48px;
+                padding-bottom: max(24px, env(safe-area-inset-bottom));
+                overflow: hidden;
+            }
+
+            .site-footer .content-container {
+                width: calc(100% - 32px);
+                margin-inline: auto;
+            }
+
+            .site-footer .footer-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 30px 18px;
+            }
+
+            .site-footer .footer-brand-column {
+                grid-column: 1 / -1;
+                min-width: 0;
+                padding-bottom: 10px;
+                border-bottom: 1px solid rgba(255,255,255,.08);
+            }
+
+            .site-footer .footer-brand-column > p {
+                max-width: 330px;
+                margin-top: 12px;
+                font-size: 13px;
+                line-height: 1.7;
+            }
+
+            .site-footer .footer-socials {
+                margin-top: 16px;
+                gap: 9px;
+            }
+
+            .site-footer .footer-socials a {
+                width: 40px;
+                height: 40px;
+            }
+
+            .site-footer .footer-column {
+                min-width: 0;
+            }
+
+            .site-footer .footer-column h3 {
+                margin-bottom: 12px;
+                font-size: 14px;
+                letter-spacing: .3px;
+            }
+
+            .site-footer .footer-column > a {
+                display: block;
+                width: fit-content;
+                max-width: 100%;
+                padding: 5px 0;
+                font-size: 13px;
+                line-height: 1.45;
+            }
+
+            .site-footer .footer-contact-column {
+                grid-column: 1 / -1;
+                min-width: 0;
+                padding-top: 5px;
+                padding-bottom: 6px;
+                border-top: 1px solid rgba(255,255,255,.08);
+            }
+
+            .site-footer .footer-contact-column h3 {
+                margin-bottom: 14px;
+            }
+
+            .site-footer .footer-contact-column p,
+            .site-footer .footer-contact-column > a,
+            .site-footer .footer-contact-column > span {
+                width: 100%;
+                margin: 0 0 11px;
+                font-size: 12.5px;
+                line-height: 1.55;
+                overflow-wrap: anywhere;
+            }
+
+            .site-footer .footer-contact-column i {
+                flex: 0 0 18px;
+                margin-top: 2px;
+            }
+
+            .site-footer .footer-bottom {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 14px;
+                margin-top: 28px;
+                padding-top: 18px;
+                text-align: left;
+            }
+
+            .site-footer .footer-bottom p {
+                margin: 0;
+                font-size: 11.5px;
+                line-height: 1.55;
+            }
+
+            .site-footer .footer-legal {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px 16px;
+            }
+
+            .site-footer .footer-legal a {
+                font-size: 11.5px;
+                line-height: 1.5;
+            }
+        }
+
+        @media (max-width: 380px) {
+
+            .about-header-container {
+                width: calc(100% - 24px);
+            }
+
+            .about-brand-name strong {
+                font-size: 14px;
+            }
+
+            .about-brand-logo {
+                width: 36px;
+                height: 36px;
+                flex-basis: 36px;
+            }
+
+            .about-hero {
+                padding-left: 14px;
+                padding-right: 14px;
+            }
+
+            .about-story,
+            .about-values,
+            .about-experience,
+            .about-branches {
+                padding-left: 13px;
+                padding-right: 13px;
+            }
+
+            .about-story-placeholder,
+            .about-story-image {
+                min-height: 290px;
+            }
+
+            .about-cta {
+                padding-left: 13px;
+                padding-right: 13px;
+            }
+
+            .site-footer .content-container {
+                width: calc(100% - 24px);
+            }
+
+            .site-footer .footer-grid {
+                gap: 26px 14px;
+            }
+
+            .site-footer .footer-column h3 {
+                font-size: 13px;
+            }
+
+            .site-footer .footer-column > a,
+            .site-footer .footer-contact-column p,
+            .site-footer .footer-contact-column > a,
+            .site-footer .footer-contact-column > span {
+                font-size: 12px;
+            }
+
+            .site-footer .footer-socials a {
+                width: 38px;
+                height: 38px;
+            }
+        }
+
+    </style>
     <link rel="icon" type="image/png" href="../assets/images/logo/beauty-salon-logo.png">
 
 
-<style>
-/* FOOTER - responsive width and spacing fix */
-html, body {
-    width: 100%;
-    max-width: 100%;
-    overflow-x: hidden;
-}
 
-.footer {
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
-    overflow: hidden;
-}
-
-.footer > .container {
-    width: 80%;
-    max-width: 1400px;
-    margin: 0 auto;
-    box-sizing: border-box;
-}
-
-.footer-grid {
-    width: 100%;
-    box-sizing: border-box;
-    min-width: 0;
-}
-
-.footer-grid > * {
-    min-width: 0;
-}
-
-.footer p,
-.footer li,
-.footer a {
-    overflow-wrap: break-word;
-    word-break: normal;
-}
-
-.footer-bottom {
-    width: 100%;
-    box-sizing: border-box;
-}
-
-@media (max-width: 767px) {
-    .footer > .container {
-        width: 100%;
-        padding-left: 20px;
-        padding-right: 20px;
-    }
-}
-</style>
 
 </head>
 
@@ -1395,7 +2001,7 @@ html, body {
                             <span>My Appointments</span>
                         </a>
 
-                        <a href="booking-history.html">
+                        <a href="history.html">
                             <i class="fa-solid fa-clock-rotate-left"></i>
                             <span>Booking History</span>
                         </a>
@@ -1633,7 +2239,7 @@ html, body {
 
                     <div class="about-story-badge">
 
-                        <strong>2</strong>
+                        <strong id="aboutBranchCount">0</strong>
 
                         <span>
                             Salon<br>
@@ -2002,90 +2608,124 @@ html, body {
          FOOTER
     ========================================================== -->
 
-    <footer class="footer">
+    <footer class="site-footer">
 
-        <div class="container">
+        <div class="content-container">
 
             <div class="footer-grid">
 
-                <div>
-                    <h3>
-                        The <span>Beauty</span> Salon
-                    </h3>
-                    <p style="margin-top: 12px; max-width: 310px;">
-                        A modern unisex beauty and hair salon in
-                        Baramati, created for premium styling,
-                        grooming and beauty care.
+                <!-- Footer Brand -->
+                <div class="footer-brand-column">
+
+                    <a href="../index.html"
+                       class="site-brand">
+
+                        <span class="brand-logo">
+                            <i class="fa-solid fa-scissors"></i>
+                        </span>
+
+                        <span class="brand-name">
+                            <strong>The Beauty</strong>
+                            <small>Salon</small>
+                        </span>
+
+                    </a>
+
+                    <p>
+                        Premium unisex beauty and hair care
+                        in Baramati, Maharashtra.
                     </p>
+
+                    <div class="footer-socials">
+
+                        <a href="#" aria-label="Instagram">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+
+                        <a href="#" aria-label="Facebook">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+
+                        <a href="https://wa.me/918793465001" aria-label="WhatsApp">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </a>
+
+                    </div>
+
                 </div>
 
-                <div>
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="../index.html">Home</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="branches.html">Branches</a></li>
-                        <li><a href="gallery.html">Gallery</a></li>
-                    </ul>
+                <!-- Quick Links -->
+                <div class="footer-column">
+
+                    <h3>Quick Links</h3>
+
+                    <a href="../index.html">Home</a>
+                    <a href="about.html">About</a>
+                    <a href="services.html">Services</a>
+                    <a href="branches.html">Branches</a>
+                    <a href="gallery.html">Gallery</a>
+
                 </div>
 
-                <div>
-                    <h4>Customer</h4>
-                    <ul>
-                        <li><a href="booking.html">Book Appointment</a></li>
-                        <li><a href="login.html">Login</a></li>
-                        <li><a href="register.html">Create Account</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
+                <!-- Customer -->
+                <div class="footer-column">
+
+                    <h3>Customer</h3>
+
+                    <a href="booking.html">Book Appointment</a>
+                    <a href="login.html">Customer Login</a>
+                    <a href="register.html">Create Account</a>
+                    <a href="contact.html">Contact Us</a>
+
                 </div>
 
-                <div class="footer-contact">
-                    <h4>Baramati Branch</h4>
+                <!-- Contact -->
+                <div class="footer-column footer-contact-column">
+
+                    <h3>Contact</h3>
 
                     <p>
                         <i class="fa-solid fa-location-dot"></i>
                         <span>
-                            Near Mahanagar Bank, in front of
-                            Shayog Society, Baramati, Maharashtra
+                            Near Mahanagar Bank,
+                            in front of Shayog Society,
+                            Baramati, Maharashtra.
                         </span>
                     </p>
 
-                    <p>
+                    <a href="tel:+918087646512">
                         <i class="fa-solid fa-phone"></i>
-                        <a href="tel:+918793465001">+91 8793465001</a>
-                    </p>
+                        <span>+91 8087646512</span>
+                    </a>
 
-                    <p>
+                    <a href="mailto:beautysalon@gamil.com">
                         <i class="fa-regular fa-envelope"></i>
-                        <a href="mailto:beautysalon@gamil.com">beautysalon@gamil.com</a>
-                    </p>
+                        <span>beautysalon@gamil.com</span>
+                    </a>
 
-                    <p>
+                    <span>
                         <i class="fa-regular fa-clock"></i>
-                        <span>Mon - Sun: 9:00 AM - 9:00 PM</span>
-                    </p>
+                        <span>Mon – Sun: 9:00 AM – 9:00 PM</span>
+                    </span>
+
                 </div>
 
             </div>
 
+            <!-- Footer Bottom -->
             <div class="footer-bottom">
+
                 <p>
                     © <span id="year"></span>
-                    The Beauty Salon. All Rights Reserved.
+                    The Beauty Salon.
+                    All rights reserved.
                 </p>
 
-                <div class="social">
-                    <a href="#" aria-label="Instagram" onclick="return false;">
-                        <i class="fa-brands fa-instagram"></i>
-                    </a>
-                    <a href="#" aria-label="Facebook" onclick="return false;">
-                        <i class="fa-brands fa-facebook-f"></i>
-                    </a>
-                    <a href="#" aria-label="WhatsApp" onclick="return false;">
-                        <i class="fa-brands fa-whatsapp"></i>
-                    </a>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms & Conditions</a>
                 </div>
+
             </div>
 
         </div>
@@ -2305,6 +2945,12 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(payload => {
             const branches = getBranches(payload)
                 .filter(branch => Number(branch.is_active ?? branch.isActive ?? 1) === 1);
+            const branchCount = document.getElementById("aboutBranchCount");
+
+            if (branchCount) {
+                branchCount.textContent = branches.length;
+            }
+
             if (branches.length) {
                 grid.innerHTML = branches.map(renderBranch).join("");
             }

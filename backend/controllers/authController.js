@@ -393,6 +393,7 @@ async function loginCustomer(req, res) {
             loginIdentifier
         );
 
+
         const normalizedMobile = normalizePhone(
             loginIdentifier
         );
@@ -425,6 +426,7 @@ async function loginCustomer(req, res) {
             );
 
         }
+
 
         /* ---------- MOBILE LOGIN ---------- */
 
@@ -559,6 +561,170 @@ async function loginCustomer(req, res) {
         return res.status(500).json({
             success: false,
             message: "Login failed. Please try again."
+        });
+
+    }
+
+}
+
+
+/* ============================================
+   FORGOT PASSWORD
+============================================ */
+
+async function forgotPassword(req, res) {
+
+    try {
+
+        const {
+            email,
+            newPassword,
+            confirmPassword
+        } = req.body;
+
+
+        const customerEmail = normalizeEmail(email);
+
+        const password = String(newPassword || "");
+
+        const confirm = String(confirmPassword || "");
+
+
+        /* ---------- EMAIL VALIDATION ---------- */
+
+        if (!customerEmail) {
+
+            return res.status(400).json({
+                success: false,
+                message: "Email is required."
+            });
+
+        }
+
+
+        if (
+            !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(customerEmail)
+        ) {
+
+            return res.status(400).json({
+                success: false,
+                message: "Please enter a valid email address."
+            });
+
+        }
+
+
+        /* ---------- PASSWORD VALIDATION ---------- */
+
+        if (!password) {
+
+            return res.status(400).json({
+                success: false,
+                message: "New password is required."
+            });
+
+        }
+
+
+        if (password.length < 6) {
+
+            return res.status(400).json({
+                success: false,
+                message: "Password must be at least 6 characters."
+            });
+
+        }
+
+
+        if (password !== confirm) {
+
+            return res.status(400).json({
+                success: false,
+                message: "Passwords do not match."
+            });
+
+        }
+
+
+        /* ---------- FIND CUSTOMER ---------- */
+
+        const [rows] = await pool.promise().query(
+            `
+            SELECT
+                id,
+                email
+            FROM customers
+            WHERE email = ?
+            LIMIT 1
+            `,
+            [customerEmail]
+        );
+
+
+        if (rows.length === 0) {
+
+            return res.status(404).json({
+                success: false,
+                message: "No customer account found with this email."
+            });
+
+        }
+
+
+        const customer = rows[0];
+
+
+        /* ---------- HASH NEW PASSWORD ---------- */
+
+        const hashedPassword = await bcrypt.hash(
+            password,
+            12
+        );
+
+
+        /* ---------- UPDATE PASSWORD ---------- */
+
+        await pool.promise().query(
+            `
+            UPDATE customers
+            SET password = ?
+            WHERE id = ?
+            `,
+            [
+                hashedPassword,
+                customer.id
+            ]
+        );
+
+
+        /* ---------- INVALIDATE OLD SESSIONS ---------- */
+
+        await pool.promise().query(
+            `
+            DELETE FROM customer_sessions
+            WHERE customer_id = ?
+            `,
+            [customer.id]
+        );
+
+
+        return res.status(200).json({
+            success: true,
+            message: "Password reset successfully. Please login with your new password."
+        });
+
+
+    } catch (error) {
+
+        console.error(
+            "❌ Forgot Password Error:",
+            error
+        );
+
+
+        return res.status(500).json({
+            success: false,
+            message: "Password reset failed. Please try again."
         });
 
     }
@@ -839,6 +1005,8 @@ module.exports = {
     registerCustomer,
 
     loginCustomer,
+
+    forgotPassword,
 
     updateCustomerProfile
 

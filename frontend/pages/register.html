@@ -8,6 +8,7 @@
     <meta name="theme-color" content="#000000">
 
     <title>Create Account | The Beauty Salon</title>
+    <link rel="icon" type="image/png" href="../assets/images/logo/beauty-salon-logo.png">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -371,6 +372,255 @@
         }
 
         /* =========================================================
+           PREMIUM BRAND LOGO
+        ========================================================= */
+        .brand-logo {
+            width: 48px;
+            height: 48px;
+            display: grid;
+            place-items: center;
+            flex-shrink: 0;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 1px solid rgba(212, 175, 55, 0.65);
+            background: #0b0b0b;
+            box-shadow: 0 0 22px rgba(212, 175, 55, 0.08);
+        }
+
+        .brand-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* =========================================================
+           PREMIUM REGISTER EXPERIENCE
+        ========================================================= */
+        .register-page {
+            padding-top: 112px !important;
+            padding-bottom: 65px !important;
+        }
+
+        .register-wrapper {
+            max-width: 1080px !important;
+        }
+
+        .register-layout {
+            display: grid;
+            grid-template-columns: 0.85fr 1.15fr;
+            gap: 22px;
+            align-items: stretch;
+        }
+
+        .register-intro {
+            position: relative;
+            overflow: hidden;
+            min-height: 100%;
+            padding: 42px 34px;
+            border: 1px solid rgba(212, 175, 55, 0.20);
+            border-radius: 18px;
+            background:
+                radial-gradient(circle at 20% 15%, rgba(212,175,55,.12), transparent 34%),
+                linear-gradient(145deg, #171717, #090909 75%);
+            box-shadow: 0 25px 70px rgba(0,0,0,.42);
+        }
+
+        .register-intro::after {
+            content: "";
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            right: -80px;
+            bottom: -90px;
+            border: 1px solid rgba(212,175,55,.12);
+            border-radius: 50%;
+        }
+
+        .intro-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 18px;
+            color: var(--gold);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .intro-kicker i {
+            font-size: 10px;
+        }
+
+        .register-intro h2 {
+            max-width: 390px;
+            margin-bottom: 14px;
+            font-family: "Playfair Display", serif;
+            font-size: 38px;
+            line-height: 1.15;
+            font-weight: 600;
+        }
+
+        .register-intro > p {
+            max-width: 400px;
+            color: #a9a9a9;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .register-benefits {
+            display: grid;
+            gap: 13px;
+            margin-top: 30px;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 13px 14px;
+            border: 1px solid rgba(255,255,255,.07);
+            border-radius: 11px;
+            background: rgba(255,255,255,.025);
+        }
+
+        .benefit-icon {
+            width: 36px;
+            height: 36px;
+            flex: 0 0 36px;
+            display: grid;
+            place-items: center;
+            border-radius: 9px;
+            color: var(--gold);
+            background: rgba(212,175,55,.08);
+            border: 1px solid rgba(212,175,55,.16);
+        }
+
+        .benefit-item strong {
+            display: block;
+            margin-bottom: 2px;
+            font-size: 13px;
+            color: #f1f1f1;
+        }
+
+        .benefit-item span {
+            color: #777;
+            font-size: 11px;
+        }
+
+        .register-card {
+            height: 100%;
+        }
+
+        .register-card-topline {
+            width: 55px;
+            height: 2px;
+            margin: 0 auto 20px;
+            background: var(--gold);
+            border-radius: 99px;
+        }
+
+        .trust-row {
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+            margin-top: 18px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255,255,255,.07);
+            color: #666;
+            font-size: 10px;
+        }
+
+        .trust-row span {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .trust-row i {
+            color: var(--gold-dark);
+        }
+
+        @media (max-width: 900px) {
+            .register-wrapper {
+                max-width: 620px !important;
+            }
+
+            .register-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .register-intro {
+                min-height: auto;
+                padding: 30px 26px;
+            }
+
+            .register-intro h2 {
+                font-size: 31px;
+            }
+
+            .register-benefits {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .brand-logo {
+                width: 42px;
+                height: 42px;
+            }
+
+            .register-page {
+                padding: 91px 14px 38px !important;
+            }
+
+            .register-intro {
+                padding: 27px 21px;
+                border-radius: 15px;
+            }
+
+            .register-intro h2 {
+                font-size: 28px;
+            }
+
+            .register-intro > p {
+                font-size: 13px;
+                line-height: 1.7;
+            }
+
+            .register-benefits {
+                grid-template-columns: 1fr;
+                gap: 9px;
+                margin-top: 22px;
+            }
+
+            .benefit-item {
+                padding: 11px 12px;
+            }
+
+            .register-card {
+                padding: 28px 20px;
+            }
+
+            .trust-row {
+                gap: 10px;
+                flex-wrap: wrap;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .brand-logo {
+                width: 39px;
+                height: 39px;
+            }
+
+            .register-intro h2 {
+                font-size: 26px;
+            }
+        }
+
+        /* =========================================================
            REGISTER PAGE
         ========================================================= */
         .register-page {
@@ -626,51 +876,7 @@
         .password-strength.strong {
             color: #8dcc9b;
         }
-
-        /* =========================================================
-           TERMS
-        ========================================================= */
-        .terms-row {
-            margin: 2px 0 20px;
-        }
-
-        .terms-label {
-            display: flex;
-            align-items: flex-start;
-            gap: 9px;
-
-            color: #999999;
-
-            font-size: 12px;
-            line-height: 1.6;
-
-            cursor: pointer;
-        }
-
-        .terms-label input {
-            width: 15px;
-            height: 15px;
-
-            flex-shrink: 0;
-
-            margin-top: 2px;
-
-            accent-color: var(--gold);
-
-            cursor: pointer;
-        }
-
-        .terms-label a {
-            color: var(--gold);
-            font-weight: 600;
-        }
-
-        .terms-label a:hover {
-            color: var(--gold-light);
-            text-decoration: underline;
-        }
-
-        /* =========================================================
+/* =========================================================
            CREATE ACCOUNT BUTTON
         ========================================================= */
         .register-btn {
@@ -962,185 +1168,237 @@
                 animation: none !important;
             }
         }
-    </style>
+    
+        /* FINAL FORM-ONLY HEADER */
+        .site-header {
+            background: rgba(0, 0, 0, 0.96);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.16);
+        }
+
+        .header-inner {
+            justify-content: center;
+            min-height: 82px;
+        }
+
+        .brand {
+            margin: 0 auto;
+        }
+
+        .brand-logo {
+            width: 46px;
+            height: 46px;
+            display: grid;
+            place-items: center;
+            flex-shrink: 0;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 1px solid rgba(212, 175, 55, 0.55);
+            background: #101010;
+        }
+
+        .brand-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .desktop-nav,
+        .header-actions,
+        .menu-btn,
+        .mobile-menu {
+            display: none !important;
+        }
+
+        .register-page {
+            padding-top: 112px;
+        }
+
+        @media (max-width: 767px) {
+            .header-inner {
+                min-height: 70px;
+                width: calc(100% - 28px);
+            }
+
+            .brand-logo {
+                width: 40px;
+                height: 40px;
+            }
+
+            .register-page {
+                padding-top: 92px;
+            }
+        }
+
+
+        /* FINAL HEADER: BRAND LEFT + LOGIN RIGHT */
+        .header-inner {
+            justify-content: space-between !important;
+        }
+
+        .brand {
+            margin: 0 !important;
+        }
+
+        .header-login-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            min-height: 42px;
+            padding: 10px 17px;
+            border: 1px solid rgba(212, 175, 55, 0.42);
+            border-radius: 9px;
+            background: rgba(212, 175, 55, 0.05);
+            color: #D4AF37;
+            font-size: 13px;
+            font-weight: 700;
+            transition: all 0.25s ease;
+        }
+
+        .header-login-btn:hover {
+            background: #D4AF37;
+            color: #000000;
+            border-color: #D4AF37;
+            transform: translateY(-1px);
+        }
+
+        @media (max-width: 767px) {
+            .header-login-btn {
+                min-height: 40px;
+                padding: 9px 13px;
+                font-size: 12px;
+            }
+
+            .header-login-btn i {
+                font-size: 12px;
+            }
+        }
+
+        /* Keep the registration page focused only on the form. */
+        .register-page .register-promo,
+        .register-page .hero-copy,
+        .register-page .feature-list,
+        .register-page .register-intro,
+        .register-page .benefits,
+        .register-page .benefit-grid {
+            display: none !important;
+        }
+
+
+        /* ONLY: CENTER THE EXISTING FORM */
+        @media (min-width: 901px) {
+            .register-page {
+                display: flex !important;
+                justify-content: center !important;
+            }
+
+            .register-wrapper {
+                width: 100% !important;
+                max-width: 520px !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+            }
+
+            .register-layout {
+                display: block !important;
+            }
+
+            .register-card {
+                width: 100% !important;
+                max-width: 520px !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+            }
+
+            .register-intro {
+                display: none !important;
+            }
+        }
+
+</style>
 </head>
 
 <body>
 
-    <!-- =========================================================
-         HEADER
-    ========================================================= -->
+    <!-- HEADER -->
     <header class="site-header">
-
         <div class="header-inner">
-
-            <a href="../index.html"
-               class="brand"
-               aria-label="The Beauty Salon Home">
-
-                <div class="brand-icon">
-                    <i class="fa-solid fa-scissors"></i>
-                </div>
-
-                <div class="brand-text">
+            <a href="../index.html" class="brand" aria-label="The Beauty Salon Home">
+                <span class="brand-logo">
+                    <img src="../assets/images/logo/beauty-salon-logo.png"
+                         alt="The Beauty Salon Logo">
+                </span>
+                <span class="brand-text">
                     <strong>The Beauty</strong>
                     <span>Salon</span>
-                </div>
-
+                </span>
             </a>
 
-
-            <!-- Desktop Navigation -->
-            <nav class="desktop-nav"
-                 aria-label="Main navigation">
-
-                <a href="../index.html">Home</a>
-
-                <a href="about.html">About</a>
-
-                <a href="services.html">Services</a>
-
-                <a href="branches.html">Branches</a>
-
-                <a href="gallery.html">Gallery</a>
-
-                <a href="contact.html">Contact</a>
-
-            </nav>
-
-
-            <!-- Header Actions -->
-            <div class="header-actions">
-
-                <a href="login.html"
-                   class="login-header-btn">
-                    Login
-                </a>
-
-                <a href="booking.html"
-                   class="book-header-btn">
-
-                    <i class="fa-regular fa-calendar-check"></i>
-
-                    Book Appointment
-
-                </a>
-
-            </div>
-
-
-            <!-- Mobile Menu Button -->
-            <button
-                class="menu-btn"
-                id="menuBtn"
-                type="button"
-                aria-label="Open menu"
-                aria-controls="mobileMenu"
-                aria-expanded="false">
-
-                <i class="fa-solid fa-bars"></i>
-
-            </button>
-
+            <a href="login.html" class="header-login-btn">
+                <i class="fa-solid fa-right-to-bracket"></i>
+                <span>Login</span>
+            </a>
         </div>
-
     </header>
 
 
-    <!-- =========================================================
-         MOBILE MENU
-    ========================================================= -->
-    <div class="mobile-menu"
-         id="mobileMenu">
-
-        <div class="mobile-menu-top">
-
-            <a href="../index.html"
-               class="brand">
-
-                <div class="brand-icon">
-                    <i class="fa-solid fa-scissors"></i>
-                </div>
-
-                <div class="brand-text">
-                    <strong>The Beauty</strong>
-                    <span>Salon</span>
-                </div>
-
-            </a>
-
-
-            <button
-                class="mobile-close"
-                id="closeMenuBtn"
-                type="button"
-                aria-label="Close menu">
-
-                <i class="fa-solid fa-xmark"></i>
-
-            </button>
-
-        </div>
-
-
-        <nav class="mobile-nav"
-             aria-label="Mobile navigation">
-
-            <a href="../index.html">
-                Home
-            </a>
-
-            <a href="about.html">
-                About
-            </a>
-
-            <a href="services.html">
-                Services
-            </a>
-
-            <a href="branches.html">
-                Branches
-            </a>
-
-            <a href="gallery.html">
-                Gallery
-            </a>
-
-            <a href="contact.html">
-                Contact
-            </a>
-
-            <a href="login.html">
-                Login
-            </a>
-
-            <a href="register.html"
-               class="active">
-                Create Account
-            </a>
-
-            <a href="booking.html"
-               class="mobile-book">
-
-                <i class="fa-regular fa-calendar-check"></i>
-
-                Book Appointment
-
-            </a>
-
-        </nav>
-
-    </div>
-
-
-    <!-- =========================================================
+<!-- =========================================================
          REGISTER PAGE
     ========================================================= -->
     <main class="register-page">
 
         <div class="register-wrapper">
 
-            <div class="register-card">
+            <div class="register-layout">
+
+                <section class="register-intro">
+                    <div class="intro-kicker">
+                        <i class="fa-solid fa-sparkles"></i>
+                        The Beauty Salon
+                    </div>
+
+                    
+
+                    <p>
+                        Create your personal salon account for a smoother,
+                        faster and more personalized appointment experience.
+                    </p>
+
+                    <div class="register-benefits">
+                        <div class="benefit-item">
+                            <div class="benefit-icon">
+                                <i class="fa-regular fa-calendar-check"></i>
+                            </div>
+                            <div>
+                                
+                                
+                            </div>
+                        </div>
+
+                        <div class="benefit-item">
+                            <div class="benefit-icon">
+                                <i class="fa-regular fa-clock"></i>
+                            </div>
+                            <div>
+                                
+                                
+                            </div>
+                        </div>
+
+                        <div class="benefit-item">
+                            <div class="benefit-icon">
+                                <i class="fa-solid fa-shield-halved"></i>
+                            </div>
+                            <div>
+                                
+                                
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="register-card">
 
                 <!-- Heading -->
                 <div class="register-heading">
@@ -1337,35 +1595,7 @@
 
                     </div>
 
-
-                    <!-- Terms -->
-                    <div class="terms-row">
-
-                        <label class="terms-label">
-
-                            <input
-                                type="checkbox"
-                                id="terms"
-                                name="terms"
-                                required>
-
-                            <span>
-                                I agree to the
-                                <a href="#"
-                                   id="termsLink">
-                                    Terms & Conditions
-                                </a>
-                                and understand that my account
-                                information will be used to manage
-                                my salon appointments.
-                            </span>
-
-                        </label>
-
-                    </div>
-
-
-                    <!-- Register Button -->
+<!-- Register Button -->
                     <button
                         type="submit"
                         class="register-btn"
@@ -1411,7 +1641,17 @@
 
                 </div>
 
+                <div class="trust-row">
+                    <span><i class="fa-solid fa-lock"></i> Secure</span>
+                    <span><i class="fa-regular fa-circle-check"></i> Simple</span>
+                    <span><i class="fa-solid fa-star"></i> Premium Care</span>
+                </div>
+
             </div>
+
+        </div>
+
+
 
 
             <!-- Footer -->
@@ -1493,11 +1733,7 @@
 
                 const mobileInput =
                     document.getElementById("mobile");
-
-                const termsLink =
-                    document.getElementById("termsLink");
-
-                const currentYear =
+const currentYear =
                     document.getElementById("currentYear");
 
 
@@ -1511,96 +1747,6 @@
                         new Date().getFullYear();
 
                 }
-
-
-                /* =================================================
-                   MOBILE MENU
-                ================================================= */
-
-                function openMobileMenu() {
-
-                    if (!mobileMenu) return;
-
-                    mobileMenu.classList.add("open");
-
-                    if (menuBtn) {
-
-                        menuBtn.setAttribute(
-                            "aria-expanded",
-                            "true"
-                        );
-
-                    }
-
-                    document.body.style.overflow =
-                        "hidden";
-                }
-
-
-                function closeMobileMenu() {
-
-                    if (!mobileMenu) return;
-
-                    mobileMenu.classList.remove("open");
-
-                    if (menuBtn) {
-
-                        menuBtn.setAttribute(
-                            "aria-expanded",
-                            "false"
-                        );
-
-                    }
-
-                    document.body.style.overflow =
-                        "";
-                }
-
-
-                if (menuBtn) {
-
-                    menuBtn.addEventListener(
-                        "click",
-                        openMobileMenu
-                    );
-
-                }
-
-
-                if (closeMenuBtn) {
-
-                    closeMenuBtn.addEventListener(
-                        "click",
-                        closeMobileMenu
-                    );
-
-                }
-
-
-                document
-                    .querySelectorAll(".mobile-nav a")
-                    .forEach(function (link) {
-
-                        link.addEventListener(
-                            "click",
-                            closeMobileMenu
-                        );
-
-                    });
-
-
-                document.addEventListener(
-                    "keydown",
-                    function (event) {
-
-                        if (event.key === "Escape") {
-
-                            closeMobileMenu();
-
-                        }
-
-                    }
-                );
 
 
                 /* =================================================
@@ -1843,14 +1989,7 @@
 
                             const confirmPassword =
                                 confirmPasswordInput.value;
-
-                            const terms =
-                                document
-                                    .getElementById("terms")
-                                    .checked;
-
-
-                            /* Full Name */
+/* Full Name */
 
                             if (fullName.length < 2) {
 
@@ -1947,19 +2086,6 @@
 
                             }
 
-
-                            /* Terms */
-
-                            if (!terms) {
-
-                                showMessage(
-                                    "Please accept the Terms & Conditions.",
-                                    "error"
-                                );
-
-                                return;
-
-                            }
 
 
                             /* =====================================
@@ -2086,28 +2212,6 @@
 
                 }
 
-
-                /* =================================================
-                   TERMS LINK
-                ================================================= */
-
-                if (termsLink) {
-
-                    termsLink.addEventListener(
-                        "click",
-                        function (event) {
-
-                            event.preventDefault();
-
-                            showMessage(
-                                "Terms & Conditions will be added to the final system.",
-                                "success"
-                            );
-
-                        }
-                    );
-
-                }
 
 
                 /* =================================================
