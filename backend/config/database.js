@@ -2,16 +2,17 @@ const mysql = require("mysql2");
 
 
 // =====================================================
-// LOCAL MYSQL DATABASE CONNECTION
+// DATABASE CONNECTION
+// Local MySQL + TiDB Cloud / Render compatible
 // =====================================================
 
 const pool = mysql.createPool({
 
-    host: process.env.DB_HOST || "localhost",
+    host:
+        process.env.DB_HOST || "localhost",
 
-    port: Number(
-        process.env.DB_PORT || 3306
-    ),
+    port:
+        Number(process.env.DB_PORT || 3306),
 
     user:
         process.env.DB_USER || "root",
@@ -21,6 +22,14 @@ const pool = mysql.createPool({
 
     database:
         process.env.DB_NAME || "salon_booking",
+
+    // TiDB Cloud requires TLS for public endpoint
+    ssl:
+        process.env.DB_SSL === "true"
+            ? {
+                minVersion: "TLSv1.2"
+            }
+            : undefined,
 
     waitForConnections: true,
 
@@ -40,7 +49,7 @@ pool.getConnection((err, connection) => {
     if (err) {
 
         console.error(
-            "❌ Local MySQL Database Connection Failed"
+            "❌ Database Connection Failed"
         );
 
         console.error(
@@ -52,7 +61,7 @@ pool.getConnection((err, connection) => {
 
 
     console.log(
-        "✅ Local MySQL Database Connected Successfully"
+        "✅ Database Connected Successfully"
     );
 
 
