@@ -1,4 +1,119 @@
 const pool = require("../config/database");
+const fs = require("fs");
+const path = require("path");
+
+// =====================================================
+// SERVICE IMAGE DIRECTORY
+// =====================================================
+
+const SERVICE_IMAGE_DIR = path.resolve(
+    __dirname,
+    "../../frontend/assets/images/services"
+);
+
+// Make sure folder exists
+fs.mkdirSync(SERVICE_IMAGE_DIR, { recursive: true });
+
+
+// =====================================================
+// DELETE SERVICE IMAGE
+// =====================================================
+
+function deleteServiceImage(filename) {
+
+    if (!filename) return;
+
+    const safeName = path.basename(String(filename));
+
+    const filePath = path.join(
+        SERVICE_IMAGE_DIR,
+        safeName
+    );
+
+    try {
+
+        if (fs.existsSync(filePath)) {
+            fs.unlinkSync(filePath);
+        }
+
+    } catch (error) {
+
+        console.error(
+            "SERVICE IMAGE DELETE ERROR:",
+            error
+        );
+
+    }
+}
+
+
+// =====================================================
+// VALIDATE SERVICE INPUT
+// =====================================================
+
+function validateServiceInput({
+    name,
+    category,
+    price,
+    duration
+}) {
+
+    if (
+        !name ||
+        !category ||
+        price === undefined ||
+        duration === undefined
+    ) {
+
+        return (
+            "Service name, category, price and duration are required."
+        );
+
+    }
+
+    const categoryValue =
+        String(category)
+            .toLowerCase()
+            .trim();
+
+    if (
+        ![
+            "him",
+            "her",
+            "child"
+        ].includes(categoryValue)
+    ) {
+
+        return (
+            "Category must be Him, Her or Child."
+        );
+
+    }
+
+    if (
+        !Number.isFinite(Number(price)) ||
+        Number(price) < 0
+    ) {
+
+        return (
+            "Price must be a valid non-negative number."
+        );
+
+    }
+
+    if (
+        !Number.isInteger(Number(duration)) ||
+        Number(duration) <= 0
+    ) {
+
+        return (
+            "Duration must be a positive whole number."
+        );
+
+    }
+
+    return null;
+}
 
 
 // =====================================================
@@ -6,39 +121,50 @@ const pool = require("../config/database");
 // =====================================================
 
 const getAllServices = async (req, res) => {
+
     try {
 
-        const [rows] = await pool.promise().query(`
-            SELECT
-                id,
-                name,
-                category,
-                price,
-                duration,
-                description,
-                service_image,
-                is_active,
-                created_at
-            FROM services
-            ORDER BY id ASC
-        `);
+        const [rows] =
+            await pool.promise().query(`
+                SELECT
+                    id,
+                    name,
+                    category,
+                    price,
+                    duration,
+                    description,
+                    service_image,
+                    is_active,
+                    created_at
+                FROM services
+                ORDER BY id ASC
+            `);
 
         res.json({
+
             success: true,
             count: rows.length,
             data: rows
+
         });
 
     } catch (error) {
 
-        console.error("GET SERVICES ERROR:", error);
+        console.error(
+            "GET SERVICES ERROR:",
+            error
+        );
 
         res.status(500).json({
+
             success: false,
             message: "Failed to fetch services.",
             error: error.message
+
         });
+
     }
+
 };
 
 
@@ -47,50 +173,63 @@ const getAllServices = async (req, res) => {
 // =====================================================
 
 const getServiceById = async (req, res) => {
+
     try {
 
-        const [rows] = await pool.promise().query(`
-            SELECT
-                id,
-                name,
-                category,
-                price,
-                duration,
-                description,
-                service_image,
-                is_active,
-                created_at
-            FROM services
-            WHERE id = ?
-            LIMIT 1
-        `, [req.params.id]);
+        const [rows] =
+            await pool.promise().query(`
+                SELECT
+                    id,
+                    name,
+                    category,
+                    price,
+                    duration,
+                    description,
+                    service_image,
+                    is_active,
+                    created_at
+                FROM services
+                WHERE id = ?
+                LIMIT 1
+            `, [
+                req.params.id
+            ]);
 
-
-        if (rows.length === 0) {
+        if (!rows.length) {
 
             return res.status(404).json({
+
                 success: false,
                 message: "Service not found."
+
             });
 
         }
 
-
         res.json({
+
             success: true,
             data: rows[0]
+
         });
 
     } catch (error) {
 
-        console.error("GET SERVICE ERROR:", error);
+        console.error(
+            "GET SERVICE ERROR:",
+            error
+        );
 
         res.status(500).json({
+
             success: false,
             message: "Failed to fetch service.",
             error: error.message
+
         });
+
     }
+
 };
 
 
@@ -99,6 +238,7 @@ const getServiceById = async (req, res) => {
 // =====================================================
 
 const createService = async (req, res) => {
+
     try {
 
         const {
@@ -107,108 +247,85 @@ const createService = async (req, res) => {
             description,
             price,
             duration,
-            service_image,
             is_active
         } = req.body;
 
 
-        // Required fields
-        if (
-            !name ||
-            !category ||
-            price === undefined ||
-            duration === undefined
-        ) {
-
-            return res.status(400).json({
-                success: false,
-                message:
-                    "Service name, category, price and duration are required."
-            });
-
-        }
-
-
-        const categoryValue = String(category)
-            .toLowerCase()
-            .trim();
-
-
-        // Allowed categories
-        if (!["him", "her", "child"].includes(categoryValue)) {
-
-            return res.status(400).json({
-                success: false,
-                message:
-                    "Category must be Him, Her or Child."
-            });
-
-        }
-
-
-        // Validate price
-        if (
-            !Number.isFinite(Number(price)) ||
-            Number(price) < 0
-        ) {
-
-            return res.status(400).json({
-                success: false,
-                message:
-                    "Price must be a valid non-negative number."
-            });
-
-        }
-
-
-        // Validate duration
-        if (
-            !Number.isInteger(Number(duration)) ||
-            Number(duration) <= 0
-        ) {
-
-            return res.status(400).json({
-                success: false,
-                message:
-                    "Duration must be a positive whole number."
-            });
-
-        }
-
-
-        const [result] = await pool.promise().query(`
-            INSERT INTO services
-            (
+        // Validate
+        const validationError =
+            validateServiceInput({
                 name,
                 category,
                 price,
-                duration,
-                description,
-                service_image,
-                is_active
-            )
-            VALUES (?, ?, ?, ?, ?, ?, ?)
-        `, [
+                duration
+            });
 
-            name.trim(),
 
-            categoryValue,
+        if (validationError) {
 
-            Number(price),
+            if (req.file) {
+                deleteServiceImage(
+                    req.file.filename
+                );
+            }
 
-            Number(duration),
+            return res.status(400).json({
 
-            description
-                ? String(description).trim()
-                : null,
+                success: false,
+                message: validationError
 
-            service_image
-                ? String(service_image).trim()
-                : null,
+            });
 
-            is_active === 0 ? 0 : 1
+        }
 
-        ]);
+
+        const categoryValue =
+            String(category)
+                .toLowerCase()
+                .trim();
+
+
+        const imageName =
+            req.file
+                ? req.file.filename
+                : null;
+
+
+        const [result] =
+            await pool.promise().query(`
+                INSERT INTO services
+                (
+                    name,
+                    category,
+                    price,
+                    duration,
+                    description,
+                    service_image,
+                    is_active
+                )
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+            `, [
+
+                String(name).trim(),
+
+                categoryValue,
+
+                Number(price),
+
+                Number(duration),
+
+                description
+                    ? String(description).trim()
+                    : null,
+
+                imageName,
+
+                is_active === "0" ||
+                is_active === 0
+                    ? 0
+                    : 1
+
+            ]);
 
 
         res.status(201).json({
@@ -219,13 +336,28 @@ const createService = async (req, res) => {
                 "Service added successfully.",
 
             serviceId:
-                result.insertId
+                result.insertId,
+
+            service_image:
+                imageName
 
         });
 
+
     } catch (error) {
 
-        console.error("ADD SERVICE ERROR:", error);
+        if (req.file) {
+
+            deleteServiceImage(
+                req.file.filename
+            );
+
+        }
+
+        console.error(
+            "ADD SERVICE ERROR:",
+            error
+        );
 
         res.status(500).json({
 
@@ -240,6 +372,7 @@ const createService = async (req, res) => {
         });
 
     }
+
 };
 
 
@@ -248,6 +381,7 @@ const createService = async (req, res) => {
 // =====================================================
 
 const updateService = async (req, res) => {
+
     try {
 
         const {
@@ -256,133 +390,168 @@ const updateService = async (req, res) => {
             description,
             price,
             duration,
-            service_image,
             is_active
         } = req.body;
 
 
-        // Required fields
-        if (
-            !name ||
-            !category ||
-            price === undefined ||
-            duration === undefined
-        ) {
+        // Validate
+        const validationError =
+            validateServiceInput({
+                name,
+                category,
+                price,
+                duration
+            });
+
+
+        if (validationError) {
+
+            if (req.file) {
+
+                deleteServiceImage(
+                    req.file.filename
+                );
+
+            }
 
             return res.status(400).json({
 
                 success: false,
-
-                message:
-                    "Service name, category, price and duration are required."
+                message: validationError
 
             });
 
         }
 
 
-        const categoryValue = String(category)
-            .toLowerCase()
-            .trim();
+        // Get old service
+        const [existingRows] =
+            await pool.promise().query(
+                `
+                SELECT
+                    service_image
+                FROM services
+                WHERE id = ?
+                LIMIT 1
+                `,
+                [
+                    req.params.id
+                ]
+            );
 
 
-        // Validate category
-        if (!["him", "her", "child"].includes(categoryValue)) {
+        if (!existingRows.length) {
 
-            return res.status(400).json({
+            if (req.file) {
 
-                success: false,
+                deleteServiceImage(
+                    req.file.filename
+                );
 
-                message:
-                    "Category must be Him, Her or Child."
-
-            });
-
-        }
-
-
-        // Validate price
-        if (
-            !Number.isFinite(Number(price)) ||
-            Number(price) < 0
-        ) {
-
-            return res.status(400).json({
-
-                success: false,
-
-                message:
-                    "Price must be a valid non-negative number."
-
-            });
-
-        }
-
-
-        // Validate duration
-        if (
-            !Number.isInteger(Number(duration)) ||
-            Number(duration) <= 0
-        ) {
-
-            return res.status(400).json({
-
-                success: false,
-
-                message:
-                    "Duration must be a positive whole number."
-
-            });
-
-        }
-
-
-        const [result] = await pool.promise().query(`
-            UPDATE services
-            SET
-                name = ?,
-                category = ?,
-                price = ?,
-                duration = ?,
-                description = ?,
-                service_image = ?,
-                is_active = ?
-            WHERE id = ?
-        `, [
-
-            name.trim(),
-
-            categoryValue,
-
-            Number(price),
-
-            Number(duration),
-
-            description
-                ? String(description).trim()
-                : null,
-
-            service_image
-                ? String(service_image).trim()
-                : null,
-
-            is_active === 0 ? 0 : 1,
-
-            req.params.id
-
-        ]);
-
-
-        if (result.affectedRows === 0) {
+            }
 
             return res.status(404).json({
 
                 success: false,
-
-                message:
-                    "Service not found."
+                message: "Service not found."
 
             });
+
+        }
+
+
+        const oldImage =
+            existingRows[0].service_image ||
+            null;
+
+
+        // If new image uploaded use it
+        // otherwise keep old image
+        const newImage =
+            req.file
+                ? req.file.filename
+                : oldImage;
+
+
+        const categoryValue =
+            String(category)
+                .toLowerCase()
+                .trim();
+
+
+        const activeValue =
+            is_active === "0" ||
+            is_active === 0
+                ? 0
+                : 1;
+
+
+        const [result] =
+            await pool.promise().query(`
+                UPDATE services
+                SET
+                    name = ?,
+                    category = ?,
+                    price = ?,
+                    duration = ?,
+                    description = ?,
+                    service_image = ?,
+                    is_active = ?
+                WHERE id = ?
+            `, [
+
+                String(name).trim(),
+
+                categoryValue,
+
+                Number(price),
+
+                Number(duration),
+
+                description
+                    ? String(description).trim()
+                    : null,
+
+                newImage,
+
+                activeValue,
+
+                req.params.id
+
+            ]);
+
+
+        if (!result.affectedRows) {
+
+            if (req.file) {
+
+                deleteServiceImage(
+                    req.file.filename
+                );
+
+            }
+
+            return res.status(404).json({
+
+                success: false,
+                message: "Service not found."
+
+            });
+
+        }
+
+
+        // Delete old image only when
+        // a NEW image was uploaded
+        if (
+            req.file &&
+            oldImage &&
+            oldImage !== newImage
+        ) {
+
+            deleteServiceImage(
+                oldImage
+            );
 
         }
 
@@ -392,11 +561,23 @@ const updateService = async (req, res) => {
             success: true,
 
             message:
-                "Service updated successfully."
+                "Service updated successfully.",
+
+            service_image:
+                newImage
 
         });
 
+
     } catch (error) {
+
+        if (req.file) {
+
+            deleteServiceImage(
+                req.file.filename
+            );
+
+        }
 
         console.error(
             "UPDATE SERVICE ERROR:",
@@ -416,26 +597,168 @@ const updateService = async (req, res) => {
         });
 
     }
+
 };
 
 
 // =====================================================
-// DELETE SERVICE
+// DELETE / DEACTIVATE SERVICE
+// =====================================================
+//
+// LOGIC:
+//
+// If service has bookings:
+//     Do NOT permanently delete
+//     Set is_active = 0
+//
+// If service has NO bookings:
+//     Permanently delete service
+//
+// This protects booking history.
 // =====================================================
 
 const deleteService = async (req, res) => {
+
+    const serviceId =
+        req.params.id;
+
+
     try {
 
-        const [result] = await pool.promise().query(
+        // -------------------------------------------------
+        // 1. Check service exists
+        // -------------------------------------------------
 
-            "DELETE FROM services WHERE id = ?",
+        const [serviceRows] =
+            await pool.promise().query(
+                `
+                SELECT
+                    id,
+                    name,
+                    service_image,
+                    is_active
+                FROM services
+                WHERE id = ?
+                LIMIT 1
+                `,
+                [
+                    serviceId
+                ]
+            );
 
-            [req.params.id]
 
-        );
+        if (!serviceRows.length) {
+
+            return res.status(404).json({
+
+                success: false,
+                message: "Service not found."
+
+            });
+
+        }
 
 
-        if (result.affectedRows === 0) {
+        const service =
+            serviceRows[0];
+
+
+        // -------------------------------------------------
+        // 2. Check existing bookings
+        // -------------------------------------------------
+
+        const [bookingRows] =
+            await pool.promise().query(
+                `
+                SELECT
+                    COUNT(*) AS bookingCount
+                FROM bookings
+                WHERE service_id = ?
+                `,
+                [
+                    serviceId
+                ]
+            );
+
+
+        const bookingCount =
+            Number(
+                bookingRows[0].bookingCount
+            );
+
+
+        // -------------------------------------------------
+        // 3. BOOKINGS EXIST
+        // -------------------------------------------------
+        // Do not delete.
+        // Deactivate service instead.
+        // -------------------------------------------------
+
+        if (bookingCount > 0) {
+
+            const [updateResult] =
+                await pool.promise().query(
+                    `
+                    UPDATE services
+                    SET is_active = 0
+                    WHERE id = ?
+                    `,
+                    [
+                        serviceId
+                    ]
+                );
+
+
+            if (!updateResult.affectedRows) {
+
+                return res.status(500).json({
+
+                    success: false,
+
+                    message:
+                        "Failed to deactivate service."
+
+                });
+
+            }
+
+
+            return res.json({
+
+                success: true,
+
+                action:
+                    "deactivated",
+
+                bookingCount,
+
+                message:
+                    `"${service.name}" has existing bookings, so it was deactivated instead of permanently deleted.`
+
+            });
+
+        }
+
+
+        // -------------------------------------------------
+        // 4. NO BOOKINGS
+        // -------------------------------------------------
+        // Permanent delete allowed.
+        // -------------------------------------------------
+
+        const [deleteResult] =
+            await pool.promise().query(
+                `
+                DELETE FROM services
+                WHERE id = ?
+                `,
+                [
+                    serviceId
+                ]
+            );
+
+
+        if (!deleteResult.affectedRows) {
 
             return res.status(404).json({
 
@@ -449,14 +772,34 @@ const deleteService = async (req, res) => {
         }
 
 
-        res.json({
+        // -------------------------------------------------
+        // 5. Delete image from filesystem
+        // -------------------------------------------------
+
+        if (service.service_image) {
+
+            deleteServiceImage(
+                service.service_image
+            );
+
+        }
+
+
+        return res.json({
 
             success: true,
 
+            action:
+                "deleted",
+
+            bookingCount:
+                0,
+
             message:
-                "Service deleted successfully."
+                `"${service.name}" was permanently deleted successfully.`
 
         });
+
 
     } catch (error) {
 
@@ -466,12 +809,12 @@ const deleteService = async (req, res) => {
         );
 
 
-        res.status(409).json({
+        return res.status(500).json({
 
             success: false,
 
             message:
-                "This service cannot be deleted because it is linked with existing bookings.",
+                "Failed to manage service.",
 
             error:
                 error.message
@@ -479,11 +822,117 @@ const deleteService = async (req, res) => {
         });
 
     }
+
 };
 
 
 // =====================================================
-// EXPORT
+// ACTIVATE SERVICE
+// =====================================================
+
+const activateService = async (req, res) => {
+
+    try {
+
+        // First check service exists
+        const [serviceRows] =
+            await pool.promise().query(
+                `
+                SELECT
+                    id,
+                    name,
+                    is_active
+                FROM services
+                WHERE id = ?
+                LIMIT 1
+                `,
+                [
+                    req.params.id
+                ]
+            );
+
+
+        if (!serviceRows.length) {
+
+            return res.status(404).json({
+
+                success: false,
+
+                message:
+                    "Service not found."
+
+            });
+
+        }
+
+
+        const [result] =
+            await pool.promise().query(
+                `
+                UPDATE services
+                SET is_active = 1
+                WHERE id = ?
+                `,
+                [
+                    req.params.id
+                ]
+            );
+
+
+        if (!result.affectedRows) {
+
+            return res.status(500).json({
+
+                success: false,
+
+                message:
+                    "Failed to activate service."
+
+            });
+
+        }
+
+
+        return res.json({
+
+            success: true,
+
+            action:
+                "activated",
+
+            message:
+                `"${serviceRows[0].name}" has been activated successfully.`
+
+        });
+
+
+    } catch (error) {
+
+        console.error(
+            "ACTIVATE SERVICE ERROR:",
+            error
+        );
+
+
+        return res.status(500).json({
+
+            success: false,
+
+            message:
+                "Failed to activate service.",
+
+            error:
+                error.message
+
+        });
+
+    }
+
+};
+
+
+// =====================================================
+// EXPORTS
 // =====================================================
 
 module.exports = {
@@ -496,6 +945,8 @@ module.exports = {
 
     updateService,
 
-    deleteService
+    deleteService,
+
+    activateService
 
 };

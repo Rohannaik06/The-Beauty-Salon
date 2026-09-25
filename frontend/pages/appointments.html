@@ -2820,6 +2820,41 @@ if(mobileMenu){
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closeMobileMenu();});
 })();
 </script>
+
+<script>
+/* CUSTOMER LOGIN REQUIRED FOR MY APPOINTMENTS */
+(function () {
+    "use strict";
+
+    function readSession() {
+        try {
+            const raw =
+                localStorage.getItem("salon_customer_session") ||
+                sessionStorage.getItem("salon_customer_session");
+
+            if (!raw) return null;
+
+            const session = JSON.parse(raw);
+            return session && session.token ? session : null;
+        } catch (error) {
+            return null;
+        }
+    }
+
+    const session = readSession();
+
+    if (!session) {
+        const redirect =
+            window.location.pathname.split("/").pop() +
+            window.location.search;
+
+        window.location.replace(
+            "login.html?redirect=" + encodeURIComponent(redirect)
+        );
+    }
+})();
+</script>
+
 </body>
 
 </html>

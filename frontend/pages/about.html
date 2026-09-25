@@ -2964,27 +2964,7 @@ document.addEventListener("DOMContentLoaded", function () {
 </script>
 
 
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    document.querySelectorAll('a[href="booking.html"]').forEach(function (link) {
-        link.addEventListener("click", function (event) {
-            let session = null;
-            try {
-                const raw = localStorage.getItem("salon_customer_session") || sessionStorage.getItem("salon_customer_session");
-                if (raw) {
-                    const parsed = JSON.parse(raw);
-                    if (parsed && parsed.token) session = parsed;
-                }
-            } catch (error) {}
 
-            if (!session) {
-                event.preventDefault();
-                window.location.href = "login.html";
-            }
-        });
-    });
-});
-</script>
 
 </body>
 </html>

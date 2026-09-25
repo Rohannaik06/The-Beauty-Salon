@@ -267,6 +267,41 @@
             border-bottom: 1px solid #252525;
         }
 
+        .service-card-image.has-service-image {
+            display: block;
+            padding: 0;
+        }
+
+        .service-card-image .service-image {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            object-position: center;
+            position: relative;
+            z-index: 3;
+        }
+
+        .service-card-image.has-service-image::before {
+            display: none;
+        }
+
+        .service-card-image .service-image-fallback {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(212,175,55,.11),
+                    transparent 55%
+                ),
+                #0d0d0d;
+        }
+
         .service-card-image::before {
             content: "";
             position: absolute;
@@ -2753,6 +2788,93 @@
     
     <script>
         document.addEventListener("DOMContentLoaded", function () {
+
+            /* =========================================================
+               CUSTOMER LOGIN REQUIRED FOR ALL BOOKING BUTTONS
+               Works for:
+               - Hero/CTA Book Appointment button
+               - Footer Book Appointment button
+               - Dynamically generated "Book This Service" buttons
+            ========================================================= */
+
+            function getCustomerSession() {
+                try {
+                    const sessionRaw =
+                        localStorage.getItem("salon_customer_session") ||
+                        sessionStorage.getItem("salon_customer_session");
+
+                    const customerRaw =
+                        localStorage.getItem("salon_customer") ||
+                        sessionStorage.getItem("salon_customer");
+
+                    const session = sessionRaw ? JSON.parse(sessionRaw) : null;
+                    const customer = customerRaw ? JSON.parse(customerRaw) : null;
+
+                    return {
+                        session,
+                        customer
+                    };
+                } catch (error) {
+                    return {
+                        session: null,
+                        customer: null
+                    };
+                }
+            }
+
+            function isCustomerLoggedIn() {
+                const { session, customer } = getCustomerSession();
+
+                return Boolean(
+                    session &&
+                    session.token &&
+                    (session.customer || customer)
+                );
+            }
+
+            /*
+             * Event delegation is important here because service booking
+             * buttons are created dynamically by JavaScript after page load.
+             * It also catches the footer booking link.
+             */
+            document.addEventListener(
+                "click",
+                function (event) {
+                    const bookingLink = event.target.closest(
+                        'a[href*="booking.html"]'
+                    );
+
+                    if (!bookingLink) {
+                        return;
+                    }
+
+                    if (isCustomerLoggedIn()) {
+                        // Logged in -> allow normal navigation to booking page.
+                        return;
+                    }
+
+                    // Not logged in -> stop booking page from opening.
+                    event.preventDefault();
+                    event.stopPropagation();
+                    event.stopImmediatePropagation();
+
+                    const target =
+                        bookingLink.getAttribute("href") ||
+                        "booking.html";
+
+                    /*
+                     * Services page is already inside /pages/,
+                     * so login.html and booking.html are in the same folder.
+                     */
+                    const loginUrl =
+                        "login.html?redirect=" +
+                        encodeURIComponent(target);
+
+                    window.location.href = loginUrl;
+                },
+                true
+            );
+
             const API_URL = "http://localhost:5000/api/services";
             const servicesGrid = document.getElementById("servicesGrid");
             const filterButtons = document.querySelectorAll(".service-filter");
@@ -2872,12 +2994,47 @@
                     const description = service.description || "Professional salon service.";
                     const slug = slugify(name);
 
-                    return `
-                        <article class="service-card" data-category="${escapeHtml(String(cat).toLowerCase())}">
+                    // Backend stores only the uploaded filename in service_image.
+                    // The backend serves frontend/assets through /assets.
+                    const rawImage = String(service.service_image || "").trim();
+
+                    let imageUrl = "";
+                    if (rawImage) {
+                        const cleanImage = rawImage
+                            .replace(/\\/g, "/")
+                            .replace(/^.*[\\/]/, "")
+                            .replace(/^assets\\/i, "")
+                            .replace(/^\/+/g, "");
+
+                        imageUrl = `http://localhost:5000/assets/images/services/${encodeURIComponent(cleanImage)}`;
+                    }
+
+                    const imageBlock = imageUrl
+                        ? `
+                            <div class="service-card-image has-service-image">
+                                <img
+                                    class="service-image"
+                                    src="${escapeHtml(imageUrl)}"
+                                    alt="${escapeHtml(name)}"
+                                    loading="lazy"
+                                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                                >
+                                <div class="service-image-fallback" style="display:none;">
+                                    <i class="fa-solid ${iconFor(cat, name)}"></i>
+                                    <span>${escapeHtml(labelFor(name))}</span>
+                                </div>
+                            </div>
+                        `
+                        : `
                             <div class="service-card-image">
                                 <i class="fa-solid ${iconFor(cat, name)}"></i>
                                 <span>${escapeHtml(labelFor(name))}</span>
                             </div>
+                        `;
+
+                    return `
+                        <article class="service-card" data-category="${escapeHtml(String(cat).toLowerCase())}">
+                            ${imageBlock}
 
                             <div class="service-card-content">
                                 <span class="service-category">${escapeHtml(cat)}</span>

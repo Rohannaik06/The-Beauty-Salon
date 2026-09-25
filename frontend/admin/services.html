@@ -968,6 +968,94 @@
         box-shadow: 0 0 0 3px rgba(212, 175, 55, .05);
     }
 
+    /* SERVICE IMAGE */
+    .service-image-field {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .service-image-upload {
+        display: grid;
+        grid-template-columns: 92px minmax(0, 1fr);
+        gap: 14px;
+        align-items: center;
+    }
+
+    .service-image-preview {
+        width: 92px;
+        height: 92px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        border-radius: 10px;
+        background: #181818;
+        border: 1px dashed var(--gold-border);
+        color: #666;
+        font-size: 22px;
+    }
+
+    .service-image-preview img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    .service-image-input-wrap {
+        min-width: 0;
+    }
+
+    .service-image-input-wrap input[type="file"] {
+        width: 100%;
+        height: auto;
+        min-height: 46px;
+        padding: 9px 11px;
+        cursor: pointer;
+    }
+
+    .service-image-help {
+        display: block;
+        margin-top: 6px;
+        color: #666;
+        font-size: 12px;
+        line-height: 1.45;
+    }
+
+    .service-table-image {
+        width: 48px;
+        height: 48px;
+        min-width: 48px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 9px;
+        background: var(--gold-soft);
+        border: 1px solid rgba(212, 175, 55, .14);
+        color: var(--gold);
+        font-size: 17px;
+    }
+
+    .service-table-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    @media (max-width: 600px) {
+        .service-image-upload {
+            grid-template-columns: 76px minmax(0, 1fr);
+        }
+
+        .service-image-preview {
+            width: 76px;
+            height: 76px;
+        }
+    }
+
     .modal-footer {
         padding: 17px 24px;
         display: flex;
@@ -1760,6 +1848,33 @@
 
                         </div>
 
+                        <div class="form-group full service-image-field">
+
+                            <label for="serviceImage">
+                                Service Image
+                            </label>
+
+                            <div class="service-image-upload">
+
+                                <div class="service-image-preview" id="serviceImagePreview">
+                                    <i class="fa-regular fa-image"></i>
+                                </div>
+
+                                <div class="service-image-input-wrap">
+                                    <input
+                                        type="file"
+                                        id="serviceImage"
+                                        accept="image/*">
+                                    <small class="service-image-help">
+                                        Select the service image. It will be stored by the backend in
+                                        <strong>../assets/images/services/</strong>.
+                                    </small>
+                                </div>
+
+                            </div>
+
+                        </div>
+
                         <div class="form-group full">
 
                             <label for="serviceDescription">
@@ -1919,6 +2034,28 @@ document.addEventListener("DOMContentLoaded", function () {
         };
     }
 
+    const SERVICE_IMAGE_PATH = "../assets/images/services/";
+
+    function getServiceImageUrl(imagePath) {
+        if (!imagePath) return "";
+
+        const value = String(imagePath).trim();
+
+        if (/^(https?:|data:|blob:|\/)/i.test(value)) {
+            return value;
+        }
+
+        if (value.startsWith("../assets/images/services/")) {
+            return value;
+        }
+
+        if (value.startsWith("assets/images/services/")) {
+            return "../" + value;
+        }
+
+        return SERVICE_IMAGE_PATH + value.split("/").pop();
+    }
+
     function showLoading() {
         tableBody.innerHTML = `
             <tr>
@@ -1979,8 +2116,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     <td>
                         <div class="service-info">
-                            <div class="service-icon">
-                                <i class="fa-solid ${icon}"></i>
+                            <div class="service-table-image">
+                                ${service.service_image
+                                    ? `<img src="${escapeHtml(getServiceImageUrl(service.service_image))}" alt="${escapeHtml(service.name)}" loading="lazy">`
+                                    : `<i class="fa-solid ${icon}"></i>`
+                                }
                             </div>
 
                             <div class="service-name">
@@ -2118,6 +2258,13 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("serviceDescription").value =
                 service.description || "";
 
+            serviceImageInput.value = "";
+            setServiceImagePreview(
+                service.service_image
+                    ? getServiceImageUrl(service.service_image)
+                    : ""
+            );
+
         } else {
             editingService = null;
 
@@ -2127,14 +2274,64 @@ document.addEventListener("DOMContentLoaded", function () {
 
             document.getElementById("serviceCategory").value = "him";
             document.getElementById("serviceStatus").value = "active";
+            serviceImageInput.value = "";
+            resetServiceImagePreview();
         }
     }
 
     function closeModal() {
         modal.classList.remove("active");
         document.body.style.overflow = "";
+        serviceImageInput.value = "";
+        resetServiceImagePreview();
         editingService = null;
     }
+
+    const serviceImageInput = document.getElementById("serviceImage");
+    const serviceImagePreview = document.getElementById("serviceImagePreview");
+
+    function resetServiceImagePreview() {
+        serviceImagePreview.innerHTML = '<i class="fa-regular fa-image"></i>';
+    }
+
+    function setServiceImagePreview(src) {
+        if (!src) {
+            resetServiceImagePreview();
+            return;
+        }
+
+        serviceImagePreview.innerHTML =
+            `<img src="${escapeHtml(src)}" alt="Service image preview">`;
+    }
+
+    serviceImageInput.addEventListener("change", function () {
+        const file = serviceImageInput.files && serviceImageInput.files[0];
+
+        if (!file) {
+            if (editingService && editingService.service_image) {
+                setServiceImagePreview(getServiceImageUrl(editingService.service_image));
+            } else {
+                resetServiceImagePreview();
+            }
+            return;
+        }
+
+        if (!file.type.startsWith("image/")) {
+            alert("Please select an image file.");
+            serviceImageInput.value = "";
+            resetServiceImagePreview();
+            return;
+        }
+
+        if (file.size > 5 * 1024 * 1024) {
+            alert("Image size must be 5 MB or less.");
+            serviceImageInput.value = "";
+            return;
+        }
+
+        const previewUrl = URL.createObjectURL(file);
+        setServiceImagePreview(previewUrl);
+    });
 
     addServiceBtn.addEventListener("click", function () {
         openModal(false, null);
@@ -2178,14 +2375,20 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        const payload = {
-            name,
-            category,
-            description: description || null,
-            price,
-            duration,
-            is_active: status === "inactive" ? 0 : 1
-        };
+        const imageFile = serviceImageInput.files && serviceImageInput.files[0];
+
+        const payload = new FormData();
+        payload.append("name", name);
+        payload.append("category", category);
+        payload.append("description", description || "");
+        payload.append("price", String(price));
+        payload.append("duration", String(duration));
+        payload.append("is_active", status === "inactive" ? "0" : "1");
+
+        if (imageFile) {
+            payload.append("service_image", imageFile);
+        }
+
 
         const saveButton = serviceForm.querySelector(".save-btn");
         const oldButtonHTML = saveButton.innerHTML;
@@ -2203,10 +2406,9 @@ document.addEventListener("DOMContentLoaded", function () {
             const response = await fetch(url, {
                 method: isEdit ? "PUT" : "POST",
                 headers: {
-                    "Content-Type": "application/json",
                     "Accept": "application/json"
                 },
-                body: JSON.stringify(payload)
+                body: payload
             });
 
             const result = await response.json().catch(function () {

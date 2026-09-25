@@ -2487,8 +2487,16 @@
 
 
 <script>
+/* =========================================================
+   CUSTOMER LOGIN REQUIRED FOR ALL BOOKING BUTTONS
+   - Branch card "Book Appointment"
+   - CTA "Book Appointment"
+   - Footer "Book Appointment"
+   - Dynamically generated booking links
+========================================================= */
 document.addEventListener("DOMContentLoaded", function () {
-    function isCustomerLoggedIn() {
+
+    function getCustomerSession() {
         try {
             const sessionRaw =
                 localStorage.getItem("salon_customer_session") ||
@@ -2498,36 +2506,71 @@ document.addEventListener("DOMContentLoaded", function () {
                 localStorage.getItem("salon_customer") ||
                 sessionStorage.getItem("salon_customer");
 
-            if (!sessionRaw || !customerRaw) {
-                return false;
-            }
+            const session = sessionRaw ? JSON.parse(sessionRaw) : null;
+            const customer = customerRaw ? JSON.parse(customerRaw) : null;
 
-            const session = JSON.parse(sessionRaw);
-            const customer = JSON.parse(customerRaw);
-
-            return Boolean(session && session.token && customer);
+            return { session, customer };
         } catch (error) {
-            return false;
+            return {
+                session: null,
+                customer: null
+            };
         }
     }
 
-    document.addEventListener("click", function (event) {
-        const bookingLink = event.target.closest('a[href*="booking.html"]');
+    function isCustomerLoggedIn() {
+        const { session, customer } = getCustomerSession();
 
-        if (!bookingLink) {
-            return;
-        }
+        return Boolean(
+            session &&
+            session.token &&
+            (session.customer || customer)
+        );
+    }
 
-        if (bookingLink.getAttribute("aria-disabled") === "true") {
+    document.addEventListener(
+        "click",
+        function (event) {
+            const bookingLink = event.target.closest(
+                'a[href*="booking.html"]'
+            );
+
+            if (!bookingLink) {
+                return;
+            }
+
+            /* Inactive branch */
+            if (
+                bookingLink.getAttribute("aria-disabled") === "true" ||
+                bookingLink.classList.contains("disabled-branch-action")
+            ) {
+                event.preventDefault();
+                event.stopPropagation();
+                return;
+            }
+
+            /* Already logged in -> allow normal booking navigation */
+            if (isCustomerLoggedIn()) {
+                return;
+            }
+
+            /* Not logged in -> send to login with booking URL */
             event.preventDefault();
-            return;
-        }
+            event.stopPropagation();
+            event.stopImmediatePropagation();
 
-        if (!isCustomerLoggedIn()) {
-            event.preventDefault();
-            window.location.href = "login.html";
-        }
-    });
+            const target =
+                bookingLink.getAttribute("href") ||
+                "booking.html";
+
+            const loginUrl =
+                "login.html?redirect=" +
+                encodeURIComponent(target);
+
+            window.location.href = loginUrl;
+        },
+        true
+    );
 });
 </script>
 

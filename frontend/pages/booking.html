@@ -1032,6 +1032,386 @@ button{cursor:pointer}
 .footer-bottom{flex-direction:column;align-items:flex-start}
 }
 </style>
+
+<style id="booking-mobile-final">
+/* =========================================================
+   FINAL MOBILE RESPONSIVE FIX
+========================================================= */
+@media (max-width: 767px) {
+
+    html, body {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    .about-site-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+    }
+
+    .about-header-container {
+        width: calc(100% - 24px);
+        min-height: 68px;
+        gap: 10px;
+    }
+
+    .about-brand {
+        min-width: 0;
+        gap: 8px;
+    }
+
+    .about-brand-logo {
+        width: 38px;
+        height: 38px;
+        flex: 0 0 38px;
+        font-size: 15px;
+    }
+
+    .about-brand-name strong {
+        font-size: 15px;
+    }
+
+    .about-brand-name small {
+        margin-top: 4px;
+        font-size: 8px;
+        letter-spacing: 2.2px;
+    }
+
+    .about-desktop-nav,
+    .about-header-actions {
+        display: none !important;
+    }
+
+    .about-mobile-menu-btn {
+        display: inline-flex !important;
+        width: 42px;
+        height: 42px;
+        flex: 0 0 42px;
+    }
+
+    .about-mobile-menu {
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .about-mobile-menu-header {
+        min-height: 68px;
+        padding: 0 14px;
+    }
+
+    .about-mobile-links {
+        padding: 14px 16px 30px;
+    }
+
+    .about-mobile-links a {
+        min-height: 50px;
+        font-size: 14px;
+    }
+
+    .about-mobile-book {
+        margin-top: 14px;
+        min-height: 50px !important;
+    }
+
+    .booking-hero {
+        min-height: auto;
+        padding: 105px 18px 45px;
+    }
+
+    .booking-hero h1 {
+        font-size: clamp(34px, 11vw, 48px);
+        line-height: 1.05;
+    }
+
+    .booking-hero p {
+        max-width: 100%;
+        margin-top: 13px;
+        font-size: 12px;
+        line-height: 1.65;
+    }
+
+    .booking-section {
+        padding: 32px 0 50px;
+    }
+
+    .booking-section .container {
+        width: calc(100% - 24px);
+    }
+
+    .booking-layout {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+    }
+
+    .booking-card {
+        width: 100%;
+        padding: 19px 14px;
+        border-radius: 12px;
+    }
+
+    .booking-card h2 {
+        font-size: 23px;
+    }
+
+    .booking-card-subtitle {
+        margin-bottom: 19px;
+        font-size: 11px;
+        line-height: 1.55;
+    }
+
+    .form-group {
+        margin-bottom: 14px;
+    }
+
+    .form-group label {
+        margin-bottom: 6px;
+        font-size: 11px;
+    }
+
+    .form-group input,
+    .form-group select {
+        width: 100%;
+        min-height: 45px;
+        padding: 10px 11px;
+        font-size: 13px;
+        border-radius: 7px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr !important;
+        gap: 0;
+    }
+
+    .primary-button {
+        min-height: 47px;
+        font-size: 12px;
+    }
+
+    .offers-card {
+        width: 100%;
+        border-radius: 12px;
+    }
+
+    .offers-head {
+        padding: 17px 15px 13px;
+    }
+
+    .offers-card h3 {
+        font-size: 21px;
+    }
+
+    .offers-eyebrow {
+        font-size: 8px;
+    }
+
+    .offer-slide {
+        padding: 12px 12px 13px;
+    }
+
+    .offer-image-wrap {
+        height: 180px;
+        border-radius: 10px;
+    }
+
+    .offer-nav {
+        padding: 0 7px;
+    }
+
+    .offer-arrow {
+        width: 36px;
+        height: 36px;
+        font-size: 12px;
+    }
+
+    .offer-dots {
+        padding-bottom: 13px;
+    }
+
+    .success {
+        padding: 28px 12px;
+    }
+
+    .success h2 {
+        font-size: 25px;
+    }
+
+    .success p {
+        font-size: 12px;
+    }
+
+    .site-footer {
+        padding: 42px 0 22px;
+    }
+
+    .site-footer .content-container {
+        width: calc(100% - 24px);
+    }
+
+    .site-footer .footer-grid {
+        grid-template-columns: 1fr !important;
+        gap: 24px;
+    }
+
+    .site-footer .footer-brand-column,
+    .site-footer .footer-contact-column {
+        grid-column: auto !important;
+    }
+
+    .site-footer .footer-brand-column > p {
+        max-width: 100%;
+        font-size: 12px;
+    }
+
+    .site-footer .footer-column h3 {
+        margin-bottom: 9px;
+        font-size: 15px;
+    }
+
+    .site-footer .footer-column > a {
+        padding: 5px 0;
+        font-size: 12.5px;
+    }
+
+    .site-footer .footer-contact-column p,
+    .site-footer .footer-contact-column > a,
+    .site-footer .footer-contact-column > span {
+        font-size: 12px;
+    }
+
+    .site-footer .footer-bottom {
+        gap: 12px;
+        margin-top: 25px;
+        padding-top: 17px;
+    }
+
+    .site-footer .footer-legal {
+        gap: 8px 14px;
+    }
+}
+
+/* Small phones */
+@media (max-width: 380px) {
+
+    .about-header-container {
+        width: calc(100% - 18px);
+    }
+
+    .about-brand-logo {
+        width: 35px;
+        height: 35px;
+        flex-basis: 35px;
+    }
+
+    .about-brand-name strong {
+        font-size: 14px;
+    }
+
+    .about-mobile-menu-header {
+        padding: 0 12px;
+    }
+
+    .about-mobile-links {
+        padding: 12px;
+    }
+
+    .booking-hero {
+        padding-top: 98px;
+        padding-left: 13px;
+        padding-right: 13px;
+    }
+
+    .booking-section .container {
+        width: calc(100% - 18px);
+    }
+
+    .booking-card {
+        padding: 17px 12px;
+    }
+
+    .offer-image-wrap {
+        height: 160px;
+    }
+
+    .offer-arrow {
+        width: 33px;
+        height: 33px;
+    }
+
+    .site-footer .content-container {
+        width: calc(100% - 18px);
+    }
+}
+</style>
+
+
+<style id="footer-mobile-two-column-final">
+/* =========================================================
+   MOBILE FOOTER - QUICK LINKS + CUSTOMER IN 2 COLUMNS
+========================================================= */
+@media (max-width: 767px) {
+    .site-footer .footer-grid {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 28px 20px !important;
+    }
+
+    .site-footer .footer-brand-column {
+        grid-column: 1 / -1 !important;
+        padding-bottom: 12px;
+        border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+
+    .site-footer .footer-column:not(.footer-contact-column) {
+        grid-column: auto !important;
+        min-width: 0;
+    }
+
+    .site-footer .footer-contact-column {
+        grid-column: 1 / -1 !important;
+        padding-top: 8px;
+        border-top: 1px solid rgba(255,255,255,.08);
+    }
+
+    .site-footer .footer-column h3 {
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+
+    .site-footer .footer-column > a {
+        width: 100%;
+        padding: 5px 0;
+        margin-bottom: 0;
+        font-size: 12.5px;
+        line-height: 1.45;
+    }
+
+    .site-footer .footer-contact-column p,
+    .site-footer .footer-contact-column > a,
+    .site-footer .footer-contact-column > span {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 380px) {
+    .site-footer .footer-grid {
+        gap: 24px 14px !important;
+    }
+
+    .site-footer .footer-column h3 {
+        font-size: 13px;
+    }
+
+    .site-footer .footer-column > a {
+        font-size: 12px;
+    }
+}
+</style>
+
 </head>
 
 <body>
@@ -1231,7 +1611,7 @@ button{cursor:pointer}
                 <i class="fa-regular fa-calendar-check"></i>
                 <span>My Appointments</span>
             </a>
-            <a href="booking-history.html">
+            <a href="history.html">
                 <i class="fa-solid fa-clock-rotate-left"></i>
                 <span>Booking History</span>
             </a>
@@ -1547,6 +1927,209 @@ Confirm Appointment
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
+    /* =========================================================
+       LOGGED-IN CUSTOMER ACCOUNT
+       - Shows customer name in header
+       - Shows My Appointments / Booking History / Update Profile
+       - Auto-fills booking customer details
+    ========================================================= */
+    (function setupCustomerAccount() {
+
+        function readJson(key) {
+            try {
+                const raw =
+                    localStorage.getItem(key) ||
+                    sessionStorage.getItem(key);
+
+                return raw ? JSON.parse(raw) : null;
+            } catch (error) {
+                return null;
+            }
+        }
+
+        const session = readJson("salon_customer_session");
+        const storedCustomer = readJson("salon_customer");
+
+        const customer =
+            (session && (session.customer || session.user)) ||
+            storedCustomer ||
+            {};
+
+        const token =
+            (session && session.token) ||
+            localStorage.getItem("customerToken") ||
+            sessionStorage.getItem("customerToken");
+
+        if (!token) return;
+
+        const customerName =
+            customer.name ||
+            customer.full_name ||
+            customer.fullName ||
+            customer.customer_name ||
+            customer.username ||
+            "My Account";
+
+        const customerMobile =
+            customer.mobile ||
+            customer.phone ||
+            customer.phone_number ||
+            customer.customerPhone ||
+            "";
+
+        const customerEmail =
+            customer.email ||
+            customer.email_address ||
+            "";
+
+        /* Header: hide login and show account */
+        const loginButton =
+            document.getElementById("aboutCustomerLoginBtn");
+
+        const accountWrap =
+            document.getElementById("aboutAccountWrap");
+
+        const accountName =
+            document.getElementById("aboutAccountName");
+
+        if (loginButton) {
+            loginButton.style.display = "none";
+        }
+
+        if (accountWrap) {
+            accountWrap.style.display = "inline-flex";
+        }
+
+        if (accountName) {
+            accountName.textContent = customerName;
+        }
+
+        /* Account dropdown */
+        const accountButton =
+            document.getElementById("aboutAccountBtn");
+
+        const accountDropdown =
+            document.getElementById("aboutAccountDropdown");
+
+        if (accountButton && accountDropdown) {
+
+            accountButton.addEventListener("click", function (event) {
+                event.stopPropagation();
+
+                const isOpen =
+                    accountDropdown.classList.toggle("open");
+
+                accountButton.setAttribute(
+                    "aria-expanded",
+                    String(isOpen)
+                );
+            });
+
+            document.addEventListener("click", function () {
+                accountDropdown.classList.remove("open");
+                accountButton.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+            });
+
+            accountDropdown.addEventListener("click", function (event) {
+                event.stopPropagation();
+            });
+        }
+
+        /* Logout */
+        const logoutButton =
+            document.getElementById("aboutLogoutBtn");
+
+        if (logoutButton) {
+            logoutButton.addEventListener("click", function () {
+
+                localStorage.removeItem("salon_customer_session");
+                sessionStorage.removeItem("salon_customer_session");
+
+                localStorage.removeItem("salon_customer");
+                sessionStorage.removeItem("salon_customer");
+
+                localStorage.removeItem("customerToken");
+                sessionStorage.removeItem("customerToken");
+
+                localStorage.removeItem("customerId");
+                sessionStorage.removeItem("customerId");
+
+                localStorage.removeItem("customerPhone");
+                sessionStorage.removeItem("customerPhone");
+
+                window.location.href = "login.html";
+            });
+        }
+
+        /* Mobile customer account links */
+        const mobileLogin =
+            document.getElementById("aboutMobileCustomerLogin");
+
+        const mobileAccountLinks =
+            document.getElementById("aboutMobileAccountLinks");
+
+        if (mobileLogin) {
+            mobileLogin.style.display = "none";
+        }
+
+        if (mobileAccountLinks) {
+            mobileAccountLinks.style.display = "block";
+        }
+
+        const mobileLogout =
+            document.getElementById("aboutMobileLogout");
+
+        if (mobileLogout) {
+            mobileLogout.addEventListener("click", function (event) {
+                event.preventDefault();
+
+                localStorage.removeItem("salon_customer_session");
+                sessionStorage.removeItem("salon_customer_session");
+
+                localStorage.removeItem("salon_customer");
+                sessionStorage.removeItem("salon_customer");
+
+                localStorage.removeItem("customerToken");
+                sessionStorage.removeItem("customerToken");
+
+                localStorage.removeItem("customerId");
+                sessionStorage.removeItem("customerId");
+
+                localStorage.removeItem("customerPhone");
+                sessionStorage.removeItem("customerPhone");
+
+                window.location.href = "login.html";
+            });
+        }
+
+        /* Auto-fill booking form */
+        const nameInput =
+            document.getElementById("name");
+
+        const mobileInput =
+            document.getElementById("mobile");
+
+        const emailInput =
+            document.getElementById("email");
+
+        if (nameInput && customerName && !nameInput.value) {
+            nameInput.value = customerName;
+        }
+
+        if (mobileInput && customerMobile && !mobileInput.value) {
+            mobileInput.value = customerMobile;
+        }
+
+        if (emailInput && customerEmail && !emailInput.value) {
+            emailInput.value = customerEmail;
+        }
+
+    })();
+
+
     // Header/mobile menu behavior only — booking logic remains unchanged.
     const aboutMenuBtn = document.getElementById("aboutMenuBtn");
     const aboutMobileMenu = document.getElementById("aboutMobileMenu");
@@ -2028,6 +2611,101 @@ document.addEventListener("DOMContentLoaded", function () {
         loadServices()
     ]);
 
+});
+</script>
+
+
+<script>
+/* =========================================================
+   BOOKING PAGE - CUSTOMER LOGIN + SESSION GUARD
+   ========================================================= */
+document.addEventListener("DOMContentLoaded", function () {
+
+    function readJson(key) {
+        try {
+            const raw =
+                localStorage.getItem(key) ||
+                sessionStorage.getItem(key);
+
+            return raw ? JSON.parse(raw) : null;
+        } catch (error) {
+            return null;
+        }
+    }
+
+    function getCustomerSession() {
+        const session = readJson("salon_customer_session");
+        const customer = readJson("salon_customer");
+
+        const legacyToken =
+            localStorage.getItem("customerToken") ||
+            sessionStorage.getItem("customerToken");
+
+        return {
+            session,
+            customer,
+            legacyToken
+        };
+    }
+
+    function isLoggedIn() {
+        const data = getCustomerSession();
+
+        return Boolean(
+            (data.session && data.session.token) ||
+            data.legacyToken
+        );
+    }
+
+    /* Booking page itself requires customer login. */
+    if (!isLoggedIn()) {
+        const currentUrl =
+            window.location.pathname.split("/").pop() +
+            window.location.search;
+
+        window.location.replace(
+            "login.html?redirect=" +
+            encodeURIComponent(currentUrl)
+        );
+
+        return;
+    }
+
+    /* Keep customer details filled when available. */
+    const data = getCustomerSession();
+    const customer =
+        (data.session && (data.session.customer || data.session.user)) ||
+        data.customer ||
+        {};
+
+    const nameInput = document.getElementById("name");
+    const mobileInput = document.getElementById("mobile");
+    const emailInput = document.getElementById("email");
+
+    if (nameInput && !nameInput.value) {
+        nameInput.value =
+            customer.name ||
+            customer.full_name ||
+            customer.fullName ||
+            customer.customer_name ||
+            "";
+    }
+
+    if (mobileInput && !mobileInput.value) {
+        mobileInput.value =
+            customer.mobile ||
+            customer.phone ||
+            customer.phone_number ||
+            customer.customerPhone ||
+            "";
+    }
+
+    if (emailInput && !emailInput.value) {
+        emailInput.value =
+            customer.email ||
+            customer.email_address ||
+            "";
+    }
 });
 </script>
 

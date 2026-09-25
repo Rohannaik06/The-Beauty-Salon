@@ -3043,6 +3043,83 @@ if (lightboxClose) {
 
 </script>
 
+<script>
+/* =========================================================
+   CUSTOMER LOGIN REQUIRED FOR ALL BOOKING BUTTONS
+   - Footer Book Appointment
+   - Any current/future booking.html links on this page
+========================================================= */
+document.addEventListener("DOMContentLoaded", function () {
+
+    function getCustomerSession() {
+        try {
+            const sessionRaw =
+                localStorage.getItem("salon_customer_session") ||
+                sessionStorage.getItem("salon_customer_session");
+
+            const customerRaw =
+                localStorage.getItem("salon_customer") ||
+                sessionStorage.getItem("salon_customer");
+
+            const session = sessionRaw ? JSON.parse(sessionRaw) : null;
+            const customer = customerRaw ? JSON.parse(customerRaw) : null;
+
+            return {
+                session,
+                customer
+            };
+        } catch (error) {
+            return {
+                session: null,
+                customer: null
+            };
+        }
+    }
+
+    function isCustomerLoggedIn() {
+        const { session, customer } = getCustomerSession();
+
+        return Boolean(
+            session &&
+            session.token &&
+            (session.customer || customer)
+        );
+    }
+
+    document.addEventListener(
+        "click",
+        function (event) {
+            const bookingLink = event.target.closest(
+                'a[href*="booking.html"]'
+            );
+
+            if (!bookingLink) {
+                return;
+            }
+
+            if (isCustomerLoggedIn()) {
+                return;
+            }
+
+            event.preventDefault();
+            event.stopPropagation();
+            event.stopImmediatePropagation();
+
+            const target =
+                bookingLink.getAttribute("href") ||
+                "booking.html";
+
+            const loginUrl =
+                "login.html?redirect=" +
+                encodeURIComponent(target);
+
+            window.location.href = loginUrl;
+        },
+        true
+    );
+});
+</script>
+
 
 
 

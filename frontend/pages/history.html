@@ -572,6 +572,86 @@
     </div>
 </main>
 
+
+<script>
+/* =========================================================
+   CUSTOMER LOGIN REQUIRED FOR BOOKING HISTORY
+   - History page requires customer login
+   - Empty-history Book Appointment also remains protected
+========================================================= */
+(function () {
+    "use strict";
+
+    function getCustomerSession() {
+        try {
+            const sessionRaw =
+                localStorage.getItem("salon_customer_session") ||
+                sessionStorage.getItem("salon_customer_session");
+
+            const customerRaw =
+                localStorage.getItem("salon_customer") ||
+                sessionStorage.getItem("salon_customer");
+
+            const session = sessionRaw ? JSON.parse(sessionRaw) : null;
+            const customer = customerRaw ? JSON.parse(customerRaw) : null;
+
+            return { session, customer };
+        } catch (error) {
+            return { session: null, customer: null };
+        }
+    }
+
+    function isCustomerLoggedIn() {
+        const data = getCustomerSession();
+
+        return Boolean(
+            data.session &&
+            data.session.token &&
+            (data.session.customer || data.customer)
+        );
+    }
+
+    if (!isCustomerLoggedIn()) {
+        const currentPage =
+            window.location.pathname.split("/").pop() +
+            window.location.search;
+
+        window.location.replace(
+            "login.html?redirect=" +
+            encodeURIComponent(currentPage)
+        );
+
+        return;
+    }
+
+    document.addEventListener(
+        "click",
+        function (event) {
+            const bookingLink = event.target.closest(
+                'a[href*="booking.html"]'
+            );
+
+            if (!bookingLink) return;
+
+            if (isCustomerLoggedIn()) return;
+
+            event.preventDefault();
+            event.stopPropagation();
+            event.stopImmediatePropagation();
+
+            const target =
+                bookingLink.getAttribute("href") ||
+                "booking.html";
+
+            window.location.href =
+                "login.html?redirect=" +
+                encodeURIComponent(target);
+        },
+        true
+    );
+})();
+</script>
+
 <script>
 (function () {
     "use strict";

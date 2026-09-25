@@ -46,6 +46,7 @@ app.use(
 // STATIC UPLOADS
 // =====================================================
 
+// Existing backend uploads
 app.use(
     "/uploads",
     express.static(
@@ -55,17 +56,50 @@ app.use(
 
 
 // =====================================================
+// FRONTEND ASSETS
+// =====================================================
+
+// Serves:
+// frontend/assets/images/services/
+// frontend/assets/images/logo/
+// frontend/assets/images/gallery/
+// etc.
+
+app.use(
+    "/assets",
+    express.static(
+        path.join(
+            __dirname,
+            "../frontend/assets"
+        )
+    )
+);
+
+
+// =====================================================
 // HOME / SERVER TEST
 // =====================================================
 
 app.get("/", (req, res) => {
+
     res.json({
+
         success: true,
-        message: "The Beauty Salon Local Backend is running!",
-        server: `http://localhost:${PORT}`,
-        database: "salon_booking",
-        environment: "LOCAL"
+
+        message:
+            "The Beauty Salon Local Backend is running!",
+
+        server:
+            `http://localhost:${PORT}`,
+
+        database:
+            "salon_booking",
+
+        environment:
+            "LOCAL"
+
     });
+
 });
 
 
@@ -74,25 +108,50 @@ app.get("/", (req, res) => {
 // =====================================================
 
 app.get("/api/test-db", async (req, res) => {
+
     try {
-        const [rows] = await pool.promise().query(
-            "SELECT 1 AS connected"
-        );
+
+        const [rows] =
+            await pool.promise().query(
+                "SELECT 1 AS connected"
+            );
+
 
         res.json({
+
             success: true,
-            message: "Local MySQL Database Connected Successfully!",
-            data: rows
+
+            message:
+                "Local MySQL Database Connected Successfully!",
+
+            data:
+                rows
+
         });
+
+
     } catch (error) {
-        console.error("DATABASE TEST ERROR:", error);
+
+        console.error(
+            "DATABASE TEST ERROR:",
+            error
+        );
+
 
         res.status(500).json({
+
             success: false,
-            message: "Database connection failed.",
-            error: error.message
+
+            message:
+                "Database connection failed.",
+
+            error:
+                error.message
+
         });
+
     }
+
 });
 
 
@@ -100,226 +159,454 @@ app.get("/api/test-db", async (req, res) => {
 // BRANCHES API
 // =====================================================
 
-app.use("/api/branches", branchRoutes);
+app.use(
+    "/api/branches",
+    branchRoutes
+);
 
 
 // =====================================================
 // CUSTOMER API
 // =====================================================
 
-app.use("/api/customers", customerRoutes);
+app.use(
+    "/api/customers",
+    customerRoutes
+);
 
 
 // =====================================================
 // STAFF API
 // =====================================================
 
-app.use("/api/staff", staffRoutes);
+app.use(
+    "/api/staff",
+    staffRoutes
+);
 
 
 // =====================================================
 // GALLERY API
 // =====================================================
 
-app.use("/api/gallery", galleryRoutes);
+app.use(
+    "/api/gallery",
+    galleryRoutes
+);
 
 
 // =====================================================
 // SERVICES API
 // =====================================================
 
-app.use("/api/services", serviceRoutes);
+app.use(
+    "/api/services",
+    serviceRoutes
+);
 
 
-// Offer API
-app.use("/api/offers", offerRoutes);
+// =====================================================
+// OFFER API
+// =====================================================
 
-// Admin Login API
-app.use("/api/admin-auth", adminAuthRoutes);
+app.use(
+    "/api/offers",
+    offerRoutes
+);
 
-// Admin Seetings
-app.use("/api/admin-settings", adminSettingsRoutes);
 
-// Admin dashboard
-app.use("/api/dashboard", dashboardRoutes);
+// =====================================================
+// ADMIN LOGIN API
+// =====================================================
+
+app.use(
+    "/api/admin-auth",
+    adminAuthRoutes
+);
+
+
+// =====================================================
+// ADMIN SETTINGS API
+// =====================================================
+
+app.use(
+    "/api/admin-settings",
+    adminSettingsRoutes
+);
+
+
+// =====================================================
+// ADMIN DASHBOARD API
+// =====================================================
+
+app.use(
+    "/api/dashboard",
+    dashboardRoutes
+);
+
 
 // =====================================================
 // STAFF BY BRANCH
 // =====================================================
 
-app.get("/api/staff/branch/:branchId", async (req, res) => {
-    try {
-        const [rows] = await pool.promise().query(
-            `
-            SELECT
-                id,
-                name,
-                role,
-                branch_id,
-                phone,
-                email
-            FROM staff
-            WHERE branch_id = ?
-            AND is_active = 1
-            ORDER BY id ASC
-            `,
-            [req.params.branchId]
-        );
+app.get(
+    "/api/staff/branch/:branchId",
+    async (req, res) => {
 
-        res.json({
-            success: true,
-            count: rows.length,
-            data: rows
-        });
-    } catch (error) {
-        console.error("GET BRANCH STAFF ERROR:", error);
+        try {
 
-        res.status(500).json({
-            success: false,
-            message: "Failed to fetch branch staff.",
-            error: error.message
-        });
+            const [rows] =
+                await pool.promise().query(
+                    `
+                    SELECT
+                        id,
+                        name,
+                        role,
+                        branch_id,
+                        phone,
+                        email
+
+                    FROM staff
+
+                    WHERE branch_id = ?
+
+                    AND is_active = 1
+
+                    ORDER BY id ASC
+                    `,
+                    [
+                        req.params.branchId
+                    ]
+                );
+
+
+            res.json({
+
+                success: true,
+
+                count:
+                    rows.length,
+
+                data:
+                    rows
+
+            });
+
+
+        } catch (error) {
+
+            console.error(
+                "GET BRANCH STAFF ERROR:",
+                error
+            );
+
+
+            res.status(500).json({
+
+                success: false,
+
+                message:
+                    "Failed to fetch branch staff.",
+
+                error:
+                    error.message
+
+            });
+
+        }
+
     }
-});
+);
 
 
 // =====================================================
 // BOOKINGS API
 // =====================================================
 
-app.use("/api/bookings", bookingRoutes);
+app.use(
+    "/api/bookings",
+    bookingRoutes
+);
 
 
 // =====================================================
 // AUTH API
 // =====================================================
 
-app.use("/api/auth", authRoutes);
+app.use(
+    "/api/auth",
+    authRoutes
+);
 
 
 // =====================================================
 // DASHBOARD STATISTICS
 // =====================================================
 
-app.get("/api/dashboard/stats", async (req, res) => {
-    try {
-        const [customers] = await pool.promise().query(
-            `
-            SELECT COUNT(*) AS total
-            FROM customers
-            `
-        );
+app.get(
+    "/api/dashboard/stats",
+    async (req, res) => {
 
-        const [bookings] = await pool.promise().query(
-            `
-            SELECT COUNT(*) AS total
-            FROM bookings
-            `
-        );
+        try {
 
-        const [services] = await pool.promise().query(
-            `
-            SELECT COUNT(*) AS total
-            FROM services
-            WHERE is_active = 1
-            `
-        );
+            // =========================================
+            // CUSTOMERS
+            // =========================================
 
-        const [staff] = await pool.promise().query(
-            `
-            SELECT COUNT(*) AS total
-            FROM staff
-            WHERE is_active = 1
-            `
-        );
+            const [customers] =
+                await pool.promise().query(
+                    `
+                    SELECT COUNT(*) AS total
+                    FROM customers
+                    `
+                );
 
-        const [confirmed] = await pool.promise().query(
-            `
-            SELECT COUNT(*) AS total
-            FROM bookings
-            WHERE status = 'CONFIRMED'
-            `
-        );
 
-        const [completed] = await pool.promise().query(
-            `
-            SELECT COUNT(*) AS total
-            FROM bookings
-            WHERE status = 'COMPLETED'
-            `
-        );
+            // =========================================
+            // BOOKINGS
+            // =========================================
 
-        const [cancelled] = await pool.promise().query(
-            `
-            SELECT COUNT(*) AS total
-            FROM bookings
-            WHERE status = 'CANCELLED'
-            `
-        );
+            const [bookings] =
+                await pool.promise().query(
+                    `
+                    SELECT COUNT(*) AS total
+                    FROM bookings
+                    `
+                );
 
-        res.json({
-            success: true,
-            data: {
-                totalCustomers: customers[0].total,
-                totalBookings: bookings[0].total,
-                totalServices: services[0].total,
-                activeStaff: staff[0].total,
-                confirmedBookings: confirmed[0].total,
-                completedBookings: completed[0].total,
-                cancelledBookings: cancelled[0].total
-            }
-        });
-    } catch (error) {
-        console.error("DASHBOARD ERROR:", error);
 
-        res.status(500).json({
-            success: false,
-            message: "Failed to fetch dashboard statistics.",
-            error: error.message
-        });
+            // =========================================
+            // ACTIVE SERVICES
+            // =========================================
+
+            const [services] =
+                await pool.promise().query(
+                    `
+                    SELECT COUNT(*) AS total
+                    FROM services
+                    WHERE is_active = 1
+                    `
+                );
+
+
+            // =========================================
+            // ACTIVE STAFF
+            // =========================================
+
+            const [staff] =
+                await pool.promise().query(
+                    `
+                    SELECT COUNT(*) AS total
+                    FROM staff
+                    WHERE is_active = 1
+                    `
+                );
+
+
+            // =========================================
+            // CONFIRMED BOOKINGS
+            // =========================================
+
+            const [confirmed] =
+                await pool.promise().query(
+                    `
+                    SELECT COUNT(*) AS total
+                    FROM bookings
+                    WHERE status = 'CONFIRMED'
+                    `
+                );
+
+
+            // =========================================
+            // COMPLETED BOOKINGS
+            // =========================================
+
+            const [completed] =
+                await pool.promise().query(
+                    `
+                    SELECT COUNT(*) AS total
+                    FROM bookings
+                    WHERE status = 'COMPLETED'
+                    `
+                );
+
+
+            // =========================================
+            // CANCELLED BOOKINGS
+            // =========================================
+
+            const [cancelled] =
+                await pool.promise().query(
+                    `
+                    SELECT COUNT(*) AS total
+                    FROM bookings
+                    WHERE status = 'CANCELLED'
+                    `
+                );
+
+
+            // =========================================
+            // RESPONSE
+            // =========================================
+
+            res.json({
+
+                success: true,
+
+                data: {
+
+                    totalCustomers:
+                        customers[0].total,
+
+                    totalBookings:
+                        bookings[0].total,
+
+                    totalServices:
+                        services[0].total,
+
+                    activeStaff:
+                        staff[0].total,
+
+                    confirmedBookings:
+                        confirmed[0].total,
+
+                    completedBookings:
+                        completed[0].total,
+
+                    cancelledBookings:
+                        cancelled[0].total
+
+                }
+
+            });
+
+
+        } catch (error) {
+
+            console.error(
+                "DASHBOARD ERROR:",
+                error
+            );
+
+
+            res.status(500).json({
+
+                success: false,
+
+                message:
+                    "Failed to fetch dashboard statistics.",
+
+                error:
+                    error.message
+
+            });
+
+        }
+
     }
-});
+);
 
 
 // =====================================================
 // 404 HANDLER
 // =====================================================
 
-app.use((req, res) => {
-    res.status(404).json({
-        success: false,
-        message: "API endpoint not found."
-    });
-});
+app.use(
+    (req, res) => {
+
+        res.status(404).json({
+
+            success: false,
+
+            message:
+                "API endpoint not found."
+
+        });
+
+    }
+);
 
 
 // =====================================================
 // GLOBAL ERROR HANDLER
 // =====================================================
 
-app.use((err, req, res, next) => {
-    console.error("SERVER ERROR:", err);
+app.use(
+    (err, req, res, next) => {
 
-    res.status(500).json({
-        success: false,
-        message: "Internal server error.",
-        error: err.message
-    });
-});
+        console.error(
+            "SERVER ERROR:",
+            err
+        );
+
+
+        res.status(500).json({
+
+            success: false,
+
+            message:
+                "Internal server error.",
+
+            error:
+                err.message
+
+        });
+
+    }
+);
 
 
 // =====================================================
 // START LOCAL SERVER
 // =====================================================
 
-app.listen(PORT, () => {
-    console.log("==============================================");
-    console.log("       THE BEAUTY SALON BACKEND");
-    console.log("==============================================");
-    console.log(`Server: http://localhost:${PORT}`);
-    console.log("Database: salon_booking");
-    console.log("Environment: LOCAL");
-    console.log("Uploads: /uploads");
-    console.log("Status: Running");
-    console.log("==============================================");
-});
+app.listen(
+    PORT,
+    () => {
+
+        console.log(
+            "=============================================="
+        );
+
+        console.log(
+            "       THE BEAUTY SALON BACKEND"
+        );
+
+        console.log(
+            "=============================================="
+        );
+
+        console.log(
+            `Server: http://localhost:${PORT}`
+        );
+
+        console.log(
+            "Database: salon_booking"
+        );
+
+        console.log(
+            "Environment: LOCAL"
+        );
+
+        console.log(
+            "Uploads: /uploads"
+        );
+
+        console.log(
+            "Assets: /assets"
+        );
+
+        console.log(
+            "Service Images: /assets/images/services"
+        );
+
+        console.log(
+            "Status: Running"
+        );
+
+        console.log(
+            "=============================================="
+        );
+
+    }
+);

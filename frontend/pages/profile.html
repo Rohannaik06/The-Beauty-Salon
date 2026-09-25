@@ -1121,6 +1121,50 @@
     </section>
 </main>
 
+
+<script>
+/* =========================================================
+   CUSTOMER LOGIN REQUIRED FOR PROFILE PAGE
+   ========================================================= */
+(function () {
+    "use strict";
+
+    function readJson(key) {
+        try {
+            const raw =
+                localStorage.getItem(key) ||
+                sessionStorage.getItem(key);
+            return raw ? JSON.parse(raw) : null;
+        } catch (error) {
+            return null;
+        }
+    }
+
+    function isCustomerLoggedIn() {
+        const session = readJson("salon_customer_session");
+        const customer = readJson("salon_customer");
+        const legacyToken =
+            localStorage.getItem("customerToken") ||
+            sessionStorage.getItem("customerToken");
+
+        return Boolean(
+            (session && session.token && (session.customer || customer)) ||
+            legacyToken
+        );
+    }
+
+    if (!isCustomerLoggedIn()) {
+        const currentUrl =
+            window.location.pathname.split("/").pop() +
+            window.location.search;
+
+        window.location.replace(
+            "login.html?redirect=" + encodeURIComponent(currentUrl)
+        );
+    }
+})();
+</script>
+
 <script>
 (function () {
     "use strict";
