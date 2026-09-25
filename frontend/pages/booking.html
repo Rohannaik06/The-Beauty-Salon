@@ -2345,6 +2345,11 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
+    branch.addEventListener("change", function () {
+        clearMessage();
+        loadStaff(this.value);
+    });
+
         setSelectLoading(staff, "Loading staff...");
 
         try {
