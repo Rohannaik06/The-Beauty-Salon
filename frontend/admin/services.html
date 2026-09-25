@@ -666,7 +666,7 @@
 
     .services-table {
         width: 100%;
-        min-width: 900px;
+        min-width: 1180px;
         border-collapse: collapse;
     }
 
@@ -928,6 +928,20 @@
         color: #aaa;
         font-size: 14px;
         font-weight: 600;
+    }
+
+    /* BRANCH / STAFF ASSIGNMENT */
+    .staff-assignment-note {
+        display: block;
+        margin-top: 5px;
+        color: #666;
+        font-size: 12px;
+        line-height: 1.45;
+    }
+
+    .form-group select:disabled {
+        opacity: .55;
+        cursor: not-allowed;
     }
 
     .form-group input,
@@ -1723,6 +1737,8 @@
                                 <th>Category</th>
                                 <th>Price</th>
                                 <th>Duration</th>
+                                <th>Branch</th>
+                                <th>Staff</th>
                                 <th>Status</th>
                                 <th>Actions</th>
                             </tr>
@@ -1730,7 +1746,7 @@
 
                         <tbody id="servicesTableBody">
                             <tr>
-                                <td colspan="6" style="text-align:center;padding:35px;color:#888;">
+                                <td colspan="8" style="text-align:center;padding:35px;color:#888;">
                                     <i class="fa-solid fa-spinner fa-spin"></i>
                                     &nbsp; Loading services...
                                 </td>
@@ -1814,6 +1830,38 @@
                                 <option value="active">Active</option>
                                 <option value="inactive">Inactive</option>
                             </select>
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label for="serviceBranch">
+                                Branch
+                            </label>
+
+                            <select id="serviceBranch" required>
+                                <option value="">Loading branches...</option>
+                            </select>
+
+                            <small class="staff-assignment-note">
+                                Select a branch to load its available staff.
+                            </small>
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label for="serviceStaff">
+                                Staff
+                            </label>
+
+                            <select id="serviceStaff" required disabled>
+                                <option value="">Select branch first</option>
+                            </select>
+
+                            <small class="staff-assignment-note">
+                                Only active staff from the selected branch will appear.
+                            </small>
 
                         </div>
 
@@ -1943,7 +1991,15 @@ document.addEventListener("DOMContentLoaded", function () {
     const serviceCount = document.getElementById("serviceCount");
     const tableBody = document.getElementById("servicesTableBody");
 
+    const serviceBranchSelect = document.getElementById("serviceBranch");
+    const serviceStaffSelect = document.getElementById("serviceStaff");
+
+    const BRANCHES_API_URL = "https://the-beauty-salon.onrender.com/api/branches";
+    const STAFF_API_URL = "https://the-beauty-salon.onrender.com/api/staff";
+
     let services = [];
+    let branches = [];
+    let staff = [];
     let selectedCategory = "all";
     let editingService = null;
 
@@ -2030,7 +2086,11 @@ document.addEventListener("DOMContentLoaded", function () {
             is_active: Number(raw.is_active) === 1 ? 1 : 0,
             status: normalizeStatus(raw.is_active),
             description: raw.description ?? "",
-            service_image: raw.service_image ?? ""
+            service_image: raw.service_image ?? "",
+            branch_id: raw.branch_id ?? raw.branchId ?? "",
+            branch_name: raw.branch_name ?? raw.branch ?? "",
+            staff_id: raw.staff_id ?? raw.staffId ?? "",
+            staff_name: raw.staff_name ?? raw.staff ?? ""
         };
     }
 
@@ -2059,7 +2119,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function showLoading() {
         tableBody.innerHTML = `
             <tr>
-                <td colspan="6" style="text-align:center;padding:35px;color:#888;">
+                <td colspan="8" style="text-align:center;padding:35px;color:#888;">
                     <i class="fa-solid fa-spinner fa-spin"></i>
                     &nbsp; Loading services...
                 </td>
@@ -2070,7 +2130,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function showEmpty(message) {
         tableBody.innerHTML = `
             <tr>
-                <td colspan="6" style="text-align:center;padding:40px;color:#777;">
+                <td colspan="8" style="text-align:center;padding:40px;color:#777;">
                     <i class="fa-regular fa-folder-open"
                        style="font-size:22px;color:#d4af37;margin-bottom:10px;"></i>
                     <div>${escapeHtml(message)}</div>
@@ -2150,6 +2210,18 @@ document.addEventListener("DOMContentLoaded", function () {
                     </td>
 
                     <td>
+                        <span class="category-badge">
+                            ${escapeHtml(service.branch_name || "—")}
+                        </span>
+                    </td>
+
+                    <td>
+                        <span class="category-badge">
+                            ${escapeHtml(service.staff_name || "—")}
+                        </span>
+                    </td>
+
+                    <td>
                         <span class="status-badge ${service.status}">
                             ${service.status === "active" ? "Active" : "Inactive"}
                         </span>
@@ -2179,6 +2251,147 @@ document.addEventListener("DOMContentLoaded", function () {
             `;
         }).join("");
     }
+
+    function extractRows(result) {
+        return Array.isArray(result.data)
+            ? result.data
+            : Array.isArray(result.branches)
+                ? result.branches
+                : Array.isArray(result.staff)
+                    ? result.staff
+                    : Array.isArray(result)
+                        ? result
+                        : [];
+    }
+
+    function populateBranchSelect(selectedBranchId = "") {
+        if (!serviceBranchSelect) return;
+
+        serviceBranchSelect.innerHTML = '<option value="">Select branch</option>';
+
+        branches.forEach(function (branch) {
+            const option = document.createElement("option");
+            option.value = branch.id;
+            option.textContent = branch.name || `Branch ${branch.id}`;
+            if (String(branch.id) === String(selectedBranchId)) {
+                option.selected = true;
+            }
+            serviceBranchSelect.appendChild(option);
+        });
+    }
+
+    function populateStaffSelect(selectedStaffId = "") {
+        if (!serviceStaffSelect) return;
+
+        const branchId = serviceBranchSelect.value;
+
+        serviceStaffSelect.innerHTML = "";
+
+        if (!branchId) {
+            serviceStaffSelect.disabled = true;
+            serviceStaffSelect.innerHTML = '<option value="">Select branch first</option>';
+            return;
+        }
+
+        const branchStaff = staff.filter(function (member) {
+            return String(member.branch_id) === String(branchId);
+        });
+
+        if (!branchStaff.length) {
+            serviceStaffSelect.disabled = true;
+            serviceStaffSelect.innerHTML = '<option value="">No active staff in this branch</option>';
+            return;
+        }
+
+        serviceStaffSelect.disabled = false;
+
+        const placeholder = document.createElement("option");
+        placeholder.value = "";
+        placeholder.textContent = "Select staff";
+        serviceStaffSelect.appendChild(placeholder);
+
+        branchStaff.forEach(function (member) {
+            const option = document.createElement("option");
+            option.value = member.id;
+            option.textContent = member.role
+                ? `${member.name} — ${member.role}`
+                : member.name;
+
+            if (String(member.id) === String(selectedStaffId)) {
+                option.selected = true;
+            }
+
+            serviceStaffSelect.appendChild(option);
+        });
+    }
+
+    async function loadBranchesAndStaff() {
+        if (!serviceBranchSelect || !serviceStaffSelect) return;
+
+        serviceBranchSelect.disabled = true;
+        serviceStaffSelect.disabled = true;
+        serviceBranchSelect.innerHTML = '<option value="">Loading branches...</option>';
+        serviceStaffSelect.innerHTML = '<option value="">Select branch first</option>';
+
+        try {
+            const [branchResponse, staffResponse] = await Promise.all([
+                fetch(BRANCHES_API_URL, {
+                    headers: { "Accept": "application/json" }
+                }),
+                fetch(STAFF_API_URL, {
+                    headers: { "Accept": "application/json" }
+                })
+            ]);
+
+            const branchResult = await branchResponse.json().catch(function () {
+                return {};
+            });
+
+            const staffResult = await staffResponse.json().catch(function () {
+                return {};
+            });
+
+            if (!branchResponse.ok || branchResult.success === false) {
+                throw new Error(
+                    branchResult.message || "Unable to load branches."
+                );
+            }
+
+            if (!staffResponse.ok || staffResult.success === false) {
+                throw new Error(
+                    staffResult.message || "Unable to load staff."
+                );
+            }
+
+            branches = extractRows(branchResult).filter(function (branch) {
+                return Number(branch.is_active ?? 1) !== 0;
+            });
+
+            staff = extractRows(staffResult).filter(function (member) {
+                return Number(member.is_active ?? 1) !== 0;
+            });
+
+            serviceBranchSelect.disabled = false;
+            populateBranchSelect();
+
+        } catch (error) {
+            console.error("Branch/Staff Load Error:", error);
+
+            serviceBranchSelect.disabled = false;
+            serviceBranchSelect.innerHTML =
+                '<option value="">Unable to load branches</option>';
+
+            serviceStaffSelect.disabled = true;
+            serviceStaffSelect.innerHTML =
+                '<option value="">Unable to load staff</option>';
+        }
+    }
+
+    serviceBranchSelect.addEventListener("change", function () {
+        populateStaffSelect();
+    });
+
+    loadBranchesAndStaff();
 
     async function loadServices() {
         showLoading();
@@ -2215,7 +2428,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             tableBody.innerHTML = `
                 <tr>
-                    <td colspan="6"
+                    <td colspan="8"
                         style="text-align:center;padding:40px;color:#ef8888;">
                         <i class="fa-solid fa-triangle-exclamation"
                            style="font-size:22px;margin-bottom:10px;"></i>
@@ -2258,6 +2471,9 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("serviceDescription").value =
                 service.description || "";
 
+            populateBranchSelect(service.branch_id);
+            populateStaffSelect(service.staff_id);
+
             serviceImageInput.value = "";
             setServiceImagePreview(
                 service.service_image
@@ -2274,6 +2490,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
             document.getElementById("serviceCategory").value = "him";
             document.getElementById("serviceStatus").value = "active";
+
+            populateBranchSelect("");
+            serviceStaffSelect.disabled = true;
+            serviceStaffSelect.innerHTML =
+                '<option value="">Select branch first</option>';
+
             serviceImageInput.value = "";
             resetServiceImagePreview();
         }
@@ -2356,6 +2578,8 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("serviceCategory").value
         );
         const status = document.getElementById("serviceStatus").value;
+        const branchId = serviceBranchSelect.value;
+        const staffId = serviceStaffSelect.value;
         const price = Number(document.getElementById("servicePrice").value);
         const duration = Number(
             document.getElementById("serviceDuration").value
@@ -2366,6 +2590,8 @@ document.addEventListener("DOMContentLoaded", function () {
         if (
             !name ||
             !["him", "her", "child"].includes(category) ||
+            !branchId ||
+            !staffId ||
             !Number.isFinite(price) ||
             price < 0 ||
             !Number.isInteger(duration) ||
@@ -2384,6 +2610,8 @@ document.addEventListener("DOMContentLoaded", function () {
         payload.append("price", String(price));
         payload.append("duration", String(duration));
         payload.append("is_active", status === "inactive" ? "0" : "1");
+        payload.append("branch_id", String(branchId));
+        payload.append("staff_id", String(staffId));
 
         if (imageFile) {
             payload.append("service_image", imageFile);
@@ -2539,13 +2767,25 @@ document.addEventListener("DOMContentLoaded", function () {
     // LOGOUT
     // =====================================================
 
-    document.getElementById("logoutBtn").addEventListener("click", function (event) {
-        event.preventDefault();
+    const logoutBtn = document.getElementById("logoutBtn");
 
-        if (confirm("Are you sure you want to logout?")) {
-            window.location.href = "../index.html";
-        }
-    });
+    if (logoutBtn) {
+        logoutBtn.addEventListener("click", function (event) {
+            event.preventDefault();
+
+            if (!confirm("Are you sure you want to logout?")) return;
+
+            localStorage.removeItem("adminToken");
+            localStorage.removeItem("adminEmail");
+            localStorage.removeItem("adminId");
+
+            sessionStorage.removeItem("adminToken");
+            sessionStorage.removeItem("adminEmail");
+            sessionStorage.removeItem("adminId");
+
+            window.location.replace("../pages/admin-login.html");
+        });
+    }
 
     // =====================================================
     // INITIAL LOAD
