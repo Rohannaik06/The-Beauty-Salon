@@ -2111,7 +2111,7 @@ body{
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            const API = "http://localhost:5000/api/gallery";
+            const API = "https://the-beauty-salon.onrender.com/api/gallery";
 
             const sidebar = document.getElementById("adminSidebar");
             const sidebarToggle = document.getElementById("sidebarToggle");
@@ -2242,7 +2242,7 @@ body{
                         ? image
                         : `/${image}`;
 
-                    return `http://localhost:5000${uploadPath}`;
+                    return `https://the-beauty-salon.onrender.com${uploadPath}`;
                 }
 
                 let fileName = image

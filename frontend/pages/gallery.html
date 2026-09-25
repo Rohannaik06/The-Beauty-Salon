@@ -2672,7 +2672,7 @@ if (lightboxClose) {
            DATABASE GALLERY
         ============================== */
 
-        const GALLERY_API = "http://localhost:5000/api/gallery";
+        const GALLERY_API = "https://the-beauty-salon.onrender.com/api/gallery";
         const GALLERY_IMAGE_FOLDER = "../assets/images/gallery/";
 
         let databaseGalleryImages = [];
@@ -2703,7 +2703,7 @@ if (lightboxClose) {
             }
 
             if (value.startsWith("/uploads/")) {
-                return "http://localhost:5000" + value;
+                return "https://the-beauty-salon.onrender.com" + value;
             }
 
             if (value.startsWith("/assets/")) {

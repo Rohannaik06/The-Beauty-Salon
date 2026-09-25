@@ -3143,7 +3143,7 @@ html, body {
                 true
             );
 
-            const API_URL = "http://localhost:5000/api/services";
+            const API_URL = "https://the-beauty-salon.onrender.com/api/services";
             const servicesGrid = document.getElementById("servicesGrid");
             const filterButtons = document.querySelectorAll(".service-filter");
 
@@ -3281,7 +3281,7 @@ html, body {
                             .replace(/^assets\\/i, "")
                             .replace(/^\/+/g, "");
 
-                        imageUrl = `http://localhost:5000/assets/images/services/${encodeURIComponent(cleanImage)}`;
+                        imageUrl = `https://the-beauty-salon.onrender.com/assets/images/services/${encodeURIComponent(cleanImage)}`;
                     }
 
                     const imageBlock = imageUrl

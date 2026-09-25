@@ -3536,7 +3536,7 @@ body.mobile-menu-open{
 
         document.addEventListener("DOMContentLoaded", function () {
 
-            const API_BASE = "http://localhost:5000/api";
+            const API_BASE = "https://the-beauty-salon.onrender.com/api";
 
             function escapeHtml(value) {
                 return String(value ?? "")
@@ -4028,7 +4028,7 @@ body.mobile-menu-open{
                         if (/^https?:\/\//i.test(raw)) return raw;
 
                         if (raw.startsWith("/uploads/")) {
-                            return "http://localhost:5000" + raw;
+                            return "https://the-beauty-salon.onrender.com" + raw;
                         }
 
                         if (raw.startsWith("/assets/")) {
