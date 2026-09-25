@@ -1535,6 +1535,62 @@
 .account-menu a i,.account-menu .logout-btn i{color:#D4AF37 !important;}
 .account-menu a:hover,.account-menu .logout-btn:hover{background:#101010 !important;color:#fff !important;}
 </style>
+
+<style>
+/* EXACT ALL-TABS MENU — APPOINTMENTS PAGE */
+.desktop-navigation { display:flex; align-items:center; gap:24px; white-space:nowrap; }
+.desktop-navigation a { color:#ccc; text-decoration:none; font-size:13px; font-weight:600; }
+.desktop-navigation a:hover { color:#D4AF37; }
+
+@media (max-width:900px){
+  .desktop-navigation{display:none!important;}
+  .mobile-header-actions{display:flex!important;align-items:center;margin-left:auto;}
+  .account-wrap{display:none!important;}
+  .mobile-navigation-links > a.active,
+  .mobile-navigation-links > a[aria-current="page"]{
+    background:linear-gradient(90deg,#181810,#1a1910)!important;
+    border-color:rgba(212,175,55,.65)!important;
+    color:#D4AF37!important;
+    box-shadow:0 5px 18px rgba(0,0,0,.35),0 0 10px rgba(212,175,55,.08)!important;
+  }
+  .mobile-navigation-links > a.active i,
+  .mobile-navigation-links > a[aria-current="page"] i{color:#D4AF37!important;}
+  .mobile-navigation-links > a{border:1px solid transparent!important;}
+  .mobile-navigation-links > a:hover{border-color:rgba(212,175,55,.38)!important;background:#15150f!important;}
+}
+</style>
+
+<style>
+/* DESKTOP ONLY — CENTER MAIN NAVIGATION */
+@media (min-width: 901px) {
+    .header-container {
+        display: grid !important;
+        grid-template-columns: 1fr auto 1fr !important;
+        align-items: center !important;
+        gap: 20px !important;
+    }
+
+    .site-brand {
+        margin-right: 0 !important;
+        justify-self: start !important;
+    }
+
+    .desktop-navigation {
+        grid-column: 2 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 24px !important;
+        white-space: nowrap !important;
+    }
+
+    .account-wrap {
+        grid-column: 3 !important;
+        justify-self: end !important;
+    }
+}
+</style>
+
 </head>
 
 
@@ -1554,7 +1610,17 @@
                 <small>Salon</small>
             </span>
         </a>
-<div class="mobile-header-actions">
+
+        <nav class="desktop-navigation" aria-label="Main navigation">
+            <a href="../index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="services.html">Services</a>
+            <a href="branches.html">Branches</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+
+        <div class="mobile-header-actions">
             <button type="button" class="mobile-menu-button" id="menuBtn"
                     aria-label="Open navigation menu" aria-controls="mobileMenu" aria-expanded="false">
                 <i class="fa-solid fa-bars"></i>
@@ -1567,32 +1633,18 @@
                 <span id="accountName">My Account</span>
                 <i class="fa-solid fa-chevron-down"></i>
             </button>
-
             <div class="account-menu" id="accountMenu">
-                <a href="appointments.html">
-                    <i class="fa-regular fa-calendar-check"></i>
-                    <span>My Appointments</span>
-                </a>
-                <a href="history.html">
-                    <i class="fa-solid fa-clock-rotate-left"></i>
-                    <span>Booking History</span>
-                </a>
-                <a href="profile.html">
-                    <i class="fa-regular fa-user"></i>
-                    <span>Update Profile</span>
-                </a>
+                <a href="appointments.html"><i class="fa-regular fa-calendar-check"></i><span>My Appointments</span></a>
+                <a href="history.html"><i class="fa-solid fa-clock-rotate-left"></i><span>Booking History</span></a>
+                <a href="profile.html"><i class="fa-regular fa-user"></i><span>Update Profile</span></a>
                 <div class="menu-divider"></div>
                 <button type="button" class="logout-btn" id="logoutButton">
-                    <i class="fa-solid fa-right-from-bracket"></i>
-                    <span>Logout</span>
+                    <i class="fa-solid fa-right-from-bracket"></i><span>Logout</span>
                 </button>
             </div>
         </div>
-
     </div>
 </header>
-
-
 
 <div class="mobile-navigation" id="mobileMenu" aria-hidden="true">
     <div class="mobile-navigation-header">
@@ -1609,29 +1661,18 @@
             <i class="fa-solid fa-xmark"></i>
         </button>
     </div>
-
-    <nav class="mobile-navigation-links" aria-label="Mobile account navigation">
-        <a href="appointments.html" aria-current="page">
-            <i class="fa-regular fa-calendar-check"></i>
-            <span>My Appointments</span>
-        </a>
-
-        <a href="history.html">
-            <i class="fa-solid fa-clock-rotate-left"></i>
-            <span>Booking History</span>
-        </a>
-
-        <a href="profile.html">
-            <i class="fa-regular fa-user"></i>
-            <span>Update Profile</span>
-        </a>
-
+    <nav class="mobile-navigation-links" aria-label="Main navigation">
+        <a href="../index.html"><i class="fa-solid fa-house"></i><span>Home</span></a>
+        <a href="about.html"><i class="fa-regular fa-circle-info"></i><span>About</span></a>
+        <a href="services.html"><i class="fa-solid fa-scissors"></i><span>Services</span></a>
+        <a href="branches.html"><i class="fa-solid fa-location-dot"></i><span>Branches</span></a>
+        <a href="gallery.html"><i class="fa-regular fa-images"></i><span>Gallery</span></a>
+        <a href="contact.html"><i class="fa-regular fa-envelope"></i><span>Contact</span></a>
         <div class="mobile-menu-divider"></div>
-
-        <a href="#" id="mobileLogoutButton">
-            <i class="fa-solid fa-right-from-bracket"></i>
-            <span>Logout</span>
-        </a>
+        <a href="appointments.html" class="active" aria-current="page"><i class="fa-regular fa-calendar-check"></i><span>My Appointments</span></a>
+        <a href="history.html"><i class="fa-solid fa-clock-rotate-left"></i><span>Booking History</span></a>
+        <a href="profile.html"><i class="fa-regular fa-user"></i><span>Update Profile</span></a>
+        <a href="#" id="mobileLogoutButton"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></a>
     </nav>
 </div>
 

@@ -631,80 +631,6 @@ body {
     }
 }
 
-.mobile-menu {
-    position: fixed;
-
-    inset: 0;
-
-    z-index: 2000;
-
-    display: none;
-
-    background: #050505;
-}
-
-.mobile-menu.open {
-    display: block;
-}
-
-.mobile-menu-inner {
-    min-height: 100%;
-
-    padding: 22px 20px;
-
-    display: flex;
-
-    flex-direction: column;
-}
-
-.mobile-close {
-    align-self: flex-end;
-
-    width: 42px;
-    height: 42px;
-
-    margin-bottom: 35px;
-
-    border: 1px solid #333;
-
-    border-radius: 50%;
-
-    background: #111;
-
-    color: #fff;
-}
-
-.mobile-link {
-    padding: 17px 5px;
-
-    border-bottom: 1px solid #202020;
-
-    color: #ccc;
-
-    font-size: 17px;
-}
-
-.mobile-link.active {
-    color: #d4af37;
-}
-
-.mobile-book {
-    margin-top: 28px;
-
-    padding: 15px;
-
-    border-radius: 7px;
-
-    background: #d4af37;
-
-    color: #000;
-
-    text-align: center;
-
-    font-weight: 700;
-}
-
-
 /* =====================================================
    HERO
 ===================================================== */
@@ -1762,6 +1688,255 @@ body:not(.contact-page) .site-footer {
 }
 
 </style>
+
+
+<style>
+/* =========================================================
+   BRANCHES EXACT MENU — CONTACT PAGE
+   DESIGN ONLY — EXISTING FONT SIZES PRESERVED
+========================================================= */
+
+@media (max-width: 767px) {
+
+    .about-site-header {
+        background: rgba(5,5,5,.97) !important;
+        border-bottom: 1px solid rgba(212,175,55,.20) !important;
+        box-shadow: 0 4px 18px rgba(0,0,0,.45) !important;
+    }
+
+    .about-mobile-menu-btn {
+        border: 1px solid rgba(212,175,55,.65) !important;
+        background: #111 !important;
+        color: #D4AF37 !important;
+        box-shadow: 0 0 12px rgba(212,175,55,.10) !important;
+    }
+
+    .about-mobile-menu-btn i {
+        color: #D4AF37 !important;
+    }
+
+    .about-mobile-menu {
+        background:
+            radial-gradient(circle at 100% 10%, rgba(212,175,55,.08), transparent 34%),
+            #050505 !important;
+        border: 0 !important;
+        box-shadow: inset 0 0 55px rgba(212,175,55,.025) !important;
+    }
+
+    .about-mobile-menu-header {
+        background: #080808 !important;
+        border-bottom: 1px solid rgba(212,175,55,.18) !important;
+        box-shadow: 0 4px 16px rgba(0,0,0,.35) !important;
+    }
+
+    .about-mobile-close {
+        border: 1px solid rgba(212,175,55,.65) !important;
+        background: #111 !important;
+        color: #D4AF37 !important;
+        box-shadow: 0 0 12px rgba(212,175,55,.10) !important;
+    }
+
+    .about-mobile-close i {
+        color: #D4AF37 !important;
+    }
+
+    .about-mobile-links {
+        background: transparent !important;
+    }
+
+    .about-mobile-links > a {
+        border: 1px solid rgba(255,255,255,.035) !important;
+        border-radius: 15px !important;
+        background: linear-gradient(90deg,#111,#121210) !important;
+        box-shadow: 0 5px 16px rgba(0,0,0,.30) !important;
+        margin-bottom: 8px !important;
+        padding: 0 14px !important;
+    }
+
+    .about-mobile-links > a i {
+        color: #D4AF37 !important;
+        text-shadow: 0 0 7px rgba(212,175,55,.22) !important;
+    }
+
+    .about-mobile-links > a.active,
+    .about-mobile-links > a[aria-current="page"] {
+        border-color: rgba(212,175,55,.65) !important;
+        background: linear-gradient(90deg,#181810,#1a1910) !important;
+        box-shadow:
+            0 5px 18px rgba(0,0,0,.35),
+            0 0 10px rgba(212,175,55,.08) !important;
+        color: #D4AF37 !important;
+    }
+
+    .about-mobile-links > a.active i,
+    .about-mobile-links > a[aria-current="page"] i {
+        color: #D4AF37 !important;
+    }
+
+    .about-mobile-links > a:hover {
+        border-color: rgba(212,175,55,.38) !important;
+        background: linear-gradient(90deg,#15150f,#17170f) !important;
+        box-shadow: 0 6px 18px rgba(0,0,0,.35) !important;
+    }
+
+    .about-mobile-divider {
+        height: 14px !important;
+        background: transparent !important;
+    }
+
+    .about-mobile-links > a.customer-login-link {
+        border: 1px solid rgba(212,175,55,.35) !important;
+        border-radius: 12px !important;
+        background: #0d0d0d !important;
+        box-shadow: 0 4px 14px rgba(0,0,0,.28) !important;
+    }
+
+    /* Account tabs — same menu style, no fixed border */
+    /* ACCOUNT TABS + LOGOUT — EXACT SAME TAB STYLE */
+    .about-mobile-links > a.customer-account-area,
+    .about-mobile-links > button.customer-account-area {
+        width: 100% !important;
+        min-height: 52px !important;
+        margin: 0 !important;
+        padding: 0 18px !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 14px !important;
+        box-sizing: border-box !important;
+        border: 0 !important;
+        outline: 0 !important;
+        border-radius: 15px !important;
+        background: linear-gradient(90deg,#111,#121210) !important;
+        color: #d6d6d6 !important;
+        box-shadow: 0 5px 16px rgba(0,0,0,.30) !important;
+        font: inherit !important;
+        text-align: left !important;
+        text-decoration: none !important;
+        cursor: pointer !important;
+    }
+
+    .about-mobile-links > a.customer-account-area:hover,
+    .about-mobile-links > button.customer-account-area:hover {
+        border: 0 !important;
+        outline: 0 !important;
+        background: linear-gradient(90deg,#15150f,#17170f) !important;
+        color: #D4AF37 !important;
+        box-shadow: 0 6px 18px rgba(0,0,0,.35) !important;
+    }
+
+    .about-mobile-links > a.customer-account-area i,
+    .about-mobile-links > button.customer-account-area i,
+    .about-mobile-links > a.customer-login-link i {
+        color: #D4AF37 !important;
+    }
+
+    .about-mobile-menu i,
+    .about-mobile-menu .fa,
+    .about-mobile-menu [class^="fa-"],
+    .about-mobile-menu [class*=" fa-"] {
+        color: #D4AF37 !important;
+    }
+}
+
+/* =========================================================
+   DESKTOP ACCOUNT — SAME BRANCHES STYLE
+========================================================= */
+
+.customer-account-wrap {
+    position: relative;
+}
+
+.customer-account-btn {
+    color: #D4AF37 !important;
+    border-color: rgba(212,175,55,.45) !important;
+    background: #050505 !important;
+}
+
+.customer-account-btn:hover,
+.customer-account-btn[aria-expanded="true"] {
+    border-color: #D4AF37 !important;
+    background: #0d0d0d !important;
+}
+
+.customer-account-btn i,
+.customer-account-btn span,
+.customer-account-chevron {
+    color: #D4AF37 !important;
+}
+
+.customer-account-chevron {
+    transition: transform .25s ease;
+}
+
+.customer-account-dropdown {
+    position: absolute !important;
+    top: calc(100% + 10px) !important;
+    right: 0 !important;
+    width: 250px !important;
+    padding: 8px !important;
+    background: #101010 !important;
+    border: 1px solid rgba(212,175,55,.28) !important;
+    border-radius: 10px !important;
+    box-shadow: 0 18px 45px rgba(0,0,0,.45) !important;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-7px);
+    transition: opacity .22s ease, transform .22s ease, visibility .22s ease;
+    z-index: 3000;
+}
+
+.customer-account-dropdown.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.customer-account-dropdown a,
+.customer-account-dropdown .customer-logout {
+    width: 100% !important;
+    min-height: 44px !important;
+    padding: 0 12px !important;
+    display: flex !important;
+    align-items: center;
+    gap: 12px;
+    border: 0 !important;
+    border-radius: 8px !important;
+    background: transparent !important;
+    color: #d0d0d0 !important;
+    font-size: 13px !important;
+    text-decoration: none;
+    text-align: left;
+}
+
+.customer-account-dropdown a i,
+.customer-account-dropdown .customer-logout i {
+    width: 20px;
+    color: #D4AF37 !important;
+}
+
+.customer-account-dropdown a:hover {
+    background: rgba(212,175,55,.08) !important;
+    color: #D4AF37 !important;
+}
+
+.customer-account-dropdown .customer-logout {
+    margin-top: 0 !important;
+    border: 0 !important;
+    border-color: transparent !important;
+    border-radius: 8px !important;
+    background: transparent !important;
+    color: #d0d0d0 !important;
+    box-shadow: none !important;
+}
+
+.customer-account-dropdown .customer-logout:hover {
+    border: 0 !important;
+    border-color: transparent !important;
+    background: rgba(212,175,55,.08) !important;
+    color: #D4AF37 !important;
+}
+</style>
+
 </head>
 
 
@@ -1776,97 +1951,72 @@ body:not(.contact-page) .site-footer {
 
     <div class="about-header-container">
 
-        <a href="../index.html"
-           class="about-brand"
-           aria-label="The Beauty Salon Home">
-
+        <a href="../index.html" class="about-brand" aria-label="The Beauty Salon Home">
             <span class="about-brand-logo">
-                <img
-                    src="../assets/images/logo/beauty-salon-logo.png"
-                    alt="The Beauty Salon Logo">
+                <img src="../assets/images/logo/beauty-salon-logo.png" alt="The Beauty Salon Logo">
             </span>
-
             <span class="about-brand-name">
                 <strong>The Beauty</strong>
                 <small>Salon</small>
             </span>
-
         </a>
 
-        <nav class="about-desktop-nav"
-             aria-label="Primary navigation">
-
-            <a href="../index.html">
-                Home
-            </a>
-
-            <a href="about.html">
-                About
-            </a>
-
-            <a href="services.html">
-                Services
-            </a>
-
-            <a href="branches.html">
-                Branches
-            </a>
-
-            <a href="gallery.html">
-                Gallery
-            </a>
-
-            <a href="contact.html"
-               class="active"
-               aria-current="page">
-                Contact
-            </a>
-
+        <nav class="about-desktop-nav" aria-label="Primary navigation">
+            <a href="../index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="services.html">Services</a>
+            <a href="branches.html">Branches</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="contact.html" class="active" aria-current="page">Contact</a>
         </nav>
 
         <div class="about-header-actions">
 
             <a href="login.html"
-               class="about-login-btn"
+               class="about-login-btn customer-login-link"
                id="headerCustomerLogin">
                 <i class="fa-regular fa-user"></i>
                 <span>Customer Login</span>
             </a>
 
-            <div class="about-account-wrap" id="headerAccountWrap" style="display:none;">
-                <button class="about-account-btn"
+            <div class="customer-account-area customer-account-wrap"
+                 id="headerAccountWrap"
+                 style="display:none; position:relative;">
+
+                <button class="about-login-btn customer-account-btn"
                         id="headerAccountBtn"
                         type="button"
-                        aria-expanded="false"
-                        aria-controls="headerAccountDropdown">
+                        aria-haspopup="true"
+                        aria-expanded="false">
                     <i class="fa-regular fa-user"></i>
-                    <span id="headerAccountName">Profile</span>
-                    <i class="fa-solid fa-chevron-down account-chevron"></i>
+                    <span id="headerAccountName">My Account</span>
+                    <i class="fa-solid fa-chevron-down customer-account-chevron"
+                       id="customerAccountChevron"></i>
                 </button>
 
-                <div class="about-account-dropdown"
+                <div class="customer-account-dropdown"
                      id="headerAccountDropdown">
 
                     <a href="appointments.html">
                         <i class="fa-regular fa-calendar-check"></i>
-                        <span>My Appointments</span>
+                        My Appointments
                     </a>
 
                     <a href="history.html">
                         <i class="fa-solid fa-clock-rotate-left"></i>
-                        <span>Booking History</span>
+                        Booking History
                     </a>
 
                     <a href="profile.html">
                         <i class="fa-regular fa-user"></i>
-                        <span>Update Profile</span>
+                        Update Profile
                     </a>
 
-                    <div class="account-divider"></div>
-
-                    <button type="button" id="headerLogoutBtn">
+                    <button type="button"
+                            class="customer-logout"
+                            id="headerLogoutBtn">
                         <i class="fa-solid fa-right-from-bracket"></i>
-                        <span>Logout</span>
+                        Logout
                     </button>
 
                 </div>
@@ -1874,20 +2024,16 @@ body:not(.contact-page) .site-footer {
 
         </div>
 
-        <button
-            class="about-mobile-menu-btn"
-            id="contactMenuBtn"
-            type="button"
-            aria-label="Open menu"
-            aria-controls="contactMobileMenu"
-            aria-expanded="false">
-
+        <button class="about-mobile-menu-btn"
+                id="contactMenuBtn"
+                type="button"
+                aria-label="Open menu"
+                aria-controls="contactMobileMenu"
+                aria-expanded="false">
             <i class="fa-solid fa-bars"></i>
-
         </button>
 
     </div>
-
 </header>
 
 <div class="about-mobile-menu"
@@ -1896,36 +2042,27 @@ body:not(.contact-page) .site-footer {
 
     <div class="about-mobile-menu-header">
 
-        <a href="../index.html"
-           class="about-brand">
-
+        <a href="../index.html" class="about-brand">
             <span class="about-brand-logo">
-                <img
-                    src="../assets/images/logo/beauty-salon-logo.png"
-                    alt="The Beauty Salon Logo">
+                <img src="../assets/images/logo/beauty-salon-logo.png"
+                     alt="The Beauty Salon Logo">
             </span>
-
             <span class="about-brand-name">
                 <strong>The Beauty</strong>
                 <small>Salon</small>
             </span>
-
         </a>
 
-        <button
-            class="about-mobile-close"
-            id="contactCloseMenuBtn"
-            type="button"
-            aria-label="Close menu">
-
+        <button class="about-mobile-close"
+                id="contactCloseMenuBtn"
+                type="button"
+                aria-label="Close menu">
             <i class="fa-solid fa-xmark"></i>
-
         </button>
 
     </div>
 
-    <nav class="about-mobile-links"
-         aria-label="Mobile navigation">
+    <nav class="about-mobile-links" aria-label="Mobile navigation">
 
         <a href="../index.html">
             <i class="fa-solid fa-house"></i>
@@ -1952,9 +2089,7 @@ body:not(.contact-page) .site-footer {
             <span>Gallery</span>
         </a>
 
-        <a href="contact.html"
-           class="active"
-           aria-current="page">
+        <a href="contact.html" class="active" aria-current="page">
             <i class="fa-regular fa-envelope"></i>
             <span>Contact</span>
         </a>
@@ -1962,44 +2097,42 @@ body:not(.contact-page) .site-footer {
         <div class="about-mobile-divider"></div>
 
         <a href="login.html"
-           class="about-mobile-login"
+           class="customer-login-link"
            id="mobileCustomerLogin">
             <i class="fa-solid fa-right-to-bracket"></i>
             <span>Customer Login</span>
         </a>
 
-        <div class="about-mobile-account" id="mobileAccountWrap" style="display:none;">
-            <button type="button"
-                    class="about-mobile-account-btn"
-                    id="mobileAccountBtn"
-                    aria-expanded="false">
-                <i class="fa-regular fa-user"></i>
-                <span id="mobileAccountName">Profile</span>
-                <i class="fa-solid fa-chevron-down account-chevron"></i>
-            </button>
+        <a href="appointments.html"
+           class="customer-account-area"
+           style="display:none;">
+            <i class="fa-regular fa-calendar-check"></i>
+            <span>My Appointments</span>
+        </a>
 
-            <div class="about-mobile-account-menu" id="mobileAccountMenu">
-                <a href="appointments.html">
-                    <i class="fa-regular fa-calendar-check"></i>
-                    <span>My Appointments</span>
-                </a>
-                <a href="booking-history.html">
-                    <i class="fa-solid fa-clock-rotate-left"></i>
-                    <span>Booking History</span>
-                </a>
-                <a href="profile.html">
-                    <i class="fa-regular fa-user"></i>
-                    <span>Update Profile</span>
-                </a>
-                <button type="button" id="mobileLogoutBtn">
-                    <i class="fa-solid fa-right-from-bracket"></i>
-                    <span>Logout</span>
-                </button>
-            </div>
-        </div>
+        <a href="history.html"
+           class="customer-account-area"
+           style="display:none;">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+            <span>Booking History</span>
+        </a>
+
+        <a href="profile.html"
+           class="customer-account-area"
+           style="display:none;">
+            <i class="fa-regular fa-user"></i>
+            <span>Update Profile</span>
+        </a>
+
+        <button type="button"
+                id="mobileLogoutBtn"
+                class="customer-account-area"
+                style="display:none;">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span>Logout</span>
+        </button>
 
     </nav>
-
 </div>
 
 
@@ -2627,13 +2760,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const logoutBtn = document.getElementById("headerLogoutBtn");
 
     const mobileLogin = document.getElementById("mobileCustomerLogin");
-    const mobileAccountWrap = document.getElementById("mobileAccountWrap");
-    const mobileAccountBtn = document.getElementById("mobileAccountBtn");
-    const mobileAccountMenu = document.getElementById("mobileAccountMenu");
-    const mobileAccountName = document.getElementById("mobileAccountName");
-    const mobileLogoutBtn = document.getElementById("mobileLogoutBtn");
-
-    let customer = null;
+    const mobileAccountItems =
+        document.querySelectorAll(".about-mobile-links .customer-account-area");
 
     const customerKeys = [
         "salon_customer_session",
@@ -2643,86 +2771,127 @@ document.addEventListener("DOMContentLoaded", function () {
         "customerPhone"
     ];
 
-    for (const key of ["salon_customer_session", "salon_customer"]) {
+    function readJSON(key) {
         try {
-            const raw = localStorage.getItem(key);
-            if (raw) {
-                const parsed = JSON.parse(raw);
-                if (parsed && typeof parsed === "object") {
-                    customer = parsed.user || parsed.customer || parsed;
-                    break;
-                }
-            }
-        } catch (error) {}
+            const raw =
+                localStorage.getItem(key) ||
+                sessionStorage.getItem(key);
+            return raw ? JSON.parse(raw) : null;
+        } catch (error) {
+            return null;
+        }
     }
 
-    const loggedIn = customerKeys.some(key => !!localStorage.getItem(key));
+    function getCustomer() {
+        const session = readJSON("salon_customer_session");
+        const salonCustomer = readJSON("salon_customer");
+
+        return (
+            session?.customer ||
+            session?.user ||
+            salonCustomer?.customer ||
+            salonCustomer?.user ||
+            salonCustomer ||
+            null
+        );
+    }
+
+    function isLoggedIn() {
+        const customer = getCustomer();
+        const hasStorage = customerKeys.some(function (key) {
+            return Boolean(
+                localStorage.getItem(key) ||
+                sessionStorage.getItem(key)
+            );
+        });
+
+        return Boolean(customer && hasStorage);
+    }
 
     function getCustomerName() {
-        if (!customer) return "Profile";
-        return customer.name ||
-               customer.full_name ||
-               customer.fullName ||
-               customer.customer_name ||
-               customer.username ||
-               "Profile";
+        const customer = getCustomer();
+
+        return customer?.name ||
+               customer?.full_name ||
+               customer?.fullName ||
+               customer?.customer_name ||
+               customer?.username ||
+               "My Account";
+    }
+
+    function updateAccountUI() {
+        const loggedIn = isLoggedIn();
+
+        if (login) {
+            login.style.display = loggedIn ? "none" : "inline-flex";
+        }
+
+        if (accountWrap) {
+            accountWrap.style.display = loggedIn ? "block" : "none";
+        }
+
+        if (accountName && loggedIn) {
+            accountName.textContent = getCustomerName();
+        }
+
+        if (mobileLogin) {
+            mobileLogin.style.display = loggedIn ? "none" : "flex";
+        }
+
+        mobileAccountItems.forEach(function (item) {
+            item.style.display = loggedIn ? "flex" : "none";
+        });
     }
 
     function logoutCustomer() {
-        [
-            "salon_customer_session",
-            "salon_customer",
-            "customerToken",
-            "customerId",
-            "customerPhone"
-        ].forEach(key => {
+        customerKeys.forEach(function (key) {
             localStorage.removeItem(key);
             sessionStorage.removeItem(key);
         });
 
-        window.location.href = "login.html";
+        localStorage.removeItem("salonhubUser");
+        sessionStorage.removeItem("salonhubUser");
+
+        window.location.href = "../index.html";
     }
 
-    if (loggedIn) {
-        const name = getCustomerName();
-
-        if (login) login.style.display = "none";
-        if (accountWrap) accountWrap.style.display = "block";
-        if (accountName) accountName.textContent = name;
-
-        if (mobileLogin) mobileLogin.style.display = "none";
-        if (mobileAccountWrap) mobileAccountWrap.style.display = "block";
-        if (mobileAccountName) mobileAccountName.textContent = name;
-    }
-
-    function closeDesktopAccount() {
-        if (accountDropdown) accountDropdown.classList.remove("open");
-        if (accountBtn) accountBtn.setAttribute("aria-expanded", "false");
-    }
-
-    if (accountBtn) {
+    if (accountBtn && accountDropdown) {
         accountBtn.addEventListener("click", function (event) {
             event.stopPropagation();
-            const open = accountDropdown.classList.toggle("open");
-            accountBtn.setAttribute("aria-expanded", String(open));
+
+            const open =
+                accountDropdown.classList.toggle("open");
+
+            accountBtn.setAttribute(
+                "aria-expanded",
+                String(open)
+            );
+        });
+
+        accountDropdown.addEventListener("click", function (event) {
+            event.stopPropagation();
+        });
+
+        document.addEventListener("click", function () {
+            accountDropdown.classList.remove("open");
+            accountBtn.setAttribute("aria-expanded", "false");
         });
     }
 
-    document.addEventListener("click", function (event) {
-        if (accountWrap && !accountWrap.contains(event.target)) {
-            closeDesktopAccount();
-        }
-    });
+    if (logoutBtn) {
+        logoutBtn.addEventListener("click", logoutCustomer);
+    }
 
-    if (logoutBtn) logoutBtn.addEventListener("click", logoutCustomer);
-    if (mobileLogoutBtn) mobileLogoutBtn.addEventListener("click", logoutCustomer);
+    const mobileLogoutBtn =
+        document.getElementById("mobileLogoutBtn");
 
-    if (mobileAccountBtn) {
-        mobileAccountBtn.addEventListener("click", function () {
-            const open = mobileAccountMenu.classList.toggle("open");
-            mobileAccountBtn.setAttribute("aria-expanded", String(open));
+    if (mobileLogoutBtn) {
+        mobileLogoutBtn.addEventListener("click", function () {
+            logoutCustomer();
         });
     }
+
+    updateAccountUI();
 
 });
 </script>

@@ -440,6 +440,117 @@
         }
 
     </style>
+
+
+<style>
+/* =========================================================
+   EXACT ACCOUNT / MOBILE MENU DESIGN
+   Design only — existing page font sizes preserved
+   ========================================================= */
+@media (max-width: 900px) {
+    .site-header {
+        background: rgba(5,5,5,.97) !important;
+        border-bottom: 1px solid rgba(212,175,55,.20) !important;
+        box-shadow: 0 4px 18px rgba(0,0,0,.45) !important;
+    }
+    .mobile-menu-button {
+        border: 1px solid rgba(212,175,55,.65) !important;
+        background: #111 !important;
+        color: #D4AF37 !important;
+        box-shadow: 0 0 12px rgba(212,175,55,.10) !important;
+    }
+    .mobile-navigation {
+        background:
+            radial-gradient(circle at 100% 10%, rgba(212,175,55,.08), transparent 34%),
+            #050505 !important;
+        border: 0 !important;
+        box-shadow: inset 0 0 55px rgba(212,175,55,.025) !important;
+    }
+    .mobile-navigation-header {
+        background: #080808 !important;
+        border-bottom: 1px solid rgba(212,175,55,.18) !important;
+        box-shadow: 0 4px 16px rgba(0,0,0,.35) !important;
+    }
+    .mobile-close-button {
+        border: 1px solid rgba(212,175,55,.65) !important;
+        background: #111 !important;
+        color: #D4AF37 !important;
+        box-shadow: 0 0 12px rgba(212,175,55,.10) !important;
+    }
+    .mobile-navigation-links { background: transparent !important; }
+    .mobile-navigation-links > a {
+        border: 1px solid rgba(255,255,255,.035) !important;
+        border-radius: 15px !important;
+        background: linear-gradient(90deg,#111,#121210) !important;
+        box-shadow: 0 5px 16px rgba(0,0,0,.30) !important;
+    }
+    .mobile-navigation-links > a i {
+        color: #D4AF37 !important;
+        text-shadow: 0 0 7px rgba(212,175,55,.22) !important;
+    }
+    .mobile-navigation-links > a[aria-current="page"] {
+        border-color: rgba(212,175,55,.65) !important;
+        background: linear-gradient(90deg,#181810,#1a1910) !important;
+        box-shadow: 0 5px 18px rgba(0,0,0,.35),0 0 10px rgba(212,175,55,.08) !important;
+    }
+    .mobile-navigation-links > a:hover {
+        border-color: rgba(212,175,55,.38) !important;
+        background: linear-gradient(90deg,#15150f,#17170f) !important;
+    }
+    .mobile-navigation-links > a:hover i { color:#D4AF37 !important; }
+    .mobile-menu-divider { background: rgba(255,255,255,.08) !important; }
+}
+.account-menu a,
+.account-menu .logout-btn {
+    background:#000 !important;
+    color:#D0D0D0 !important;
+    border:0 !important;
+}
+.account-menu a:hover,
+.account-menu .logout-btn:hover {
+    background:#101010 !important;
+    color:#fff !important;
+}
+.account-menu a i,
+.account-menu .logout-btn i { color:#D4AF37 !important; }
+</style>
+
+<style>
+/* DESKTOP ONLY — same centered navigation as My Appointments */
+@media (min-width: 901px) {
+    .header-container {
+        display: grid !important;
+        grid-template-columns: 1fr auto 1fr !important;
+        align-items: center !important;
+        gap: 30px !important;
+    }
+
+    .site-brand {
+        grid-column: 1 !important;
+        justify-self: start !important;
+        margin-right: 0 !important;
+    }
+
+    .desktop-navigation {
+        grid-column: 2 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 24px !important;
+        white-space: nowrap !important;
+    }
+
+    .account-wrap {
+        grid-column: 3 !important;
+        justify-self: end !important;
+    }
+
+    .desktop-navigation a.active {
+        color: #D4AF37 !important;
+    }
+}
+</style>
+
 </head>
 
 <body>
@@ -453,6 +564,15 @@
                 <small>Salon</small>
             </span>
         </a>
+<nav class="desktop-navigation" aria-label="Main navigation">
+    <a href="../index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="branches.html">Branches</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="contact.html">Contact</a>
+</nav>
+
 <div class="mobile-header-actions">
             <button type="button" class="mobile-menu-button" id="menuBtn"
                     aria-label="Open navigation menu" aria-controls="mobileMenu" aria-expanded="false">
@@ -472,7 +592,7 @@
                     <i class="fa-regular fa-calendar-check"></i>
                     <span>My Appointments</span>
                 </a>
-                <a href="history.html">
+                <a href="history.html" class="active" aria-current="page">
                     <i class="fa-solid fa-clock-rotate-left"></i>
                     <span>Booking History</span>
                 </a>
@@ -507,24 +627,46 @@
         </button>
     </div>
 
-    <nav class="mobile-navigation-links" aria-label="Mobile account navigation">
-        <a href="appointments.html">
-            <i class="fa-regular fa-calendar-check"></i>
-            <span>My Appointments</span>
+    <nav class="mobile-navigation-links" aria-label="Mobile navigation">
+        <a href="../index.html">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
         </a>
-
-        <a href="history.html" aria-current="page">
-            <i class="fa-solid fa-clock-rotate-left"></i>
-            <span>Booking History</span>
+        <a href="about.html">
+            <i class="fa-regular fa-circle-info"></i>
+            <span>About</span>
         </a>
-
-        <a href="profile.html">
-            <i class="fa-regular fa-user"></i>
-            <span>Update Profile</span>
+        <a href="services.html">
+            <i class="fa-solid fa-scissors"></i>
+            <span>Services</span>
+        </a>
+        <a href="branches.html">
+            <i class="fa-solid fa-location-dot"></i>
+            <span>Branches</span>
+        </a>
+        <a href="gallery.html">
+            <i class="fa-regular fa-images"></i>
+            <span>Gallery</span>
+        </a>
+        <a href="contact.html">
+            <i class="fa-regular fa-envelope"></i>
+            <span>Contact</span>
         </a>
 
         <div class="mobile-menu-divider"></div>
 
+        <a href="appointments.html">
+            <i class="fa-regular fa-calendar-check"></i>
+            <span>My Appointments</span>
+        </a>
+        <a href="history.html" aria-current="page">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+            <span>Booking History</span>
+        </a>
+        <a href="profile.html">
+            <i class="fa-regular fa-user"></i>
+            <span>Update Profile</span>
+        </a>
         <a href="#" id="mobileLogoutButton">
             <i class="fa-solid fa-right-from-bracket"></i>
             <span>Logout</span>
@@ -1090,7 +1232,7 @@
 .account-menu .logout-btn {
     background: #000000 !important;
     color: #D0D0D0 !important;
-    border: 1px solid rgba(212,175,55,.14) !important;
+    border: 0 !important;
 }
 
 .account-menu a i,

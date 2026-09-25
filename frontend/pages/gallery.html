@@ -1817,6 +1817,86 @@
     }
 }
 
+
+/* =========================================================
+   MOBILE CUSTOMER ITEMS + LOGOUT = EXACT NORMAL TABS
+   Design only. Existing font sizes are preserved.
+========================================================= */
+@media (max-width: 767px) {
+    .about-mobile-links > a.customer-account-area,
+    .about-mobile-links > button.customer-account-area {
+        min-height: 53px !important;
+        width: 100% !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 13px !important;
+        padding: 0 5px !important;
+        margin: 0 !important;
+
+        border: 1px solid rgba(255,255,255,.035) !important;
+        border-radius: 15px !important;
+        border-bottom: 1px solid rgba(255,255,255,.035) !important;
+
+        background: linear-gradient(90deg,#111,#121210) !important;
+        box-shadow: 0 5px 16px rgba(0,0,0,.30) !important;
+
+        color: #d6d6d6 !important;
+        font: inherit !important;
+        font-size: 15px !important;
+        font-weight: 500 !important;
+        text-align: left !important;
+        text-decoration: none !important;
+        cursor: pointer !important;
+    }
+
+    .about-mobile-links > a.customer-account-area i,
+    .about-mobile-links > button.customer-account-area i {
+        width: 20px !important;
+        color: #D4AF37 !important;
+        text-align: center !important;
+        text-shadow: 0 0 7px rgba(212,175,55,.22) !important;
+    }
+
+    .about-mobile-links > a.customer-account-area:hover,
+    .about-mobile-links > button.customer-account-area:hover {
+        border-color: rgba(212,175,55,.38) !important;
+        background: linear-gradient(90deg,#15150f,#17170f) !important;
+        box-shadow: 0 6px 18px rgba(0,0,0,.35) !important;
+        color: #D4AF37 !important;
+    }
+
+    .about-mobile-links > button.customer-mobile-tab.customer-logout {
+        appearance: none !important;
+        -webkit-appearance: none !important;
+    }
+
+    .about-mobile-links > button.customer-mobile-tab.customer-logout span {
+        color: inherit !important;
+    }
+
+    .about-mobile-links > a.active,
+    .about-mobile-links > a[aria-current="page"] {
+        border-color: rgba(212,175,55,.65) !important;
+        background: linear-gradient(90deg,#181810,#1a1910) !important;
+        box-shadow: 0 5px 18px rgba(0,0,0,.35), 0 0 10px rgba(212,175,55,.08) !important;
+    }
+}
+
+/* Desktop dropdown Logout remains a normal dropdown item */
+.customer-account-dropdown .customer-logout {
+    border: 0 !important;
+    border-radius: 3px !important;
+    margin: 0 !important;
+    background: transparent !important;
+    color: #d0d0d0 !important;
+}
+
+.customer-account-dropdown .customer-logout:hover {
+    border-color: transparent !important;
+    background: rgba(212,175,55,.08) !important;
+    color: #D4AF37 !important;
+}
+
 </style>
 
     <link rel="icon" type="image/png" href="../assets/images/logo/beauty-salon-logo.png">
@@ -2017,7 +2097,7 @@
             </a>
 
 
-            <a href="gallery.html">
+            <a href="gallery.html" class="active" aria-current="page">
 
                 <i class="fa-regular fa-images"></i>
 
@@ -2053,9 +2133,10 @@
             </a>
             <button type="button"
                     id="mobileCustomerLogout"
-                    class="customer-account-area"
+                    class="customer-account-area customer-mobile-tab customer-logout"
                     style="display:none;">
-                <i class="fa-solid fa-right-from-bracket"></i><span>Logout</span>
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
             </button>
 
         </nav>
@@ -2331,6 +2412,8 @@
 
             menuButton.addEventListener("click", function () {
                 mobileMenu.classList.add("open");
+                mobileMenu.setAttribute("aria-hidden", "false");
+                menuButton.setAttribute("aria-expanded", "true");
                 document.body.style.overflow = "hidden";
             });
 
@@ -2340,6 +2423,8 @@
 
             mobileClose.addEventListener("click", function () {
                 mobileMenu.classList.remove("open");
+                mobileMenu.setAttribute("aria-hidden", "true");
+                menuButton.setAttribute("aria-expanded", "false");
                 document.body.style.overflow = "";
             });
 
@@ -2351,13 +2436,15 @@
         ============================== */
 
         var mobileLinks =
-            document.querySelectorAll(".mobile-menu .menu-link");
+            document.querySelectorAll(".about-mobile-links a, .about-mobile-links button");
 
         mobileLinks.forEach(function (link) {
 
             link.addEventListener("click", function () {
 
                 mobileMenu.classList.remove("open");
+                mobileMenu.setAttribute("aria-hidden", "true");
+                menuButton.setAttribute("aria-expanded", "false");
                 document.body.style.overflow = "";
 
             });
@@ -2992,9 +3079,10 @@ if (lightboxClose) {
             });
         }
 
-        const mobileLogin = document.getElementById("mobileCustomerLogin");
+        const mobileLogin =
+            document.querySelector(".about-mobile-links .customer-login-link");
         const mobileAccountItems =
-            document.querySelectorAll(".customer-account-area");
+            document.querySelectorAll(".about-mobile-links .customer-account-area");
 
         if (mobileLogin) {
             mobileLogin.style.display = loggedIn ? "none" : "flex";

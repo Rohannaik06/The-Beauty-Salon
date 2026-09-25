@@ -1484,6 +1484,73 @@
     outline:none;
 }
 
+/* =========================================================
+   MOBILE ACCOUNT MENU
+   Existing authentication/session logic is reused.
+========================================================= */
+.mobile-account-menu{
+    margin-top:2px;
+}
+.mobile-account-heading{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:4px 4px 10px;
+    color:#D4AF37;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:1.4px;
+    text-transform:uppercase;
+}
+.mobile-account-heading-icon{
+    width:28px;
+    height:28px;
+    display:grid;
+    place-items:center;
+    border:1px solid rgba(212,175,55,.28);
+    border-radius:9px;
+    background:rgba(212,175,55,.08);
+    color:#D4AF37;
+}
+.mobile-account-state{
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+}
+.mobile-account-state[hidden]{
+    display:none !important;
+}
+.mobile-account-link{
+    position:relative;
+}
+.mobile-account-link .mobile-account-arrow{
+    width:auto;
+    margin-left:auto;
+    color:#777;
+    font-size:11px;
+    transition:transform .2s ease,color .2s ease;
+}
+.mobile-account-link:hover .mobile-account-arrow,
+.mobile-account-link:focus-visible .mobile-account-arrow{
+    color:#D4AF37;
+    transform:translateX(2px);
+}
+.mobile-logout-link{
+    font-family:inherit;
+    text-align:left;
+    cursor:pointer;
+}
+.mobile-logout-link:hover,
+.mobile-logout-link:focus-visible{
+    color:#fff;
+    background:rgba(190,55,55,.12);
+    border-color:rgba(190,55,55,.24);
+}
+.mobile-logout-link:hover > i:first-child,
+.mobile-logout-link:focus-visible > i:first-child{
+    color:#ff7777;
+}
+
 .mobile-navigation-divider{
     height:1px;
     margin:12px 0 8px;
@@ -1790,19 +1857,49 @@ body.mobile-menu-open{
 
             <div class="mobile-navigation-divider"></div>
 
-            <a href="pages/admin-login.html"
-               class="mobile-nav-link"
-               id="mobileAdminLogin">
-                <i class="fa-solid fa-user-shield"></i>
-                <span>Admin Login</span>
-            </a>
+            <!-- ACCOUNT MENU: logged-out and logged-in states -->
+            <div class="mobile-account-menu" id="mobileAccountMenu">
+                <div class="mobile-account-heading">
+                    <span class="mobile-account-heading-icon"><i class="fa-regular fa-user"></i></span>
+                    <span>Account</span>
+                </div>
 
-            <a href="pages/login.html"
-               class="mobile-nav-link"
-               id="mobileCustomerAccount">
-                <i class="fa-solid fa-right-to-bracket"></i>
-                <span id="mobileCustomerAccountText">Customer Login</span>
-            </a>
+                <div class="mobile-account-state" id="mobileLoggedOutAccount">
+                    <a href="pages/admin-login.html" class="mobile-nav-link mobile-account-link" id="mobileAdminLogin">
+                        <i class="fa-solid fa-user-shield"></i>
+                        <span>Admin Login</span>
+                        <i class="fa-solid fa-arrow-right mobile-account-arrow"></i>
+                    </a>
+                    <a href="pages/login.html" class="mobile-nav-link mobile-account-link" id="mobileCustomerAccount">
+                        <i class="fa-solid fa-right-to-bracket"></i>
+                        <span id="mobileCustomerAccountText">Customer Login</span>
+                        <i class="fa-solid fa-arrow-right mobile-account-arrow"></i>
+                    </a>
+                </div>
+
+                <div class="mobile-account-state" id="mobileLoggedInAccount" hidden>
+                    <a href="pages/appointments.html" class="mobile-nav-link mobile-account-link">
+                        <i class="fa-regular fa-calendar-check"></i>
+                        <span>My Appointments</span>
+                        <i class="fa-solid fa-arrow-right mobile-account-arrow"></i>
+                    </a>
+                    <a href="pages/history.html" class="mobile-nav-link mobile-account-link">
+                        <i class="fa-solid fa-clock-rotate-left"></i>
+                        <span>Booking History</span>
+                        <i class="fa-solid fa-arrow-right mobile-account-arrow"></i>
+                    </a>
+                    <a href="pages/profile.html" class="mobile-nav-link mobile-account-link">
+                        <i class="fa-regular fa-id-card"></i>
+                        <span>Update Profile</span>
+                        <i class="fa-solid fa-arrow-right mobile-account-arrow"></i>
+                    </a>
+                    <button type="button" class="mobile-nav-link mobile-account-link mobile-logout-link" id="mobileCustomerLogoutButton">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        <span>Logout</span>
+                        <i class="fa-solid fa-arrow-right mobile-account-arrow"></i>
+                    </button>
+                </div>
+            </div>
 
         </nav>
 
@@ -3339,6 +3436,9 @@ body.mobile-menu-open{
             const logoutButton = document.getElementById("customerLogoutButton");
             const mobileAccount = document.getElementById("mobileCustomerAccount");
             const mobileAccountText = document.getElementById("mobileCustomerAccountText");
+            const mobileLoggedOutAccount = document.getElementById("mobileLoggedOutAccount");
+            const mobileLoggedInAccount = document.getElementById("mobileLoggedInAccount");
+            const mobileCustomerLogoutButton = document.getElementById("mobileCustomerLogoutButton");
             const adminLoginButton = document.getElementById("adminLoginButton");
             const mobileAdminLogin = document.getElementById("mobileAdminLogin");
 
@@ -3380,6 +3480,9 @@ body.mobile-menu-open{
                     }
                 });
 
+                if (mobileLoggedOutAccount) mobileLoggedOutAccount.hidden = true;
+                if (mobileLoggedInAccount) mobileLoggedInAccount.hidden = false;
+
                 mobileAccount.href = "pages/profile.html";
                 mobileAccountText.textContent = "My Account";
                 mobileAccount.querySelector("i").className = "fa-regular fa-user";
@@ -3392,12 +3495,25 @@ body.mobile-menu-open{
                 accountButton.removeAttribute("aria-expanded");
                 accountChevron.style.display = "none";
                 accountDropdown.style.display = "none";
+                if (mobileLoggedOutAccount) mobileLoggedOutAccount.hidden = false;
+                if (mobileLoggedInAccount) mobileLoggedInAccount.hidden = true;
+
                 mobileAccount.href = "pages/login.html";
                 mobileAccountText.textContent = "Customer Login";
             }
 
             if (logoutButton) {
                 logoutButton.addEventListener("click", function () {
+                    localStorage.removeItem("salon_customer_session");
+                    sessionStorage.removeItem("salon_customer_session");
+                    localStorage.removeItem("salon_customer");
+                    sessionStorage.removeItem("salon_customer");
+                    window.location.href = "index.html";
+                });
+            }
+
+            if (mobileCustomerLogoutButton) {
+                mobileCustomerLogoutButton.addEventListener("click", function () {
                     localStorage.removeItem("salon_customer_session");
                     sessionStorage.removeItem("salon_customer_session");
                     localStorage.removeItem("salon_customer");

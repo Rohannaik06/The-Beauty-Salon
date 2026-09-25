@@ -222,10 +222,8 @@
         }
 
         /* =========================================================
-           ACCOUNT / ADMIN HEADER ACTIONS
         ========================================================== */
 
-        .about-admin-btn,
         .about-login-btn,
         .about-account-wrap {
             min-height: 40px;
@@ -233,7 +231,6 @@
             align-items: center;
         }
 
-        .about-admin-btn,
         .about-login-btn {
             justify-content: center;
             gap: 7px;
@@ -243,15 +240,12 @@
             font-weight: 700;
             white-space: nowrap;
             transition: all .25s ease;
-        }
-
-        .about-admin-btn {
             color: #D4AF37;
             border: 1px solid rgba(212, 175, 55, .30);
             background: rgba(212, 175, 55, .03);
         }
 
-        .about-admin-btn:hover {
+        .about-login-btn:hover {
             border-color: #D4AF37;
             background: rgba(212, 175, 55, .08);
         }
@@ -1893,7 +1887,20 @@
             }
         }
 
-    </style>
+    
+/* INDEX PAGE HEADER MATCH - ABOUT PAGE */
+.site-header{position:fixed;top:0;left:0;width:100%;z-index:10000;background:rgba(0,0,0,.92);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid rgba(212,175,55,.12)}
+.header-container{width:min(1280px,calc(100% - 40px));min-height:78px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.site-brand{display:inline-flex;align-items:center;gap:11px;flex-shrink:0;text-decoration:none}.brand-logo{width:44px;height:44px;display:grid;place-items:center;border:1px solid #D4AF37;border-radius:50%;background:rgba(212,175,55,.05);overflow:hidden}.brand-logo img{width:100%;height:100%;object-fit:cover;border-radius:50%}.brand-name{display:flex;flex-direction:column;line-height:1}.brand-name strong{font-family:"Playfair Display",serif;font-size:18px;font-weight:600;color:#fff}.brand-name small{margin-top:5px;color:#D4AF37;font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase}
+.desktop-navigation{display:flex;align-items:center;gap:25px}.nav-link{position:relative;padding:29px 0;color:#cfcfcf;font-size:13px;font-weight:500;white-space:nowrap;text-decoration:none;transition:color .25s ease}.nav-link::after{content:"";position:absolute;left:0;bottom:20px;width:0;height:2px;background:#D4AF37;transition:width .25s ease}.nav-link:hover,.nav-link.active{color:#D4AF37}.nav-link:hover::after,.nav-link.active::after{width:100%}
+.header-actions{position:relative;display:flex;align-items:center;gap:10px}.header-login{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:42px;padding:0 16px;border:1px solid rgba(212,175,55,.42);border-radius:10px;text-decoration:none;font-size:13px;font-weight:700;letter-spacing:.2px;transition:all .25s ease;box-sizing:border-box;color:#fff;background:#111;cursor:pointer}.header-login:hover{transform:translateY(-1px);border-color:#D4AF37;box-shadow:0 8px 24px rgba(212,175,55,.12)}
+.customer-account-wrap{position:relative;display:inline-flex;align-items:center}.customer-account-button{font:inherit}.customer-account-chevron{font-size:9px;margin-left:2px;transition:transform .2s ease}.customer-account-dropdown{position:absolute;top:calc(100% + 10px);right:0;width:245px;padding:10px;background:#111;border:1px solid rgba(212,175,55,.28);border-radius:14px;box-shadow:0 18px 45px rgba(0,0,0,.5);z-index:9999;opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .2s ease,transform .2s ease,visibility .2s ease}.customer-account-dropdown.open{opacity:1;visibility:visible;transform:translateY(0)}.customer-account-heading{display:flex;align-items:center;gap:10px;padding:10px 10px 12px;color:#D4AF37;font-size:13px;font-weight:700;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:6px}.customer-account-avatar{width:32px;height:32px;display:grid;place-items:center;border-radius:50%;color:#111;background:#D4AF37}.customer-account-dropdown a,.customer-account-dropdown button{width:100%;display:flex;align-items:center;gap:11px;padding:11px 10px;border:0;border-radius:9px;background:transparent;color:#ddd;text-decoration:none;font:inherit;font-size:13px;text-align:left;cursor:pointer;box-sizing:border-box}.customer-account-dropdown a:hover,.customer-account-dropdown button:hover{color:#D4AF37;background:rgba(212,175,55,.08)}.customer-account-dropdown i{width:18px;text-align:center;color:#D4AF37}.customer-account-divider{height:1px;margin:6px 4px;background:rgba(255,255,255,.08)}.customer-account-dropdown button:hover{color:#fff;background:rgba(190,55,55,.16)}.customer-account-dropdown button:hover i{color:#ff7777}
+.mobile-menu-button{display:none;width:46px;height:46px;min-width:46px;align-items:center;justify-content:center;border:1px solid rgba(212,175,55,.38);border-radius:12px;background:rgba(17,17,17,.96);color:#D4AF37;font-size:19px;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.25);transition:all .25s ease;z-index:10002}.mobile-menu-button:hover{border-color:#D4AF37;background:#181818;transform:translateY(-1px)}
+.mobile-navigation{position:fixed;inset:0;z-index:10001;display:flex;flex-direction:column;background:radial-gradient(circle at 85% 10%,rgba(212,175,55,.10),transparent 30%),linear-gradient(180deg,#0b0b0b 0%,#050505 100%);opacity:0;visibility:hidden;pointer-events:none;transform:translateX(100%);transition:transform .32s cubic-bezier(.22,.61,.36,1),opacity .25s ease,visibility .25s ease;overflow-y:auto;-webkit-overflow-scrolling:touch}.mobile-navigation.open{opacity:1;visibility:visible;pointer-events:auto;transform:translateX(0)}.mobile-navigation-header{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:max(18px,env(safe-area-inset-top)) 20px 18px;border-bottom:1px solid rgba(255,255,255,.08);flex:0 0 auto}.mobile-navigation-header .site-brand{gap:10px}.mobile-navigation-header .brand-name strong{color:#fff;font-size:15px}.mobile-navigation-header .brand-name small{margin-top:4px;color:#D4AF37;font-size:11px;letter-spacing:1.6px}.mobile-close-button{width:44px;height:44px;min-width:44px;display:grid;place-items:center;border:1px solid rgba(212,175,55,.42);border-radius:12px;background:#111;color:#D4AF37;font-size:20px;cursor:pointer;transition:all .25s ease}.mobile-close-button:hover{background:#D4AF37;color:#111;transform:rotate(90deg)}.mobile-navigation-links{display:flex;flex-direction:column;gap:7px;padding:24px 20px 30px}.mobile-nav-link{display:flex;align-items:center;gap:14px;width:100%;min-height:52px;padding:0 15px;box-sizing:border-box;border:1px solid transparent;border-radius:12px;color:#ddd;background:rgba(255,255,255,.025);text-decoration:none;font-size:14px;font-weight:600;letter-spacing:.15px;transition:all .22s ease}.mobile-nav-link i{width:22px;text-align:center;color:#D4AF37;font-size:16px}.mobile-nav-link:hover,.mobile-nav-link:focus-visible,.mobile-nav-link.active{color:#fff;background:rgba(212,175,55,.09);border-color:rgba(212,175,55,.28);transform:translateX(3px);outline:none}.mobile-navigation-divider{height:1px;margin:12px 0 8px;background:rgba(255,255,255,.10)}
+@media(max-width:767px){.header-actions,.desktop-navigation{display:none}.header-container{min-height:68px;width:calc(100% - 28px)}.site-brand .brand-name strong{font-size:14px}.site-brand .brand-name small{font-size:10px}.image-brand-logo{width:42px;height:42px}.mobile-menu-button{display:inline-flex!important}.mobile-navigation{display:flex!important}.mobile-navigation-links>div#aboutMobileAccountLinks{display:block}.mobile-navigation-links>div#aboutMobileAccountLinks[style*="display:none"]{display:none}.about-page{padding-top:0}}
+@media(min-width:768px){.mobile-navigation{display:none!important}}
+@media(max-width:380px){.mobile-navigation-header{padding-left:14px;padding-right:14px}.mobile-navigation-links{padding-left:14px;padding-right:14px}.mobile-nav-link{min-height:50px;font-size:13px}}
+</style>
     <link rel="icon" type="image/png" href="../assets/images/logo/beauty-salon-logo.png">
 
 
@@ -1909,134 +1916,59 @@
          PROFESSIONAL HEADER
     ========================================================== -->
 
-    <header class="about-site-header">
+    <header class="site-header" id="siteHeader">
 
-        <div class="about-header-container">
+        <div class="header-container">
 
-
-            <!-- Logo -->
-
-            <a href="../index.html"
-               class="about-brand"
-               aria-label="The Beauty Salon Home">
-
-                <span class="about-brand-logo">
-                    <img src="../assets/images/logo/beauty-salon-logo.png" alt="The Beauty Salon Logo">
+            <a href="../index.html" class="site-brand" aria-label="The Beauty Salon Home">
+                <span class="brand-logo image-brand-logo">
+                    <img src="../assets/images/logo/beauty-salon-logo.png" alt="The Beauty Salon logo">
                 </span>
-
-                <span class="about-brand-name">
-
+                <span class="brand-name">
                     <strong>The Beauty</strong>
-
                     <small>Salon</small>
-
                 </span>
-
             </a>
 
-
-            <!-- Desktop Navigation -->
-
-            <nav class="about-desktop-nav"
-                 aria-label="Primary navigation">
-
-                <a href="../index.html">
-                    Home
-                </a>
-
-                <a href="about.html"
-                   class="active"
-                   aria-current="page">
-                    About
-                </a>
-
-                <a href="services.html">
-                    Services
-                </a>
-
-                <a href="branches.html">
-                    Branches
-                </a>
-
-                <a href="gallery.html">
-                    Gallery
-                </a>
-
-                <a href="contact.html">
-                    Contact
-                </a>
-
+            <nav class="desktop-navigation" aria-label="Primary navigation">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="about.html" class="nav-link active" aria-current="page">About</a>
+                <a href="services.html" class="nav-link">Services</a>
+                <a href="branches.html" class="nav-link">Branches</a>
+                <a href="gallery.html" class="nav-link">Gallery</a>
+                <a href="contact.html" class="nav-link">Contact</a>
             </nav>
 
-
-            <!-- Header Actions -->
-
-            <div class="about-header-actions">
-
-                <a href="login.html"
-                   class="about-login-btn"
-                   id="aboutCustomerLoginBtn">
+            <div class="header-actions">
+                <a href="login.html" class="header-login" id="aboutCustomerLoginBtn">
                     <i class="fa-regular fa-user"></i>
                     <span>Customer Login</span>
                 </a>
 
-                <div class="about-account-wrap"
-                     id="aboutAccountWrap"
-                     style="display:none;">
-
-                    <button type="button"
-                            class="about-account-btn"
-                            id="aboutAccountBtn"
-                            aria-expanded="false">
+                <div class="customer-account-wrap" id="aboutAccountWrap" style="display:none;">
+                    <button type="button" class="header-login customer-account-button" id="aboutAccountBtn" aria-expanded="false">
                         <i class="fa-regular fa-user"></i>
                         <span id="aboutAccountName">My Account</span>
-                        <i class="fa-solid fa-chevron-down"></i>
+                        <i class="fa-solid fa-chevron-down customer-account-chevron" aria-hidden="true"></i>
                     </button>
-
-                    <div class="about-account-dropdown"
-                         id="aboutAccountDropdown">
-
-                        <a href="appointments.html">
-                            <i class="fa-regular fa-calendar-check"></i>
-                            <span>My Appointments</span>
-                        </a>
-
-                        <a href="history.html">
-                            <i class="fa-solid fa-clock-rotate-left"></i>
-                            <span>Booking History</span>
-                        </a>
-
-                        <a href="profile.html">
-                            <i class="fa-regular fa-user"></i>
-                            <span>Update Profile</span>
-                        </a>
-
-                        <button type="button" id="aboutLogoutBtn">
-                            <i class="fa-solid fa-right-from-bracket"></i>
-                            <span>Logout</span>
-                        </button>
-
+                    <div class="customer-account-dropdown" id="aboutAccountDropdown" aria-hidden="true">
+                        <div class="customer-account-heading">
+                            <span class="customer-account-avatar"><i class="fa-regular fa-user"></i></span>
+                            <span>My Account</span>
+                        </div>
+                        <a href="appointments.html"><i class="fa-regular fa-calendar-check"></i><span>My Appointments</span></a>
+                        <a href="history.html"><i class="fa-solid fa-clock-rotate-left"></i><span>Booking History</span></a>
+                        <a href="profile.html"><i class="fa-regular fa-id-card"></i><span>Update Profile</span></a>
+                        <div class="customer-account-divider"></div>
+                        <button type="button" id="aboutLogoutBtn"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></button>
                     </div>
                 </div>
-
             </div>
 
-
-            <!-- Mobile Menu -->
-
-            <button class="about-mobile-menu-btn"
-                    id="aboutMenuBtn"
-                    type="button"
-                    aria-label="Open menu"
-                    aria-controls="aboutMobileMenu"
-                    aria-expanded="false">
-
+            <button class="mobile-menu-button" id="aboutMenuBtn" type="button" aria-label="Open navigation menu" aria-controls="aboutMobileMenu" aria-expanded="false">
                 <i class="fa-solid fa-bars"></i>
-
             </button>
-
         </div>
-
     </header>
 
 
@@ -2045,135 +1977,35 @@
          MOBILE MENU
     ========================================================== -->
 
-    <div class="about-mobile-menu"
-         id="aboutMobileMenu"
-         aria-hidden="true">
-
-
-        <div class="about-mobile-menu-header">
-
-
-            <a href="../index.html"
-               class="about-brand">
-
-                <span class="about-brand-logo">
-                    <img src="../assets/images/logo/beauty-salon-logo.png" alt="The Beauty Salon Logo">
+    <div class="mobile-navigation" id="aboutMobileMenu" aria-hidden="true">
+        <div class="mobile-navigation-header">
+            <a href="../index.html" class="site-brand">
+                <span class="brand-logo image-brand-logo">
+                    <img src="../assets/images/logo/beauty-salon-logo.png" alt="The Beauty Salon logo">
                 </span>
-
-                <span class="about-brand-name">
-
-                    <strong>The Beauty</strong>
-
-                    <small>Salon</small>
-
-                </span>
-
+                <span class="brand-name"><strong>The Beauty</strong><small>Salon</small></span>
             </a>
-
-
-            <button class="about-mobile-close"
-                    id="aboutCloseMenuBtn"
-                    type="button"
-                    aria-label="Close menu">
-
+            <button class="mobile-close-button" id="aboutCloseMenuBtn" type="button" aria-label="Close navigation menu">
                 <i class="fa-solid fa-xmark"></i>
-
             </button>
-
         </div>
-
-
-        <nav class="about-mobile-links"
-             aria-label="Mobile navigation">
-
-
-            <a href="../index.html">
-
-                <i class="fa-solid fa-house"></i>
-
-                <span>Home</span>
-
-            </a>
-
-
-            <a href="about.html"
-               class="active">
-
-                <i class="fa-regular fa-circle-user"></i>
-
-                <span>About</span>
-
-            </a>
-
-
-            <a href="services.html">
-
-                <i class="fa-solid fa-scissors"></i>
-
-                <span>Services</span>
-
-            </a>
-
-
-            <a href="branches.html">
-
-                <i class="fa-solid fa-location-dot"></i>
-
-                <span>Branches</span>
-
-            </a>
-
-
-            <a href="gallery.html">
-
-                <i class="fa-regular fa-images"></i>
-
-                <span>Gallery</span>
-
-            </a>
-
-
-            <a href="contact.html">
-
-                <i class="fa-regular fa-envelope"></i>
-
-                <span>Contact</span>
-
-            </a>
-
-
-            <div class="about-mobile-divider"></div>
-
-            <a href="login.html" id="aboutMobileCustomerLogin">
-
-                <i class="fa-solid fa-right-to-bracket"></i>
-
-                <span>Customer Login</span>
-
-            </a>
-
+        <nav class="mobile-navigation-links" aria-label="Mobile navigation">
+            <a href="../index.html" class="mobile-nav-link"><i class="fa-solid fa-house"></i><span>Home</span></a>
+            <a href="about.html" class="mobile-nav-link active"><i class="fa-regular fa-circle-user"></i><span>About</span></a>
+            <a href="services.html" class="mobile-nav-link"><i class="fa-solid fa-scissors"></i><span>Services</span></a>
+            <a href="branches.html" class="mobile-nav-link"><i class="fa-solid fa-location-dot"></i><span>Branches</span></a>
+            <a href="gallery.html" class="mobile-nav-link"><i class="fa-regular fa-images"></i><span>Gallery</span></a>
+            <a href="contact.html" class="mobile-nav-link"><i class="fa-regular fa-envelope"></i><span>Contact</span></a>
+            <div class="mobile-navigation-divider"></div>
+            <a href="login.html" class="mobile-nav-link" id="aboutMobileCustomerLogin"><i class="fa-solid fa-right-to-bracket"></i><span>Customer Login</span></a>
             <div id="aboutMobileAccountLinks" style="display:none;">
-                <a href="appointments.html">
-                    <i class="fa-regular fa-calendar-check"></i>
-                    <span>My Appointments</span>
-                </a>
-                <a href="booking-history.html">
-                    <i class="fa-solid fa-clock-rotate-left"></i>
-                    <span>Booking History</span>
-                </a>
-                <a href="profile.html">
-                    <i class="fa-regular fa-user"></i>
-                    <span>Update Profile</span>
-                </a>
-                <a href="#" id="aboutMobileLogout">
-                    <i class="fa-solid fa-right-from-bracket"></i>
-                    <span>Logout</span>
-                </a>
+                <a href="appointments.html" class="mobile-nav-link"><i class="fa-regular fa-calendar-check"></i><span>My Appointments</span></a>
+                <a href="history.html" class="mobile-nav-link"><i class="fa-solid fa-clock-rotate-left"></i><span>Booking History</span></a>
+                <a href="profile.html" class="mobile-nav-link"><i class="fa-regular fa-id-card"></i><span>Update Profile</span></a>
+                <a href="#" class="mobile-nav-link" id="aboutMobileLogout"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></a>
             </div>
-
         </nav>
-
-    </div>
+    </div></div>
 
 
 
