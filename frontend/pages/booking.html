@@ -2474,11 +2474,6 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-    branch.addEventListener("change", function () {
-        clearMessage();
-        loadStaff(this.value);
-    });
-
         setSelectLoading(staff, "Loading staff...");
 
         try {
@@ -2503,6 +2498,11 @@ document.addEventListener("DOMContentLoaded", function () {
             showMessage("Unable to load staff for the selected branch.", "error");
         }
     }
+
+    branch.addEventListener("change", function () {
+        clearMessage();
+        loadStaff(this.value);
+    });
 
     let offerIndex = 0;
     let offerTimer = null;
