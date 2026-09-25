@@ -127,17 +127,25 @@ const getAllServices = async (req, res) => {
         const [rows] =
             await pool.promise().query(`
                 SELECT
-                    id,
-                    name,
-                    category,
-                    price,
-                    duration,
-                    description,
-                    service_image,
-                    is_active,
-                    created_at
-                FROM services
-                ORDER BY id ASC
+                    s.id,
+                    s.name,
+                    s.category,
+                    s.branch_id,
+                    s.staff_id,
+                    s.price,
+                    s.duration,
+                    s.description,
+                    s.service_image,
+                    s.is_active,
+                    s.created_at,
+                    b.name AS branch_name,
+                    st.name AS staff_name
+                FROM services s
+                LEFT JOIN branches b
+                    ON s.branch_id = b.id
+                LEFT JOIN staff st
+                    ON s.staff_id = st.id
+                ORDER BY s.id ASC
             `);
 
         res.json({
@@ -179,17 +187,25 @@ const getServiceById = async (req, res) => {
         const [rows] =
             await pool.promise().query(`
                 SELECT
-                    id,
-                    name,
-                    category,
-                    price,
-                    duration,
-                    description,
-                    service_image,
-                    is_active,
-                    created_at
-                FROM services
-                WHERE id = ?
+                    s.id,
+                    s.name,
+                    s.category,
+                    s.branch_id,
+                    s.staff_id,
+                    s.price,
+                    s.duration,
+                    s.description,
+                    s.service_image,
+                    s.is_active,
+                    s.created_at,
+                    b.name AS branch_name,
+                    st.name AS staff_name
+                FROM services s
+                LEFT JOIN branches b
+                    ON s.branch_id = b.id
+                LEFT JOIN staff st
+                    ON s.staff_id = st.id
+                WHERE s.id = ?
                 LIMIT 1
             `, [
                 req.params.id
@@ -247,7 +263,9 @@ const createService = async (req, res) => {
             description,
             price,
             duration,
-            is_active
+            is_active,
+            branch_id,
+            staff_id
         } = req.body;
 
 
@@ -279,6 +297,36 @@ const createService = async (req, res) => {
         }
 
 
+        // =================================================
+        // VALIDATE BRANCH AND STAFF
+        // =================================================
+
+        const branchId = Number(branch_id);
+        const staffId = Number(staff_id);
+
+        if (
+            !Number.isInteger(branchId) ||
+            branchId <= 0 ||
+            !Number.isInteger(staffId) ||
+            staffId <= 0
+        ) {
+
+            if (req.file) {
+                deleteServiceImage(
+                    req.file.filename
+                );
+            }
+
+            return res.status(400).json({
+
+                success: false,
+                message: "Branch and staff are required."
+
+            });
+
+        }
+
+
         const categoryValue =
             String(category)
                 .toLowerCase()
@@ -291,24 +339,34 @@ const createService = async (req, res) => {
                 : null;
 
 
+        // =================================================
+        // INSERT SERVICE
+        // =================================================
+
         const [result] =
             await pool.promise().query(`
                 INSERT INTO services
                 (
                     name,
                     category,
+                    branch_id,
+                    staff_id,
                     price,
                     duration,
                     description,
                     service_image,
                     is_active
                 )
-                VALUES (?, ?, ?, ?, ?, ?, ?)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
             `, [
 
                 String(name).trim(),
 
                 categoryValue,
+
+                branchId,
+
+                staffId,
 
                 Number(price),
 
@@ -390,7 +448,9 @@ const updateService = async (req, res) => {
             description,
             price,
             duration,
-            is_active
+            is_active,
+            branch_id,
+            staff_id
         } = req.body;
 
 
@@ -424,7 +484,40 @@ const updateService = async (req, res) => {
         }
 
 
-        // Get old service
+        // =================================================
+        // VALIDATE BRANCH AND STAFF
+        // =================================================
+
+        const branchId = Number(branch_id);
+        const staffId = Number(staff_id);
+
+        if (
+            !Number.isInteger(branchId) ||
+            branchId <= 0 ||
+            !Number.isInteger(staffId) ||
+            staffId <= 0
+        ) {
+
+            if (req.file) {
+                deleteServiceImage(
+                    req.file.filename
+                );
+            }
+
+            return res.status(400).json({
+
+                success: false,
+                message: "Branch and staff are required."
+
+            });
+
+        }
+
+
+        // =================================================
+        // GET OLD SERVICE
+        // =================================================
+
         const [existingRows] =
             await pool.promise().query(
                 `
@@ -465,8 +558,10 @@ const updateService = async (req, res) => {
             null;
 
 
-        // If new image uploaded use it
-        // otherwise keep old image
+        // =================================================
+        // IMAGE HANDLING
+        // =================================================
+
         const newImage =
             req.file
                 ? req.file.filename
@@ -486,12 +581,18 @@ const updateService = async (req, res) => {
                 : 1;
 
 
+        // =================================================
+        // UPDATE SERVICE
+        // =================================================
+
         const [result] =
             await pool.promise().query(`
                 UPDATE services
                 SET
                     name = ?,
                     category = ?,
+                    branch_id = ?,
+                    staff_id = ?,
                     price = ?,
                     duration = ?,
                     description = ?,
@@ -503,6 +604,10 @@ const updateService = async (req, res) => {
                 String(name).trim(),
 
                 categoryValue,
+
+                branchId,
+
+                staffId,
 
                 Number(price),
 
@@ -541,8 +646,10 @@ const updateService = async (req, res) => {
         }
 
 
-        // Delete old image only when
-        // a NEW image was uploaded
+        // =================================================
+        // DELETE OLD IMAGE
+        // =================================================
+
         if (
             req.file &&
             oldImage &&
