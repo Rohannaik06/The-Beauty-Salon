@@ -1615,6 +1615,245 @@ body.mobile-menu-open{
     }
 }
 
+    
+        /* =========================================================
+           CUSTOMER FEEDBACK / REVIEWS
+           Database driven - maximum 4 best/latest reviews
+           Existing fonts and overall homepage design preserved
+        ========================================================== */
+        .feedback-section {
+            padding: 72px 0;
+            background:
+                radial-gradient(circle at 50% 0%, rgba(212,175,55,.08), transparent 42%),
+                #080808;
+        }
+
+        .feedback-section .content-container {
+            width: min(100% - 32px, 1180px);
+            margin-inline: auto;
+        }
+
+        .feedback-section-heading {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 34px;
+        }
+
+        .feedback-section-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: #D4AF37;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2.2px;
+            text-transform: uppercase;
+        }
+
+        .feedback-section-eyebrow::before,
+        .feedback-section-eyebrow::after {
+            content: "";
+            width: 30px;
+            height: 1px;
+            background: rgba(212,175,55,.55);
+        }
+
+        .feedback-section-title {
+            margin: 10px 0 9px;
+            color: #fff;
+            font-family: "Playfair Display", serif;
+            font-size: clamp(28px, 4vw, 42px);
+            font-weight: 600;
+            line-height: 1.15;
+        }
+
+        .feedback-section-description {
+            margin: 0;
+            color: #999;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .feedback-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .feedback-card {
+            position: relative;
+            min-width: 0;
+            padding: 22px;
+            border: 1px solid rgba(212,175,55,.18);
+            border-radius: 15px;
+            background: linear-gradient(145deg, #121212 0%, #0c0c0c 100%);
+            box-shadow: 0 14px 34px rgba(0,0,0,.24);
+            overflow: hidden;
+        }
+
+        .feedback-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(212,175,55,.65), transparent);
+        }
+
+        .feedback-card-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .feedback-customer {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 0;
+        }
+
+        .feedback-avatar {
+            width: 38px;
+            height: 38px;
+            flex: 0 0 38px;
+            display: grid;
+            place-items: center;
+            border: 1px solid rgba(212,175,55,.28);
+            border-radius: 50%;
+            background: rgba(212,175,55,.08);
+            color: #D4AF37;
+            font-size: 14px;
+        }
+
+        .feedback-customer-name {
+            min-width: 0;
+            color: #fff;
+            font-size: 13px;
+            font-weight: 700;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .feedback-date {
+            margin-top: 3px;
+            color: #777;
+            font-size: 10px;
+        }
+
+        .feedback-rating {
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+            flex: 0 0 auto;
+        }
+
+        .feedback-rating i {
+            color: #D4AF37;
+            font-size: 11px;
+        }
+
+        .feedback-comment {
+            position: relative;
+            margin: 0;
+            color: #c7c7c7;
+            font-size: 13px;
+            line-height: 1.75;
+            overflow-wrap: anywhere;
+        }
+
+        .feedback-quote {
+            color: rgba(212,175,55,.55);
+            font-family: Georgia, serif;
+            font-size: 26px;
+            line-height: 0;
+            vertical-align: -5px;
+            margin-right: 3px;
+        }
+
+        .feedback-empty {
+            grid-column: 1 / -1;
+            padding: 34px 20px;
+            text-align: center;
+            border: 1px solid rgba(212,175,55,.14);
+            border-radius: 14px;
+            background: #101010;
+            color: #888;
+        }
+
+        .feedback-empty i {
+            display: block;
+            margin-bottom: 10px;
+            color: #D4AF37;
+            font-size: 25px;
+        }
+
+        .feedback-empty p {
+            margin: 0;
+            font-size: 13px;
+        }
+
+        .feedback-api-status {
+            grid-column: 1 / -1;
+            display: none;
+            padding: 25px 20px;
+            text-align: center;
+            color: #888;
+            font-size: 13px;
+        }
+
+        .feedback-api-status i {
+            color: #D4AF37;
+            margin-right: 7px;
+        }
+
+        @media (max-width: 1024px) {
+            .feedback-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 767px) {
+            .feedback-section {
+                padding: 50px 0;
+            }
+
+            .feedback-section .content-container {
+                width: min(100% - 24px, 620px);
+            }
+
+            .feedback-section-heading {
+                margin-bottom: 25px;
+            }
+
+            .feedback-section-description {
+                font-size: 13px;
+            }
+
+            .feedback-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .feedback-card {
+                padding: 19px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .feedback-section .content-container {
+                width: calc(100% - 18px);
+            }
+
+            .feedback-card {
+                padding: 17px;
+            }
+        }
+
     </style>
 </head>
 
@@ -3084,6 +3323,38 @@ body.mobile-menu-open{
              FINAL CTA
         ====================================================== -->
 
+
+        <!-- =========================================================
+             CUSTOMER REVIEWS / FEEDBACK
+             Loaded from /api/feedback/home
+        ========================================================== -->
+        <section class="feedback-section" id="customerReviews">
+            <div class="content-container">
+
+                <div class="feedback-section-heading">
+                    <div class="feedback-section-eyebrow">
+                        CUSTOMER EXPERIENCES
+                    </div>
+
+                    <h2 class="feedback-section-title">
+                        What Our Clients Say
+                    </h2>
+
+                    <p class="feedback-section-description">
+                        Real experiences from customers who visited The Beauty Salon.
+                    </p>
+                </div>
+
+                <div class="feedback-grid" id="homeFeedbackGrid">
+                    <div class="feedback-api-status" id="homeFeedbackLoading" style="display:block;">
+                        <i class="fa-solid fa-spinner fa-spin"></i>
+                        Loading customer reviews...
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
         <section class="cta-section">
 
 
@@ -4075,10 +4346,159 @@ body.mobile-menu-open{
                 }
             }
 
+
+            /* =====================================================
+               CUSTOMER FEEDBACK / REVIEWS DATABASE
+               GET /api/feedback/home
+               Maximum 4 best/latest reviews
+            ====================================================== */
+            async function loadHomeFeedback() {
+                const grid = document.getElementById("homeFeedbackGrid");
+                const loading = document.getElementById("homeFeedbackLoading");
+
+                if (!grid) return;
+
+                function formatFeedbackDate(value) {
+                    if (!value) return "";
+
+                    const date = new Date(value);
+
+                    if (Number.isNaN(date.getTime())) {
+                        return "";
+                    }
+
+                    return date.toLocaleDateString("en-IN", {
+                        day: "2-digit",
+                        month: "short",
+                        year: "numeric"
+                    });
+                }
+
+                function getInitial(name) {
+                    const text = String(name || "Customer").trim();
+                    return escapeHtml(text.charAt(0).toUpperCase() || "C");
+                }
+
+                function renderFeedback(feedback) {
+                    if (!feedback.length) {
+                        grid.innerHTML = `
+                            <div class="feedback-empty">
+                                <i class="fa-regular fa-star"></i>
+                                <p>Customer reviews will appear here after our first feedback submissions.</p>
+                            </div>
+                        `;
+                        return;
+                    }
+
+                    grid.innerHTML = feedback.slice(0, 4).map(function (item) {
+                        const rating = Math.max(
+                            1,
+                            Math.min(5, Number(item.rating) || 5)
+                        );
+
+                        const customerName =
+                            item.customer_name ||
+                            item.customerName ||
+                            "Our Customer";
+
+                        const comment =
+                            String(item.comment || "").trim();
+
+                        const stars = Array.from(
+                            { length: 5 },
+                            function (_, index) {
+                                return `
+                                    <i class="fa-${index < rating ? "solid" : "regular"} fa-star"></i>
+                                `;
+                            }
+                        ).join("");
+
+                        return `
+                            <article class="feedback-card">
+                                <div class="feedback-card-top">
+                                    <div class="feedback-customer">
+                                        <span class="feedback-avatar">
+                                            ${getInitial(customerName)}
+                                        </span>
+
+                                        <div>
+                                            <div class="feedback-customer-name">
+                                                ${escapeHtml(customerName)}
+                                            </div>
+
+                                            <div class="feedback-date">
+                                                ${escapeHtml(formatFeedbackDate(item.created_at || item.createdAt))}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="feedback-rating"
+                                         aria-label="${rating} out of 5 stars">
+                                        ${stars}
+                                    </div>
+                                </div>
+
+                                <p class="feedback-comment">
+                                    <span class="feedback-quote">“</span>${escapeHtml(comment)}
+                                </p>
+                            </article>
+                        `;
+                    }).join("");
+                }
+
+                try {
+                    const response = await fetch(
+                        `${API_BASE}/feedback/home`,
+                        {
+                            method: "GET",
+                            cache: "no-store",
+                            headers: {
+                                "Accept": "application/json"
+                            }
+                        }
+                    );
+
+                    if (!response.ok) {
+                        throw new Error(
+                            "Feedback API returned HTTP " + response.status
+                        );
+                    }
+
+                    const payload = await response.json();
+                    const feedback = apiRows(payload)
+                        .filter(function (item) {
+                            return (
+                                item &&
+                                String(item.comment || "").trim() &&
+                                Number(item.rating) >= 1 &&
+                                Number(item.rating) <= 5
+                            );
+                        })
+                        .slice(0, 4);
+
+                    renderFeedback(feedback);
+
+                } catch (error) {
+                    console.error("FEEDBACK API ERROR:", error);
+
+                    grid.innerHTML = `
+                        <div class="feedback-empty">
+                            <i class="fa-regular fa-star"></i>
+                            <p>Customer reviews are currently unavailable.</p>
+                        </div>
+                    `;
+                } finally {
+                    if (loading && loading.parentNode) {
+                        loading.remove();
+                    }
+                }
+            }
+
             loadTodayOffer();
             loadHomeServices();
             loadHomeBranches();
             loadHomeGallery();
+            loadHomeFeedback();
 
         });
     </script>

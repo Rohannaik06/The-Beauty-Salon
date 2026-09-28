@@ -16,6 +16,7 @@ const offerRoutes = require("./routes/offerRoutes");
 const adminAuthRoutes = require("./routes/adminAuthRoutes");
 const adminSettingsRoutes = require("./routes/adminSettingsRoutes");
 const dashboardRoutes = require("./routes/dashboardRoutes");
+const feedbackRoutes = require("./routes/feedbackRoutes");
 
 const app = express();
 
@@ -242,6 +243,13 @@ app.use(
 app.use(
     "/api/dashboard",
     dashboardRoutes
+);
+
+// Feedback
+
+app.use(
+    "/api/feedback",
+    feedbackRoutes
 );
 
 
