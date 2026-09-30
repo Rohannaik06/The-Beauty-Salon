@@ -1854,7 +1854,522 @@ body.mobile-menu-open{
             }
         }
 
-    </style>
+    
+
+/* =========================================================
+   FINAL PROFESSIONAL HOMEPAGE POLISH
+   Visual-only CSS. Existing HTML, API and JavaScript logic
+   remain unchanged.
+========================================================= */
+
+:root{
+    --salon-gold:#D4AF37;
+    --salon-bg:#080808;
+    --salon-surface:#111111;
+    --salon-text:#F3F3F3;
+    --salon-muted:#B8B8B8;
+    --salon-border:rgba(212,175,55,.20);
+}
+
+/* Cleaner, consistent visual hierarchy */
+body{
+    background:var(--salon-bg);
+    color:var(--salon-text);
+}
+
+.home-section{
+    position:relative;
+    padding-block:64px;
+}
+
+.section-title,
+.feedback-section-title,
+.today-offer-title,
+.cta-section h2{
+    color:var(--salon-text);
+}
+
+.section-text,
+.about-content .section-text,
+.services-section .service-card p,
+.branches-section .branch-card p,
+.why-section .why-card p,
+.feedback-comment,
+.feedback-section-description{
+    color:var(--salon-muted) !important;
+}
+
+/* Shorter visible copy without changing the underlying content/logic */
+.about-content .section-text{
+    display:-webkit-box;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:2;
+    line-clamp:2;
+    overflow:hidden;
+    line-height:1.65;
+}
+
+.about-content .section-text + .section-text{
+    margin-top:10px;
+}
+
+/* Consistent transitions */
+.service-card,
+.branch-card,
+.why-card,
+.feedback-card,
+.gallery-tile,
+.today-offer-card,
+.about-feature,
+.button,
+.service-book-link,
+.branch-button,
+.text-arrow-link,
+.mobile-section-button,
+.footer-socials a{
+    transition:
+        transform .28s ease,
+        border-color .28s ease,
+        background-color .28s ease,
+        box-shadow .28s ease,
+        color .28s ease,
+        opacity .28s ease;
+}
+
+.service-card:hover,
+.branch-card:hover,
+.why-card:hover,
+.feedback-card:hover{
+    transform:translateY(-4px);
+    border-color:rgba(212,175,55,.42);
+    box-shadow:0 16px 38px rgba(0,0,0,.28);
+}
+
+.gallery-tile:hover{
+    transform:translateY(-3px);
+}
+
+.about-feature:hover{
+    transform:translateX(3px);
+}
+
+.button:hover,
+.service-book-link:hover,
+.branch-button:hover,
+.text-arrow-link:hover,
+.mobile-section-button:hover{
+    transform:translateY(-2px);
+}
+
+/* =========================================================
+   HORIZONTAL CARD SLIDERS
+   Keeps repeated content compact instead of stacking vertically.
+   Desktop: multiple cards visible.
+   Mobile: swipe/slide horizontally.
+========================================================= */
+
+.services-section .services-grid,
+.branches-section .branches-grid,
+.why-section .why-grid,
+.feedback-section .feedback-grid{
+    display:flex !important;
+    flex-wrap:nowrap !important;
+    overflow-x:auto !important;
+    overflow-y:hidden !important;
+    gap:18px !important;
+    padding:4px 3px 12px !important;
+    scroll-snap-type:x mandatory;
+    scroll-behavior:smooth;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+}
+
+.services-section .services-grid::-webkit-scrollbar,
+.branches-section .branches-grid::-webkit-scrollbar,
+.why-section .why-grid::-webkit-scrollbar,
+.feedback-section .feedback-grid::-webkit-scrollbar{
+    display:none;
+}
+
+/* Services */
+.services-section .service-card{
+    flex:0 0 clamp(285px, calc((100% - 36px) / 3), 370px);
+    scroll-snap-align:start;
+    min-width:0;
+}
+
+/* Branches */
+.branches-section .branch-card{
+    flex:0 0 clamp(320px, calc((100% - 18px) / 2), 520px);
+    scroll-snap-align:start;
+    min-width:0;
+}
+
+/* Why choose us */
+.why-section .why-card{
+    flex:0 0 clamp(260px, calc((100% - 54px) / 4), 330px);
+    scroll-snap-align:start;
+    min-width:0;
+}
+
+/* Customer feedback */
+.feedback-section .feedback-card{
+    flex:0 0 clamp(285px, calc((100% - 36px) / 3), 365px);
+    scroll-snap-align:start;
+    min-width:0;
+}
+
+/* Small scroll cue without adding extra text */
+.services-section .services-grid::after,
+.branches-section .branches-grid::after,
+.why-section .why-grid::after,
+.feedback-section .feedback-grid::after{
+    content:"";
+    flex:0 0 2px;
+}
+
+/* Gallery stays a visual grid, not a long text/card stack */
+.gallery-preview-grid .gallery-placeholder{
+    transition:transform .35s ease, box-shadow .35s ease;
+}
+
+.gallery-preview-grid .gallery-tile:hover .gallery-placeholder{
+    transform:scale(1.015);
+    box-shadow:0 14px 34px rgba(0,0,0,.28);
+}
+
+/* Offer stays compact */
+.today-offer-section{
+    padding-block:58px;
+}
+
+.today-offer-card{
+    border-color:var(--salon-border);
+}
+
+/* Cleaner section headings */
+.section-header-row{
+    align-items:flex-end;
+    gap:24px;
+}
+
+.section-eyebrow,
+.feedback-section-eyebrow,
+.today-offer-badge{
+    color:var(--salon-gold);
+}
+
+.text-arrow-link{
+    color:var(--salon-text);
+}
+
+.text-arrow-link:hover{
+    color:var(--salon-gold);
+}
+
+/* Hero: tighter copy and cleaner spacing */
+.hero-description{
+    color:var(--salon-muted) !important;
+    max-width:600px;
+    line-height:1.65;
+}
+
+.hero-trust .trust-text strong,
+.hero-trust .trust-text small{
+    color:var(--salon-text);
+}
+
+.hero-trust .trust-text small{
+    opacity:.72;
+}
+
+/* Footer text stays light and restrained */
+.site-footer,
+.site-footer p,
+.site-footer a{
+    color:var(--salon-muted);
+}
+
+.site-footer .footer-column h3,
+.site-footer .brand-name strong{
+    color:var(--salon-text);
+}
+
+.site-footer a:hover{
+    color:var(--salon-gold);
+}
+
+/* Better keyboard focus */
+.service-card a:focus-visible,
+.branch-card a:focus-visible,
+.button:focus-visible,
+.text-arrow-link:focus-visible,
+.mobile-section-button:focus-visible{
+    outline:2px solid var(--salon-gold);
+    outline-offset:3px;
+}
+
+/* Mobile */
+@media (max-width:767px){
+
+    .home-section{
+        padding-block:48px;
+    }
+
+    .today-offer-section{
+        padding-block:44px;
+    }
+
+    .section-header-row{
+        align-items:flex-start;
+        gap:14px;
+    }
+
+    .services-section .services-grid,
+    .branches-section .branches-grid,
+    .why-section .why-grid,
+    .feedback-section .feedback-grid{
+        gap:12px !important;
+        padding:3px 2px 10px !important;
+    }
+
+    .services-section .service-card{
+        flex:0 0 84%;
+    }
+
+    .branches-section .branch-card{
+        flex:0 0 88%;
+    }
+
+    .why-section .why-card{
+        flex:0 0 82%;
+    }
+
+    .feedback-section .feedback-card{
+        flex:0 0 86%;
+    }
+
+    .about-content .section-text{
+        -webkit-line-clamp:2;
+        line-clamp:2;
+        font-size:14px;
+    }
+
+    .hero-description{
+        max-width:100%;
+        font-size:14px;
+    }
+
+    .gallery-preview-grid .gallery-placeholder{
+        min-height:180px;
+    }
+}
+
+/* Very small screens */
+@media (max-width:380px){
+
+    .home-section{
+        padding-block:42px;
+    }
+
+    .services-section .service-card,
+    .branches-section .branch-card,
+    .why-section .why-card,
+    .feedback-section .feedback-card{
+        flex-basis:90%;
+    }
+}
+
+/* Respect accessibility preferences */
+@media (prefers-reduced-motion:reduce){
+
+    .service-card,
+    .branch-card,
+    .why-card,
+    .feedback-card,
+    .gallery-tile,
+    .today-offer-card,
+    .about-feature,
+    .button,
+    .service-book-link,
+    .branch-button,
+    .text-arrow-link,
+    .mobile-section-button,
+    .footer-socials a{
+        transition:none !important;
+    }
+
+    .services-section .services-grid,
+    .branches-section .branches-grid,
+    .why-section .why-grid,
+    .feedback-section .feedback-grid{
+        scroll-behavior:auto;
+    }
+}
+
+
+/* =========================================================
+   GALLERY + BRANCH MOBILE SLIDER
+   Visual-only: no API/business logic changes.
+========================================================= */
+.gallery-preview-grid{
+    scrollbar-width:none;
+}
+
+.gallery-preview-grid::-webkit-scrollbar{
+    display:none;
+}
+
+@media (max-width:767px){
+    .gallery-preview-grid{
+        display:flex !important;
+        flex-wrap:nowrap !important;
+        gap:12px !important;
+        overflow-x:auto !important;
+        overflow-y:hidden !important;
+        padding:3px 2px 10px !important;
+        scroll-snap-type:x mandatory;
+        scroll-behavior:smooth;
+        -webkit-overflow-scrolling:touch;
+    }
+
+    .gallery-preview-grid .gallery-tile{
+        flex:0 0 84% !important;
+        min-width:0 !important;
+        scroll-snap-align:start;
+    }
+
+    .gallery-preview-grid .gallery-large{
+        grid-column:auto !important;
+        grid-row:auto !important;
+    }
+
+    .gallery-preview-grid .gallery-placeholder{
+        width:100%;
+        height:180px !important;
+        min-height:180px !important;
+        aspect-ratio:16 / 10;
+        border-radius:14px;
+        overflow:hidden;
+    }
+}
+
+@media (max-width:380px){
+    .gallery-preview-grid .gallery-tile{
+        flex-basis:90% !important;
+    }
+
+    .gallery-preview-grid .gallery-placeholder{
+        height:165px !important;
+        min-height:165px !important;
+    }
+}
+
+/* =========================================================
+   SCROLL REVEAL / MOTION
+   CSS-only, so existing JavaScript and application logic
+   remain untouched.
+========================================================= */
+@keyframes salonRevealUp{
+    from{
+        opacity:0;
+        transform:translateY(28px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@supports (animation-timeline: view()){
+    .home-section,
+    .today-offer-section,
+    .feedback-section{
+        animation-name:salonRevealUp;
+        animation-duration:1ms;
+        animation-fill-mode:both;
+        animation-timing-function:ease-out;
+        animation-timeline:view();
+        animation-range:entry 0% cover 24%;
+    }
+
+    .service-card,
+    .branch-card,
+    .why-card,
+    .gallery-tile,
+    .feedback-card{
+        animation-name:salonRevealUp;
+        animation-duration:1ms;
+        animation-fill-mode:both;
+        animation-timing-function:ease-out;
+        animation-timeline:view();
+        animation-range:entry 0% cover 18%;
+    }
+}
+
+@media (prefers-reduced-motion:reduce){
+    .home-section,
+    .today-offer-section,
+    .feedback-section,
+    .service-card,
+    .branch-card,
+    .why-card,
+    .gallery-tile,
+    .feedback-card{
+        animation:none !important;
+    }
+}
+
+
+/* =========================================================
+   PROFESSIONAL SCROLL REVEAL
+   Visual-only interaction; no booking/API/auth logic changed.
+========================================================= */
+.scroll-reveal{
+    opacity:0;
+    transform:translate3d(0,36px,0) scale(.985);
+    transition:
+        opacity .90s cubic-bezier(.22,1,.36,1),
+        transform .90s cubic-bezier(.22,1,.36,1);
+    will-change:opacity,transform;
+}
+
+.scroll-reveal.is-visible{
+    opacity:1;
+    transform:translate3d(0,0,0) scale(1);
+}
+
+.scroll-reveal[data-reveal-delay="1"]{transition-delay:.08s;}
+.scroll-reveal[data-reveal-delay="2"]{transition-delay:.16s;}
+.scroll-reveal[data-reveal-delay="3"]{transition-delay:.24s;}
+.scroll-reveal[data-reveal-delay="4"]{transition-delay:.32s;}
+
+.service-card.scroll-reveal,
+.branch-card.scroll-reveal,
+.why-card.scroll-reveal,
+.gallery-tile.scroll-reveal,
+.feedback-card.scroll-reveal{
+    transition:
+        opacity .85s cubic-bezier(.22,1,.36,1),
+        transform .85s cubic-bezier(.22,1,.36,1),
+        border-color .25s ease,
+        box-shadow .25s ease;
+}
+
+@media (prefers-reduced-motion:reduce){
+    .scroll-reveal,
+    .service-card.scroll-reveal,
+    .branch-card.scroll-reveal,
+    .why-card.scroll-reveal,
+    .gallery-tile.scroll-reveal,
+    .feedback-card.scroll-reveal{
+        opacity:1 !important;
+        transform:none !important;
+        transition:none !important;
+    }
+}
+
+</style>
 </head>
 
 
@@ -3046,143 +3561,17 @@ body.mobile-menu-open{
 
                 </div>
 
-            </div>
 
-        </section>
+                <a href="pages/branches.html"
+                   class="mobile-section-button">
 
-
-
-        <!-- =====================================================
-             WHY CHOOSE US
-        ====================================================== -->
-
-        <section class="home-section why-section">
-
-
-            <div class="content-container">
-
-
-                <div class="centered-section-heading">
-
-
-                    <span class="section-eyebrow">
-                        WHY THE BEAUTY SALON
+                    <span>
+                        Explore Branches
                     </span>
 
+                    <i class="fa-solid fa-arrow-right"></i>
 
-                    <h2 class="section-title">
-
-                        A Better Salon
-
-                        <span>
-                            Experience.
-                        </span>
-
-                    </h2>
-
-
-                    <p>
-
-                        From booking to your salon visit,
-                        everything is designed to be simple,
-                        comfortable and convenient.
-
-                    </p>
-
-                </div>
-
-
-                <div class="why-grid">
-
-
-                    <article class="why-card">
-
-                        <span class="why-icon">
-
-                            <i class="fa-solid fa-user-check"></i>
-
-                        </span>
-
-                        <h3>
-                            Professional Care
-                        </h3>
-
-                        <p>
-
-                            Quality salon services delivered
-                            with attention to your individual needs.
-
-                        </p>
-
-                    </article>
-
-
-                    <article class="why-card">
-
-                        <span class="why-icon">
-
-                            <i class="fa-regular fa-calendar-check"></i>
-
-                        </span>
-
-                        <h3>
-                            Easy Booking
-                        </h3>
-
-                        <p>
-
-                            Select your branch, service, staff,
-                            date and time slot with ease.
-
-                        </p>
-
-                    </article>
-
-
-                    <article class="why-card">
-
-                        <span class="why-icon">
-
-                            <i class="fa-solid fa-wallet"></i>
-
-                        </span>
-
-                        <h3>
-                            Pay at Salon
-                        </h3>
-
-                        <p>
-
-                            No online payment is required.
-                            Pay directly at the salon.
-
-                        </p>
-
-                    </article>
-
-
-                    <article class="why-card">
-
-                        <span class="why-icon">
-
-                            <i class="fa-solid fa-location-dot"></i>
-
-                        </span>
-
-                        <h3>
-                            Convenient Locations
-                        </h3>
-
-                        <p>
-
-                            Serving customers through our
-                            Baramati salon locations.
-
-                        </p>
-
-                    </article>
-
-                </div>
+                </a>
 
             </div>
 
@@ -4625,6 +5014,80 @@ body.mobile-menu-open{
         <img id="offerImageModalImg" src="" alt="Offer preview">
     </div>
 
+
+
+<script>
+(function () {
+    function initProfessionalScrollReveal() {
+        const selectors = [
+            ".hero-section",
+            ".home-section",
+            ".today-offer-section",
+            ".feedback-section",
+            ".service-card",
+            ".branch-card",
+            ".why-card",
+            ".gallery-tile",
+            ".feedback-card",
+            ".about-feature",
+            ".footer-column"
+        ];
+
+        const elements = document.querySelectorAll(selectors.join(","));
+        if (!elements.length) return;
+
+        elements.forEach((element, index) => {
+            element.classList.add("scroll-reveal");
+
+            if (
+                element.classList.contains("service-card") ||
+                element.classList.contains("branch-card") ||
+                element.classList.contains("why-card") ||
+                element.classList.contains("gallery-tile") ||
+                element.classList.contains("feedback-card")
+            ) {
+                element.setAttribute(
+                    "data-reveal-delay",
+                    String((index % 4) + 1)
+                );
+            }
+        });
+
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            elements.forEach(element => element.classList.add("is-visible"));
+            return;
+        }
+
+        if (!("IntersectionObserver" in window)) {
+            elements.forEach(element => element.classList.add("is-visible"));
+            return;
+        }
+
+        const observer = new IntersectionObserver(
+            (entries, revealObserver) => {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) return;
+
+                    entry.target.classList.add("is-visible");
+                    revealObserver.unobserve(entry.target);
+                });
+            },
+            {
+                threshold: 0.12,
+                rootMargin: "0px 0px -60px 0px"
+            }
+        );
+
+        elements.forEach(element => observer.observe(element));
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initProfessionalScrollReveal);
+    } else {
+        initProfessionalScrollReveal();
+    }
+})();
+</script>
 
 </body>
 </html>
