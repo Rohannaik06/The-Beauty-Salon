@@ -2240,7 +2240,7 @@ body.mobile-menu-open{
 
                             <span class="trust-text">
 
-                                <strong>2</strong>
+                                <strong id="homeBranchCount">2</strong>
 
                                 <small>Locations</small>
 
@@ -2260,7 +2260,7 @@ body.mobile-menu-open{
 
                             <span class="trust-text">
 
-                                <strong>9 AM – 9 PM</strong>
+                                <strong id="homeBranchHours">9 AM – 9 PM</strong>
 
                                 <small>Open Daily</small>
 
@@ -4184,6 +4184,29 @@ body.mobile-menu-open{
                     if (!branches.length) {
                         showApiMessage(grid, "No active branches found in the database.", "fa-location-dot");
                         return;
+                    }
+
+                    const homeBranchCount = document.getElementById("homeBranchCount");
+                    const homeBranchHours = document.getElementById("homeBranchHours");
+
+                    if (homeBranchCount) {
+                        homeBranchCount.textContent = branches.length;
+                    }
+
+                    if (homeBranchHours) {
+                        const branchHours = branches.map(function (branch) {
+                            const opening = normalizeTime(branch.opening_time);
+                            const closing = normalizeTime(branch.closing_time);
+                            return opening && closing ? `${opening} – ${closing}` : "";
+                        }).filter(Boolean);
+
+                        const sameHours = branchHours.length > 0 && branchHours.every(function (hours) {
+                            return hours === branchHours[0];
+                        });
+
+                        homeBranchHours.textContent = sameHours
+                            ? branchHours[0]
+                            : "See Branch Hours";
                     }
 
                     grid.innerHTML = branches.slice(0, 2).map(function (branch, index) {

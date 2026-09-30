@@ -2250,6 +2250,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (mobileInput && customerMobile && !mobileInput.value) {
             mobileInput.value = customerMobile;
+            mobileInput.value = mobileInput.value.replace(/\D/g, "").slice(-10);
         }
 
         if (emailInput && customerEmail && !emailInput.value) {
@@ -2673,7 +2674,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const payload = {
                 name: name.value.trim(),
                 email: email.value.trim() || null,
-                phone: "+91 " + mobile.value.trim(),
+                phone: mobile.value.trim(),
                 branch: branch.options[branch.selectedIndex].textContent,
                 service: service.options[service.selectedIndex].textContent.split(" — ₹")[0].trim(),
                 staff: staff.value === "ANY"
@@ -2832,6 +2833,7 @@ document.addEventListener("DOMContentLoaded", function () {
             customer.phone_number ||
             customer.customerPhone ||
             "";
+        mobileInput.value = mobileInput.value.replace(/\D/g, "").slice(-10);
     }
 
     if (emailInput && !emailInput.value) {

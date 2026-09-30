@@ -5,7 +5,9 @@ const router = express.Router();
 const {
     createFeedback,
     getMyFeedback,
-    getHomeFeedback
+    getHomeFeedback,
+    getAdminFeedback,
+    deleteFeedback
 } = require("../controllers/feedbackController");
 
 
@@ -28,6 +30,14 @@ router.get("/my", getMyFeedback);
 // Get best/latest feedback for Home page
 // Public endpoint
 router.get("/home", getHomeFeedback);
+
+
+// Get all feedback for Admin Feedback page
+router.get("/admin", getAdminFeedback);
+
+
+// Delete feedback from Admin Feedback page
+router.delete("/:id", deleteFeedback);
 
 
 module.exports = router;
