@@ -1498,6 +1498,330 @@ body{
 @media (max-width:600px){
     .admin-logo{width:38px;height:38px;flex-basis:38px}
 }
+
+/* ==========================================================
+   FINAL MOBILE RESPONSIVE GALLERY MANAGEMENT
+   Targeted responsive refinement only
+   ========================================================== */
+
+@media (max-width: 767px) {
+    .admin-main {
+        width: 100% !important;
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+    }
+
+    .content-heading {
+        width: 100% !important;
+        margin-bottom: 16px !important;
+        gap: 14px !important;
+    }
+
+    .heading-text {
+        width: 100% !important;
+    }
+
+    .heading-text h1 {
+        font-size: 24px !important;
+        line-height: 1.2 !important;
+        margin-bottom: 5px !important;
+    }
+
+    .heading-text p {
+        font-size: 11px !important;
+        line-height: 1.5 !important;
+    }
+
+    .add-image-btn {
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: none !important;
+        height: 44px !important;
+    }
+
+    .summary-grid {
+        width: 100% !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 10px !important;
+        margin-bottom: 14px !important;
+    }
+
+    .summary-card {
+        min-width: 0 !important;
+        min-height: 82px !important;
+        padding: 12px 8px !important;
+        border-radius: 11px !important;
+    }
+
+    .summary-card h3 {
+        font-size: 24px !important;
+    }
+
+    .summary-card p {
+        font-size: 10px !important;
+        line-height: 1.35 !important;
+        margin-top: 6px !important;
+    }
+
+    .filter-box {
+        width: 100% !important;
+        padding: 11px !important;
+        margin-bottom: 14px !important;
+    }
+
+    .filter-row {
+        width: 100% !important;
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 9px !important;
+    }
+
+    .search-box {
+        width: 100% !important;
+        grid-column: 1 / -1 !important;
+    }
+
+    .filter-select {
+        width: 100% !important;
+        min-width: 0 !important;
+        height: 42px !important;
+        font-size: 11px !important;
+    }
+
+    .search-box input {
+        height: 42px !important;
+        font-size: 11px !important;
+    }
+
+    .filter-row .add-image-btn {
+        grid-column: 1 / -1 !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: none !important;
+        height: 42px !important;
+    }
+
+    .gallery-card {
+        width: 100% !important;
+        border-radius: 11px !important;
+    }
+
+    .gallery-header {
+        min-height: 56px !important;
+        padding: 13px 14px !important;
+        gap: 8px !important;
+    }
+
+    .gallery-header h2 {
+        font-size: 14px !important;
+    }
+
+    .gallery-header span {
+        font-size: 9px !important;
+        white-space: nowrap !important;
+    }
+
+    .gallery-grid {
+        width: 100% !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        padding: 12px !important;
+        gap: 10px !important;
+    }
+
+    .gallery-item {
+        min-width: 0 !important;
+        border-radius: 9px !important;
+    }
+
+    .gallery-image {
+        width: 100% !important;
+        height: 135px !important;
+    }
+
+    .gallery-info {
+        padding: 10px !important;
+    }
+
+    .gallery-info h3 {
+        font-size: 12px !important;
+        line-height: 1.35 !important;
+        margin-bottom: 4px !important;
+        display: -webkit-box !important;
+        -webkit-line-clamp: 2 !important;
+        line-clamp: 2 !important;
+        -webkit-box-orient: vertical !important;
+        overflow: hidden !important;
+    }
+
+    .gallery-info p {
+        font-size: 9px !important;
+        line-height: 1.35 !important;
+        display: -webkit-box !important;
+        -webkit-line-clamp: 2 !important;
+        line-clamp: 2 !important;
+        -webkit-box-orient: vertical !important;
+        overflow: hidden !important;
+    }
+
+    .gallery-meta {
+        margin-top: 8px !important;
+        gap: 6px !important;
+        flex-wrap: wrap !important;
+    }
+
+    .gallery-status {
+        font-size: 8px !important;
+        padding: 4px 7px !important;
+    }
+
+    .gallery-actions {
+        gap: 4px !important;
+    }
+
+    .action-btn {
+        width: 28px !important;
+        height: 28px !important;
+    }
+
+    .modal-overlay {
+        padding: 10px !important;
+        align-items: flex-end !important;
+    }
+
+    .modal {
+        width: 100% !important;
+        max-height: 92vh !important;
+        border-radius: 14px 14px 0 0 !important;
+    }
+
+    .modal-header {
+        padding: 15px 16px !important;
+    }
+
+    .modal-header h3 {
+        font-size: 18px !important;
+    }
+
+    .modal-body {
+        padding: 16px !important;
+    }
+
+    .preview-box {
+        height: 150px !important;
+        margin-bottom: 16px !important;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr !important;
+        gap: 11px !important;
+    }
+
+    .form-group.full {
+        grid-column: auto !important;
+    }
+
+    .form-group input,
+    .form-group select {
+        height: 42px !important;
+        font-size: 12px !important;
+    }
+
+    .checkbox-row {
+        margin-top: 13px !important;
+    }
+
+    .modal-footer {
+        position: sticky !important;
+        bottom: 0 !important;
+        padding: 12px 16px !important;
+        background: #111 !important;
+        z-index: 2 !important;
+    }
+
+    .modal-btn {
+        min-height: 40px !important;
+        flex: 1 !important;
+    }
+
+    .image-preview {
+        height: 250px !important;
+    }
+}
+
+@media (max-width: 430px) {
+    .admin-main {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+
+    .heading-text h1 {
+        font-size: 22px !important;
+    }
+
+    .summary-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+
+    .gallery-grid {
+        grid-template-columns: 1fr !important;
+        padding: 11px !important;
+        gap: 11px !important;
+    }
+
+    .gallery-image {
+        height: 180px !important;
+    }
+
+    .gallery-info h3 {
+        font-size: 13px !important;
+    }
+
+    .gallery-info p {
+        font-size: 10px !important;
+    }
+
+    .filter-row {
+        grid-template-columns: 1fr !important;
+    }
+
+    .search-box,
+    .filter-row .add-image-btn {
+        grid-column: auto !important;
+    }
+
+    .gallery-header {
+        padding: 12px !important;
+    }
+
+    .gallery-header span {
+        font-size: 8px !important;
+    }
+}
+
+@media (max-width: 360px) {
+    .summary-grid {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 8px !important;
+    }
+
+    .summary-card {
+        min-height: 76px !important;
+        padding: 10px 6px !important;
+    }
+
+    .summary-card h3 {
+        font-size: 21px !important;
+    }
+
+    .summary-card p {
+        font-size: 9px !important;
+    }
+
+    .gallery-image {
+        height: 165px !important;
+    }
+}
+
 </style>
 </head>
 

@@ -2,6 +2,7 @@ const pool = require("../config/database");
 const fs = require("fs");
 const path = require("path");
 
+
 // =====================================================
 // SERVICE IMAGE DIRECTORY
 // =====================================================
@@ -11,8 +12,14 @@ const SERVICE_IMAGE_DIR = path.resolve(
     "../../frontend/assets/images/services"
 );
 
+
 // Make sure folder exists
-fs.mkdirSync(SERVICE_IMAGE_DIR, { recursive: true });
+fs.mkdirSync(
+    SERVICE_IMAGE_DIR,
+    {
+        recursive: true
+    }
+);
 
 
 // =====================================================
@@ -23,17 +30,29 @@ function deleteServiceImage(filename) {
 
     if (!filename) return;
 
-    const safeName = path.basename(String(filename));
+    const safeName =
+        path.basename(
+            String(filename)
+        );
 
-    const filePath = path.join(
-        SERVICE_IMAGE_DIR,
-        safeName
-    );
+    const filePath =
+        path.join(
+            SERVICE_IMAGE_DIR,
+            safeName
+        );
 
     try {
 
-        if (fs.existsSync(filePath)) {
-            fs.unlinkSync(filePath);
+        if (
+            fs.existsSync(
+                filePath
+            )
+        ) {
+
+            fs.unlinkSync(
+                filePath
+            );
+
         }
 
     } catch (error) {
@@ -44,6 +63,7 @@ function deleteServiceImage(filename) {
         );
 
     }
+
 }
 
 
@@ -71,17 +91,21 @@ function validateServiceInput({
 
     }
 
+
     const categoryValue =
         String(category)
             .toLowerCase()
             .trim();
+
 
     if (
         ![
             "him",
             "her",
             "child"
-        ].includes(categoryValue)
+        ].includes(
+            categoryValue
+        )
     ) {
 
         return (
@@ -90,8 +114,11 @@ function validateServiceInput({
 
     }
 
+
     if (
-        !Number.isFinite(Number(price)) ||
+        !Number.isFinite(
+            Number(price)
+        ) ||
         Number(price) < 0
     ) {
 
@@ -101,8 +128,11 @@ function validateServiceInput({
 
     }
 
+
     if (
-        !Number.isInteger(Number(duration)) ||
+        !Number.isInteger(
+            Number(duration)
+        ) ||
         Number(duration) <= 0
     ) {
 
@@ -112,7 +142,49 @@ function validateServiceInput({
 
     }
 
+
     return null;
+
+}
+
+
+// =====================================================
+// NORMALIZE BRANCH
+//
+// NULL = ALL BRANCHES
+// NUMBER = SPECIFIC BRANCH
+// =====================================================
+
+function normalizeBranchId(branch_id) {
+
+    if (
+        branch_id === undefined ||
+        branch_id === null ||
+        String(branch_id).trim() === "" ||
+        String(branch_id).trim().toUpperCase() === "ALL"
+    ) {
+
+        return null;
+
+    }
+
+
+    const branchId =
+        Number(branch_id);
+
+
+    if (
+        !Number.isInteger(branchId) ||
+        branchId <= 0
+    ) {
+
+        return undefined;
+
+    }
+
+
+    return branchId;
+
 }
 
 
@@ -120,41 +192,81 @@ function validateServiceInput({
 // GET ALL SERVICES
 // =====================================================
 
-const getAllServices = async (req, res) => {
+const getAllServices = async (
+    req,
+    res
+) => {
 
     try {
 
         const [rows] =
             await pool.promise().query(`
+
                 SELECT
+
                     s.id,
+
                     s.name,
+
                     s.category,
+
                     s.branch_id,
-                    s.staff_id,
+
                     s.price,
+
                     s.duration,
+
                     s.description,
+
                     s.service_image,
+
                     s.is_active,
+
                     s.created_at,
-                    b.name AS branch_name,
-                    st.name AS staff_name
+
+                    b.name AS branch_name
+
                 FROM services s
+
                 LEFT JOIN branches b
                     ON s.branch_id = b.id
-                LEFT JOIN staff st
-                    ON s.staff_id = st.id
-                ORDER BY s.id ASC
+
+                ORDER BY
+                    s.id ASC
+
             `);
+
+
+        const data =
+            rows.map(
+                function (service) {
+
+                    return {
+
+                        ...service,
+
+                        branch_name:
+                            service.branch_id === null
+                                ? "All Branches"
+                                : service.branch_name
+
+                    };
+
+                }
+            );
+
 
         res.json({
 
             success: true,
-            count: rows.length,
-            data: rows
+
+            count:
+                data.length,
+
+            data
 
         });
+
 
     } catch (error) {
 
@@ -163,11 +275,16 @@ const getAllServices = async (req, res) => {
             error
         );
 
+
         res.status(500).json({
 
             success: false,
-            message: "Failed to fetch services.",
-            error: error.message
+
+            message:
+                "Failed to fetch services.",
+
+            error:
+                error.message
 
         });
 
@@ -180,54 +297,95 @@ const getAllServices = async (req, res) => {
 // GET SINGLE SERVICE
 // =====================================================
 
-const getServiceById = async (req, res) => {
+const getServiceById = async (
+    req,
+    res
+) => {
 
     try {
 
         const [rows] =
             await pool.promise().query(`
+
                 SELECT
+
                     s.id,
+
                     s.name,
+
                     s.category,
+
                     s.branch_id,
-                    s.staff_id,
+
                     s.price,
+
                     s.duration,
+
                     s.description,
+
                     s.service_image,
+
                     s.is_active,
+
                     s.created_at,
-                    b.name AS branch_name,
-                    st.name AS staff_name
+
+                    b.name AS branch_name
+
                 FROM services s
+
                 LEFT JOIN branches b
                     ON s.branch_id = b.id
-                LEFT JOIN staff st
-                    ON s.staff_id = st.id
+
                 WHERE s.id = ?
+
                 LIMIT 1
+
             `, [
+
                 req.params.id
+
             ]);
 
-        if (!rows.length) {
+
+        if (
+            !rows.length
+        ) {
 
             return res.status(404).json({
 
                 success: false,
-                message: "Service not found."
+
+                message:
+                    "Service not found."
 
             });
 
         }
 
+
+        const service =
+            rows[0];
+
+
+        if (
+            service.branch_id === null
+        ) {
+
+            service.branch_name =
+                "All Branches";
+
+        }
+
+
         res.json({
 
             success: true,
-            data: rows[0]
+
+            data:
+                service
 
         });
+
 
     } catch (error) {
 
@@ -236,11 +394,16 @@ const getServiceById = async (req, res) => {
             error
         );
 
+
         res.status(500).json({
 
             success: false,
-            message: "Failed to fetch service.",
-            error: error.message
+
+            message:
+                "Failed to fetch service.",
+
+            error:
+                error.message
 
         });
 
@@ -253,7 +416,10 @@ const getServiceById = async (req, res) => {
 // CREATE SERVICE
 // =====================================================
 
-const createService = async (req, res) => {
+const createService = async (
+    req,
+    res
+) => {
 
     try {
 
@@ -264,33 +430,44 @@ const createService = async (req, res) => {
             price,
             duration,
             is_active,
-            branch_id,
-            staff_id
+            branch_id
         } = req.body;
 
 
-        // Validate
+        // =================================================
+        // VALIDATE BASIC SERVICE DATA
+        // =================================================
+
         const validationError =
             validateServiceInput({
+
                 name,
                 category,
                 price,
                 duration
+
             });
 
 
-        if (validationError) {
+        if (
+            validationError
+        ) {
 
             if (req.file) {
+
                 deleteServiceImage(
                     req.file.filename
                 );
+
             }
+
 
             return res.status(400).json({
 
                 success: false,
-                message: validationError
+
+                message:
+                    validationError
 
             });
 
@@ -298,31 +475,94 @@ const createService = async (req, res) => {
 
 
         // =================================================
-        // VALIDATE BRANCH AND STAFF
+        // NORMALIZE BRANCH
+        //
+        // Empty / ALL = ALL BRANCHES
         // =================================================
 
-        const branchId = Number(branch_id);
-        const staffId = Number(staff_id);
+        const branchId =
+            normalizeBranchId(
+                branch_id
+            );
+
 
         if (
-            !Number.isInteger(branchId) ||
-            branchId <= 0 ||
-            !Number.isInteger(staffId) ||
-            staffId <= 0
+            branchId === undefined
         ) {
 
             if (req.file) {
+
                 deleteServiceImage(
                     req.file.filename
                 );
+
             }
+
 
             return res.status(400).json({
 
                 success: false,
-                message: "Branch and staff are required."
+
+                message:
+                    "Invalid branch selected."
 
             });
+
+        }
+
+
+        // =================================================
+        // VALIDATE SPECIFIC BRANCH
+        // =================================================
+
+        if (
+            branchId !== null
+        ) {
+
+            const [branchRows] =
+                await pool.promise().query(`
+
+                    SELECT
+                        id
+
+                    FROM branches
+
+                    WHERE id = ?
+
+                    AND is_active = 1
+
+                    LIMIT 1
+
+                `, [
+
+                    branchId
+
+                ]);
+
+
+            if (
+                !branchRows.length
+            ) {
+
+                if (req.file) {
+
+                    deleteServiceImage(
+                        req.file.filename
+                    );
+
+                }
+
+
+                return res.status(400).json({
+
+                    success: false,
+
+                    message:
+                        "Selected branch is not available."
+
+                });
+
+            }
 
         }
 
@@ -345,19 +585,21 @@ const createService = async (req, res) => {
 
         const [result] =
             await pool.promise().query(`
+
                 INSERT INTO services
                 (
                     name,
                     category,
                     branch_id,
-                    staff_id,
                     price,
                     duration,
                     description,
                     service_image,
                     is_active
                 )
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+
             `, [
 
                 String(name).trim(),
@@ -365,8 +607,6 @@ const createService = async (req, res) => {
                 categoryValue,
 
                 branchId,
-
-                staffId,
 
                 Number(price),
 
@@ -412,10 +652,12 @@ const createService = async (req, res) => {
 
         }
 
+
         console.error(
             "ADD SERVICE ERROR:",
             error
         );
+
 
         res.status(500).json({
 
@@ -438,7 +680,10 @@ const createService = async (req, res) => {
 // UPDATE SERVICE
 // =====================================================
 
-const updateService = async (req, res) => {
+const updateService = async (
+    req,
+    res
+) => {
 
     try {
 
@@ -449,22 +694,28 @@ const updateService = async (req, res) => {
             price,
             duration,
             is_active,
-            branch_id,
-            staff_id
+            branch_id
         } = req.body;
 
 
-        // Validate
+        // =================================================
+        // VALIDATE BASIC SERVICE DATA
+        // =================================================
+
         const validationError =
             validateServiceInput({
+
                 name,
                 category,
                 price,
                 duration
+
             });
 
 
-        if (validationError) {
+        if (
+            validationError
+        ) {
 
             if (req.file) {
 
@@ -474,10 +725,13 @@ const updateService = async (req, res) => {
 
             }
 
+
             return res.status(400).json({
 
                 success: false,
-                message: validationError
+
+                message:
+                    validationError
 
             });
 
@@ -485,31 +739,94 @@ const updateService = async (req, res) => {
 
 
         // =================================================
-        // VALIDATE BRANCH AND STAFF
+        // NORMALIZE BRANCH
+        //
+        // Empty / ALL = ALL BRANCHES
         // =================================================
 
-        const branchId = Number(branch_id);
-        const staffId = Number(staff_id);
+        const branchId =
+            normalizeBranchId(
+                branch_id
+            );
+
 
         if (
-            !Number.isInteger(branchId) ||
-            branchId <= 0 ||
-            !Number.isInteger(staffId) ||
-            staffId <= 0
+            branchId === undefined
         ) {
 
             if (req.file) {
+
                 deleteServiceImage(
                     req.file.filename
                 );
+
             }
+
 
             return res.status(400).json({
 
                 success: false,
-                message: "Branch and staff are required."
+
+                message:
+                    "Invalid branch selected."
 
             });
+
+        }
+
+
+        // =================================================
+        // VALIDATE SPECIFIC BRANCH
+        // =================================================
+
+        if (
+            branchId !== null
+        ) {
+
+            const [branchRows] =
+                await pool.promise().query(`
+
+                    SELECT
+                        id
+
+                    FROM branches
+
+                    WHERE id = ?
+
+                    AND is_active = 1
+
+                    LIMIT 1
+
+                `, [
+
+                    branchId
+
+                ]);
+
+
+            if (
+                !branchRows.length
+            ) {
+
+                if (req.file) {
+
+                    deleteServiceImage(
+                        req.file.filename
+                    );
+
+                }
+
+
+                return res.status(400).json({
+
+                    success: false,
+
+                    message:
+                        "Selected branch is not available."
+
+                });
+
+            }
 
         }
 
@@ -519,21 +836,27 @@ const updateService = async (req, res) => {
         // =================================================
 
         const [existingRows] =
-            await pool.promise().query(
-                `
+            await pool.promise().query(`
+
                 SELECT
                     service_image
+
                 FROM services
+
                 WHERE id = ?
+
                 LIMIT 1
-                `,
-                [
-                    req.params.id
-                ]
-            );
+
+            `, [
+
+                req.params.id
+
+            ]);
 
 
-        if (!existingRows.length) {
+        if (
+            !existingRows.length
+        ) {
 
             if (req.file) {
 
@@ -543,10 +866,13 @@ const updateService = async (req, res) => {
 
             }
 
+
             return res.status(404).json({
 
                 success: false,
-                message: "Service not found."
+
+                message:
+                    "Service not found."
 
             });
 
@@ -554,7 +880,8 @@ const updateService = async (req, res) => {
 
 
         const oldImage =
-            existingRows[0].service_image ||
+            existingRows[0]
+                .service_image ||
             null;
 
 
@@ -587,18 +914,29 @@ const updateService = async (req, res) => {
 
         const [result] =
             await pool.promise().query(`
+
                 UPDATE services
+
                 SET
+
                     name = ?,
+
                     category = ?,
+
                     branch_id = ?,
-                    staff_id = ?,
+
                     price = ?,
+
                     duration = ?,
+
                     description = ?,
+
                     service_image = ?,
+
                     is_active = ?
+
                 WHERE id = ?
+
             `, [
 
                 String(name).trim(),
@@ -606,8 +944,6 @@ const updateService = async (req, res) => {
                 categoryValue,
 
                 branchId,
-
-                staffId,
 
                 Number(price),
 
@@ -626,7 +962,9 @@ const updateService = async (req, res) => {
             ]);
 
 
-        if (!result.affectedRows) {
+        if (
+            !result.affectedRows
+        ) {
 
             if (req.file) {
 
@@ -636,10 +974,13 @@ const updateService = async (req, res) => {
 
             }
 
+
             return res.status(404).json({
 
                 success: false,
-                message: "Service not found."
+
+                message:
+                    "Service not found."
 
             });
 
@@ -686,10 +1027,12 @@ const updateService = async (req, res) => {
 
         }
 
+
         console.error(
             "UPDATE SERVICE ERROR:",
             error
         );
+
 
         res.status(500).json({
 
@@ -710,9 +1053,6 @@ const updateService = async (req, res) => {
 
 // =====================================================
 // DELETE / DEACTIVATE SERVICE
-// =====================================================
-//
-// LOGIC:
 //
 // If service has bookings:
 //     Do NOT permanently delete
@@ -724,7 +1064,10 @@ const updateService = async (req, res) => {
 // This protects booking history.
 // =====================================================
 
-const deleteService = async (req, res) => {
+const deleteService = async (
+    req,
+    res
+) => {
 
     const serviceId =
         req.params.id;
@@ -732,34 +1075,46 @@ const deleteService = async (req, res) => {
 
     try {
 
-        // -------------------------------------------------
-        // 1. Check service exists
-        // -------------------------------------------------
+        // =================================================
+        // 1. CHECK SERVICE EXISTS
+        // =================================================
 
         const [serviceRows] =
-            await pool.promise().query(
-                `
+            await pool.promise().query(`
+
                 SELECT
+
                     id,
+
                     name,
+
                     service_image,
+
                     is_active
+
                 FROM services
+
                 WHERE id = ?
+
                 LIMIT 1
-                `,
-                [
-                    serviceId
-                ]
-            );
+
+            `, [
+
+                serviceId
+
+            ]);
 
 
-        if (!serviceRows.length) {
+        if (
+            !serviceRows.length
+        ) {
 
             return res.status(404).json({
 
                 success: false,
-                message: "Service not found."
+
+                message:
+                    "Service not found."
 
             });
 
@@ -770,53 +1125,62 @@ const deleteService = async (req, res) => {
             serviceRows[0];
 
 
-        // -------------------------------------------------
-        // 2. Check existing bookings
-        // -------------------------------------------------
+        // =================================================
+        // 2. CHECK EXISTING BOOKINGS
+        // =================================================
 
         const [bookingRows] =
-            await pool.promise().query(
-                `
+            await pool.promise().query(`
+
                 SELECT
                     COUNT(*) AS bookingCount
+
                 FROM bookings
+
                 WHERE service_id = ?
-                `,
-                [
-                    serviceId
-                ]
-            );
+
+            `, [
+
+                serviceId
+
+            ]);
 
 
         const bookingCount =
             Number(
-                bookingRows[0].bookingCount
+                bookingRows[0]
+                    .bookingCount
             );
 
 
-        // -------------------------------------------------
+        // =================================================
         // 3. BOOKINGS EXIST
-        // -------------------------------------------------
-        // Do not delete.
-        // Deactivate service instead.
-        // -------------------------------------------------
+        // =================================================
 
-        if (bookingCount > 0) {
+        if (
+            bookingCount > 0
+        ) {
 
             const [updateResult] =
-                await pool.promise().query(
-                    `
+                await pool.promise().query(`
+
                     UPDATE services
-                    SET is_active = 0
+
+                    SET
+                        is_active = 0
+
                     WHERE id = ?
-                    `,
-                    [
-                        serviceId
-                    ]
-                );
+
+                `, [
+
+                    serviceId
+
+                ]);
 
 
-            if (!updateResult.affectedRows) {
+            if (
+                !updateResult.affectedRows
+            ) {
 
                 return res.status(500).json({
 
@@ -847,25 +1211,27 @@ const deleteService = async (req, res) => {
         }
 
 
-        // -------------------------------------------------
+        // =================================================
         // 4. NO BOOKINGS
-        // -------------------------------------------------
-        // Permanent delete allowed.
-        // -------------------------------------------------
+        // =================================================
 
         const [deleteResult] =
-            await pool.promise().query(
-                `
+            await pool.promise().query(`
+
                 DELETE FROM services
+
                 WHERE id = ?
-                `,
-                [
-                    serviceId
-                ]
-            );
+
+            `, [
+
+                serviceId
+
+            ]);
 
 
-        if (!deleteResult.affectedRows) {
+        if (
+            !deleteResult.affectedRows
+        ) {
 
             return res.status(404).json({
 
@@ -879,11 +1245,13 @@ const deleteService = async (req, res) => {
         }
 
 
-        // -------------------------------------------------
-        // 5. Delete image from filesystem
-        // -------------------------------------------------
+        // =================================================
+        // 5. DELETE IMAGE
+        // =================================================
 
-        if (service.service_image) {
+        if (
+            service.service_image
+        ) {
 
             deleteServiceImage(
                 service.service_image
@@ -937,29 +1305,44 @@ const deleteService = async (req, res) => {
 // ACTIVATE SERVICE
 // =====================================================
 
-const activateService = async (req, res) => {
+const activateService = async (
+    req,
+    res
+) => {
 
     try {
 
-        // First check service exists
+        // =================================================
+        // CHECK SERVICE EXISTS
+        // =================================================
+
         const [serviceRows] =
-            await pool.promise().query(
-                `
+            await pool.promise().query(`
+
                 SELECT
+
                     id,
+
                     name,
+
                     is_active
+
                 FROM services
+
                 WHERE id = ?
+
                 LIMIT 1
-                `,
-                [
-                    req.params.id
-                ]
-            );
+
+            `, [
+
+                req.params.id
+
+            ]);
 
 
-        if (!serviceRows.length) {
+        if (
+            !serviceRows.length
+        ) {
 
             return res.status(404).json({
 
@@ -973,20 +1356,30 @@ const activateService = async (req, res) => {
         }
 
 
+        // =================================================
+        // ACTIVATE
+        // =================================================
+
         const [result] =
-            await pool.promise().query(
-                `
+            await pool.promise().query(`
+
                 UPDATE services
-                SET is_active = 1
+
+                SET
+                    is_active = 1
+
                 WHERE id = ?
-                `,
-                [
-                    req.params.id
-                ]
-            );
+
+            `, [
+
+                req.params.id
+
+            ]);
 
 
-        if (!result.affectedRows) {
+        if (
+            !result.affectedRows
+        ) {
 
             return res.status(500).json({
 
@@ -1026,10 +1419,7 @@ const activateService = async (req, res) => {
             success: false,
 
             message:
-                "Failed to activate service.",
-
-            error:
-                error.message
+                "Failed to activate service."
 
         });
 

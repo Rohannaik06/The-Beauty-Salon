@@ -489,6 +489,42 @@ td{
     .admin-logo{width:38px;height:38px;flex-basis:38px}
 }
 
+
+/* FINAL STAFF MANAGEMENT RESPONSIVE REFINEMENT */
+@media (max-width: 850px){
+    .filter-box{padding:12px;}
+    .filter-row{width:100%;gap:9px;}
+    .search-box{width:100%!important;}
+    .filter-select{width:100%!important;min-width:0;}
+    .filter-add-btn{width:100%!important;min-width:0!important;}
+    .table-card{border-radius:12px;}
+    .table-header{min-height:62px;padding:0 15px;gap:10px;}
+    .table-wrapper{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+    .table-wrapper table{min-width:1050px;}
+    .table-wrapper th,.table-wrapper td{white-space:nowrap;}
+}
+@media (max-width: 600px){
+    .content-heading{margin-bottom:14px;}
+    .summary-grid{grid-template-columns:1fr 1fr!important;gap:10px;}
+    .summary-card{min-height:88px;padding:12px;}
+    .summary-card h3{font-size:24px!important;}
+    .summary-card p{font-size:10px!important;line-height:1.35;}
+    .table-header h2{font-size:14px;}
+    .table-header span{font-size:10px;}
+    .modal-overlay{padding:10px;align-items:flex-end;}
+    .modal{width:100%;max-height:92vh;border-radius:14px 14px 0 0;}
+    .modal-body{padding:17px;}
+    .modal-footer{position:sticky;bottom:0;background:#111;padding:12px 17px;z-index:2;}
+    .modal-btn{flex:1;min-height:40px;}
+}
+@media (max-width: 420px){
+    .summary-grid{grid-template-columns:1fr 1fr!important;}
+    .summary-card{min-height:82px;padding:10px 8px;}
+    .summary-card h3{font-size:21px!important;}
+    .summary-card p{font-size:9px!important;}
+    .table-header{padding:0 12px;}
+}
+
 </style>
 
     <script src="admin-auth.js"></script>

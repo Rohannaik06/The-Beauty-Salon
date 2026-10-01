@@ -86,14 +86,57 @@ function normalizeTime(value) {
     return null;
 }
 
+
+/*
+=====================================================
+PHONE NORMALIZATION
+=====================================================
+
+Valid:
+9123456789
+9876543210
+
+Also accepts:
++91 9123456789
+919123456789
+
+IMPORTANT:
+If the actual 10-digit mobile number starts with 91,
+we DO NOT remove the first 91.
+
+Example:
+9123456789
+    ↓
+9123456789
+
+Not:
+23456789
+*/
 function normalizePhone(phone) {
-    if (!phone) {
+    if (phone === null || phone === undefined) {
         return "";
     }
 
     const digits = String(phone).replace(/\D/g, "");
 
-    return digits.slice(-10);
+    // Normal 10-digit Indian mobile number.
+    // This includes numbers starting with 91.
+    if (digits.length === 10) {
+        return digits;
+    }
+
+    // Indian country-code format.
+    // Example:
+    // +91 9123456789
+    // 919123456789
+    if (
+        digits.length === 12 &&
+        digits.startsWith("91")
+    ) {
+        return digits.slice(2);
+    }
+
+    return "";
 }
 
 function normalizeDate(value) {
@@ -113,15 +156,8 @@ function normalizeDate(value) {
 
 // =====================================================
 // GET ALL BOOKINGS
-//
 // GET /api/bookings
 // GET /api/bookings?date=2026-09-20
-//
-// IMPORTANT:
-// - Exact database calendar date
-// - No timezone conversion
-// - No DATE_SUB
-// - No UTC/IST conversion
 // =====================================================
 
 async function getAllBookings(req, res) {
@@ -226,7 +262,6 @@ async function getAllBookings(req, res) {
 
 // =====================================================
 // GET SINGLE BOOKING
-//
 // GET /api/bookings/:id
 // =====================================================
 
@@ -321,8 +356,19 @@ async function getBookingById(req, res) {
 
 // =====================================================
 // CREATE BOOKING
-//
 // POST /api/bookings
+//
+// SERVICE LOGIC:
+// branch_id = NULL
+//      -> ALL BRANCHES
+//
+// branch_id = selected branch ID
+//      -> ONLY THAT BRANCH
+//
+// STAFF:
+// Customer does NOT select staff.
+// Backend automatically finds an available
+// active staff member from selected branch.
 // =====================================================
 
 async function createBooking(req, res) {
@@ -357,6 +403,7 @@ async function createBooking(req, res) {
             !booking_date ||
             !booking_time
         ) {
+
             return res.status(400).json({
                 success: false,
                 message:
@@ -383,13 +430,11 @@ async function createBooking(req, res) {
 
 
         // =================================================
-        // VALIDATION
+        // PHONE VALIDATION
         // =================================================
 
-        if (
-            !cleanPhone ||
-            cleanPhone.length !== 10
-        ) {
+        if (!/^\d{10}$/.test(cleanPhone)) {
+
             return res.status(400).json({
                 success: false,
                 message:
@@ -397,7 +442,13 @@ async function createBooking(req, res) {
             });
         }
 
+
+        // =================================================
+        // DATE VALIDATION
+        // =================================================
+
         if (!cleanDate) {
+
             return res.status(400).json({
                 success: false,
                 message:
@@ -405,7 +456,13 @@ async function createBooking(req, res) {
             });
         }
 
+
+        // =================================================
+        // TIME VALIDATION
+        // =================================================
+
         if (!cleanTime) {
+
             return res.status(400).json({
                 success: false,
                 message:
@@ -418,7 +475,8 @@ async function createBooking(req, res) {
         // PREVENT PAST DATE
         // =================================================
 
-        const today = new Date();
+        const today =
+            new Date();
 
         const todayString =
             today.getFullYear() +
@@ -431,7 +489,11 @@ async function createBooking(req, res) {
                 today.getDate()
             ).padStart(2, "0");
 
-        if (cleanDate < todayString) {
+
+        if (
+            cleanDate < todayString
+        ) {
+
             return res.status(400).json({
                 success: false,
                 message:
@@ -444,10 +506,11 @@ async function createBooking(req, res) {
 
 
         // =================================================
-        // FIND BRANCH
+        // FIND SELECTED BRANCH
         // =================================================
 
         let branches = [];
+
 
         if (
             /^\d+$/.test(
@@ -497,7 +560,9 @@ async function createBooking(req, res) {
         }
 
 
-        if (branches.length === 0) {
+        if (
+            branches.length === 0
+        ) {
 
             await connection.rollback();
 
@@ -515,9 +580,16 @@ async function createBooking(req, res) {
 
         // =================================================
         // FIND SERVICE
+        //
+        // branch_id IS NULL
+        //     = ALL BRANCHES
+        //
+        // branch_id = selected branch
+        //     = selected branch only
         // =================================================
 
         let services = [];
+
 
         if (
             /^\d+$/.test(
@@ -532,15 +604,21 @@ async function createBooking(req, res) {
                         id,
                         name,
                         price,
-                        duration
+                        duration,
+                        branch_id
                     FROM services
                     WHERE
                         id = ?
                         AND is_active = 1
+                        AND (
+                            branch_id = ?
+                            OR branch_id IS NULL
+                        )
                     LIMIT 1
                     `,
                     [
-                        Number(service)
+                        Number(service),
+                        selectedBranch.id
                     ]
                 );
 
@@ -553,28 +631,36 @@ async function createBooking(req, res) {
                         id,
                         name,
                         price,
-                        duration
+                        duration,
+                        branch_id
                     FROM services
                     WHERE
                         name = ?
                         AND is_active = 1
+                        AND (
+                            branch_id = ?
+                            OR branch_id IS NULL
+                        )
                     LIMIT 1
                     `,
                     [
-                        String(service).trim()
+                        String(service).trim(),
+                        selectedBranch.id
                     ]
                 );
         }
 
 
-        if (services.length === 0) {
+        if (
+            services.length === 0
+        ) {
 
             await connection.rollback();
 
             return res.status(400).json({
                 success: false,
                 message:
-                    "Selected service is not available."
+                    "Selected service is not available at the selected branch."
             });
         }
 
@@ -582,6 +668,10 @@ async function createBooking(req, res) {
         const selectedService =
             services[0];
 
+
+        // =================================================
+        // SERVICE DURATION / PRICE
+        // =================================================
 
         const serviceDuration =
             Number(
@@ -682,105 +772,41 @@ async function createBooking(req, res) {
 
 
         // =================================================
-        // FIND STAFF
+        // FIND AVAILABLE STAFF
+        //
+        // CUSTOMER DOES NOT SELECT STAFF.
+        //
+        // Backend automatically selects an available
+        // active staff member from selected branch.
         // =================================================
 
         let staffRows = [];
 
-        const staffValue =
-            staff === null ||
-            staff === undefined
-                ? "ANY"
-                : String(staff).trim();
+
+        [
+            staffRows
+        ] =
+            await connection.query(
+                `
+                SELECT
+                    id,
+                    name,
+                    role
+                FROM staff
+                WHERE
+                    branch_id = ?
+                    AND is_active = 1
+                ORDER BY id ASC
+                `,
+                [
+                    selectedBranch.id
+                ]
+            );
 
 
-        const isAnyStaff =
-            !staffValue ||
-            staffValue.toUpperCase() === "ANY" ||
-            staffValue.toLowerCase() ===
-                "any available staff";
-
-
-        if (isAnyStaff) {
-
-            [staffRows] =
-                await connection.query(
-                    `
-                    SELECT
-                        id,
-                        name,
-                        role
-                    FROM staff
-                    WHERE
-                        branch_id = ?
-                        AND is_active = 1
-                    ORDER BY id ASC
-                    `,
-                    [
-                        selectedBranch.id
-                    ]
-                );
-
-        } else if (
-            /^\d+$/.test(
-                staffValue
-            )
+        if (
+            staffRows.length === 0
         ) {
-
-            [staffRows] =
-                await connection.query(
-                    `
-                    SELECT
-                        id,
-                        name,
-                        role
-                    FROM staff
-                    WHERE
-                        id = ?
-                        AND branch_id = ?
-                        AND is_active = 1
-                    LIMIT 1
-                    `,
-                    [
-                        Number(staffValue),
-                        selectedBranch.id
-                    ]
-                );
-
-        } else {
-
-            const staffName =
-                staffValue
-                    .split(" — ")[0]
-                    .trim();
-
-            [staffRows] =
-                await connection.query(
-                    `
-                    SELECT
-                        id,
-                        name,
-                        role
-                    FROM staff
-                    WHERE
-                        branch_id = ?
-                        AND is_active = 1
-                        AND (
-                            name = ?
-                            OR role = ?
-                        )
-                    ORDER BY id ASC
-                    `,
-                    [
-                        selectedBranch.id,
-                        staffName,
-                        staffName
-                    ]
-                );
-        }
-
-
-        if (staffRows.length === 0) {
 
             await connection.rollback();
 
@@ -833,7 +859,8 @@ async function createBooking(req, res) {
                 );
 
 
-            let isAvailable = true;
+            let isAvailable =
+                true;
 
 
             for (
@@ -864,22 +891,33 @@ async function createBooking(req, res) {
                         existingStart;
 
 
-                if (overlaps) {
-                    isAvailable = false;
+                if (
+                    overlaps
+                ) {
+
+                    isAvailable =
+                        false;
+
                     break;
                 }
             }
 
 
-            if (isAvailable) {
+            if (
+                isAvailable
+            ) {
+
                 selectedStaff =
                     candidate;
+
                 break;
             }
         }
 
 
-        if (!selectedStaff) {
+        if (
+            !selectedStaff
+        ) {
 
             await connection.rollback();
 
@@ -896,10 +934,13 @@ async function createBooking(req, res) {
         // =================================================
 
         const customerPhone =
-            "+91 " + cleanPhone;
+            "+91 " +
+            cleanPhone;
 
 
-        const [customers] =
+        const [
+            customers
+        ] =
             await connection.query(
                 `
                 SELECT
@@ -917,7 +958,9 @@ async function createBooking(req, res) {
         let customerId;
 
 
-        if (customers.length > 0) {
+        if (
+            customers.length > 0
+        ) {
 
             customerId =
                 customers[0].id;
@@ -1013,7 +1056,9 @@ async function createBooking(req, res) {
             );
 
 
-        if (finalOverlap.length > 0) {
+        if (
+            finalOverlap.length > 0
+        ) {
 
             await connection.rollback();
 
@@ -1029,7 +1074,9 @@ async function createBooking(req, res) {
         // GENERATE BOOKING NUMBER
         // =================================================
 
-        const [latest] =
+        const [
+            latest
+        ] =
             await connection.query(
                 `
                 SELECT
@@ -1164,6 +1211,7 @@ async function createBooking(req, res) {
                 "CONFIRMED"
         });
 
+
     } catch (error) {
 
         try {
@@ -1184,6 +1232,7 @@ async function createBooking(req, res) {
         });
 
     } finally {
+
         connection.release();
     }
 }
@@ -1191,7 +1240,6 @@ async function createBooking(req, res) {
 
 // =====================================================
 // UPDATE BOOKING STATUS
-//
 // Allowed:
 // CONFIRMED
 // COMPLETED

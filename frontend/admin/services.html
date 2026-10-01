@@ -1427,6 +1427,307 @@
         }
     }
 
+
+    /* =====================================================
+       FINAL MOBILE RESPONSIVE REFINEMENT
+       ===================================================== */
+
+    @media (max-width: 700px) {
+
+        .main-content {
+            width: 100%;
+            max-width: 100%;
+            padding: 18px 12px 28px;
+        }
+
+        .page-top {
+            margin-bottom: 16px;
+        }
+
+        .page-title h2 {
+            font-size: 27px;
+        }
+
+        .page-title p {
+            max-width: 100%;
+            font-size: 13px;
+            line-height: 1.45;
+        }
+
+        .toolbar {
+            width: 100%;
+            padding: 12px;
+            border-radius: 12px;
+        }
+
+        .category-tabs {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 7px;
+        }
+
+        .category-btn {
+            min-height: 42px;
+            font-size: 13px;
+        }
+
+        .toolbar-add-service-btn {
+            width: 100%;
+            min-height: 44px;
+        }
+
+        .services-panel {
+            border-radius: 13px;
+        }
+
+        .panel-header {
+            min-height: auto;
+            padding: 14px;
+            align-items: flex-start;
+        }
+
+        .panel-title h3 {
+            font-size: 17px;
+        }
+
+        .panel-title span {
+            font-size: 11px;
+        }
+
+        .service-count {
+            font-size: 12px;
+            padding-top: 2px;
+        }
+
+        .table-wrapper {
+            overflow-x: hidden;
+        }
+
+        .services-table {
+            width: 100%;
+            min-width: 0;
+            display: block;
+        }
+
+        .services-table thead {
+            display: none;
+        }
+
+        .services-table tbody {
+            display: block;
+            width: 100%;
+        }
+
+        .services-table tbody tr {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            border-top: 1px solid rgba(255,255,255,.06);
+            background: transparent;
+        }
+
+        .services-table tbody tr:hover {
+            background: rgba(255,255,255,.018);
+        }
+
+        .services-table td {
+            width: 100%;
+            min-width: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 9px 0;
+            border-top: 1px solid rgba(255,255,255,.05);
+            font-size: 14px;
+        }
+
+        .services-table td:first-child {
+            display: block;
+            padding-top: 0;
+            border-top: 0;
+            padding-bottom: 12px;
+        }
+
+        .services-table td:nth-child(2)::before {
+            content: "Category";
+        }
+
+        .services-table td:nth-child(3)::before {
+            content: "Price";
+        }
+
+        .services-table td:nth-child(4)::before {
+            content: "Duration";
+        }
+
+        .services-table td:nth-child(5)::before {
+            content: "Branch";
+        }
+
+        .services-table td:nth-child(6)::before {
+            content: "Status";
+        }
+
+        .services-table td:nth-child(7)::before {
+            content: "Actions";
+        }
+
+        .services-table td:nth-child(n+2)::before {
+            flex: 0 0 auto;
+            color: #777;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .service-info {
+            width: 100%;
+            min-width: 0;
+            gap: 11px;
+        }
+
+        .service-table-image {
+            width: 48px;
+            height: 48px;
+            min-width: 48px;
+        }
+
+        .service-name {
+            min-width: 0;
+            flex: 1;
+        }
+
+        .service-name strong {
+            font-size: 15px;
+        }
+
+        .service-name span {
+            max-width: 100%;
+            font-size: 12px;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
+            overflow: hidden;
+        }
+
+        .table-actions {
+            justify-content: flex-end;
+        }
+
+        .table-action {
+            width: 38px;
+            height: 38px;
+        }
+
+        .modal-overlay {
+            padding: 8px;
+            align-items: flex-end;
+        }
+
+        .modal {
+            width: 100%;
+            max-width: 100%;
+            max-height: 94vh;
+            border-radius: 16px 16px 10px 10px;
+        }
+
+        .modal-header {
+            min-height: 64px;
+            padding: 0 15px;
+        }
+
+        .modal-title h3 {
+            font-size: 18px;
+        }
+
+        .modal-title span {
+            font-size: 12px;
+        }
+
+        .modal-body {
+            padding: 15px;
+        }
+
+        .form-grid {
+            grid-template-columns: 1fr;
+            gap: 14px;
+        }
+
+        .form-group.full {
+            grid-column: auto;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            font-size: 15px;
+        }
+
+        .service-image-upload {
+            grid-template-columns: 70px minmax(0, 1fr);
+            gap: 11px;
+        }
+
+        .service-image-preview {
+            width: 70px;
+            height: 70px;
+        }
+
+        .service-image-help {
+            font-size: 11px;
+        }
+
+        .modal-footer {
+            position: sticky;
+            bottom: 0;
+            padding: 12px 15px;
+            background: #111;
+            z-index: 2;
+        }
+
+        .modal-btn {
+            min-height: 44px;
+            flex: 1;
+        }
+    }
+
+    @media (max-width: 380px) {
+
+        .main-content {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        .page-title h2 {
+            font-size: 25px;
+        }
+
+        .panel-header {
+            padding: 13px;
+        }
+
+        .services-table tbody tr {
+            padding: 12px;
+        }
+
+        .service-count {
+            font-size: 11px;
+        }
+
+        .service-name strong {
+            font-size: 14px;
+        }
+
+        .service-name span {
+            font-size: 11px;
+        }
+
+        .modal-body {
+            padding: 13px;
+        }
+    }
+
     @media (prefers-reduced-motion: reduce) {
         *,
         *::before,
@@ -1747,7 +2048,6 @@
                                 <th>Price</th>
                                 <th>Duration</th>
                                 <th>Branch</th>
-                                <th>Staff</th>
                                 <th>Status</th>
                                 <th>Actions</th>
                             </tr>
@@ -1755,7 +2055,7 @@
 
                         <tbody id="servicesTableBody">
                             <tr>
-                                <td colspan="8" style="text-align:center;padding:35px;color:#888;">
+                                <td colspan="7" style="text-align:center;padding:35px;color:#888;">
                                     <i class="fa-solid fa-spinner fa-spin"></i>
                                     &nbsp; Loading services...
                                 </td>
@@ -1848,31 +2148,13 @@
                                 Branch
                             </label>
 
-                            <select id="serviceBranch" required>
+                            <select id="serviceBranch">
                                 <option value="">Loading branches...</option>
                             </select>
 
-                            <small class="staff-assignment-note">
-                                Select a branch to load its available staff.
-                            </small>
-
                         </div>
 
-                        <div class="form-group">
-
-                            <label for="serviceStaff">
-                                Staff
-                            </label>
-
-                            <select id="serviceStaff" required disabled>
-                                <option value="">Select branch first</option>
-                            </select>
-
-                            <small class="staff-assignment-note">
-                                Only active staff from the selected branch will appear.
-                            </small>
-
-                        </div>
+                        
 
                         <div class="form-group">
 
@@ -2001,14 +2283,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const tableBody = document.getElementById("servicesTableBody");
 
     const serviceBranchSelect = document.getElementById("serviceBranch");
-    const serviceStaffSelect = document.getElementById("serviceStaff");
-
     const BRANCHES_API_URL = "https://the-beauty-salon.onrender.com/api/branches";
-    const STAFF_API_URL = "https://the-beauty-salon.onrender.com/api/staff";
-
     let services = [];
     let branches = [];
-    let staff = [];
     let selectedCategory = "all";
     let editingService = null;
 
@@ -2098,7 +2375,6 @@ document.addEventListener("DOMContentLoaded", function () {
             service_image: raw.service_image ?? "",
             branch_id: raw.branch_id ?? raw.branchId ?? "",
             branch_name: raw.branch_name ?? raw.branch ?? "",
-            staff_id: raw.staff_id ?? raw.staffId ?? "",
             staff_name: raw.staff_name ?? raw.staff ?? ""
         };
     }
@@ -2128,7 +2404,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function showLoading() {
         tableBody.innerHTML = `
             <tr>
-                <td colspan="8" style="text-align:center;padding:35px;color:#888;">
+                <td colspan="7" style="text-align:center;padding:35px;color:#888;">
                     <i class="fa-solid fa-spinner fa-spin"></i>
                     &nbsp; Loading services...
                 </td>
@@ -2139,7 +2415,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function showEmpty(message) {
         tableBody.innerHTML = `
             <tr>
-                <td colspan="8" style="text-align:center;padding:40px;color:#777;">
+                <td colspan="7" style="text-align:center;padding:40px;color:#777;">
                     <i class="fa-regular fa-folder-open"
                        style="font-size:22px;color:#d4af37;margin-bottom:10px;"></i>
                     <div>${escapeHtml(message)}</div>
@@ -2225,12 +2501,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     </td>
 
                     <td>
-                        <span class="category-badge">
-                            ${escapeHtml(service.staff_name || "—")}
-                        </span>
-                    </td>
-
-                    <td>
                         <span class="status-badge ${service.status}">
                             ${service.status === "active" ? "Active" : "Inactive"}
                         </span>
@@ -2273,90 +2543,38 @@ document.addEventListener("DOMContentLoaded", function () {
                         : [];
     }
 
-    function populateBranchSelect(selectedBranchId = "") {
+    function populateBranchSelect(selectedBranchId) {
         if (!serviceBranchSelect) return;
 
-        serviceBranchSelect.innerHTML = '<option value="">Select branch</option>';
+        const selected = selectedBranchId == null ? "" : String(selectedBranchId);
+
+        serviceBranchSelect.innerHTML = '<option value="">All Branches</option>';
 
         branches.forEach(function (branch) {
             const option = document.createElement("option");
             option.value = branch.id;
-            option.textContent = branch.name || `Branch ${branch.id}`;
-            if (String(branch.id) === String(selectedBranchId)) {
+            option.textContent = branch.name;
+
+            if (selected && String(branch.id) === selected) {
                 option.selected = true;
             }
+
             serviceBranchSelect.appendChild(option);
         });
     }
 
-    function populateStaffSelect(selectedStaffId = "") {
-        if (!serviceStaffSelect) return;
-
-        const branchId = serviceBranchSelect.value;
-
-        serviceStaffSelect.innerHTML = "";
-
-        if (!branchId) {
-            serviceStaffSelect.disabled = true;
-            serviceStaffSelect.innerHTML = '<option value="">Select branch first</option>';
-            return;
-        }
-
-        const branchStaff = staff.filter(function (member) {
-            return String(member.branch_id) === String(branchId);
-        });
-
-        if (!branchStaff.length) {
-            serviceStaffSelect.disabled = true;
-            serviceStaffSelect.innerHTML = '<option value="">No active staff in this branch</option>';
-            return;
-        }
-
-        serviceStaffSelect.disabled = false;
-
-        const placeholder = document.createElement("option");
-        placeholder.value = "";
-        placeholder.textContent = "Select staff";
-        serviceStaffSelect.appendChild(placeholder);
-
-        branchStaff.forEach(function (member) {
-            const option = document.createElement("option");
-            option.value = member.id;
-            option.textContent = member.role
-                ? `${member.name} — ${member.role}`
-                : member.name;
-
-            if (String(member.id) === String(selectedStaffId)) {
-                option.selected = true;
-            }
-
-            serviceStaffSelect.appendChild(option);
-        });
-    }
-
-    async function loadBranchesAndStaff() {
-        if (!serviceBranchSelect || !serviceStaffSelect) return;
+    async function loadBranches() {
+        if (!serviceBranchSelect) return;
 
         serviceBranchSelect.disabled = true;
-        serviceStaffSelect.disabled = true;
         serviceBranchSelect.innerHTML = '<option value="">Loading branches...</option>';
-        serviceStaffSelect.innerHTML = '<option value="">Select branch first</option>';
 
         try {
-            const [branchResponse, staffResponse] = await Promise.all([
-                fetch(BRANCHES_API_URL, {
-                    headers: { "Accept": "application/json" }
-                }),
-                fetch(STAFF_API_URL, {
-                    headers: { "Accept": "application/json" }
-                })
-            ]);
-
-            const branchResult = await branchResponse.json().catch(function () {
-                return {};
+            const branchResponse = await fetch(BRANCHES_API_URL, {
+                headers: { "Accept": "application/json" }
             });
 
-            const staffResult = await staffResponse.json().catch(function () {
+            const branchResult = await branchResponse.json().catch(function () {
                 return {};
             });
 
@@ -2366,41 +2584,23 @@ document.addEventListener("DOMContentLoaded", function () {
                 );
             }
 
-            if (!staffResponse.ok || staffResult.success === false) {
-                throw new Error(
-                    staffResult.message || "Unable to load staff."
-                );
-            }
-
             branches = extractRows(branchResult).filter(function (branch) {
                 return Number(branch.is_active ?? 1) !== 0;
             });
 
-            staff = extractRows(staffResult).filter(function (member) {
-                return Number(member.is_active ?? 1) !== 0;
-            });
-
             serviceBranchSelect.disabled = false;
-            populateBranchSelect();
+            populateBranchSelect("");
 
         } catch (error) {
-            console.error("Branch/Staff Load Error:", error);
+            console.error("Branch Load Error:", error);
 
             serviceBranchSelect.disabled = false;
             serviceBranchSelect.innerHTML =
                 '<option value="">Unable to load branches</option>';
-
-            serviceStaffSelect.disabled = true;
-            serviceStaffSelect.innerHTML =
-                '<option value="">Unable to load staff</option>';
         }
     }
 
-    serviceBranchSelect.addEventListener("change", function () {
-        populateStaffSelect();
-    });
-
-    loadBranchesAndStaff();
+    loadBranches();
 
     async function loadServices() {
         showLoading();
@@ -2437,7 +2637,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             tableBody.innerHTML = `
                 <tr>
-                    <td colspan="8"
+                    <td colspan="7"
                         style="text-align:center;padding:40px;color:#ef8888;">
                         <i class="fa-solid fa-triangle-exclamation"
                            style="font-size:22px;margin-bottom:10px;"></i>
@@ -2481,8 +2681,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 service.description || "";
 
             populateBranchSelect(service.branch_id);
-            populateStaffSelect(service.staff_id);
-
             serviceImageInput.value = "";
             setServiceImagePreview(
                 service.service_image
@@ -2501,10 +2699,6 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("serviceStatus").value = "active";
 
             populateBranchSelect("");
-            serviceStaffSelect.disabled = true;
-            serviceStaffSelect.innerHTML =
-                '<option value="">Select branch first</option>';
-
             serviceImageInput.value = "";
             resetServiceImagePreview();
         }
@@ -2588,7 +2782,6 @@ document.addEventListener("DOMContentLoaded", function () {
         );
         const status = document.getElementById("serviceStatus").value;
         const branchId = serviceBranchSelect.value;
-        const staffId = serviceStaffSelect.value;
         const price = Number(document.getElementById("servicePrice").value);
         const duration = Number(
             document.getElementById("serviceDuration").value
@@ -2599,8 +2792,6 @@ document.addEventListener("DOMContentLoaded", function () {
         if (
             !name ||
             !["him", "her", "child"].includes(category) ||
-            !branchId ||
-            !staffId ||
             !Number.isFinite(price) ||
             price < 0 ||
             !Number.isInteger(duration) ||
@@ -2619,8 +2810,8 @@ document.addEventListener("DOMContentLoaded", function () {
         payload.append("price", String(price));
         payload.append("duration", String(duration));
         payload.append("is_active", status === "inactive" ? "0" : "1");
-        payload.append("branch_id", String(branchId));
-        payload.append("staff_id", String(staffId));
+        // Empty branch_id means the service is available at all branches.
+        payload.append("branch_id", branchId ? String(branchId) : "");
 
         if (imageFile) {
             payload.append("service_image", imageFile);

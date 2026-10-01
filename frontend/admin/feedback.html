@@ -1251,6 +1251,389 @@ body.sidebar-collapsed .admin-main{margin-left:var(--sidebar-collapsed)}
     .feedback-detail-grid{grid-template-columns:1fr}
     .feedback-detail.full{grid-column:auto}
 }
+
+
+/* ==========================================================
+   FINAL FEEDBACK MANAGEMENT MOBILE RESPONSIVE POLISH
+   Targeted CSS only - existing HTML/JS/API preserved
+   ========================================================== */
+
+@media (max-width: 850px) {
+    .main-content {
+        width: 100% !important;
+        padding: 24px 18px !important;
+    }
+
+    .feedback-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 10px !important;
+        margin-bottom: 16px !important;
+    }
+
+    .feedback-stat-card {
+        min-height: 105px !important;
+        padding: 16px !important;
+        border-radius: 11px !important;
+    }
+
+    .feedback-stat-value {
+        font-size: 28px !important;
+    }
+
+    .feedback-stat-label {
+        font-size: 11px !important;
+        margin-top: 6px !important;
+    }
+
+    .feedback-panel {
+        border-radius: 11px !important;
+    }
+
+    .feedback-panel-header {
+        min-height: 64px !important;
+        padding: 0 15px !important;
+    }
+
+    .feedback-panel-title h3 {
+        font-size: 15px !important;
+    }
+
+    .feedback-panel-title span {
+        font-size: 10px !important;
+        line-height: 1.4 !important;
+    }
+
+    .feedback-refresh {
+        min-height: 38px !important;
+        padding: 0 11px !important;
+        font-size: 11px !important;
+    }
+
+    .feedback-table-wrap {
+        width: 100% !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+    }
+
+    .feedback-table {
+        min-width: 850px !important;
+    }
+
+    .feedback-table th,
+    .feedback-table td {
+        white-space: nowrap !important;
+    }
+
+    .feedback-comment {
+        max-width: 360px !important;
+        white-space: normal !important;
+    }
+
+    .feedback-modal {
+        padding: 10px !important;
+        align-items: flex-end !important;
+    }
+
+    .feedback-modal-card {
+        width: 100% !important;
+        max-width: 100% !important;
+        max-height: 92vh !important;
+        border-radius: 14px 14px 0 0 !important;
+    }
+
+    .feedback-modal-header {
+        padding: 15px 16px !important;
+    }
+
+    .feedback-modal-header h3 {
+        font-size: 17px !important;
+    }
+
+    .feedback-modal-body {
+        padding: 16px !important;
+    }
+
+    .feedback-detail-grid {
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+    }
+
+    .feedback-detail.full {
+        grid-column: auto !important;
+    }
+
+    .feedback-detail {
+        padding: 13px !important;
+    }
+
+    .feedback-detail-label {
+        font-size: 10px !important;
+    }
+
+    .feedback-detail-value {
+        font-size: 12px !important;
+    }
+}
+
+@media (max-width: 600px) {
+    .main-content {
+        padding: 20px 13px 28px !important;
+    }
+
+    .feedback-stats {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 8px !important;
+    }
+
+    .feedback-stat-card {
+        min-height: 88px !important;
+        padding: 12px 9px !important;
+        border-radius: 10px !important;
+    }
+
+    .feedback-stat-value {
+        font-size: 24px !important;
+    }
+
+    .feedback-stat-label {
+        font-size: 9px !important;
+        text-align: center !important;
+    }
+
+    .feedback-panel-header {
+        min-height: 62px !important;
+        padding: 10px 12px !important;
+        align-items: center !important;
+    }
+
+    .feedback-panel-title {
+        min-width: 0 !important;
+    }
+
+    .feedback-panel-title h3 {
+        font-size: 14px !important;
+    }
+
+    .feedback-panel-title span {
+        display: none !important;
+    }
+
+    .feedback-actions {
+        flex-shrink: 0 !important;
+    }
+
+    .feedback-refresh {
+        width: 38px !important;
+        min-width: 38px !important;
+        height: 38px !important;
+        padding: 0 !important;
+        justify-content: center !important;
+        font-size: 0 !important;
+    }
+
+    .feedback-refresh i {
+        font-size: 13px !important;
+        margin: 0 !important;
+    }
+
+    .feedback-table {
+        min-width: 820px !important;
+    }
+
+    .feedback-table th {
+        padding: 12px 14px !important;
+        font-size: 10px !important;
+    }
+
+    .feedback-table td {
+        padding: 13px 14px !important;
+        font-size: 11px !important;
+    }
+
+    .feedback-customer {
+        min-width: 175px !important;
+    }
+
+    .feedback-avatar {
+        width: 34px !important;
+        height: 34px !important;
+        flex-basis: 34px !important;
+        font-size: 11px !important;
+    }
+
+    .feedback-customer-info strong {
+        font-size: 12px !important;
+    }
+
+    .feedback-customer-info span {
+        font-size: 9px !important;
+    }
+
+    .feedback-rating {
+        font-size: 12px !important;
+    }
+
+    .feedback-rating-number {
+        font-size: 10px !important;
+    }
+
+    .feedback-comment {
+        max-width: 300px !important;
+        white-space: normal !important;
+        line-height: 1.45 !important;
+    }
+
+    .feedback-date {
+        font-size: 10px !important;
+    }
+
+    .feedback-view-btn,
+    .feedback-delete-btn {
+        width: 32px !important;
+        height: 32px !important;
+        border-radius: 7px !important;
+    }
+
+    .feedback-modal {
+        padding: 6px !important;
+    }
+
+    .feedback-modal-card {
+        max-height: 94vh !important;
+    }
+
+    .feedback-modal-header {
+        padding: 13px 14px !important;
+    }
+
+    .feedback-modal-body {
+        padding: 13px !important;
+    }
+}
+
+@media (max-width: 380px) {
+    .main-content {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+
+    .feedback-stats {
+        gap: 7px !important;
+    }
+
+    .feedback-stat-card {
+        min-height: 82px !important;
+        padding: 10px 6px !important;
+    }
+
+    .feedback-stat-value {
+        font-size: 21px !important;
+    }
+
+    .feedback-stat-label {
+        font-size: 8px !important;
+    }
+
+    .feedback-table {
+        min-width: 790px !important;
+    }
+}
+
+
+
+/* ==========================================================
+   FINAL PROFESSIONAL FEEDBACK LAYOUT
+   Exact centered statistics + balanced mobile spacing
+   ========================================================== */
+
+.feedback-stat-card {
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+}
+
+.feedback-stat-value {
+    width: 100% !important;
+    display: block !important;
+    text-align: center !important;
+}
+
+.feedback-stat-label {
+    width: 100% !important;
+    display: block !important;
+    text-align: center !important;
+}
+
+@media (max-width: 850px) {
+    .feedback-stats {
+        width: 100% !important;
+        align-items: stretch !important;
+    }
+
+    .feedback-stat-card {
+        width: 100% !important;
+        min-height: 108px !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-align: center !important;
+    }
+
+    .feedback-stat-value,
+    .feedback-stat-label {
+        text-align: center !important;
+    }
+}
+
+@media (max-width: 600px) {
+    .feedback-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 9px !important;
+    }
+
+    .feedback-stat-card {
+        min-height: 92px !important;
+        padding: 12px 8px !important;
+    }
+
+    .feedback-stat-value {
+        font-size: 25px !important;
+        line-height: 1.1 !important;
+    }
+
+    .feedback-stat-label {
+        margin-top: 6px !important;
+        font-size: 9px !important;
+        line-height: 1.3 !important;
+    }
+
+    .feedback-panel {
+        margin-top: 4px !important;
+    }
+
+    .feedback-panel-header {
+        padding: 10px 13px !important;
+    }
+}
+
+@media (max-width: 380px) {
+    .feedback-stats {
+        gap: 7px !important;
+    }
+
+    .feedback-stat-card {
+        min-height: 86px !important;
+        padding: 10px 5px !important;
+    }
+
+    .feedback-stat-value {
+        font-size: 22px !important;
+    }
+
+    .feedback-stat-label {
+        font-size: 8px !important;
+    }
+}
+
 </style>
 </head>
 <body>
