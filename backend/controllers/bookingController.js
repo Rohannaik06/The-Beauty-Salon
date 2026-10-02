@@ -87,31 +87,10 @@ function normalizeTime(value) {
 }
 
 
-/*
-=====================================================
-PHONE NORMALIZATION
-=====================================================
+// =====================================================
+// PHONE NORMALIZATION
+// =====================================================
 
-Valid:
-9123456789
-9876543210
-
-Also accepts:
-+91 9123456789
-919123456789
-
-IMPORTANT:
-If the actual 10-digit mobile number starts with 91,
-we DO NOT remove the first 91.
-
-Example:
-9123456789
-    ↓
-9123456789
-
-Not:
-23456789
-*/
 function normalizePhone(phone) {
     if (phone === null || phone === undefined) {
         return "";
@@ -120,13 +99,13 @@ function normalizePhone(phone) {
     const digits = String(phone).replace(/\D/g, "");
 
     // Normal 10-digit Indian mobile number.
-    // This includes numbers starting with 91.
+    // This also correctly accepts numbers beginning with 91.
+    // Example: 9123456789
     if (digits.length === 10) {
         return digits;
     }
 
-    // Indian country-code format.
-    // Example:
+    // Indian country-code format:
     // +91 9123456789
     // 919123456789
     if (
@@ -138,6 +117,7 @@ function normalizePhone(phone) {
 
     return "";
 }
+
 
 function normalizeDate(value) {
     if (!value) {
@@ -161,100 +141,120 @@ function normalizeDate(value) {
 // =====================================================
 
 async function getAllBookings(req, res) {
+
     try {
-        const selectedDate = normalizeDate(req.query.date);
+
+        const selectedDate =
+            normalizeDate(req.query.date);
 
         let dateCondition = "";
         let queryParams = [];
 
         if (selectedDate) {
+
             dateCondition = `
                 WHERE DATE(b.booking_date) = ?
             `;
 
-            queryParams = [selectedDate];
+            queryParams = [
+                selectedDate
+            ];
         }
 
-        const [rows] = await pool.promise().query(
-            `
-            SELECT
-                b.id,
-                b.booking_number,
+        const [rows] =
+            await pool.promise().query(
+                `
+                SELECT
+                    b.id,
+                    b.booking_number,
 
-                DATE_FORMAT(
-                    b.booking_date,
-                    '%Y-%m-%d'
-                ) AS booking_date,
+                    DATE_FORMAT(
+                        b.booking_date,
+                        '%Y-%m-%d'
+                    ) AS booking_date,
 
-                b.booking_time,
+                    b.booking_time,
 
-                b.service_price,
-                b.service_duration,
+                    b.service_price,
+                    b.service_duration,
 
-                b.payment_method,
-                b.payment_status,
-                b.status,
+                    b.payment_method,
+                    b.payment_status,
+                    b.status,
 
-                b.notes,
+                    b.notes,
 
-                b.created_at,
+                    b.created_at,
 
-                c.id AS customer_id,
-                c.name AS customer_name,
-                c.phone AS customer_phone,
-                c.email AS customer_email,
+                    c.id AS customer_id,
+                    c.name AS customer_name,
+                    c.phone AS customer_phone,
+                    c.email AS customer_email,
 
-                br.id AS branch_id,
-                br.name AS branch_name,
+                    br.id AS branch_id,
+                    br.name AS branch_name,
 
-                s.id AS service_id,
-                s.name AS service_name,
+                    s.id AS service_id,
+                    s.name AS service_name,
 
-                st.id AS staff_id,
-                st.name AS staff_name,
-                st.role AS staff_role
+                    st.id AS staff_id,
+                    st.name AS staff_name,
+                    st.role AS staff_role
 
-            FROM bookings b
+                FROM bookings b
 
-            INNER JOIN customers c
-                ON c.id = b.customer_id
+                INNER JOIN customers c
+                    ON c.id = b.customer_id
 
-            INNER JOIN branches br
-                ON br.id = b.branch_id
+                INNER JOIN branches br
+                    ON br.id = b.branch_id
 
-            INNER JOIN services s
-                ON s.id = b.service_id
+                INNER JOIN services s
+                    ON s.id = b.service_id
 
-            INNER JOIN staff st
-                ON st.id = b.staff_id
+                INNER JOIN staff st
+                    ON st.id = b.staff_id
 
-            ${dateCondition}
+                ${dateCondition}
 
-            ORDER BY
-                b.booking_date DESC,
-                b.booking_time DESC,
-                b.id DESC
-            `,
-            queryParams
-        );
+                ORDER BY
+                    b.booking_date DESC,
+                    b.booking_time DESC,
+                    b.id DESC
+                `,
+                queryParams
+            );
 
         return res.status(200).json({
+
             success: true,
-            count: rows.length,
-            selectedDate: selectedDate || null,
-            data: rows
+
+            count:
+                rows.length,
+
+            selectedDate:
+                selectedDate || null,
+
+            data:
+                rows
         });
 
     } catch (error) {
+
         console.error(
             "GET ALL BOOKINGS ERROR:",
             error
         );
 
         return res.status(500).json({
+
             success: false,
-            message: "Failed to fetch bookings.",
-            error: error.message
+
+            message:
+                "Failed to fetch bookings.",
+
+            error:
+                error.message
         });
     }
 }
@@ -266,89 +266,107 @@ async function getAllBookings(req, res) {
 // =====================================================
 
 async function getBookingById(req, res) {
+
     try {
-        const [rows] = await pool.promise().query(
-            `
-            SELECT
-                b.id,
-                b.booking_number,
 
-                DATE_FORMAT(
-                    b.booking_date,
-                    '%Y-%m-%d'
-                ) AS booking_date,
+        const [rows] =
+            await pool.promise().query(
+                `
+                SELECT
+                    b.id,
+                    b.booking_number,
 
-                b.booking_time,
-                b.service_price,
-                b.service_duration,
-                b.payment_method,
-                b.payment_status,
-                b.status,
-                b.notes,
-                b.created_at,
-                b.updated_at,
+                    DATE_FORMAT(
+                        b.booking_date,
+                        '%Y-%m-%d'
+                    ) AS booking_date,
 
-                c.id AS customer_id,
-                c.name AS customer_name,
-                c.phone AS customer_phone,
-                c.email AS customer_email,
+                    b.booking_time,
+                    b.service_price,
+                    b.service_duration,
+                    b.payment_method,
+                    b.payment_status,
+                    b.status,
+                    b.notes,
+                    b.created_at,
+                    b.updated_at,
 
-                br.id AS branch_id,
-                br.name AS branch_name,
-                br.address AS branch_address,
-                br.phone AS branch_phone,
+                    c.id AS customer_id,
+                    c.name AS customer_name,
+                    c.phone AS customer_phone,
+                    c.email AS customer_email,
 
-                s.id AS service_id,
-                s.name AS service_name,
-                s.category AS service_category,
+                    br.id AS branch_id,
+                    br.name AS branch_name,
+                    br.address AS branch_address,
+                    br.phone AS branch_phone,
 
-                st.id AS staff_id,
-                st.name AS staff_name,
-                st.role AS staff_role
+                    s.id AS service_id,
+                    s.name AS service_name,
+                    s.category AS service_category,
 
-            FROM bookings b
+                    st.id AS staff_id,
+                    st.name AS staff_name,
+                    st.role AS staff_role
 
-            INNER JOIN customers c
-                ON c.id = b.customer_id
+                FROM bookings b
 
-            INNER JOIN branches br
-                ON br.id = b.branch_id
+                INNER JOIN customers c
+                    ON c.id = b.customer_id
 
-            INNER JOIN services s
-                ON s.id = b.service_id
+                INNER JOIN branches br
+                    ON br.id = b.branch_id
 
-            INNER JOIN staff st
-                ON st.id = b.staff_id
+                INNER JOIN services s
+                    ON s.id = b.service_id
 
-            WHERE b.id = ?
+                INNER JOIN staff st
+                    ON st.id = b.staff_id
 
-            LIMIT 1
-            `,
-            [req.params.id]
-        );
+                WHERE b.id = ?
+
+                LIMIT 1
+                `,
+                [
+                    req.params.id
+                ]
+            );
 
         if (rows.length === 0) {
+
             return res.status(404).json({
+
                 success: false,
-                message: "Booking not found."
+
+                message:
+                    "Booking not found."
             });
         }
 
         return res.status(200).json({
+
             success: true,
-            data: rows[0]
+
+            data:
+                rows[0]
         });
 
     } catch (error) {
+
         console.error(
             "GET BOOKING ERROR:",
             error
         );
 
         return res.status(500).json({
+
             success: false,
-            message: "Failed to fetch booking.",
-            error: error.message
+
+            message:
+                "Failed to fetch booking.",
+
+            error:
+                error.message
         });
     }
 }
@@ -357,18 +375,6 @@ async function getBookingById(req, res) {
 // =====================================================
 // CREATE BOOKING
 // POST /api/bookings
-//
-// SERVICE LOGIC:
-// branch_id = NULL
-//      -> ALL BRANCHES
-//
-// branch_id = selected branch ID
-//      -> ONLY THAT BRANCH
-//
-// STAFF:
-// Customer does NOT select staff.
-// Backend automatically finds an available
-// active staff member from selected branch.
 // =====================================================
 
 async function createBooking(req, res) {
@@ -405,7 +411,9 @@ async function createBooking(req, res) {
         ) {
 
             return res.status(400).json({
+
                 success: false,
+
                 message:
                     "Name, phone, branch, service, date and time are required."
             });
@@ -422,49 +430,62 @@ async function createBooking(req, res) {
         const cleanPhone =
             normalizePhone(phone);
 
+        const cleanEmail =
+            email &&
+            String(email).trim()
+                ? String(email)
+                    .trim()
+                    .toLowerCase()
+                : null;
+
         const cleanDate =
-            normalizeDate(booking_date);
+            normalizeDate(
+                booking_date
+            );
 
         const cleanTime =
-            normalizeTime(booking_time);
+            normalizeTime(
+                booking_time
+            );
 
 
         // =================================================
-        // PHONE VALIDATION
+        // VALIDATION
         // =================================================
 
-        if (!/^\d{10}$/.test(cleanPhone)) {
+        if (
+            !cleanPhone ||
+            cleanPhone.length !== 10
+        ) {
 
             return res.status(400).json({
+
                 success: false,
+
                 message:
                     "Please enter a valid 10-digit mobile number."
             });
         }
 
 
-        // =================================================
-        // DATE VALIDATION
-        // =================================================
-
         if (!cleanDate) {
 
             return res.status(400).json({
+
                 success: false,
+
                 message:
                     "Invalid booking date."
             });
         }
 
 
-        // =================================================
-        // TIME VALIDATION
-        // =================================================
-
         if (!cleanTime) {
 
             return res.status(400).json({
+
                 success: false,
+
                 message:
                     "Invalid booking time."
             });
@@ -495,7 +516,9 @@ async function createBooking(req, res) {
         ) {
 
             return res.status(400).json({
+
                 success: false,
+
                 message:
                     "Past dates cannot be booked."
             });
@@ -567,7 +590,9 @@ async function createBooking(req, res) {
             await connection.rollback();
 
             return res.status(400).json({
+
                 success: false,
+
                 message:
                     "Selected branch is not available."
             });
@@ -580,12 +605,7 @@ async function createBooking(req, res) {
 
         // =================================================
         // FIND SERVICE
-        //
-        // branch_id IS NULL
-        //     = ALL BRANCHES
-        //
-        // branch_id = selected branch
-        //     = selected branch only
+        // branch_id NULL = ALL BRANCHES
         // =================================================
 
         let services = [];
@@ -658,7 +678,9 @@ async function createBooking(req, res) {
             await connection.rollback();
 
             return res.status(400).json({
+
                 success: false,
+
                 message:
                     "Selected service is not available at the selected branch."
             });
@@ -694,7 +716,9 @@ async function createBooking(req, res) {
             await connection.rollback();
 
             return res.status(400).json({
+
                 success: false,
+
                 message:
                     "Invalid service duration."
             });
@@ -740,7 +764,9 @@ async function createBooking(req, res) {
             await connection.rollback();
 
             return res.status(400).json({
+
                 success: false,
+
                 message:
                     "Invalid salon time configuration."
             });
@@ -757,7 +783,9 @@ async function createBooking(req, res) {
             await connection.rollback();
 
             return res.status(400).json({
+
                 success: false,
+
                 message:
                     `This service cannot be booked at ${cleanTime.substring(0, 5)}. ` +
                     `The service duration is ${serviceDuration} minutes and the salon is open from ` +
@@ -773,15 +801,9 @@ async function createBooking(req, res) {
 
         // =================================================
         // FIND AVAILABLE STAFF
-        //
-        // CUSTOMER DOES NOT SELECT STAFF.
-        //
-        // Backend automatically selects an available
-        // active staff member from selected branch.
         // =================================================
 
         let staffRows = [];
-
 
         [
             staffRows
@@ -811,16 +833,14 @@ async function createBooking(req, res) {
             await connection.rollback();
 
             return res.status(400).json({
+
                 success: false,
+
                 message:
                     "No active staff is available for the selected branch."
             });
         }
 
-
-        // =================================================
-        // FIND AVAILABLE STAFF
-        // =================================================
 
         let selectedStaff = null;
 
@@ -891,9 +911,7 @@ async function createBooking(req, res) {
                         existingStart;
 
 
-                if (
-                    overlaps
-                ) {
+                if (overlaps) {
 
                     isAvailable =
                         false;
@@ -903,9 +921,7 @@ async function createBooking(req, res) {
             }
 
 
-            if (
-                isAvailable
-            ) {
+            if (isAvailable) {
 
                 selectedStaff =
                     candidate;
@@ -922,7 +938,9 @@ async function createBooking(req, res) {
             await connection.rollback();
 
             return res.status(400).json({
+
                 success: false,
+
                 message:
                     "No staff is available for the selected date and time."
             });
@@ -931,6 +949,17 @@ async function createBooking(req, res) {
 
         // =================================================
         // FIND / CREATE CUSTOMER
+        //
+        // Phone = primary identity
+        //
+        // Existing phone:
+        //   reuse customer
+        //
+        // New phone + existing email:
+        //   clear 409 validation
+        //
+        // New phone + new email:
+        //   create customer
         // =================================================
 
         const customerPhone =
@@ -944,7 +973,8 @@ async function createBooking(req, res) {
             await connection.query(
                 `
                 SELECT
-                    id
+                    id,
+                    email
                 FROM customers
                 WHERE phone = ?
                 LIMIT 1
@@ -958,12 +988,57 @@ async function createBooking(req, res) {
         let customerId;
 
 
+        // =================================================
+        // EXISTING PHONE
+        // =================================================
+
         if (
             customers.length > 0
         ) {
 
             customerId =
                 customers[0].id;
+
+
+            // Check whether submitted email belongs
+            // to another customer.
+            if (cleanEmail) {
+
+                const [
+                    emailOwners
+                ] =
+                    await connection.query(
+                        `
+                        SELECT
+                            id
+                        FROM customers
+                        WHERE
+                            email = ?
+                            AND id <> ?
+                        LIMIT 1
+                        `,
+                        [
+                            cleanEmail,
+                            customerId
+                        ]
+                    );
+
+
+                if (
+                    emailOwners.length > 0
+                ) {
+
+                    await connection.rollback();
+
+                    return res.status(409).json({
+
+                        success: false,
+
+                        message:
+                            "Email already registered. Please use your registered mobile number or another email."
+                    });
+                }
+            }
 
 
             await connection.query(
@@ -976,12 +1051,55 @@ async function createBooking(req, res) {
                 `,
                 [
                     cleanName,
-                    email || null,
+                    cleanEmail,
                     customerId
                 ]
             );
+        }
 
-        } else {
+
+        // =================================================
+        // NEW PHONE
+        // =================================================
+
+        else {
+
+            // Check duplicate email before INSERT.
+            if (cleanEmail) {
+
+                const [
+                    emailOwners
+                ] =
+                    await connection.query(
+                        `
+                        SELECT
+                            id
+                        FROM customers
+                        WHERE email = ?
+                        LIMIT 1
+                        `,
+                        [
+                            cleanEmail
+                        ]
+                    );
+
+
+                if (
+                    emailOwners.length > 0
+                ) {
+
+                    await connection.rollback();
+
+                    return res.status(409).json({
+
+                        success: false,
+
+                        message:
+                            "Email already registered. Please use your registered mobile number or another email."
+                    });
+                }
+            }
+
 
             const [
                 customerResult
@@ -999,7 +1117,7 @@ async function createBooking(req, res) {
                     [
                         cleanName,
                         customerPhone,
-                        email || null
+                        cleanEmail
                     ]
                 );
 
@@ -1063,7 +1181,9 @@ async function createBooking(req, res) {
             await connection.rollback();
 
             return res.status(400).json({
+
                 success: false,
+
                 message:
                     "This staff member is no longer available for the selected time."
             });
@@ -1177,7 +1297,7 @@ async function createBooking(req, res) {
                 customerPhone,
 
             email:
-                email || null,
+                cleanEmail,
 
             staff:
                 selectedStaff.name,
@@ -1218,15 +1338,45 @@ async function createBooking(req, res) {
             await connection.rollback();
         } catch (_) {}
 
+
         console.error(
             "CREATE BOOKING ERROR:",
             error
         );
 
+
+        // Database UNIQUE email protection.
+        // Prevents duplicate-email errors from appearing
+        // to the user as a generic 500 error.
+        if (
+            error &&
+            error.code === "ER_DUP_ENTRY" &&
+            String(
+                error.sqlMessage ||
+                error.message ||
+                ""
+            ).includes(
+                "unique_customer_email"
+            )
+        ) {
+
+            return res.status(409).json({
+
+                success: false,
+
+                message:
+                    "Email already registered. Please use your registered mobile number or another email."
+            });
+        }
+
+
         return res.status(500).json({
+
             success: false,
+
             message:
                 "Unable to create booking.",
+
             error:
                 error.message
         });
@@ -1240,10 +1390,6 @@ async function createBooking(req, res) {
 
 // =====================================================
 // UPDATE BOOKING STATUS
-// Allowed:
-// CONFIRMED
-// COMPLETED
-// CANCELLED
 // =====================================================
 
 async function updateBookingStatus(req, res) {
@@ -1269,7 +1415,9 @@ async function updateBookingStatus(req, res) {
         ) {
 
             return res.status(400).json({
+
                 success: false,
+
                 message:
                     "Invalid booking status. Allowed values are CONFIRMED, COMPLETED and CANCELLED."
             });
@@ -1299,7 +1447,9 @@ async function updateBookingStatus(req, res) {
         ) {
 
             return res.status(404).json({
+
                 success: false,
+
                 message:
                     "Booking not found."
             });
@@ -1329,15 +1479,17 @@ async function updateBookingStatus(req, res) {
                 "Booking status updated successfully.",
 
             data: {
+
                 id:
-                    Number(req.params.id),
+                    Number(
+                        req.params.id
+                    ),
 
                 previousStatus:
                     existingRows[0].status,
 
                 status
             }
-
         });
 
     } catch (error) {
@@ -1348,9 +1500,12 @@ async function updateBookingStatus(req, res) {
         );
 
         return res.status(500).json({
+
             success: false,
+
             message:
                 "Failed to update booking status.",
+
             error:
                 error.message
         });
@@ -1378,7 +1533,9 @@ async function getMyAppointments(req, res) {
         ) {
 
             return res.status(401).json({
+
                 success: false,
+
                 message:
                     "Authentication token is required."
             });
@@ -1394,7 +1551,9 @@ async function getMyAppointments(req, res) {
         if (!token) {
 
             return res.status(401).json({
+
                 success: false,
+
                 message:
                     "Authentication token is required."
             });
@@ -1434,7 +1593,9 @@ async function getMyAppointments(req, res) {
         ) {
 
             return res.status(401).json({
+
                 success: false,
+
                 message:
                     "Session expired or invalid. Please login again."
             });
@@ -1532,6 +1693,7 @@ async function getMyAppointments(req, res) {
                 rows.length,
 
             customer: {
+
                 id:
                     customer.id,
 
@@ -1557,9 +1719,12 @@ async function getMyAppointments(req, res) {
         );
 
         return res.status(500).json({
+
             success: false,
+
             message:
-                "Failed to fetch your appointments.",
+                "Failed to fetch appointments.",
+
             error:
                 error.message
         });
@@ -1587,7 +1752,9 @@ async function getMyBookingHistory(req, res) {
         ) {
 
             return res.status(401).json({
+
                 success: false,
+
                 message:
                     "Authentication token is required."
             });
@@ -1603,7 +1770,9 @@ async function getMyBookingHistory(req, res) {
         if (!token) {
 
             return res.status(401).json({
+
                 success: false,
+
                 message:
                     "Authentication token is required."
             });
@@ -1643,7 +1812,9 @@ async function getMyBookingHistory(req, res) {
         ) {
 
             return res.status(401).json({
+
                 success: false,
+
                 message:
                     "Session expired or invalid. Please login again."
             });
@@ -1711,9 +1882,19 @@ async function getMyBookingHistory(req, res) {
                 WHERE
                     b.customer_id = ?
 
-                    AND b.status IN (
-                        'COMPLETED',
-                        'CANCELLED'
+                    AND (
+                        b.status = 'COMPLETED'
+                        OR b.status = 'CANCELLED'
+                        OR (
+                            b.status = 'CONFIRMED'
+                            AND (
+                                DATE(b.booking_date) < CURDATE()
+                                OR (
+                                    DATE(b.booking_date) = CURDATE()
+                                    AND b.booking_time < CURTIME()
+                                )
+                            )
+                        )
                     )
 
                 ORDER BY
@@ -1735,6 +1916,7 @@ async function getMyBookingHistory(req, res) {
                 rows.length,
 
             customer: {
+
                 id:
                     customer.id,
 
@@ -1760,9 +1942,12 @@ async function getMyBookingHistory(req, res) {
         );
 
         return res.status(500).json({
+
             success: false,
+
             message:
                 "Failed to fetch booking history.",
+
             error:
                 error.message
         });
@@ -1775,10 +1960,17 @@ async function getMyBookingHistory(req, res) {
 // =====================================================
 
 module.exports = {
+
     getAllBookings,
+
     getBookingById,
+
     createBooking,
+
     updateBookingStatus,
+
     getMyAppointments,
+
     getMyBookingHistory
+
 };

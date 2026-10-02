@@ -3056,35 +3056,44 @@ if (lightboxClose) {
         /* ==============================
            CUSTOMER ACCOUNT
         ============================== */
-        function readCustomerJSON(key) {
-            try {
-                const localValue = localStorage.getItem(key);
-                const sessionValue = sessionStorage.getItem(key);
-                const raw = localValue || sessionValue;
-                return raw ? JSON.parse(raw) : null;
-            } catch (error) {
-                return null;
-            }
-        }
+        /*
+           CUSTOMER SESSION
+           Use sessionStorage as the ONLY active customer session source.
 
+           This makes the login valid while the current browser tab/session
+           is open. When the tab/window is closed, sessionStorage is cleared
+           by the browser, so the next visit correctly shows Customer Login.
+           No localStorage fallback is used here because localStorage survives
+           browser close and would keep the customer logged in.
+        */
         function getCustomerData() {
-            const session = readCustomerJSON("salon_customer_session");
-            const salonCustomer = readCustomerJSON("salon_customer");
-            const salonhubUser = readCustomerJSON("salonhubUser");
+            let session = null;
+
+            try {
+                const rawSession =
+                    sessionStorage.getItem("salon_customer_session");
+
+                if (rawSession) {
+                    session = JSON.parse(rawSession);
+                }
+            } catch (error) {
+                session = null;
+            }
 
             const customer =
-                session?.customer ||
-                salonCustomer ||
-                salonhubUser ||
-                null;
+                session &&
+                session.customer
+                    ? session.customer
+                    : null;
 
             const token =
-                session?.token ||
-                localStorage.getItem("customerToken") ||
-                sessionStorage.getItem("customerToken");
+                session &&
+                session.token
+                    ? session.token
+                    : sessionStorage.getItem("customerToken");
 
             return {
-                loggedIn: !!(customer && (token || salonCustomer || salonhubUser)),
+                loggedIn: !!(customer && token),
                 customer
             };
         }

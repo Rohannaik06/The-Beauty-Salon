@@ -1906,6 +1906,51 @@
 
 
 
+
+<style id="account-before-login-gold-final">
+/* BEFORE LOGIN ONLY — GOLD + BLACK
+   Logged-in My Account section remains unchanged. */
+#aboutCustomerLoginBtn,
+#aboutMobileCustomerLogin {
+    color: #D4AF37 !important;
+    border: 1px solid #D4AF37 !important;
+    background: #000 !important;
+    border-radius: 8px !important;
+    font-size: 10px !important;
+    font-weight: 600 !important;
+    letter-spacing: .2px !important;
+}
+
+#aboutCustomerLoginBtn i,
+#aboutMobileCustomerLogin i {
+    color: #D4AF37 !important;
+}
+
+#aboutCustomerLoginBtn:hover,
+#aboutMobileCustomerLogin:hover {
+    color: #D4AF37 !important;
+    border-color: #D4AF37 !important;
+    background: #080808 !important;
+}
+
+@media (max-width: 767px) {
+    #aboutMobileCustomerLogin {
+        min-height: 42px !important;
+        padding: 0 12px !important;
+        border: 1px solid #D4AF37 !important;
+        border-radius: 8px !important;
+        background: #000 !important;
+        font-size: 10px !important;
+        font-weight: 600 !important;
+    }
+
+    #aboutMobileCustomerLogin i {
+        color: #D4AF37 !important;
+        font-size: 12px !important;
+    }
+}
+</style>
+
 </head>
 
 
@@ -2794,9 +2839,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 </script>
-
-
-
 
 </body>
 </html>

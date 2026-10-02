@@ -1791,6 +1791,13 @@ body:not(.contact-page) .site-footer {
         box-shadow: 0 4px 14px rgba(0,0,0,.28) !important;
     }
 
+    /* LOGGED-OUT ACCOUNT TABS — ALWAYS HIDDEN */
+    .about-mobile-links > a.customer-account-area[style*="display:none"],
+    .about-mobile-links > button.customer-account-area[style*="display:none"],
+    .about-mobile-links > .customer-account-hidden {
+        display: none !important;
+    }
+
     /* Account tabs — same menu style, no fixed border */
     /* ACCOUNT TABS + LOGOUT — EXACT SAME TAB STYLE */
     .about-mobile-links > a.customer-account-area,
@@ -2839,11 +2846,21 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         mobileAccountItems.forEach(function (item) {
+            item.classList.toggle("customer-account-hidden", !loggedIn);
             item.style.display = loggedIn ? "flex" : "none";
         });
     }
 
     function logoutCustomer() {
+        mobileAccountItems.forEach(function (item) {
+            item.classList.add("customer-account-hidden");
+            item.style.display = "none";
+        });
+
+        if (mobileLogin) {
+            mobileLogin.style.display = "flex";
+        }
+
         customerKeys.forEach(function (key) {
             localStorage.removeItem(key);
             sessionStorage.removeItem(key);

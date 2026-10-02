@@ -1823,6 +1823,205 @@ body{
 }
 
 </style>
+
+<style id="exact-master-admin-header-mobile">
+/* ==========================================================
+   EXACT MASTER ADMIN HEADER - MOBILE
+   Applied to Gallery page only; content/API/JS unchanged
+   ========================================================== */
+@media (max-width:850px){
+    .admin-header{
+        height:68px !important;
+        padding:0 18px !important;
+        display:flex !important;
+        align-items:center !important;
+        justify-content:space-between !important;
+    }
+
+    .header-left{
+        height:100% !important;
+        display:flex !important;
+        align-items:center !important;
+        gap:15px !important;
+        min-width:0 !important;
+    }
+
+    .mobile-menu-btn{
+        display:flex !important;
+        width:40px !important;
+        height:40px !important;
+        flex:0 0 40px !important;
+        align-items:center !important;
+        justify-content:center !important;
+        color:#d4af37 !important;
+        background:#171717 !important;
+        border:1px solid rgba(212,175,55,.24) !important;
+        border-radius:10px !important;
+    }
+
+    .admin-logo{
+        width:39px !important;
+        height:39px !important;
+        flex:0 0 39px !important;
+        border-radius:50% !important;
+        overflow:hidden !important;
+        padding:0 !important;
+    }
+
+    .admin-logo img{
+        width:100% !important;
+        height:100% !important;
+        display:block !important;
+        object-fit:cover !important;
+        border-radius:50% !important;
+    }
+
+    .brand-area{
+        min-width:0 !important;
+        display:flex !important;
+        flex-direction:column !important;
+        line-height:1 !important;
+    }
+
+    .brand-name{
+        font-family:"Playfair Display",serif !important;
+        font-size:17px !important;
+        font-weight:600 !important;
+        color:#fff !important;
+        white-space:nowrap !important;
+    }
+
+    .brand-admin{
+        margin-top:4px !important;
+        color:#d4af37 !important;
+        font-size:8px !important;
+        font-weight:700 !important;
+        letter-spacing:1.7px !important;
+        white-space:nowrap !important;
+    }
+
+    .page-title{
+        display:none !important;
+    }
+
+    .header-right{
+        display:flex !important;
+        align-items:center !important;
+        gap:7px !important;
+        flex-shrink:0 !important;
+    }
+
+    .notification-btn,
+    .admin-profile{
+        flex-shrink:0 !important;
+    }
+
+    .notification-btn{
+        width:38px !important;
+        height:38px !important;
+        display:flex !important;
+        align-items:center !important;
+        justify-content:center !important;
+        border-radius:10px !important;
+    }
+
+    .admin-profile{
+        padding-left:0 !important;
+        border-left:0 !important;
+        display:flex !important;
+        align-items:center !important;
+        gap:0 !important;
+    }
+
+    .profile-avatar{
+        width:38px !important;
+        height:38px !important;
+        flex:0 0 38px !important;
+        border-radius:50% !important;
+    }
+
+    .profile-text{
+        display:none !important;
+    }
+
+    .admin-sidebar,
+    .sidebar-overlay{
+        top:68px !important;
+    }
+
+    .admin-sidebar{
+        width:275px !important;
+        transform:translateX(-100%) !important;
+        box-shadow:15px 0 40px rgba(0,0,0,.5) !important;
+    }
+
+    .admin-sidebar.mobile-open{
+        transform:translateX(0) !important;
+    }
+
+    .sidebar-overlay{
+        position:fixed !important;
+        left:0 !important;
+        right:0 !important;
+        bottom:0 !important;
+        z-index:850 !important;
+        background:rgba(0,0,0,.65) !important;
+        backdrop-filter:blur(2px) !important;
+    }
+
+    .sidebar-overlay.show{
+        display:block !important;
+    }
+}
+
+@media (max-width:600px){
+    .admin-header{
+        padding:0 13px !important;
+    }
+
+    .header-left{
+        gap:9px !important;
+    }
+
+    .mobile-menu-btn{
+        width:38px !important;
+        height:38px !important;
+        flex-basis:38px !important;
+    }
+
+    .admin-logo{
+        width:38px !important;
+        height:38px !important;
+        flex-basis:38px !important;
+    }
+
+    .brand-name{
+        font-size:17px !important;
+    }
+
+    .brand-admin{
+        margin-top:4px !important;
+        font-size:8px !important;
+        letter-spacing:1.7px !important;
+    }
+
+    .header-right{
+        gap:7px !important;
+    }
+
+    .notification-btn{
+        width:38px !important;
+        height:38px !important;
+    }
+
+    .profile-avatar{
+        width:38px !important;
+        height:38px !important;
+        flex-basis:38px !important;
+    }
+}
+</style>
+
 </head>
 
 <body>
