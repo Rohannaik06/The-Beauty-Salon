@@ -8,10 +8,25 @@ const pool = require("../config/database");
 ============================================ */
 
 function normalizePhone(value) {
-    return String(value || "")
-        .replace(/\D/g, "")
-        .replace(/^91/, "")
-        .replace(/^0/, "");
+    const digits = String(value || "").replace(/\D/g, "");
+
+    // A normal 10-digit mobile number is kept unchanged.
+    // This is important for numbers that naturally start with 91.
+    if (digits.length === 10) {
+        return digits;
+    }
+
+    // International India format: +91XXXXXXXXXX / 91XXXXXXXXXX
+    if (digits.length === 12 && digits.startsWith("91")) {
+        return digits.slice(2);
+    }
+
+    // Domestic format with a leading 0: 0XXXXXXXXXX
+    if (digits.length === 11 && digits.startsWith("0")) {
+        return digits.slice(1);
+    }
+
+    return "";
 }
 
 

@@ -8,7 +8,8 @@ const {
     createBooking,
     updateBookingStatus,
     getMyAppointments,
-    getMyBookingHistory
+    getMyBookingHistory,
+    getBookingAvailability
 } = require("../controllers/bookingController");
 
 
@@ -29,6 +30,24 @@ router.get(
 router.get(
     "/booking-history",
     getMyBookingHistory
+);
+
+
+// =====================================================
+// CUSTOMER - BOOKING AVAILABILITY
+//
+// GET /api/bookings/availability
+//
+// Query:
+// branch_id
+// staff_id
+// service_id
+// booking_date
+// =====================================================
+
+router.get(
+    "/availability",
+    getBookingAvailability
 );
 
 

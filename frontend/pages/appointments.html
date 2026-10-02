@@ -1591,6 +1591,46 @@
 }
 </style>
 
+
+/* =====================================================
+   CANCEL APPOINTMENT
+===================================================== */
+.appointment-actions {
+    margin-top: 20px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(212, 175, 55, 0.18);
+}
+
+.cancel-appointment-btn {
+    width: 100%;
+    min-height: 46px;
+    padding: 12px 18px;
+    border: 1px solid rgba(212, 175, 55, 0.55);
+    border-radius: 8px;
+    background: transparent;
+    color: #D4AF37;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.cancel-appointment-btn:hover {
+    background: #D4AF37;
+    color: #000;
+    border-color: #D4AF37;
+}
+
+.cancel-appointment-btn:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+.cancel-appointment-btn i {
+    margin-right: 7px;
+}
+
 </head>
 
 
@@ -2346,6 +2386,106 @@
 
 
         /* =====================================================
+           CANCEL APPOINTMENT
+        ===================================================== */
+
+        async function cancelAppointment(bookingId) {
+
+            if (!bookingId) {
+                alert("Invalid appointment.");
+                return;
+            }
+
+            const confirmed = confirm(
+                "Are you sure you want to cancel this appointment?"
+            );
+
+            if (!confirmed) {
+                return;
+            }
+
+            const session = getCustomerSession();
+
+            if (!session || !session.token) {
+                window.location.href = "login.html";
+                return;
+            }
+
+            const buttons = document.querySelectorAll(
+                `.cancel-appointment-btn[data-booking-id="${String(bookingId).replace(/\"/g, "&quot;")}"]`
+            );
+
+            buttons.forEach(function (button) {
+                button.disabled = true;
+                button.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Cancelling...';
+            });
+
+            try {
+
+                const response = await fetch(
+                    `https://the-beauty-salon.onrender.com/api/bookings/${encodeURIComponent(bookingId)}/status`,
+                    {
+                        method: "PUT",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": "Bearer " + session.token
+                        },
+                        body: JSON.stringify({
+                            status: "CANCELLED"
+                        })
+                    }
+                );
+
+                let data = {};
+
+                try {
+                    data = await response.json();
+                } catch (jsonError) {
+                    data = {};
+                }
+
+                if (response.status === 401) {
+
+                    localStorage.removeItem("salon_customer_session");
+                    sessionStorage.removeItem("salon_customer_session");
+                    localStorage.removeItem("salon_customer");
+
+                    window.location.href = "login.html";
+                    return;
+                }
+
+                if (!response.ok || data.success === false) {
+                    throw new Error(
+                        data.message ||
+                        "Unable to cancel appointment."
+                    );
+                }
+
+                alert("Appointment cancelled successfully.");
+
+                await loadAppointments();
+
+            } catch (error) {
+
+                console.error(
+                    "Cancel Appointment Error:",
+                    error
+                );
+
+                buttons.forEach(function (button) {
+                    button.disabled = false;
+                    button.innerHTML = '<i class="fa-solid fa-xmark"></i> Cancel Appointment';
+                });
+
+                alert(
+                    error.message ||
+                    "Unable to cancel appointment. Please try again."
+                );
+            }
+        }
+
+
+        /* =====================================================
            CREATE APPOINTMENT CARD
         ===================================================== */
 
@@ -2736,6 +2876,29 @@
 
                         </div>
 
+
+
+                    <!-- CANCEL ACTION -->
+
+                    ${
+                        String(appointment.status || "CONFIRMED").toUpperCase() === "CONFIRMED"
+                            ? `
+                                <div class="appointment-actions">
+
+                                    <button
+                                        type="button"
+                                        class="cancel-appointment-btn"
+                                        data-booking-id="${Number(appointment.id) || ""}"
+                                        onclick="cancelAppointment(${Number(appointment.id) || "0"})"
+                                    >
+                                        <i class="fa-solid fa-xmark"></i>
+                                        Cancel Appointment
+                                    </button>
+
+                                </div>
+                              `
+                            : ""
+                    }
 
                     </div>
 

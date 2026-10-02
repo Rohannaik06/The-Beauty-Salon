@@ -2386,14 +2386,63 @@ document.addEventListener("DOMContentLoaded", function () {
         return String(h).padStart(2, "0") + ":" + String(minute).padStart(2, "0") + " " + suffix;
     }
 
-    function populateTimeSlots() {
-        time.innerHTML = "";
-        addOption(time, "", "Select time");
+    function getTodayIndiaString() {
+        return new Intl.DateTimeFormat("en-CA", {
+            timeZone: "Asia/Kolkata",
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit"
+        }).format(new Date());
+    }
 
-        for (let minutes = 9 * 60; minutes < 21 * 60; minutes += 30) {
-            const hour = Math.floor(minutes / 60);
-            const minute = minutes % 60;
-            addOption(time, to12Hour(hour, minute), to12Hour(hour, minute));
+    function getCurrentIndiaMinutes() {
+        const parts = new Intl.DateTimeFormat("en-GB", {
+            timeZone: "Asia/Kolkata",
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: false
+        }).formatToParts(new Date());
+        const hour = Number(parts.find(function (p) { return p.type === "hour"; }).value);
+        const minute = Number(parts.find(function (p) { return p.type === "minute"; }).value);
+        return (hour * 60) + minute;
+    }
+
+    function renderTimeSlots(slots) {
+        time.innerHTML = "";
+        addOption(time, "", slots.length ? "Select time" : "No available time slots");
+        slots.forEach(function (slot) {
+            addOption(time, slot, slot);
+        });
+    }
+
+    async function refreshAvailableTimeSlots() {
+        renderTimeSlots([]);
+
+        if (!branch.value || !service.value || !staff.value || !date.value) {
+            if (!date.value) {
+                time.innerHTML = "";
+                addOption(time, "", "Select date first");
+            }
+            return;
+        }
+
+        time.innerHTML = "";
+        addOption(time, "", "Loading available times...");
+
+        try {
+            const params = new URLSearchParams({
+                branch_id: branch.value,
+                service_id: service.value,
+                staff_id: staff.value,
+                date: date.value
+            });
+
+            const result = await getJson(API + "/bookings/availability?" + params.toString());
+            const slots = Array.isArray(result.availableSlots) ? result.availableSlots : [];
+            renderTimeSlots(slots);
+        } catch (error) {
+            renderTimeSlots([]);
+            showMessage(error.message || "Unable to load available time slots.", "error");
         }
     }
 
@@ -2439,19 +2488,30 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    async function loadServices() {
+    async function loadServices(branchId) {
+        if (!branchId) {
+            setSelectLoading(service, "Select branch first");
+            return;
+        }
+
         setSelectLoading(service, "Loading services...");
 
         try {
             const result = await getJson(API + "/services");
             const rows = Array.isArray(result) ? result : (result.data || result.services || []);
 
+            const filteredRows = rows.filter(function (item) {
+                const active = item.is_active === undefined || Number(item.is_active) === 1;
+                const itemBranch = item.branch_id === null || item.branch_id === undefined || item.branch_id === ""
+                    ? null
+                    : Number(item.branch_id);
+                return active && (itemBranch === null || itemBranch === Number(branchId));
+            });
+
             service.innerHTML = "";
             addOption(service, "", "Choose service");
 
-            rows.filter(function (item) {
-                return item.is_active === undefined || Number(item.is_active) === 1;
-            }).forEach(function (item) {
+            filteredRows.forEach(function (item) {
                 const price = Number(item.price || 0).toFixed(0);
                 addOption(
                     service,
@@ -2460,8 +2520,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 );
             });
 
-            if (rows.length === 0) {
-                addOption(service, "", "No active services found");
+            if (filteredRows.length === 0) {
+                addOption(service, "", "No services available for this branch");
             }
         } catch (error) {
             setSelectLoading(service, "Unable to load services");
@@ -2500,9 +2560,37 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    branch.addEventListener("change", function () {
+    branch.addEventListener("change", async function () {
         clearMessage();
-        loadStaff(this.value);
+        setSelectLoading(service, "Select branch first");
+        setSelectLoading(staff, "Select branch first");
+        time.innerHTML = "";
+        addOption(time, "", "Select staff and date first");
+
+        if (!this.value) {
+            return;
+        }
+
+        await Promise.all([
+            loadServices(this.value),
+            loadStaff(this.value)
+        ]);
+        refreshAvailableTimeSlots();
+    });
+
+    staff.addEventListener("change", function () {
+        clearMessage();
+        refreshAvailableTimeSlots();
+    });
+
+    service.addEventListener("change", function () {
+        clearMessage();
+        refreshAvailableTimeSlots();
+    });
+
+    date.addEventListener("change", function () {
+        clearMessage();
+        refreshAvailableTimeSlots();
     });
 
     let offerIndex = 0;
@@ -2638,14 +2726,9 @@ document.addEventListener("DOMContentLoaded", function () {
         this.value = this.value.replace(/[^0-9]/g, "").slice(0, 10);
     });
 
-    const today = new Date();
-    const localToday =
-        today.getFullYear() + "-" +
-        String(today.getMonth() + 1).padStart(2, "0") + "-" +
-        String(today.getDate()).padStart(2, "0");
-
-    date.min = localToday;
-    populateTimeSlots();
+    date.min = getTodayIndiaString();
+    time.innerHTML = "";
+    addOption(time, "", "Select staff and date first");
 
     bookingForm.addEventListener("submit", async function (event) {
         event.preventDefault();
@@ -2675,11 +2758,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 name: name.value.trim(),
                 email: email.value.trim() || null,
                 phone: mobile.value.trim(),
-                branch: branch.options[branch.selectedIndex].textContent,
-                service: service.options[service.selectedIndex].textContent.split(" — ₹")[0].trim(),
-                staff: staff.value === "ANY"
-                    ? "Any Available Staff"
-                    : staff.options[staff.selectedIndex].textContent.split(" — ")[0].trim(),
+                branch: branch.value,
+                service: service.value,
+                staff: staff.value,
                 booking_date: date.value,
                 booking_time: time.value
             };
@@ -2742,8 +2823,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     Promise.all([
-        loadBranches(),
-        loadServices()
+        loadBranches()
     ]);
 
 });
