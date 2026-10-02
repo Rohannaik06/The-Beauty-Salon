@@ -1596,6 +1596,8 @@
    CANCEL APPOINTMENT
 ===================================================== */
 .appointment-actions {
+    grid-column: 1 / -1;
+    width: 100%;
     margin-top: 20px;
     padding-top: 18px;
     border-top: 1px solid rgba(212, 175, 55, 0.18);
@@ -2391,10 +2393,14 @@
 
         async function cancelAppointment(bookingId) {
 
-            if (!bookingId) {
+            const numericBookingId = Number(bookingId);
+
+            if (!Number.isInteger(numericBookingId) || numericBookingId <= 0) {
                 alert("Invalid appointment.");
                 return;
             }
+
+            bookingId = numericBookingId;
 
             const confirmed = confirm(
                 "Are you sure you want to cancel this appointment?"
@@ -2999,8 +3005,34 @@ if (logoutButton) {
 <script>
 (function(){
 const menuBtn=document.getElementById("menuBtn"),closeMenuBtn=document.getElementById("closeMenuBtn"),mobileMenu=document.getElementById("mobileMenu");
-function openMobileMenu(){if(!mobileMenu)return;mobileMenu.classList.add("open");mobileMenu.setAttribute("aria-hidden","false");if(menuBtn)menuBtn.setAttribute("aria-expanded","true");document.body.style.overflow="hidden";}
-function closeMobileMenu(){if(!mobileMenu)return;mobileMenu.classList.remove("open");mobileMenu.setAttribute("aria-hidden","true");if(menuBtn)menuBtn.setAttribute("aria-expanded","false");document.body.style.overflow="";}
+function openMobileMenu(){
+    if(!mobileMenu) return;
+
+    mobileMenu.classList.add("open");
+    mobileMenu.setAttribute("aria-hidden","false");
+
+    if(menuBtn){
+        menuBtn.setAttribute("aria-expanded","true");
+    }
+
+    document.body.style.overflow="hidden";
+
+    if(closeMenuBtn){
+        closeMenuBtn.focus();
+    }
+}
+function closeMobileMenu(){
+    if(!mobileMenu) return;
+
+    if(menuBtn){
+        menuBtn.focus();
+        menuBtn.setAttribute("aria-expanded","false");
+    }
+
+    mobileMenu.classList.remove("open");
+    mobileMenu.setAttribute("aria-hidden","true");
+    document.body.style.overflow="";
+}
 if(menuBtn)menuBtn.addEventListener("click",openMobileMenu);
 if(closeMenuBtn)closeMenuBtn.addEventListener("click",closeMobileMenu);
 

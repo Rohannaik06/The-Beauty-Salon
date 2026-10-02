@@ -329,6 +329,660 @@ async function getBookingById(req, res) {
     }
 }
 
+// =====================================================
+// GET BOOKING AVAILABILITY
+// GET /api/bookings/availability
+//
+// Query:
+// branch_id
+// service_id
+// staff_id
+// date
+// =====================================================
+
+async function getBookingAvailability(req, res) {
+
+    try {
+
+        const {
+            branch_id,
+            service_id,
+            staff_id,
+            date
+        } = req.query;
+
+
+        // =================================================
+        // REQUIRED PARAMETERS
+        // =================================================
+
+        if (
+            !branch_id ||
+            !service_id ||
+            !date
+        ) {
+
+            return res.status(400).json({
+                success: false,
+                message:
+                    "branch_id, service_id and date are required."
+            });
+
+        }
+
+
+        // =================================================
+        // VALIDATE IDS
+        // =================================================
+
+        const branchId = Number(branch_id);
+
+        const serviceId = Number(service_id);
+
+
+        if (
+            !Number.isInteger(branchId) ||
+            branchId <= 0
+        ) {
+
+            return res.status(400).json({
+                success: false,
+                message:
+                    "Invalid branch ID."
+            });
+
+        }
+
+
+        if (
+            !Number.isInteger(serviceId) ||
+            serviceId <= 0
+        ) {
+
+            return res.status(400).json({
+                success: false,
+                message:
+                    "Invalid service ID."
+            });
+
+        }
+
+
+        // =================================================
+        // VALIDATE DATE
+        // =================================================
+
+        const cleanDate =
+            normalizeDate(date);
+
+
+        if (!cleanDate) {
+
+            return res.status(400).json({
+                success: false,
+                message:
+                    "Invalid booking date."
+            });
+
+        }
+
+
+        // =================================================
+        // PREVENT PAST DATE
+        // =================================================
+
+        const todayString =
+            getTodayString();
+
+
+        if (cleanDate < todayString) {
+
+            return res.status(400).json({
+                success: false,
+                message:
+                    "Past dates cannot be booked."
+            });
+
+        }
+
+
+        // =================================================
+        // FIND BRANCH
+        // =================================================
+
+        const [
+            branches
+        ] =
+            await pool.promise().query(
+                `
+                SELECT
+                    id,
+                    name,
+                    opening_time,
+                    closing_time
+                FROM branches
+                WHERE
+                    id = ?
+                    AND is_active = 1
+                LIMIT 1
+                `,
+                [
+                    branchId
+                ]
+            );
+
+
+        if (branches.length === 0) {
+
+            return res.status(404).json({
+                success: false,
+                message:
+                    "Selected branch is not available."
+            });
+
+        }
+
+
+        const selectedBranch =
+            branches[0];
+
+
+        // =================================================
+        // FIND SERVICE
+        // =================================================
+
+        const [
+            services
+        ] =
+            await pool.promise().query(
+                `
+                SELECT
+                    id,
+                    name,
+                    price,
+                    duration,
+                    branch_id
+                FROM services
+                WHERE
+                    id = ?
+                    AND is_active = 1
+                    AND (
+                        branch_id = ?
+                        OR branch_id IS NULL
+                    )
+                LIMIT 1
+                `,
+                [
+                    serviceId,
+                    branchId
+                ]
+            );
+
+
+        if (services.length === 0) {
+
+            return res.status(404).json({
+                success: false,
+                message:
+                    "Selected service is not available at the selected branch."
+            });
+
+        }
+
+
+        const selectedService =
+            services[0];
+
+
+        // =================================================
+        // SERVICE DURATION
+        // =================================================
+
+        const serviceDuration =
+            Number(
+                selectedService.duration
+            );
+
+
+        if (
+            !Number.isFinite(
+                serviceDuration
+            ) ||
+            serviceDuration <= 0
+        ) {
+
+            return res.status(400).json({
+                success: false,
+                message:
+                    "Invalid service duration."
+            });
+
+        }
+
+
+        // =================================================
+        // SALON OPENING / CLOSING TIME
+        // =================================================
+
+        const openingMinutes =
+            timeToMinutes(
+                selectedBranch.opening_time
+            );
+
+
+        const closingMinutes =
+            timeToMinutes(
+                selectedBranch.closing_time
+            );
+
+
+        if (
+            Number.isNaN(
+                openingMinutes
+            ) ||
+            Number.isNaN(
+                closingMinutes
+            )
+        ) {
+
+            return res.status(500).json({
+                success: false,
+                message:
+                    "Invalid salon time configuration."
+            });
+
+        }
+
+
+        // =================================================
+        // STAFF
+        // =================================================
+
+        let staffRows = [];
+
+
+        const staffValue =
+            staff_id === null ||
+            staff_id === undefined
+                ? ""
+                : String(
+                    staff_id
+                ).trim();
+
+
+        const isAnyStaff =
+            !staffValue ||
+            staffValue.toUpperCase() === "ANY" ||
+            staffValue.toLowerCase() ===
+                "any available staff";
+
+
+        // =================================================
+        // SPECIFIC STAFF
+        // =================================================
+
+        if (!isAnyStaff) {
+
+            if (
+                !/^\d+$/.test(
+                    staffValue
+                )
+            ) {
+
+                return res.status(400).json({
+                    success: false,
+                    message:
+                        "Invalid staff ID."
+                });
+
+            }
+
+
+            [
+                staffRows
+            ] =
+                await pool.promise().query(
+                    `
+                    SELECT
+                        id,
+                        name,
+                        role
+                    FROM staff
+                    WHERE
+                        id = ?
+                        AND branch_id = ?
+                        AND is_active = 1
+                    LIMIT 1
+                    `,
+                    [
+                        Number(
+                            staffValue
+                        ),
+                        branchId
+                    ]
+                );
+
+
+            if (
+                staffRows.length === 0
+            ) {
+
+                return res.status(404).json({
+                    success: false,
+                    message:
+                        "Selected staff is not available at the selected branch."
+                });
+
+            }
+
+        }
+
+
+        // =================================================
+        // ANY AVAILABLE STAFF
+        // =================================================
+
+        else {
+
+            [
+                staffRows
+            ] =
+                await pool.promise().query(
+                    `
+                    SELECT
+                        id,
+                        name,
+                        role
+                    FROM staff
+                    WHERE
+                        branch_id = ?
+                        AND is_active = 1
+                    ORDER BY
+                        id ASC
+                    `,
+                    [
+                        branchId
+                    ]
+                );
+
+
+            if (
+                staffRows.length === 0
+            ) {
+
+                return res.status(200).json({
+                    success: true,
+                    availableSlots: []
+                });
+
+            }
+
+        }
+
+
+        // =================================================
+        // GENERATE AVAILABLE TIME SLOTS
+        // =================================================
+
+        const availableSlots = [];
+
+
+        const SLOT_INTERVAL = 30;
+
+
+        for (
+            let startMinutes =
+                openingMinutes;
+
+            startMinutes +
+                serviceDuration <=
+                closingMinutes;
+
+            startMinutes +=
+                SLOT_INTERVAL
+        ) {
+
+
+            // =============================================
+            // TODAY - SKIP PASSED TIMES
+            // =============================================
+
+            if (
+                cleanDate ===
+                todayString
+            ) {
+
+                const now =
+                    new Date();
+
+
+                const currentMinutes =
+                    now.getHours() * 60 +
+                    now.getMinutes();
+
+
+                if (
+                    startMinutes <=
+                    currentMinutes
+                ) {
+
+                    continue;
+
+                }
+
+            }
+
+
+            const endMinutes =
+                startMinutes +
+                serviceDuration;
+
+
+            // =============================================
+            // CHECK STAFF
+            // =============================================
+
+            let slotAvailable =
+                false;
+
+
+            for (
+                const staffMember
+                of staffRows
+            ) {
+
+                const [
+                    existingBookings
+                ] =
+                    await pool.promise().query(
+                        `
+                        SELECT
+                            booking_time,
+                            service_duration,
+                            status
+                        FROM bookings
+                        WHERE
+                            staff_id = ?
+                            AND branch_id = ?
+                            AND DATE(booking_date) = ?
+                            AND status IN (
+                                'CONFIRMED',
+                                'COMPLETED'
+                            )
+                        `,
+                        [
+                            staffMember.id,
+                            branchId,
+                            cleanDate
+                        ]
+                    );
+
+
+                let staffAvailable =
+                    true;
+
+
+                for (
+                    const booking
+                    of existingBookings
+                ) {
+
+                    const existingStart =
+                        timeToMinutes(
+                            booking.booking_time
+                        );
+
+
+                    const existingDuration =
+                        Number(
+                            booking.service_duration ||
+                            30
+                        );
+
+
+                    const existingEnd =
+                        existingStart +
+                        existingDuration;
+
+
+                    const overlaps =
+                        startMinutes <
+                            existingEnd &&
+                        endMinutes >
+                            existingStart;
+
+
+                    if (overlaps) {
+
+                        staffAvailable =
+                            false;
+
+                        break;
+
+                    }
+
+                }
+
+
+                if (
+                    staffAvailable
+                ) {
+
+                    slotAvailable =
+                        true;
+
+                    break;
+
+                }
+
+            }
+
+
+            // =============================================
+            // ADD AVAILABLE SLOT
+            // =============================================
+
+            if (
+                slotAvailable
+            ) {
+
+                const hours =
+                    Math.floor(
+                        startMinutes / 60
+                    );
+
+
+                const minutes =
+                    startMinutes % 60;
+
+
+                const hour12 =
+                    hours % 12 || 12;
+
+
+                const suffix =
+                    hours >= 12
+                        ? "PM"
+                        : "AM";
+
+
+                const formattedTime =
+                    String(
+                        hour12
+                    ) +
+                    ":" +
+                    String(
+                        minutes
+                    ).padStart(
+                        2,
+                        "0"
+                    ) +
+                    " " +
+                    suffix;
+
+
+                availableSlots.push(
+                    formattedTime
+                );
+
+            }
+
+        }
+
+
+        // =================================================
+        // SUCCESS
+        // =================================================
+
+        return res.status(200).json({
+
+            success: true,
+
+            branch_id:
+                branchId,
+
+            service_id:
+                serviceId,
+
+            staff_id:
+                isAnyStaff
+                    ? "ANY"
+                    : Number(
+                        staffValue
+                    ),
+
+            date:
+                cleanDate,
+
+            availableSlots
+
+        });
+
+
+    } catch (error) {
+
+        console.error(
+            "GET BOOKING AVAILABILITY ERROR:",
+            error
+        );
+
+
+        return res.status(500).json({
+
+            success: false,
+
+            message:
+                "Failed to load booking availability.",
+
+            error:
+                error.message
+
+        });
+
+    }
+
+}
+
 
 // =====================================================
 // CREATE BOOKING

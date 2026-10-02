@@ -2331,18 +2331,48 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    if (mobileClose && mobileMenu) {
-        mobileClose.addEventListener("click", function () {
-            mobileMenu.classList.remove("open");
-            document.body.style.overflow = "";
+    function closeMobileMenu() {
+        if (!mobileMenu) return;
+
+        /*
+         * Move focus outside the menu BEFORE hiding it.
+         * This prevents the aria-hidden/focused-element accessibility warning.
+         */
+        if (menuButton) {
+            menuButton.focus({ preventScroll: true });
+        }
+
+        mobileMenu.classList.remove("open");
+        mobileMenu.setAttribute("aria-hidden", "true");
+
+        if (menuButton) {
+            menuButton.setAttribute("aria-expanded", "false");
+        }
+
+        document.body.style.overflow = "";
+    }
+
+    if (menuButton && mobileMenu) {
+        menuButton.addEventListener("click", function () {
+            mobileMenu.classList.add("open");
+            mobileMenu.setAttribute("aria-hidden", "false");
+            menuButton.setAttribute("aria-expanded", "true");
+            document.body.style.overflow = "hidden";
+
+            if (mobileClose) {
+                mobileClose.focus({ preventScroll: true });
+            }
         });
+    }
+
+    if (mobileClose && mobileMenu) {
+        mobileClose.addEventListener("click", closeMobileMenu);
     }
 
     if (mobileMenu) {
         mobileMenu.querySelectorAll("a").forEach(function (link) {
             link.addEventListener("click", function () {
-                mobileMenu.classList.remove("open");
-                document.body.style.overflow = "";
+                closeMobileMenu();
             });
         });
     }
@@ -2407,6 +2437,29 @@ document.addEventListener("DOMContentLoaded", function () {
         return (hour * 60) + minute;
     }
 
+    function isValidBookingDate(value) {
+        if (!/^\\d{4}-\\d{2}-\\d{2}$/.test(value || "")) {
+            return false;
+        }
+
+        const parts = value.split("-");
+        const year = Number(parts[0]);
+        const month = Number(parts[1]);
+        const day = Number(parts[2]);
+
+        if (year < 1900 || year > 9999 || month < 1 || month > 12 || day < 1 || day > 31) {
+            return false;
+        }
+
+        const check = new Date(Date.UTC(year, month - 1, day));
+
+        return (
+            check.getUTCFullYear() === year &&
+            check.getUTCMonth() === month - 1 &&
+            check.getUTCDate() === day
+        );
+    }
+
     function renderTimeSlots(slots) {
         time.innerHTML = "";
         addOption(time, "", slots.length ? "Select time" : "No available time slots");
@@ -2417,6 +2470,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     async function refreshAvailableTimeSlots() {
         renderTimeSlots([]);
+
+        if (date.value && !isValidBookingDate(date.value)) {
+            time.innerHTML = "";
+            addOption(time, "", "Select a valid date");
+            showMessage("Please select a valid appointment date.", "error");
+            return;
+        }
 
         if (!branch.value || !service.value || !staff.value || !date.value) {
             if (!date.value) {
@@ -2590,6 +2650,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
     date.addEventListener("change", function () {
         clearMessage();
+
+        if (this.value && !isValidBookingDate(this.value)) {
+            this.value = "";
+            time.innerHTML = "";
+            addOption(time, "", "Select date first");
+            showMessage("Please select a valid appointment date.", "error");
+            return;
+        }
+
+        const today = getTodayIndiaString();
+
+        if (this.value && this.value < today) {
+            this.value = "";
+            time.innerHTML = "";
+            addOption(time, "", "Select date first");
+            showMessage("Appointment date cannot be in the past.", "error");
+            return;
+        }
+
         refreshAvailableTimeSlots();
     });
 
@@ -2750,6 +2829,18 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
+        if (!isValidBookingDate(date.value)) {
+            showMessage("Please select a valid appointment date.", "error");
+            date.focus();
+            return;
+        }
+
+        if (date.value < getTodayIndiaString()) {
+            showMessage("Appointment date cannot be in the past.", "error");
+            date.focus();
+            return;
+        }
+
         submitButton.disabled = true;
         submitButton.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Confirming...';
 
@@ -2814,6 +2905,9 @@ document.addEventListener("DOMContentLoaded", function () {
         bookingForm.style.display = "";
         bookingForm.reset();
         setSelectLoading(staff, "Select branch first");
+        time.innerHTML = "";
+        addOption(time, "", "Select staff and date first");
+        date.min = getTodayIndiaString();
         clearMessage();
         window.scrollTo({
             top: 0,
