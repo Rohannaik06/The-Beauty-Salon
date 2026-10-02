@@ -1592,6 +1592,7 @@
 </style>
 
 
+<style>
 /* =====================================================
    CANCEL APPOINTMENT
 ===================================================== */
@@ -1632,6 +1633,278 @@
 .cancel-appointment-btn i {
     margin-right: 7px;
 }
+</style>
+
+
+<style>
+/* =========================================================
+   FINAL RESPONSIVE APPOINTMENTS LAYOUT
+   Keeps existing design; mobile-only layout corrections.
+========================================================= */
+
+.appointment-card {
+    min-width: 0;
+    overflow: hidden;
+}
+
+.card-top,
+.service-info,
+.details-grid,
+.detail-item {
+    min-width: 0;
+}
+
+.appointment-actions {
+    grid-column: 1 / -1;
+    width: 100%;
+    margin-top: 18px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(212, 175, 55, 0.18);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.cancel-appointment-btn {
+    width: auto;
+    min-width: 148px;
+    max-width: 100%;
+    min-height: 40px;
+    padding: 9px 14px;
+    border: 1px solid rgba(212, 175, 55, 0.55);
+    border-radius: 7px;
+    background: transparent;
+    color: #D4AF37;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.2;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.cancel-appointment-btn:hover {
+    background: #D4AF37;
+    color: #000;
+    border-color: #D4AF37;
+}
+
+.cancel-appointment-btn:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+.cancel-appointment-btn i {
+    margin-right: 6px;
+}
+
+@media (max-width: 900px) {
+    .main-container {
+        width: min(94%, 760px);
+    }
+
+    .details-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 17px 14px;
+    }
+
+    .detail-item {
+        min-width: 0;
+    }
+
+    .detail-value {
+        overflow-wrap: anywhere;
+    }
+
+    .appointment-card {
+        padding: 18px;
+    }
+}
+
+@media (max-width: 650px) {
+    .site-header {
+        padding: 0 4%;
+    }
+
+    .header-container {
+        width: 100%;
+        min-height: 68px;
+    }
+
+    .site-brand {
+        min-width: 0;
+        max-width: calc(100% - 58px);
+    }
+
+    .site-brand .brand-name {
+        min-width: 0;
+    }
+
+    .site-brand .brand-name strong {
+        white-space: nowrap;
+    }
+
+    .page-hero {
+        padding: 48px 16px 34px;
+    }
+
+    .page-title {
+        font-size: clamp(31px, 9vw, 40px);
+    }
+
+    .page-subtitle {
+        max-width: 95%;
+        font-size: 13px;
+        line-height: 1.65;
+    }
+
+    .main-container {
+        width: calc(100% - 24px);
+        padding-bottom: 55px;
+    }
+
+    .welcome-box {
+        padding: 16px;
+        margin-bottom: 26px;
+        gap: 14px;
+    }
+
+    .welcome-content {
+        min-width: 0;
+    }
+
+    .welcome-content h3 {
+        font-size: 17px;
+    }
+
+    .welcome-content p {
+        font-size: 12px;
+    }
+
+    .welcome-icon {
+        width: 43px;
+        height: 43px;
+        font-size: 16px;
+    }
+
+    .section-header {
+        gap: 10px;
+        margin-bottom: 14px;
+    }
+
+    .section-title {
+        font-size: 23px;
+        line-height: 1.2;
+    }
+
+    .appointment-count {
+        font-size: 11px;
+    }
+
+    .appointment-card {
+        padding: 15px;
+        border-radius: 9px;
+    }
+
+    .card-top {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        padding-bottom: 15px;
+    }
+
+    .service-info {
+        width: 100%;
+        gap: 11px;
+    }
+
+    .service-icon {
+        width: 44px;
+        height: 44px;
+        font-size: 17px;
+    }
+
+    .service-name {
+        max-width: 100%;
+        font-size: 16px;
+    }
+
+    .booking-number {
+        font-size: 10px;
+        overflow-wrap: anywhere;
+    }
+
+    .status-badge {
+        align-self: flex-start;
+        padding: 6px 10px;
+        font-size: 9px;
+    }
+
+    .details-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        padding-top: 17px;
+    }
+
+    .detail-item {
+        gap: 9px;
+    }
+
+    .detail-value {
+        font-size: 12px;
+    }
+
+    .appointment-actions {
+        margin-top: 17px;
+        padding-top: 14px;
+        justify-content: flex-end;
+    }
+
+    .cancel-appointment-btn {
+        min-width: 142px;
+        min-height: 38px;
+        padding: 8px 12px;
+        font-size: 11px;
+    }
+
+    .empty-box {
+        padding: 55px 16px;
+    }
+}
+
+@media (max-width: 380px) {
+    .main-container {
+        width: calc(100% - 18px);
+    }
+
+    .appointment-card {
+        padding: 13px;
+    }
+
+    .welcome-box {
+        padding: 14px;
+    }
+
+    .section-title {
+        font-size: 21px;
+    }
+
+    .appointment-count {
+        font-size: 10px;
+    }
+
+    .service-name {
+        font-size: 15px;
+    }
+
+    .cancel-appointment-btn {
+        min-width: 132px;
+        font-size: 10.5px;
+        padding-inline: 10px;
+    }
+}
+</style>
 
 </head>
 
