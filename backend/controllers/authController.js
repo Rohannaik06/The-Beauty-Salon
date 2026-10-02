@@ -87,11 +87,13 @@ async function registerCustomer(req, res) {
         }
 
 
-        if (!/^[6-9]\d{9}$/.test(normalizedPhone)) {
+        /* ---------- MOBILE VALIDATION ---------- */
+
+        if (!/^\d{10}$/.test(normalizedPhone)) {
 
             return res.status(400).json({
                 success: false,
-                message: "Please enter a valid 10-digit Indian mobile number."
+                message: "Please enter a valid 10-digit mobile number."
             });
 
         }
@@ -432,7 +434,7 @@ async function loginCustomer(req, res) {
 
         else {
 
-            if (!/^[6-9]\d{9}$/.test(normalizedMobile)) {
+            if (!/^\d{10}$/.test(normalizedMobile)) {
 
                 return res.status(400).json({
                     success: false,

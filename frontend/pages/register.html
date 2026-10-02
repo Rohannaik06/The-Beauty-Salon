@@ -2010,13 +2010,13 @@ const currentYear =
                             /* Mobile */
 
                             if (
-                                !/^[6-9]\d{9}$/.test(
+                                !/^\d{10}$/.test(
                                     mobile
                                 )
                             ) {
 
                                 showMessage(
-                                    "Please enter a valid 10-digit Indian mobile number.",
+                                    "Please enter a valid 10-digit mobile number.",
                                     "error"
                                 );
 
