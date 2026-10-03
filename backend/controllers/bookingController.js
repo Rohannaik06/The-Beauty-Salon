@@ -115,15 +115,66 @@ function normalizeDate(value) {
     return null;
 }
 
+function getIndiaDateTimeParts() {
+    const parts = new Intl.DateTimeFormat("en-GB", {
+        timeZone: "Asia/Kolkata",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: false
+    }).formatToParts(new Date());
+
+    const getPart = function (type) {
+        const part = parts.find(function (item) {
+            return item.type === type;
+        });
+
+        return part ? part.value : "00";
+    };
+
+    return {
+        year: Number(getPart("year")),
+        month: Number(getPart("month")),
+        day: Number(getPart("day")),
+        hour: Number(getPart("hour")),
+        minute: Number(getPart("minute")),
+        second: Number(getPart("second"))
+    };
+}
+
 function getTodayString() {
-    const today = new Date();
+    const now = getIndiaDateTimeParts();
 
     return (
-        today.getFullYear() +
+        String(now.year) +
         "-" +
-        String(today.getMonth() + 1).padStart(2, "0") +
+        String(now.month).padStart(2, "0") +
         "-" +
-        String(today.getDate()).padStart(2, "0")
+        String(now.day).padStart(2, "0")
+    );
+}
+
+function getCurrentIndiaMinutes() {
+    const now = getIndiaDateTimeParts();
+
+    return (
+        (now.hour * 60) +
+        now.minute
+    );
+}
+
+function getCurrentIndiaTimeString() {
+    const now = getIndiaDateTimeParts();
+
+    return (
+        String(now.hour).padStart(2, "0") +
+        ":" +
+        String(now.minute).padStart(2, "0") +
+        ":" +
+        String(now.second).padStart(2, "0")
     );
 }
 
@@ -530,16 +581,36 @@ async function getBookingAvailability(req, res) {
             startMinutes += SLOT_INTERVAL
         ) {
             if (cleanDate === todayString) {
+
                 const now = new Date();
 
-                const currentMinutes =
-                    now.getHours() * 60 +
-                    now.getMinutes();
+                const parts = new Intl.DateTimeFormat("en-GB", {
+                    timeZone: "Asia/Kolkata",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    hour12: false
+                }).formatToParts(now);
 
-                if (
-                    startMinutes <=
-                    currentMinutes
-                ) {
+                const hourPart = parts.find(function (part) {
+                    return part.type === "hour";
+                });
+
+                const minutePart = parts.find(function (part) {
+                    return part.type === "minute";
+                });
+
+                const currentHour = Number(
+                    hourPart ? hourPart.value : 0
+                );
+
+                const currentMinute = Number(
+                    minutePart ? minutePart.value : 0
+                );
+
+                const currentIndiaMinutes =
+                    (currentHour * 60) + currentMinute;
+
+                if (startMinutes <= currentIndiaMinutes) {
                     continue;
                 }
             }
@@ -962,11 +1033,8 @@ async function createBooking(req, res) {
         }
 
         if (cleanDate === todayString) {
-            const now = new Date();
-
             const currentMinutes =
-                now.getHours() * 60 +
-                now.getMinutes();
+                getCurrentIndiaMinutes();
 
             if (startMinutes <= currentMinutes) {
                 await connection.rollback();
@@ -1719,22 +1787,9 @@ async function updateBookingStatus(req, res) {
                 });
             }
 
-            const [
-                currentTimeRows
-            ] =
-                await pool.promise().query(
-                    `
-                    SELECT
-                        CURDATE() AS today,
-                        CURTIME() AS current_time
-                    `
-                );
+            const today = getTodayString();
 
-            const today =
-                currentTimeRows[0].today;
-
-            const currentTime =
-                currentTimeRows[0].current_time;
+            const currentTime = getCurrentIndiaTimeString();
 
             const bookingDate =
                 String(
@@ -1996,11 +2051,15 @@ async function getMyAppointments(req, res) {
                 WHERE
                     b.customer_id = ?
                     AND b.status = 'CONFIRMED'
+                    const today = getTodayString();
+
+                    const currentTime = getCurrentIndiaTimeString();
+
                     AND (
-                        DATE(b.booking_date) > CURDATE()
+                        DATE(b.booking_date) > ?
                         OR (
-                            DATE(b.booking_date) = CURDATE()
-                            AND b.booking_time >= CURTIME()
+                            DATE(b.booking_date) = ?
+                            AND b.booking_time >= ?
                         )
                     )
                 ORDER BY
@@ -2008,7 +2067,12 @@ async function getMyAppointments(req, res) {
                     b.booking_time ASC,
                     b.id ASC
                 `,
-                [customerId]
+                [
+                    customerId,
+                    today,
+                    today,
+                    currentTime
+                ]
             );
 
         return res.status(200).json({
@@ -2156,20 +2220,29 @@ async function getMyBookingHistory(req, res) {
                         OR (
                             b.status = 'CONFIRMED'
                             AND (
-                                DATE(b.booking_date) < CURDATE()
+                                DATE(b.booking_date) < ?
                                 OR (
-                                    DATE(b.booking_date) = CURDATE()
-                                    AND b.booking_time < CURTIME()
+                                    DATE(b.booking_date) = ?
+                                    AND b.booking_time < ?
                                 )
                             )
                         )
                     )
+
+                    const today = getTodayString();
+
+                    const currentTime = getCurrentIndiaTimeString();
                 ORDER BY
                     b.booking_date DESC,
                     b.booking_time DESC,
                     b.id DESC
                 `,
-                [customerId]
+                [
+                    customerId,
+                    today,
+                    today,
+                    currentTime
+                ]
             );
 
         return res.status(200).json({

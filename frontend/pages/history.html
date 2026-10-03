@@ -707,6 +707,333 @@
 }
 </style>
 
+<style>
+/* Profile: no hover background */
+.account-menu a[href="profile.html"]:hover {
+    background: transparent !important;
+    color: #D0D0D0 !important;
+}
+.account-menu a[href="profile.html"]:hover i {
+    color: #D4AF37 !important;
+}
+</style>
+
+
+<style>
+/* Customer account dropdown - black menu tabs */
+.account-menu a,
+.account-menu .logout-btn {
+    background: #000000 !important;
+    color: #D0D0D0 !important;
+    border: 0 !important;
+}
+
+.account-menu a i,
+.account-menu .logout-btn i {
+    color: #D4AF37 !important;
+}
+
+.account-menu a:hover,
+.account-menu .logout-btn:hover {
+    background: #101010 !important;
+    color: #FFFFFF !important;
+}
+
+.account-menu a:hover i,
+.account-menu .logout-btn:hover i {
+    color: #D4AF37 !important;
+}
+
+/* Keep the logged-in user's name/button background unchanged */
+.account-button {
+    background: transparent !important;
+}
+</style>
+
+<style>
+/* Logged-in user name: gold */
+.account-button,
+.account-button span,
+#accountName {
+    background: transparent !important;
+    color: #D4AF37 !important;
+}
+
+.account-button i {
+    color: #D4AF37 !important;
+}
+</style>
+
+
+<style id="mobile-booking-history-compact-css">
+/* =========================================================
+   MOBILE BOOKING HISTORY — COMPACT 3-COLUMN + VIEW DETAILS
+   Desktop layout remains unchanged.
+========================================================= */
+.mobile-booking-summary,
+.mobile-booking-view-btn,
+.booking-details-modal {
+    display: none;
+}
+
+@media (max-width: 650px) {
+    .mobile-booking-summary {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 7px;
+        margin: 0 14px 10px;
+    }
+
+    .mobile-booking-summary-item {
+        min-width: 0;
+        min-height: 52px;
+        padding: 8px 5px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        border: 1px solid rgba(212,175,55,.14);
+        border-radius: 7px;
+        background: #0b0b0b;
+        color: #D4AF37;
+        text-align: center;
+    }
+
+    .mobile-booking-summary-item i {
+        color: #D4AF37;
+        font-size: 12px;
+    }
+
+    .mobile-booking-summary-item span {
+        min-width: 0;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        color: #ddd;
+        font-size: 10px;
+        line-height: 1.25;
+    }
+
+    .mobile-booking-view-btn {
+        width: calc(100% - 28px);
+        min-height: 39px;
+        margin: 0 14px 14px;
+        padding: 8px 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+        border: 1px solid rgba(212,175,55,.35);
+        border-radius: 7px;
+        background: rgba(212,175,55,.04);
+        color: #D4AF37;
+        font: 600 11px "DM Sans", sans-serif;
+        cursor: pointer;
+        transition: .2s ease;
+    }
+
+    .mobile-booking-view-btn:hover,
+    .mobile-booking-view-btn:active {
+        background: rgba(212,175,55,.10);
+        border-color: #D4AF37;
+    }
+
+    /* Full desktop booking details are replaced by the compact mobile view. */
+    .booking-card .booking-body,
+    .booking-card .payment {
+        display: none !important;
+    }
+
+    /* Keep the existing feedback action available on mobile. */
+    .booking-card .feedback-action {
+        margin: 0 14px 14px;
+    }
+
+    .booking-details-modal {
+        position: fixed;
+        inset: 0;
+        z-index: 6000;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: opacity .22s ease, visibility .22s ease;
+    }
+
+    .booking-details-modal.open {
+        display: block;
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+    }
+
+    .booking-details-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(0,0,0,.80);
+        backdrop-filter: blur(7px);
+    }
+
+    .booking-details-dialog {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        max-height: 86vh;
+        overflow-y: auto;
+        padding: 18px 15px 16px;
+        border: 1px solid rgba(212,175,55,.28);
+        border-bottom: 0;
+        border-radius: 18px 18px 0 0;
+        background: #0d0d0d;
+        box-shadow: 0 -20px 60px rgba(0,0,0,.65);
+        transform: translateY(20px);
+        transition: transform .22s ease;
+    }
+
+    .booking-details-modal.open .booking-details-dialog {
+        transform: translateY(0);
+    }
+
+    .booking-details-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+        padding-bottom: 13px;
+        border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+
+    .booking-details-eyebrow {
+        margin-bottom: 4px;
+        color: #D4AF37;
+        font-size: 8px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
+
+    .booking-details-title {
+        margin: 0;
+        color: #fff;
+        font: 600 21px "Playfair Display", serif;
+        line-height: 1.2;
+    }
+
+    .booking-details-close {
+        width: 34px;
+        height: 34px;
+        flex: 0 0 34px;
+        display: grid;
+        place-items: center;
+        border: 1px solid rgba(212,175,55,.35);
+        border-radius: 8px;
+        background: #111;
+        color: #D4AF37;
+        cursor: pointer;
+    }
+
+    .booking-details-status {
+        width: fit-content;
+        margin: 13px 0 12px;
+        padding: 6px 10px;
+        border: 1px solid rgba(212,175,55,.30);
+        border-radius: 30px;
+        background: rgba(212,175,55,.08);
+        color: #D4AF37;
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: .5px;
+    }
+
+    .booking-details-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+    }
+
+    .booking-details-box {
+        min-width: 0;
+        padding: 10px;
+        border: 1px solid rgba(255,255,255,.07);
+        border-radius: 8px;
+        background: #111;
+    }
+
+    .booking-details-box.full {
+        grid-column: 1 / -1;
+    }
+
+    .booking-details-label {
+        display: block;
+        margin-bottom: 4px;
+        color: #666;
+        font-size: 8px;
+        font-weight: 700;
+        letter-spacing: .8px;
+        text-transform: uppercase;
+    }
+
+    .booking-details-value {
+        display: block;
+        color: #ddd;
+        font-size: 11px;
+        line-height: 1.45;
+        overflow-wrap: anywhere;
+    }
+
+    .booking-details-value.gold {
+        color: #D4AF37;
+        font-weight: 700;
+    }
+
+    .booking-details-actions {
+        margin-top: 12px;
+    }
+
+    .booking-details-done {
+        width: 100%;
+        min-height: 40px;
+        border: 1px solid #D4AF37;
+        border-radius: 7px;
+        background: transparent;
+        color: #D4AF37;
+        font: 600 11px "DM Sans", sans-serif;
+        cursor: pointer;
+    }
+
+    .booking-details-done:hover {
+        background: #D4AF37;
+        color: #000;
+    }
+}
+
+@media (max-width: 380px) {
+    .mobile-booking-summary {
+        gap: 5px;
+    }
+
+    .mobile-booking-summary-item {
+        min-height: 49px;
+        padding-inline: 3px;
+    }
+
+    .mobile-booking-summary-item span {
+        font-size: 9px;
+    }
+
+    .booking-details-grid {
+        gap: 6px;
+    }
+
+    .booking-details-box {
+        padding: 9px;
+    }
+}
+</style>
+
 </head>
 
 <body>
@@ -869,6 +1196,45 @@
         <div id="historyList" class="history-list" style="display:none;"></div>
     </div>
 </main>
+
+
+<!-- MOBILE BOOKING DETAILS MODAL -->
+<div class="booking-details-modal" id="bookingDetailsModal" aria-hidden="true">
+    <div class="booking-details-overlay" data-close-booking-details></div>
+
+    <div
+        class="booking-details-dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="bookingDetailsTitle"
+    >
+        <div class="booking-details-header">
+            <div>
+                <div class="booking-details-eyebrow">BOOKING DETAILS</div>
+                <h2 class="booking-details-title" id="bookingDetailsTitle">Booking</h2>
+            </div>
+
+            <button
+                type="button"
+                class="booking-details-close"
+                id="bookingDetailsClose"
+                aria-label="Close booking details"
+            >
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <div class="booking-details-status" id="bookingDetailsStatus"></div>
+
+        <div class="booking-details-grid" id="bookingDetailsGrid"></div>
+
+        <div class="booking-details-actions">
+            <button type="button" class="booking-details-done" data-close-booking-details>
+                Close
+            </button>
+        </div>
+    </div>
+</div>
 
 <div class="feedback-modal" id="feedbackModal" aria-hidden="true">
     <div class="feedback-modal-backdrop" id="feedbackBackdrop"></div>
@@ -1126,6 +1492,7 @@
 
         const rows = Array.isArray(data.data) ? data.data : [];
         feedbackByBookingId = new Map();
+        window.__bookingFeedbackData = rows;
 
         rows.forEach(function (row) {
             const bookingId = Number(row.booking_id);
@@ -1268,6 +1635,31 @@
                         <span class="booking-number">${safe(bookingNumber)}</span>
                         <span class="status ${getStatusClass(status)}">${safe(getStatusText(status))}</span>
                     </div>
+
+                    <div class="mobile-booking-summary">
+                        <div class="mobile-booking-summary-item">
+                            <i class="fa-regular fa-calendar"></i>
+                            <span>${safe(formatDate(date))}</span>
+                        </div>
+                        <div class="mobile-booking-summary-item">
+                            <i class="fa-regular fa-clock"></i>
+                            <span>${safe(formatTime(time))}</span>
+                        </div>
+                        <div class="mobile-booking-summary-item">
+                            <i class="fa-solid fa-indian-rupee-sign"></i>
+                            <span>${safe(money(price))}</span>
+                        </div>
+                    </div>
+
+                    <button
+                        type="button"
+                        class="mobile-booking-view-btn"
+                        data-view-booking-id="${safe(bookingId || "")}"
+                        aria-label="View booking details"
+                    >
+                        <i class="fa-regular fa-eye"></i>
+                        View Details
+                    </button>
 
                     <div class="booking-body">
                         <div>
@@ -1433,6 +1825,7 @@
             }
 
             const bookings = getBookingArray(data);
+            window.__bookingHistoryData = bookings;
 
             // Feedback status is loaded separately so the existing booking-history API stays unchanged.
             try {
@@ -1573,61 +1966,268 @@
 })();
 </script>
 
+
+<script>
+/* =========================================================
+   MOBILE BOOKING DETAILS MODAL
+   Desktop booking-history functionality remains unchanged.
+========================================================= */
+(function () {
+    "use strict";
+
+    const modal = document.getElementById("bookingDetailsModal");
+    const closeButton = document.getElementById("bookingDetailsClose");
+    const title = document.getElementById("bookingDetailsTitle");
+    const statusBox = document.getElementById("bookingDetailsStatus");
+    const grid = document.getElementById("bookingDetailsGrid");
+
+    if (!modal || !title || !statusBox || !grid) return;
+
+    function escapeHtml(value) {
+        return String(value ?? "-")
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
+
+    function detailBox(label, value, full, gold) {
+        return `
+            <div class="booking-details-box${full ? " full" : ""}">
+                <span class="booking-details-label">${escapeHtml(label)}</span>
+                <span class="booking-details-value${gold ? " gold" : ""}">
+                    ${escapeHtml(value)}
+                </span>
+            </div>
+        `;
+    }
+
+    function formatDetailDate(value) {
+        if (!value) return "-";
+        const text = String(value).trim();
+        const match = text.match(/^(\d{4})-(\d{2})-(\d{2})/);
+        if (!match) return text;
+
+        const y = Number(match[1]);
+        const m = Number(match[2]);
+        const d = Number(match[3]);
+        const months = [
+            "Jan","Feb","Mar","Apr","May","Jun",
+            "Jul","Aug","Sep","Oct","Nov","Dec"
+        ];
+
+        if (m < 1 || m > 12 || d < 1 || d > 31) return text;
+        return String(d).padStart(2, "0") + " " + months[m - 1] + " " + y;
+    }
+
+    function formatDetailTime(value) {
+        if (!value) return "-";
+        const text = String(value).trim();
+        const match = text.match(/^(\d{1,2}):(\d{2})(?::\d{2})?$/);
+        if (!match) return text;
+
+        let hour = Number(match[1]);
+        const minute = match[2];
+        const suffix = hour >= 12 ? "PM" : "AM";
+        hour = hour % 12;
+        if (hour === 0) hour = 12;
+
+        return String(hour).padStart(2, "0") + ":" + minute + " " + suffix;
+    }
+
+    function formatDetailMoney(value) {
+        const number = Number(value);
+        if (!Number.isFinite(number)) return "₹0";
+        return "₹" + number.toLocaleString("en-IN", {
+            maximumFractionDigits: 2
+        });
+    }
+
+    function openBookingDetails(bookingId) {
+        const bookings = Array.isArray(window.__bookingHistoryData)
+            ? window.__bookingHistoryData
+            : [];
+
+        const booking = bookings.find(function (item) {
+            return String(
+                item && (item.id ?? item.booking_id ?? item.bookingId)
+            ) === String(bookingId);
+        });
+
+        if (!booking) return;
+
+        const bookingNumber =
+            booking.booking_number ||
+            booking.bookingNumber ||
+            booking.booking_id ||
+            booking.id ||
+            "-";
+
+        const service =
+            booking.service_name ||
+            booking.serviceName ||
+            (booking.service && booking.service.name) ||
+            "Salon Service";
+
+        const branch =
+            booking.branch_name ||
+            booking.branchName ||
+            (booking.branch && booking.branch.name) ||
+            "-";
+
+        const staff =
+            booking.staff_name ||
+            booking.staffName ||
+            (booking.staff && booking.staff.name) ||
+            "-";
+
+        const date =
+            booking.booking_date ||
+            booking.bookingDate ||
+            booking.date ||
+            "-";
+
+        const time =
+            booking.booking_time ||
+            booking.bookingTime ||
+            booking.time ||
+            "-";
+
+        const price =
+            booking.service_price ??
+            booking.servicePrice ??
+            booking.price ??
+            0;
+
+        const duration =
+            booking.service_duration ??
+            booking.serviceDuration ??
+            booking.duration ??
+            "-";
+
+        const paymentMethod =
+            booking.payment_method ||
+            booking.paymentMethod ||
+            "PAY_AT_SALON";
+
+        const paymentStatus =
+            booking.payment_status ||
+            booking.paymentStatus ||
+            "PENDING";
+
+        const bookingStatus =
+            booking.status ||
+            booking.booking_status ||
+            booking.bookingStatus ||
+            "UNKNOWN";
+
+        const feedback = Array.isArray(window.__bookingFeedbackData)
+            ? window.__bookingFeedbackData.find(function (row) {
+                return String(row.booking_id) === String(bookingId);
+            })
+            : null;
+
+        title.textContent = service;
+
+        statusBox.innerHTML =
+            '<i class="fa-solid fa-circle-check"></i> ' +
+            escapeHtml(String(bookingStatus).replace(/_/g, " "));
+
+        let html = "";
+
+        html += detailBox("Booking Number", bookingNumber, false, true);
+        html += detailBox("Service", service, false, false);
+        html += detailBox("Date", formatDetailDate(date), false, false);
+        html += detailBox("Time", formatDetailTime(time), false, false);
+        html += detailBox("Branch", branch, false, false);
+        html += detailBox("Staff", staff, false, false);
+        html += detailBox("Duration", duration ? String(duration) + " minutes" : "-", false, false);
+        html += detailBox(
+            "Payment",
+            String(paymentMethod).replace(/_/g, " "),
+            false,
+            false
+        );
+        html += detailBox(
+            "Payment Status",
+            String(paymentStatus).replace(/_/g, " "),
+            false,
+            false
+        );
+        html += detailBox(
+            "Price",
+            formatDetailMoney(price),
+            false,
+            true
+        );
+
+        if (feedback) {
+            html += detailBox(
+                "Your Rating",
+                String(feedback.rating || "-") + " / 5",
+                false,
+                true
+            );
+
+            if (feedback.comment) {
+                html += detailBox(
+                    "Your Feedback",
+                    feedback.comment,
+                    true,
+                    false
+                );
+            }
+        }
+
+        if (booking.notes) {
+            html += detailBox("Notes", booking.notes, true, false);
+        }
+
+        grid.innerHTML = html;
+        modal.classList.add("open");
+        modal.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+    }
+
+    function closeBookingDetails() {
+        modal.classList.remove("open");
+        modal.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = "";
+    }
+
+    document.addEventListener("click", function (event) {
+        const viewButton = event.target.closest(".mobile-booking-view-btn");
+
+        if (viewButton) {
+            openBookingDetails(
+                viewButton.getAttribute("data-view-booking-id")
+            );
+            return;
+        }
+
+        if (
+            event.target.closest("[data-close-booking-details]") ||
+            event.target.closest("#bookingDetailsClose")
+        ) {
+            closeBookingDetails();
+        }
+    });
+
+    if (closeButton) {
+        closeButton.addEventListener("click", closeBookingDetails);
+    }
+
+    document.addEventListener("keydown", function (event) {
+        if (
+            event.key === "Escape" &&
+            modal.classList.contains("open")
+        ) {
+            closeBookingDetails();
+        }
+    });
+})();
+</script>
+
 </body>
 </html>
-<style>
-/* Profile: no hover background */
-.account-menu a[href="profile.html"]:hover {
-    background: transparent !important;
-    color: #D0D0D0 !important;
-}
-.account-menu a[href="profile.html"]:hover i {
-    color: #D4AF37 !important;
-}
-</style>
-
-
-<style>
-/* Customer account dropdown - black menu tabs */
-.account-menu a,
-.account-menu .logout-btn {
-    background: #000000 !important;
-    color: #D0D0D0 !important;
-    border: 0 !important;
-}
-
-.account-menu a i,
-.account-menu .logout-btn i {
-    color: #D4AF37 !important;
-}
-
-.account-menu a:hover,
-.account-menu .logout-btn:hover {
-    background: #101010 !important;
-    color: #FFFFFF !important;
-}
-
-.account-menu a:hover i,
-.account-menu .logout-btn:hover i {
-    color: #D4AF37 !important;
-}
-
-/* Keep the logged-in user's name/button background unchanged */
-.account-button {
-    background: transparent !important;
-}
-</style>
-
-<style>
-/* Logged-in user name: gold */
-.account-button,
-.account-button span,
-#accountName {
-    background: transparent !important;
-    color: #D4AF37 !important;
-}
-
-.account-button i {
-    color: #D4AF37 !important;
-}
-</style>

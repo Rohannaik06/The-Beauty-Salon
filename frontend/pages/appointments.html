@@ -1906,6 +1906,270 @@
 }
 </style>
 
+
+
+<style>
+/* =========================================================
+   MOBILE APPOINTMENT COMPACT VIEW + DETAILS MODAL
+   Desktop appointment layout remains unchanged.
+========================================================= */
+.mobile-appointment-summary,
+.mobile-view-details-btn,
+.appointment-details-modal {
+    display: none;
+}
+
+@media (max-width: 650px) {
+
+    .mobile-appointment-summary {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 7px;
+        margin-top: 15px;
+    }
+
+    .mobile-summary-item {
+        min-width: 0;
+        min-height: 52px;
+        padding: 8px 5px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        border: 1px solid rgba(212,175,55,.14);
+        border-radius: 7px;
+        background: #0b0b0b;
+        text-align: center;
+    }
+
+    .mobile-summary-item i {
+        color: #D4AF37;
+        font-size: 12px;
+    }
+
+    .mobile-summary-item span {
+        max-width: 100%;
+        color: #ddd;
+        font-size: 10px;
+        line-height: 1.25;
+        overflow-wrap: anywhere;
+    }
+
+    .mobile-view-details-btn {
+        width: 100%;
+        min-height: 39px;
+        margin-top: 9px;
+        padding: 8px 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+        border: 1px solid rgba(212,175,55,.35);
+        border-radius: 7px;
+        background: rgba(212,175,55,.04);
+        color: #D4AF37;
+        font: 600 11px "DM Sans", sans-serif;
+        cursor: pointer;
+        transition: .2s ease;
+    }
+
+    .mobile-view-details-btn:hover,
+    .mobile-view-details-btn:active {
+        background: rgba(212,175,55,.10);
+        border-color: #D4AF37;
+    }
+
+    .mobile-view-details-btn i {
+        font-size: 12px;
+    }
+
+    .appointment-card .details-grid {
+        display: none !important;
+    }
+
+    .appointment-details-modal {
+        position: fixed;
+        inset: 0;
+        z-index: 7000;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        padding: 0;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: opacity .22s ease, visibility .22s ease;
+    }
+
+    .appointment-details-modal.open {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+    }
+
+    .appointment-details-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(0,0,0,.78);
+        backdrop-filter: blur(7px);
+    }
+
+    .appointment-details-dialog {
+        position: relative;
+        width: 100%;
+        max-height: 88vh;
+        overflow-y: auto;
+        padding: 18px 15px 16px;
+        border: 1px solid rgba(212,175,55,.28);
+        border-bottom: 0;
+        border-radius: 18px 18px 0 0;
+        background: #0d0d0d;
+        box-shadow: 0 -20px 60px rgba(0,0,0,.65);
+        transform: translateY(20px);
+        transition: transform .22s ease;
+    }
+
+    .appointment-details-modal.open .appointment-details-dialog {
+        transform: translateY(0);
+    }
+
+    .appointment-details-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+        padding-bottom: 13px;
+        border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+
+    .appointment-details-eyebrow {
+        margin-bottom: 4px;
+        color: #D4AF37;
+        font-size: 8px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
+
+    .appointment-details-header h3 {
+        color: #fff;
+        font: 600 21px "Playfair Display", serif;
+        line-height: 1.2;
+    }
+
+    .appointment-details-close {
+        width: 34px;
+        height: 34px;
+        flex: 0 0 34px;
+        display: grid;
+        place-items: center;
+        border: 1px solid rgba(212,175,55,.35);
+        border-radius: 8px;
+        background: #111;
+        color: #D4AF37;
+        cursor: pointer;
+    }
+
+    .appointment-details-status {
+        width: fit-content;
+        margin: 13px 0 12px;
+        padding: 6px 10px;
+        border: 1px solid rgba(212,175,55,.30);
+        border-radius: 30px;
+        background: rgba(212,175,55,.08);
+        color: #D4AF37;
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: .5px;
+    }
+
+    .appointment-details-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+    }
+
+    .appointment-detail-box {
+        min-width: 0;
+        padding: 10px;
+        border: 1px solid rgba(255,255,255,.07);
+        border-radius: 8px;
+        background: #111;
+    }
+
+    .appointment-detail-box.full {
+        grid-column: 1 / -1;
+    }
+
+    .appointment-detail-box-label {
+        display: block;
+        margin-bottom: 4px;
+        color: #6f6f6f;
+        font-size: 8px;
+        font-weight: 700;
+        letter-spacing: .8px;
+        text-transform: uppercase;
+    }
+
+    .appointment-detail-box-value {
+        display: block;
+        color: #ddd;
+        font-size: 11px;
+        line-height: 1.45;
+        overflow-wrap: anywhere;
+    }
+
+    .appointment-detail-box-value.gold {
+        color: #D4AF37;
+        font-weight: 700;
+    }
+
+    .appointment-details-modal-actions {
+        margin-top: 12px;
+    }
+
+    .appointment-details-done {
+        width: 100%;
+        min-height: 40px;
+        border: 1px solid #D4AF37;
+        border-radius: 7px;
+        background: transparent;
+        color: #D4AF37;
+        font: 600 11px "DM Sans", sans-serif;
+        cursor: pointer;
+    }
+
+    .appointment-details-done:hover {
+        background: #D4AF37;
+        color: #000;
+    }
+}
+
+@media (max-width: 380px) {
+    .mobile-appointment-summary {
+        gap: 5px;
+    }
+
+    .mobile-summary-item {
+        min-height: 49px;
+        padding-inline: 3px;
+    }
+
+    .mobile-summary-item span {
+        font-size: 9px;
+    }
+
+    .appointment-details-grid {
+        gap: 6px;
+    }
+
+    .appointment-detail-box {
+        padding: 9px;
+    }
+}
+
+</style>
 </head>
 
 
@@ -2096,6 +2360,43 @@
         </div>
 
     </main>
+
+    <!-- =====================================================
+         MOBILE APPOINTMENT DETAILS MODAL
+    ====================================================== -->
+
+<div class="appointment-details-modal" id="appointmentDetailsModal" aria-hidden="true">
+        <div class="appointment-details-overlay" data-close-appointment-modal></div>
+
+        <div class="appointment-details-dialog" role="dialog" aria-modal="true" aria-labelledby="appointmentDetailsTitle">
+            <div class="appointment-details-header">
+                <div>
+                    <div class="appointment-details-eyebrow">Appointment Details</div>
+                    <h3 id="appointmentDetailsTitle">Appointment</h3>
+                </div>
+
+                <button
+                    type="button"
+                    class="appointment-details-close"
+                    id="closeAppointmentDetails"
+                    aria-label="Close appointment details"
+                >
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="appointment-details-status" id="appointmentDetailsStatus"></div>
+
+            <div class="appointment-details-grid" id="appointmentDetailsGrid"></div>
+
+            <div class="appointment-details-modal-actions">
+                <button type="button" class="appointment-details-done" data-close-appointment-modal>
+                    <i class="fa-solid fa-check"></i>
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
 
 
 
@@ -2538,6 +2839,8 @@
                         ? data.data
                         : [];
 
+                window.__upcomingAppointments = appointments;
+
 
                 /* COUNT */
 
@@ -2879,6 +3182,32 @@
 
 
 
+                    <!-- MOBILE QUICK SUMMARY -->
+                    <div class="mobile-appointment-summary">
+                        <div class="mobile-summary-item">
+                            <i class="fa-regular fa-calendar"></i>
+                            <span>${formatDate(appointment.booking_date)}</span>
+                        </div>
+                        <div class="mobile-summary-item">
+                            <i class="fa-regular fa-clock"></i>
+                            <span>${formatTime(appointment.booking_time)}</span>
+                        </div>
+                        <div class="mobile-summary-item">
+                            <i class="fa-solid fa-indian-rupee-sign"></i>
+                            <span>${formatPrice(appointment.service_price)}</span>
+                        </div>
+                    </div>
+
+                    <button
+                        type="button"
+                        class="mobile-view-details-btn"
+                        data-appointment-id="${Number(appointment.id) || ""}"
+                        aria-label="View appointment details"
+                    >
+                        <i class="fa-regular fa-eye"></i>
+                        View Details
+                    </button>
+
                     <!-- DETAILS -->
 
                     <div class="details-grid">
@@ -3190,8 +3519,202 @@
 
 
         /* =====================================================
+           MOBILE APPOINTMENT DETAILS MODAL
+        ===================================================== */
+
+        const appointmentDetailsModal =
+            document.getElementById("appointmentDetailsModal");
+
+        const appointmentDetailsGrid =
+            document.getElementById("appointmentDetailsGrid");
+
+        const appointmentDetailsTitle =
+            document.getElementById("appointmentDetailsTitle");
+
+        const appointmentDetailsStatus =
+            document.getElementById("appointmentDetailsStatus");
+
+        const closeAppointmentDetails =
+            document.getElementById("closeAppointmentDetails");
+
+
+        function appointmentDetailBox(label, value, extraClass) {
+            return `
+                <div class="appointment-detail-box ${extraClass || ""}">
+                    <span class="appointment-detail-box-label">
+                        ${escapeHtml(label)}
+                    </span>
+                    <span class="appointment-detail-box-value">
+                        ${escapeHtml(value || "-")}
+                    </span>
+                </div>
+            `;
+        }
+
+
+        function openAppointmentDetails(appointmentId) {
+
+            if (!appointmentDetailsModal) return;
+
+            const appointments =
+                Array.isArray(window.__upcomingAppointments)
+                    ? window.__upcomingAppointments
+                    : [];
+
+            const appointment =
+                appointments.find(function (item) {
+                    return String(item.id) === String(appointmentId);
+                });
+
+            if (!appointment) return;
+
+            const serviceName =
+                appointment.service_name || "Salon Service";
+
+            const bookingNumber =
+                appointment.booking_number || "-";
+
+            const branchName =
+                appointment.branch_name || "-";
+
+            const staffName =
+                appointment.staff_name || "-";
+
+            const duration =
+                Number(appointment.service_duration || 0);
+
+            const paymentMethod =
+                appointment.payment_method === "PAY_AT_SALON"
+                    ? "Pay at Salon"
+                    : (appointment.payment_method || "-");
+
+            const paymentStatus =
+                appointment.payment_status || "PENDING";
+
+            const status =
+                String(appointment.status || "CONFIRMED").toUpperCase();
+
+            appointmentDetailsTitle.textContent = serviceName;
+
+            appointmentDetailsStatus.innerHTML =
+                '<i class="fa-solid fa-circle-check"></i> ' +
+                escapeHtml(status);
+
+            let html = "";
+
+            html += appointmentDetailBox(
+                "Booking Number",
+                bookingNumber
+            );
+
+            html += appointmentDetailBox(
+                "Service",
+                serviceName
+            );
+
+            html += appointmentDetailBox(
+                "Date",
+                formatDate(appointment.booking_date)
+            );
+
+            html += appointmentDetailBox(
+                "Time",
+                formatTime(appointment.booking_time)
+            );
+
+            html += appointmentDetailBox(
+                "Branch",
+                branchName
+            );
+
+            html += appointmentDetailBox(
+                "Staff",
+                staffName
+            );
+
+            html += appointmentDetailBox(
+                "Duration",
+                duration + " minutes"
+            );
+
+            html += appointmentDetailBox(
+                "Payment",
+                paymentMethod
+            );
+
+            html += appointmentDetailBox(
+                "Payment Status",
+                paymentStatus
+            );
+
+            html += appointmentDetailBox(
+                "Price",
+                formatPrice(appointment.service_price),
+                "full"
+            );
+
+            if (appointment.notes) {
+                html += appointmentDetailBox(
+                    "Notes",
+                    appointment.notes,
+                    "full"
+                );
+            }
+
+            appointmentDetailsGrid.innerHTML = html;
+
+            appointmentDetailsModal.classList.add("open");
+            appointmentDetailsModal.setAttribute("aria-hidden", "false");
+            document.body.style.overflow = "hidden";
+        }
+
+
+        function closeAppointmentDetailsModal() {
+
+            if (!appointmentDetailsModal) return;
+
+            appointmentDetailsModal.classList.remove("open");
+            appointmentDetailsModal.setAttribute("aria-hidden", "true");
+            document.body.style.overflow = "";
+        }
+
+
+        document.addEventListener("click", function (event) {
+
+            const viewButton =
+                event.target.closest(".mobile-view-details-btn");
+
+            if (viewButton) {
+                openAppointmentDetails(
+                    viewButton.getAttribute("data-appointment-id")
+                );
+                return;
+            }
+
+            if (
+                event.target.closest("[data-close-appointment-modal]") ||
+                event.target.closest("#closeAppointmentDetails")
+            ) {
+                closeAppointmentDetailsModal();
+            }
+        });
+
+
+        document.addEventListener("keydown", function (event) {
+            if (
+                event.key === "Escape" &&
+                appointmentDetailsModal &&
+                appointmentDetailsModal.classList.contains("open")
+            ) {
+                closeAppointmentDetailsModal();
+            }
+        });
+
+
+        /* =====================================================
            START
         ===================================================== */
+
 
         loadAppointments();
 
