@@ -2331,48 +2331,18 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    function closeMobileMenu() {
-        if (!mobileMenu) return;
-
-        /*
-         * Move focus outside the menu BEFORE hiding it.
-         * This prevents the aria-hidden/focused-element accessibility warning.
-         */
-        if (menuButton) {
-            menuButton.focus({ preventScroll: true });
-        }
-
-        mobileMenu.classList.remove("open");
-        mobileMenu.setAttribute("aria-hidden", "true");
-
-        if (menuButton) {
-            menuButton.setAttribute("aria-expanded", "false");
-        }
-
-        document.body.style.overflow = "";
-    }
-
-    if (menuButton && mobileMenu) {
-        menuButton.addEventListener("click", function () {
-            mobileMenu.classList.add("open");
-            mobileMenu.setAttribute("aria-hidden", "false");
-            menuButton.setAttribute("aria-expanded", "true");
-            document.body.style.overflow = "hidden";
-
-            if (mobileClose) {
-                mobileClose.focus({ preventScroll: true });
-            }
-        });
-    }
-
     if (mobileClose && mobileMenu) {
-        mobileClose.addEventListener("click", closeMobileMenu);
+        mobileClose.addEventListener("click", function () {
+            mobileMenu.classList.remove("open");
+            document.body.style.overflow = "";
+        });
     }
 
     if (mobileMenu) {
         mobileMenu.querySelectorAll("a").forEach(function (link) {
             link.addEventListener("click", function () {
-                closeMobileMenu();
+                mobileMenu.classList.remove("open");
+                document.body.style.overflow = "";
             });
         });
     }
@@ -2437,29 +2407,6 @@ document.addEventListener("DOMContentLoaded", function () {
         return (hour * 60) + minute;
     }
 
-    function isValidBookingDate(value) {
-        if (!/^\d{4}-\d{2}-\d{2}$/.test(value || "")) {
-            return false;
-        }
-
-        const parts = value.split("-");
-        const year = Number(parts[0]);
-        const month = Number(parts[1]);
-        const day = Number(parts[2]);
-
-        if (year < 1900 || year > 9999 || month < 1 || month > 12 || day < 1 || day > 31) {
-            return false;
-        }
-
-        const check = new Date(Date.UTC(year, month - 1, day));
-
-        return (
-            check.getUTCFullYear() === year &&
-            check.getUTCMonth() === month - 1 &&
-            check.getUTCDate() === day
-        );
-    }
-
     function renderTimeSlots(slots) {
         time.innerHTML = "";
         addOption(time, "", slots.length ? "Select time" : "No available time slots");
@@ -2468,21 +2415,68 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    function isValidBookingDate(value) {
+        const text = String(value || "").trim();
+
+        if (!/^\\d{4}-\\d{2}-\\d{2}$/.test(text)) {
+            return false;
+        }
+
+        const parts = text.split("-").map(Number);
+        const year = parts[0];
+        const month = parts[1];
+        const day = parts[2];
+
+        if (
+            !Number.isInteger(year) ||
+            !Number.isInteger(month) ||
+            !Number.isInteger(day) ||
+            year < 2000 ||
+            month < 1 ||
+            month > 12 ||
+            day < 1 ||
+            day > 31
+        ) {
+            return false;
+        }
+
+        const calendarDate = new Date(Date.UTC(year, month - 1, day));
+
+        if (
+            calendarDate.getUTCFullYear() !== year ||
+            calendarDate.getUTCMonth() !== month - 1 ||
+            calendarDate.getUTCDate() !== day
+        ) {
+            return false;
+        }
+
+        return text >= getTodayIndiaString();
+    }
+
+    function setDateInputRules() {
+        const today = getTodayIndiaString();
+        date.min = today;
+        date.removeAttribute("max");
+    }
+
     async function refreshAvailableTimeSlots() {
         renderTimeSlots([]);
 
-        if (date.value && !isValidBookingDate(date.value)) {
+        const selectedDate = String(date.value || "").trim();
+
+        if (!branch.value || !service.value || !staff.value || !selectedDate) {
             time.innerHTML = "";
-            addOption(time, "", "Select a valid date");
-            showMessage("Please select a valid appointment date.", "error");
+            addOption(
+                time,
+                "",
+                selectedDate ? "Select staff and date first" : "Select date first"
+            );
             return;
         }
 
-        if (!branch.value || !service.value || !staff.value || !date.value) {
-            if (!date.value) {
-                time.innerHTML = "";
-                addOption(time, "", "Select date first");
-            }
+        if (!isValidBookingDate(selectedDate)) {
+            time.innerHTML = "";
+            addOption(time, "", "Select a valid future date");
             return;
         }
 
@@ -2494,15 +2488,24 @@ document.addEventListener("DOMContentLoaded", function () {
                 branch_id: branch.value,
                 service_id: service.value,
                 staff_id: staff.value,
-                date: date.value
+                date: selectedDate
             });
 
-            const result = await getJson(API + "/bookings/availability?" + params.toString());
-            const slots = Array.isArray(result.availableSlots) ? result.availableSlots : [];
+            const result = await getJson(
+                API + "/bookings/availability?" + params.toString()
+            );
+
+            const slots = Array.isArray(result.availableSlots)
+                ? result.availableSlots
+                : [];
+
             renderTimeSlots(slots);
         } catch (error) {
             renderTimeSlots([]);
-            showMessage(error.message || "Unable to load available time slots.", "error");
+            showMessage(
+                error.message || "Unable to load available time slots.",
+                "error"
+            );
         }
     }
 
@@ -2651,21 +2654,22 @@ document.addEventListener("DOMContentLoaded", function () {
     date.addEventListener("change", function () {
         clearMessage();
 
-        if (this.value && !isValidBookingDate(this.value)) {
-            this.value = "";
+        const selectedDate = String(this.value || "").trim();
+
+        if (!selectedDate) {
             time.innerHTML = "";
             addOption(time, "", "Select date first");
-            showMessage("Please select a valid appointment date.", "error");
             return;
         }
 
-        const today = getTodayIndiaString();
-
-        if (this.value && this.value < today) {
+        if (!isValidBookingDate(selectedDate)) {
             this.value = "";
             time.innerHTML = "";
-            addOption(time, "", "Select date first");
-            showMessage("Appointment date cannot be in the past.", "error");
+            addOption(time, "", "Select a valid future date");
+            showMessage(
+                "Please select a valid appointment date from today onward.",
+                "error"
+            );
             return;
         }
 
@@ -2805,7 +2809,7 @@ document.addEventListener("DOMContentLoaded", function () {
         this.value = this.value.replace(/[^0-9]/g, "").slice(0, 10);
     });
 
-    date.min = getTodayIndiaString();
+    setDateInputRules();
     time.innerHTML = "";
     addOption(time, "", "Select staff and date first");
 
@@ -2830,13 +2834,10 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         if (!isValidBookingDate(date.value)) {
-            showMessage("Please select a valid appointment date.", "error");
-            date.focus();
-            return;
-        }
-
-        if (date.value < getTodayIndiaString()) {
-            showMessage("Appointment date cannot be in the past.", "error");
+            showMessage(
+                "Please select a valid appointment date from today onward.",
+                "error"
+            );
             date.focus();
             return;
         }
@@ -2905,9 +2906,6 @@ document.addEventListener("DOMContentLoaded", function () {
         bookingForm.style.display = "";
         bookingForm.reset();
         setSelectLoading(staff, "Select branch first");
-        time.innerHTML = "";
-        addOption(time, "", "Select staff and date first");
-        date.min = getTodayIndiaString();
         clearMessage();
         window.scrollTo({
             top: 0,

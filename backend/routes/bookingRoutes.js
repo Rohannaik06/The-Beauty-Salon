@@ -14,7 +14,7 @@ const {
 
 
 // =====================================================
-// CUSTOMER - MY APPOINTMENTS
+// CUSTOMER APPOINTMENTS
 // =====================================================
 
 router.get(
@@ -24,7 +24,7 @@ router.get(
 
 
 // =====================================================
-// CUSTOMER - BOOKING HISTORY
+// CUSTOMER BOOKING HISTORY
 // =====================================================
 
 router.get(
@@ -34,15 +34,8 @@ router.get(
 
 
 // =====================================================
-// CUSTOMER - BOOKING AVAILABILITY
-//
-// GET /api/bookings/availability
-//
-// Query:
-// branch_id
-// staff_id
-// service_id
-// booking_date
+// BOOKING AVAILABILITY
+// IMPORTANT: MUST BE BEFORE /:id
 // =====================================================
 
 router.get(
@@ -52,10 +45,7 @@ router.get(
 
 
 // =====================================================
-// ADMIN - ALL BOOKINGS
-//
-// GET /api/bookings
-// GET /api/bookings?date=2026-09-20
+// ALL BOOKINGS
 // =====================================================
 
 router.get(
@@ -65,7 +55,7 @@ router.get(
 
 
 // =====================================================
-// GET SINGLE BOOKING
+// SINGLE BOOKING
 // =====================================================
 
 router.get(

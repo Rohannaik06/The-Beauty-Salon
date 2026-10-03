@@ -329,21 +329,8 @@ async function getBookingById(req, res) {
     }
 }
 
-// =====================================================
-// GET BOOKING AVAILABILITY
-// GET /api/bookings/availability
-//
-// Query:
-// branch_id
-// service_id
-// staff_id
-// date
-// =====================================================
-
 async function getBookingAvailability(req, res) {
-
     try {
-
         const {
             branch_id,
             service_id,
@@ -351,108 +338,61 @@ async function getBookingAvailability(req, res) {
             date
         } = req.query;
 
-
-        // =================================================
-        // REQUIRED PARAMETERS
-        // =================================================
-
         if (
             !branch_id ||
             !service_id ||
             !date
         ) {
-
             return res.status(400).json({
                 success: false,
                 message:
                     "branch_id, service_id and date are required."
             });
-
         }
 
-
-        // =================================================
-        // VALIDATE IDS
-        // =================================================
-
         const branchId = Number(branch_id);
-
         const serviceId = Number(service_id);
-
 
         if (
             !Number.isInteger(branchId) ||
             branchId <= 0
         ) {
-
             return res.status(400).json({
                 success: false,
-                message:
-                    "Invalid branch ID."
+                message: "Invalid branch ID."
             });
-
         }
-
 
         if (
             !Number.isInteger(serviceId) ||
             serviceId <= 0
         ) {
-
             return res.status(400).json({
                 success: false,
-                message:
-                    "Invalid service ID."
+                message: "Invalid service ID."
             });
-
         }
 
-
-        // =================================================
-        // VALIDATE DATE
-        // =================================================
-
-        const cleanDate =
-            normalizeDate(date);
-
+        const cleanDate = normalizeDate(date);
 
         if (!cleanDate) {
-
             return res.status(400).json({
                 success: false,
-                message:
-                    "Invalid booking date."
+                message: "Invalid booking date."
             });
-
         }
 
-
-        // =================================================
-        // PREVENT PAST DATE
-        // =================================================
-
-        const todayString =
-            getTodayString();
-
+        const todayString = getTodayString();
 
         if (cleanDate < todayString) {
-
             return res.status(400).json({
                 success: false,
                 message:
                     "Past dates cannot be booked."
             });
-
         }
 
-
-        // =================================================
-        // FIND BRANCH
-        // =================================================
-
-        const [
-            branches
-        ] =
+        const [branches] =
             await pool.promise().query(
                 `
                 SELECT
@@ -466,34 +406,20 @@ async function getBookingAvailability(req, res) {
                     AND is_active = 1
                 LIMIT 1
                 `,
-                [
-                    branchId
-                ]
+                [branchId]
             );
 
-
         if (branches.length === 0) {
-
             return res.status(404).json({
                 success: false,
                 message:
                     "Selected branch is not available."
             });
-
         }
 
+        const selectedBranch = branches[0];
 
-        const selectedBranch =
-            branches[0];
-
-
-        // =================================================
-        // FIND SERVICE
-        // =================================================
-
-        const [
-            services
-        ] =
+        const [services] =
             await pool.promise().query(
                 `
                 SELECT
@@ -518,97 +444,58 @@ async function getBookingAvailability(req, res) {
                 ]
             );
 
-
         if (services.length === 0) {
-
             return res.status(404).json({
                 success: false,
                 message:
                     "Selected service is not available at the selected branch."
             });
-
         }
 
-
-        const selectedService =
-            services[0];
-
-
-        // =================================================
-        // SERVICE DURATION
-        // =================================================
+        const selectedService = services[0];
 
         const serviceDuration =
-            Number(
-                selectedService.duration
-            );
-
+            Number(selectedService.duration);
 
         if (
-            !Number.isFinite(
-                serviceDuration
-            ) ||
+            !Number.isFinite(serviceDuration) ||
             serviceDuration <= 0
         ) {
-
             return res.status(400).json({
                 success: false,
                 message:
                     "Invalid service duration."
             });
-
         }
-
-
-        // =================================================
-        // SALON OPENING / CLOSING TIME
-        // =================================================
 
         const openingMinutes =
             timeToMinutes(
                 selectedBranch.opening_time
             );
 
-
         const closingMinutes =
             timeToMinutes(
                 selectedBranch.closing_time
             );
 
-
         if (
-            Number.isNaN(
-                openingMinutes
-            ) ||
-            Number.isNaN(
-                closingMinutes
-            )
+            Number.isNaN(openingMinutes) ||
+            Number.isNaN(closingMinutes)
         ) {
-
             return res.status(500).json({
                 success: false,
                 message:
                     "Invalid salon time configuration."
             });
-
         }
 
-
-        // =================================================
-        // STAFF
-        // =================================================
-
         let staffRows = [];
-
 
         const staffValue =
             staff_id === null ||
             staff_id === undefined
                 ? ""
-                : String(
-                    staff_id
-                ).trim();
-
+                : String(staff_id).trim();
 
         const isAnyStaff =
             !staffValue ||
@@ -616,31 +503,16 @@ async function getBookingAvailability(req, res) {
             staffValue.toLowerCase() ===
                 "any available staff";
 
-
-        // =================================================
-        // SPECIFIC STAFF
-        // =================================================
-
         if (!isAnyStaff) {
-
-            if (
-                !/^\d+$/.test(
-                    staffValue
-                )
-            ) {
-
+            if (!/^\d+$/.test(staffValue)) {
                 return res.status(400).json({
                     success: false,
                     message:
                         "Invalid staff ID."
                 });
-
             }
 
-
-            [
-                staffRows
-            ] =
+            [staffRows] =
                 await pool.promise().query(
                     `
                     SELECT
@@ -655,38 +527,20 @@ async function getBookingAvailability(req, res) {
                     LIMIT 1
                     `,
                     [
-                        Number(
-                            staffValue
-                        ),
+                        Number(staffValue),
                         branchId
                     ]
                 );
 
-
-            if (
-                staffRows.length === 0
-            ) {
-
+            if (staffRows.length === 0) {
                 return res.status(404).json({
                     success: false,
                     message:
                         "Selected staff is not available at the selected branch."
                 });
-
             }
-
-        }
-
-
-        // =================================================
-        // ANY AVAILABLE STAFF
-        // =================================================
-
-        else {
-
-            [
-                staffRows
-            ] =
+        } else {
+            [staffRows] =
                 await pool.promise().query(
                     `
                     SELECT
@@ -697,103 +551,54 @@ async function getBookingAvailability(req, res) {
                     WHERE
                         branch_id = ?
                         AND is_active = 1
-                    ORDER BY
-                        id ASC
+                    ORDER BY id ASC
                     `,
-                    [
-                        branchId
-                    ]
+                    [branchId]
                 );
 
-
-            if (
-                staffRows.length === 0
-            ) {
-
+            if (staffRows.length === 0) {
                 return res.status(200).json({
                     success: true,
                     availableSlots: []
                 });
-
             }
-
         }
 
-
-        // =================================================
-        // GENERATE AVAILABLE TIME SLOTS
-        // =================================================
-
         const availableSlots = [];
-
-
         const SLOT_INTERVAL = 30;
 
-
         for (
-            let startMinutes =
-                openingMinutes;
-
-            startMinutes +
-                serviceDuration <=
+            let startMinutes = openingMinutes;
+            startMinutes + serviceDuration <=
                 closingMinutes;
-
-            startMinutes +=
-                SLOT_INTERVAL
+            startMinutes += SLOT_INTERVAL
         ) {
-
-
-            // =============================================
-            // TODAY - SKIP PASSED TIMES
-            // =============================================
-
-            if (
-                cleanDate ===
-                todayString
-            ) {
-
-                const now =
-                    new Date();
-
+            if (cleanDate === todayString) {
+                const now = new Date();
 
                 const currentMinutes =
                     now.getHours() * 60 +
                     now.getMinutes();
 
-
                 if (
                     startMinutes <=
                     currentMinutes
                 ) {
-
                     continue;
-
                 }
-
             }
-
 
             const endMinutes =
                 startMinutes +
                 serviceDuration;
 
-
-            // =============================================
-            // CHECK STAFF
-            // =============================================
-
-            let slotAvailable =
-                false;
-
+            let slotAvailable = false;
 
             for (
                 const staffMember
                 of staffRows
             ) {
-
-                const [
-                    existingBookings
-                ] =
+                const [existingBookings] =
                     await pool.promise().query(
                         `
                         SELECT
@@ -817,21 +622,16 @@ async function getBookingAvailability(req, res) {
                         ]
                     );
 
-
-                let staffAvailable =
-                    true;
-
+                let staffAvailable = true;
 
                 for (
                     const booking
                     of existingBookings
                 ) {
-
                     const existingStart =
                         timeToMinutes(
                             booking.booking_time
                         );
-
 
                     const existingDuration =
                         Number(
@@ -839,11 +639,9 @@ async function getBookingAvailability(req, res) {
                             30
                         );
 
-
                     const existingEnd =
                         existingStart +
                         existingDuration;
-
 
                     const overlaps =
                         startMinutes <
@@ -851,138 +649,77 @@ async function getBookingAvailability(req, res) {
                         endMinutes >
                             existingStart;
 
-
                     if (overlaps) {
-
-                        staffAvailable =
-                            false;
-
+                        staffAvailable = false;
                         break;
-
                     }
-
                 }
 
-
-                if (
-                    staffAvailable
-                ) {
-
-                    slotAvailable =
-                        true;
-
+                if (staffAvailable) {
+                    slotAvailable = true;
                     break;
-
                 }
-
             }
 
-
-            // =============================================
-            // ADD AVAILABLE SLOT
-            // =============================================
-
-            if (
-                slotAvailable
-            ) {
-
+            if (slotAvailable) {
                 const hours =
                     Math.floor(
                         startMinutes / 60
                     );
 
-
                 const minutes =
                     startMinutes % 60;
 
-
                 const hour12 =
                     hours % 12 || 12;
-
 
                 const suffix =
                     hours >= 12
                         ? "PM"
                         : "AM";
 
-
                 const formattedTime =
-                    String(
-                        hour12
-                    ) +
+                    String(hour12) +
                     ":" +
-                    String(
-                        minutes
-                    ).padStart(
+                    String(minutes).padStart(
                         2,
                         "0"
                     ) +
                     " " +
                     suffix;
 
-
                 availableSlots.push(
                     formattedTime
                 );
-
             }
-
         }
 
-
-        // =================================================
-        // SUCCESS
-        // =================================================
-
         return res.status(200).json({
-
             success: true,
-
-            branch_id:
-                branchId,
-
-            service_id:
-                serviceId,
-
+            branch_id: branchId,
+            service_id: serviceId,
             staff_id:
                 isAnyStaff
                     ? "ANY"
-                    : Number(
-                        staffValue
-                    ),
-
-            date:
-                cleanDate,
-
+                    : Number(staffValue),
+            date: cleanDate,
             availableSlots
-
         });
 
-
     } catch (error) {
-
         console.error(
             "GET BOOKING AVAILABILITY ERROR:",
             error
         );
 
-
         return res.status(500).json({
-
             success: false,
-
             message:
                 "Failed to load booking availability.",
-
-            error:
-                error.message
-
+            error: error.message
         });
-
     }
-
 }
-
 
 // =====================================================
 // CREATE BOOKING
@@ -2998,22 +2735,16 @@ async function getMyBookingHistory(req, res) {
 }
 
 
+
 // =====================================================
 // EXPORTS
 // =====================================================
-
 module.exports = {
-
     getAllBookings,
-
     getBookingById,
-
     createBooking,
-
     updateBookingStatus,
-
     getMyAppointments,
-
-    getMyBookingHistory
-
+    getMyBookingHistory,
+    getBookingAvailability
 };
