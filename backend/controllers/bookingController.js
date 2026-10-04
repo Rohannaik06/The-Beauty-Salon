@@ -1992,7 +1992,9 @@ async function getMyAppointments(req, res) {
                     AND cs.expires_at > NOW()
                 LIMIT 1
                 `,
-                [token]
+                [
+                    token
+                ]
             );
 
         if (
@@ -2010,6 +2012,15 @@ async function getMyAppointments(req, res) {
 
         const customerId =
             customer.id;
+
+        // IMPORTANT:
+        // India date/time must be defined
+        // BEFORE using them in the SQL query.
+        const today =
+            getTodayString();
+
+        const currentTime =
+            getCurrentIndiaTimeString();
 
         const [
             rows
@@ -2051,10 +2062,6 @@ async function getMyAppointments(req, res) {
                 WHERE
                     b.customer_id = ?
                     AND b.status = 'CONFIRMED'
-                    const today = getTodayString();
-
-                    const currentTime = getCurrentIndiaTimeString();
-
                     AND (
                         DATE(b.booking_date) > ?
                         OR (
@@ -2092,6 +2099,7 @@ async function getMyAppointments(req, res) {
             data:
                 rows
         });
+
     } catch (error) {
         console.error(
             "GET MY APPOINTMENTS ERROR:",
@@ -2156,7 +2164,9 @@ async function getMyBookingHistory(req, res) {
                     AND cs.expires_at > NOW()
                 LIMIT 1
                 `,
-                [token]
+                [
+                    token
+                ]
             );
 
         if (
@@ -2174,6 +2184,14 @@ async function getMyBookingHistory(req, res) {
 
         const customerId =
             customer.id;
+
+        // India date and time
+        // MUST be defined before SQL query
+        const today =
+            getTodayString();
+
+        const currentTime =
+            getCurrentIndiaTimeString();
 
         const [
             rows
@@ -2228,10 +2246,6 @@ async function getMyBookingHistory(req, res) {
                             )
                         )
                     )
-
-                    const today = getTodayString();
-
-                    const currentTime = getCurrentIndiaTimeString();
                 ORDER BY
                     b.booking_date DESC,
                     b.booking_time DESC,
@@ -2262,6 +2276,7 @@ async function getMyBookingHistory(req, res) {
             data:
                 rows
         });
+
     } catch (error) {
         console.error(
             "GET MY BOOKING HISTORY ERROR:",
