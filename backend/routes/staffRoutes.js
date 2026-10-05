@@ -5,30 +5,72 @@ const router = express.Router();
 const {
     getAllStaff,
     getStaffById,
+    getStaffByBranch,
     createStaff,
     updateStaff,
     deleteStaff
 } = require("../controllers/staffController");
 
 
-// GET ALL STAFF
-router.get("/", getAllStaff);
+// =====================================================
+// ALL STAFF
+// =====================================================
+
+router.get(
+    "/",
+    getAllStaff
+);
 
 
-// GET STAFF BY ID
-router.get("/:id", getStaffById);
+// =====================================================
+// STAFF BY BRANCH
+// IMPORTANT: MUST BE BEFORE /:id
+// =====================================================
+
+router.get(
+    "/branch/:branchId",
+    getStaffByBranch
+);
 
 
+// =====================================================
+// SINGLE STAFF
+// =====================================================
+
+router.get(
+    "/:id",
+    getStaffById
+);
+
+
+// =====================================================
 // CREATE STAFF
-router.post("/", createStaff);
+// =====================================================
+
+router.post(
+    "/",
+    createStaff
+);
 
 
+// =====================================================
 // UPDATE STAFF
-router.put("/:id", updateStaff);
+// =====================================================
+
+router.put(
+    "/:id",
+    updateStaff
+);
 
 
+// =====================================================
 // DELETE STAFF
-router.delete("/:id", deleteStaff);
+// =====================================================
+
+router.delete(
+    "/:id",
+    deleteStaff
+);
 
 
 module.exports = router;

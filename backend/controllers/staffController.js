@@ -178,13 +178,89 @@ const getStaffById = async (req, res) => {
 };
 
 
+// =========================================================
+// GET STAFF BY BRANCH
+// =========================================================
+
+const getStaffByBranch = async (req, res) => {
+    try {
+        const branchId = Number(req.params.branchId);
+
+        if (
+            !Number.isInteger(branchId) ||
+            branchId <= 0
+        ) {
+            return res.status(400).json({
+                success: false,
+                message: "Invalid branch ID."
+            });
+        }
+
+        const [branchRows] =
+            await pool.promise().query(
+                `
+                SELECT
+                    id
+                FROM branches
+                WHERE
+                    id = ?
+                    AND is_active = 1
+                LIMIT 1
+                `,
+                [branchId]
+            );
+
+        if (branchRows.length === 0) {
+            return res.status(404).json({
+                success: false,
+                message: "Selected branch is not available."
+            });
+        }
+
+        const [rows] =
+            await pool.promise().query(
+                `
+                SELECT
+                    id,
+                    name,
+                    branch_id,
+                    phone,
+                    is_active
+                FROM staff
+                WHERE
+                    branch_id = ?
+                    AND is_active = 1
+                ORDER BY
+                    id ASC
+                `,
+                [branchId]
+            );
+
+        return res.status(200).json({
+            success: true,
+            count: rows.length,
+            data: rows
+        });
+
+    } catch (error) {
+        console.error(
+            "GET STAFF BY BRANCH ERROR:",
+            error
+        );
+
+        return res.status(500).json({
+            success: false,
+            message: "Failed to fetch staff for branch.",
+            error: error.message
+        });
+    }
+};
+
 
 // =========================================================
 // VALIDATE STAFF INPUT
 // =========================================================
-
 const validateStaffInput = async (body) => {
-
     const name =
         String(body.name || "").trim();
 
@@ -194,7 +270,6 @@ const validateStaffInput = async (body) => {
     const branchId =
         Number(body.branch_id);
 
-
     const isActive =
         body.is_active === false ||
         body.is_active === 0 ||
@@ -203,20 +278,16 @@ const validateStaffInput = async (body) => {
             ? 0
             : 1;
 
-
     if (
         !name ||
-        !phone ||
         !Number.isInteger(branchId) ||
         branchId <= 0
     ) {
-
         return {
             error:
-                "Name, phone and a valid branch are required."
+                "Name and a valid branch are required."
         };
     }
-
 
     const [branchRows] =
         await pool.promise().query(
@@ -229,19 +300,16 @@ const validateStaffInput = async (body) => {
             [branchId]
         );
 
-
     if (branchRows.length === 0) {
-
         return {
             error:
                 "Selected branch does not exist."
         };
     }
 
-
     return {
         name,
-        phone,
+        phone: phone || null,
         branchId,
         isActive
     };
@@ -272,25 +340,25 @@ const createStaff = async (req, res) => {
         }
 
 
-        const [phoneRows] =
-            await pool.promise().query(
-                `
-                SELECT id
-                FROM staff
-                WHERE phone = ?
-                LIMIT 1
-                `,
-                [values.phone]
-            );
+        if (values.phone) {
+            const [phoneRows] =
+                await pool.promise().query(
+                    `
+                    SELECT id
+                    FROM staff
+                    WHERE phone = ?
+                    LIMIT 1
+                    `,
+                    [values.phone]
+                );
 
-
-        if (phoneRows.length > 0) {
-
-            return res.status(409).json({
-                success: false,
-                message:
-                    "Phone number is already used by another staff member."
-            });
+            if (phoneRows.length > 0) {
+                return res.status(409).json({
+                    success: false,
+                    message:
+                        "Phone number is already used by another staff member."
+                });
+            }
         }
 
 
@@ -392,29 +460,29 @@ const updateStaff = async (req, res) => {
         }
 
 
-        const [phoneRows] =
-            await pool.promise().query(
-                `
-                SELECT id
-                FROM staff
-                WHERE phone = ?
-                AND id != ?
-                LIMIT 1
-                `,
-                [
-                    values.phone,
-                    staffId
-                ]
-            );
+        if (values.phone) {
+            const [phoneRows] =
+                await pool.promise().query(
+                    `
+                    SELECT id
+                    FROM staff
+                    WHERE phone = ?
+                    AND id != ?
+                    LIMIT 1
+                    `,
+                    [
+                        values.phone,
+                        staffId
+                    ]
+                );
 
-
-        if (phoneRows.length > 0) {
-
-            return res.status(409).json({
-                success: false,
-                message:
-                    "Phone number is already used by another staff member."
-            });
+            if (phoneRows.length > 0) {
+                return res.status(409).json({
+                    success: false,
+                    message:
+                        "Phone number is already used by another staff member."
+                });
+            }
         }
 
 
@@ -560,14 +628,10 @@ const deleteStaff = async (req, res) => {
 // =========================================================
 
 module.exports = {
-
     getAllStaff,
-
     getStaffById,
-
+    getStaffByBranch,
     createStaff,
-
     updateStaff,
-
     deleteStaff
 };
