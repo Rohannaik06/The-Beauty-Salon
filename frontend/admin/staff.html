@@ -832,7 +832,7 @@ td{
                 <span>View Website</span>
             </a>
 
-            <a href="../login.html" class="sidebar-link logout">
+            <a href="../index.html" class="sidebar-link logout" id="logoutBtn">
                 <i class="fa-solid fa-right-from-bracket"></i>
                 <span>Logout</span>
             </a>
@@ -1754,6 +1754,26 @@ document.getElementById("viewBranch").textContent =
             loadBranches();
             loadStaff();
         });
+
+        const logoutBtn = document.getElementById("logoutBtn");
+
+        if (logoutBtn) {
+            logoutBtn.addEventListener("click", function (event) {
+                event.preventDefault();
+
+                if (!confirm("Are you sure you want to logout?")) return;
+
+                localStorage.removeItem("adminToken");
+                localStorage.removeItem("adminEmail");
+                localStorage.removeItem("adminId");
+
+                sessionStorage.removeItem("adminToken");
+                sessionStorage.removeItem("adminEmail");
+                sessionStorage.removeItem("adminId");
+
+                window.location.replace("../pages/admin-login.html");
+            });
+        }
     </script>
 
 </body>
