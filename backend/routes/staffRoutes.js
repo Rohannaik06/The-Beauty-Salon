@@ -10,14 +10,25 @@ const {
     deleteStaff
 } = require("../controllers/staffController");
 
+
+// GET ALL STAFF
 router.get("/", getAllStaff);
 
+
+// GET STAFF BY ID
 router.get("/:id", getStaffById);
 
+
+// CREATE STAFF
 router.post("/", createStaff);
 
+
+// UPDATE STAFF
 router.put("/:id", updateStaff);
 
+
+// DELETE STAFF
 router.delete("/:id", deleteStaff);
+
 
 module.exports = router;

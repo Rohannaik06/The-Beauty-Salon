@@ -221,8 +221,7 @@ async function getAllBookings(req, res) {
                     s.id AS service_id,
                     s.name AS service_name,
                     st.id AS staff_id,
-                    st.name AS staff_name,
-                    st.role AS staff_role
+                    st.name AS staff_name
                 FROM bookings b
                 INNER JOIN customers c
                     ON c.id = b.customer_id
@@ -294,8 +293,7 @@ async function getBookingById(req, res) {
                     s.name AS service_name,
                     s.category AS service_category,
                     st.id AS staff_id,
-                    st.name AS staff_name,
-                    st.role AS staff_role
+                    st.name AS staff_name
                 FROM bookings b
                 INNER JOIN customers c
                     ON c.id = b.customer_id
@@ -524,8 +522,7 @@ async function getBookingAvailability(req, res) {
                     `
                     SELECT
                         id,
-                        name,
-                        role
+                        name
                     FROM staff
                     WHERE
                         id = ?
@@ -552,8 +549,7 @@ async function getBookingAvailability(req, res) {
                     `
                     SELECT
                         id,
-                        name,
-                        role
+                        name
                     FROM staff
                     WHERE
                         branch_id = ?
@@ -1072,8 +1068,7 @@ async function createBooking(req, res) {
                         `
                         SELECT
                             id,
-                            name,
-                            role
+                            name
                         FROM staff
                         WHERE
                             id = ?
@@ -1088,43 +1083,26 @@ async function createBooking(req, res) {
                     );
             } else {
                 const staffName =
-                    staffValue
-                        .split(/\s+[—-]\s+/)[0]
-                        .trim();
+                staffValue.trim();
 
-                [staffRows] =
-                    await connection.query(
-                        `
-                        SELECT
-                            id,
-                            name,
-                            role
-                        FROM staff
-                        WHERE
-                            branch_id = ?
-                            AND is_active = 1
-                            AND (
-                                name = ?
-                                OR CONCAT(
-                                    name,
-                                    ' — ',
-                                    role
-                                ) = ?
-                                OR CONCAT(
-                                    name,
-                                    ' - ',
-                                    role
-                                ) = ?
-                            )
-                        LIMIT 1
-                        `,
-                        [
-                            selectedBranch.id,
-                            staffName,
-                            staffValue,
-                            staffValue
-                        ]
-                    );
+            [staffRows] =
+                await connection.query(
+                    `
+                    SELECT
+                        id,
+                        name
+                    FROM staff
+                    WHERE
+                        branch_id = ?
+                        AND is_active = 1
+                        AND name = ?
+                    LIMIT 1
+                    `,
+                    [
+                        selectedBranch.id,
+                        staffName
+                    ]
+                );
             }
 
             if (staffRows.length === 0) {
@@ -1208,8 +1186,7 @@ async function createBooking(req, res) {
                     `
                     SELECT
                         id,
-                        name,
-                        role
+                        name
                     FROM staff
                     WHERE
                         branch_id = ?
@@ -1569,8 +1546,6 @@ async function createBooking(req, res) {
                 cleanEmail,
             staff:
                 selectedStaff.name,
-            staffRole:
-                selectedStaff.role,
             branch:
                 selectedBranch.name,
             service:
@@ -2050,8 +2025,7 @@ async function getMyAppointments(req, res) {
                     s.name AS service_name,
                     s.category AS service_category,
                     st.id AS staff_id,
-                    st.name AS staff_name,
-                    st.role AS staff_role
+                    st.name AS staff_name
                 FROM bookings b
                 INNER JOIN branches br
                     ON br.id = b.branch_id
@@ -2221,8 +2195,7 @@ async function getMyBookingHistory(req, res) {
                     s.name AS service_name,
                     s.category AS service_category,
                     st.id AS staff_id,
-                    st.name AS staff_name,
-                    st.role AS staff_role
+                    st.name AS staff_name
                 FROM bookings b
                 INNER JOIN branches br
                     ON br.id = b.branch_id

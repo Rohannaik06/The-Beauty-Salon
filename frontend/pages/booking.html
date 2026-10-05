@@ -2603,7 +2603,7 @@ document.addEventListener("DOMContentLoaded", function () {
             rows.filter(function (item) {
                 return item.is_active === undefined || Number(item.is_active) === 1;
             }).forEach(function (item) {
-                addOption(staff, String(item.id), item.name + (item.role ? " — " + item.role : ""));
+                addOption(staff, String(item.id), item.name);
             });
 
             if (rows.length === 0) {
@@ -2612,7 +2612,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         } catch (error) {
             setSelectLoading(staff, "Unable to load staff");
-            showMessage("Unable to load staff for the selected branch.", "error");
+            showMessage("Unable to load staff for the selected branch. Please try again.", "error");
         }
     }
 

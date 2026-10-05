@@ -97,7 +97,6 @@ tbody tr:hover{background:#141414}
 .staff-cell{display:flex;align-items:center;gap:11px}
 .staff-avatar{width:37px;height:37px;border-radius:50%;background:#222;border:1px solid #3a3a3a;display:flex;align-items:center;justify-content:center;color:#d4af37;font-weight:700;font-size:11px}
 .staff-info strong{display:block;color:#eee;font-size:12px}.staff-info span{display:block;color:#777;font-size:10px;margin-top:3px}
-.role{color:#d4af37;font-size:11px;font-weight:600}
 .status{display:inline-flex;align-items:center;padding:5px 9px;border-radius:20px;font-size:10px;font-weight:700}
 .status.active{color:#73d69a;background:rgba(60,180,100,.1)}.status.inactive{color:#999;background:rgba(150,150,150,.1)}
 .action-group{display:flex;gap:6px}.action-btn{width:31px;height:31px;border-radius:7px;border:1px solid #333;background:#181818;color:#aaa}
@@ -364,10 +363,6 @@ td{
 
 .staff-info span{
     font-size:10px!important;
-}
-
-.role{
-    font-size:11px!important;
 }
 
 .status{
@@ -668,6 +663,32 @@ td{
 }
 </style>
 
+
+<style id="final-staff-ui-adjustments">
+/* FINAL STAFF UI ADJUSTMENTS */
+.summary-grid{
+    grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+    gap:22px !important;
+}
+.summary-card{
+    width:100% !important;
+}
+.search-box{
+    width:220px !important;
+}
+.filter-row{
+    grid-template-columns:220px 180px 160px auto !important;
+}
+@media(max-width:1100px){
+    .search-box{width:100% !important;}
+    .filter-row{grid-template-columns:1fr 1fr !important;}
+}
+@media(max-width:767px){
+    .summary-grid{grid-template-columns:1fr 1fr !important;gap:12px !important;}
+    .search-box{width:100% !important;}
+    .filter-row{grid-template-columns:1fr !important;}
+}
+</style>
 </head>
 
 <body>
@@ -850,8 +871,8 @@ td{
             </div>
 
             <div class="summary-card">
-                <h3 id="expertStaff">0</h3>
-                <p>Senior &amp; Beauty Experts</p>
+                <h3 id="totalBookings">0</h3>
+                <p>Total Bookings</p>
             </div>
         </section>
 
@@ -870,7 +891,7 @@ td{
                     <input
                         type="text"
                         id="staffSearch"
-                        placeholder="Search staff by name, phone or email..."
+                        placeholder="Search staff by name or phone..."
                     >
 
                 </div>
@@ -894,32 +915,7 @@ td{
                     </option>
 
                 </select>
-
-
-                <select
-                    class="filter-select"
-                    id="roleFilter"
-                >
-
-                    <option value="all">
-                        All Roles
-                    </option>
-
-                    <option value="Senior Stylist">
-                        Senior Stylist
-                    </option>
-
-                    <option value="Stylist">
-                        Stylist
-                    </option>
-
-                    <option value="Beauty Specialist">
-                        Beauty Specialist
-                    </option>
-
-                </select>
-
-                <select
+<select
                     class="filter-select"
                     id="statusFilter"
                 >
@@ -966,7 +962,7 @@ td{
                     <thead>
                         <tr>
                             <th>Staff Member</th>
-                            <th>Role</th>
+                            
                             <th>Branch</th>
                             <th>Phone</th>
                             <th>Bookings</th>
@@ -977,7 +973,7 @@ td{
 
                     <tbody id="staffTableBody">
                         <tr>
-                            <td colspan="7" style="text-align:center; padding:35px; color:#777;">
+                            <td colspan="6" style="text-align:center; padding:35px; color:#777;">
                                 Loading staff...
                             </td>
                         </tr>
@@ -1045,18 +1041,7 @@ td{
                             <label>Phone</label>
                             <strong id="viewPhone">—</strong>
                         </div>
-
-                        <div class="detail-item">
-                            <label>Email</label>
-                            <strong id="viewEmail">—</strong>
-                        </div>
-
-                        <div class="detail-item">
-                            <label>Role</label>
-                            <strong id="viewRole">—</strong>
-                        </div>
-
-                        <div class="detail-item">
+<div class="detail-item">
                             <label>Branch</label>
                             <strong id="viewBranch">—</strong>
                         </div>
@@ -1150,50 +1135,16 @@ td{
                                 type="tel"
                                 id="staffPhone"
                                 placeholder="+91 XXXXX XXXXX"
-                                required
                             >
 
                         </div>
-
-
-                        <div class="form-group full">
-
-                            <label>
-                                Email Address
-                            </label>
-
-                            <input
-                                type="email"
-                                id="staffEmail"
-                                placeholder="staff@beautysalon.com"
-                                required
-                            >
-
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label>
-                                Role
-                            </label>
-
-                            <select id="staffRole" required>
-                                <option value="Senior Stylist">Senior Stylist</option>
-                                <option value="Stylist">Stylist</option>
-                                <option value="Beauty Specialist">Beauty Specialist</option>
-                            </select>
-
-                        </div>
-
-
-                        <div class="form-group">
+<div class="form-group">
 
                             <label>
                                 Branch
                             </label>
 
-                            <select id="staffBranch">
+                            <select id="staffBranch" required>
 
                                 <option value="Baramati">
                                     Baramati
@@ -1214,7 +1165,7 @@ td{
                                 Status
                             </label>
 
-                            <select id="staffStatus">
+                            <select id="staffStatus" required>
 
                                 <option value="Active">
                                     Active
@@ -1275,7 +1226,6 @@ td{
 
             const searchInput = document.getElementById("staffSearch");
             const branchFilter = document.getElementById("branchFilter");
-            const roleFilter = document.getElementById("roleFilter");
             const statusFilter = document.getElementById("statusFilter");
             const tableBody = document.getElementById("staffTableBody");
             const staffCount = document.getElementById("staffCount");
@@ -1283,7 +1233,7 @@ td{
             const totalStaff = document.getElementById("totalStaff");
             const activeStaff = document.getElementById("activeStaff");
             const inactiveStaff = document.getElementById("inactiveStaff");
-            const expertStaff = document.getElementById("expertStaff");
+            const totalBookings = document.getElementById("totalBookings");
 
             const viewModal = document.getElementById("viewModal");
             const formModal = document.getElementById("formModal");
@@ -1292,8 +1242,6 @@ td{
 
             const staffName = document.getElementById("staffName");
             const staffPhone = document.getElementById("staffPhone");
-            const staffEmail = document.getElementById("staffEmail");
-            const staffRole = document.getElementById("staffRole");
             const staffBranch = document.getElementById("staffBranch");
             const staffStatus = document.getElementById("staffStatus");
             const formTitle = document.getElementById("formTitle");
@@ -1342,7 +1290,7 @@ td{
             function showTableMessage(message) {
                 tableBody.innerHTML = `
                     <tr>
-                        <td colspan="7" style="text-align:center; padding:35px; color:#777;">
+                        <td colspan="6" style="text-align:center; padding:35px; color:#777;">
                             ${escapeHtml(message)}
                         </td>
                     </tr>
@@ -1425,30 +1373,21 @@ td{
                 const total = staffData.length;
                 const active = staffData.filter(staff => staff.is_active).length;
                 const inactive = total - active;
-
-                const experts = staffData.filter(staff =>
-                    staff.role === "Senior Stylist" ||
-                    staff.role === "Beauty Specialist"
-                ).length;
-
-                totalStaff.textContent = total;
+totalStaff.textContent = total;
                 activeStaff.textContent = active;
                 inactiveStaff.textContent = inactive;
-                expertStaff.textContent = experts;
+                totalBookings.textContent = staffData.reduce((sum, staff) => sum + Number(staff.total_bookings || 0), 0);
             }
 
             function getFilteredStaff() {
                 const searchValue = searchInput.value.trim().toLowerCase();
                 const selectedBranch = branchFilter.value;
-                const selectedRole = roleFilter.value;
                 const selectedStatus = statusFilter.value;
 
                 return staffData.filter(staff => {
                     const searchableText = [
                         staff.name,
                         staff.phone,
-                        staff.email,
-                        staff.role,
                         staff.branch_name
                     ]
                         .join(" ")
@@ -1462,10 +1401,6 @@ td{
                         selectedBranch === "all" ||
                         String(staff.branch_id) === String(selectedBranch);
 
-                    const matchesRole =
-                        selectedRole === "all" ||
-                        staff.role === selectedRole;
-
                     const matchesStatus =
                         selectedStatus === "all" ||
                         (selectedStatus === "active" && staff.is_active) ||
@@ -1473,7 +1408,6 @@ td{
 
                     return matchesSearch &&
                         matchesBranch &&
-                        matchesRole &&
                         matchesStatus;
                 });
             }
@@ -1508,14 +1442,7 @@ td{
                                 </div>
                             </div>
                         </td>
-
-                        <td>
-                            <span class="role">
-                                ${escapeHtml(staff.role)}
-                            </span>
-                        </td>
-
-                        <td>
+<td>
                             ${escapeHtml(staff.branch_name || "—")}
                         </td>
 
@@ -1589,14 +1516,7 @@ td{
 
                 document.getElementById("viewPhone").textContent =
                     staff.phone || "—";
-
-                document.getElementById("viewEmail").textContent =
-                    staff.email || "—";
-
-                document.getElementById("viewRole").textContent =
-                    staff.role || "—";
-
-                document.getElementById("viewBranch").textContent =
+document.getElementById("viewBranch").textContent =
                     staff.branch_name || "—";
 
                 document.getElementById("viewBookings").textContent =
@@ -1634,8 +1554,6 @@ td{
 
                 staffName.value = staff.name || "";
                 staffPhone.value = staff.phone || "";
-                staffEmail.value = staff.email || "";
-                staffRole.value = staff.role || "Stylist";
                 staffBranch.value = String(staff.branch_id);
                 staffStatus.value = staff.is_active ? "Active" : "Inactive";
 
@@ -1709,18 +1627,13 @@ td{
                 const payload = {
                     name: staffName.value.trim(),
                     phone: staffPhone.value.trim(),
-                    email: staffEmail.value.trim(),
-                    role: staffRole.value,
                     branch_id: Number(staffBranch.value),
                     is_active: staffStatus.value === "Active"
                 };
 
                 if (
                     !payload.name ||
-                    !payload.phone ||
-                    !payload.email ||
-                    !payload.role ||
-                    !payload.branch_id
+                                                            !payload.branch_id
                 ) {
                     alert("Please fill all required fields.");
                     return;
@@ -1771,7 +1684,6 @@ td{
 
             searchInput.addEventListener("input", renderStaff);
             branchFilter.addEventListener("change", renderStaff);
-            roleFilter.addEventListener("change", renderStaff);
             statusFilter.addEventListener("change", renderStaff);
 
             document.querySelectorAll("[data-close]").forEach(button => {
