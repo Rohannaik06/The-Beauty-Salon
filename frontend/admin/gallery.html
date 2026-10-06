@@ -2214,10 +2214,10 @@ body{
             </a>
 
 
-            <a
-                href="../login.html"
-                class="sidebar-link logout"
-            >
+            <a href="../pages/admin-login.html"
+            class="sidebar-link logout"
+            id="logoutBtn"
+            data-tooltip="Logout">
                 <i class="fa-solid fa-right-from-bracket"></i>
                 <span>Logout</span>
             </a>
@@ -3403,6 +3403,33 @@ body{
 
             loadGallery();
         });
+
+        // =====================================================
+        // LOGOUT
+        // =====================================================
+
+        const logoutBtn = document.getElementById("logoutBtn");
+
+        if (logoutBtn) {
+            logoutBtn.addEventListener("click", function (event) {
+                event.preventDefault();
+
+                const confirmLogout = confirm("Are you sure you want to logout?");
+                if (!confirmLogout) return;
+
+                // Clear authentication data
+                localStorage.removeItem("adminToken");
+                localStorage.removeItem("adminEmail");
+                localStorage.removeItem("adminId");
+
+                sessionStorage.removeItem("adminToken");
+                sessionStorage.removeItem("adminEmail");
+                sessionStorage.removeItem("adminId");
+
+                // Redirect to admin login
+                window.location.replace("../pages/admin-login.html");
+            });
+        }
     </script>
 
 </body>
